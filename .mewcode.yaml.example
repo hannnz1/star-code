@@ -1,0 +1,16 @@
+# Copy to .mewcode.yaml to enable project-level MCP servers.
+# Project entries completely replace user entries with the same server name.
+mcp_servers:
+  local_tools:
+    type: stdio
+    # Windows: launch npm command shims through cmd.exe.
+    command: cmd.exe
+    args: ["/c", "npx", "-y", "@modelcontextprotocol/server-everything", "stdio"]
+    env:
+      EXAMPLE_TOKEN: "${MCP_EXAMPLE_TOKEN}"
+
+  remote_service:
+    type: http
+    url: "https://example.invalid/mcp"
+    headers:
+      Authorization: "Bearer ${MCP_REMOTE_TOKEN}"

@@ -1,0 +1,22 @@
+# Worktree 隔离 Checklist
+
+- [x] Slug 遍历与非法字符被拒绝，嵌套 slug 正确 flatten。
+- [x] session snake_case JSON 可保存、恢复，clear 写 `null`。
+- [x] Git 子进程禁交互、受超时约束，变更检查 fail-closed。
+- [x] 非 Git 目录构造 Manager 失败但 Main 可降级。
+- [x] 真实仓库创建、嵌套目录、分支命名和重复拒绝通过测试。
+- [x] sidecar 元数据和纯文件系统恢复通过测试。
+- [x] 本地配置与 `.worktreeinclude` 复制通过测试。
+- [x] enter 不改变 JVM cwd，session 持久化通过测试。
+- [x] 未提交变更阻止删除，`--discard` 删除目录/分支。
+- [x] manual 保留、临时无变更清理、临时有变更保留。
+- [x] stale sweep 只删除过期干净临时 Worktree。
+- [x] 六个内置工具使用 explicit cwd，主目录文件不受影响。
+- [x] 工具 schema 不包含 cwd，既有权限沙箱仍生效。
+- [x] `isolation: worktree` 解析、非法值降级。
+- [x] 隔离 SubAgent 写文件只落在 Worktree，并回传保留路径。
+- [x] 隔离角色的 background 请求被强制转为前台。
+- [x] `/worktree` 参数命令注册；原有命令继续拒绝参数。
+- [x] `.gitignore` 包含 Worktree 运行文件。
+- [x] 完整 JUnit + Shadow JAR。
+- [ ] 真实 Provider/TUI 人工端到端验证。

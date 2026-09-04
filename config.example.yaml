@@ -1,0 +1,35 @@
+system_prompt: |
+  You are Star Code, a terminal AI assistant. Reply in the user's language.
+  You can use Markdown. Use available tools when they are needed and report tool failures honestly.
+
+request_timeout_seconds: 120
+enable_subagent_background: true
+
+# Coordinator requires both this flag and STAR_CODE_COORDINATOR_MODE=1.
+# fork_teammate makes Agent(team_name=...) inherit the parent conversation when
+# subagent_type is omitted; keep false for a clean general-purpose teammate.
+features:
+  coordinator_mode: false
+  fork_teammate: false
+
+proxy:
+  enabled: true
+  host: 127.0.0.1
+  port: 10808
+
+providers:
+  - name: OpenAI
+    protocol: openai-responses
+    base_url: https://api.openai.com/v1
+    api_key_env: OPENAI_API_KEY
+    model: gpt-5.4-mini
+    thinking: false
+    context_window: 128000
+
+  # - name: Anthropic
+  #   protocol: anthropic
+  #   base_url: https://api.anthropic.com
+  #   api_key_env: ANTHROPIC_API_KEY
+  #   model: claude-sonnet-4-20250514
+  #   thinking: false
+  #   context_window: 200000
