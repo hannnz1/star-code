@@ -1,0 +1,39 @@
+{
+  "status": "POLICY_REPLAY_COMPLETE",
+  "production_commit": "ba607a3b3dc489228526556127314cab8d7827ce",
+  "raw_directory": "C:\\Users\\Administrator\\Desktop\\project\\star code\\benchmarks\\results\\raw\\permission-v1\\2026-09-06T08-49-31.281255100Z",
+  "summaries": {
+    "BASELINE_ONCE": {
+      "sessions": 10,
+      "median_prompts": 12.0,
+      "permission_prompts": 130,
+      "approved": 130,
+      "denied": 50,
+      "auto_allowed": 30,
+      "session_allowed": 0,
+      "dangerous_action_blocked": 50,
+      "unsafe_auto_approval_count": 0
+    },
+    "CURRENT_SESSION": {
+      "sessions": 10,
+      "median_prompts": 8.0,
+      "permission_prompts": 80,
+      "approved": 130,
+      "denied": 50,
+      "auto_allowed": 80,
+      "session_allowed": 50,
+      "dangerous_action_blocked": 50,
+      "unsafe_auto_approval_count": 0
+    }
+  },
+  "median_prompt_reduction_percent": 33.333333333333336,
+  "task_success": null,
+  "real_coding_sessions": 0,
+  "interpretation": "Deterministic fixed action traces, injected user choices; no model or shell execution.",
+  "limits": [
+    "No OS sandbox result",
+    "No general unsafe-action guarantee",
+    "No real-session30-to-5 result",
+    "Both policies deny labeled risky requests. Existing readonly auto-allow and safety guards are shared."
+  ]
+}

@@ -107,3 +107,11 @@ Next: real Team Multi-Agent integration feasibility. Correction to the initial i
 ## Phase 3 current outcome
 
 Team result retrieval bug fixed in production commit53ec9ba;199 full tests pass. Pre-fix run had UNKNOWN_TEAM_TASK due to execution/shared-task namespace confusion. Post-fix both worker results were collected and Main's unified21-check verifier passed. However parent still terminated with iteration_limit at10 rounds. Legacy component gate PASS is superseded by audited complete-run BLOCKED. Two attempts, one distinct contract; no speed experiment. See results/multi-agent-postfix-validation.md and preserved raw/current summaries. Next lower-priority phase: permission policy and session approval; multi-agent completion budget remains an open product limitation.
+
+## Phase 4 policy replay completed
+
+Production session grants implemented at ba607a3b3dc489228526556127314cab8d7827ce. Explicit ALLOW_SESSION is isolated by tool/path or exact command/arguments, actor, execution directory and mode; cleared on new/resumed sessions and never persisted. Existing rule/path/blacklist checks precede reuse. Full Gradle204 tests /55 suites pass.
+
+Ten frozen synthetic action traces,180 actions per policy: baseline ALLOW_ONCE median12 prompts versus CURRENT_SESSION median8; total130 versus80;50 session-grant reuses. Each policy denied all50 labeled risky probes, with zero unsafe auto-approvals in this finite corpus. The user choices are injected; no shell commands or models run. This is POLICY_REPLAY_COMPLETE, not real coding-session performance. Do not claim30-to-5 or general OS isolation. See results/permission-v1-final.md, CSV, per-action raw and SHA256 index.
+
+Open stages: normal Multi-Agent completion still limited by10 turns; three distinct E2E tasks/speedup unfinished. Long-horizon repeated compaction and real SWE-bench-Live cases remain NOT_RUN. Context decision remains NEEDS_MORE_TESTING. This ledger is interim, not overall validation completion.
