@@ -1,0 +1,1933 @@
+[ {
+  "name" : "search_text_000",
+  "description" : "Search literal text and return file, line and content",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "query" : {
+        "type" : "string",
+        "description" : "Literal text to find"
+      },
+      "path" : {
+        "type" : "string",
+        "description" : "Optional workspace-relative file or directory"
+      },
+      "case_sensitive" : {
+        "type" : "boolean",
+        "default" : false
+      }
+    },
+    "required" : [ "query" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "read_file_001",
+  "description" : "Read a UTF-8 text file with 1-based line numbers",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "path" : {
+        "type" : "string",
+        "description" : "Workspace-relative file path"
+      }
+    },
+    "required" : [ "path" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "glob_002",
+  "description" : "Find workspace files matching a glob",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "pattern" : {
+        "type" : "string",
+        "description" : "Glob such as **/*.java"
+      }
+    },
+    "required" : [ "pattern" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "glob_003",
+  "description" : "Find workspace files matching a glob",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "pattern" : {
+        "type" : "string",
+        "description" : "Glob such as **/*.java"
+      }
+    },
+    "required" : [ "pattern" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "edit_file_004",
+  "description" : "Replace one uniquely matching text block. Read the file with read_file before editing it.",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "path" : {
+        "type" : "string",
+        "description" : "Workspace-relative file path"
+      },
+      "old_text" : {
+        "type" : "string",
+        "description" : "Exact text that must occur once"
+      },
+      "new_text" : {
+        "type" : "string",
+        "description" : "Replacement text"
+      }
+    },
+    "required" : [ "path", "old_text", "new_text" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "search_text_005",
+  "description" : "Search literal text and return file, line and content",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "query" : {
+        "type" : "string",
+        "description" : "Literal text to find"
+      },
+      "path" : {
+        "type" : "string",
+        "description" : "Optional workspace-relative file or directory"
+      },
+      "case_sensitive" : {
+        "type" : "boolean",
+        "default" : false
+      }
+    },
+    "required" : [ "query" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "glob_006",
+  "description" : "Find workspace files matching a glob",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "pattern" : {
+        "type" : "string",
+        "description" : "Glob such as **/*.java"
+      }
+    },
+    "required" : [ "pattern" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "search_text_007",
+  "description" : "Search literal text and return file, line and content",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "query" : {
+        "type" : "string",
+        "description" : "Literal text to find"
+      },
+      "path" : {
+        "type" : "string",
+        "description" : "Optional workspace-relative file or directory"
+      },
+      "case_sensitive" : {
+        "type" : "boolean",
+        "default" : false
+      }
+    },
+    "required" : [ "query" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "glob_008",
+  "description" : "Find workspace files matching a glob",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "pattern" : {
+        "type" : "string",
+        "description" : "Glob such as **/*.java"
+      }
+    },
+    "required" : [ "pattern" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "write_file_009",
+  "description" : "Create or overwrite a text file",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "path" : {
+        "type" : "string",
+        "description" : "Workspace-relative file path"
+      },
+      "content" : {
+        "type" : "string",
+        "description" : "Complete UTF-8 file content"
+      }
+    },
+    "required" : [ "path", "content" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "bash_010",
+  "description" : "Run a PowerShell command in the workspace. Prefer dedicated file, glob, search, read, edit, and write tools when applicable.",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "command" : {
+        "type" : "string",
+        "description" : "PowerShell command to execute"
+      }
+    },
+    "required" : [ "command" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "search_text_011",
+  "description" : "Search literal text and return file, line and content",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "query" : {
+        "type" : "string",
+        "description" : "Literal text to find"
+      },
+      "path" : {
+        "type" : "string",
+        "description" : "Optional workspace-relative file or directory"
+      },
+      "case_sensitive" : {
+        "type" : "boolean",
+        "default" : false
+      }
+    },
+    "required" : [ "query" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "search_text_012",
+  "description" : "Search literal text and return file, line and content",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "query" : {
+        "type" : "string",
+        "description" : "Literal text to find"
+      },
+      "path" : {
+        "type" : "string",
+        "description" : "Optional workspace-relative file or directory"
+      },
+      "case_sensitive" : {
+        "type" : "boolean",
+        "default" : false
+      }
+    },
+    "required" : [ "query" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "search_text_013",
+  "description" : "Search literal text and return file, line and content",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "query" : {
+        "type" : "string",
+        "description" : "Literal text to find"
+      },
+      "path" : {
+        "type" : "string",
+        "description" : "Optional workspace-relative file or directory"
+      },
+      "case_sensitive" : {
+        "type" : "boolean",
+        "default" : false
+      }
+    },
+    "required" : [ "query" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "search_text_014",
+  "description" : "Search literal text and return file, line and content",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "query" : {
+        "type" : "string",
+        "description" : "Literal text to find"
+      },
+      "path" : {
+        "type" : "string",
+        "description" : "Optional workspace-relative file or directory"
+      },
+      "case_sensitive" : {
+        "type" : "boolean",
+        "default" : false
+      }
+    },
+    "required" : [ "query" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "read_file_015",
+  "description" : "Read a UTF-8 text file with 1-based line numbers",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "path" : {
+        "type" : "string",
+        "description" : "Workspace-relative file path"
+      }
+    },
+    "required" : [ "path" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "read_file_016",
+  "description" : "Read a UTF-8 text file with 1-based line numbers",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "path" : {
+        "type" : "string",
+        "description" : "Workspace-relative file path"
+      }
+    },
+    "required" : [ "path" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "write_file_017",
+  "description" : "Create or overwrite a text file",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "path" : {
+        "type" : "string",
+        "description" : "Workspace-relative file path"
+      },
+      "content" : {
+        "type" : "string",
+        "description" : "Complete UTF-8 file content"
+      }
+    },
+    "required" : [ "path", "content" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "bash_018",
+  "description" : "Run a PowerShell command in the workspace. Prefer dedicated file, glob, search, read, edit, and write tools when applicable.",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "command" : {
+        "type" : "string",
+        "description" : "PowerShell command to execute"
+      }
+    },
+    "required" : [ "command" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "read_file_019",
+  "description" : "Read a UTF-8 text file with 1-based line numbers",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "path" : {
+        "type" : "string",
+        "description" : "Workspace-relative file path"
+      }
+    },
+    "required" : [ "path" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "edit_file_020",
+  "description" : "Replace one uniquely matching text block. Read the file with read_file before editing it.",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "path" : {
+        "type" : "string",
+        "description" : "Workspace-relative file path"
+      },
+      "old_text" : {
+        "type" : "string",
+        "description" : "Exact text that must occur once"
+      },
+      "new_text" : {
+        "type" : "string",
+        "description" : "Replacement text"
+      }
+    },
+    "required" : [ "path", "old_text", "new_text" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "edit_file_021",
+  "description" : "Replace one uniquely matching text block. Read the file with read_file before editing it.",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "path" : {
+        "type" : "string",
+        "description" : "Workspace-relative file path"
+      },
+      "old_text" : {
+        "type" : "string",
+        "description" : "Exact text that must occur once"
+      },
+      "new_text" : {
+        "type" : "string",
+        "description" : "Replacement text"
+      }
+    },
+    "required" : [ "path", "old_text", "new_text" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "write_file_022",
+  "description" : "Create or overwrite a text file",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "path" : {
+        "type" : "string",
+        "description" : "Workspace-relative file path"
+      },
+      "content" : {
+        "type" : "string",
+        "description" : "Complete UTF-8 file content"
+      }
+    },
+    "required" : [ "path", "content" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "glob_023",
+  "description" : "Find workspace files matching a glob",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "pattern" : {
+        "type" : "string",
+        "description" : "Glob such as **/*.java"
+      }
+    },
+    "required" : [ "pattern" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "glob_024",
+  "description" : "Find workspace files matching a glob",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "pattern" : {
+        "type" : "string",
+        "description" : "Glob such as **/*.java"
+      }
+    },
+    "required" : [ "pattern" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "bash_025",
+  "description" : "Run a PowerShell command in the workspace. Prefer dedicated file, glob, search, read, edit, and write tools when applicable.",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "command" : {
+        "type" : "string",
+        "description" : "PowerShell command to execute"
+      }
+    },
+    "required" : [ "command" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "glob_026",
+  "description" : "Find workspace files matching a glob",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "pattern" : {
+        "type" : "string",
+        "description" : "Glob such as **/*.java"
+      }
+    },
+    "required" : [ "pattern" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "edit_file_027",
+  "description" : "Replace one uniquely matching text block. Read the file with read_file before editing it.",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "path" : {
+        "type" : "string",
+        "description" : "Workspace-relative file path"
+      },
+      "old_text" : {
+        "type" : "string",
+        "description" : "Exact text that must occur once"
+      },
+      "new_text" : {
+        "type" : "string",
+        "description" : "Replacement text"
+      }
+    },
+    "required" : [ "path", "old_text", "new_text" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "edit_file_028",
+  "description" : "Replace one uniquely matching text block. Read the file with read_file before editing it.",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "path" : {
+        "type" : "string",
+        "description" : "Workspace-relative file path"
+      },
+      "old_text" : {
+        "type" : "string",
+        "description" : "Exact text that must occur once"
+      },
+      "new_text" : {
+        "type" : "string",
+        "description" : "Replacement text"
+      }
+    },
+    "required" : [ "path", "old_text", "new_text" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "edit_file_029",
+  "description" : "Replace one uniquely matching text block. Read the file with read_file before editing it.",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "path" : {
+        "type" : "string",
+        "description" : "Workspace-relative file path"
+      },
+      "old_text" : {
+        "type" : "string",
+        "description" : "Exact text that must occur once"
+      },
+      "new_text" : {
+        "type" : "string",
+        "description" : "Replacement text"
+      }
+    },
+    "required" : [ "path", "old_text", "new_text" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "read_file_030",
+  "description" : "Read a UTF-8 text file with 1-based line numbers",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "path" : {
+        "type" : "string",
+        "description" : "Workspace-relative file path"
+      }
+    },
+    "required" : [ "path" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "glob_031",
+  "description" : "Find workspace files matching a glob",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "pattern" : {
+        "type" : "string",
+        "description" : "Glob such as **/*.java"
+      }
+    },
+    "required" : [ "pattern" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "glob_032",
+  "description" : "Find workspace files matching a glob",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "pattern" : {
+        "type" : "string",
+        "description" : "Glob such as **/*.java"
+      }
+    },
+    "required" : [ "pattern" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "bash_033",
+  "description" : "Run a PowerShell command in the workspace. Prefer dedicated file, glob, search, read, edit, and write tools when applicable.",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "command" : {
+        "type" : "string",
+        "description" : "PowerShell command to execute"
+      }
+    },
+    "required" : [ "command" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "write_file_034",
+  "description" : "Create or overwrite a text file",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "path" : {
+        "type" : "string",
+        "description" : "Workspace-relative file path"
+      },
+      "content" : {
+        "type" : "string",
+        "description" : "Complete UTF-8 file content"
+      }
+    },
+    "required" : [ "path", "content" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "write_file_035",
+  "description" : "Create or overwrite a text file",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "path" : {
+        "type" : "string",
+        "description" : "Workspace-relative file path"
+      },
+      "content" : {
+        "type" : "string",
+        "description" : "Complete UTF-8 file content"
+      }
+    },
+    "required" : [ "path", "content" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "bash_036",
+  "description" : "Run a PowerShell command in the workspace. Prefer dedicated file, glob, search, read, edit, and write tools when applicable.",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "command" : {
+        "type" : "string",
+        "description" : "PowerShell command to execute"
+      }
+    },
+    "required" : [ "command" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "edit_file_037",
+  "description" : "Replace one uniquely matching text block. Read the file with read_file before editing it.",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "path" : {
+        "type" : "string",
+        "description" : "Workspace-relative file path"
+      },
+      "old_text" : {
+        "type" : "string",
+        "description" : "Exact text that must occur once"
+      },
+      "new_text" : {
+        "type" : "string",
+        "description" : "Replacement text"
+      }
+    },
+    "required" : [ "path", "old_text", "new_text" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "bash_038",
+  "description" : "Run a PowerShell command in the workspace. Prefer dedicated file, glob, search, read, edit, and write tools when applicable.",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "command" : {
+        "type" : "string",
+        "description" : "PowerShell command to execute"
+      }
+    },
+    "required" : [ "command" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "search_text_039",
+  "description" : "Search literal text and return file, line and content",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "query" : {
+        "type" : "string",
+        "description" : "Literal text to find"
+      },
+      "path" : {
+        "type" : "string",
+        "description" : "Optional workspace-relative file or directory"
+      },
+      "case_sensitive" : {
+        "type" : "boolean",
+        "default" : false
+      }
+    },
+    "required" : [ "query" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "read_file_040",
+  "description" : "Read a UTF-8 text file with 1-based line numbers",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "path" : {
+        "type" : "string",
+        "description" : "Workspace-relative file path"
+      }
+    },
+    "required" : [ "path" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "read_file_041",
+  "description" : "Read a UTF-8 text file with 1-based line numbers",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "path" : {
+        "type" : "string",
+        "description" : "Workspace-relative file path"
+      }
+    },
+    "required" : [ "path" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "write_file_042",
+  "description" : "Create or overwrite a text file",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "path" : {
+        "type" : "string",
+        "description" : "Workspace-relative file path"
+      },
+      "content" : {
+        "type" : "string",
+        "description" : "Complete UTF-8 file content"
+      }
+    },
+    "required" : [ "path", "content" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "bash_043",
+  "description" : "Run a PowerShell command in the workspace. Prefer dedicated file, glob, search, read, edit, and write tools when applicable.",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "command" : {
+        "type" : "string",
+        "description" : "PowerShell command to execute"
+      }
+    },
+    "required" : [ "command" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "bash_044",
+  "description" : "Run a PowerShell command in the workspace. Prefer dedicated file, glob, search, read, edit, and write tools when applicable.",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "command" : {
+        "type" : "string",
+        "description" : "PowerShell command to execute"
+      }
+    },
+    "required" : [ "command" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "write_file_045",
+  "description" : "Create or overwrite a text file",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "path" : {
+        "type" : "string",
+        "description" : "Workspace-relative file path"
+      },
+      "content" : {
+        "type" : "string",
+        "description" : "Complete UTF-8 file content"
+      }
+    },
+    "required" : [ "path", "content" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "search_text_046",
+  "description" : "Search literal text and return file, line and content",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "query" : {
+        "type" : "string",
+        "description" : "Literal text to find"
+      },
+      "path" : {
+        "type" : "string",
+        "description" : "Optional workspace-relative file or directory"
+      },
+      "case_sensitive" : {
+        "type" : "boolean",
+        "default" : false
+      }
+    },
+    "required" : [ "query" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "glob_047",
+  "description" : "Find workspace files matching a glob",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "pattern" : {
+        "type" : "string",
+        "description" : "Glob such as **/*.java"
+      }
+    },
+    "required" : [ "pattern" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "glob_048",
+  "description" : "Find workspace files matching a glob",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "pattern" : {
+        "type" : "string",
+        "description" : "Glob such as **/*.java"
+      }
+    },
+    "required" : [ "pattern" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "search_text_049",
+  "description" : "Search literal text and return file, line and content",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "query" : {
+        "type" : "string",
+        "description" : "Literal text to find"
+      },
+      "path" : {
+        "type" : "string",
+        "description" : "Optional workspace-relative file or directory"
+      },
+      "case_sensitive" : {
+        "type" : "boolean",
+        "default" : false
+      }
+    },
+    "required" : [ "query" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "write_file_050",
+  "description" : "Create or overwrite a text file",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "path" : {
+        "type" : "string",
+        "description" : "Workspace-relative file path"
+      },
+      "content" : {
+        "type" : "string",
+        "description" : "Complete UTF-8 file content"
+      }
+    },
+    "required" : [ "path", "content" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "bash_051",
+  "description" : "Run a PowerShell command in the workspace. Prefer dedicated file, glob, search, read, edit, and write tools when applicable.",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "command" : {
+        "type" : "string",
+        "description" : "PowerShell command to execute"
+      }
+    },
+    "required" : [ "command" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "write_file_052",
+  "description" : "Create or overwrite a text file",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "path" : {
+        "type" : "string",
+        "description" : "Workspace-relative file path"
+      },
+      "content" : {
+        "type" : "string",
+        "description" : "Complete UTF-8 file content"
+      }
+    },
+    "required" : [ "path", "content" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "write_file_053",
+  "description" : "Create or overwrite a text file",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "path" : {
+        "type" : "string",
+        "description" : "Workspace-relative file path"
+      },
+      "content" : {
+        "type" : "string",
+        "description" : "Complete UTF-8 file content"
+      }
+    },
+    "required" : [ "path", "content" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "read_file_054",
+  "description" : "Read a UTF-8 text file with 1-based line numbers",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "path" : {
+        "type" : "string",
+        "description" : "Workspace-relative file path"
+      }
+    },
+    "required" : [ "path" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "glob_055",
+  "description" : "Find workspace files matching a glob",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "pattern" : {
+        "type" : "string",
+        "description" : "Glob such as **/*.java"
+      }
+    },
+    "required" : [ "pattern" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "edit_file_056",
+  "description" : "Replace one uniquely matching text block. Read the file with read_file before editing it.",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "path" : {
+        "type" : "string",
+        "description" : "Workspace-relative file path"
+      },
+      "old_text" : {
+        "type" : "string",
+        "description" : "Exact text that must occur once"
+      },
+      "new_text" : {
+        "type" : "string",
+        "description" : "Replacement text"
+      }
+    },
+    "required" : [ "path", "old_text", "new_text" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "bash_057",
+  "description" : "Run a PowerShell command in the workspace. Prefer dedicated file, glob, search, read, edit, and write tools when applicable.",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "command" : {
+        "type" : "string",
+        "description" : "PowerShell command to execute"
+      }
+    },
+    "required" : [ "command" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "read_file_058",
+  "description" : "Read a UTF-8 text file with 1-based line numbers",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "path" : {
+        "type" : "string",
+        "description" : "Workspace-relative file path"
+      }
+    },
+    "required" : [ "path" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "read_file_059",
+  "description" : "Read a UTF-8 text file with 1-based line numbers",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "path" : {
+        "type" : "string",
+        "description" : "Workspace-relative file path"
+      }
+    },
+    "required" : [ "path" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "edit_file_060",
+  "description" : "Replace one uniquely matching text block. Read the file with read_file before editing it.",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "path" : {
+        "type" : "string",
+        "description" : "Workspace-relative file path"
+      },
+      "old_text" : {
+        "type" : "string",
+        "description" : "Exact text that must occur once"
+      },
+      "new_text" : {
+        "type" : "string",
+        "description" : "Replacement text"
+      }
+    },
+    "required" : [ "path", "old_text", "new_text" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "write_file_061",
+  "description" : "Create or overwrite a text file",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "path" : {
+        "type" : "string",
+        "description" : "Workspace-relative file path"
+      },
+      "content" : {
+        "type" : "string",
+        "description" : "Complete UTF-8 file content"
+      }
+    },
+    "required" : [ "path", "content" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "read_file_062",
+  "description" : "Read a UTF-8 text file with 1-based line numbers",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "path" : {
+        "type" : "string",
+        "description" : "Workspace-relative file path"
+      }
+    },
+    "required" : [ "path" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "read_file_063",
+  "description" : "Read a UTF-8 text file with 1-based line numbers",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "path" : {
+        "type" : "string",
+        "description" : "Workspace-relative file path"
+      }
+    },
+    "required" : [ "path" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "write_file_064",
+  "description" : "Create or overwrite a text file",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "path" : {
+        "type" : "string",
+        "description" : "Workspace-relative file path"
+      },
+      "content" : {
+        "type" : "string",
+        "description" : "Complete UTF-8 file content"
+      }
+    },
+    "required" : [ "path", "content" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "edit_file_065",
+  "description" : "Replace one uniquely matching text block. Read the file with read_file before editing it.",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "path" : {
+        "type" : "string",
+        "description" : "Workspace-relative file path"
+      },
+      "old_text" : {
+        "type" : "string",
+        "description" : "Exact text that must occur once"
+      },
+      "new_text" : {
+        "type" : "string",
+        "description" : "Replacement text"
+      }
+    },
+    "required" : [ "path", "old_text", "new_text" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "read_file_066",
+  "description" : "Read a UTF-8 text file with 1-based line numbers",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "path" : {
+        "type" : "string",
+        "description" : "Workspace-relative file path"
+      }
+    },
+    "required" : [ "path" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "bash_067",
+  "description" : "Run a PowerShell command in the workspace. Prefer dedicated file, glob, search, read, edit, and write tools when applicable.",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "command" : {
+        "type" : "string",
+        "description" : "PowerShell command to execute"
+      }
+    },
+    "required" : [ "command" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "read_file_068",
+  "description" : "Read a UTF-8 text file with 1-based line numbers",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "path" : {
+        "type" : "string",
+        "description" : "Workspace-relative file path"
+      }
+    },
+    "required" : [ "path" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "search_text_069",
+  "description" : "Search literal text and return file, line and content",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "query" : {
+        "type" : "string",
+        "description" : "Literal text to find"
+      },
+      "path" : {
+        "type" : "string",
+        "description" : "Optional workspace-relative file or directory"
+      },
+      "case_sensitive" : {
+        "type" : "boolean",
+        "default" : false
+      }
+    },
+    "required" : [ "query" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "search_text_070",
+  "description" : "Search literal text and return file, line and content",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "query" : {
+        "type" : "string",
+        "description" : "Literal text to find"
+      },
+      "path" : {
+        "type" : "string",
+        "description" : "Optional workspace-relative file or directory"
+      },
+      "case_sensitive" : {
+        "type" : "boolean",
+        "default" : false
+      }
+    },
+    "required" : [ "query" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "glob_071",
+  "description" : "Find workspace files matching a glob",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "pattern" : {
+        "type" : "string",
+        "description" : "Glob such as **/*.java"
+      }
+    },
+    "required" : [ "pattern" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "glob_072",
+  "description" : "Find workspace files matching a glob",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "pattern" : {
+        "type" : "string",
+        "description" : "Glob such as **/*.java"
+      }
+    },
+    "required" : [ "pattern" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "bash_073",
+  "description" : "Run a PowerShell command in the workspace. Prefer dedicated file, glob, search, read, edit, and write tools when applicable.",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "command" : {
+        "type" : "string",
+        "description" : "PowerShell command to execute"
+      }
+    },
+    "required" : [ "command" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "search_text_074",
+  "description" : "Search literal text and return file, line and content",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "query" : {
+        "type" : "string",
+        "description" : "Literal text to find"
+      },
+      "path" : {
+        "type" : "string",
+        "description" : "Optional workspace-relative file or directory"
+      },
+      "case_sensitive" : {
+        "type" : "boolean",
+        "default" : false
+      }
+    },
+    "required" : [ "query" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "search_text_075",
+  "description" : "Search literal text and return file, line and content",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "query" : {
+        "type" : "string",
+        "description" : "Literal text to find"
+      },
+      "path" : {
+        "type" : "string",
+        "description" : "Optional workspace-relative file or directory"
+      },
+      "case_sensitive" : {
+        "type" : "boolean",
+        "default" : false
+      }
+    },
+    "required" : [ "query" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "write_file_076",
+  "description" : "Create or overwrite a text file",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "path" : {
+        "type" : "string",
+        "description" : "Workspace-relative file path"
+      },
+      "content" : {
+        "type" : "string",
+        "description" : "Complete UTF-8 file content"
+      }
+    },
+    "required" : [ "path", "content" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "bash_077",
+  "description" : "Run a PowerShell command in the workspace. Prefer dedicated file, glob, search, read, edit, and write tools when applicable.",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "command" : {
+        "type" : "string",
+        "description" : "PowerShell command to execute"
+      }
+    },
+    "required" : [ "command" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "bash_078",
+  "description" : "Run a PowerShell command in the workspace. Prefer dedicated file, glob, search, read, edit, and write tools when applicable.",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "command" : {
+        "type" : "string",
+        "description" : "PowerShell command to execute"
+      }
+    },
+    "required" : [ "command" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "bash_079",
+  "description" : "Run a PowerShell command in the workspace. Prefer dedicated file, glob, search, read, edit, and write tools when applicable.",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "command" : {
+        "type" : "string",
+        "description" : "PowerShell command to execute"
+      }
+    },
+    "required" : [ "command" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "read_file_080",
+  "description" : "Read a UTF-8 text file with 1-based line numbers",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "path" : {
+        "type" : "string",
+        "description" : "Workspace-relative file path"
+      }
+    },
+    "required" : [ "path" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "edit_file_081",
+  "description" : "Replace one uniquely matching text block. Read the file with read_file before editing it.",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "path" : {
+        "type" : "string",
+        "description" : "Workspace-relative file path"
+      },
+      "old_text" : {
+        "type" : "string",
+        "description" : "Exact text that must occur once"
+      },
+      "new_text" : {
+        "type" : "string",
+        "description" : "Replacement text"
+      }
+    },
+    "required" : [ "path", "old_text", "new_text" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "write_file_082",
+  "description" : "Create or overwrite a text file",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "path" : {
+        "type" : "string",
+        "description" : "Workspace-relative file path"
+      },
+      "content" : {
+        "type" : "string",
+        "description" : "Complete UTF-8 file content"
+      }
+    },
+    "required" : [ "path", "content" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "search_text_083",
+  "description" : "Search literal text and return file, line and content",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "query" : {
+        "type" : "string",
+        "description" : "Literal text to find"
+      },
+      "path" : {
+        "type" : "string",
+        "description" : "Optional workspace-relative file or directory"
+      },
+      "case_sensitive" : {
+        "type" : "boolean",
+        "default" : false
+      }
+    },
+    "required" : [ "query" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "search_text_084",
+  "description" : "Search literal text and return file, line and content",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "query" : {
+        "type" : "string",
+        "description" : "Literal text to find"
+      },
+      "path" : {
+        "type" : "string",
+        "description" : "Optional workspace-relative file or directory"
+      },
+      "case_sensitive" : {
+        "type" : "boolean",
+        "default" : false
+      }
+    },
+    "required" : [ "query" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "edit_file_085",
+  "description" : "Replace one uniquely matching text block. Read the file with read_file before editing it.",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "path" : {
+        "type" : "string",
+        "description" : "Workspace-relative file path"
+      },
+      "old_text" : {
+        "type" : "string",
+        "description" : "Exact text that must occur once"
+      },
+      "new_text" : {
+        "type" : "string",
+        "description" : "Replacement text"
+      }
+    },
+    "required" : [ "path", "old_text", "new_text" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "edit_file_086",
+  "description" : "Replace one uniquely matching text block. Read the file with read_file before editing it.",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "path" : {
+        "type" : "string",
+        "description" : "Workspace-relative file path"
+      },
+      "old_text" : {
+        "type" : "string",
+        "description" : "Exact text that must occur once"
+      },
+      "new_text" : {
+        "type" : "string",
+        "description" : "Replacement text"
+      }
+    },
+    "required" : [ "path", "old_text", "new_text" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "bash_087",
+  "description" : "Run a PowerShell command in the workspace. Prefer dedicated file, glob, search, read, edit, and write tools when applicable.",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "command" : {
+        "type" : "string",
+        "description" : "PowerShell command to execute"
+      }
+    },
+    "required" : [ "command" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "edit_file_088",
+  "description" : "Replace one uniquely matching text block. Read the file with read_file before editing it.",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "path" : {
+        "type" : "string",
+        "description" : "Workspace-relative file path"
+      },
+      "old_text" : {
+        "type" : "string",
+        "description" : "Exact text that must occur once"
+      },
+      "new_text" : {
+        "type" : "string",
+        "description" : "Replacement text"
+      }
+    },
+    "required" : [ "path", "old_text", "new_text" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "read_file_089",
+  "description" : "Read a UTF-8 text file with 1-based line numbers",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "path" : {
+        "type" : "string",
+        "description" : "Workspace-relative file path"
+      }
+    },
+    "required" : [ "path" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "bash_090",
+  "description" : "Run a PowerShell command in the workspace. Prefer dedicated file, glob, search, read, edit, and write tools when applicable.",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "command" : {
+        "type" : "string",
+        "description" : "PowerShell command to execute"
+      }
+    },
+    "required" : [ "command" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "edit_file_091",
+  "description" : "Replace one uniquely matching text block. Read the file with read_file before editing it.",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "path" : {
+        "type" : "string",
+        "description" : "Workspace-relative file path"
+      },
+      "old_text" : {
+        "type" : "string",
+        "description" : "Exact text that must occur once"
+      },
+      "new_text" : {
+        "type" : "string",
+        "description" : "Replacement text"
+      }
+    },
+    "required" : [ "path", "old_text", "new_text" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "write_file_092",
+  "description" : "Create or overwrite a text file",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "path" : {
+        "type" : "string",
+        "description" : "Workspace-relative file path"
+      },
+      "content" : {
+        "type" : "string",
+        "description" : "Complete UTF-8 file content"
+      }
+    },
+    "required" : [ "path", "content" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "read_file_093",
+  "description" : "Read a UTF-8 text file with 1-based line numbers",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "path" : {
+        "type" : "string",
+        "description" : "Workspace-relative file path"
+      }
+    },
+    "required" : [ "path" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "edit_file_094",
+  "description" : "Replace one uniquely matching text block. Read the file with read_file before editing it.",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "path" : {
+        "type" : "string",
+        "description" : "Workspace-relative file path"
+      },
+      "old_text" : {
+        "type" : "string",
+        "description" : "Exact text that must occur once"
+      },
+      "new_text" : {
+        "type" : "string",
+        "description" : "Replacement text"
+      }
+    },
+    "required" : [ "path", "old_text", "new_text" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "write_file_095",
+  "description" : "Create or overwrite a text file",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "path" : {
+        "type" : "string",
+        "description" : "Workspace-relative file path"
+      },
+      "content" : {
+        "type" : "string",
+        "description" : "Complete UTF-8 file content"
+      }
+    },
+    "required" : [ "path", "content" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "write_file_096",
+  "description" : "Create or overwrite a text file",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "path" : {
+        "type" : "string",
+        "description" : "Workspace-relative file path"
+      },
+      "content" : {
+        "type" : "string",
+        "description" : "Complete UTF-8 file content"
+      }
+    },
+    "required" : [ "path", "content" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "glob_097",
+  "description" : "Find workspace files matching a glob",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "pattern" : {
+        "type" : "string",
+        "description" : "Glob such as **/*.java"
+      }
+    },
+    "required" : [ "pattern" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "edit_file_098",
+  "description" : "Replace one uniquely matching text block. Read the file with read_file before editing it.",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "path" : {
+        "type" : "string",
+        "description" : "Workspace-relative file path"
+      },
+      "old_text" : {
+        "type" : "string",
+        "description" : "Exact text that must occur once"
+      },
+      "new_text" : {
+        "type" : "string",
+        "description" : "Replacement text"
+      }
+    },
+    "required" : [ "path", "old_text", "new_text" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+}, {
+  "name" : "glob_099",
+  "description" : "Find workspace files matching a glob",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "pattern" : {
+        "type" : "string",
+        "description" : "Glob such as **/*.java"
+      }
+    },
+    "required" : [ "pattern" ]
+  },
+  "annotations" : {
+    "readOnlyHint" : true
+  }
+} ]

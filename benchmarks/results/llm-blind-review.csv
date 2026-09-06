@@ -1,0 +1,161 @@
+﻿review_id,reviewer_label,reviewer_notes,reviewer_confidence
+R0001,PASS,The compressed context preserves the exact constraint not to rename customer_ref during AccountMigration.,HIGH
+R0002,PASS,The summary preserves that the pending InventoryReconcile task is to add a regression test for duplicate SKU events.,HIGH
+R0003,PASS,The summary preserves the explicit constraint not to delete historical rows while fixing SubscriptionExpiry.,HIGH
+R0004,PASS,"The compressed summary preserves the exact BlobUpload bug cause: hashing before decompression, which is sufficient for the downstream decision.",HIGH
+R0005,PASS,"The summary preserves the BlobUpload root cause as hashing before decompression, matching the original fact.",HIGH
+R0006,PASS,The summary preserves the LeaseCleaner fact that increasing threads from 4 to 16 was tried without success.,HIGH
+R0007,PASS,The compressed context preserves the exact file path `resources/locale-fallbacks.json` for the locale fallback data.,HIGH
+R0008,FAIL,"The compressed summary mentions `resources/locale-fallbacks.json`, but it does not preserve the exact fact that locale fallback data is in that file as a locatable path-specific requirement.",HIGH
+R0009,PASS,The compressed context still explicitly preserves that the health readiness path is /internal/readyz.,HIGH
+R0010,PASS,The compressed context explicitly preserves that billing reports must use the Europe/Paris timezone.,HIGH
+R0011,PASS,The compressed context preserves the exact RetryQueue delay of 730 milliseconds with the correct object and role.,HIGH
+R0012,PASS,The compressed context explicitly preserves that the pending CsvParser test must cover a quoted field containing a newline.,HIGH
+R0013,PASS,The compressed context preserves the exact BlobUpload cause: the checksum mismatch comes from hashing before decompression.,HIGH
+R0014,PASS,"The compressed context preserves the BlobUpload checksum cause as hashing before decompression, matching the original fact.",HIGH
+R0015,PASS,The summary preserves the exact method name roundTaxHalfEven and the tax-rounding responsibility.,HIGH
+R0016,PASS,The compressed summary preserves the current-state fact that RouteCache’s next step is to inspect the route_generation metric.,HIGH
+R0017,PASS,The compressed summary explicitly preserves that fraud score rules live in `rules/fraud-score.toml`.,HIGH
+R0018,PASS,The summary preserves the exact API contract that customer suspension uses PATCH on /v3/customers/suspension.,HIGH
+R0019,PASS,"The summary preserves the exact path reports/invoice-audit.json for Invoice export, so the downstream file-location decision is recoverable.",HIGH
+R0020,PASS,The summary explicitly preserves the `/v3/customers/suspension` endpoint and HTTP PATCH method.,HIGH
+R0021,PASS,"The compressed context preserves the exact filename path config/shipping-thresholds.yaml, so the downstream decision can be recovered accurately.",HIGH
+R0022,PASS,The compressed context explicitly preserves that InvoiceRenderer must keep output encoded as UTF-8.,HIGH
+R0023,PASS,The summary preserves that DeliveryEstimator must enforce a maximum of 37 route hops.,HIGH
+R0024,PASS,The summary preserves the bug root cause that WebhookAck timeout is due to synchronous DNS lookup on the event loop.,HIGH
+R0025,PASS,The summary preserves that RetryBudget’s next command is ./gradlew test --tests RetryBudgetTest.,HIGH
+R0026,PASS,"The summary preserves the exact endpoint GET /v4/accounts/summary, so the downstream API contract decision is recoverable.",HIGH
+R0027,PASS,The compressed summary preserves the exact constraint not to rename `customer_ref` during `AccountMigration`.,HIGH
+R0028,PASS,The compressed context preserves that SocketDrain’s keep-alive disabling was tried and still did not stop dropped messages.,HIGH
+R0029,PASS,The compressed summary preserves that RetryQueue must wait 730 milliseconds before the first retry.,HIGH
+R0030,PASS,The compressed context preserves the exact bug cause: BlobUpload checksum mismatch comes from hashing before decompression.,HIGH
+R0031,PASS,The compressed summary preserves the WebhookAck timeout root cause as synchronous DNS lookup on the event loop.,HIGH
+R0032,PASS,"The compressed context preserves the exact path `rules/fraud-score.toml`, so the filename/location fact is recoverable.",HIGH
+R0033,PASS,The compressed summary preserves the exact health readiness path `/internal/readyz` as a concrete API contract.,HIGH
+R0034,PASS,The compressed context preserves the exact identifier `reconcilePendingTransfers` as the reconciliation entry point.,HIGH
+R0035,PASS,"The summary preserves the WebhookAck root cause as synchronous DNS lookup on the event loop, matching the original fact.",HIGH
+R0036,FAIL,"The compressed context omits the 65536-byte cap for StreamBuffer, so the key numeric parameter is not preserved.",HIGH
+R0037,PASS,The 730 ms first-retry delay for RetryQueue is preserved exactly in the compressed context.,HIGH
+R0038,PASS,The summary preserves that customer suspension uses HTTP PATCH on /v3/customers/suspension.,HIGH
+R0039,PASS,The compressed context preserves the pending CsvParser test requirement to cover a quoted field containing a newline.,HIGH
+R0040,PASS,The compressed context preserves the bug cause exactly: PriceImport precision loss is attributed to conversion through double.,HIGH
+R0041,PASS,The compressed summary explicitly preserves that JobScheduler must use the America/Toronto timezone.,HIGH
+R0042,PASS,The summary preserves that MetricFlush switching to a fixed-rate timer was attempted and failed.,HIGH
+R0043,PASS,The compressed context preserves that SearchBackfill processes batches of exactly 240 documents.,HIGH
+R0044,PASS,The compressed summary preserves the exact RetryQueue first-retry delay of 730 milliseconds with the correct role.,HIGH
+R0045,PASS,The compressed context still explicitly preserves the health readiness path as `/internal/readyz`.,HIGH
+R0046,PASS,The compressed context preserves the failed-attempt fact that LeaseCleaner tried raising the thread count from 4 to 16 without success.,HIGH
+R0047,PASS,The compressed summary still explicitly preserves that the OrderArchive change must not add external dependencies.,HIGH
+R0048,PASS,The compressed context preserves the exact pending task to inspect CatalogSnapshotReader before editing CatalogDiff.,HIGH
+R0049,PASS,The summary preserves the numeric constraint that RetryQueue waits 730 milliseconds before the first retry.,HIGH
+R0050,PASS,The compressed context preserves the root cause that the BlobUpload checksum mismatch comes from hashing before decompression.,HIGH
+R0051,PASS,The compressed context preserves the exact AuthThrottle limit of at most 11 attempts per minute.,HIGH
+R0052,PASS,The compressed context preserves the exact StreamBuffer payload cap of 65536 bytes with the correct class and role.,HIGH
+R0053,PASS,The compressed context preserves the BlobUpload root cause exactly as hashing before decompression.,HIGH
+R0054,PASS,The compressed summary preserves that LeaseCleaner’s thread-count increase from 4 to 16 was attempted and failed.,HIGH
+R0055,PASS,The compressed context preserves the exact identifier and meaning: tax rounding belongs in method roundTaxHalfEven.,HIGH
+R0056,PASS,The compressed context preserves that disabling keep-alive was attempted for SocketDrain and did not stop dropped messages.,HIGH
+R0057,PASS,The summary preserves that SocketDrain tried disabling keep-alive and it still did not stop dropped messages.,HIGH
+R0058,PASS,"The compressed context preserves the exact test file path for PaymentDedupTest.java, so the downstream location decision is recoverable.",HIGH
+R0059,PASS,The compressed context preserves the BlobUpload root cause exactly: hashing before decompression.,HIGH
+R0060,PASS,"The summary preserves the next ReleaseAudit step as running verify-release.ps1, matching the original fact exactly.",HIGH
+R0061,PASS,The compressed context preserves the exact bug cause: WebhookAck timeout from synchronous DNS lookup on the event loop.,HIGH
+R0062,PASS,The compressed context still preserves that RetryQueue must wait 730 milliseconds before the first retry.,HIGH
+R0063,PASS,The compressed context preserves the exact fact that BlobUpload checksum mismatch is caused by hashing before decompression.,HIGH
+R0064,PASS,The compressed context preserves the exact constraint not to rename customer_ref during AccountMigration.,HIGH
+R0065,PASS,"The compressed summary preserves the exact path `rules/fraud-score.toml`, so the downstream file-location decision is recoverable.",HIGH
+R0066,PASS,The compressed context preserves that CartCache’s TTL increase to 900 seconds was attempted and failed.,HIGH
+R0067,FAIL,"The compressed summary does not preserve the specific identifier `reconcilePendingTransfers`, instead replacing it with unrelated preserved facts.",HIGH
+R0068,PASS,The compressed summary preserves the billing reports timezone requirement as Europe/Paris with the correct constraint.,HIGH
+R0069,PASS,The compressed context explicitly preserves the identifier `reconcilePendingTransfers` as the reconciliation entry point.,HIGH
+R0070,PASS,The summary preserves the exact method name roundTaxHalfEven and correctly keeps it as the tax rounding location.,HIGH
+R0071,PASS,The compressed context still preserves that tax rounding belongs in method `roundTaxHalfEven` with the correct identifier name.,HIGH
+R0072,PASS,The summary preserves the exact next-step state: inspect `CatalogSnapshotReader` before editing `CatalogDiff`.,HIGH
+R0073,PASS,The compressed context still explicitly preserves that the CSV compatibility adapter is LegacyCsvBridge.,HIGH
+R0074,PASS,The compressed summary preserves the exact path `config/shipping-thresholds.yaml` for shipping thresholds.,HIGH
+R0075,PASS,The compressed context explicitly preserves that the BlobUpload checksum mismatch is caused by hashing before decompression.,HIGH
+R0076,PASS,The summary preserves the failed attempt: clearing the index cache for SearchRefresh was tried and did not fix the stale results.,HIGH
+R0077,PASS,The compressed summary preserves the exact API fact that customer suspension uses HTTP PATCH on /v3/customers/suspension.,HIGH
+R0078,PASS,The summary explicitly preserves that the pending CsvParser test must cover a quoted field containing a newline.,HIGH
+R0079,PASS,"The compressed context preserves the exact filename path resources/locale-fallbacks.json, so the downstream decision can be recovered accurately.",HIGH
+R0080,PASS,"The summary preserves the RouteCache next-step fact accurately, including the component and the action to inspect the route_generation metric next.",HIGH
+R0081,PASS,The summary preserves the pending CsvParser test requirement to cover a quoted field containing a newline.,HIGH
+R0082,PASS,The compressed context preserves the exact HALF_EVEN rounding requirement for MoneyFormatter with no conflicting qualifier.,HIGH
+R0083,PASS,"The compressed context still preserves the PriceImport precision loss cause as conversion through double, matching the original fact exactly.",HIGH
+R0084,PASS,The compressed context preserves the AuditExport bug cause as a UTC/local time conversion mismatch.,HIGH
+R0085,PASS,The compressed summary preserves the exact constraint that SchemaReview must not change the public OrderResult constructor signature.,HIGH
+R0086,PASS,The compressed context explicitly preserves that payment deduplication tests belong in src/test/java/payments/PaymentDedupTest.java.,HIGH
+R0087,PASS,The compressed context explicitly preserves that for RetryBudget the next command is ./gradlew test --tests RetryBudgetTest.,HIGH
+R0088,PASS,The 37-hop maximum for DeliveryEstimator is explicitly preserved in the compressed context.,HIGH
+R0089,PASS,The compressed summary explicitly preserves that the reconciliation entry point is reconcilePendingTransfers.,HIGH
+R0090,PASS,LegacyCsvBridge is explicitly preserved as the CSV compatibility adapter name.,HIGH
+R0091,PASS,The compressed summary explicitly preserves that billing reports must use the Europe/Paris timezone.,HIGH
+R0092,PASS,"The compressed context preserves the exact path `config/shipping-thresholds.yaml`, so the file-location fact is recoverable.",HIGH
+R0093,PASS,The compressed summary preserves the exact Billing reports Europe/Paris timezone constraint with the correct role and no conflicting qualifier.,HIGH
+R0094,PASS,The compressed context explicitly preserves that MetricFlush switching to a fixed-rate timer was attempted and failed.,HIGH
+R0095,PASS,The compressed summary preserves the AuditExport bug cause as a UTC/local time conversion mismatch.,HIGH
+R0096,PASS,The compressed summary preserves the exact endpoint and method: GET /v4/accounts/summary.,HIGH
+R0097,PASS,"The compressed context preserves the exact package identifier com.acme.notifications.policy, so the downstream decision can be recovered accurately.",HIGH
+R0098,PASS,The compressed context explicitly preserves that BlobUpload checksum mismatch is caused by hashing before decompression.,HIGH
+R0099,PASS,"The summary preserves the exact path `resources/locale-fallbacks.json`, so the filename/location fact is recoverable.",HIGH
+R0100,PASS,"The compressed context preserves the exact todo state: for CatalogDiff, inspect CatalogSnapshotReader before editing.",HIGH
+R0101,PASS,The compressed context preserves the exact next command for RetryBudget: `./gradlew test --tests RetryBudgetTest`.,HIGH
+R0102,PASS,The compressed summary preserves the exact identifier reconcilePendingTransfers and its role as the reconciliation entry point.,HIGH
+R0103,PASS,The compressed context preserves the exact bug cause: PriceImport precision loss is caused by conversion through double.,HIGH
+R0104,PASS,The compressed context preserves the exact API contract that inventory reservation accepts POST /v1/inventory/reservations.,HIGH
+R0105,PASS,The compressed summary explicitly preserves that the fraud score rules are in `rules/fraud-score.toml`.,HIGH
+R0106,PASS,The compressed context preserves the exact path `config/shipping-thresholds.yaml` for shipping thresholds.,HIGH
+R0107,PASS,The compressed context preserves the exact identifier `LegacyCsvBridge` as the CSV compatibility adapter.,HIGH
+R0108,PASS,The summary explicitly preserves that CartCache TTL increase to 900 seconds was attempted and failed.,HIGH
+R0109,PASS,"The compressed summary preserves the exact package identifier com.acme.notifications.policy, so the downstream decision can be recovered accurately.",HIGH
+R0110,PASS,"The compressed context preserves the exact identifier `reconcilePendingTransfers`, matching the original reconciliation entry point fact.",HIGH
+R0111,PASS,The summary preserves the pending SessionPurge test as covering an expired session with an active upload.,HIGH
+R0112,PASS,The compressed context preserves the exact RetryQueue first-retry delay of 730 milliseconds.,HIGH
+R0113,PASS,The compressed summary preserves the BlobUpload checksum root cause as hashing before decompression.,HIGH
+R0114,PASS,The summary preserves that SocketDrain keep-alive was tried and did not prevent dropped messages.,HIGH
+R0115,PASS,The compressed context preserves that SearchRefresh clearing the index cache was tried and did not fix the stale results.,HIGH
+R0116,PASS,The compressed context preserves the failed attempt that clearing the SearchRefresh index cache was tried and did not fix the stale results.,HIGH
+R0117,PASS,The summary preserves that MetricFlush switching to a fixed-rate timer was attempted and failed.,HIGH
+R0118,PASS,"The compressed context preserves the exact endpoint GET /v4/accounts/summary, so the downstream API-contract decision is recoverable.",HIGH
+R0119,PASS,The compressed context preserves that tax rounding belongs in the method `roundTaxHalfEven` with the correct identifier.,HIGH
+R0120,PASS,The compressed context preserves the BlobUpload root cause exactly: hashing before decompression.,HIGH
+R0121,PASS,"The summary preserves the RetryQueue 730 ms first-retry delay exactly, so the numeric parameter is recoverable for downstream decisions.",HIGH
+R0122,PASS,"The compressed context preserves the exact file path for the PaymentDedup tests, so the downstream placement decision is recoverable.",HIGH
+R0123,PASS,The compressed context explicitly preserves that RetryBudget’s next command is ./gradlew test --tests RetryBudgetTest.,HIGH
+R0124,PASS,The summary preserves that DeliveryEstimator must enforce a maximum of 37 route hops.,HIGH
+R0125,PASS,The compressed summary explicitly preserves that DeliveryEstimator has a maximum of 37 route hops.,HIGH
+R0126,PASS,The summary preserves the root cause that BlobUpload checksum mismatch comes from hashing before decompression.,HIGH
+R0127,FAIL,The compressed summary does not preserve the exact fact that SearchBackfill processes batches of exactly 240 documents.,HIGH
+R0128,PASS,The compressed context preserves the exact path fact that fraud score rules live in `rules/fraud-score.toml`.,HIGH
+R0129,PASS,The compressed context explicitly preserves that CartCache TTL increase to 900 seconds was attempted and failed.,HIGH
+R0130,PASS,The summary explicitly preserves the refund preview API path `/v2/refunds/preview` with the correct meaning and role.,HIGH
+R0131,PASS,The compressed context preserves the exact MoneyFormatter HALF_EVEN rounding requirement with no conflicting qualifier or path loss.,HIGH
+R0132,PASS,The compressed context still states that customer suspension uses HTTP PATCH on /v3/customers/suspension.,HIGH
+R0133,PASS,"The compressed context preserves that CartCache TTL increase to 900 seconds was attempted and failed, with the same failed-attempt meaning intact.",HIGH
+R0134,PASS,The compressed summary preserves that LedgerReplay duplication is caused by a missing idempotency key.,HIGH
+R0135,PASS,PostalRouteNormalizer is explicitly preserved as the shipment normalization class.,HIGH
+R0136,PASS,The compressed summary explicitly preserves that PriceImport precision loss is caused by conversion through double.,HIGH
+R0137,PASS,The compressed summary preserves the exact RetryQueue delay of 730 milliseconds before the first retry.,HIGH
+R0138,PASS,The summary preserves that MetricFlush’s fixed-rate timer switch was attempted and failed.,HIGH
+R0139,PASS,The compressed summary preserves the exact API contract: inventory reservation accepts POST /v1/inventory/reservations.,HIGH
+R0140,PASS,The compressed summary explicitly preserves that RetryBudget’s next command is `./gradlew test --tests RetryBudgetTest`.,HIGH
+R0141,PASS,The compressed summary explicitly preserves that InvoiceRenderer output must stay UTF-8 encoded.,HIGH
+R0142,PASS,The compressed context preserves the exact identifier reconcilePendingTransfers as the reconciliation entry point.,HIGH
+R0143,PASS,The compressed context preserves the exact API fact that the current account summary endpoint is GET /v4/accounts/summary.,HIGH
+R0144,PASS,The summary preserves the exact constraint that SchemaReview must not change the public OrderResult constructor signature.,HIGH
+R0145,PASS,The summary preserves that DeliveryEstimator must enforce a maximum of 37 route hops.,HIGH
+R0146,FAIL,The summary says the endpoint is POST /v1/inventory/reservations in one place and does not preserve the original GET /v4/accounts/summary contract accurately.,HIGH
+R0147,FAIL,"The summary omits the specific RouteCache next step and instead only lists RouteCache among many concepts, so the actionable todo is not preserved accurately enough.",HIGH
+R0148,PASS,The compressed context preserves the exact file path `resources/locale-fallbacks.json` for the locale fallback data.,HIGH
+R0149,PASS,The compressed context explicitly preserves that locale fallback data is in resources/locale-fallbacks.json.,HIGH
+R0150,PASS,The compressed context still clearly preserves that the pending CsvParser test must cover a quoted field containing a newline.,HIGH
+R0151,PASS,The compressed context preserves the exact BlobUpload checksum cause as hashing before decompression.,HIGH
+R0152,PASS,"The summary preserves the PriceImport root cause as conversion through double, matching the original fact and its downstream meaning.",HIGH
+R0153,PASS,The Europe/Paris timezone requirement is explicitly preserved in the compressed context with the same constraint and owner.,HIGH
+R0154,PASS,The compressed context explicitly preserves the API contract: customer suspension uses HTTP PATCH on /v3/customers/suspension.,HIGH
+R0155,PASS,The compressed summary preserves the exact method name reconcilePendingTransfers as the reconciliation entry point.,HIGH
+R0156,PASS,The compressed context preserves the SocketDrain keep-alive attempt and the failed outcome that it did not stop dropped messages.,HIGH
+R0157,PASS,The summary preserves that the next ReleaseAudit step is to run verify-release.ps1.,HIGH
+R0158,PASS,The compressed summary preserves the exact constraint that SchemaReview must not change the public OrderResult constructor signature.,HIGH
+R0159,PASS,The summary explicitly preserves that switching MetricFlush to a fixed-rate timer was attempted and failed.,HIGH
+R0160,PASS,"The summary preserves the exact endpoint GET /v4/accounts/summary, so the API contract is recoverable for downstream use.",HIGH

@@ -1,0 +1,192 @@
+{
+  "challenge_cases": [
+    {
+      "fact_id": "F04",
+      "source": "RetryQueue waits 730 seconds before the first retry.",
+      "expected_supported": false,
+      "case": "wrong unit",
+      "legacy_supported": true,
+      "prior_rule_supported": false,
+      "new_screen": {
+        "semantic": "UNVERIFIED",
+        "exact": false,
+        "evidence": null,
+        "conflict_evidence": []
+      },
+      "screen_matches_expected": true
+    },
+    {
+      "fact_id": "F08",
+      "source": "AccountMigration must not delete unrelated rows.",
+      "expected_supported": false,
+      "case": "wrong prohibited action",
+      "legacy_supported": true,
+      "prior_rule_supported": false,
+      "new_screen": {
+        "semantic": "UNVERIFIED",
+        "exact": null,
+        "evidence": null,
+        "conflict_evidence": []
+      },
+      "screen_matches_expected": true
+    },
+    {
+      "fact_id": "F07",
+      "source": "CartCache TTL 900 seconds was successful, but an unrelated task failed.",
+      "expected_supported": false,
+      "case": "unrelated failure",
+      "legacy_supported": false,
+      "prior_rule_supported": false,
+      "new_screen": {
+        "semantic": "UNVERIFIED",
+        "exact": null,
+        "evidence": null,
+        "conflict_evidence": []
+      },
+      "screen_matches_expected": true
+    },
+    {
+      "fact_id": "F04",
+      "source": "OtherQueue must wait 730 milliseconds before the first retry.",
+      "expected_supported": false,
+      "case": "wrong owner",
+      "legacy_supported": false,
+      "prior_rule_supported": false,
+      "new_screen": {
+        "semantic": "UNVERIFIED",
+        "exact": false,
+        "evidence": null,
+        "conflict_evidence": []
+      },
+      "screen_matches_expected": true
+    },
+    {
+      "fact_id": "F04",
+      "source": "RetryQueue must wait 731 milliseconds before the first retry.",
+      "expected_supported": false,
+      "case": "wrong number",
+      "legacy_supported": false,
+      "prior_rule_supported": false,
+      "new_screen": {
+        "semantic": "UNVERIFIED",
+        "exact": false,
+        "evidence": null,
+        "conflict_evidence": []
+      },
+      "screen_matches_expected": true
+    },
+    {
+      "fact_id": "F08",
+      "source": "AccountMigration must leave customer_ref unchanged.",
+      "expected_supported": true,
+      "case": "paraphrased constraint",
+      "legacy_supported": false,
+      "prior_rule_supported": false,
+      "new_screen": {
+        "semantic": "SUPPORTED",
+        "exact": null,
+        "evidence": "AccountMigration must leave customer_ref unchanged.",
+        "conflict_evidence": []
+      },
+      "screen_matches_expected": true
+    },
+    {
+      "fact_id": "F18",
+      "source": "Keep historical rows intact when fixing SubscriptionExpiry.",
+      "expected_supported": true,
+      "case": "paraphrased constraint",
+      "legacy_supported": false,
+      "prior_rule_supported": false,
+      "new_screen": {
+        "semantic": "SUPPORTED",
+        "exact": null,
+        "evidence": "Keep historical rows intact when fixing SubscriptionExpiry.",
+        "conflict_evidence": []
+      },
+      "screen_matches_expected": true
+    },
+    {
+      "fact_id": "F07",
+      "source": "CartCache: TTL 900 seconds did not solve the problem.",
+      "expected_supported": true,
+      "case": "paraphrased failure",
+      "legacy_supported": true,
+      "prior_rule_supported": false,
+      "new_screen": {
+        "semantic": "SUPPORTED",
+        "exact": null,
+        "evidence": "CartCache: TTL 900 seconds did not solve the problem.",
+        "conflict_evidence": []
+      },
+      "screen_matches_expected": true
+    },
+    {
+      "fact_id": "F19",
+      "source": "TokenRefresh: pending test for concurrent refresh requests.",
+      "expected_supported": true,
+      "case": "paraphrased task",
+      "legacy_supported": true,
+      "prior_rule_supported": false,
+      "new_screen": {
+        "semantic": "SUPPORTED",
+        "exact": null,
+        "evidence": "TokenRefresh: pending test for concurrent refresh requests.",
+        "conflict_evidence": []
+      },
+      "screen_matches_expected": true
+    },
+    {
+      "fact_id": "F04",
+      "source": "RetryQueue must not wait 730 milliseconds before the first retry.",
+      "expected_supported": false,
+      "case": "reversed polarity",
+      "legacy_supported": false,
+      "prior_rule_supported": false,
+      "new_screen": {
+        "semantic": "DISTORTED",
+        "exact": false,
+        "evidence": null,
+        "conflict_evidence": [
+          "RetryQueue must not wait 730 milliseconds before the first retry."
+        ]
+      },
+      "screen_matches_expected": true
+    },
+    {
+      "fact_id": "F13",
+      "source": "Customer suspension uses HTTP GET on /v3/customers/suspension.",
+      "expected_supported": false,
+      "case": "wrong verb",
+      "legacy_supported": false,
+      "prior_rule_supported": false,
+      "new_screen": {
+        "semantic": "UNVERIFIED",
+        "exact": false,
+        "evidence": null,
+        "conflict_evidence": []
+      },
+      "screen_matches_expected": true
+    },
+    {
+      "fact_id": "F23",
+      "source": "Inventory reservation accepts POST /v9/wrong.",
+      "expected_supported": false,
+      "case": "wrong API path",
+      "legacy_supported": false,
+      "prior_rule_supported": false,
+      "new_screen": {
+        "semantic": "UNVERIFIED",
+        "exact": false,
+        "evidence": null,
+        "conflict_evidence": []
+      },
+      "screen_matches_expected": true
+    }
+  ],
+  "challenge_count": 12,
+  "screen_correct": 12,
+  "legacy_correct": 8,
+  "manual_audit_status": "PENDING_HUMAN_REVIEW",
+  "manual_disagreement_rate": null,
+  "scope": "Synthetic challenges; not proof of semantic evaluator validity."
+}

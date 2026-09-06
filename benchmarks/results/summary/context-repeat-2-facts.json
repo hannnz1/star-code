@@ -1,0 +1,1206 @@
+[
+  {
+    "run": "repeat-2",
+    "id": "F01",
+    "category": "file",
+    "position": "early",
+    "expected": "reports/invoice-audit.json",
+    "summary_answer": {
+      "value": "reports/invoice-audit.json",
+      "evidence": "- Invoice export audit file path: `reports/invoice-audit.json`"
+    },
+    "complete_answer": {
+      "value": "reports/invoice-audit.json",
+      "evidence": "- Invoice export writes its audit file to reports/invoice-audit.json."
+    },
+    "summary_pass": true,
+    "summary_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_extraction_pass": true,
+    "complete_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_pass": true,
+    "sources": [
+      "summary"
+    ],
+    "original_retained": false
+  },
+  {
+    "run": "repeat-2",
+    "id": "F02",
+    "category": "class",
+    "position": "early",
+    "expected": "PostalRouteNormalizer",
+    "summary_answer": {
+      "value": "PostalRouteNormalizer",
+      "evidence": "- Shipment normalization class: `PostalRouteNormalizer`"
+    },
+    "complete_answer": {
+      "value": "PostalRouteNormalizer",
+      "evidence": "- The shipment normalization class is PostalRouteNormalizer."
+    },
+    "summary_pass": true,
+    "summary_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_extraction_pass": true,
+    "complete_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_pass": true,
+    "sources": [
+      "summary"
+    ],
+    "original_retained": false
+  },
+  {
+    "run": "repeat-2",
+    "id": "F03",
+    "category": "api",
+    "position": "early",
+    "expected": "/v2/refunds/preview",
+    "summary_answer": {
+      "value": "/v2/refunds/preview",
+      "evidence": "- Refund preview API path: `/v2/refunds/preview`"
+    },
+    "complete_answer": {
+      "value": "/v2/refunds/preview",
+      "evidence": "- The refund preview API path is /v2/refunds/preview."
+    },
+    "summary_pass": true,
+    "summary_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_extraction_pass": true,
+    "complete_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_pass": true,
+    "sources": [
+      "summary"
+    ],
+    "original_retained": false
+  },
+  {
+    "run": "repeat-2",
+    "id": "F04",
+    "category": "number",
+    "position": "early",
+    "expected": 730,
+    "summary_answer": {
+      "value": 730,
+      "evidence": "- `RetryQueue` first retry delay: 730 ms"
+    },
+    "complete_answer": {
+      "value": 730,
+      "evidence": "- RetryQueue must wait 730 milliseconds before the first retry."
+    },
+    "summary_pass": true,
+    "summary_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_extraction_pass": true,
+    "complete_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_pass": true,
+    "sources": [
+      "summary"
+    ],
+    "original_retained": false
+  },
+  {
+    "run": "repeat-2",
+    "id": "F05",
+    "category": "constraint",
+    "position": "early",
+    "expected": "Europe/Paris",
+    "summary_answer": {
+      "value": "Europe/Paris",
+      "evidence": "- Billing reports timezone: `Europe/Paris`"
+    },
+    "complete_answer": {
+      "value": "Europe/Paris",
+      "evidence": "- Billing reports must use the Europe/Paris timezone."
+    },
+    "summary_pass": true,
+    "summary_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_extraction_pass": true,
+    "complete_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_pass": true,
+    "sources": [
+      "summary"
+    ],
+    "original_retained": false
+  },
+  {
+    "run": "repeat-2",
+    "id": "F06",
+    "category": "cause",
+    "position": "early",
+    "expected": "UTC/local time conversion mismatch",
+    "summary_answer": {
+      "value": "UTC/local time conversion mismatch",
+      "evidence": "- AuditExport date bug: UTC/local time conversion mismatch"
+    },
+    "complete_answer": {
+      "value": "UTC/local time conversion mismatch",
+      "evidence": "- The AuditExport date bug is caused by UTC/local time conversion mismatch."
+    },
+    "summary_pass": true,
+    "summary_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_extraction_pass": true,
+    "complete_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_pass": true,
+    "sources": [
+      "summary"
+    ],
+    "original_retained": false
+  },
+  {
+    "run": "repeat-2",
+    "id": "F07",
+    "category": "failed_attempt",
+    "position": "early",
+    "expected": false,
+    "summary_answer": {
+      "value": false,
+      "evidence": "- `CartCache` TTL attempt to 900 seconds failed"
+    },
+    "complete_answer": {
+      "value": false,
+      "evidence": "- For CartCache, increasing the TTL to 900 seconds was attempted and failed."
+    },
+    "summary_pass": true,
+    "summary_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_extraction_pass": true,
+    "complete_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_pass": true,
+    "sources": [
+      "summary"
+    ],
+    "original_retained": false
+  },
+  {
+    "run": "repeat-2",
+    "id": "F08",
+    "category": "negative",
+    "position": "early",
+    "expected": false,
+    "summary_answer": {
+      "value": false,
+      "evidence": "- Account migration: do not rename legacy column `customer_ref`"
+    },
+    "complete_answer": {
+      "value": false,
+      "evidence": "- Do not rename the legacy column customer_ref during AccountMigration."
+    },
+    "summary_pass": false,
+    "summary_reason": "evidence does not identify fact owner",
+    "complete_extraction_pass": true,
+    "complete_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_pass": true,
+    "sources": [
+      "summary"
+    ],
+    "original_retained": false
+  },
+  {
+    "run": "repeat-2",
+    "id": "F09",
+    "category": "pending",
+    "position": "early",
+    "expected": "duplicate SKU events",
+    "summary_answer": {
+      "value": "add regression test for duplicate SKU events",
+      "evidence": "- `InventoryReconcile` pending task: add regression test for duplicate SKU events"
+    },
+    "complete_answer": {
+      "value": "add regression test for duplicate SKU events",
+      "evidence": "- The pending InventoryReconcile task is to add a regression test for duplicate SKU events."
+    },
+    "summary_pass": false,
+    "summary_reason": "typed value mismatch",
+    "complete_extraction_pass": false,
+    "complete_reason": "typed value mismatch",
+    "complete_pass": false,
+    "sources": [
+      "missing"
+    ],
+    "original_retained": false
+  },
+  {
+    "run": "repeat-2",
+    "id": "F10",
+    "category": "next",
+    "position": "early",
+    "expected": "verify-release.ps1",
+    "summary_answer": {
+      "value": "verify-release.ps1",
+      "evidence": "- ReleaseAudit next step: run `verify-release.ps1`"
+    },
+    "complete_answer": {
+      "value": "run verify-release.ps1",
+      "evidence": "- The next ReleaseAudit step is to run verify-release.ps1."
+    },
+    "summary_pass": true,
+    "summary_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_extraction_pass": false,
+    "complete_reason": "typed value mismatch",
+    "complete_pass": true,
+    "sources": [
+      "summary"
+    ],
+    "original_retained": false
+  },
+  {
+    "run": "repeat-2",
+    "id": "F11",
+    "category": "file",
+    "position": "early",
+    "expected": "config/shipping-thresholds.yaml",
+    "summary_answer": {
+      "value": "config/shipping-thresholds.yaml",
+      "evidence": "- Shipping thresholds file: `config/shipping-thresholds.yaml`"
+    },
+    "complete_answer": {
+      "value": "config/shipping-thresholds.yaml",
+      "evidence": "- Shipping thresholds are configured in config/shipping-thresholds.yaml."
+    },
+    "summary_pass": true,
+    "summary_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_extraction_pass": true,
+    "complete_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_pass": true,
+    "sources": [
+      "summary"
+    ],
+    "original_retained": false
+  },
+  {
+    "run": "repeat-2",
+    "id": "F12",
+    "category": "method",
+    "position": "early",
+    "expected": "roundTaxHalfEven",
+    "summary_answer": {
+      "value": "roundTaxHalfEven",
+      "evidence": "- Tax rounding method: `roundTaxHalfEven`"
+    },
+    "complete_answer": {
+      "value": "roundTaxHalfEven",
+      "evidence": "- Tax rounding belongs in method roundTaxHalfEven."
+    },
+    "summary_pass": true,
+    "summary_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_extraction_pass": true,
+    "complete_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_pass": true,
+    "sources": [
+      "summary"
+    ],
+    "original_retained": false
+  },
+  {
+    "run": "repeat-2",
+    "id": "F13",
+    "category": "api",
+    "position": "early",
+    "expected": "PATCH",
+    "summary_answer": {
+      "value": "PATCH",
+      "evidence": "- Customer suspension uses `PATCH /v3/customers/suspension`"
+    },
+    "complete_answer": {
+      "value": "PATCH",
+      "evidence": "- Customer suspension uses HTTP PATCH on /v3/customers/suspension."
+    },
+    "summary_pass": true,
+    "summary_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_extraction_pass": true,
+    "complete_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_pass": true,
+    "sources": [
+      "summary"
+    ],
+    "original_retained": false
+  },
+  {
+    "run": "repeat-2",
+    "id": "F14",
+    "category": "number",
+    "position": "early",
+    "expected": 240,
+    "summary_answer": {
+      "value": 240,
+      "evidence": "- `SearchBackfill` batch size: exactly 240 documents"
+    },
+    "complete_answer": {
+      "value": 240,
+      "evidence": "- SearchBackfill processes batches of exactly 240 documents."
+    },
+    "summary_pass": true,
+    "summary_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_extraction_pass": true,
+    "complete_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_pass": true,
+    "sources": [
+      "summary"
+    ],
+    "original_retained": false
+  },
+  {
+    "run": "repeat-2",
+    "id": "F15",
+    "category": "constraint",
+    "position": "early",
+    "expected": "fr-CA",
+    "summary_answer": {
+      "value": "fr-CA",
+      "evidence": "- ReportMailer locale: `fr-CA`"
+    },
+    "complete_answer": {
+      "value": "fr-CA",
+      "evidence": "- The ReportMailer locale must be fr-CA."
+    },
+    "summary_pass": true,
+    "summary_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_extraction_pass": true,
+    "complete_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_pass": true,
+    "sources": [
+      "summary"
+    ],
+    "original_retained": false
+  },
+  {
+    "run": "repeat-2",
+    "id": "F16",
+    "category": "cause",
+    "position": "early",
+    "expected": "missing idempotency key",
+    "summary_answer": {
+      "value": "missing idempotency key",
+      "evidence": "- LedgerReplay duplication cause: missing idempotency key"
+    },
+    "complete_answer": {
+      "value": "missing idempotency key",
+      "evidence": "- The LedgerReplay duplication is caused by a missing idempotency key."
+    },
+    "summary_pass": true,
+    "summary_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_extraction_pass": true,
+    "complete_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_pass": true,
+    "sources": [
+      "summary"
+    ],
+    "original_retained": false
+  },
+  {
+    "run": "repeat-2",
+    "id": "F17",
+    "category": "failed_attempt",
+    "position": "early",
+    "expected": false,
+    "summary_answer": {
+      "value": false,
+      "evidence": "- SearchRefresh stale results: clearing index cache did not fix it"
+    },
+    "complete_answer": {
+      "value": false,
+      "evidence": "- For SearchRefresh, clearing the index cache was tried and did not fix the stale results."
+    },
+    "summary_pass": true,
+    "summary_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_extraction_pass": true,
+    "complete_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_pass": true,
+    "sources": [
+      "summary"
+    ],
+    "original_retained": false
+  },
+  {
+    "run": "repeat-2",
+    "id": "F18",
+    "category": "negative",
+    "position": "middle",
+    "expected": false,
+    "summary_answer": {
+      "value": false,
+      "evidence": "- Do not delete historical rows while fixing SubscriptionExpiry"
+    },
+    "complete_answer": {
+      "value": false,
+      "evidence": "- Do not delete historical rows while fixing SubscriptionExpiry."
+    },
+    "summary_pass": false,
+    "summary_reason": "value or polarity is not supported in the named-owner clause",
+    "complete_extraction_pass": false,
+    "complete_reason": "value or polarity is not supported in the named-owner clause",
+    "complete_pass": false,
+    "sources": [
+      "missing"
+    ],
+    "original_retained": false
+  },
+  {
+    "run": "repeat-2",
+    "id": "F19",
+    "category": "pending",
+    "position": "middle",
+    "expected": "simultaneous refresh requests",
+    "summary_answer": {
+      "value": "simultaneous refresh requests",
+      "evidence": "- TokenRefresh pending task: test simultaneous refresh requests"
+    },
+    "complete_answer": {
+      "value": "simultaneous refresh requests",
+      "evidence": "- The pending TokenRefresh task is to test simultaneous refresh requests."
+    },
+    "summary_pass": true,
+    "summary_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_extraction_pass": true,
+    "complete_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_pass": true,
+    "sources": [
+      "summary"
+    ],
+    "original_retained": false
+  },
+  {
+    "run": "repeat-2",
+    "id": "F20",
+    "category": "next",
+    "position": "middle",
+    "expected": "CatalogSnapshotReader",
+    "summary_answer": {
+      "value": "CatalogSnapshotReader",
+      "evidence": "- CatalogDiff: inspect `CatalogSnapshotReader` before editing"
+    },
+    "complete_answer": {
+      "value": "CatalogSnapshotReader",
+      "evidence": "- For CatalogDiff, inspect CatalogSnapshotReader before editing."
+    },
+    "summary_pass": true,
+    "summary_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_extraction_pass": true,
+    "complete_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_pass": true,
+    "sources": [
+      "summary"
+    ],
+    "original_retained": false
+  },
+  {
+    "run": "repeat-2",
+    "id": "F21",
+    "category": "file",
+    "position": "middle",
+    "expected": "src/test/java/payments/PaymentDedupTest.java",
+    "summary_answer": {
+      "value": "src/test/java/payments/PaymentDedupTest.java",
+      "evidence": "- Payment dedup tests belong in `src/test/java/payments/PaymentDedupTest.java`"
+    },
+    "complete_answer": {
+      "value": "src/test/java/payments/PaymentDedupTest.java",
+      "evidence": "- Payment deduplication tests belong in src/test/java/payments/PaymentDedupTest.java."
+    },
+    "summary_pass": false,
+    "summary_reason": "evidence does not identify fact owner",
+    "complete_extraction_pass": true,
+    "complete_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_pass": true,
+    "sources": [
+      "summary"
+    ],
+    "original_retained": false
+  },
+  {
+    "run": "repeat-2",
+    "id": "F22",
+    "category": "package",
+    "position": "middle",
+    "expected": "com.acme.notifications.policy",
+    "summary_answer": {
+      "value": "com.acme.notifications.policy",
+      "evidence": "- Notification policy package: `com.acme.notifications.policy`"
+    },
+    "complete_answer": {
+      "value": "com.acme.notifications.policy",
+      "evidence": "- The notification policy package is com.acme.notifications.policy."
+    },
+    "summary_pass": true,
+    "summary_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_extraction_pass": true,
+    "complete_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_pass": true,
+    "sources": [
+      "summary"
+    ],
+    "original_retained": false
+  },
+  {
+    "run": "repeat-2",
+    "id": "F23",
+    "category": "api",
+    "position": "middle",
+    "expected": "/v1/inventory/reservations",
+    "summary_answer": {
+      "value": "/v1/inventory/reservations",
+      "evidence": "- Inventory reservation endpoint: `POST /v1/inventory/reservations`"
+    },
+    "complete_answer": {
+      "value": "POST /v1/inventory/reservations",
+      "evidence": "- Inventory reservation accepts POST /v1/inventory/reservations."
+    },
+    "summary_pass": true,
+    "summary_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_extraction_pass": false,
+    "complete_reason": "typed value mismatch",
+    "complete_pass": true,
+    "sources": [
+      "summary"
+    ],
+    "original_retained": false
+  },
+  {
+    "run": "repeat-2",
+    "id": "F24",
+    "category": "number",
+    "position": "middle",
+    "expected": 37,
+    "summary_answer": {
+      "value": 37,
+      "evidence": "- DeliveryEstimator maximum route hops: 37"
+    },
+    "complete_answer": {
+      "value": 37,
+      "evidence": "- DeliveryEstimator maximum route hops: 37."
+    },
+    "summary_pass": true,
+    "summary_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_extraction_pass": false,
+    "complete_reason": "evidence is not a verbatim source quote",
+    "complete_pass": true,
+    "sources": [
+      "summary"
+    ],
+    "original_retained": false
+  },
+  {
+    "run": "repeat-2",
+    "id": "F25",
+    "category": "constraint",
+    "position": "middle",
+    "expected": "UTF-8",
+    "summary_answer": {
+      "value": "UTF-8",
+      "evidence": "- InvoiceRenderer must keep output encoded as UTF-8"
+    },
+    "complete_answer": {
+      "value": "UTF-8",
+      "evidence": "- InvoiceRenderer must keep output encoded as UTF-8."
+    },
+    "summary_pass": true,
+    "summary_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_extraction_pass": false,
+    "complete_reason": "evidence is not a verbatim source quote",
+    "complete_pass": true,
+    "sources": [
+      "summary"
+    ],
+    "original_retained": false
+  },
+  {
+    "run": "repeat-2",
+    "id": "F26",
+    "category": "cause",
+    "position": "middle",
+    "expected": "conversion through double",
+    "summary_answer": {
+      "value": "conversion through double",
+      "evidence": "- PriceImport precision loss caused by conversion through double"
+    },
+    "complete_answer": {
+      "value": "conversion through double",
+      "evidence": "- The PriceImport precision loss is caused by conversion through double."
+    },
+    "summary_pass": true,
+    "summary_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_extraction_pass": true,
+    "complete_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_pass": true,
+    "sources": [
+      "summary"
+    ],
+    "original_retained": false
+  },
+  {
+    "run": "repeat-2",
+    "id": "F27",
+    "category": "failed_attempt",
+    "position": "middle",
+    "expected": false,
+    "summary_answer": {
+      "value": false,
+      "evidence": "- LeaseCleaner thread count increase from 4 to 16 failed"
+    },
+    "complete_answer": {
+      "value": false,
+      "evidence": "- For LeaseCleaner, raising the thread count from 4 to 16 was tried without success."
+    },
+    "summary_pass": true,
+    "summary_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_extraction_pass": true,
+    "complete_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_pass": true,
+    "sources": [
+      "summary"
+    ],
+    "original_retained": false
+  },
+  {
+    "run": "repeat-2",
+    "id": "F28",
+    "category": "negative",
+    "position": "middle",
+    "expected": false,
+    "summary_answer": {
+      "value": false,
+      "evidence": "- OrderArchive must not add external dependencies"
+    },
+    "complete_answer": {
+      "value": false,
+      "evidence": "- The OrderArchive change must not add external dependencies."
+    },
+    "summary_pass": true,
+    "summary_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_extraction_pass": true,
+    "complete_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_pass": true,
+    "sources": [
+      "summary"
+    ],
+    "original_retained": false
+  },
+  {
+    "run": "repeat-2",
+    "id": "F29",
+    "category": "pending",
+    "position": "middle",
+    "expected": "quoted field containing a newline",
+    "summary_answer": {
+      "value": "quoted field containing a newline",
+      "evidence": "- CsvParser test must cover quoted field containing a newline"
+    },
+    "complete_answer": {
+      "value": "quoted field containing a newline",
+      "evidence": "- The pending CsvParser test must cover a quoted field containing a newline."
+    },
+    "summary_pass": true,
+    "summary_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_extraction_pass": true,
+    "complete_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_pass": true,
+    "sources": [
+      "summary"
+    ],
+    "original_retained": false
+  },
+  {
+    "run": "repeat-2",
+    "id": "F30",
+    "category": "next",
+    "position": "middle",
+    "expected": "./gradlew test --tests RetryBudgetTest",
+    "summary_answer": {
+      "value": "./gradlew test --tests RetryBudgetTest",
+      "evidence": "- RetryBudget next command: `./gradlew test --tests RetryBudgetTest`"
+    },
+    "complete_answer": {
+      "value": "./gradlew test --tests RetryBudgetTest",
+      "evidence": "- For RetryBudget, the next command is ./gradlew test --tests RetryBudgetTest."
+    },
+    "summary_pass": true,
+    "summary_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_extraction_pass": true,
+    "complete_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_pass": true,
+    "sources": [
+      "summary"
+    ],
+    "original_retained": false
+  },
+  {
+    "run": "repeat-2",
+    "id": "F31",
+    "category": "file",
+    "position": "middle",
+    "expected": "rules/fraud-score.toml",
+    "summary_answer": {
+      "value": "rules/fraud-score.toml",
+      "evidence": "- Fraud score rules file: `rules/fraud-score.toml`"
+    },
+    "complete_answer": {
+      "value": "rules/fraud-score.toml",
+      "evidence": "- Fraud score rules live in rules/fraud-score.toml."
+    },
+    "summary_pass": true,
+    "summary_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_extraction_pass": true,
+    "complete_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_pass": true,
+    "sources": [
+      "summary"
+    ],
+    "original_retained": false
+  },
+  {
+    "run": "repeat-2",
+    "id": "F32",
+    "category": "class",
+    "position": "middle",
+    "expected": "LegacyCsvBridge",
+    "summary_answer": {
+      "value": "LegacyCsvBridge",
+      "evidence": "- Legacy CSV compatibility adapter: `LegacyCsvBridge`"
+    },
+    "complete_answer": {
+      "value": "LegacyCsvBridge",
+      "evidence": "- The legacy CSV compatibility adapter: LegacyCsvBridge."
+    },
+    "summary_pass": true,
+    "summary_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_extraction_pass": false,
+    "complete_reason": "evidence is not a verbatim source quote",
+    "complete_pass": true,
+    "sources": [
+      "summary"
+    ],
+    "original_retained": false
+  },
+  {
+    "run": "repeat-2",
+    "id": "F33",
+    "category": "api",
+    "position": "middle",
+    "expected": "/internal/readyz",
+    "summary_answer": {
+      "value": "/internal/readyz",
+      "evidence": "- Health readiness path: `/internal/readyz`"
+    },
+    "complete_answer": {
+      "value": "/internal/readyz",
+      "evidence": "- The health readiness path is /internal/readyz."
+    },
+    "summary_pass": true,
+    "summary_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_extraction_pass": true,
+    "complete_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_pass": true,
+    "sources": [
+      "summary"
+    ],
+    "original_retained": false
+  },
+  {
+    "run": "repeat-2",
+    "id": "F34",
+    "category": "number",
+    "position": "late",
+    "expected": 65536,
+    "summary_answer": {
+      "value": 65536,
+      "evidence": "- StreamBuffer cap payloads at 65536 bytes"
+    },
+    "complete_answer": {
+      "value": 65536,
+      "evidence": "- StreamBuffer must cap payloads at 65536 bytes."
+    },
+    "summary_pass": true,
+    "summary_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_extraction_pass": true,
+    "complete_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_pass": true,
+    "sources": [
+      "summary"
+    ],
+    "original_retained": false
+  },
+  {
+    "run": "repeat-2",
+    "id": "F35",
+    "category": "constraint",
+    "position": "late",
+    "expected": "America/Toronto",
+    "summary_answer": {
+      "value": "America/Toronto",
+      "evidence": "- JobScheduler timezone: `America/Toronto`"
+    },
+    "complete_answer": {
+      "value": "America/Toronto",
+      "evidence": "- JobScheduler must use the America/Toronto timezone."
+    },
+    "summary_pass": true,
+    "summary_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_extraction_pass": true,
+    "complete_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_pass": true,
+    "sources": [
+      "summary"
+    ],
+    "original_retained": false
+  },
+  {
+    "run": "repeat-2",
+    "id": "F36",
+    "category": "cause",
+    "position": "late",
+    "expected": "synchronous DNS lookup on the event loop",
+    "summary_answer": {
+      "value": "synchronous DNS lookup on the event loop",
+      "evidence": "- WebhookAck timeout caused by synchronous DNS lookup on the event loop"
+    },
+    "complete_answer": {
+      "value": "synchronous DNS lookup on the event loop",
+      "evidence": "- The WebhookAck timeout is caused by synchronous DNS lookup on the event loop."
+    },
+    "summary_pass": true,
+    "summary_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_extraction_pass": true,
+    "complete_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_pass": true,
+    "sources": [
+      "summary"
+    ],
+    "original_retained": false
+  },
+  {
+    "run": "repeat-2",
+    "id": "F37",
+    "category": "failed_attempt",
+    "position": "late",
+    "expected": false,
+    "summary_answer": {
+      "value": false,
+      "evidence": "- MetricFlush fixed-rate timer attempt failed"
+    },
+    "complete_answer": {
+      "value": false,
+      "evidence": "- Discussion note 110: review repository layout with attention to error attribution. The implementation review compares control flow and test coverage; this note records exploration, not a new requirement."
+    },
+    "summary_pass": true,
+    "summary_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_extraction_pass": false,
+    "complete_reason": "evidence is not a verbatim source quote",
+    "complete_pass": true,
+    "sources": [
+      "summary"
+    ],
+    "original_retained": false
+  },
+  {
+    "run": "repeat-2",
+    "id": "F38",
+    "category": "negative",
+    "position": "late",
+    "expected": false,
+    "summary_answer": {
+      "value": false,
+      "evidence": "- SchemaReview must not change public `OrderResult` constructor signature"
+    },
+    "complete_answer": {
+      "value": false,
+      "evidence": "- ProfileRepair must not overwrite user-selected display names."
+    },
+    "summary_pass": false,
+    "summary_reason": "evidence does not identify fact owner",
+    "complete_extraction_pass": true,
+    "complete_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_pass": true,
+    "sources": [
+      "summary"
+    ],
+    "original_retained": false
+  },
+  {
+    "run": "repeat-2",
+    "id": "F39",
+    "category": "pending",
+    "position": "late",
+    "expected": "expired session with an active upload",
+    "summary_answer": {
+      "value": "expired session with an active upload",
+      "evidence": "- The pending SessionPurge test covers an expired session with an active upload."
+    },
+    "complete_answer": {
+      "value": "expired session with an active upload",
+      "evidence": "- The pending SessionPurge test covers an expired session with an active upload."
+    },
+    "summary_pass": true,
+    "summary_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_extraction_pass": true,
+    "complete_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_pass": true,
+    "sources": [
+      "summary"
+    ],
+    "original_retained": false
+  },
+  {
+    "run": "repeat-2",
+    "id": "F40",
+    "category": "next",
+    "position": "late",
+    "expected": "route_generation",
+    "summary_answer": {
+      "value": "route_generation",
+      "evidence": "- For RouteCache, inspect the route_generation metric next."
+    },
+    "complete_answer": {
+      "value": "route_generation",
+      "evidence": "- For RouteCache, inspect the route_generation metric next."
+    },
+    "summary_pass": true,
+    "summary_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_extraction_pass": true,
+    "complete_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_pass": true,
+    "sources": [
+      "summary"
+    ],
+    "original_retained": false
+  },
+  {
+    "run": "repeat-2",
+    "id": "F41",
+    "category": "file",
+    "position": "late",
+    "expected": "resources/locale-fallbacks.json",
+    "summary_answer": {
+      "value": "resources/locale-fallbacks.json",
+      "evidence": "- Locale fallback data in `resources/locale-fallbacks.json`"
+    },
+    "complete_answer": {
+      "value": "resources/locale-fallbacks.json",
+      "evidence": "- Locale fallback data in resources/locale-fallbacks.json."
+    },
+    "summary_pass": true,
+    "summary_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_extraction_pass": false,
+    "complete_reason": "evidence is not a verbatim source quote",
+    "complete_pass": true,
+    "sources": [
+      "summary"
+    ],
+    "original_retained": false
+  },
+  {
+    "run": "repeat-2",
+    "id": "F42",
+    "category": "method",
+    "position": "late",
+    "expected": "reconcilePendingTransfers",
+    "summary_answer": {
+      "value": "reconcilePendingTransfers",
+      "evidence": "- Reconciliation entry point is `reconcilePendingTransfers`"
+    },
+    "complete_answer": {
+      "value": "reconcilePendingTransfers",
+      "evidence": "- The reconciliation entry point is reconcilePendingTransfers."
+    },
+    "summary_pass": true,
+    "summary_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_extraction_pass": true,
+    "complete_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_pass": true,
+    "sources": [
+      "summary"
+    ],
+    "original_retained": false
+  },
+  {
+    "run": "repeat-2",
+    "id": "F43",
+    "category": "api",
+    "position": "late",
+    "expected": "/v4/accounts/summary",
+    "summary_answer": {
+      "value": "GET /v4/accounts/summary",
+      "evidence": "- Current account summary endpoint is `GET /v4/accounts/summary`"
+    },
+    "complete_answer": {
+      "value": "GET /v4/accounts/summary",
+      "evidence": "- The current account summary endpoint is GET /v4/accounts/summary."
+    },
+    "summary_pass": false,
+    "summary_reason": "typed value mismatch",
+    "complete_extraction_pass": false,
+    "complete_reason": "typed value mismatch",
+    "complete_pass": false,
+    "sources": [
+      "missing"
+    ],
+    "original_retained": false
+  },
+  {
+    "run": "repeat-2",
+    "id": "F44",
+    "category": "number",
+    "position": "late",
+    "expected": 11,
+    "summary_answer": {
+      "value": 11,
+      "evidence": "- AuthThrottle allows at most 11 attempts per minute"
+    },
+    "complete_answer": {
+      "value": 11,
+      "evidence": "- AuthThrottle allows at most 11 attempts per minute."
+    },
+    "summary_pass": true,
+    "summary_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_extraction_pass": true,
+    "complete_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_pass": true,
+    "sources": [
+      "summary"
+    ],
+    "original_retained": false
+  },
+  {
+    "run": "repeat-2",
+    "id": "F45",
+    "category": "constraint",
+    "position": "late",
+    "expected": "HALF_EVEN",
+    "summary_answer": {
+      "value": "HALF_EVEN",
+      "evidence": "- MoneyFormatter must use HALF_EVEN rounding"
+    },
+    "complete_answer": {
+      "value": "HALF_EVEN",
+      "evidence": "- MoneyFormatter must use HALF_EVEN rounding."
+    },
+    "summary_pass": true,
+    "summary_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_extraction_pass": true,
+    "complete_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_pass": true,
+    "sources": [
+      "summary"
+    ],
+    "original_retained": false
+  },
+  {
+    "run": "repeat-2",
+    "id": "F46",
+    "category": "cause",
+    "position": "late",
+    "expected": "hashing before decompression",
+    "summary_answer": {
+      "value": "hashing before decompression",
+      "evidence": "- BlobUpload checksum mismatch caused by hashing before decompression"
+    },
+    "complete_answer": {
+      "value": "hashing before decompression",
+      "evidence": "- The BlobUpload checksum mismatch is caused by hashing before decompression."
+    },
+    "summary_pass": true,
+    "summary_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_extraction_pass": false,
+    "complete_reason": "evidence is not a verbatim source quote",
+    "complete_pass": true,
+    "sources": [
+      "summary",
+      "retained recent messages"
+    ],
+    "original_retained": true
+  },
+  {
+    "run": "repeat-2",
+    "id": "F47",
+    "category": "failed_attempt",
+    "position": "late",
+    "expected": false,
+    "summary_answer": {
+      "value": false,
+      "evidence": "- SocketDrain keep-alive disabling did not prevent dropped messages"
+    },
+    "complete_answer": {
+      "value": false,
+      "evidence": "- For SocketDrain, disabling keep-alive was tried and did not prevent dropped messages."
+    },
+    "summary_pass": true,
+    "summary_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_extraction_pass": true,
+    "complete_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_pass": true,
+    "sources": [
+      "summary",
+      "retained recent messages"
+    ],
+    "original_retained": true
+  },
+  {
+    "run": "repeat-2",
+    "id": "F48",
+    "category": "negative",
+    "position": "late",
+    "expected": false,
+    "summary_answer": {
+      "value": false,
+      "evidence": "- SchemaReview must not change the public `OrderResult` constructor signature"
+    },
+    "complete_answer": {
+      "value": false,
+      "evidence": "- SchemaReview must not change the public OrderResult constructor signature."
+    },
+    "summary_pass": false,
+    "summary_reason": "evidence is not a verbatim source quote",
+    "complete_extraction_pass": true,
+    "complete_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_pass": true,
+    "sources": [
+      "retained recent messages",
+      "summary"
+    ],
+    "original_retained": true
+  },
+  {
+    "run": "repeat-2",
+    "id": "F49",
+    "category": "pending",
+    "position": "late",
+    "expected": "zero-priced basket",
+    "summary_answer": {
+      "value": "zero-priced basket",
+      "evidence": "- DiscountPolicy pending test covers a zero-priced basket"
+    },
+    "complete_answer": {
+      "value": "zero-priced basket",
+      "evidence": "- The pending DiscountPolicy test covers a zero-priced basket."
+    },
+    "summary_pass": true,
+    "summary_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_extraction_pass": true,
+    "complete_reason": "typed value and owner-clause source evidence verified; semantic extraction is model-assisted",
+    "complete_pass": true,
+    "sources": [
+      "summary",
+      "retained recent messages"
+    ],
+    "original_retained": true
+  },
+  {
+    "run": "repeat-2",
+    "id": "F50",
+    "category": "next",
+    "position": "late",
+    "expected": "deploy/rollback-policy.md",
+    "summary_answer": {
+      "value": "deploy/rollback-policy.md",
+      "evidence": "- `deploy/rollback-policy.md`"
+    },
+    "complete_answer": {
+      "value": "deploy/rollback-policy.md",
+      "evidence": "- For DeployChecklist, the next file to inspect is deploy/rollback-policy.md."
+    },
+    "summary_pass": false,
+    "summary_reason": "evidence does not identify fact owner",
+    "complete_extraction_pass": false,
+    "complete_reason": "evidence is not a verbatim source quote",
+    "complete_pass": true,
+    "sources": [
+      "retained recent messages"
+    ],
+    "original_retained": true
+  }
+]

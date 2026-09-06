@@ -1,0 +1,37 @@
+{
+  "status": "PENDING",
+  "total_fact_view_records": 4000,
+  "candidate_pool": 800,
+  "human_sample": 160,
+  "seed": 20260905,
+  "category_counts": {
+    "user_constraint": 20,
+    "todo_current_state": 20,
+    "api_contract": 20,
+    "bug_root_cause": 20,
+    "failed_attempt": 20,
+    "filename_path": 20,
+    "numeric_parameter": 20,
+    "identifier_class_method": 20
+  },
+  "arm_counts": {
+    "new": 80,
+    "old": 80
+  },
+  "view_counts": {
+    "effective": 80,
+    "summary": 80
+  },
+  "score_band_counts": {
+    "middle_50_80": 77,
+    "high_>=80": 83
+  },
+  "absent_categories": [
+    "architectural_decision",
+    "real_tool_result"
+  ],
+  "human_disagreement_rate": null,
+  "blind_csv": "C:\\Users\\Administrator\\Desktop\\project\\star code\\benchmarks\\results\\manual-review-blind.csv",
+  "key_csv": "C:\\Users\\Administrator\\Desktop\\project\\star code\\benchmarks\\results\\manual-review-key.csv",
+  "sampling_note": "Latest user instruction supersedes original 20% of all judgments: 800 candidates ->160 human sample, 4% of 4000 total. Equal arm/view/category allocation and score-band coverage; not an unstratified population error estimate."
+}

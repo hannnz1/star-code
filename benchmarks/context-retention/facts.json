@@ -1,0 +1,535 @@
+{
+  "seed": 20260905,
+  "version": 1,
+  "facts": [
+    {
+      "id": "F01",
+      "category": "file",
+      "statement": "Invoice export writes its audit file to reports/invoice-audit.json.",
+      "question": "What exact path holds the invoice export audit file?",
+      "expected": "reports/invoice-audit.json",
+      "aliases": [],
+      "group": 0,
+      "position": "early"
+    },
+    {
+      "id": "F02",
+      "category": "class",
+      "statement": "The shipment normalization class is PostalRouteNormalizer.",
+      "question": "What is the exact shipment normalization class name?",
+      "expected": "PostalRouteNormalizer",
+      "aliases": [],
+      "group": 2,
+      "position": "early"
+    },
+    {
+      "id": "F03",
+      "category": "api",
+      "statement": "The refund preview API path is /v2/refunds/preview.",
+      "question": "What exact API path serves refund previews?",
+      "expected": "/v2/refunds/preview",
+      "aliases": [],
+      "group": 5,
+      "position": "early"
+    },
+    {
+      "id": "F04",
+      "category": "number",
+      "statement": "RetryQueue must wait 730 milliseconds before the first retry.",
+      "question": "How many milliseconds must RetryQueue wait before its first retry?",
+      "expected": 730,
+      "aliases": [],
+      "group": 7,
+      "position": "early"
+    },
+    {
+      "id": "F05",
+      "category": "constraint",
+      "statement": "Billing reports must use the Europe/Paris timezone.",
+      "question": "Which timezone must billing reports use?",
+      "expected": "Europe/Paris",
+      "aliases": [],
+      "group": 10,
+      "position": "early"
+    },
+    {
+      "id": "F06",
+      "category": "cause",
+      "statement": "The AuditExport date bug is caused by UTC/local time conversion mismatch.",
+      "question": "What caused the AuditExport date bug?",
+      "expected": "UTC/local time conversion mismatch",
+      "aliases": [
+        "UTC and local timezone mismatch",
+        "mismatch between UTC and local time"
+      ],
+      "group": 12,
+      "position": "early"
+    },
+    {
+      "id": "F07",
+      "category": "failed_attempt",
+      "statement": "For CartCache, increasing the TTL to 900 seconds was attempted and failed.",
+      "question": "Did increasing CartCache TTL to 900 seconds solve the problem?",
+      "expected": false,
+      "aliases": [],
+      "group": 15,
+      "position": "early"
+    },
+    {
+      "id": "F08",
+      "category": "negative",
+      "statement": "Do not rename the legacy column customer_ref during AccountMigration.",
+      "question": "May AccountMigration rename the legacy customer_ref column?",
+      "expected": false,
+      "aliases": [],
+      "group": 17,
+      "position": "early"
+    },
+    {
+      "id": "F09",
+      "category": "pending",
+      "statement": "The pending InventoryReconcile task is to add a regression test for duplicate SKU events.",
+      "question": "What regression test is pending for InventoryReconcile?",
+      "expected": "duplicate SKU events",
+      "aliases": [
+        "a regression test for duplicate SKU events",
+        "test duplicate SKU events"
+      ],
+      "group": 19,
+      "position": "early"
+    },
+    {
+      "id": "F10",
+      "category": "next",
+      "statement": "The next ReleaseAudit step is to run verify-release.ps1.",
+      "question": "What script is the next ReleaseAudit step?",
+      "expected": "verify-release.ps1",
+      "aliases": [],
+      "group": 22,
+      "position": "early"
+    },
+    {
+      "id": "F11",
+      "category": "file",
+      "statement": "Shipping thresholds are configured in config/shipping-thresholds.yaml.",
+      "question": "What is the shipping thresholds configuration path?",
+      "expected": "config/shipping-thresholds.yaml",
+      "aliases": [],
+      "group": 24,
+      "position": "early"
+    },
+    {
+      "id": "F12",
+      "category": "method",
+      "statement": "Tax rounding belongs in method roundTaxHalfEven.",
+      "question": "What exact method performs tax rounding?",
+      "expected": "roundTaxHalfEven",
+      "aliases": [],
+      "group": 27,
+      "position": "early"
+    },
+    {
+      "id": "F13",
+      "category": "api",
+      "statement": "Customer suspension uses HTTP PATCH on /v3/customers/suspension.",
+      "question": "What HTTP method is used on /v3/customers/suspension?",
+      "expected": "PATCH",
+      "aliases": [],
+      "group": 29,
+      "position": "early"
+    },
+    {
+      "id": "F14",
+      "category": "number",
+      "statement": "SearchBackfill processes batches of exactly 240 documents.",
+      "question": "How many documents are in each SearchBackfill batch?",
+      "expected": 240,
+      "aliases": [],
+      "group": 32,
+      "position": "early"
+    },
+    {
+      "id": "F15",
+      "category": "constraint",
+      "statement": "The ReportMailer locale must be fr-CA.",
+      "question": "Which locale must ReportMailer use?",
+      "expected": "fr-CA",
+      "aliases": [],
+      "group": 34,
+      "position": "early"
+    },
+    {
+      "id": "F16",
+      "category": "cause",
+      "statement": "The LedgerReplay duplication is caused by a missing idempotency key.",
+      "question": "What caused LedgerReplay duplication?",
+      "expected": "missing idempotency key",
+      "aliases": [
+        "a missing idempotency key",
+        "absence of an idempotency key"
+      ],
+      "group": 36,
+      "position": "early"
+    },
+    {
+      "id": "F17",
+      "category": "failed_attempt",
+      "statement": "For SearchRefresh, clearing the index cache was tried and did not fix the stale results.",
+      "question": "Did clearing the index cache fix SearchRefresh stale results?",
+      "expected": false,
+      "aliases": [],
+      "group": 39,
+      "position": "early"
+    },
+    {
+      "id": "F18",
+      "category": "negative",
+      "statement": "Do not delete historical rows while fixing SubscriptionExpiry.",
+      "question": "May the SubscriptionExpiry fix delete historical rows?",
+      "expected": false,
+      "aliases": [],
+      "group": 41,
+      "position": "middle"
+    },
+    {
+      "id": "F19",
+      "category": "pending",
+      "statement": "The pending TokenRefresh task is to test simultaneous refresh requests.",
+      "question": "Which request scenario still needs a TokenRefresh test?",
+      "expected": "simultaneous refresh requests",
+      "aliases": [
+        "concurrent refresh requests"
+      ],
+      "group": 44,
+      "position": "middle"
+    },
+    {
+      "id": "F20",
+      "category": "next",
+      "statement": "For CatalogDiff, inspect CatalogSnapshotReader before editing.",
+      "question": "Which class must be inspected next for CatalogDiff?",
+      "expected": "CatalogSnapshotReader",
+      "aliases": [],
+      "group": 46,
+      "position": "middle"
+    },
+    {
+      "id": "F21",
+      "category": "file",
+      "statement": "Payment deduplication tests belong in src/test/java/payments/PaymentDedupTest.java.",
+      "question": "What exact file should contain payment deduplication tests?",
+      "expected": "src/test/java/payments/PaymentDedupTest.java",
+      "aliases": [],
+      "group": 49,
+      "position": "middle"
+    },
+    {
+      "id": "F22",
+      "category": "package",
+      "statement": "The notification policy package is com.acme.notifications.policy.",
+      "question": "What is the exact notification policy package?",
+      "expected": "com.acme.notifications.policy",
+      "aliases": [],
+      "group": 51,
+      "position": "middle"
+    },
+    {
+      "id": "F23",
+      "category": "api",
+      "statement": "Inventory reservation accepts POST /v1/inventory/reservations.",
+      "question": "What exact API path accepts inventory reservations?",
+      "expected": "/v1/inventory/reservations",
+      "aliases": [],
+      "group": 53,
+      "position": "middle"
+    },
+    {
+      "id": "F24",
+      "category": "number",
+      "statement": "DeliveryEstimator must enforce a maximum of 37 route hops.",
+      "question": "What is DeliveryEstimator maximum route-hop count?",
+      "expected": 37,
+      "aliases": [],
+      "group": 56,
+      "position": "middle"
+    },
+    {
+      "id": "F25",
+      "category": "constraint",
+      "statement": "InvoiceRenderer must keep output encoded as UTF-8.",
+      "question": "What encoding must InvoiceRenderer preserve?",
+      "expected": "UTF-8",
+      "aliases": [],
+      "group": 58,
+      "position": "middle"
+    },
+    {
+      "id": "F26",
+      "category": "cause",
+      "statement": "The PriceImport precision loss is caused by conversion through double.",
+      "question": "What caused PriceImport precision loss?",
+      "expected": "conversion through double",
+      "aliases": [
+        "conversion to double",
+        "converting through double",
+        "double conversion"
+      ],
+      "group": 61,
+      "position": "middle"
+    },
+    {
+      "id": "F27",
+      "category": "failed_attempt",
+      "statement": "For LeaseCleaner, raising the thread count from 4 to 16 was tried without success.",
+      "question": "Did raising LeaseCleaner threads to 16 solve the problem?",
+      "expected": false,
+      "aliases": [],
+      "group": 63,
+      "position": "middle"
+    },
+    {
+      "id": "F28",
+      "category": "negative",
+      "statement": "The OrderArchive change must not add external dependencies.",
+      "question": "May OrderArchive add external dependencies?",
+      "expected": false,
+      "aliases": [],
+      "group": 66,
+      "position": "middle"
+    },
+    {
+      "id": "F29",
+      "category": "pending",
+      "statement": "The pending CsvParser test must cover a quoted field containing a newline.",
+      "question": "What field case remains to be tested in CsvParser?",
+      "expected": "quoted field containing a newline",
+      "aliases": [
+        "a quoted field containing a newline",
+        "quoted field with embedded newline"
+      ],
+      "group": 68,
+      "position": "middle"
+    },
+    {
+      "id": "F30",
+      "category": "next",
+      "statement": "For RetryBudget, the next command is ./gradlew test --tests RetryBudgetTest.",
+      "question": "What is the exact next RetryBudget command?",
+      "expected": "./gradlew test --tests RetryBudgetTest",
+      "aliases": [],
+      "group": 70,
+      "position": "middle"
+    },
+    {
+      "id": "F31",
+      "category": "file",
+      "statement": "Fraud score rules live in rules/fraud-score.toml.",
+      "question": "Where do fraud score rules live?",
+      "expected": "rules/fraud-score.toml",
+      "aliases": [],
+      "group": 73,
+      "position": "middle"
+    },
+    {
+      "id": "F32",
+      "category": "class",
+      "statement": "The CSV compatibility adapter is LegacyCsvBridge.",
+      "question": "What is the CSV compatibility adapter class?",
+      "expected": "LegacyCsvBridge",
+      "aliases": [],
+      "group": 75,
+      "position": "middle"
+    },
+    {
+      "id": "F33",
+      "category": "api",
+      "statement": "The health readiness path is /internal/readyz.",
+      "question": "What is the exact readiness path?",
+      "expected": "/internal/readyz",
+      "aliases": [],
+      "group": 78,
+      "position": "middle"
+    },
+    {
+      "id": "F34",
+      "category": "number",
+      "statement": "StreamBuffer must cap payloads at 65536 bytes.",
+      "question": "What is StreamBuffer maximum payload size in bytes?",
+      "expected": 65536,
+      "aliases": [],
+      "group": 80,
+      "position": "late"
+    },
+    {
+      "id": "F35",
+      "category": "constraint",
+      "statement": "JobScheduler must use the America/Toronto timezone.",
+      "question": "Which timezone must JobScheduler use?",
+      "expected": "America/Toronto",
+      "aliases": [],
+      "group": 83,
+      "position": "late"
+    },
+    {
+      "id": "F36",
+      "category": "cause",
+      "statement": "The WebhookAck timeout is caused by synchronous DNS lookup on the event loop.",
+      "question": "What caused the WebhookAck timeout?",
+      "expected": "synchronous DNS lookup on the event loop",
+      "aliases": [
+        "blocking DNS lookup on the event loop",
+        "synchronous DNS resolution on the event loop"
+      ],
+      "group": 85,
+      "position": "late"
+    },
+    {
+      "id": "F37",
+      "category": "failed_attempt",
+      "statement": "For MetricFlush, switching to a fixed-rate timer was attempted and failed.",
+      "question": "Did switching MetricFlush to a fixed-rate timer fix the issue?",
+      "expected": false,
+      "aliases": [],
+      "group": 87,
+      "position": "late"
+    },
+    {
+      "id": "F38",
+      "category": "negative",
+      "statement": "ProfileRepair must not overwrite user-selected display names.",
+      "question": "May ProfileRepair overwrite user-selected display names?",
+      "expected": false,
+      "aliases": [],
+      "group": 90,
+      "position": "late"
+    },
+    {
+      "id": "F39",
+      "category": "pending",
+      "statement": "The pending SessionPurge test covers an expired session with an active upload.",
+      "question": "What session scenario remains to be tested in SessionPurge?",
+      "expected": "expired session with an active upload",
+      "aliases": [
+        "an expired session with an active upload"
+      ],
+      "group": 92,
+      "position": "late"
+    },
+    {
+      "id": "F40",
+      "category": "next",
+      "statement": "For RouteCache, inspect the route_generation metric next.",
+      "question": "Which metric must be inspected next for RouteCache?",
+      "expected": "route_generation",
+      "aliases": [],
+      "group": 95,
+      "position": "late"
+    },
+    {
+      "id": "F41",
+      "category": "file",
+      "statement": "Locale fallback data is in resources/locale-fallbacks.json.",
+      "question": "What is the locale fallback data path?",
+      "expected": "resources/locale-fallbacks.json",
+      "aliases": [],
+      "group": 97,
+      "position": "late"
+    },
+    {
+      "id": "F42",
+      "category": "method",
+      "statement": "The reconciliation entry point is reconcilePendingTransfers.",
+      "question": "What is the reconciliation entry-point method?",
+      "expected": "reconcilePendingTransfers",
+      "aliases": [],
+      "group": 100,
+      "position": "late"
+    },
+    {
+      "id": "F43",
+      "category": "api",
+      "statement": "The current account summary endpoint is GET /v4/accounts/summary.",
+      "question": "What is the exact current account summary path?",
+      "expected": "/v4/accounts/summary",
+      "aliases": [],
+      "group": 102,
+      "position": "late"
+    },
+    {
+      "id": "F44",
+      "category": "number",
+      "statement": "AuthThrottle allows at most 11 attempts per minute.",
+      "question": "How many attempts per minute does AuthThrottle allow?",
+      "expected": 11,
+      "aliases": [],
+      "group": 104,
+      "position": "late"
+    },
+    {
+      "id": "F45",
+      "category": "constraint",
+      "statement": "MoneyFormatter must use HALF_EVEN rounding.",
+      "question": "Which rounding mode must MoneyFormatter use?",
+      "expected": "HALF_EVEN",
+      "aliases": [],
+      "group": 107,
+      "position": "late"
+    },
+    {
+      "id": "F46",
+      "category": "cause",
+      "statement": "The BlobUpload checksum mismatch is caused by hashing before decompression.",
+      "question": "What caused the BlobUpload checksum mismatch?",
+      "expected": "hashing before decompression",
+      "aliases": [
+        "checksum computed before decompression",
+        "computing the hash before decompression"
+      ],
+      "group": 109,
+      "position": "late"
+    },
+    {
+      "id": "F47",
+      "category": "failed_attempt",
+      "statement": "For SocketDrain, disabling keep-alive was tried and did not prevent dropped messages.",
+      "question": "Did disabling keep-alive fix SocketDrain dropped messages?",
+      "expected": false,
+      "aliases": [],
+      "group": 112,
+      "position": "late"
+    },
+    {
+      "id": "F48",
+      "category": "negative",
+      "statement": "SchemaReview must not change the public OrderResult constructor signature.",
+      "question": "May SchemaReview change the public OrderResult constructor signature?",
+      "expected": false,
+      "aliases": [],
+      "group": 114,
+      "position": "late"
+    },
+    {
+      "id": "F49",
+      "category": "pending",
+      "statement": "The pending DiscountPolicy test covers a zero-priced basket.",
+      "question": "What basket case remains to be tested in DiscountPolicy?",
+      "expected": "zero-priced basket",
+      "aliases": [
+        "a zero-priced basket",
+        "zero priced basket"
+      ],
+      "group": 117,
+      "position": "late"
+    },
+    {
+      "id": "F50",
+      "category": "next",
+      "statement": "For DeployChecklist, the next file to inspect is deploy/rollback-policy.md.",
+      "question": "What is the next file to inspect for DeployChecklist?",
+      "expected": "deploy/rollback-policy.md",
+      "aliases": [],
+      "group": 119,
+      "position": "late"
+    }
+  ]
+}

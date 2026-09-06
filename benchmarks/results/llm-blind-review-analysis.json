@@ -1,0 +1,1701 @@
+{
+  "method": "Independent LLM Blind Review",
+  "human_audit": "NOT_PERFORMED",
+  "overall": {
+    "total": 160,
+    "labels": {
+      "PASS": 154,
+      "PARTIAL": 0,
+      "FAIL": 6,
+      "UNCERTAIN": 0
+    },
+    "scored": 160,
+    "strict": 0.9625,
+    "weighted": 0.9625
+  },
+  "by_version": {
+    "NEW": {
+      "total": 80,
+      "labels": {
+        "PASS": 77,
+        "PARTIAL": 0,
+        "FAIL": 3,
+        "UNCERTAIN": 0
+      },
+      "scored": 80,
+      "strict": 0.9625,
+      "weighted": 0.9625
+    },
+    "OLD": {
+      "total": 80,
+      "labels": {
+        "PASS": 77,
+        "PARTIAL": 0,
+        "FAIL": 3,
+        "UNCERTAIN": 0
+      },
+      "scored": 80,
+      "strict": 0.9625,
+      "weighted": 0.9625
+    }
+  },
+  "by_category": {
+    "api_contract": {
+      "total": 20,
+      "labels": {
+        "PASS": 19,
+        "PARTIAL": 0,
+        "FAIL": 1,
+        "UNCERTAIN": 0
+      },
+      "scored": 20,
+      "strict": 0.95,
+      "weighted": 0.95
+    },
+    "bug_root_cause": {
+      "total": 20,
+      "labels": {
+        "PASS": 20,
+        "PARTIAL": 0,
+        "FAIL": 0,
+        "UNCERTAIN": 0
+      },
+      "scored": 20,
+      "strict": 1.0,
+      "weighted": 1.0
+    },
+    "failed_attempt": {
+      "total": 20,
+      "labels": {
+        "PASS": 20,
+        "PARTIAL": 0,
+        "FAIL": 0,
+        "UNCERTAIN": 0
+      },
+      "scored": 20,
+      "strict": 1.0,
+      "weighted": 1.0
+    },
+    "filename_path": {
+      "total": 20,
+      "labels": {
+        "PASS": 19,
+        "PARTIAL": 0,
+        "FAIL": 1,
+        "UNCERTAIN": 0
+      },
+      "scored": 20,
+      "strict": 0.95,
+      "weighted": 0.95
+    },
+    "identifier_class_method": {
+      "total": 20,
+      "labels": {
+        "PASS": 19,
+        "PARTIAL": 0,
+        "FAIL": 1,
+        "UNCERTAIN": 0
+      },
+      "scored": 20,
+      "strict": 0.95,
+      "weighted": 0.95
+    },
+    "numeric_parameter": {
+      "total": 20,
+      "labels": {
+        "PASS": 18,
+        "PARTIAL": 0,
+        "FAIL": 2,
+        "UNCERTAIN": 0
+      },
+      "scored": 20,
+      "strict": 0.9,
+      "weighted": 0.9
+    },
+    "todo_current_state": {
+      "total": 20,
+      "labels": {
+        "PASS": 19,
+        "PARTIAL": 0,
+        "FAIL": 1,
+        "UNCERTAIN": 0
+      },
+      "scored": 20,
+      "strict": 0.95,
+      "weighted": 0.95
+    },
+    "user_constraint": {
+      "total": 20,
+      "labels": {
+        "PASS": 20,
+        "PARTIAL": 0,
+        "FAIL": 0,
+        "UNCERTAIN": 0
+      },
+      "scored": 20,
+      "strict": 1.0,
+      "weighted": 1.0
+    }
+  },
+  "by_version_category": {
+    "NEW": {
+      "api_contract": {
+        "total": 10,
+        "labels": {
+          "PASS": 10,
+          "PARTIAL": 0,
+          "FAIL": 0,
+          "UNCERTAIN": 0
+        },
+        "scored": 10,
+        "strict": 1.0,
+        "weighted": 1.0
+      },
+      "bug_root_cause": {
+        "total": 10,
+        "labels": {
+          "PASS": 10,
+          "PARTIAL": 0,
+          "FAIL": 0,
+          "UNCERTAIN": 0
+        },
+        "scored": 10,
+        "strict": 1.0,
+        "weighted": 1.0
+      },
+      "failed_attempt": {
+        "total": 10,
+        "labels": {
+          "PASS": 10,
+          "PARTIAL": 0,
+          "FAIL": 0,
+          "UNCERTAIN": 0
+        },
+        "scored": 10,
+        "strict": 1.0,
+        "weighted": 1.0
+      },
+      "filename_path": {
+        "total": 10,
+        "labels": {
+          "PASS": 9,
+          "PARTIAL": 0,
+          "FAIL": 1,
+          "UNCERTAIN": 0
+        },
+        "scored": 10,
+        "strict": 0.9,
+        "weighted": 0.9
+      },
+      "identifier_class_method": {
+        "total": 10,
+        "labels": {
+          "PASS": 9,
+          "PARTIAL": 0,
+          "FAIL": 1,
+          "UNCERTAIN": 0
+        },
+        "scored": 10,
+        "strict": 0.9,
+        "weighted": 0.9
+      },
+      "numeric_parameter": {
+        "total": 10,
+        "labels": {
+          "PASS": 9,
+          "PARTIAL": 0,
+          "FAIL": 1,
+          "UNCERTAIN": 0
+        },
+        "scored": 10,
+        "strict": 0.9,
+        "weighted": 0.9
+      },
+      "todo_current_state": {
+        "total": 10,
+        "labels": {
+          "PASS": 10,
+          "PARTIAL": 0,
+          "FAIL": 0,
+          "UNCERTAIN": 0
+        },
+        "scored": 10,
+        "strict": 1.0,
+        "weighted": 1.0
+      },
+      "user_constraint": {
+        "total": 10,
+        "labels": {
+          "PASS": 10,
+          "PARTIAL": 0,
+          "FAIL": 0,
+          "UNCERTAIN": 0
+        },
+        "scored": 10,
+        "strict": 1.0,
+        "weighted": 1.0
+      }
+    },
+    "OLD": {
+      "api_contract": {
+        "total": 10,
+        "labels": {
+          "PASS": 9,
+          "PARTIAL": 0,
+          "FAIL": 1,
+          "UNCERTAIN": 0
+        },
+        "scored": 10,
+        "strict": 0.9,
+        "weighted": 0.9
+      },
+      "bug_root_cause": {
+        "total": 10,
+        "labels": {
+          "PASS": 10,
+          "PARTIAL": 0,
+          "FAIL": 0,
+          "UNCERTAIN": 0
+        },
+        "scored": 10,
+        "strict": 1.0,
+        "weighted": 1.0
+      },
+      "failed_attempt": {
+        "total": 10,
+        "labels": {
+          "PASS": 10,
+          "PARTIAL": 0,
+          "FAIL": 0,
+          "UNCERTAIN": 0
+        },
+        "scored": 10,
+        "strict": 1.0,
+        "weighted": 1.0
+      },
+      "filename_path": {
+        "total": 10,
+        "labels": {
+          "PASS": 10,
+          "PARTIAL": 0,
+          "FAIL": 0,
+          "UNCERTAIN": 0
+        },
+        "scored": 10,
+        "strict": 1.0,
+        "weighted": 1.0
+      },
+      "identifier_class_method": {
+        "total": 10,
+        "labels": {
+          "PASS": 10,
+          "PARTIAL": 0,
+          "FAIL": 0,
+          "UNCERTAIN": 0
+        },
+        "scored": 10,
+        "strict": 1.0,
+        "weighted": 1.0
+      },
+      "numeric_parameter": {
+        "total": 10,
+        "labels": {
+          "PASS": 9,
+          "PARTIAL": 0,
+          "FAIL": 1,
+          "UNCERTAIN": 0
+        },
+        "scored": 10,
+        "strict": 0.9,
+        "weighted": 0.9
+      },
+      "todo_current_state": {
+        "total": 10,
+        "labels": {
+          "PASS": 9,
+          "PARTIAL": 0,
+          "FAIL": 1,
+          "UNCERTAIN": 0
+        },
+        "scored": 10,
+        "strict": 0.9,
+        "weighted": 0.9
+      },
+      "user_constraint": {
+        "total": 10,
+        "labels": {
+          "PASS": 10,
+          "PARTIAL": 0,
+          "FAIL": 0,
+          "UNCERTAIN": 0
+        },
+        "scored": 10,
+        "strict": 1.0,
+        "weighted": 1.0
+      }
+    }
+  },
+  "definitions": {
+    "raw_agreement": "Exact nominal reviewer/automatic label match, excludes reviewer UNCERTAIN",
+    "strict": "PASS=1; PARTIAL/FAIL=0; automatic SUPPORTED=1 and all other screen labels=0",
+    "weighted": "Reviewer PARTIAL=.5; 1-mean absolute score difference; not nominal agreement or weighted kappa",
+    "kappa": "Cohen kappa on strict binary labels; null when marginals degenerate",
+    "population": "160 stratified fact/view records of 800 candidates from 4000 records; not 160 independent compaction runs",
+    "causal_inference": "Descriptive sampled-record comparison only; no preregistered noninferiority margin or cluster-adjusted population estimate"
+  },
+  "evaluator": {
+    "frozen_v1": {
+      "overall": {
+        "n": 160,
+        "reviewer_uncertain": 0,
+        "confusion_matrix_reviewer_rows_automatic_columns": {
+          "PASS": {
+            "PASS": 125,
+            "PARTIAL": 0,
+            "FAIL": 0,
+            "UNCERTAIN": 29
+          },
+          "PARTIAL": {
+            "PASS": 0,
+            "PARTIAL": 0,
+            "FAIL": 0,
+            "UNCERTAIN": 0
+          },
+          "FAIL": {
+            "PASS": 1,
+            "PARTIAL": 0,
+            "FAIL": 0,
+            "UNCERTAIN": 5
+          }
+        },
+        "raw_agreement": 0.78125,
+        "disagreement_rate": 0.21875,
+        "strict_agreement": 0.8125,
+        "strict_disagreement": 0.1875,
+        "weighted_agreement_credit": 0.8125,
+        "weighted_disagreement": 0.1875,
+        "cohens_kappa_strict": 0.19893190921228326,
+        "automatic_unverified": 34
+      },
+      "by_category": {
+        "api_contract": {
+          "n": 20,
+          "reviewer_uncertain": 0,
+          "confusion_matrix_reviewer_rows_automatic_columns": {
+            "PASS": {
+              "PASS": 11,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 8
+            },
+            "PARTIAL": {
+              "PASS": 0,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 0
+            },
+            "FAIL": {
+              "PASS": 0,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 1
+            }
+          },
+          "raw_agreement": 0.55,
+          "disagreement_rate": 0.44999999999999996,
+          "strict_agreement": 0.6,
+          "strict_disagreement": 0.4,
+          "weighted_agreement_credit": 0.6,
+          "weighted_disagreement": 0.4,
+          "cohens_kappa_strict": 0.12087912087912096,
+          "automatic_unverified": 9
+        },
+        "bug_root_cause": {
+          "n": 20,
+          "reviewer_uncertain": 0,
+          "confusion_matrix_reviewer_rows_automatic_columns": {
+            "PASS": {
+              "PASS": 17,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 3
+            },
+            "PARTIAL": {
+              "PASS": 0,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 0
+            },
+            "FAIL": {
+              "PASS": 0,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 0
+            }
+          },
+          "raw_agreement": 0.85,
+          "disagreement_rate": 0.15000000000000002,
+          "strict_agreement": 0.85,
+          "strict_disagreement": 0.15000000000000002,
+          "weighted_agreement_credit": 0.85,
+          "weighted_disagreement": 0.15,
+          "cohens_kappa_strict": 0.0,
+          "automatic_unverified": 3
+        },
+        "failed_attempt": {
+          "n": 20,
+          "reviewer_uncertain": 0,
+          "confusion_matrix_reviewer_rows_automatic_columns": {
+            "PASS": {
+              "PASS": 16,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 4
+            },
+            "PARTIAL": {
+              "PASS": 0,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 0
+            },
+            "FAIL": {
+              "PASS": 0,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 0
+            }
+          },
+          "raw_agreement": 0.8,
+          "disagreement_rate": 0.19999999999999996,
+          "strict_agreement": 0.8,
+          "strict_disagreement": 0.19999999999999996,
+          "weighted_agreement_credit": 0.8,
+          "weighted_disagreement": 0.2,
+          "cohens_kappa_strict": 0.0,
+          "automatic_unverified": 4
+        },
+        "filename_path": {
+          "n": 20,
+          "reviewer_uncertain": 0,
+          "confusion_matrix_reviewer_rows_automatic_columns": {
+            "PASS": {
+              "PASS": 13,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 6
+            },
+            "PARTIAL": {
+              "PASS": 0,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 0
+            },
+            "FAIL": {
+              "PASS": 1,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 0
+            }
+          },
+          "raw_agreement": 0.65,
+          "disagreement_rate": 0.35,
+          "strict_agreement": 0.65,
+          "strict_disagreement": 0.35,
+          "weighted_agreement_credit": 0.65,
+          "weighted_disagreement": 0.35,
+          "cohens_kappa_strict": -0.09374999999999972,
+          "automatic_unverified": 6
+        },
+        "identifier_class_method": {
+          "n": 20,
+          "reviewer_uncertain": 0,
+          "confusion_matrix_reviewer_rows_automatic_columns": {
+            "PASS": {
+              "PASS": 19,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 0
+            },
+            "PARTIAL": {
+              "PASS": 0,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 0
+            },
+            "FAIL": {
+              "PASS": 0,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 1
+            }
+          },
+          "raw_agreement": 0.95,
+          "disagreement_rate": 0.050000000000000044,
+          "strict_agreement": 1.0,
+          "strict_disagreement": 0.0,
+          "weighted_agreement_credit": 1.0,
+          "weighted_disagreement": 0.0,
+          "cohens_kappa_strict": 1.0,
+          "automatic_unverified": 1
+        },
+        "numeric_parameter": {
+          "n": 20,
+          "reviewer_uncertain": 0,
+          "confusion_matrix_reviewer_rows_automatic_columns": {
+            "PASS": {
+              "PASS": 17,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 1
+            },
+            "PARTIAL": {
+              "PASS": 0,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 0
+            },
+            "FAIL": {
+              "PASS": 0,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 2
+            }
+          },
+          "raw_agreement": 0.85,
+          "disagreement_rate": 0.15000000000000002,
+          "strict_agreement": 0.95,
+          "strict_disagreement": 0.050000000000000044,
+          "weighted_agreement_credit": 0.95,
+          "weighted_disagreement": 0.05,
+          "cohens_kappa_strict": 0.7727272727272725,
+          "automatic_unverified": 3
+        },
+        "todo_current_state": {
+          "n": 20,
+          "reviewer_uncertain": 0,
+          "confusion_matrix_reviewer_rows_automatic_columns": {
+            "PASS": {
+              "PASS": 15,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 4
+            },
+            "PARTIAL": {
+              "PASS": 0,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 0
+            },
+            "FAIL": {
+              "PASS": 0,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 1
+            }
+          },
+          "raw_agreement": 0.75,
+          "disagreement_rate": 0.25,
+          "strict_agreement": 0.8,
+          "strict_disagreement": 0.19999999999999996,
+          "weighted_agreement_credit": 0.8,
+          "weighted_disagreement": 0.2,
+          "cohens_kappa_strict": 0.27272727272727326,
+          "automatic_unverified": 5
+        },
+        "user_constraint": {
+          "n": 20,
+          "reviewer_uncertain": 0,
+          "confusion_matrix_reviewer_rows_automatic_columns": {
+            "PASS": {
+              "PASS": 17,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 3
+            },
+            "PARTIAL": {
+              "PASS": 0,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 0
+            },
+            "FAIL": {
+              "PASS": 0,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 0
+            }
+          },
+          "raw_agreement": 0.85,
+          "disagreement_rate": 0.15000000000000002,
+          "strict_agreement": 0.85,
+          "strict_disagreement": 0.15000000000000002,
+          "weighted_agreement_credit": 0.85,
+          "weighted_disagreement": 0.15,
+          "cohens_kappa_strict": 0.0,
+          "automatic_unverified": 3
+        }
+      },
+      "by_version": {
+        "NEW": {
+          "n": 80,
+          "reviewer_uncertain": 0,
+          "confusion_matrix_reviewer_rows_automatic_columns": {
+            "PASS": {
+              "PASS": 64,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 13
+            },
+            "PARTIAL": {
+              "PASS": 0,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 0
+            },
+            "FAIL": {
+              "PASS": 1,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 2
+            }
+          },
+          "raw_agreement": 0.8,
+          "disagreement_rate": 0.19999999999999996,
+          "strict_agreement": 0.825,
+          "strict_disagreement": 0.17500000000000004,
+          "weighted_agreement_credit": 0.825,
+          "weighted_disagreement": 0.175,
+          "cohens_kappa_strict": 0.17037037037036973,
+          "automatic_unverified": 15
+        },
+        "OLD": {
+          "n": 80,
+          "reviewer_uncertain": 0,
+          "confusion_matrix_reviewer_rows_automatic_columns": {
+            "PASS": {
+              "PASS": 61,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 16
+            },
+            "PARTIAL": {
+              "PASS": 0,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 0
+            },
+            "FAIL": {
+              "PASS": 0,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 3
+            }
+          },
+          "raw_agreement": 0.7625,
+          "disagreement_rate": 0.23750000000000004,
+          "strict_agreement": 0.8,
+          "strict_disagreement": 0.19999999999999996,
+          "weighted_agreement_credit": 0.8,
+          "weighted_disagreement": 0.2,
+          "cohens_kappa_strict": 0.22235722964763083,
+          "automatic_unverified": 19
+        }
+      },
+      "categories_by_disagreement": [
+        {
+          "category": "api_contract",
+          "n": 20,
+          "reviewer_uncertain": 0,
+          "confusion_matrix_reviewer_rows_automatic_columns": {
+            "PASS": {
+              "PASS": 11,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 8
+            },
+            "PARTIAL": {
+              "PASS": 0,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 0
+            },
+            "FAIL": {
+              "PASS": 0,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 1
+            }
+          },
+          "raw_agreement": 0.55,
+          "disagreement_rate": 0.44999999999999996,
+          "strict_agreement": 0.6,
+          "strict_disagreement": 0.4,
+          "weighted_agreement_credit": 0.6,
+          "weighted_disagreement": 0.4,
+          "cohens_kappa_strict": 0.12087912087912096,
+          "automatic_unverified": 9
+        },
+        {
+          "category": "filename_path",
+          "n": 20,
+          "reviewer_uncertain": 0,
+          "confusion_matrix_reviewer_rows_automatic_columns": {
+            "PASS": {
+              "PASS": 13,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 6
+            },
+            "PARTIAL": {
+              "PASS": 0,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 0
+            },
+            "FAIL": {
+              "PASS": 1,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 0
+            }
+          },
+          "raw_agreement": 0.65,
+          "disagreement_rate": 0.35,
+          "strict_agreement": 0.65,
+          "strict_disagreement": 0.35,
+          "weighted_agreement_credit": 0.65,
+          "weighted_disagreement": 0.35,
+          "cohens_kappa_strict": -0.09374999999999972,
+          "automatic_unverified": 6
+        },
+        {
+          "category": "todo_current_state",
+          "n": 20,
+          "reviewer_uncertain": 0,
+          "confusion_matrix_reviewer_rows_automatic_columns": {
+            "PASS": {
+              "PASS": 15,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 4
+            },
+            "PARTIAL": {
+              "PASS": 0,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 0
+            },
+            "FAIL": {
+              "PASS": 0,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 1
+            }
+          },
+          "raw_agreement": 0.75,
+          "disagreement_rate": 0.25,
+          "strict_agreement": 0.8,
+          "strict_disagreement": 0.19999999999999996,
+          "weighted_agreement_credit": 0.8,
+          "weighted_disagreement": 0.2,
+          "cohens_kappa_strict": 0.27272727272727326,
+          "automatic_unverified": 5
+        },
+        {
+          "category": "failed_attempt",
+          "n": 20,
+          "reviewer_uncertain": 0,
+          "confusion_matrix_reviewer_rows_automatic_columns": {
+            "PASS": {
+              "PASS": 16,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 4
+            },
+            "PARTIAL": {
+              "PASS": 0,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 0
+            },
+            "FAIL": {
+              "PASS": 0,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 0
+            }
+          },
+          "raw_agreement": 0.8,
+          "disagreement_rate": 0.19999999999999996,
+          "strict_agreement": 0.8,
+          "strict_disagreement": 0.19999999999999996,
+          "weighted_agreement_credit": 0.8,
+          "weighted_disagreement": 0.2,
+          "cohens_kappa_strict": 0.0,
+          "automatic_unverified": 4
+        },
+        {
+          "category": "bug_root_cause",
+          "n": 20,
+          "reviewer_uncertain": 0,
+          "confusion_matrix_reviewer_rows_automatic_columns": {
+            "PASS": {
+              "PASS": 17,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 3
+            },
+            "PARTIAL": {
+              "PASS": 0,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 0
+            },
+            "FAIL": {
+              "PASS": 0,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 0
+            }
+          },
+          "raw_agreement": 0.85,
+          "disagreement_rate": 0.15000000000000002,
+          "strict_agreement": 0.85,
+          "strict_disagreement": 0.15000000000000002,
+          "weighted_agreement_credit": 0.85,
+          "weighted_disagreement": 0.15,
+          "cohens_kappa_strict": 0.0,
+          "automatic_unverified": 3
+        },
+        {
+          "category": "numeric_parameter",
+          "n": 20,
+          "reviewer_uncertain": 0,
+          "confusion_matrix_reviewer_rows_automatic_columns": {
+            "PASS": {
+              "PASS": 17,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 1
+            },
+            "PARTIAL": {
+              "PASS": 0,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 0
+            },
+            "FAIL": {
+              "PASS": 0,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 2
+            }
+          },
+          "raw_agreement": 0.85,
+          "disagreement_rate": 0.15000000000000002,
+          "strict_agreement": 0.95,
+          "strict_disagreement": 0.050000000000000044,
+          "weighted_agreement_credit": 0.95,
+          "weighted_disagreement": 0.05,
+          "cohens_kappa_strict": 0.7727272727272725,
+          "automatic_unverified": 3
+        },
+        {
+          "category": "user_constraint",
+          "n": 20,
+          "reviewer_uncertain": 0,
+          "confusion_matrix_reviewer_rows_automatic_columns": {
+            "PASS": {
+              "PASS": 17,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 3
+            },
+            "PARTIAL": {
+              "PASS": 0,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 0
+            },
+            "FAIL": {
+              "PASS": 0,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 0
+            }
+          },
+          "raw_agreement": 0.85,
+          "disagreement_rate": 0.15000000000000002,
+          "strict_agreement": 0.85,
+          "strict_disagreement": 0.15000000000000002,
+          "weighted_agreement_credit": 0.85,
+          "weighted_disagreement": 0.15,
+          "cohens_kappa_strict": 0.0,
+          "automatic_unverified": 3
+        },
+        {
+          "category": "identifier_class_method",
+          "n": 20,
+          "reviewer_uncertain": 0,
+          "confusion_matrix_reviewer_rows_automatic_columns": {
+            "PASS": {
+              "PASS": 19,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 0
+            },
+            "PARTIAL": {
+              "PASS": 0,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 0
+            },
+            "FAIL": {
+              "PASS": 0,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 1
+            }
+          },
+          "raw_agreement": 0.95,
+          "disagreement_rate": 0.050000000000000044,
+          "strict_agreement": 1.0,
+          "strict_disagreement": 0.0,
+          "weighted_agreement_credit": 1.0,
+          "weighted_disagreement": 0.0,
+          "cohens_kappa_strict": 1.0,
+          "automatic_unverified": 1
+        }
+      ]
+    },
+    "supplemental_v2": {
+      "overall": {
+        "n": 160,
+        "reviewer_uncertain": 0,
+        "confusion_matrix_reviewer_rows_automatic_columns": {
+          "PASS": {
+            "PASS": 132,
+            "PARTIAL": 0,
+            "FAIL": 0,
+            "UNCERTAIN": 22
+          },
+          "PARTIAL": {
+            "PASS": 0,
+            "PARTIAL": 0,
+            "FAIL": 0,
+            "UNCERTAIN": 0
+          },
+          "FAIL": {
+            "PASS": 2,
+            "PARTIAL": 0,
+            "FAIL": 0,
+            "UNCERTAIN": 4
+          }
+        },
+        "raw_agreement": 0.825,
+        "disagreement_rate": 0.17500000000000004,
+        "strict_agreement": 0.85,
+        "strict_disagreement": 0.15000000000000002,
+        "weighted_agreement_credit": 0.85,
+        "weighted_disagreement": 0.15,
+        "cohens_kappa_strict": 0.20133111480865187,
+        "automatic_unverified": 26
+      },
+      "by_category": {
+        "api_contract": {
+          "n": 20,
+          "reviewer_uncertain": 0,
+          "confusion_matrix_reviewer_rows_automatic_columns": {
+            "PASS": {
+              "PASS": 18,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 1
+            },
+            "PARTIAL": {
+              "PASS": 0,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 0
+            },
+            "FAIL": {
+              "PASS": 1,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 0
+            }
+          },
+          "raw_agreement": 0.9,
+          "disagreement_rate": 0.09999999999999998,
+          "strict_agreement": 0.9,
+          "strict_disagreement": 0.09999999999999998,
+          "weighted_agreement_credit": 0.9,
+          "weighted_disagreement": 0.1,
+          "cohens_kappa_strict": -0.05263157894736848,
+          "automatic_unverified": 1
+        },
+        "bug_root_cause": {
+          "n": 20,
+          "reviewer_uncertain": 0,
+          "confusion_matrix_reviewer_rows_automatic_columns": {
+            "PASS": {
+              "PASS": 17,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 3
+            },
+            "PARTIAL": {
+              "PASS": 0,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 0
+            },
+            "FAIL": {
+              "PASS": 0,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 0
+            }
+          },
+          "raw_agreement": 0.85,
+          "disagreement_rate": 0.15000000000000002,
+          "strict_agreement": 0.85,
+          "strict_disagreement": 0.15000000000000002,
+          "weighted_agreement_credit": 0.85,
+          "weighted_disagreement": 0.15,
+          "cohens_kappa_strict": 0.0,
+          "automatic_unverified": 3
+        },
+        "failed_attempt": {
+          "n": 20,
+          "reviewer_uncertain": 0,
+          "confusion_matrix_reviewer_rows_automatic_columns": {
+            "PASS": {
+              "PASS": 16,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 4
+            },
+            "PARTIAL": {
+              "PASS": 0,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 0
+            },
+            "FAIL": {
+              "PASS": 0,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 0
+            }
+          },
+          "raw_agreement": 0.8,
+          "disagreement_rate": 0.19999999999999996,
+          "strict_agreement": 0.8,
+          "strict_disagreement": 0.19999999999999996,
+          "weighted_agreement_credit": 0.8,
+          "weighted_disagreement": 0.2,
+          "cohens_kappa_strict": 0.0,
+          "automatic_unverified": 4
+        },
+        "filename_path": {
+          "n": 20,
+          "reviewer_uncertain": 0,
+          "confusion_matrix_reviewer_rows_automatic_columns": {
+            "PASS": {
+              "PASS": 13,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 6
+            },
+            "PARTIAL": {
+              "PASS": 0,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 0
+            },
+            "FAIL": {
+              "PASS": 1,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 0
+            }
+          },
+          "raw_agreement": 0.65,
+          "disagreement_rate": 0.35,
+          "strict_agreement": 0.65,
+          "strict_disagreement": 0.35,
+          "weighted_agreement_credit": 0.65,
+          "weighted_disagreement": 0.35,
+          "cohens_kappa_strict": -0.09374999999999972,
+          "automatic_unverified": 6
+        },
+        "identifier_class_method": {
+          "n": 20,
+          "reviewer_uncertain": 0,
+          "confusion_matrix_reviewer_rows_automatic_columns": {
+            "PASS": {
+              "PASS": 19,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 0
+            },
+            "PARTIAL": {
+              "PASS": 0,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 0
+            },
+            "FAIL": {
+              "PASS": 0,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 1
+            }
+          },
+          "raw_agreement": 0.95,
+          "disagreement_rate": 0.050000000000000044,
+          "strict_agreement": 1.0,
+          "strict_disagreement": 0.0,
+          "weighted_agreement_credit": 1.0,
+          "weighted_disagreement": 0.0,
+          "cohens_kappa_strict": 1.0,
+          "automatic_unverified": 1
+        },
+        "numeric_parameter": {
+          "n": 20,
+          "reviewer_uncertain": 0,
+          "confusion_matrix_reviewer_rows_automatic_columns": {
+            "PASS": {
+              "PASS": 17,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 1
+            },
+            "PARTIAL": {
+              "PASS": 0,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 0
+            },
+            "FAIL": {
+              "PASS": 0,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 2
+            }
+          },
+          "raw_agreement": 0.85,
+          "disagreement_rate": 0.15000000000000002,
+          "strict_agreement": 0.95,
+          "strict_disagreement": 0.050000000000000044,
+          "weighted_agreement_credit": 0.95,
+          "weighted_disagreement": 0.05,
+          "cohens_kappa_strict": 0.7727272727272725,
+          "automatic_unverified": 3
+        },
+        "todo_current_state": {
+          "n": 20,
+          "reviewer_uncertain": 0,
+          "confusion_matrix_reviewer_rows_automatic_columns": {
+            "PASS": {
+              "PASS": 15,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 4
+            },
+            "PARTIAL": {
+              "PASS": 0,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 0
+            },
+            "FAIL": {
+              "PASS": 0,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 1
+            }
+          },
+          "raw_agreement": 0.75,
+          "disagreement_rate": 0.25,
+          "strict_agreement": 0.8,
+          "strict_disagreement": 0.19999999999999996,
+          "weighted_agreement_credit": 0.8,
+          "weighted_disagreement": 0.2,
+          "cohens_kappa_strict": 0.27272727272727326,
+          "automatic_unverified": 5
+        },
+        "user_constraint": {
+          "n": 20,
+          "reviewer_uncertain": 0,
+          "confusion_matrix_reviewer_rows_automatic_columns": {
+            "PASS": {
+              "PASS": 17,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 3
+            },
+            "PARTIAL": {
+              "PASS": 0,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 0
+            },
+            "FAIL": {
+              "PASS": 0,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 0
+            }
+          },
+          "raw_agreement": 0.85,
+          "disagreement_rate": 0.15000000000000002,
+          "strict_agreement": 0.85,
+          "strict_disagreement": 0.15000000000000002,
+          "weighted_agreement_credit": 0.85,
+          "weighted_disagreement": 0.15,
+          "cohens_kappa_strict": 0.0,
+          "automatic_unverified": 3
+        }
+      },
+      "by_version": {
+        "NEW": {
+          "n": 80,
+          "reviewer_uncertain": 0,
+          "confusion_matrix_reviewer_rows_automatic_columns": {
+            "PASS": {
+              "PASS": 65,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 12
+            },
+            "PARTIAL": {
+              "PASS": 0,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 0
+            },
+            "FAIL": {
+              "PASS": 1,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 2
+            }
+          },
+          "raw_agreement": 0.8125,
+          "disagreement_rate": 0.1875,
+          "strict_agreement": 0.8375,
+          "strict_disagreement": 0.16249999999999998,
+          "weighted_agreement_credit": 0.8375,
+          "weighted_disagreement": 0.1625,
+          "cohens_kappa_strict": 0.18495297805642633,
+          "automatic_unverified": 14
+        },
+        "OLD": {
+          "n": 80,
+          "reviewer_uncertain": 0,
+          "confusion_matrix_reviewer_rows_automatic_columns": {
+            "PASS": {
+              "PASS": 67,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 10
+            },
+            "PARTIAL": {
+              "PASS": 0,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 0
+            },
+            "FAIL": {
+              "PASS": 1,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 2
+            }
+          },
+          "raw_agreement": 0.8375,
+          "disagreement_rate": 0.16249999999999998,
+          "strict_agreement": 0.8625,
+          "strict_disagreement": 0.13749999999999996,
+          "weighted_agreement_credit": 0.8625,
+          "weighted_disagreement": 0.1375,
+          "cohens_kappa_strict": 0.2198581560283691,
+          "automatic_unverified": 12
+        }
+      },
+      "categories_by_disagreement": [
+        {
+          "category": "filename_path",
+          "n": 20,
+          "reviewer_uncertain": 0,
+          "confusion_matrix_reviewer_rows_automatic_columns": {
+            "PASS": {
+              "PASS": 13,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 6
+            },
+            "PARTIAL": {
+              "PASS": 0,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 0
+            },
+            "FAIL": {
+              "PASS": 1,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 0
+            }
+          },
+          "raw_agreement": 0.65,
+          "disagreement_rate": 0.35,
+          "strict_agreement": 0.65,
+          "strict_disagreement": 0.35,
+          "weighted_agreement_credit": 0.65,
+          "weighted_disagreement": 0.35,
+          "cohens_kappa_strict": -0.09374999999999972,
+          "automatic_unverified": 6
+        },
+        {
+          "category": "todo_current_state",
+          "n": 20,
+          "reviewer_uncertain": 0,
+          "confusion_matrix_reviewer_rows_automatic_columns": {
+            "PASS": {
+              "PASS": 15,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 4
+            },
+            "PARTIAL": {
+              "PASS": 0,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 0
+            },
+            "FAIL": {
+              "PASS": 0,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 1
+            }
+          },
+          "raw_agreement": 0.75,
+          "disagreement_rate": 0.25,
+          "strict_agreement": 0.8,
+          "strict_disagreement": 0.19999999999999996,
+          "weighted_agreement_credit": 0.8,
+          "weighted_disagreement": 0.2,
+          "cohens_kappa_strict": 0.27272727272727326,
+          "automatic_unverified": 5
+        },
+        {
+          "category": "failed_attempt",
+          "n": 20,
+          "reviewer_uncertain": 0,
+          "confusion_matrix_reviewer_rows_automatic_columns": {
+            "PASS": {
+              "PASS": 16,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 4
+            },
+            "PARTIAL": {
+              "PASS": 0,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 0
+            },
+            "FAIL": {
+              "PASS": 0,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 0
+            }
+          },
+          "raw_agreement": 0.8,
+          "disagreement_rate": 0.19999999999999996,
+          "strict_agreement": 0.8,
+          "strict_disagreement": 0.19999999999999996,
+          "weighted_agreement_credit": 0.8,
+          "weighted_disagreement": 0.2,
+          "cohens_kappa_strict": 0.0,
+          "automatic_unverified": 4
+        },
+        {
+          "category": "bug_root_cause",
+          "n": 20,
+          "reviewer_uncertain": 0,
+          "confusion_matrix_reviewer_rows_automatic_columns": {
+            "PASS": {
+              "PASS": 17,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 3
+            },
+            "PARTIAL": {
+              "PASS": 0,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 0
+            },
+            "FAIL": {
+              "PASS": 0,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 0
+            }
+          },
+          "raw_agreement": 0.85,
+          "disagreement_rate": 0.15000000000000002,
+          "strict_agreement": 0.85,
+          "strict_disagreement": 0.15000000000000002,
+          "weighted_agreement_credit": 0.85,
+          "weighted_disagreement": 0.15,
+          "cohens_kappa_strict": 0.0,
+          "automatic_unverified": 3
+        },
+        {
+          "category": "numeric_parameter",
+          "n": 20,
+          "reviewer_uncertain": 0,
+          "confusion_matrix_reviewer_rows_automatic_columns": {
+            "PASS": {
+              "PASS": 17,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 1
+            },
+            "PARTIAL": {
+              "PASS": 0,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 0
+            },
+            "FAIL": {
+              "PASS": 0,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 2
+            }
+          },
+          "raw_agreement": 0.85,
+          "disagreement_rate": 0.15000000000000002,
+          "strict_agreement": 0.95,
+          "strict_disagreement": 0.050000000000000044,
+          "weighted_agreement_credit": 0.95,
+          "weighted_disagreement": 0.05,
+          "cohens_kappa_strict": 0.7727272727272725,
+          "automatic_unverified": 3
+        },
+        {
+          "category": "user_constraint",
+          "n": 20,
+          "reviewer_uncertain": 0,
+          "confusion_matrix_reviewer_rows_automatic_columns": {
+            "PASS": {
+              "PASS": 17,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 3
+            },
+            "PARTIAL": {
+              "PASS": 0,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 0
+            },
+            "FAIL": {
+              "PASS": 0,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 0
+            }
+          },
+          "raw_agreement": 0.85,
+          "disagreement_rate": 0.15000000000000002,
+          "strict_agreement": 0.85,
+          "strict_disagreement": 0.15000000000000002,
+          "weighted_agreement_credit": 0.85,
+          "weighted_disagreement": 0.15,
+          "cohens_kappa_strict": 0.0,
+          "automatic_unverified": 3
+        },
+        {
+          "category": "api_contract",
+          "n": 20,
+          "reviewer_uncertain": 0,
+          "confusion_matrix_reviewer_rows_automatic_columns": {
+            "PASS": {
+              "PASS": 18,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 1
+            },
+            "PARTIAL": {
+              "PASS": 0,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 0
+            },
+            "FAIL": {
+              "PASS": 1,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 0
+            }
+          },
+          "raw_agreement": 0.9,
+          "disagreement_rate": 0.09999999999999998,
+          "strict_agreement": 0.9,
+          "strict_disagreement": 0.09999999999999998,
+          "weighted_agreement_credit": 0.9,
+          "weighted_disagreement": 0.1,
+          "cohens_kappa_strict": -0.05263157894736848,
+          "automatic_unverified": 1
+        },
+        {
+          "category": "identifier_class_method",
+          "n": 20,
+          "reviewer_uncertain": 0,
+          "confusion_matrix_reviewer_rows_automatic_columns": {
+            "PASS": {
+              "PASS": 19,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 0
+            },
+            "PARTIAL": {
+              "PASS": 0,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 0
+            },
+            "FAIL": {
+              "PASS": 0,
+              "PARTIAL": 0,
+              "FAIL": 0,
+              "UNCERTAIN": 1
+            }
+          },
+          "raw_agreement": 0.95,
+          "disagreement_rate": 0.050000000000000044,
+          "strict_agreement": 1.0,
+          "strict_disagreement": 0.0,
+          "weighted_agreement_credit": 1.0,
+          "weighted_disagreement": 0.0,
+          "cohens_kappa_strict": 1.0,
+          "automatic_unverified": 1
+        }
+      ]
+    }
+  },
+  "review_seal_sha256": "fff3218763dd8310e0c1c80ce77fb44f09eda2c889e3da29222208d6fcee7840",
+  "conclusion": "INCONCLUSIVE",
+  "context_validation": "NEEDS_MORE_TESTING",
+  "resume_status": "NEEDS_MORE_TESTING",
+  "rationale": "The two arms each have 77/80 model-rated PASS records, with opposing small view-specific differences. This stratified, correlated single-fixture sample has no preregistered noninferiority margin and contains apparent reviewer errors in both arms. It establishes neither semantic improvement/equivalence nor systematic regression. Controlled internal compact success remains OLD20/20 versus NEW19/20; operational failures and evaluator defects remain disclosed. Preserve current production implementation; do not run compression tuning without stronger regression evidence. Mechanism and benchmark descriptions are supportable; historical retention-improvement percentages are not.",
+  "by_view": {
+    "effective": {
+      "total": 80,
+      "labels": {
+        "PASS": 79,
+        "PARTIAL": 0,
+        "FAIL": 1,
+        "UNCERTAIN": 0
+      },
+      "scored": 80,
+      "strict": 0.9875,
+      "weighted": 0.9875
+    },
+    "summary": {
+      "total": 80,
+      "labels": {
+        "PASS": 75,
+        "PARTIAL": 0,
+        "FAIL": 5,
+        "UNCERTAIN": 0
+      },
+      "scored": 80,
+      "strict": 0.9375,
+      "weighted": 0.9375
+    }
+  },
+  "by_version_view": {
+    "NEW": {
+      "effective": {
+        "total": 40,
+        "labels": {
+          "PASS": 40,
+          "PARTIAL": 0,
+          "FAIL": 0,
+          "UNCERTAIN": 0
+        },
+        "scored": 40,
+        "strict": 1.0,
+        "weighted": 1.0
+      },
+      "summary": {
+        "total": 40,
+        "labels": {
+          "PASS": 37,
+          "PARTIAL": 0,
+          "FAIL": 3,
+          "UNCERTAIN": 0
+        },
+        "scored": 40,
+        "strict": 0.925,
+        "weighted": 0.925
+      }
+    },
+    "OLD": {
+      "effective": {
+        "total": 40,
+        "labels": {
+          "PASS": 39,
+          "PARTIAL": 0,
+          "FAIL": 1,
+          "UNCERTAIN": 0
+        },
+        "scored": 40,
+        "strict": 0.975,
+        "weighted": 0.975
+      },
+      "summary": {
+        "total": 40,
+        "labels": {
+          "PASS": 38,
+          "PARTIAL": 0,
+          "FAIL": 2,
+          "UNCERTAIN": 0
+        },
+        "scored": 40,
+        "strict": 0.95,
+        "weighted": 0.95
+      }
+    }
+  },
+  "review_calls": {
+    "attempts": 161,
+    "status_counts": {
+      "VALID_REVIEW": 160,
+      "INFRASTRUCTURE_FAILURE": 1
+    },
+    "usage_records": 160,
+    "missing_usage": 1,
+    "known_usage": {
+      "input_tokens": 3086580,
+      "output_tokens": 6780,
+      "total_tokens": 3093360
+    },
+    "request_wall_clock_seconds_sum": 274.302722,
+    "pacing_seconds_sum": 1916.213,
+    "first_start": "2026-09-06T03:35:34.411802700Z",
+    "last_end": "2026-09-06T07:05:45.178400500Z",
+    "observed_batch_span_seconds": 12610.766598,
+    "span_caveat": "Includes interruption, compilation/recovery and pacing; not compression latency or pure model latency."
+  }
+}

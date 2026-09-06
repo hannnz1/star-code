@@ -1,0 +1,20 @@
+{
+  "blind_csv_sha256": "a9ffb5fb3259e13fc06a77955e0af4efca15c86c0308a571b6125641066bf3f1",
+  "samples_sha256": "2391b0a5500be9904c7abf0f47251438a93cb20ef72b334b319adc1b7741b59f",
+  "sample_count": 160,
+  "input_fields": [
+    "review_id",
+    "fact_category",
+    "original_fact",
+    "source_context",
+    "compressed_context_or_summary"
+  ],
+  "leak_scan": "schema and explicit metadata patterns PASS; content/style inference remains possible",
+  "orchestrator_context": "Previously exposed to versions/scores; must not supply judgments. Fresh stateless external model requests are the reviewer.",
+  "rubric_sha256": "d06b8cadc234ac5db270b7d0b76ea1d9a118393d23f5e7d8717c2de79c4c53e5",
+  "temperature": 0,
+  "max_output_tokens": 2048,
+  "max_attempts_per_sample": 2,
+  "unblinding_gate": "All160 valid reviews saved and sealed before key access",
+  "annotation_method": "Independent LLM Blind Review; not human annotation"
+}

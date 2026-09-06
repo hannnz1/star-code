@@ -1,0 +1,609 @@
+{
+  "timing": "Post-freeze diagnostic; no scorer or production modifications",
+  "semantic_supported": 47,
+  "semantic_total": 50,
+  "exact_pass": 10,
+  "exact_applicable": 30,
+  "cases": [
+    {
+      "fact_id": "F01",
+      "category": "file",
+      "expected_semantic": "SUPPORTED",
+      "actual": {
+        "semantic": "SUPPORTED",
+        "exact": false,
+        "evidence": "Invoice export writes its audit file to reports/invoice-audit.json.",
+        "conflict_evidence": []
+      },
+      "exact_applicable": true
+    },
+    {
+      "fact_id": "F02",
+      "category": "class",
+      "expected_semantic": "SUPPORTED",
+      "actual": {
+        "semantic": "SUPPORTED",
+        "exact": false,
+        "evidence": "The shipment normalization class is PostalRouteNormalizer.",
+        "conflict_evidence": []
+      },
+      "exact_applicable": true
+    },
+    {
+      "fact_id": "F03",
+      "category": "api",
+      "expected_semantic": "SUPPORTED",
+      "actual": {
+        "semantic": "SUPPORTED",
+        "exact": false,
+        "evidence": "The refund preview API path is /v2/refunds/preview.",
+        "conflict_evidence": []
+      },
+      "exact_applicable": true
+    },
+    {
+      "fact_id": "F04",
+      "category": "number",
+      "expected_semantic": "SUPPORTED",
+      "actual": {
+        "semantic": "SUPPORTED",
+        "exact": true,
+        "evidence": "RetryQueue must wait 730 milliseconds before the first retry.",
+        "conflict_evidence": []
+      },
+      "exact_applicable": true
+    },
+    {
+      "fact_id": "F05",
+      "category": "constraint",
+      "expected_semantic": "SUPPORTED",
+      "actual": {
+        "semantic": "SUPPORTED",
+        "exact": true,
+        "evidence": "Billing reports must use the Europe/Paris timezone.",
+        "conflict_evidence": []
+      },
+      "exact_applicable": true
+    },
+    {
+      "fact_id": "F06",
+      "category": "cause",
+      "expected_semantic": "SUPPORTED",
+      "actual": {
+        "semantic": "SUPPORTED",
+        "exact": null,
+        "evidence": "The AuditExport date bug is caused by UTC/local time conversion mismatch.",
+        "conflict_evidence": []
+      },
+      "exact_applicable": false
+    },
+    {
+      "fact_id": "F07",
+      "category": "failed_attempt",
+      "expected_semantic": "SUPPORTED",
+      "actual": {
+        "semantic": "SUPPORTED",
+        "exact": null,
+        "evidence": "For CartCache, increasing the TTL to 900 seconds was attempted and failed.",
+        "conflict_evidence": []
+      },
+      "exact_applicable": false
+    },
+    {
+      "fact_id": "F08",
+      "category": "negative",
+      "expected_semantic": "SUPPORTED",
+      "actual": {
+        "semantic": "SUPPORTED",
+        "exact": null,
+        "evidence": "Do not rename the legacy column customer_ref during AccountMigration.",
+        "conflict_evidence": []
+      },
+      "exact_applicable": false
+    },
+    {
+      "fact_id": "F09",
+      "category": "pending",
+      "expected_semantic": "SUPPORTED",
+      "actual": {
+        "semantic": "SUPPORTED",
+        "exact": null,
+        "evidence": "The pending InventoryReconcile task is to add a regression test for duplicate SKU events.",
+        "conflict_evidence": []
+      },
+      "exact_applicable": false
+    },
+    {
+      "fact_id": "F10",
+      "category": "next",
+      "expected_semantic": "SUPPORTED",
+      "actual": {
+        "semantic": "SUPPORTED",
+        "exact": false,
+        "evidence": "The next ReleaseAudit step is to run verify-release.ps1.",
+        "conflict_evidence": []
+      },
+      "exact_applicable": true
+    },
+    {
+      "fact_id": "F11",
+      "category": "file",
+      "expected_semantic": "SUPPORTED",
+      "actual": {
+        "semantic": "SUPPORTED",
+        "exact": false,
+        "evidence": "Shipping thresholds are configured in config/shipping-thresholds.yaml.",
+        "conflict_evidence": []
+      },
+      "exact_applicable": true
+    },
+    {
+      "fact_id": "F12",
+      "category": "method",
+      "expected_semantic": "SUPPORTED",
+      "actual": {
+        "semantic": "SUPPORTED",
+        "exact": false,
+        "evidence": "Tax rounding belongs in method roundTaxHalfEven.",
+        "conflict_evidence": []
+      },
+      "exact_applicable": true
+    },
+    {
+      "fact_id": "F13",
+      "category": "api",
+      "expected_semantic": "SUPPORTED",
+      "actual": {
+        "semantic": "UNVERIFIED",
+        "exact": false,
+        "evidence": null,
+        "conflict_evidence": []
+      },
+      "exact_applicable": true
+    },
+    {
+      "fact_id": "F14",
+      "category": "number",
+      "expected_semantic": "SUPPORTED",
+      "actual": {
+        "semantic": "SUPPORTED",
+        "exact": true,
+        "evidence": "SearchBackfill processes batches of exactly 240 documents.",
+        "conflict_evidence": []
+      },
+      "exact_applicable": true
+    },
+    {
+      "fact_id": "F15",
+      "category": "constraint",
+      "expected_semantic": "SUPPORTED",
+      "actual": {
+        "semantic": "SUPPORTED",
+        "exact": false,
+        "evidence": "The ReportMailer locale must be fr-CA.",
+        "conflict_evidence": []
+      },
+      "exact_applicable": true
+    },
+    {
+      "fact_id": "F16",
+      "category": "cause",
+      "expected_semantic": "SUPPORTED",
+      "actual": {
+        "semantic": "SUPPORTED",
+        "exact": null,
+        "evidence": "The LedgerReplay duplication is caused by a missing idempotency key.",
+        "conflict_evidence": []
+      },
+      "exact_applicable": false
+    },
+    {
+      "fact_id": "F17",
+      "category": "failed_attempt",
+      "expected_semantic": "SUPPORTED",
+      "actual": {
+        "semantic": "SUPPORTED",
+        "exact": null,
+        "evidence": "For SearchRefresh, clearing the index cache was tried and did not fix the stale results.",
+        "conflict_evidence": []
+      },
+      "exact_applicable": false
+    },
+    {
+      "fact_id": "F18",
+      "category": "negative",
+      "expected_semantic": "SUPPORTED",
+      "actual": {
+        "semantic": "SUPPORTED",
+        "exact": null,
+        "evidence": "Do not delete historical rows while fixing SubscriptionExpiry.",
+        "conflict_evidence": []
+      },
+      "exact_applicable": false
+    },
+    {
+      "fact_id": "F19",
+      "category": "pending",
+      "expected_semantic": "SUPPORTED",
+      "actual": {
+        "semantic": "SUPPORTED",
+        "exact": null,
+        "evidence": "The pending TokenRefresh task is to test simultaneous refresh requests.",
+        "conflict_evidence": []
+      },
+      "exact_applicable": false
+    },
+    {
+      "fact_id": "F20",
+      "category": "next",
+      "expected_semantic": "SUPPORTED",
+      "actual": {
+        "semantic": "SUPPORTED",
+        "exact": true,
+        "evidence": "For CatalogDiff, inspect CatalogSnapshotReader before editing.",
+        "conflict_evidence": []
+      },
+      "exact_applicable": true
+    },
+    {
+      "fact_id": "F21",
+      "category": "file",
+      "expected_semantic": "SUPPORTED",
+      "actual": {
+        "semantic": "SUPPORTED",
+        "exact": false,
+        "evidence": "Payment deduplication tests belong in src/test/java/payments/PaymentDedupTest.java.",
+        "conflict_evidence": []
+      },
+      "exact_applicable": true
+    },
+    {
+      "fact_id": "F22",
+      "category": "package",
+      "expected_semantic": "SUPPORTED",
+      "actual": {
+        "semantic": "SUPPORTED",
+        "exact": false,
+        "evidence": "The notification policy package is com.acme.notifications.policy.",
+        "conflict_evidence": []
+      },
+      "exact_applicable": true
+    },
+    {
+      "fact_id": "F23",
+      "category": "api",
+      "expected_semantic": "SUPPORTED",
+      "actual": {
+        "semantic": "UNVERIFIED",
+        "exact": false,
+        "evidence": null,
+        "conflict_evidence": []
+      },
+      "exact_applicable": true
+    },
+    {
+      "fact_id": "F24",
+      "category": "number",
+      "expected_semantic": "SUPPORTED",
+      "actual": {
+        "semantic": "SUPPORTED",
+        "exact": true,
+        "evidence": "DeliveryEstimator must enforce a maximum of 37 route hops.",
+        "conflict_evidence": []
+      },
+      "exact_applicable": true
+    },
+    {
+      "fact_id": "F25",
+      "category": "constraint",
+      "expected_semantic": "SUPPORTED",
+      "actual": {
+        "semantic": "SUPPORTED",
+        "exact": false,
+        "evidence": "InvoiceRenderer must keep output encoded as UTF-8.",
+        "conflict_evidence": []
+      },
+      "exact_applicable": true
+    },
+    {
+      "fact_id": "F26",
+      "category": "cause",
+      "expected_semantic": "SUPPORTED",
+      "actual": {
+        "semantic": "SUPPORTED",
+        "exact": null,
+        "evidence": "The PriceImport precision loss is caused by conversion through double.",
+        "conflict_evidence": []
+      },
+      "exact_applicable": false
+    },
+    {
+      "fact_id": "F27",
+      "category": "failed_attempt",
+      "expected_semantic": "SUPPORTED",
+      "actual": {
+        "semantic": "SUPPORTED",
+        "exact": null,
+        "evidence": "For LeaseCleaner, raising the thread count from 4 to 16 was tried without success.",
+        "conflict_evidence": []
+      },
+      "exact_applicable": false
+    },
+    {
+      "fact_id": "F28",
+      "category": "negative",
+      "expected_semantic": "SUPPORTED",
+      "actual": {
+        "semantic": "SUPPORTED",
+        "exact": null,
+        "evidence": "The OrderArchive change must not add external dependencies.",
+        "conflict_evidence": []
+      },
+      "exact_applicable": false
+    },
+    {
+      "fact_id": "F29",
+      "category": "pending",
+      "expected_semantic": "SUPPORTED",
+      "actual": {
+        "semantic": "SUPPORTED",
+        "exact": null,
+        "evidence": "The pending CsvParser test must cover a quoted field containing a newline.",
+        "conflict_evidence": []
+      },
+      "exact_applicable": false
+    },
+    {
+      "fact_id": "F30",
+      "category": "next",
+      "expected_semantic": "SUPPORTED",
+      "actual": {
+        "semantic": "SUPPORTED",
+        "exact": false,
+        "evidence": "For RetryBudget, the next command is ./gradlew test --tests RetryBudgetTest.",
+        "conflict_evidence": []
+      },
+      "exact_applicable": true
+    },
+    {
+      "fact_id": "F31",
+      "category": "file",
+      "expected_semantic": "SUPPORTED",
+      "actual": {
+        "semantic": "SUPPORTED",
+        "exact": false,
+        "evidence": "Fraud score rules live in rules/fraud-score.toml.",
+        "conflict_evidence": []
+      },
+      "exact_applicable": true
+    },
+    {
+      "fact_id": "F32",
+      "category": "class",
+      "expected_semantic": "SUPPORTED",
+      "actual": {
+        "semantic": "SUPPORTED",
+        "exact": false,
+        "evidence": "The CSV compatibility adapter is LegacyCsvBridge.",
+        "conflict_evidence": []
+      },
+      "exact_applicable": true
+    },
+    {
+      "fact_id": "F33",
+      "category": "api",
+      "expected_semantic": "SUPPORTED",
+      "actual": {
+        "semantic": "SUPPORTED",
+        "exact": false,
+        "evidence": "The health readiness path is /internal/readyz.",
+        "conflict_evidence": []
+      },
+      "exact_applicable": true
+    },
+    {
+      "fact_id": "F34",
+      "category": "number",
+      "expected_semantic": "SUPPORTED",
+      "actual": {
+        "semantic": "SUPPORTED",
+        "exact": true,
+        "evidence": "StreamBuffer must cap payloads at 65536 bytes.",
+        "conflict_evidence": []
+      },
+      "exact_applicable": true
+    },
+    {
+      "fact_id": "F35",
+      "category": "constraint",
+      "expected_semantic": "SUPPORTED",
+      "actual": {
+        "semantic": "SUPPORTED",
+        "exact": true,
+        "evidence": "JobScheduler must use the America/Toronto timezone.",
+        "conflict_evidence": []
+      },
+      "exact_applicable": true
+    },
+    {
+      "fact_id": "F36",
+      "category": "cause",
+      "expected_semantic": "SUPPORTED",
+      "actual": {
+        "semantic": "SUPPORTED",
+        "exact": null,
+        "evidence": "The WebhookAck timeout is caused by synchronous DNS lookup on the event loop.",
+        "conflict_evidence": []
+      },
+      "exact_applicable": false
+    },
+    {
+      "fact_id": "F37",
+      "category": "failed_attempt",
+      "expected_semantic": "SUPPORTED",
+      "actual": {
+        "semantic": "SUPPORTED",
+        "exact": null,
+        "evidence": "For MetricFlush, switching to a fixed-rate timer was attempted and failed.",
+        "conflict_evidence": []
+      },
+      "exact_applicable": false
+    },
+    {
+      "fact_id": "F38",
+      "category": "negative",
+      "expected_semantic": "SUPPORTED",
+      "actual": {
+        "semantic": "SUPPORTED",
+        "exact": null,
+        "evidence": "ProfileRepair must not overwrite user-selected display names.",
+        "conflict_evidence": []
+      },
+      "exact_applicable": false
+    },
+    {
+      "fact_id": "F39",
+      "category": "pending",
+      "expected_semantic": "SUPPORTED",
+      "actual": {
+        "semantic": "SUPPORTED",
+        "exact": null,
+        "evidence": "The pending SessionPurge test covers an expired session with an active upload.",
+        "conflict_evidence": []
+      },
+      "exact_applicable": false
+    },
+    {
+      "fact_id": "F40",
+      "category": "next",
+      "expected_semantic": "SUPPORTED",
+      "actual": {
+        "semantic": "SUPPORTED",
+        "exact": true,
+        "evidence": "For RouteCache, inspect the route_generation metric next.",
+        "conflict_evidence": []
+      },
+      "exact_applicable": true
+    },
+    {
+      "fact_id": "F41",
+      "category": "file",
+      "expected_semantic": "SUPPORTED",
+      "actual": {
+        "semantic": "SUPPORTED",
+        "exact": false,
+        "evidence": "Locale fallback data is in resources/locale-fallbacks.json.",
+        "conflict_evidence": []
+      },
+      "exact_applicable": true
+    },
+    {
+      "fact_id": "F42",
+      "category": "method",
+      "expected_semantic": "SUPPORTED",
+      "actual": {
+        "semantic": "SUPPORTED",
+        "exact": false,
+        "evidence": "The reconciliation entry point is reconcilePendingTransfers.",
+        "conflict_evidence": []
+      },
+      "exact_applicable": true
+    },
+    {
+      "fact_id": "F43",
+      "category": "api",
+      "expected_semantic": "SUPPORTED",
+      "actual": {
+        "semantic": "UNVERIFIED",
+        "exact": false,
+        "evidence": null,
+        "conflict_evidence": []
+      },
+      "exact_applicable": true
+    },
+    {
+      "fact_id": "F44",
+      "category": "number",
+      "expected_semantic": "SUPPORTED",
+      "actual": {
+        "semantic": "SUPPORTED",
+        "exact": true,
+        "evidence": "AuthThrottle allows at most 11 attempts per minute.",
+        "conflict_evidence": []
+      },
+      "exact_applicable": true
+    },
+    {
+      "fact_id": "F45",
+      "category": "constraint",
+      "expected_semantic": "SUPPORTED",
+      "actual": {
+        "semantic": "SUPPORTED",
+        "exact": true,
+        "evidence": "MoneyFormatter must use HALF_EVEN rounding.",
+        "conflict_evidence": []
+      },
+      "exact_applicable": true
+    },
+    {
+      "fact_id": "F46",
+      "category": "cause",
+      "expected_semantic": "SUPPORTED",
+      "actual": {
+        "semantic": "SUPPORTED",
+        "exact": null,
+        "evidence": "The BlobUpload checksum mismatch is caused by hashing before decompression.",
+        "conflict_evidence": []
+      },
+      "exact_applicable": false
+    },
+    {
+      "fact_id": "F47",
+      "category": "failed_attempt",
+      "expected_semantic": "SUPPORTED",
+      "actual": {
+        "semantic": "SUPPORTED",
+        "exact": null,
+        "evidence": "For SocketDrain, disabling keep-alive was tried and did not prevent dropped messages.",
+        "conflict_evidence": []
+      },
+      "exact_applicable": false
+    },
+    {
+      "fact_id": "F48",
+      "category": "negative",
+      "expected_semantic": "SUPPORTED",
+      "actual": {
+        "semantic": "SUPPORTED",
+        "exact": null,
+        "evidence": "SchemaReview must not change the public OrderResult constructor signature.",
+        "conflict_evidence": []
+      },
+      "exact_applicable": false
+    },
+    {
+      "fact_id": "F49",
+      "category": "pending",
+      "expected_semantic": "SUPPORTED",
+      "actual": {
+        "semantic": "SUPPORTED",
+        "exact": null,
+        "evidence": "The pending DiscountPolicy test covers a zero-priced basket.",
+        "conflict_evidence": []
+      },
+      "exact_applicable": false
+    },
+    {
+      "fact_id": "F50",
+      "category": "next",
+      "expected_semantic": "SUPPORTED",
+      "actual": {
+        "semantic": "SUPPORTED",
+        "exact": false,
+        "evidence": "For DeployChecklist, the next file to inspect is deploy/rollback-policy.md.",
+        "conflict_evidence": []
+      },
+      "exact_applicable": true
+    }
+  ]
+}

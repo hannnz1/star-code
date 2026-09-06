@@ -1,0 +1,99 @@
+[ {
+  "name" : "read_file",
+  "description" : "Read a UTF-8 text file with 1-based line numbers",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "path" : {
+        "type" : "string",
+        "description" : "Workspace-relative file path"
+      }
+    },
+    "required" : [ "path" ]
+  }
+}, {
+  "name" : "write_file",
+  "description" : "Create or overwrite a text file",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "path" : {
+        "type" : "string",
+        "description" : "Workspace-relative file path"
+      },
+      "content" : {
+        "type" : "string",
+        "description" : "Complete UTF-8 file content"
+      }
+    },
+    "required" : [ "path", "content" ]
+  }
+}, {
+  "name" : "edit_file",
+  "description" : "Replace one uniquely matching text block. Read the file with read_file before editing it.",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "path" : {
+        "type" : "string",
+        "description" : "Workspace-relative file path"
+      },
+      "old_text" : {
+        "type" : "string",
+        "description" : "Exact text that must occur once"
+      },
+      "new_text" : {
+        "type" : "string",
+        "description" : "Replacement text"
+      }
+    },
+    "required" : [ "path", "old_text", "new_text" ]
+  }
+}, {
+  "name" : "bash",
+  "description" : "Run a PowerShell command in the workspace. Prefer dedicated file, glob, search, read, edit, and write tools when applicable.",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "command" : {
+        "type" : "string",
+        "description" : "PowerShell command to execute"
+      }
+    },
+    "required" : [ "command" ]
+  }
+}, {
+  "name" : "glob",
+  "description" : "Find workspace files matching a glob",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "pattern" : {
+        "type" : "string",
+        "description" : "Glob such as **/*.java"
+      }
+    },
+    "required" : [ "pattern" ]
+  }
+}, {
+  "name" : "search_text",
+  "description" : "Search literal text and return file, line and content",
+  "inputSchema" : {
+    "type" : "object",
+    "properties" : {
+      "query" : {
+        "type" : "string",
+        "description" : "Literal text to find"
+      },
+      "path" : {
+        "type" : "string",
+        "description" : "Optional workspace-relative file or directory"
+      },
+      "case_sensitive" : {
+        "type" : "boolean",
+        "default" : false
+      }
+    },
+    "required" : [ "query" ]
+  }
+} ]

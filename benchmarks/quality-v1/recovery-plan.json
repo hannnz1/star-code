@@ -1,0 +1,246 @@
+{
+  "created_at": "2026-09-05T08:26:29.144279+00:00",
+  "reason": "TLS handshake failures in both arms after pair7; first fourteen completed HTTP200 experiments retained",
+  "criterion": "First completed physical attempt per logical slot with any upstream HTTP200; production parsing failure still counts. No HTTP response and operator interruption remain in all-started denominator.",
+  "target_model_attempts_per_arm": 20,
+  "initial_selected": {
+    "old-01": "old-01",
+    "new-01": "new-01",
+    "new-02": "new-02",
+    "old-02": "old-02",
+    "old-03": "old-03",
+    "new-03": "new-03",
+    "old-04": "old-04",
+    "new-04": "new-04",
+    "new-05": "new-05",
+    "old-05": "old-05",
+    "new-06": "new-06",
+    "old-06": "old-06",
+    "new-07": "new-07",
+    "old-07": "old-07"
+  },
+  "excluded_from_model_cohort": {
+    "old-08": "NO_UPSTREAM_HTTP_200; TLS forwarding error",
+    "new-08": "NO_UPSTREAM_HTTP_200; TLS forwarding error",
+    "new-09": "NO_UPSTREAM_HTTP_200; TLS forwarding error",
+    "old-09": "NO_UPSTREAM_HTTP_200; TLS forwarding error",
+    "new-10": "NO_UPSTREAM_HTTP_200; TLS forwarding error",
+    "old-10": "NO_UPSTREAM_HTTP_200; TLS forwarding error",
+    "new-11": "NO_UPSTREAM_HTTP_200; TLS forwarding error",
+    "old-11": "NO_UPSTREAM_HTTP_200; TLS forwarding error",
+    "new-12": "NO_UPSTREAM_HTTP_200; TLS forwarding error",
+    "old-12": "NO_UPSTREAM_HTTP_200; TLS forwarding error",
+    "new-13": "NO_UPSTREAM_HTTP_200; TLS forwarding error",
+    "old-13": "NO_UPSTREAM_HTTP_200; TLS forwarding error",
+    "new-14": "NO_UPSTREAM_HTTP_200; TLS forwarding error",
+    "old-14": "NO_UPSTREAM_HTTP_200; TLS forwarding error",
+    "new-15": "NO_UPSTREAM_HTTP_200; TLS forwarding error",
+    "old-15": "NO_UPSTREAM_HTTP_200; TLS forwarding error",
+    "new-16": "NO_UPSTREAM_HTTP_200; TLS forwarding error",
+    "old-16": "OPERATOR_INTERRUPTED"
+  },
+  "schedule": [
+    {
+      "pair": 1,
+      "arm": "old",
+      "run_id": "old-01"
+    },
+    {
+      "pair": 1,
+      "arm": "new",
+      "run_id": "new-01"
+    },
+    {
+      "pair": 2,
+      "arm": "new",
+      "run_id": "new-02"
+    },
+    {
+      "pair": 2,
+      "arm": "old",
+      "run_id": "old-02"
+    },
+    {
+      "pair": 3,
+      "arm": "old",
+      "run_id": "old-03"
+    },
+    {
+      "pair": 3,
+      "arm": "new",
+      "run_id": "new-03"
+    },
+    {
+      "pair": 4,
+      "arm": "old",
+      "run_id": "old-04"
+    },
+    {
+      "pair": 4,
+      "arm": "new",
+      "run_id": "new-04"
+    },
+    {
+      "pair": 5,
+      "arm": "new",
+      "run_id": "new-05"
+    },
+    {
+      "pair": 5,
+      "arm": "old",
+      "run_id": "old-05"
+    },
+    {
+      "pair": 6,
+      "arm": "new",
+      "run_id": "new-06"
+    },
+    {
+      "pair": 6,
+      "arm": "old",
+      "run_id": "old-06"
+    },
+    {
+      "pair": 7,
+      "arm": "new",
+      "run_id": "new-07"
+    },
+    {
+      "pair": 7,
+      "arm": "old",
+      "run_id": "old-07"
+    },
+    {
+      "pair": 8,
+      "arm": "old",
+      "run_id": "old-08"
+    },
+    {
+      "pair": 8,
+      "arm": "new",
+      "run_id": "new-08"
+    },
+    {
+      "pair": 9,
+      "arm": "new",
+      "run_id": "new-09"
+    },
+    {
+      "pair": 9,
+      "arm": "old",
+      "run_id": "old-09"
+    },
+    {
+      "pair": 10,
+      "arm": "new",
+      "run_id": "new-10"
+    },
+    {
+      "pair": 10,
+      "arm": "old",
+      "run_id": "old-10"
+    },
+    {
+      "pair": 11,
+      "arm": "new",
+      "run_id": "new-11"
+    },
+    {
+      "pair": 11,
+      "arm": "old",
+      "run_id": "old-11"
+    },
+    {
+      "pair": 12,
+      "arm": "new",
+      "run_id": "new-12"
+    },
+    {
+      "pair": 12,
+      "arm": "old",
+      "run_id": "old-12"
+    },
+    {
+      "pair": 13,
+      "arm": "new",
+      "run_id": "new-13"
+    },
+    {
+      "pair": 13,
+      "arm": "old",
+      "run_id": "old-13"
+    },
+    {
+      "pair": 14,
+      "arm": "new",
+      "run_id": "new-14"
+    },
+    {
+      "pair": 14,
+      "arm": "old",
+      "run_id": "old-14"
+    },
+    {
+      "pair": 15,
+      "arm": "new",
+      "run_id": "new-15"
+    },
+    {
+      "pair": 15,
+      "arm": "old",
+      "run_id": "old-15"
+    },
+    {
+      "pair": 16,
+      "arm": "new",
+      "run_id": "new-16"
+    },
+    {
+      "pair": 16,
+      "arm": "old",
+      "run_id": "old-16"
+    },
+    {
+      "pair": 17,
+      "arm": "new",
+      "run_id": "new-17"
+    },
+    {
+      "pair": 17,
+      "arm": "old",
+      "run_id": "old-17"
+    },
+    {
+      "pair": 18,
+      "arm": "old",
+      "run_id": "old-18"
+    },
+    {
+      "pair": 18,
+      "arm": "new",
+      "run_id": "new-18"
+    },
+    {
+      "pair": 19,
+      "arm": "new",
+      "run_id": "new-19"
+    },
+    {
+      "pair": 19,
+      "arm": "old",
+      "run_id": "old-19"
+    },
+    {
+      "pair": 20,
+      "arm": "new",
+      "run_id": "new-20"
+    },
+    {
+      "pair": 20,
+      "arm": "old",
+      "run_id": "old-20"
+    }
+  ],
+  "script_sha256": "435096b6d1325112f9b14f3a1b88086a22514be7481798bf4e35194dbc309a73",
+  "stopping": "Stop immediately at next non200/infrastructure failure; never automatically exhaust retries"
+}

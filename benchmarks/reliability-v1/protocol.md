@@ -1,0 +1,4 @@
+# Predeclared reliability experiment
+10 independent compactions of the unchanged 50-fact, 240-message fixture. No optional extension beyond 10 in this batch. Same provider/model, trigger threshold, data generator and original extraction/evidence scorer. No warmups excluded. Count compression success separately from extraction failure. One production retry maximum (two model attempts in total). Always record first-attempt failure and retries. Original protocol is preserved under frozen/.
+
+Secondary evaluator: exact verbatim fact-statement presence plus conservative deterministic semantic rules. Both will be applied to baseline and after raw summaries; never overwrite legacy scores. No additional LLM judge will be used. Missing semantic matches mean not established by the rules, not proven absence. Any estimator or model extraction uncertainty is reported.

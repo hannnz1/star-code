@@ -1,0 +1,1039 @@
+{
+  "main_implementation_commit": "63cade05f8dec1e5b33a948dfcd05eb69f291aa3",
+  "ab_new_snapshot_commit": "4f26fa7552e72a54d85a262255a2aff243042181",
+  "normalization": "CRLF to LF only",
+  "files": 257,
+  "missing": [],
+  "mismatch": [],
+  "equivalent": true,
+  "source_hashes": [
+    {
+      "path": "src/main/java/com/starcode/ChatApplication.java",
+      "normalized_sha256": "448ecece74ce5d87b6d022d4e07dfc0b16af4a490c375c0b263fa981941449c9"
+    },
+    {
+      "path": "src/main/java/com/starcode/Main.java",
+      "normalized_sha256": "b893ff725b669b2d4f5ad4ec5910488b2400dc305d78a1cb80bcb8d66ab7ec5b"
+    },
+    {
+      "path": "src/main/java/com/starcode/agent/AgentEvent.java",
+      "normalized_sha256": "5960fb791222f74d2b343b763dfcd075f6730f1017ff1d35c5fa21cdccbbc633"
+    },
+    {
+      "path": "src/main/java/com/starcode/agent/AgentLoop.java",
+      "normalized_sha256": "caa90a64a8a78b198de9ac76838fb6462cebc3456b82dac6f2b45c7870e3dac2"
+    },
+    {
+      "path": "src/main/java/com/starcode/agent/AgentMode.java",
+      "normalized_sha256": "7d767829b2a40c50508a9802994b8e80ab46ba1529f1d8c49e7bd003c5482a73"
+    },
+    {
+      "path": "src/main/java/com/starcode/agent/AgentOutcome.java",
+      "normalized_sha256": "0e3eabbb8310fb451de73c6635f30cc7919862f9b2a7014842e4398f7e4fd8b9"
+    },
+    {
+      "path": "src/main/java/com/starcode/agent/CancellationToken.java",
+      "normalized_sha256": "325a56f5532733234a41a93c0e769c73d24bdef16b244bb794daf9c4e06220d0"
+    },
+    {
+      "path": "src/main/java/com/starcode/agent/MaxTurnsReachedException.java",
+      "normalized_sha256": "5b46898ed9c053e4862e05eb64ad280d49b4c06507a06ab01a2c99889ceb69bc"
+    },
+    {
+      "path": "src/main/java/com/starcode/command/BuiltinCommands.java",
+      "normalized_sha256": "2e98012687cf2583fe557adc1b34d12e76f8ad3eba65494444acda1662b02a96"
+    },
+    {
+      "path": "src/main/java/com/starcode/command/CommandCompletion.java",
+      "normalized_sha256": "f0ea8c57a835420488afcc66192251ba4b845d4ee8f18daf08c1b53b9b154bfb"
+    },
+    {
+      "path": "src/main/java/com/starcode/command/CommandContext.java",
+      "normalized_sha256": "c0951a42edd4ab879b8ff0e0ad42d3ce751838a4e925570d12e80dd3e3432531"
+    },
+    {
+      "path": "src/main/java/com/starcode/command/CommandDispatch.java",
+      "normalized_sha256": "e7b0dceab9bbe815f0bc687085e706f025d3dfafcbb8f751e250e0c91d3e3e9a"
+    },
+    {
+      "path": "src/main/java/com/starcode/command/CommandHandler.java",
+      "normalized_sha256": "b2d951b2c29295977ff63deb86616ddf23c450644a8f03fe405e3705fb676221"
+    },
+    {
+      "path": "src/main/java/com/starcode/command/CommandKind.java",
+      "normalized_sha256": "31b784fe45481b2bbcad80813dd38992b026e17d5ef8ab02e33e5b9684a39aae"
+    },
+    {
+      "path": "src/main/java/com/starcode/command/CommandRegistry.java",
+      "normalized_sha256": "b6a70aab1ddf4120a56ba2afe8ba9d3c855c01197486ec918e4c2aea61948bdc"
+    },
+    {
+      "path": "src/main/java/com/starcode/command/CommandSource.java",
+      "normalized_sha256": "6e9a7030851e00289d5e6354cabc8bb64610e2466571e66b8982b9ab13229fe7"
+    },
+    {
+      "path": "src/main/java/com/starcode/command/CommandSpec.java",
+      "normalized_sha256": "9df58bdf23b308310530220cd0c69bb4754a6772cb7513058c09ceeed8130279"
+    },
+    {
+      "path": "src/main/java/com/starcode/command/TeamCommand.java",
+      "normalized_sha256": "1e1d3f778ede0540b95882e3e078a27f3f794b4a2fdbd73f2c51ba553c64cee4"
+    },
+    {
+      "path": "src/main/java/com/starcode/command/WorktreeAccessor.java",
+      "normalized_sha256": "a751fbdc5fd6df6a5bb72fc4283ff17e6b41f1825439bb78eab1fbde3547e575"
+    },
+    {
+      "path": "src/main/java/com/starcode/command/WorktreeCommand.java",
+      "normalized_sha256": "35c3f558354c4c0405592ffd19e0a3caa1410d2d79afa18edf74615519d2b56a"
+    },
+    {
+      "path": "src/main/java/com/starcode/config/AppConfig.java",
+      "normalized_sha256": "b664b2e4edb4bd0c94ed54e960b7732eccd3f9a063728aff9860ec1dac6df458"
+    },
+    {
+      "path": "src/main/java/com/starcode/config/ConfigException.java",
+      "normalized_sha256": "4f79aa7e144945170505765a693aee3b092467d0ecf5f496f72e9bd78a7fe4b7"
+    },
+    {
+      "path": "src/main/java/com/starcode/config/ConfigLoader.java",
+      "normalized_sha256": "281dcd77a3e760f75546507bbcb144f6d15a7f8a46c5a001b30217e53c70b89d"
+    },
+    {
+      "path": "src/main/java/com/starcode/config/FeaturesConfig.java",
+      "normalized_sha256": "3186191d451a565845d7f0a24e5fa68f996cac9fcdfc77a2ce7534c97711842c"
+    },
+    {
+      "path": "src/main/java/com/starcode/config/ProviderConfig.java",
+      "normalized_sha256": "97a70361a84d65eb6bd2dd9700b05132528f2120433200573762682cde8c7d2c"
+    },
+    {
+      "path": "src/main/java/com/starcode/config/ProxyConfig.java",
+      "normalized_sha256": "8053882a9272245d65d5761e19087dd9728e35a0f3446a36a563ca2346e2c5b0"
+    },
+    {
+      "path": "src/main/java/com/starcode/context/ContextManager.java",
+      "normalized_sha256": "14f9a2236ac2eb7b75dd9d98cf4d9e8d055537e1c63e036b17e2242efb6314b6"
+    },
+    {
+      "path": "src/main/java/com/starcode/context/SummaryValidator.java",
+      "normalized_sha256": "4398cff48e6ec950090855e915cd283428be6749cdb89779035d7906005bcc7e"
+    },
+    {
+      "path": "src/main/java/com/starcode/hook/DefaultHookActionExecutor.java",
+      "normalized_sha256": "53050e3572fa03cda0a909ed5da921a39c887f5028cbe9ec4340540755bc00dc"
+    },
+    {
+      "path": "src/main/java/com/starcode/hook/HookAction.java",
+      "normalized_sha256": "98d2a1a06b2cfc12955189b1f985a7eb2f2e8fba7c01c03242bb395dbfb3a451"
+    },
+    {
+      "path": "src/main/java/com/starcode/hook/HookActionExecutor.java",
+      "normalized_sha256": "66278cc1503405d2dcda95136862b776717d0c6ec47a33544f868dd439b4de77"
+    },
+    {
+      "path": "src/main/java/com/starcode/hook/HookCondition.java",
+      "normalized_sha256": "2000599470903baef36c7a45b2917c2b320d4a6cc154cde879d1b11b1179f8b8"
+    },
+    {
+      "path": "src/main/java/com/starcode/hook/HookDispatchResult.java",
+      "normalized_sha256": "71f207ba7f71444a5fed7160642cf9aa5ebf2affcfa8358e67d25cf8170bfd3c"
+    },
+    {
+      "path": "src/main/java/com/starcode/hook/HookEngine.java",
+      "normalized_sha256": "48bd80eb2df68572544e743e00973ea8b1807fb4c8e366598dc90d9088c5629d"
+    },
+    {
+      "path": "src/main/java/com/starcode/hook/HookEvent.java",
+      "normalized_sha256": "d742ae21cf11ccc220e2d6adbe4444bc29415cbeb0d933f74a7c65531a334081"
+    },
+    {
+      "path": "src/main/java/com/starcode/hook/HookExecution.java",
+      "normalized_sha256": "192c1b69d199cc5c5c036ed092cda9d846b1e12d2a94929bd8ad5438183737ab"
+    },
+    {
+      "path": "src/main/java/com/starcode/hook/HookLoader.java",
+      "normalized_sha256": "5dafb443258ffacfb3bd9fbe88f68f7e590eff334c139ed8fd3454e4afc31e30"
+    },
+    {
+      "path": "src/main/java/com/starcode/hook/HookPayload.java",
+      "normalized_sha256": "c28e8cd6ec36cc5330934567621870e3002dde436c7432770c8fa622e1a454d1"
+    },
+    {
+      "path": "src/main/java/com/starcode/hook/HookPayloadFactory.java",
+      "normalized_sha256": "a8b2ad4f3549061daa46355b4058c6ebcc59b9e952a6987c978cd76359a04e3a"
+    },
+    {
+      "path": "src/main/java/com/starcode/hook/HookRule.java",
+      "normalized_sha256": "c53e557fb180d5e87cdb7566c54d4cd9d684d0d456354ed141756d2dca25b698"
+    },
+    {
+      "path": "src/main/java/com/starcode/instructions/InstructionLoader.java",
+      "normalized_sha256": "47d96b05fbd5e68e3df0476462e8d5ca693b1290a5ef01ec297ece9b537a7380"
+    },
+    {
+      "path": "src/main/java/com/starcode/llm/AbstractHttpLlmClient.java",
+      "normalized_sha256": "4a4b5438c6f5466763dbf13ecc7b635263716095c16288e647e98cf9104a8fca"
+    },
+    {
+      "path": "src/main/java/com/starcode/llm/AnthropicClient.java",
+      "normalized_sha256": "71671a34f6925dfdbc14d53400a2dd9b7da43918e02d20818d8276b504b15a75"
+    },
+    {
+      "path": "src/main/java/com/starcode/llm/ChatMessage.java",
+      "normalized_sha256": "c397d4a9bee2cecd2cd8788336291fde8174f6a89ed4c34f3eeea283356702ea"
+    },
+    {
+      "path": "src/main/java/com/starcode/llm/Completion.java",
+      "normalized_sha256": "509e9db07263a48014e69633731c7242d1742fc3cfb85d644661909572e019ab"
+    },
+    {
+      "path": "src/main/java/com/starcode/llm/Conversation.java",
+      "normalized_sha256": "adc223a2c0331ec84a694b7f5110c9cb2c3659748111c3fdd4d57d13f01c7c1e"
+    },
+    {
+      "path": "src/main/java/com/starcode/llm/LlmClient.java",
+      "normalized_sha256": "6bee468e5f84516dad5b9b63a06d5e1b32d23f64bcdb67df1f206ae17665ac91"
+    },
+    {
+      "path": "src/main/java/com/starcode/llm/LlmClients.java",
+      "normalized_sha256": "5caa9d98067b4664d675014525ce8dd88a94a76651d30c0cbd0a6901feff55be"
+    },
+    {
+      "path": "src/main/java/com/starcode/llm/LlmException.java",
+      "normalized_sha256": "dc5b1b6db6222b349498b07386d5d17b03c5a9ae0133155a788339dcc367c1fc"
+    },
+    {
+      "path": "src/main/java/com/starcode/llm/OpenAiResponsesClient.java",
+      "normalized_sha256": "f46ea9bd25324c852c5dce86770b0fef5b29d75b377e39655df8de462c61309d"
+    },
+    {
+      "path": "src/main/java/com/starcode/llm/SseReader.java",
+      "normalized_sha256": "bd4567a1bac85bbf32fd2813ad1aa4f8181c31723f068f65a655d03874144a82"
+    },
+    {
+      "path": "src/main/java/com/starcode/llm/StreamEvent.java",
+      "normalized_sha256": "29452a2d133c1227e9a5ea6baea46d182e9092a0ec54c1412a52003691d0baa4"
+    },
+    {
+      "path": "src/main/java/com/starcode/llm/TokenUsage.java",
+      "normalized_sha256": "bb9c07991bf428f238370d8f33861e9248355f3870a88309ef9c3d49b9edc091"
+    },
+    {
+      "path": "src/main/java/com/starcode/llm/ToolExchange.java",
+      "normalized_sha256": "876b0d03d28295fa98ef0b8cb4e6a57fb3b41f5c5db15e1eedc5679a9f4b2893"
+    },
+    {
+      "path": "src/main/java/com/starcode/llm/TurnContext.java",
+      "normalized_sha256": "e9a33383bf6c0f3c9cfd0fb008922645fe4d03eedf78f3e685b4b918403903f4"
+    },
+    {
+      "path": "src/main/java/com/starcode/mcp/McpCallResult.java",
+      "normalized_sha256": "2708efab556fccf3c84a883a1edde4a9714afdd7eec2bf90049348fd95e7be55"
+    },
+    {
+      "path": "src/main/java/com/starcode/mcp/McpConfigLoader.java",
+      "normalized_sha256": "fe4e5c1d76f27c347e202e26d69a780681f436481058d493880753754cbe96cf"
+    },
+    {
+      "path": "src/main/java/com/starcode/mcp/McpManager.java",
+      "normalized_sha256": "24b47845723680f05dc5d2d7ba041f377a6aaa7befb290446aeaefae26008e00"
+    },
+    {
+      "path": "src/main/java/com/starcode/mcp/McpRemoteTool.java",
+      "normalized_sha256": "031e41cdba45dc78c399fc563317893e20cc010e82f6cc563fa5d995f19539d7"
+    },
+    {
+      "path": "src/main/java/com/starcode/mcp/McpServerConfig.java",
+      "normalized_sha256": "a2a015de276390909ec1c482ddfc76adb8f859e23a6faf1b6ad2fd8894597180"
+    },
+    {
+      "path": "src/main/java/com/starcode/mcp/McpSession.java",
+      "normalized_sha256": "b13ce244345c144c690149943415eb9863418c759c900769f81285217e86f10c"
+    },
+    {
+      "path": "src/main/java/com/starcode/mcp/McpToolAdapter.java",
+      "normalized_sha256": "7e859b6d2b506e8459c9ed2561664107d24f0e37e8bc7ffc05e92519fa968564"
+    },
+    {
+      "path": "src/main/java/com/starcode/mcp/SdkMcpSession.java",
+      "normalized_sha256": "c22adcfea0f1f368adbb72da0de4ff856d42cf7f4aa35181051badab4a100113"
+    },
+    {
+      "path": "src/main/java/com/starcode/memory/MemoryManager.java",
+      "normalized_sha256": "50ecf5019074ace3b36edefeff03116907d29de135de0f1a004d917458e3acdf"
+    },
+    {
+      "path": "src/main/java/com/starcode/memory/MemoryStore.java",
+      "normalized_sha256": "065479f6171f57b7fe46a67c01dcb90c869b8fb6d07b3eda2976f9df19914aa3"
+    },
+    {
+      "path": "src/main/java/com/starcode/memory/MemoryUpdateAction.java",
+      "normalized_sha256": "27b197ece730d8bad8c902cb5e02f820ad28e6514bb34de8849d3482168b7525"
+    },
+    {
+      "path": "src/main/java/com/starcode/memory/NoteType.java",
+      "normalized_sha256": "0b650cbbd70430d3a15dafd100ce9745a3062fc4b0b66ae2517ad57c302d75f7"
+    },
+    {
+      "path": "src/main/java/com/starcode/permission/ApprovalChoice.java",
+      "normalized_sha256": "6558b7d0a5b8403966dbc73ee78542d344b4b30f46aae03cd02f3175091fd081"
+    },
+    {
+      "path": "src/main/java/com/starcode/permission/DangerousCommandPolicy.java",
+      "normalized_sha256": "8ed6dde2ecbee0e676f7b23c8d60401d615862df10b6389a7855e26b3c41160c"
+    },
+    {
+      "path": "src/main/java/com/starcode/permission/ExactValueMatcher.java",
+      "normalized_sha256": "a9801ce18889480d5054f74577304b3aca927699033528048bbdc06036d08fb0"
+    },
+    {
+      "path": "src/main/java/com/starcode/permission/GlobValueMatcher.java",
+      "normalized_sha256": "fcd7f3bd6493eb96b82c42951cd65339ce2488d0d3ae089c59cab7a212bf82a4"
+    },
+    {
+      "path": "src/main/java/com/starcode/permission/NotValueMatcher.java",
+      "normalized_sha256": "49f25e6520f33e20c6caa10c4a523e996ea711fa9ba3df57badb8c38a9491bb8"
+    },
+    {
+      "path": "src/main/java/com/starcode/permission/PermissionApprover.java",
+      "normalized_sha256": "1a85f955081badbef404867837ca61c723e209e09e94cab8e66e302c9e75a965"
+    },
+    {
+      "path": "src/main/java/com/starcode/permission/PermissionConfigLoader.java",
+      "normalized_sha256": "6ffa77cc9300d3e953be80b23256574d4011365a70429f5657e1b0668bacecd5"
+    },
+    {
+      "path": "src/main/java/com/starcode/permission/PermissionDecision.java",
+      "normalized_sha256": "eb47127814c42c324dfa48501684d35f7ba28cb897f6a95a7571f14ec8163e37"
+    },
+    {
+      "path": "src/main/java/com/starcode/permission/PermissionManager.java",
+      "normalized_sha256": "404bc833b0f03d2c73da23c23e10d1f79cb86f755496d6ea95e3a0bb7ab51ab1"
+    },
+    {
+      "path": "src/main/java/com/starcode/permission/PermissionMode.java",
+      "normalized_sha256": "15e34b3d5a7521fd29df0d2066381ba4394b5e001ef694075ef582ea6eb84d01"
+    },
+    {
+      "path": "src/main/java/com/starcode/permission/PermissionOutcome.java",
+      "normalized_sha256": "ca76a1d516b083c5dde5e8d33cfaec9fa82e3864c90b6678215677c6c92f2064"
+    },
+    {
+      "path": "src/main/java/com/starcode/permission/PermissionRequest.java",
+      "normalized_sha256": "6b7936912f4fc637834582a755e548963561b1d34cbb06a06152800cc05b0d86"
+    },
+    {
+      "path": "src/main/java/com/starcode/permission/PermissionRule.java",
+      "normalized_sha256": "e23aab7df3936c6f6efcaf283a8a5b3e3fb18a32e4bdf5b4f22e64d4d02f8143"
+    },
+    {
+      "path": "src/main/java/com/starcode/permission/PermissionRuleSet.java",
+      "normalized_sha256": "251422a61bba1038a7516140824d4d6602cc99745b93b97c4b11c2d611747523"
+    },
+    {
+      "path": "src/main/java/com/starcode/permission/RegexValueMatcher.java",
+      "normalized_sha256": "d70174129b1918f8f36b02fd74147db99e4cca5e5aa27e563850f6cc5371cc99"
+    },
+    {
+      "path": "src/main/java/com/starcode/permission/RuleParseException.java",
+      "normalized_sha256": "4f050ced0bd55df1792e58945b241f9721fae1e19e63c70dc43ec7a3d4fe7c51"
+    },
+    {
+      "path": "src/main/java/com/starcode/permission/ToolCategory.java",
+      "normalized_sha256": "e7ee55042a4c299d1b7453e49293a878ef21af3792c64354b2200cf3d600e8f1"
+    },
+    {
+      "path": "src/main/java/com/starcode/permission/ValueMatcher.java",
+      "normalized_sha256": "78bd558b886d14424571f1bb3fa9047d5cf5f9432215f210026266cc0f889efa"
+    },
+    {
+      "path": "src/main/java/com/starcode/permission/ValueMatchers.java",
+      "normalized_sha256": "030da4b1099d9a905528e419e94f7bc387796fc140547d0b158d4f306d19ad7f"
+    },
+    {
+      "path": "src/main/java/com/starcode/prompt/EnvironmentContext.java",
+      "normalized_sha256": "e6cc381c2cd598410e831fe85e5713d9bb715d9d7e627387cbb9d16a7ccefe15"
+    },
+    {
+      "path": "src/main/java/com/starcode/prompt/PromptContext.java",
+      "normalized_sha256": "9b54475d8179b2ca07cc3e26bf628267383aacc6d2e439b9da5c9b53edbbfa8b"
+    },
+    {
+      "path": "src/main/java/com/starcode/prompt/PromptModule.java",
+      "normalized_sha256": "56b8463cac589f5a5d01572a3e35605b20af5daf7054dd5370f477e724b5eac3"
+    },
+    {
+      "path": "src/main/java/com/starcode/prompt/SystemPromptAssembler.java",
+      "normalized_sha256": "79c2840e8ff4997085a3bf0d6dad12e4cf1cc507d4ff3229809d89ca65aae34e"
+    },
+    {
+      "path": "src/main/java/com/starcode/prompt/SystemReminder.java",
+      "normalized_sha256": "433dec717604b78e621b6cf7e8071ae7bc0464ed21d33b08d95f2ef2c3700754"
+    },
+    {
+      "path": "src/main/java/com/starcode/session/SessionCatalog.java",
+      "normalized_sha256": "2574e812e6d498e93071093234fc125610f6a35218e6504260db903cf649609c"
+    },
+    {
+      "path": "src/main/java/com/starcode/session/SessionCleaner.java",
+      "normalized_sha256": "6029faa8888b54cd63ed93564342d39f7b52de1bb8e2c2f772de8b812b14ecf8"
+    },
+    {
+      "path": "src/main/java/com/starcode/session/SessionContext.java",
+      "normalized_sha256": "6225cabe8ac6772c2b28e8bf31ec5ebe1d9aeb1aaa4550c530047b97dab5690f"
+    },
+    {
+      "path": "src/main/java/com/starcode/session/SessionEntry.java",
+      "normalized_sha256": "228b2aff82d5dae4c2d9b8821915f6dd1868518605098e3cbd8137a2f79c0d16"
+    },
+    {
+      "path": "src/main/java/com/starcode/session/SessionInfo.java",
+      "normalized_sha256": "99780eb5643521256fa9728cb24fa06496512d291859a6cc14b659795850ed8f"
+    },
+    {
+      "path": "src/main/java/com/starcode/session/SessionLoader.java",
+      "normalized_sha256": "458a32a3240bc92a98db264f627bf082975eff2575614cabc401e6de773af9c8"
+    },
+    {
+      "path": "src/main/java/com/starcode/session/SessionWriter.java",
+      "normalized_sha256": "864f120590286772b3dadbda2f7daa03f3f2fb2d37457d117dfc1788a8959be5"
+    },
+    {
+      "path": "src/main/java/com/starcode/skill/ActiveSkills.java",
+      "normalized_sha256": "3e06e072c69085afbe64df54e525dc9489703802daee87a50e012ab4cdbf3b55"
+    },
+    {
+      "path": "src/main/java/com/starcode/skill/GitHubSkillInstaller.java",
+      "normalized_sha256": "bf20fcabc1bc9322ab456bc4d55975422cb4edde72bb86e26cbdf3e38df8e0b7"
+    },
+    {
+      "path": "src/main/java/com/starcode/skill/Skill.java",
+      "normalized_sha256": "2e160cd359b02d352050322151dccee406365df2456537cf7a4465949a1f4b05"
+    },
+    {
+      "path": "src/main/java/com/starcode/skill/SkillCatalog.java",
+      "normalized_sha256": "b08f1d46ea570a5002b7fd1d0b0a0b7fd88f80c86262a4f288c9791f42bba732"
+    },
+    {
+      "path": "src/main/java/com/starcode/skill/SkillExecutor.java",
+      "normalized_sha256": "a5e65ad5e9c341945221ad1fcf87a5dc002a04b869f862a317eb266b049307e5"
+    },
+    {
+      "path": "src/main/java/com/starcode/skill/SkillForkHost.java",
+      "normalized_sha256": "c724f26e030ce634f1530057a8ce75b12b23c51cbedf833dfdcba471212ebc29"
+    },
+    {
+      "path": "src/main/java/com/starcode/skill/SkillHost.java",
+      "normalized_sha256": "58b4f2c5ce599e07654c2d9459649f818579aecfb9a3d84a2782053418a1952c"
+    },
+    {
+      "path": "src/main/java/com/starcode/skill/SkillInvocationAudit.java",
+      "normalized_sha256": "835b6f95f16dcd9f22e5c51627111af8b59c31e93e8643da18bcc53739ab29ca"
+    },
+    {
+      "path": "src/main/java/com/starcode/skill/SkillMeta.java",
+      "normalized_sha256": "494e886e8194cbcb303e6d3a840f37d4b5ca6ba4b5122817bc130851cd9d951d"
+    },
+    {
+      "path": "src/main/java/com/starcode/skill/SkillProviderResolver.java",
+      "normalized_sha256": "abc164ee6498417557bb37d2eac3554f439a8cf759289f355adca00dbe7e2d85"
+    },
+    {
+      "path": "src/main/java/com/starcode/skill/SkillRefresh.java",
+      "normalized_sha256": "d035c1670beff37870b0d043cc7bed043647b7c2b5f1b081c0245798e3d879fd"
+    },
+    {
+      "path": "src/main/java/com/starcode/skill/SkillRunResult.java",
+      "normalized_sha256": "5c77993eed0f18e4e35d82386c7582e449de1f5748c6d0ab6a29e1a9302af190"
+    },
+    {
+      "path": "src/main/java/com/starcode/skill/SkillSource.java",
+      "normalized_sha256": "5acccbe327f67db9665239b20eb56c5da19b82589ab296d6a4bcbf59e9861ebe"
+    },
+    {
+      "path": "src/main/java/com/starcode/subagent/ForkMessages.java",
+      "normalized_sha256": "30c0da94c78c3c8f9bb3e0828ada7860c5eccaf761921f5c0d97e912f43886da"
+    },
+    {
+      "path": "src/main/java/com/starcode/subagent/SubAgentCatalog.java",
+      "normalized_sha256": "8034b867333cb9c161f4b7aed5abc59c7f4bf3850758a6f55082b8201591a5cb"
+    },
+    {
+      "path": "src/main/java/com/starcode/subagent/SubAgentDefinition.java",
+      "normalized_sha256": "dbee1db46230e8e130f27fb8891e8b86a845f6b0bf76eea694109935db648135"
+    },
+    {
+      "path": "src/main/java/com/starcode/subagent/SubAgentDefinitionParser.java",
+      "normalized_sha256": "31eff134ce8169a7ac635b48b26a7750753be88b9163ef666b6efe7cf90a4733"
+    },
+    {
+      "path": "src/main/java/com/starcode/subagent/SubAgentLauncher.java",
+      "normalized_sha256": "33290a32f421a536f893da05d2713bfcc2b6ca2b9d3e14125aff1624ed6c41bd"
+    },
+    {
+      "path": "src/main/java/com/starcode/subagent/SubAgentRunResult.java",
+      "normalized_sha256": "8a8c9170d055930c5bcaea90bc01173e1c347bc47812abf567144e73731a51cd"
+    },
+    {
+      "path": "src/main/java/com/starcode/subagent/SubAgentSession.java",
+      "normalized_sha256": "103f251977706755437c0674996f628677f8d952d9ef390fe91c3c65a0382301"
+    },
+    {
+      "path": "src/main/java/com/starcode/subagent/SubAgentSource.java",
+      "normalized_sha256": "b34e34a0d2b8628a8d81ad3e053338059c9c7453fdf456970613eb5a438dd6f9"
+    },
+    {
+      "path": "src/main/java/com/starcode/subagent/SubAgentTool.java",
+      "normalized_sha256": "2de98ad04853ef3b844f521ea95fbb441f74c62099a2f48809499393927c035d"
+    },
+    {
+      "path": "src/main/java/com/starcode/subagent/SubAgentToolFilter.java",
+      "normalized_sha256": "b176e285b6d21fbc8f95fec837c14887034f511101025fb71e7115f35f5c9ab7"
+    },
+    {
+      "path": "src/main/java/com/starcode/task/BackgroundTask.java",
+      "normalized_sha256": "4d55a2cbda8349dba8d6d0ec7af7eaa8f60d20962d5760e0faa056a5a625e051"
+    },
+    {
+      "path": "src/main/java/com/starcode/task/RunningSubAgent.java",
+      "normalized_sha256": "115f774dc585e5701cc0fd153814f837dede00291027584f49cc4d829375ffa3"
+    },
+    {
+      "path": "src/main/java/com/starcode/task/SendMessageTool.java",
+      "normalized_sha256": "a079acbaf65886bf353e2a0d3e997b587587864f3e6741cf245f350974cea942"
+    },
+    {
+      "path": "src/main/java/com/starcode/task/SubAgentTaskManager.java",
+      "normalized_sha256": "ae0a1ef109ab0b304b85843d05bd3b00b353e75c54631843d17da520ea7695c7"
+    },
+    {
+      "path": "src/main/java/com/starcode/task/TaskGetTool.java",
+      "normalized_sha256": "f71ae5c4a26524dfee23ee4eb8d63b97e2218df6f7d96a2e79c60084a6a1645f"
+    },
+    {
+      "path": "src/main/java/com/starcode/task/TaskJson.java",
+      "normalized_sha256": "ea45da0997796724abd44be03583ee4f097a6df02b6b8e153533bd3af377d217"
+    },
+    {
+      "path": "src/main/java/com/starcode/task/TaskListTool.java",
+      "normalized_sha256": "037869cfa969e861992d67dc9c79d535b7dc05eb0b13ad441fa09047ec714ba0"
+    },
+    {
+      "path": "src/main/java/com/starcode/task/TaskMetrics.java",
+      "normalized_sha256": "d5799182ec5cc6e4a4e61ff58a80b708d356483670f7622706eeedea8cefddb2"
+    },
+    {
+      "path": "src/main/java/com/starcode/task/TaskStatus.java",
+      "normalized_sha256": "a6795bbe68c970ff5d8dedc6a987730e377aa6bb104e88dfd9b4338af583e411"
+    },
+    {
+      "path": "src/main/java/com/starcode/task/TaskStopTool.java",
+      "normalized_sha256": "6521e3573ac3a311c89f8a1ed80eef677e62832567e7546861ea922ebcc711be"
+    },
+    {
+      "path": "src/main/java/com/starcode/team/BackendType.java",
+      "normalized_sha256": "133cce84b7c567358d48e53f6957ef7f1c02ea582478781ddf376ddb87377302"
+    },
+    {
+      "path": "src/main/java/com/starcode/team/CoordinatorMode.java",
+      "normalized_sha256": "fe8523091c296e77fa66fbfa050ca79411c262511efbc4fb07cec98ea8aba213"
+    },
+    {
+      "path": "src/main/java/com/starcode/team/InProcessTeammateNoSpawnException.java",
+      "normalized_sha256": "75c49546e66b49b8e4ffc01480a471192cff4dce1e37619c930f25db82f8de41"
+    },
+    {
+      "path": "src/main/java/com/starcode/team/MemberExistsException.java",
+      "normalized_sha256": "85d3de8f39bc17dc8d19b0b360fce70930be723efafc72feceb0e8f36678cb00"
+    },
+    {
+      "path": "src/main/java/com/starcode/team/MemberNotFoundException.java",
+      "normalized_sha256": "c8d3a41e78d731433cb3caba5864fe24dbc99a46fe62e4c7e36773579083b04e"
+    },
+    {
+      "path": "src/main/java/com/starcode/team/Persistence.java",
+      "normalized_sha256": "6f29bcb42ca82fcb33efd4676602ee7f4b7ecca3dfc7e10030b54481fe6f4a6b"
+    },
+    {
+      "path": "src/main/java/com/starcode/team/Team.java",
+      "normalized_sha256": "cf5e55e24a5a18377c4c8023bbb85f0e149710f145fe11f4f48b7ca4f63380b2"
+    },
+    {
+      "path": "src/main/java/com/starcode/team/TeamException.java",
+      "normalized_sha256": "0b6281e162d935a623b8954899c70406ef5677ce6ef374a022dcae5555c21042"
+    },
+    {
+      "path": "src/main/java/com/starcode/team/TeamHasActiveMembersException.java",
+      "normalized_sha256": "a09ae6b5b02b14ac661aaec933f23ba2f9b5cff03173eb493e89096d72a6401b"
+    },
+    {
+      "path": "src/main/java/com/starcode/team/TeamHook.java",
+      "normalized_sha256": "51b5b01d70cdc21ebf211d146ac1a65cc87a6488e0cec52010cceaa2f728014b"
+    },
+    {
+      "path": "src/main/java/com/starcode/team/TeamManager.java",
+      "normalized_sha256": "1cb8ddc184dffc590ba0ba79f2d734ffb2e726bba9062d559e8bc949df5146bb"
+    },
+    {
+      "path": "src/main/java/com/starcode/team/TeammateInfo.java",
+      "normalized_sha256": "d718c456028960324e63e8723a9f3294adbc050af56d759d72b57a99cf0b4905"
+    },
+    {
+      "path": "src/main/java/com/starcode/team/TeamMemberOptions.java",
+      "normalized_sha256": "dd646a4443b01da9e4b5bd6207d54acbca3381f00ec96c328f06bcf2ec37c866"
+    },
+    {
+      "path": "src/main/java/com/starcode/team/TeamMemberRunner.java",
+      "normalized_sha256": "17a67110cc2b9dacc641c264cd648a590c4b9c0f5fc1e076b0fd3680ec232f6e"
+    },
+    {
+      "path": "src/main/java/com/starcode/team/TeamNotFoundException.java",
+      "normalized_sha256": "6a1b32e982ee61fb9394623c251a0efc710013b764d1dead11ec3e69265683ff"
+    },
+    {
+      "path": "src/main/java/com/starcode/team/TeamSnapshot.java",
+      "normalized_sha256": "592343d5dc0d1e466c6147cb33360d28f306828d7bdad96a9a1939bd01cc6645"
+    },
+    {
+      "path": "src/main/java/com/starcode/team/TeamSpawnRequest.java",
+      "normalized_sha256": "1d2cedc4c7074be51cfa524f821b9ca4e9d0d0dc70bf78db6f1c4c267a35638a"
+    },
+    {
+      "path": "src/main/java/com/starcode/tool/Tool.java",
+      "normalized_sha256": "58d44940692126275e25e39ac69a0d759f439f09126c95629d1a1193660804c6"
+    },
+    {
+      "path": "src/main/java/com/starcode/tool/ToolCall.java",
+      "normalized_sha256": "336a27a91ac163cdb1962acc6113874778d5068a4efae19971e56e0eb54851c6"
+    },
+    {
+      "path": "src/main/java/com/starcode/tool/ToolContext.java",
+      "normalized_sha256": "86e1a67b01e983fc794ab92966bb0da293dda6bba185771a69615b71743f2031"
+    },
+    {
+      "path": "src/main/java/com/starcode/tool/ToolDefinition.java",
+      "normalized_sha256": "21703550a812becd75422698d99f5c8c1eabb0d51c88f02e0bcdd7f0f2d06f29"
+    },
+    {
+      "path": "src/main/java/com/starcode/tool/ToolRegistry.java",
+      "normalized_sha256": "1c5f037d742c528b06b2f98618a2a00cad1ac603967d2846b5998aebc2abf663"
+    },
+    {
+      "path": "src/main/java/com/starcode/tool/ToolResult.java",
+      "normalized_sha256": "6453af96402cd45b4f3bb76599bab2834e13a8528cd3a8299baa2abc387e0632"
+    },
+    {
+      "path": "src/main/java/com/starcode/ui/MarkdownRenderer.java",
+      "normalized_sha256": "9ea8ee8e521187815b964e4d2957b621c24ef7c89d609c29d473c690aeefd77a"
+    },
+    {
+      "path": "src/main/java/com/starcode/ui/TerminalUi.java",
+      "normalized_sha256": "247b7fa32bb75dab85e7efb4f16a62c602f4136b92179cb964b04aa28d5767c1"
+    },
+    {
+      "path": "src/main/java/com/starcode/worktree/AutoCleanupReport.java",
+      "normalized_sha256": "8eaced2195eeea31beaf4f73cded28ac6f80f2841403c75ca22aa9e0897f1a24"
+    },
+    {
+      "path": "src/main/java/com/starcode/worktree/ExitAction.java",
+      "normalized_sha256": "ceca0f23564e0735ffbc2d9f3b44febccd516ca0b176fc323328b9e16a27b7ac"
+    },
+    {
+      "path": "src/main/java/com/starcode/worktree/ExitOptions.java",
+      "normalized_sha256": "373cb10a1831d8059cf9a3977c939cdd46c8f0b06b8da9af61fa74bf5de171ed"
+    },
+    {
+      "path": "src/main/java/com/starcode/worktree/ExitReport.java",
+      "normalized_sha256": "88531b83f521c0aa649081a69f3fae7989da8a25358a31f5a48a48c3fccf9a0f"
+    },
+    {
+      "path": "src/main/java/com/starcode/worktree/GitHelper.java",
+      "normalized_sha256": "2fcf9ff3755db249a1ddf2e5e8980d8b0ab9d60391e4e2fa43270f2499e13393"
+    },
+    {
+      "path": "src/main/java/com/starcode/worktree/PostCreationSetup.java",
+      "normalized_sha256": "7b0af77eff3c95ce78870ccb2ffaa537e8af3f3c453d75ffe3194f390643b9bb"
+    },
+    {
+      "path": "src/main/java/com/starcode/worktree/SessionStore.java",
+      "normalized_sha256": "d1b893feda4429582e3e934fd5209463a954665b8821dd4cf6631cb762f5886c"
+    },
+    {
+      "path": "src/main/java/com/starcode/worktree/Worktree.java",
+      "normalized_sha256": "c9d99a2f21b17780d0f96d12f487a98c4c49c1abff7cf1ab3710aff8f407586f"
+    },
+    {
+      "path": "src/main/java/com/starcode/worktree/WorktreeHasChangesException.java",
+      "normalized_sha256": "bbffc971835c53a8ef272f8e3007f94107566620dc0384909c9d3ac4e119011c"
+    },
+    {
+      "path": "src/main/java/com/starcode/worktree/WorktreeManager.java",
+      "normalized_sha256": "040ec4fedb72565eab5fb67d1df9839cd06432935c97c503861959e328f9c6b0"
+    },
+    {
+      "path": "src/main/java/com/starcode/worktree/WorktreeNaming.java",
+      "normalized_sha256": "ce1d3ac5f640a3647a08ca9d9938f960cced2346e224cdff391ef524da89bb89"
+    },
+    {
+      "path": "src/main/java/com/starcode/worktree/WorktreeSession.java",
+      "normalized_sha256": "f16a555324a1a11017287e99968b9dacdd5c57fbd4ba511e3f2647ba0850c04f"
+    },
+    {
+      "path": "src/main/java/com/starcode/worktree/WorktreeSlug.java",
+      "normalized_sha256": "ba31f11b61864044b28fa8680edfa098bf0a7825e7447c51f1875b99ef451ab6"
+    },
+    {
+      "path": "src/main/java/com/starcode/team/backend/Backend.java",
+      "normalized_sha256": "ce0eaab73f24b42cf6e32c0a4a2ecf90f3e90407a80da06401ce7189201408f8"
+    },
+    {
+      "path": "src/main/java/com/starcode/team/backend/BackendDetector.java",
+      "normalized_sha256": "3192d6669c0ddbe4a19895f52db1f1f69515bab93e97888eed896349a374fd9f"
+    },
+    {
+      "path": "src/main/java/com/starcode/team/backend/BackendFactory.java",
+      "normalized_sha256": "f909e22c87b6c270a74ab9a16eab2e509b7349b2d84e6c2d1af4ea0a43cb3ac7"
+    },
+    {
+      "path": "src/main/java/com/starcode/team/backend/Iterm2Backend.java",
+      "normalized_sha256": "95324b3b99035e03db6bcbca5e20c41c1ca21ce42247e96292e108ad92781ee9"
+    },
+    {
+      "path": "src/main/java/com/starcode/team/backend/ProcessExecutor.java",
+      "normalized_sha256": "288a08b3868cee2c5d9a29af84d774f773e98034a8221d0a5a53395dbc0b4a67"
+    },
+    {
+      "path": "src/main/java/com/starcode/team/backend/SpawnRequest.java",
+      "normalized_sha256": "fb33687b32ed32518fc670d74431978e1e07d8af2fb8476782c7990cc36573cb"
+    },
+    {
+      "path": "src/main/java/com/starcode/team/backend/SpawnResult.java",
+      "normalized_sha256": "0587a12f0620c22c6178cec8c5f56e81e0cfed9ccbab2f2487098c6b5c852eae"
+    },
+    {
+      "path": "src/main/java/com/starcode/team/backend/TeamMemberCommand.java",
+      "normalized_sha256": "a0ccd151e8066fd2e750211816e7caa3a4111c75cefcd9d78baae023aed08021"
+    },
+    {
+      "path": "src/main/java/com/starcode/team/backend/TmuxBackend.java",
+      "normalized_sha256": "399253107ceb7ffc00052a21c3a283ec6287e7de7e50f50536ec0f91a8628342"
+    },
+    {
+      "path": "src/main/java/com/starcode/team/filelock/FileLock.java",
+      "normalized_sha256": "ebe5cd79e2c8beec8cf06933d8ece42adae112efc16e29288c5b0792aaad5510"
+    },
+    {
+      "path": "src/main/java/com/starcode/team/mailbox/Mailbox.java",
+      "normalized_sha256": "0d0f3f96c04b7852b3adedbde0a5b2c101cb30ee4712e77b79fec8e3ed886757"
+    },
+    {
+      "path": "src/main/java/com/starcode/team/mailbox/Message.java",
+      "normalized_sha256": "27e73744a5b50a930dacdc611dca8bb9809e2158ef0e58bc222ae7eb297aaa05"
+    },
+    {
+      "path": "src/main/java/com/starcode/team/mailbox/MessageType.java",
+      "normalized_sha256": "195ac967f4a686de901e78671386d39da228ab08b64f1e89f6a9529dd04eb7f7"
+    },
+    {
+      "path": "src/main/java/com/starcode/team/mailbox/ReadUnreadResult.java",
+      "normalized_sha256": "f128866c48c9e649c1b3b065f5c8f0bc70189090d4437282f1044c27b80f74cd"
+    },
+    {
+      "path": "src/main/java/com/starcode/team/registry/AgentNameRegistry.java",
+      "normalized_sha256": "e80731ac5e8b460c183d266ffd49d190cd4a758efb930e331cccbeaf88c620c0"
+    },
+    {
+      "path": "src/main/java/com/starcode/team/tasks/Status.java",
+      "normalized_sha256": "5efadab97fee4469ac24cc5b3b32f8fdfc2742d9e4b90f9401f56042193a5a5c"
+    },
+    {
+      "path": "src/main/java/com/starcode/team/tasks/TaskFilter.java",
+      "normalized_sha256": "03e7efe2d8084a8269dc143f76804e682a8aa73d391ef1fe74e1a1d4d706d7ae"
+    },
+    {
+      "path": "src/main/java/com/starcode/team/tasks/TaskPatch.java",
+      "normalized_sha256": "b86971dd631e9c57278be8a9723f159a95321eb2f3c973648f0489ad2c801920"
+    },
+    {
+      "path": "src/main/java/com/starcode/team/tasks/TaskView.java",
+      "normalized_sha256": "27f1142d12813d7763dd45993eac138e223256638268e90ed764ea5b3d5c9b41"
+    },
+    {
+      "path": "src/main/java/com/starcode/team/tasks/TeamTask.java",
+      "normalized_sha256": "047234c73713cde9bdb5de3456fdde2912cfc50c5125cad64e220914ac38ccfc"
+    },
+    {
+      "path": "src/main/java/com/starcode/team/tasks/TeamTaskStore.java",
+      "normalized_sha256": "04db9045ded35360402c699b6ba65e02ad4720876d44882bf94b0b89560579ad"
+    },
+    {
+      "path": "src/main/java/com/starcode/team/tools/TaskCreateTool.java",
+      "normalized_sha256": "fbe5de99a140a5a1b56352140797fee8aeb163605adfdf4fdbe4280d2b31fbd4"
+    },
+    {
+      "path": "src/main/java/com/starcode/team/tools/TaskUpdateTool.java",
+      "normalized_sha256": "8d7974bd9daaff389bb7040866c6c4774e5b05d7a709b073422f81f62fdbcc0a"
+    },
+    {
+      "path": "src/main/java/com/starcode/team/tools/TeamCreateTool.java",
+      "normalized_sha256": "e9754e36762633980ac66a5ba5c038805be8a4d3f982c77375ec260507e0e5e3"
+    },
+    {
+      "path": "src/main/java/com/starcode/team/tools/TeamDeleteTool.java",
+      "normalized_sha256": "5dac6f6738d6b809b2bc1d8690dc0e0b60908a04310805919eac256de32cc19a"
+    },
+    {
+      "path": "src/main/java/com/starcode/team/tools/TeamToolJson.java",
+      "normalized_sha256": "1c8e44d77cb555190320cb07180e1d7145b9af08aa822b512f2a6e08c6116e23"
+    },
+    {
+      "path": "src/main/java/com/starcode/tool/builtin/BashTool.java",
+      "normalized_sha256": "8cc6a6c2d3ac941b59264747135a505e0a6066931e22b8b337df75bcfb84cc13"
+    },
+    {
+      "path": "src/main/java/com/starcode/tool/builtin/EditFileTool.java",
+      "normalized_sha256": "5c5addecf0ca9702b39d1b7a6e6394ae758261b8d9acdeefb089859075fa791d"
+    },
+    {
+      "path": "src/main/java/com/starcode/tool/builtin/GlobTool.java",
+      "normalized_sha256": "46a7960022dba9cb08b7feb0ab1ba0cc00bd28f1893d9aa175151ba3d3d8f1e5"
+    },
+    {
+      "path": "src/main/java/com/starcode/tool/builtin/InstallSkillTool.java",
+      "normalized_sha256": "601ca18975aaf7e0d3d39228a245997cb61e8074ab88837511d4c65cdb51ef7b"
+    },
+    {
+      "path": "src/main/java/com/starcode/tool/builtin/LoadSkillTool.java",
+      "normalized_sha256": "f96ca5bde9d630d94d6f1ddedfa0bdc35ee5b476501b85148dad7dcbce3b1085"
+    },
+    {
+      "path": "src/main/java/com/starcode/tool/builtin/ReadFileTool.java",
+      "normalized_sha256": "87c0652f88b4b3975ae2220bea8f51df3d6149c77cc9c11d51fbd47c6f9146d9"
+    },
+    {
+      "path": "src/main/java/com/starcode/tool/builtin/Schemas.java",
+      "normalized_sha256": "76be53246b5753d0c6f3f7a9633ae1259c68a8a76070c6d75b9c9404f1e9a336"
+    },
+    {
+      "path": "src/main/java/com/starcode/tool/builtin/SearchTextTool.java",
+      "normalized_sha256": "012137a709a0e20ad129387495d947d5193840402a94ffe9d1eab352ee8a0737"
+    },
+    {
+      "path": "src/main/java/com/starcode/tool/builtin/WriteFileTool.java",
+      "normalized_sha256": "28d87213699e3a7d0b9bc7ac74d9a8f913fba7130eb9707be9f86226ccb6f93e"
+    },
+    {
+      "path": "src/test/java/com/starcode/agent/AgentLoopTest.java",
+      "normalized_sha256": "50f6e4fc9e0e6ed2f0fb8de8e6c42926484d8c682d8185efdf855296727e89ef"
+    },
+    {
+      "path": "src/test/java/com/starcode/command/CommandCompletionTest.java",
+      "normalized_sha256": "7f6d29c0b128c8e483196f15a624f1ce5767026344adfe5efcf92afe2df2929b"
+    },
+    {
+      "path": "src/test/java/com/starcode/command/CommandDispatchTest.java",
+      "normalized_sha256": "19148dec789cf3999b3c64a6c17e825f4c352fa8c436ac34b4c62dac23647a0c"
+    },
+    {
+      "path": "src/test/java/com/starcode/command/CommandRegistryTest.java",
+      "normalized_sha256": "0006ddd9d8ec9c9387b8e78de28965f8ec3be9f4dfa322634670d24ccf0c4bd2"
+    },
+    {
+      "path": "src/test/java/com/starcode/command/WorktreeCommandTest.java",
+      "normalized_sha256": "30d5f235d2f3691f33ba2b3490c555d8bdf04baeb1b10f9fd07cb46c80dd6e19"
+    },
+    {
+      "path": "src/test/java/com/starcode/config/ConfigLoaderTest.java",
+      "normalized_sha256": "d84fcd204dcb472603498863988d54e8246346e39173ef290288e6b49f140626"
+    },
+    {
+      "path": "src/test/java/com/starcode/context/CompressionReliabilityTest.java",
+      "normalized_sha256": "934062ec767b0487f4e3b3094690ba02e739f1af51a560f6c7d8fe82206a9d70"
+    },
+    {
+      "path": "src/test/java/com/starcode/context/ContextManagerTest.java",
+      "normalized_sha256": "6fa13d56ace2a6a1d53f92e69033af5b9b0bbfa04fbff93183adbad91e3bb5b3"
+    },
+    {
+      "path": "src/test/java/com/starcode/hook/DefaultHookActionExecutorTest.java",
+      "normalized_sha256": "035b1fc072fa068660ca39880c883ae2691773f1bb1950d519aafbe9be32234e"
+    },
+    {
+      "path": "src/test/java/com/starcode/hook/HookEngineTest.java",
+      "normalized_sha256": "0b2861f07c5f3e58f089f4d7c423e123c8b96a80633819078502a88f0362c08f"
+    },
+    {
+      "path": "src/test/java/com/starcode/hook/HookLoaderTest.java",
+      "normalized_sha256": "4dd4804ae7125b45bbbb0c5962592b7d3ddc7fd82dad549e0db933b31d15a621"
+    },
+    {
+      "path": "src/test/java/com/starcode/instructions/InstructionLoaderTest.java",
+      "normalized_sha256": "4f3269a6cb41d43e9c61d51aea91569004519fcc615c29f82188edffd5cc9115"
+    },
+    {
+      "path": "src/test/java/com/starcode/llm/ConversationTest.java",
+      "normalized_sha256": "6d28cc3b2565da31709f8a08efb01c04894f3f5150a28c84fff4d1c964d41b92"
+    },
+    {
+      "path": "src/test/java/com/starcode/llm/ErrorClassificationTest.java",
+      "normalized_sha256": "5b1a7a33ebe7c517f3e4ef21f93e363c766e529ee9671f7fcb1185eabe864427"
+    },
+    {
+      "path": "src/test/java/com/starcode/llm/ProtocolToolFlowTest.java",
+      "normalized_sha256": "dddcd98a635102ec81201503276325849ea78c63d3da2ce1b06c1991445c10f5"
+    },
+    {
+      "path": "src/test/java/com/starcode/llm/SseReaderTest.java",
+      "normalized_sha256": "117132f8c368e1b035bd6a41f8d909a77bf7be47fb1d3adb587719a4b6f58e08"
+    },
+    {
+      "path": "src/test/java/com/starcode/mcp/McpClientFeatureTest.java",
+      "normalized_sha256": "74999dfb7c60ec849a45c64d5fc3cd07077c7b6b420b5a2b95af9ab82ecee5b8"
+    },
+    {
+      "path": "src/test/java/com/starcode/memory/MemoryManagerTest.java",
+      "normalized_sha256": "4c09f742d05ebda6b2f5a13b215a7ce0ff6b2c48f19e8f761b80e1c3a6e32d12"
+    },
+    {
+      "path": "src/test/java/com/starcode/memory/MemoryStoreTest.java",
+      "normalized_sha256": "eca900d02d809eca1f0270721641544e0243601d476880950658a6fd981bdac3"
+    },
+    {
+      "path": "src/test/java/com/starcode/permission/PermissionSystemTest.java",
+      "normalized_sha256": "ae3c186027efa17da0de952844704bc3014528d2334e02bdf1ddefe60b1868c8"
+    },
+    {
+      "path": "src/test/java/com/starcode/permission/ValueMatcherTest.java",
+      "normalized_sha256": "439eadc948d63d47a39bbaf806184a1daab09364348b4e6f75363d93c422b7f8"
+    },
+    {
+      "path": "src/test/java/com/starcode/prompt/SystemPromptEngineeringTest.java",
+      "normalized_sha256": "1e4cc33589a5f7884708b8644bf79afe14f2ffa1cdcc2320537ff960a2c26411"
+    },
+    {
+      "path": "src/test/java/com/starcode/session/SessionPersistenceTest.java",
+      "normalized_sha256": "b547b927d3ef3349bebce1892c061044cf99091673b57840fafa0e013c3cb540"
+    },
+    {
+      "path": "src/test/java/com/starcode/skill/GitHubSkillInstallerTest.java",
+      "normalized_sha256": "5458d112aa26cfe2e7b162b155a2000d7a4beac4d8b5b6d7cb3f2d12bab91e3d"
+    },
+    {
+      "path": "src/test/java/com/starcode/skill/LoadSkillToolTest.java",
+      "normalized_sha256": "14fe538e4ca8bb5de930a389e032d4ac7b9f700d0b3c364fbc88c6d026678d3f"
+    },
+    {
+      "path": "src/test/java/com/starcode/skill/SkillCatalogTest.java",
+      "normalized_sha256": "46131d337ad266c703b23be33897c02bfe302093a5b0e80e6631698cae7af055"
+    },
+    {
+      "path": "src/test/java/com/starcode/skill/SkillExecutorTest.java",
+      "normalized_sha256": "2e53641c8e5ebb46eee96b870be1c91c2ca160c43773bdf038afd970bb5ce688"
+    },
+    {
+      "path": "src/test/java/com/starcode/skill/SkillInvocationAuditTest.java",
+      "normalized_sha256": "3cb2583438122007ef2027566b695a29a5e7f6c4ebe6b2396e0b7c05d61e709a"
+    },
+    {
+      "path": "src/test/java/com/starcode/skill/SkillProviderResolverTest.java",
+      "normalized_sha256": "3607f8993b7ac7da9441d1116aec9083a0d8a6c08fe06d2ebdbe09cb2f33e43b"
+    },
+    {
+      "path": "src/test/java/com/starcode/subagent/ForkMessagesTest.java",
+      "normalized_sha256": "72254a93058cddcea649ed3583e35d004ea1295e4deab270027910e647230a53"
+    },
+    {
+      "path": "src/test/java/com/starcode/subagent/SubAgentCatalogTest.java",
+      "normalized_sha256": "5f9d30143498f881330ffd033fd01bfa55cc7834e8ef22d6961eac451371e617"
+    },
+    {
+      "path": "src/test/java/com/starcode/subagent/SubAgentDefinitionParserTest.java",
+      "normalized_sha256": "c56b8180319ca2d70b2ccd12437cd3d7d75e5e87280a30e8d64ef9ddf52292ac"
+    },
+    {
+      "path": "src/test/java/com/starcode/subagent/SubAgentToolFilterTest.java",
+      "normalized_sha256": "4afd788792bb8f2dde14f71a5cf2131554f6e30a55489dc72b0ade4dedb0a049"
+    },
+    {
+      "path": "src/test/java/com/starcode/subagent/SubAgentToolTest.java",
+      "normalized_sha256": "43378a067c4fa959147304b32b1ada6b38dd3285bdc18f1de70dd319c4170932"
+    },
+    {
+      "path": "src/test/java/com/starcode/task/SubAgentTaskManagerTest.java",
+      "normalized_sha256": "4500a181f37480118b3d80208b763a6f8c9801e3fd8acd19e9d4a047c8f22131"
+    },
+    {
+      "path": "src/test/java/com/starcode/task/TaskToolsTest.java",
+      "normalized_sha256": "2a1d1e9def17b2ed1524a090e1fb1e02da9efbe28e156115e10053b918ab1b9e"
+    },
+    {
+      "path": "src/test/java/com/starcode/team/AgentNameRegistryTest.java",
+      "normalized_sha256": "93393264a4dc68f093709139193532cc19d1fe7338e2ef422f443035f51ad242"
+    },
+    {
+      "path": "src/test/java/com/starcode/team/BackendDetectorTest.java",
+      "normalized_sha256": "eb92f01d5da933f4406f6145d0595fd159fb15c46df26229113549a8febdcd48"
+    },
+    {
+      "path": "src/test/java/com/starcode/team/CoordinatorModeTest.java",
+      "normalized_sha256": "19ac7fc466906bd0254588764ed1c8d9e262c9c3ff9a3f1dc718f0292b83dea9"
+    },
+    {
+      "path": "src/test/java/com/starcode/team/MailboxTest.java",
+      "normalized_sha256": "0395eb60a0b6b30de477b33b9c631d069e8db0d13f5a12e4a91267b5493dc336"
+    },
+    {
+      "path": "src/test/java/com/starcode/team/TeamManagerTest.java",
+      "normalized_sha256": "f9f665b81f9dca6496dfa076487c57710cce98129538b637d33b3b8103e6b493"
+    },
+    {
+      "path": "src/test/java/com/starcode/team/TeamMemberOptionsTest.java",
+      "normalized_sha256": "29300255a5179e12a6fe0e9923b13b775ff44bb4415029e0ad6d0564cd2ebd44"
+    },
+    {
+      "path": "src/test/java/com/starcode/team/TeamTaskStoreTest.java",
+      "normalized_sha256": "8cd878fb14f79b6ef4faaa5a9ca2adcc798c744fea962dd417f4d81d12201cf9"
+    },
+    {
+      "path": "src/test/java/com/starcode/team/TeamToolsTest.java",
+      "normalized_sha256": "b9de417df41cb9b0483008fc03e2453fa3a137bf7b4c7aac73157faae5421318"
+    },
+    {
+      "path": "src/test/java/com/starcode/tool/ToolSystemTest.java",
+      "normalized_sha256": "7fb5f5e35350ca5b94a9452df5fb377da9c8c0b787644fb3a7c882a724504db9"
+    },
+    {
+      "path": "src/test/java/com/starcode/ui/MarkdownRendererTest.java",
+      "normalized_sha256": "003f9cf290fa73d7a2f5295356684a9d599459133f849ad13bd521872e1de9d1"
+    },
+    {
+      "path": "src/test/java/com/starcode/ui/WindowsPathInputTest.java",
+      "normalized_sha256": "e02a3c357071026e9b7f034bfac75da5e9cdb2309390407ad3d9271bfd444b38"
+    },
+    {
+      "path": "src/test/java/com/starcode/worktree/GitHelperTest.java",
+      "normalized_sha256": "5aea53a3374f56111083a52f6341b5b717a6523ed4cf9d562eec5483e07fe353"
+    },
+    {
+      "path": "src/test/java/com/starcode/worktree/SessionStoreTest.java",
+      "normalized_sha256": "55058d9c255466c4d501229b7b195c969d326f30ab06f1994eb5f6815ccc5515"
+    },
+    {
+      "path": "src/test/java/com/starcode/worktree/WorktreeManagerTest.java",
+      "normalized_sha256": "ad5eb9baad98e8e88b673399ac736d078c395c4a6af691d8abaca683b6522ccb"
+    },
+    {
+      "path": "src/test/java/com/starcode/worktree/WorktreeSlugTest.java",
+      "normalized_sha256": "0699a6d4edf7c5121d27c9ea03cb76e9e428648faa6ffa4894e66591051ac95f"
+    },
+    {
+      "path": "src/test/java/com/starcode/worktree/WorktreeTestSupport.java",
+      "normalized_sha256": "8d4d70d49705f060fad7c43ccec054eb2193128df45b1105e3f2ce4fbcd5859f"
+    },
+    {
+      "path": "src/test/java/com/starcode/team/backend/PaneBackendTest.java",
+      "normalized_sha256": "df7279983636ba7f3a4c0d7fefa8efa622281dd67fbf339047dee20e06530d2f"
+    }
+  ]
+}
