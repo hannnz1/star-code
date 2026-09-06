@@ -86,7 +86,8 @@ public final class SubAgentTool implements Tool {
         properties.putObject("prompt").put("type", "string").put("description", "Task for the SubAgent");
         properties.putObject("description").put("type", "string").put("description", "Short UI description");
         properties.putObject("subagent_type").put("type", "string")
-                .put("description", "Defined role; omit to fork the parent conversation");
+                .put("description", "Use an implementation role (normally general-purpose) for code changes. "
+                        + "Exploration/planning roles return analysis. Omit to fork the parent conversation outside Teams.");
         properties.putObject("model").put("type", "string").putArray("enum")
                 .add("inherit").add("haiku").add("sonnet").add("opus");
         properties.putObject("run_in_background").put("type", "boolean");
@@ -94,10 +95,14 @@ public final class SubAgentTool implements Tool {
         properties.putObject("team_name").put("type", "string")
                 .put("description", "Optional persistent Team; delegates this Agent as a teammate");
         schema.putArray("required").add("prompt").add("description");
-        String roles = catalog.list().stream().map(role -> role.name() + " (" + role.description() + ")")
+        String roles = catalog.list().stream().map(role -> role.name() + " (" + role.description()
+                + "; tool allowlist=" + (role.tools().isEmpty() ? "eligible inherited tools" : role.tools())
+                + "; disallowed=" + role.disallowedTools() + "; permission mode=" + role.permissionMode().configName() + ")")
                 .reduce((left, right) -> left + ", " + right).orElse("none");
         definition = new ToolDefinition("Agent",
-                "Delegate an isolated task to a SubAgent. Defined roles: " + roles, schema);
+                "Delegate an isolated task to a SubAgent. For parallel implementation, assign actual code changes "
+                + "in independent files/modules to implementation-capable workers, then collect, review and integrate "
+                + "their changes. Parallel analysis alone does not implement the requested changes. Defined roles: " + roles, schema);
     }
 
     @Override public ToolDefinition definition() { return definition; }

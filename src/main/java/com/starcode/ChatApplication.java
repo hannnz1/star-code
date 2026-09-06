@@ -552,9 +552,10 @@ public final class ChatApplication implements AutoCloseable, CommandContext, Ski
             teamManager.mailbox(team.name()).write(taskId, new com.starcode.team.mailbox.Message(
                     "lead", request.prompt(), "", false, null,
                     com.starcode.team.mailbox.MessageType.TEXT, null, null));
-            return com.starcode.team.tools.TeamToolJson.JSON.createObjectNode()
+            var response = com.starcode.team.tools.TeamToolJson.JSON.createObjectNode()
                     .put("teamName", team.name()).put("memberName", memberName).put("agentId", taskId)
                     .put("worktree", worktree.path().toString()).put("branch", worktree.branch())
+                    .put("subagent_type", role.name()).put("role_description", role.description())
                     .put("backend", "in-process")
                     .put("result_tool", "TaskGet")
                     .put("result_instructions", "This execution runs asynchronously. Call TaskGet with task_id="
@@ -562,7 +563,14 @@ public final class ChatApplication implements AutoCloseable, CommandContext, Ski
                             + "Launch other independent workers before waiting. Avoid duplicating assigned work. "
                             + "When the worker completes, inspect its Worktree diff, integrate the intended changes "
                             + "into your checkout using existing tools, then run unified tests. "
-                            + "Worker completion alone does not complete the parent task.").toString();
+                            + "Worker completion alone does not complete the parent task.");
+            List<String> exposed = SubAgentToolFilter.apply(tools.names(), teammateRole, true).stream()
+                    .filter(name -> teammateRole.permissionMode() != PermissionMode.PLAN || tools.isReadOnly(name)).toList();
+            response.putArray("available_tools").addAll(exposed.stream()
+                    .map(com.fasterxml.jackson.databind.node.TextNode::valueOf).toList());
+            response.put("file_edit_tools_available", exposed.contains("write_file") || exposed.contains("edit_file"));
+            response.put("shell_tool_available", exposed.contains("bash"));
+            return response.toString();
         } catch (Exception error) {
             try { worktreeManager.autoCleanup(worktree.name()); } catch (Exception ignored) { }
             throw error;
