@@ -526,7 +526,7 @@ public final class TerminalUi implements AutoCloseable, PermissionApprover {
                                    CancellationToken cancellation) {
         if (pending.result.isDone()) return;
         try {
-            if (key == '1' || key == '2' || key == '3') {
+            if (key == '1' || key == '2' || key == '3' || key == '4') {
                 pending.selected = key - '1'; completeApproval(pending); return;
             }
             if (key == 13 || key == 10) { completeApproval(pending); return; }
@@ -535,8 +535,8 @@ public final class TerminalUi implements AutoCloseable, PermissionApprover {
                 int next = input.read(80);
                 if (next == '[' || next == 'O') {
                     int arrow = input.read(80);
-                    if (arrow == 'A') pending.selected = (pending.selected + 2) % 3;
-                    if (arrow == 'B') pending.selected = (pending.selected + 1) % 3;
+                    if (arrow == 'A') pending.selected = (pending.selected + 3) % 4;
+                    if (arrow == 'B') pending.selected = (pending.selected + 1) % 4;
                     drawApproval(pending);
                 } else {
                     cancellation.cancel(); pending.result.complete(ApprovalChoice.DENY);
@@ -550,6 +550,7 @@ public final class TerminalUi implements AutoCloseable, PermissionApprover {
         ApprovalChoice choice = switch (pending.selected) {
             case 1 -> ApprovalChoice.ALLOW_ALWAYS;
             case 2 -> ApprovalChoice.DENY;
+            case 3 -> ApprovalChoice.ALLOW_SESSION;
             default -> ApprovalChoice.ALLOW_ONCE;
         };
         if (pending.result.complete(choice))
@@ -562,9 +563,10 @@ public final class TerminalUi implements AutoCloseable, PermissionApprover {
         println("  Tool: " + request.friendlyName());
         println("  Target: " + request.target());
         println("  Reason: " + request.reason());
-        String[] options = {"1. Allow once", "2. Always allow this exact call", "3. Deny once"};
+        String[] options = {"1. Allow once", "2. Always allow this rule", "3. Deny once",
+                "4. Allow for this session (same tool/path, or exact command/arguments)"};
         for (int i = 0; i < options.length; i++) println((i == pending.selected ? CYAN + "  > " : "    ") + options[i] + RESET);
-        println(DIM + "Use Up/Down and Enter, or press 1/2/3. Esc/Ctrl+C cancels." + RESET);
+        println(DIM + "Use Up/Down and Enter, or press 1/2/3/4. Esc/Ctrl+C cancels." + RESET);
     }
 
     private static final class ApprovalPending {

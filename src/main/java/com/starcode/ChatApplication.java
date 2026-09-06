@@ -284,6 +284,7 @@ public final class ChatApplication implements AutoCloseable, CommandContext, Ski
             dispatchSessionEnd();
             session = replacement; writer = replacementWriter; replacementWriter = null;
             conversation = replacementConversation; contexts = replacementContexts;
+            permissions.clearSessionApprovals();
             hooks.resetForNewSession(); endedSessionId = null;
             agent = newAgent(contexts, activeToolContext);
             memories.resetTurns();
@@ -385,6 +386,7 @@ public final class ChatApplication implements AutoCloseable, CommandContext, Ski
             SessionWriter oldWriter = writer;
             dispatchSessionEnd();
             session = target; writer = targetWriter; conversation = targetConversation; contexts = targetContexts;
+            permissions.clearSessionApprovals();
             hooks.resetForNewSession(); endedSessionId = null;
             agent = newAgent(contexts, activeToolContext);
             try { oldWriter.close(); } catch (IOException ignored) { }

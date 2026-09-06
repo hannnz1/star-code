@@ -218,3 +218,8 @@ Agent Loop 不会放宽现有安全限制：
 ## 开发说明
 
 更多实现细节可参考 `specs/003-agent-loop/spec.md` 和 `specs/003-agent-loop/implementation-report.md`。
+# Session permission grants
+
+The permission dialog supports Allow once, a persistent local rule, Deny once, and Allow for this session (key4). Session approval applies to the same tool and file path, or exact command/remote arguments, within the same execution directory, actor and permission mode. File content may change under a granted file-edit scope. It does not grant other files, commands, tools or Worktrees.
+
+Session grants are held in memory and cleared when starting or resuming a session. Path checks, the command blacklist and configured rules still run before a cached grant. An explicit session grant permits repeating its scope; it is not a general classifier of safe commands. Shell execution is not an OS sandbox. See `benchmarks/permission-v1/PLAN.md` for the limited deterministic policy replay.

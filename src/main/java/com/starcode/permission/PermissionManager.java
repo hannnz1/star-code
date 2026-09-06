@@ -17,6 +17,8 @@ public final class PermissionManager {
     private final Predicate<String> readOnlyTool;
     private volatile BiConsumer<PermissionRequest, CancellationToken> approvalObserver = (request, cancellation) -> {};
     private volatile PermissionMode mode;
+    private final Set<SessionGrant> sessionGrants = java.util.concurrent.ConcurrentHashMap.newKeySet();
+    private final java.util.concurrent.atomic.AtomicLong sessionGeneration = new java.util.concurrent.atomic.AtomicLong();
 
     public PermissionManager(ToolContext context, PermissionRuleSet userRules, PermissionRuleSet projectRules,
                              PermissionRuleSet localRules, Path localConfig, PermissionApprover approver) {
@@ -51,6 +53,8 @@ public final class PermissionManager {
     public PermissionMode mode() { return mode; }
     public void mode(PermissionMode value) { mode = Objects.requireNonNull(value); }
     public PermissionMode cycleMode() { mode = mode.next(); return mode; }
+    /** Session grants are deliberately never written to configuration or restored from history. */
+    public void clearSessionApprovals() { sessionGeneration.incrementAndGet(); sessionGrants.clear(); }
     public void approvalObserver(BiConsumer<PermissionRequest, CancellationToken> observer) {
         approvalObserver = observer == null ? (request, cancellation) -> {} : observer;
     }
@@ -68,6 +72,7 @@ public final class PermissionManager {
     public PermissionOutcome authorize(ToolCall call, CancellationToken cancellation,
                                        PermissionMode modeOverride, boolean dontAsk, String actor,
                                        ToolContext executionContext) throws InterruptedException {
+        if (cancellation.isCancelled()) return PermissionOutcome.deny("user", "Permission request cancelled");
         Descriptor descriptor = describe(call);
         if (descriptor.category == ToolCategory.COMMAND && DangerousCommandPolicy.blocked(descriptor.target))
             return PermissionOutcome.deny("blacklist", "Dangerous command blocked by immutable blacklist");
@@ -83,6 +88,10 @@ public final class PermissionManager {
         PermissionMode effectiveMode = modeOverride == null ? mode : modeOverride;
         PermissionDecision fallback = fallback(descriptor.category, effectiveMode);
         if (fallback == PermissionDecision.ALLOW) return PermissionOutcome.allow("mode " + effectiveMode.configName());
+        SessionGrant grant = new SessionGrant(sessionGeneration.get(), descriptor.friendlyName,
+                executionContext.executionRoot(), descriptor.target, actor == null ? "" : actor, effectiveMode,
+                descriptor.pathTarget ? null : call.arguments().deepCopy());
+        if (sessionGrants.contains(grant)) return PermissionOutcome.allow("session grant");
         if (dontAsk) return PermissionOutcome.allow("subagent dontAsk");
         if (approver == null) return PermissionOutcome.deny("approval", "Permission requires interactive approval");
         String prefix = actor == null || actor.isBlank() ? "" : "[SubAgent " + actor + "] ";
@@ -93,6 +102,11 @@ public final class PermissionManager {
         if (choice == ApprovalChoice.DENY || cancellation.isCancelled())
             return PermissionOutcome.deny("user", cancellation.isCancelled() ? "Permission prompt cancelled" : "User denied this action");
         if (choice == ApprovalChoice.ALLOW_ALWAYS) persist(descriptor);
+        if (choice == ApprovalChoice.ALLOW_SESSION) {
+            // A session change while the prompt was open must not grant access in the new session.
+            if (grant.generation == sessionGeneration.get()) sessionGrants.add(grant);
+            return PermissionOutcome.allow("user session");
+        }
         return PermissionOutcome.allow(choice == ApprovalChoice.ALLOW_ALWAYS ? "permanent local rule" : "user once");
     }
 
@@ -162,4 +176,6 @@ public final class PermissionManager {
     private static String safe(String message) { return message == null ? "invalid path" : message; }
     private record Descriptor(String friendlyName, String target, ToolCategory category, boolean pathTarget, boolean mustExist) {}
     private record Layer(String name, PermissionRuleSet rules) {}
+    private record SessionGrant(long generation, String tool, Path executionRoot, String target,
+                                String actor, PermissionMode mode, com.fasterxml.jackson.databind.JsonNode arguments) {}
 }
