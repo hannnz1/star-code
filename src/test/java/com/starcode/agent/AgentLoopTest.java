@@ -258,6 +258,27 @@ class AgentLoopTest {
         assertTrue(llm.lastExchanges.getFirst().results().getFirst().success());
     }
 
+    @Test void configuredBudgetCanCompletePastTenTurnsAndIsVisibleToModel() throws Exception {
+        var script = new java.util.ArrayList<Completion>();
+        for (int i = 0; i < 11; i++) script.add(completion("", TokenUsage.ZERO, call("r" + i, "read")));
+        script.add(completion("verified", TokenUsage.ZERO));
+        FakeClient llm = new FakeClient(script.toArray(Completion[]::new));
+        var outcome = loop(llm, new ToolRegistry().register(new EchoTool("read", true)), 12, 20, 2)
+                .run(List.of(), "work", AgentMode.DEFAULT, new CancellationToken(), ignored -> {});
+        assertEquals(AgentOutcome.Status.COMPLETED, outcome.status());
+        assertEquals(12, llm.requests);
+        assertTrue(llm.lastContext.reminder().contains("Model turn 12 of 12"));
+        assertTrue(llm.lastContext.reminder().contains("tool calls remaining: 9"));
+    }
+
+    @Test void configuredBudgetStillStopsUnfinishedExecution() throws Exception {
+        FakeClient llm = new FakeClient(completion("", TokenUsage.ZERO, call("r", "read")));
+        var outcome = loop(llm, new ToolRegistry().register(new EchoTool("read", true)), 3, 20, 2)
+                .run(List.of(), "work", AgentMode.DEFAULT, new CancellationToken(), ignored -> {});
+        assertEquals(AgentOutcome.Status.ITERATION_LIMIT, outcome.status());
+        assertEquals(3, llm.requests);
+    }
+
     private AgentLoop loop(LlmClient llm, ToolRegistry tools, int iterations, int calls, int unknown) throws Exception {
         return new AgentLoop(llm, tools, new ToolContext(temp, true, true), iterations, calls, unknown);
     }

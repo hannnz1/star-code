@@ -8,6 +8,19 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ConfigLoaderTest {
     @TempDir Path temp;
+    @Test void mainAgentBudgetsHaveBoundedDefaultsAndStrictOverrides() throws Exception {
+        Path config = temp.resolve("budget.yaml");
+        String provider = "providers:\n  - name: test\n    protocol: openai-responses\n    base_url: https://example.test\n    api_key_env: PATH\n    model: test\n";
+        Files.writeString(config, provider);
+        assertEquals(new AgentLimits(40, 100), ConfigLoader.load(config).agentLimits());
+        Files.writeString(config, provider + "agent:\n  max_turns: 12\n  max_tool_calls: 35\n");
+        assertEquals(new AgentLimits(12, 35), ConfigLoader.load(config).agentLimits());
+        for (String invalid : java.util.List.of("max_turns: 0", "max_turns: 201", "max_turns: 1.5",
+                "max_turns: 999999999999", "max_tool_calls: 1001", "max_tool_calls: -1", "max_turn: 20")) {
+            Files.writeString(config, provider + "agent:\n  " + invalid + "\n");
+            assertThrows(ConfigException.class, () -> ConfigLoader.load(config), invalid);
+        }
+    }
     @Test void missingFileIsReadableConfigurationError() {
         ConfigException error = assertThrows(ConfigException.class,
                 () -> ConfigLoader.load(Path.of("definitely-not-a-real-star-code-config.yaml")));

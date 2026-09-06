@@ -223,3 +223,8 @@ Agent Loop 不会放宽现有安全限制：
 The permission dialog supports Allow once, a persistent local rule, Deny once, and Allow for this session (key4). Session approval applies to the same tool and file path, or exact command/remote arguments, within the same execution directory, actor and permission mode. File content may change under a granted file-edit scope. It does not grant other files, commands, tools or Worktrees.
 
 Session grants are held in memory and cleared when starting or resuming a session. Path checks, the command blacklist and configured rules still run before a cached grant. An explicit session grant permits repeating its scope; it is not a general classifier of safe commands. Shell execution is not an OS sandbox. See `benchmarks/permission-v1/PLAN.md` for the limited deterministic policy replay.
+# Main Agent run budgets
+
+Configure `agent.max_turns` (1–200, default40) and `agent.max_tool_calls` (1–1000, default100) in config.yaml. The previous Main Agent budget was hardcoded to10 turns/50 tool calls and could stop after a successful test before returning a result. The model now sees its remaining budget; limits are still enforced and an exhausted run is not converted to success. Child Agent roles retain their own maxTurns.
+
+Larger limits permit more model requests and spending; they are ceilings, not required call counts. To retain the previous Main budget, explicitly set10 and50. This is a production behavior change; benchmark results under the new budget must remain separate from older failed runs.

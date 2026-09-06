@@ -1,0 +1,9 @@
+# Multi-Agent E2E v2 preregistration
+
+Freeze three distinct contracts before any model calls: existing checkout shipping/pricing; text slug/header parsing; numeric exact mean/capped retry delay. Every task has two independently editable modules. This gate establishes feasibility, not a representative speed benchmark or conflict resolution benchmark.
+
+Production change: Main Agent settings are now configurable and bounded, default40 model turns and100 tool calls. Child roles keep their own limits. The model sees remaining budget. This deliberately differs from earlier hardcoded10/50; no before/after latency comparison will be made. The old failures stay in their original batches. Actual config and commit/build hashes must be recorded before each attempt. Model/backend configuration and fixture inputs remain visible; no model sampling seed is implied by fixture seed20260905.
+
+The product Main Agent chooses decomposition, launches at least two isolated Team workers, waits for results, inspects/integrates their changes and runs the unchanged unified verifier. Harness code does not decompose, implement or merge. Both Main verification and independent verification must pass. Main must return normally, all workers must complete, and Worktree lifetimes must overlap. Abnormal terminal markers such as iteration_limit always block the gate. Timeout12 minutes per task. Failures and retries are retained; do not retry to select only successful attempts. No speed experiments until all three distinct contracts pass the complete gate.
+
+Environment note: preparation is offline. Real runs must wait until production/harness compilation and regression tests succeed. Windows Java AccessDenied during compilation is an environment blocker, not an Agent failure or a successful test. Run scripts must stop on it, including compiler cases that incorrectly exit0 after an internal error.

@@ -38,7 +38,7 @@ public final class Common {
     }
     public static AppConfig clean(AppConfig source, ProviderConfig provider) {
         return new AppConfig(source.systemPrompt(),source.requestTimeout(),ProxyConfig.disabled(),List.of(provider),
-            new com.starcode.prompt.PromptContext(),source.enableSubAgentBackground(),source.features());
+            new com.starcode.prompt.PromptContext(),source.enableSubAgentBackground(),source.features(),source.agentLimits());
     }
     public static String process(Path cwd, String... argv) throws Exception {
         Process p=new ProcessBuilder(argv).directory(cwd.toFile()).redirectErrorStream(true).start();

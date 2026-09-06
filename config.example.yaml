@@ -33,3 +33,7 @@ providers:
   #   model: claude-sonnet-4-20250514
   #   thinking: false
   #   context_window: 200000
+# Main Agent budget per user turn; child Agent roles keep their own maxTurns.
+agent:
+  max_turns: 40
+  max_tool_calls: 100

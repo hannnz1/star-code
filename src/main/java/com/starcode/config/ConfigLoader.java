@@ -67,7 +67,29 @@ public final class ConfigLoader {
         boolean subAgentBackground = bool(root, "enable_subagent_background", true);
         FeaturesConfig features = parseFeatures(root.get("features"));
         return new AppConfig(prompt, Duration.ofSeconds(timeout), proxy, List.copyOf(providers),
-                new com.starcode.prompt.PromptContext(), subAgentBackground, features);
+                new com.starcode.prompt.PromptContext(), subAgentBackground, features, parseAgentLimits(root.get("agent")));
+    }
+
+    private static AgentLimits parseAgentLimits(Object value) throws ConfigException {
+        if (value == null) return AgentLimits.defaults();
+        if (!(value instanceof Map<?, ?> raw)) throw new ConfigException("agent must be an object");
+        Map<String, Object> limits = stringMap(raw);
+        for (String key : limits.keySet())
+            if (!Set.of("max_turns", "max_tool_calls").contains(key))
+                throw new ConfigException("Unknown agent setting: " + key);
+        try {
+            return new AgentLimits(budget(limits, "max_turns", AgentLimits.defaults().maxTurns()),
+                    budget(limits, "max_tool_calls", AgentLimits.defaults().maxToolCalls()));
+        } catch (IllegalArgumentException error) { throw new ConfigException(error.getMessage()); }
+    }
+
+    private static int budget(Map<String, Object> map, String key, int fallback) {
+        if (!map.containsKey(key)) return fallback;
+        Object value = map.get(key);
+        if (!(value instanceof Number) || !value.toString().matches("[0-9]+"))
+            throw new IllegalArgumentException("agent." + key + " must be an integer");
+        try { return Integer.parseInt(value.toString()); }
+        catch (NumberFormatException error) { throw new IllegalArgumentException("agent." + key + " is out of range"); }
     }
 
     private static FeaturesConfig parseFeatures(Object value) throws ConfigException {

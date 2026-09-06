@@ -224,6 +224,11 @@ public final class AgentLoop {
                         hooks.dispatch(HookEvent.PRE_USER_MESSAGE,
                                 payload(HookEvent.PRE_USER_MESSAGE).with("prompt", userText), cancellation);
                         String reminder = reminder(mode, iteration);
+                        if (!subAgent) reminder += "\n\n<run-budget>\nModel turn "
+                                + iteration + " of " + maxIterations + "; tool calls remaining: "
+                                + (maxToolCalls - callCount) + ". Reserve time to collect delegated results, "
+                                + "integrate changes and verify them. On the last turn, report completed work "
+                                + "and any unfinished work honestly; do not claim unverified success.\n</run-budget>";
                         turn = exchanges.isEmpty()
                                 ? client.stream(managedHistory, userText, catalog.definitions(),
                                         new TurnContext(iteration, reminder, systemPromptOverride), event -> forward(event, events))

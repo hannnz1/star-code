@@ -619,6 +619,8 @@ public final class ChatApplication implements AutoCloseable, CommandContext, Ski
 
     private AgentLoop newAgent(ContextManager manager, ToolContext executionContext) {
         AgentLoop.Builder builder = AgentLoop.builder(client, tools, executionContext, permissions)
+                .maxTurns(appConfig.agentLimits().maxTurns())
+                .maxToolCalls(appConfig.agentLimits().maxToolCalls())
                 .contextManager(manager)
                 .hooks(hooks, this::basePayload)
                 .reminders(this::takeAgentReminders);

@@ -1,0 +1,35 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.13/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :compileJava
+> Task :processResources
+> Task :classes
+> Task :compileTestJava
+> Task :processTestResources
+> Task :testClasses
+
+> Task :test
+
+SubAgentToolTest > schemaIsStableAndDefinedRoleRunsSynchronously() FAILED
+    org.opentest4j.AssertionFailedError at SubAgentToolTest.java:39
+
+SubAgentToolTest > foregroundTimeoutAdoptsTheSameRunningSession() FAILED
+    org.opentest4j.AssertionFailedError at SubAgentToolTest.java:110
+
+SubAgentTaskManagerTest > launchCompletesNotifiesAndSupportsFollowUp() FAILED
+    org.opentest4j.AssertionFailedError at SubAgentTaskManagerTest.java:27
+
+207 tests completed, 3 failed
+
+> Task :test FAILED
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':test'.
+> There were failing tests. See the report at: file:///C:/Users/Administrator/Desktop/project/star%20code/build/reports/tests/test/index.html
+
+* Try:
+> Run with --scan to get full insights.
+
+BUILD FAILED in 27s
+5 actionable tasks: 5 executed

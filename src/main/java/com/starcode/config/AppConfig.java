@@ -11,8 +11,18 @@ public record AppConfig(
         List<ProviderConfig> providers,
         PromptContext promptContext,
         boolean enableSubAgentBackground,
-        FeaturesConfig features
+        FeaturesConfig features,
+        AgentLimits agentLimits
 ) {
+    public AppConfig {
+        if (agentLimits == null) agentLimits = AgentLimits.defaults();
+    }
+    public AppConfig(String systemPrompt, Duration requestTimeout, ProxyConfig proxy,
+                     List<ProviderConfig> providers, PromptContext promptContext,
+                     boolean enableSubAgentBackground, FeaturesConfig features) {
+        this(systemPrompt, requestTimeout, proxy, providers, promptContext, enableSubAgentBackground,
+                features, AgentLimits.defaults());
+    }
     public AppConfig(String systemPrompt, Duration requestTimeout, ProxyConfig proxy,
                      List<ProviderConfig> providers) {
         this(systemPrompt, requestTimeout, proxy, providers, new PromptContext(), true,
