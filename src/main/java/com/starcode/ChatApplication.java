@@ -552,7 +552,15 @@ public final class ChatApplication implements AutoCloseable, CommandContext, Ski
                     com.starcode.team.mailbox.MessageType.TEXT, null, null));
             return com.starcode.team.tools.TeamToolJson.JSON.createObjectNode()
                     .put("teamName", team.name()).put("memberName", memberName).put("agentId", taskId)
-                    .put("worktree", worktree.path().toString()).put("backend", "in-process").toString();
+                    .put("worktree", worktree.path().toString()).put("branch", worktree.branch())
+                    .put("backend", "in-process")
+                    .put("result_tool", "TaskGet")
+                    .put("result_instructions", "This execution runs asynchronously. Call TaskGet with task_id="
+                            + taskId + " and wait_ms=60000 to collect its result (team is optional). "
+                            + "Launch other independent workers before waiting. Avoid duplicating assigned work. "
+                            + "When the worker completes, inspect its Worktree diff, integrate the intended changes "
+                            + "into your checkout using existing tools, then run unified tests. "
+                            + "Worker completion alone does not complete the parent task.").toString();
         } catch (Exception error) {
             try { worktreeManager.autoCleanup(worktree.name()); } catch (Exception ignored) { }
             throw error;
