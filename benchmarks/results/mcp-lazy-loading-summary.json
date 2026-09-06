@@ -1,0 +1,175 @@
+{
+  "schema_groups": [
+    {
+      "tool_count": 10,
+      "runs_per_mode": 5,
+      "full_initial_tokens_estimated": 703,
+      "lazy_initial_tokens_estimated": 323,
+      "initial_schema_reduction": 0.5405405405405406,
+      "full_schema_bytes": 3201,
+      "lazy_schema_bytes": 1381,
+      "full_token_sample_sd": 0.0,
+      "lazy_token_sample_sd": 0.0
+    },
+    {
+      "tool_count": 25,
+      "runs_per_mode": 5,
+      "full_initial_tokens_estimated": 1817,
+      "lazy_initial_tokens_estimated": 663,
+      "initial_schema_reduction": 0.6351128233351679,
+      "full_schema_bytes": 8289,
+      "lazy_schema_bytes": 2711,
+      "full_token_sample_sd": 0.0,
+      "lazy_token_sample_sd": 0.0
+    },
+    {
+      "tool_count": 50,
+      "runs_per_mode": 5,
+      "full_initial_tokens_estimated": 3640,
+      "lazy_initial_tokens_estimated": 1246,
+      "initial_schema_reduction": 0.6576923076923077,
+      "full_schema_bytes": 16614,
+      "lazy_schema_bytes": 5005,
+      "full_token_sample_sd": 0.0,
+      "lazy_token_sample_sd": 0.0
+    },
+    {
+      "tool_count": 100,
+      "runs_per_mode": 5,
+      "full_initial_tokens_estimated": 7377,
+      "lazy_initial_tokens_estimated": 2420,
+      "initial_schema_reduction": 0.6719533685780128,
+      "full_schema_bytes": 33651,
+      "lazy_schema_bytes": 9599,
+      "full_token_sample_sd": 0.0,
+      "lazy_token_sample_sd": 0.0
+    }
+  ],
+  "selection": {
+    "FULL": {
+      "runs": 10,
+      "task_success": 10,
+      "selection_correct": 10,
+      "execution_failures": 0,
+      "median_agent_wall_clock_seconds": 5.43214955,
+      "median_model_calls": 2.0,
+      "median_total_tokens": 8606.0,
+      "median_initial_schema_tokens_estimated": 6213.0,
+      "median_total_schema_tokens_estimated": 12426.0,
+      "median_loaded_unique_schema_tokens_estimated": 6213.0,
+      "known_total_tokens": 86069,
+      "usage_complete_runs": 10
+    },
+    "LAZY": {
+      "runs": 10,
+      "task_success": 10,
+      "selection_correct": 10,
+      "execution_failures": 0,
+      "median_agent_wall_clock_seconds": 4.697794099999999,
+      "median_model_calls": 3.0,
+      "median_total_tokens": 7433.0,
+      "median_initial_schema_tokens_estimated": 1739.0,
+      "median_total_schema_tokens_estimated": 5347.0,
+      "median_loaded_unique_schema_tokens_estimated": 67.0,
+      "known_total_tokens": 74296,
+      "usage_complete_runs": 10
+    }
+  },
+  "pairs": [
+    {
+      "task": "task-01",
+      "full_success": true,
+      "lazy_success": true,
+      "initial_schema_reduction": 0.7201030098181234,
+      "total_schema_reduction": 0.569853532914856,
+      "extra_model_calls": 1,
+      "latency_difference_seconds": 0.7400872999999999
+    },
+    {
+      "task": "task-02",
+      "full_success": true,
+      "lazy_success": true,
+      "initial_schema_reduction": 0.7201030098181234,
+      "total_schema_reduction": 0.5696925800740382,
+      "extra_model_calls": 1,
+      "latency_difference_seconds": 0.2887038999999998
+    },
+    {
+      "task": "task-03",
+      "full_success": true,
+      "lazy_success": true,
+      "initial_schema_reduction": 0.7201030098181234,
+      "total_schema_reduction": 0.569853532914856,
+      "extra_model_calls": 1,
+      "latency_difference_seconds": -3.7753648
+    },
+    {
+      "task": "task-04",
+      "full_success": true,
+      "lazy_success": true,
+      "initial_schema_reduction": 0.7201030098181234,
+      "total_schema_reduction": 0.5696925800740382,
+      "extra_model_calls": 1,
+      "latency_difference_seconds": -0.24314210000000003
+    },
+    {
+      "task": "task-05",
+      "full_success": true,
+      "lazy_success": true,
+      "initial_schema_reduction": 0.7201030098181234,
+      "total_schema_reduction": 0.5700144857556736,
+      "extra_model_calls": 1,
+      "latency_difference_seconds": -4.040072200000001
+    },
+    {
+      "task": "task-06",
+      "full_success": true,
+      "lazy_success": true,
+      "initial_schema_reduction": 0.7201030098181234,
+      "total_schema_reduction": 0.569853532914856,
+      "extra_model_calls": 1,
+      "latency_difference_seconds": 0.3316916000000001
+    },
+    {
+      "task": "task-07",
+      "full_success": true,
+      "lazy_success": true,
+      "initial_schema_reduction": 0.7201030098181234,
+      "total_schema_reduction": 0.5696925800740382,
+      "extra_model_calls": 1,
+      "latency_difference_seconds": -0.8463764000000005
+    },
+    {
+      "task": "task-08",
+      "full_success": true,
+      "lazy_success": true,
+      "initial_schema_reduction": 0.7201030098181234,
+      "total_schema_reduction": 0.5695316272332207,
+      "extra_model_calls": 1,
+      "latency_difference_seconds": -0.9012684000000002
+    },
+    {
+      "task": "task-09",
+      "full_success": true,
+      "lazy_success": true,
+      "initial_schema_reduction": 0.7201030098181234,
+      "total_schema_reduction": 0.5696925800740382,
+      "extra_model_calls": 1,
+      "latency_difference_seconds": 0.5177527999999993
+    },
+    {
+      "task": "task-10",
+      "full_success": true,
+      "lazy_success": true,
+      "initial_schema_reduction": 0.7201030098181234,
+      "total_schema_reduction": 0.5695316272332207,
+      "extra_model_calls": 1,
+      "latency_difference_seconds": 1.5972076
+    }
+  ],
+  "estimation_method": "estimated: tiktoken0.12.0/o200k_base; compact JSON arrays; not provider-official schema tokens",
+  "selection_complete": true,
+  "schema_batch": "C:\\Users\\Administrator\\Desktop\\project\\star code\\benchmarks\\results\\raw\\mcp-schema-v1\\2026-09-06T07-42-45.782568100Z",
+  "selection_batch": "C:\\Users\\Administrator\\Desktop\\project\\star code\\benchmarks\\results\\raw\\mcp-selection-v1\\2026-09-06T07-43-23.219860500Z",
+  "production_status": "IMPLEMENTED_AND_VERIFIED"
+}

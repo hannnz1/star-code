@@ -26,3 +26,13 @@ To resolve the artifact commit after publication, use `git log -1 --format=%H --
 Independent model blind review160/160 completed and sealed before unblinding. Both arms77/80 PASS (96.25% sampled-record rate); corrected-v2 nominal agreement82.5%, strict/weighted agreement85%. **NEEDS_MORE_TESTING**, not confirmed improvement/equivalence or regression. No retention-improvement number is resume-ready. See `results/context-final-validation.md`, `llm-blind-review-report.md` and machine-readable analysis/unblinded CSV. No human annotation occurred. Known review usage3,093,360 tokens;161 attempts including one preserved rate-limit failure with unknown usage.
 
 `results/context-validation-artifact-index.json` indexes2073 local evidence files (381359088 bytes). Retain ignored raw files with the index for full reproducibility. `git log -1 --format=%H -- benchmarks/llm-review-v1/finalize.py` identifies the first committed final-report generator independently of future ledger updates.
+
+## Phase 2 completed (supersedes the earlier MCP blocker)
+
+Production lazy loading and matching harness committed as `64e4c92f5b623a166879ee5aa86f23fd09d50867`. Escalated compilation resolved the Windows Java access failure; a valid pre-change FULL baseline was captured before production changes. Original baseline tag remains unchanged.
+
+MCP FULL/LAZY schema comparison: 40/40 serialization runs, four sizes with five repeats per mode. At 100 synthetic tools, initial MCP schema/index estimate is 7377 FULL versus 2420 LAZY: 67.20% reduction, estimated with tiktoken o200k_base, not official provider attribution. Ten actual model selection tasks per mode all passed. LAZY required one extra model call per task; paired median latency difference +0.023 seconds. Cumulative schema estimate reduction has a paired median of 56.97%. No 85% claim or general latency improvement is established.
+
+Full Gradle tests: 195 tests / 53 suites, zero failures/errors/skips. Report: `results/mcp-lazy-loading-final.md`; per-run CSV and machine-readable summary accompany captured raw requests/responses. Raw artifact hashes: `results/mcp-validation-artifact-index.json`.
+
+Next: real Team Multi-Agent integration feasibility. Correction to the initial inventory: ordinary isolated SubAgent calls wait synchronously, but ChatApplication Team spawning launches background tasks with independent Worktrees. Thus isolated parallel capability exists in code; E2E completion and speed remain unverified.

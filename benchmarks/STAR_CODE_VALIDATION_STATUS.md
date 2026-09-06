@@ -89,3 +89,17 @@ Final Context decision: **NEEDS_MORE_TESTING**; feature **IMPLEMENTED_NEEDS_MORE
 161 review attempts include160 valid outputs and one preserved no-output rate-limit failure. Known provider token usage3,093,360; one failed usage unknown. The prior Codex interruption preserved146 labels; only14 were resumed. Indexed local evidence:2073 files,381359088 bytes at index generation, with SHA256 in `results/context-validation-artifact-index.json`.
 
 Next ordered step: MCP full-loading baseline followed by production lazy schema exposure and matching benchmark. Other subsystems remain unchanged.
+
+Context benchmark evidence committed as `ae2e8c8a403dbf41cc3e680c35d8d2f286920ce5`.
+
+Phase2 start: current Full Loading entry point and local run script prepared, but two clean-build attempts stopped on Java ZIP filesystem/toRealPath AccessDenied for the dependency JAR, despite explicit permissions. No new valid MCP measurements and no lazy implementation yet. Current environment disables command sandbox escalation. See `results/mcp-phase2-start-status.md`; the ordered baseline gate has not been bypassed.
+
+## Phase 2 completed (supersedes the earlier MCP blocker)
+
+Production lazy loading and matching harness committed as `64e4c92f5b623a166879ee5aa86f23fd09d50867`. Escalated compilation resolved the Windows Java access failure; a valid pre-change FULL baseline was captured before production changes. Original baseline tag remains unchanged.
+
+MCP FULL/LAZY schema comparison: 40/40 serialization runs, four sizes with five repeats per mode. At 100 synthetic tools, initial MCP schema/index estimate is 7377 FULL versus 2420 LAZY: 67.20% reduction, estimated with tiktoken o200k_base, not official provider attribution. Ten actual model selection tasks per mode all passed. LAZY required one extra model call per task; paired median latency difference +0.023 seconds. Cumulative schema estimate reduction has a paired median of 56.97%. No 85% claim or general latency improvement is established.
+
+Full Gradle tests: 195 tests / 53 suites, zero failures/errors/skips. Report: `results/mcp-lazy-loading-final.md`; per-run CSV and machine-readable summary accompany captured raw requests/responses. Raw artifact hashes: `results/mcp-validation-artifact-index.json`.
+
+Next: real Team Multi-Agent integration feasibility. Correction to the initial inventory: ordinary isolated SubAgent calls wait synchronously, but ChatApplication Team spawning launches background tasks with independent Worktrees. Thus isolated parallel capability exists in code; E2E completion and speed remain unverified.
