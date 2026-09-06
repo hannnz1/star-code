@@ -1,0 +1,63 @@
+{
+  "status": "BLOCKED",
+  "speedup_status": "NOT_MEASURED",
+  "environment": {
+    "benchmark": "multi-agent-v2",
+    "run_id": "2026-09-06T09-15-54.647989900Z",
+    "timestamp": "2026-09-06T09:15:54.715263100Z",
+    "baseline_commit": "014808a0b0942f25bc4f1c3f415fa63262f98176",
+    "seed": 20260905,
+    "harness_build_manifest_sha256": "a438667b759913fd6fd9b15f336cea54169c6dd131fbc2578415d7f1e2f4e451",
+    "java": "21.0.11+10-LTS",
+    "os": "Windows 11",
+    "os_version": "10.0",
+    "architecture": "amd64",
+    "logical_processors": 20,
+    "model": "gpt-5.4-mini",
+    "protocol": "openai-responses",
+    "thinking": false,
+    "context_window": 128000,
+    "temperature": "provider default; production does not set it",
+    "input_tokens": null,
+    "output_tokens": null,
+    "total_tokens": null,
+    "implementation_commit": "056d606d353fec8aeb7f3df528165190ed8bf36b",
+    "main_max_turns": 40,
+    "main_max_tool_calls": 100,
+    "speedup_status": "NOT_MEASURED"
+  },
+  "completed_cases": 1,
+  "passed_cases": 0,
+  "runs": [
+    {
+      "case": "checkout",
+      "status": "BLOCKED",
+      "main_completed": true,
+      "main_verified_after_changes": true,
+      "explicitly_collected_results": 2,
+      "unified_test_passed": true,
+      "workers": 2,
+      "worktrees": 2,
+      "overlap_seconds": 14.847,
+      "wall_clock_seconds": 74.3483889,
+      "main_calls": 15,
+      "child_calls": 13,
+      "all_calls": 28,
+      "failed_calls": 0,
+      "usage_records": 28,
+      "missing_response_usage": 0,
+      "known_input_tokens": 112167,
+      "known_output_tokens": 5236,
+      "known_total_tokens": 117403,
+      "failure_reason": "Strict gate conditions not all met (including normal Main completion, explicit result retrieval and final Main verification); inspect task status, Worktree changes, parent transcript and unified-test.txt. No harness merge performed.",
+      "raw_directory": "results/raw/multi-agent-v2/2026-09-06T09-15-54.647989900Z/2026-09-06T09-15-54.647989900Z-checkout"
+    }
+  ],
+  "limitations": [
+    "Three synthetic independent-file tasks, one attempt each; no speed comparison or confidence claim.",
+    "Parent40/100 default budget differs from old10/50; previous failures retained, not paired timing controls.",
+    "Conflicting edits, coupled changes, long-run reliability and OS sandbox are not tested.",
+    "Explicit TaskGet collection is required by this gate; notification-only collection is not credited.",
+    "No model seed is set; seed20260905 describes fixture provenance only."
+  ]
+}
