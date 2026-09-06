@@ -68,7 +68,9 @@ public class GateTest {
 ''')
 contracts['numeric']=['src/stats/Mean.java','src/retry/Delay.java']
 for case,paths in contracts.items():
-    if case!='checkout': shutil.copyfile(root/'multi-agent/fixture/verify.ps1',target/case/'verify.ps1')
+    if case!='checkout':
+        shutil.copyfile(root/'multi-agent/fixture/verify.ps1',target/case/'verify.ps1')
+        shutil.copyfile(root/'multi-agent/fixture/.gitignore',target/case/'.gitignore')
     write(case,'contract.json',json.dumps({'components':paths},indent=2)+'\n')
 manifest={p.relative_to(here).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(target.rglob('*')) if p.is_file()}
 (here/'fixtures.sha256.json').write_text(json.dumps(manifest,indent=2)+'\n',encoding='utf-8',newline='')
