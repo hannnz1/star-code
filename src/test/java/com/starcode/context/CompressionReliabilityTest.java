@@ -22,6 +22,26 @@ class CompressionReliabilityTest {
         return s.append("</summary>").toString();
     }
     @Test void completeSummary() throws Exception { assertTrue(SummaryValidator.parse(valid()).contains("730 ms")); }
+    @Test void quotedProtocolMarkersArePreservedAsContent() throws Exception {
+        for (String quote : List.of("`<summary>...</summary>`", "``literal `<summary>` and </summary>``")) {
+            String summary = valid().replace("Keep RetryQueue", "Output " + quote + ". Keep RetryQueue");
+            assertTrue(SummaryValidator.parse(summary).contains(quote));
+        }
+    }
+    @Test void quotedClosingMarkerCannotCompleteTruncatedSummary() {
+        String summary = valid().replace("Keep RetryQueue", "Include `</summary>`. Keep RetryQueue");
+        summary = summary.substring(0, summary.lastIndexOf("</summary>"));
+        String truncated = summary;
+        assertThrows(LlmException.class, () -> SummaryValidator.parse(truncated));
+    }
+    @Test void quotingDoesNotHideRealDuplicateBlocks() {
+        String summary = valid().replace("Keep RetryQueue", "Output `<summary>...</summary>`. Keep RetryQueue");
+        assertThrows(LlmException.class, () -> SummaryValidator.parse(summary + summary));
+    }
+    @Test void unmatchedBacktickDoesNotSwallowRealClosingMarker() throws Exception {
+        assertTrue(SummaryValidator.parse(valid().replace("None.\n</summary>", "Unclosed ` example.</summary>"))
+                .contains("Unclosed ` example."));
+    }
     @Test void ignoresSurroundingExplanations() throws Exception {
         assertEquals(SummaryValidator.parse(valid()), SummaryValidator.parse("Here is the result.\n" + valid() + "\nEnd."));
     }

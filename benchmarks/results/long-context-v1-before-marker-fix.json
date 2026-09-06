@@ -1,0 +1,107 @@
+{
+  "environment": {
+    "benchmark": "long-context-component-pilot",
+    "run_id": "2026-09-06T12-37-10.527639900Z",
+    "timestamp": "2026-09-06T12:37:10.533656900Z",
+    "baseline_commit": "014808a0b0942f25bc4f1c3f415fa63262f98176",
+    "seed": 20260905,
+    "harness_build_manifest_sha256": "a5f8c446f478736541f544a80243e7933ee794a061411fd75709f08e87526ecf",
+    "java": "21.0.11+10-LTS",
+    "os": "Windows 11",
+    "os_version": "10.0",
+    "architecture": "amd64",
+    "logical_processors": 20,
+    "model": "gpt-5.4-mini",
+    "protocol": "openai-responses",
+    "thinking": false,
+    "context_window": 128000,
+    "temperature": "provider default; production does not set it",
+    "input_tokens": null,
+    "output_tokens": null,
+    "total_tokens": null,
+    "implementation_commit": "7d2cb2ba82b4673655a4415d4265ffe13636bdfa",
+    "fixture_sha256": "0278e94ac00c5657ceddf7610f5fbad340f3940068340b3bdc5fae87e9e8d979",
+    "estimate_method": "production chars/3.5; cumulative new-history load, not provider tokens",
+    "autonomous_coding_session": false,
+    "model_seed": "UNSET"
+  },
+  "raw_batch": "benchmarks\\results\\raw\\long-context-v1\\2026-09-06T12-37-10.527639900Z",
+  "completed_runs": 0,
+  "attempted_runs": 3,
+  "runs": [
+    {
+      "run_id": "run-1",
+      "implementation_commit": "7d2cb2ba82b4673655a4415d4265ffe13636bdfa",
+      "status": "FAILURE",
+      "exception": "com.starcode.llm.LlmException: Invalid compression summary: MULTIPLE_SUMMARY_BLOCKS",
+      "compactions": 1,
+      "cumulative_new_tokens_estimated": 95654,
+      "wall_clock_seconds": 24.3228977,
+      "model_calls": 2,
+      "calls_without_response": 0,
+      "usage_available_calls": 2,
+      "known_input_tokens": 145300,
+      "known_output_tokens": 2361,
+      "known_total_tokens": 147661,
+      "compression_retries": 1,
+      "successful_compactions": 0
+    },
+    {
+      "run_id": "run-2",
+      "implementation_commit": "7d2cb2ba82b4673655a4415d4265ffe13636bdfa",
+      "status": "FAILURE",
+      "exception": "com.starcode.llm.LlmException: Invalid compression summary: MULTIPLE_SUMMARY_BLOCKS",
+      "compactions": 1,
+      "cumulative_new_tokens_estimated": 95654,
+      "wall_clock_seconds": 22.3824702,
+      "model_calls": 2,
+      "calls_without_response": 0,
+      "usage_available_calls": 2,
+      "known_input_tokens": 145302,
+      "known_output_tokens": 1785,
+      "known_total_tokens": 147087,
+      "compression_retries": 1,
+      "successful_compactions": 0
+    },
+    {
+      "run_id": "run-3",
+      "implementation_commit": "7d2cb2ba82b4673655a4415d4265ffe13636bdfa",
+      "status": "FAILURE",
+      "exception": "com.starcode.llm.LlmException: Invalid compression summary: MULTIPLE_SUMMARY_BLOCKS",
+      "compactions": 1,
+      "cumulative_new_tokens_estimated": 95654,
+      "wall_clock_seconds": 19.0073405,
+      "model_calls": 2,
+      "calls_without_response": 1,
+      "usage_available_calls": 1,
+      "known_input_tokens": 72667,
+      "known_output_tokens": 953,
+      "known_total_tokens": 73620,
+      "compression_retries": 1,
+      "successful_compactions": 0
+    }
+  ],
+  "stages": [],
+  "retrieval_errors": [],
+  "limitations": [
+    "Scripted production components, not autonomous coding or eight elapsed hours.",
+    "100K/200K/300K are cumulative new-history chars/3.5 estimates, not resident or provider tokens.",
+    "Repeated synthetic fixture; three sessions do not establish general retention reliability.",
+    "Strict typed structured-state retrieval, not semantic quality or independent human review.",
+    "A failed session contributes no later-stage score; missing stages are not silently successes.",
+    "Known usage sums exclude unavailable failed-call usage; such totals are lower bounds.",
+    "No speedup, historical-template improvement or eight-hour claim is measured."
+  ],
+  "retrieval_by_view": {
+    "summary": {
+      "passed": 0,
+      "total": 0,
+      "retention": null
+    },
+    "complete": {
+      "passed": 0,
+      "total": 0,
+      "retention": null
+    }
+  }
+}

@@ -15,7 +15,9 @@ final class SummaryValidator {
 
     static String parse(String text) throws LlmException {
         if (text == null || text.isBlank()) throw invalid("EMPTY_RESPONSE");
-        Matcher open = OPEN.matcher(text), close = CLOSE.matcher(text);
+        // Inline code may quote the summary protocol itself; it is content, not a delimiter.
+        String markers = maskInlineCode(text);
+        Matcher open = OPEN.matcher(markers), close = CLOSE.matcher(markers);
         if (!open.find()) throw invalid("MISSING_OPEN_MARKER");
         int start = open.end();
         if (!close.find(start)) throw invalid("MISSING_CLOSE_MARKER_POSSIBLY_TRUNCATED");
@@ -48,6 +50,32 @@ final class SummaryValidator {
             if (content.isBlank() || content.matches("[\\s`*#:_-]+")) throw invalid("EMPTY_SECTION_" + (i + 1));
         }
         return body;
+    }
+
+    private static String maskInlineCode(String text) {
+        char[] masked = text.toCharArray();
+        for (int start = 0; start < text.length();) {
+            if (text.charAt(start) != '`') { start++; continue; }
+            int end = start;
+            while (end < text.length() && text.charAt(end) == '`') end++;
+            int width = end - start;
+            int cursor = end;
+            boolean matched = false;
+            while (cursor < text.length() && text.charAt(cursor) != '\n' && text.charAt(cursor) != '\r') {
+                if (text.charAt(cursor) != '`') { cursor++; continue; }
+                int next = cursor;
+                while (next < text.length() && text.charAt(next) == '`') next++;
+                if (next - cursor == width) {
+                    Arrays.fill(masked, start, next, ' ');
+                    start = next;
+                    matched = true;
+                    break;
+                }
+                cursor = next;
+            }
+            if (!matched) start = end;
+        }
+        return new String(masked);
     }
 
     private static LlmException invalid(String code) {

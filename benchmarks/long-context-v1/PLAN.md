@@ -9,3 +9,7 @@ At each stage: save compact input/output/recent/recovery, diagnostics/retries, p
 No summary-template change, retry tuning or success replacement. Abort the current session on compact failure; preserve errors and continue remaining prespecified sessions. No elapsed-hour extrapolation. One-session-at-a-time;3 repetitions. Internal compaction retries are retained; no harness retry. Model gpt-5.4-mini Responses, production config unchanged, no model seed set. Fixture seed20260905. Full tests gate precedes real calls.
 
 Before this pilot, fix two separately confirmed integration bugs: cached Responses input counted twice, and recovery attachments reinjecting full tool schemas. These are not invented OLD summary templates. Earlier context-quality findings remain NEEDS_MORE_TESTING and cannot be replaced by a small structured-state pilot.
+
+## Post-failure parser correction, preregistered before rerun
+
+The first batch (2026-09-06T12-37-10.527639900Z) failed all three sessions at the first compaction. Offline inspection confirmed that quoted inline-code examples of the summary markers were incorrectly treated as delimiters. Apply only a parser correction, freeze its commit, then run a separate three-session batch with the identical fixture and settings. Preserve both batches; do not replace original failures or pool them as if they used one implementation. Extra unquoted markers continue to fail validation. Offline replay is reported separately from model experiments.

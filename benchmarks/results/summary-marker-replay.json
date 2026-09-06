@@ -1,0 +1,29 @@
+{
+  "type" : "offline_parser_replay",
+  "original_batch" : "benchmarks/results/raw/long-context-v1/2026-09-06T12-37-10.527639900Z",
+  "end_to_end_benchmark" : false,
+  "responses" : [ {
+    "file" : "run-1\\calls\\0001.json",
+    "status" : "VALID",
+    "body_characters" : 3913
+  }, {
+    "file" : "run-1\\calls\\0002.json",
+    "status" : "INVALID",
+    "exception" : "com.starcode.llm.LlmException: Invalid compression summary: MULTIPLE_SUMMARY_BLOCKS"
+  }, {
+    "file" : "run-2\\calls\\0001.json",
+    "status" : "VALID",
+    "body_characters" : 3732
+  }, {
+    "file" : "run-2\\calls\\0002.json",
+    "status" : "VALID",
+    "body_characters" : 4653
+  }, {
+    "file" : "run-3\\calls\\0001.json",
+    "status" : "NO_RESPONSE"
+  }, {
+    "file" : "run-3\\calls\\0002.json",
+    "status" : "VALID",
+    "body_characters" : 4430
+  } ]
+}
