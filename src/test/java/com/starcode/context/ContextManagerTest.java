@@ -122,7 +122,7 @@ class ContextManagerTest {
         @Override public Completion stream(List<ChatMessage> history, String userText, List<ToolDefinition> tools,
                                            Consumer<StreamEvent> events) {
             toolsWereEmpty = tools.isEmpty();
-            return new Completion("<analysis>draft discarded</analysis><summary>## Primary Requests\nKeep working\n"
+            return new Completion("<analysis>draft discarded</analysis><summary>## Primary Requests and Intent\nKeep working\n"
                     + "## Key Technical Concepts\nContext\n## Files and Code Sections\nNone\n"
                     + "## Errors and Fixes\nNone\n## Problem Solving\nCompact\n## All User Messages\nOriginal\n"
                     + "## Pending Tasks\nTests\n## Current Work\nFeature 008\n## Possible Next Step\nVerify</summary>",
