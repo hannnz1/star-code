@@ -27,6 +27,7 @@ import java.nio.file.*;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.Set;
 
 public final class Main {
     private static final String VERSION = "0.1.0";
@@ -70,6 +71,10 @@ public final class Main {
                     toolContext.workspace(), worktrees, subAgentTasks, new AgentNameRegistry());
             config.promptContext().skillsCatalog(skills.buildActiveContext());
             ToolRegistry registry = ToolRegistry.standard();
+            String mcpLoading = System.getenv().getOrDefault("STAR_CODE_MCP_LOADING", "lazy");
+            if (!Set.of("full", "lazy").contains(mcpLoading))
+                throw new IllegalArgumentException("STAR_CODE_MCP_LOADING must be full or lazy");
+            registry.lazyMcpLoading(mcpLoading.equals("lazy"));
             ActiveSkills activeSkills = new ActiveSkills();
             SkillRefresh skillRefresh = new SkillRefresh();
             registry.register(new LoadSkillTool(skills, activeSkills, config.promptContext()));

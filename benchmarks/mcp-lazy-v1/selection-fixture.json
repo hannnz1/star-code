@@ -1,0 +1,2078 @@
+{
+  "seed": 20260905,
+  "kind": "synthetic MCP services, not public production servers",
+  "tools": [
+    {
+      "name": "shipments_get_eta",
+      "description": "Retrieve the estimated arrival date for a shipment",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "repositories_get_url",
+      "description": "Retrieve url for repositories records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "payments_get_region",
+      "description": "Retrieve region for payments records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "repositories_get_state",
+      "description": "Retrieve state for repositories records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "releases_get_tags",
+      "description": "Retrieve tags for releases records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "releases_get_external_reference",
+      "description": "Retrieve external reference for releases records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "subscriptions_get_created_date",
+      "description": "Retrieve created date for subscriptions records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "repositories_get_region",
+      "description": "Retrieve region for repositories records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "warehouses_get_description",
+      "description": "Retrieve description for warehouses records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "vendors_get_url",
+      "description": "Retrieve url for vendors records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "incidents_get_severity",
+      "description": "Retrieve the severity level of an operational incident",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "releases_get_created_date",
+      "description": "Retrieve created date for releases records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "payments_get_description",
+      "description": "Retrieve description for payments records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "repositories_get_tags",
+      "description": "Retrieve tags for repositories records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "refunds_get_state",
+      "description": "Retrieve the processing state of a payment refund",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "projects_get_tags",
+      "description": "Retrieve tags for projects records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "customers_get_url",
+      "description": "Retrieve url for customers records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "subscriptions_get_region",
+      "description": "Retrieve region for subscriptions records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "warehouses_get_owner",
+      "description": "Retrieve owner for warehouses records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "projects_get_description",
+      "description": "Retrieve description for projects records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "warehouses_get_external_reference",
+      "description": "Retrieve external reference for warehouses records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "releases_get_name",
+      "description": "Retrieve name for releases records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "subscriptions_get_state",
+      "description": "Retrieve state for subscriptions records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "payments_get_tags",
+      "description": "Retrieve tags for payments records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "releases_get_region",
+      "description": "Retrieve region for releases records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "customers_get_external_reference",
+      "description": "Retrieve external reference for customers records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "users_get_owner",
+      "description": "Retrieve owner for users records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "releases_get_description",
+      "description": "Retrieve description for releases records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "warehouses_get_name",
+      "description": "Retrieve name for warehouses records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "users_get_tags",
+      "description": "Retrieve tags for users records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "users_get_url",
+      "description": "Retrieve url for users records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "payments_get_state",
+      "description": "Retrieve state for payments records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "vendors_get_owner",
+      "description": "Retrieve owner for vendors records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "vendors_get_created_date",
+      "description": "Retrieve created date for vendors records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "projects_get_owner",
+      "description": "Retrieve owner for projects records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "warehouses_get_state",
+      "description": "Retrieve state for warehouses records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "releases_get_updated_date",
+      "description": "Retrieve updated date for releases records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "users_get_region",
+      "description": "Retrieve region for users records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "payments_get_external_reference",
+      "description": "Retrieve external reference for payments records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "vendors_get_tags",
+      "description": "Retrieve tags for vendors records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "vendors_get_updated_date",
+      "description": "Retrieve updated date for vendors records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "users_get_state",
+      "description": "Retrieve state for users records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "vendors_get_state",
+      "description": "Retrieve state for vendors records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "subscriptions_get_name",
+      "description": "Retrieve name for subscriptions records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "payments_get_owner",
+      "description": "Retrieve owner for payments records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "subscriptions_get_updated_date",
+      "description": "Retrieve updated date for subscriptions records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "customers_get_created_date",
+      "description": "Retrieve created date for customers records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "invoices_get_balance",
+      "description": "Retrieve the outstanding balance of an invoice",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "repositories_get_created_date",
+      "description": "Retrieve created date for repositories records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "payments_get_url",
+      "description": "Retrieve url for payments records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "repositories_get_description",
+      "description": "Retrieve description for repositories records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "payments_get_updated_date",
+      "description": "Retrieve updated date for payments records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "projects_get_url",
+      "description": "Retrieve url for projects records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "customers_get_tags",
+      "description": "Retrieve tags for customers records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "projects_get_state",
+      "description": "Retrieve state for projects records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "warehouses_get_updated_date",
+      "description": "Retrieve updated date for warehouses records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "users_get_external_reference",
+      "description": "Retrieve external reference for users records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "repositories_get_name",
+      "description": "Retrieve name for repositories records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "warehouses_get_region",
+      "description": "Retrieve region for warehouses records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "customers_get_owner",
+      "description": "Retrieve owner for customers records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "users_get_description",
+      "description": "Retrieve description for users records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "vendors_get_description",
+      "description": "Retrieve description for vendors records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "users_get_created_date",
+      "description": "Retrieve created date for users records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "vendors_get_external_reference",
+      "description": "Retrieve external reference for vendors records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "projects_get_name",
+      "description": "Retrieve name for projects records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "releases_get_owner",
+      "description": "Retrieve owner for releases records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "tickets_get_owner",
+      "description": "Retrieve the assigned support engineer for a support ticket",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "payments_get_created_date",
+      "description": "Retrieve created date for payments records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "customers_get_updated_date",
+      "description": "Retrieve updated date for customers records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "warehouses_get_tags",
+      "description": "Retrieve tags for warehouses records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "inventory_get_quantity",
+      "description": "Retrieve the available inventory quantity for a stock item",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "payments_get_name",
+      "description": "Retrieve name for payments records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "customers_get_region",
+      "description": "Retrieve region for customers records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "releases_get_url",
+      "description": "Retrieve url for releases records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "vendors_get_region",
+      "description": "Retrieve region for vendors records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "projects_get_external_reference",
+      "description": "Retrieve external reference for projects records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "subscriptions_get_owner",
+      "description": "Retrieve owner for subscriptions records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "repositories_get_updated_date",
+      "description": "Retrieve updated date for repositories records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "repositories_get_external_reference",
+      "description": "Retrieve external reference for repositories records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "subscriptions_get_tags",
+      "description": "Retrieve tags for subscriptions records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "orders_get_status",
+      "description": "Retrieve the fulfillment status of a purchase order",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "builds_get_result",
+      "description": "Retrieve the final CI build outcome",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "subscriptions_get_url",
+      "description": "Retrieve url for subscriptions records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "projects_get_region",
+      "description": "Retrieve region for projects records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "certificates_get_expiry",
+      "description": "Retrieve the expiration date of a TLS certificate",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "customers_get_description",
+      "description": "Retrieve description for customers records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "subscriptions_get_description",
+      "description": "Retrieve description for subscriptions records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "warehouses_get_url",
+      "description": "Retrieve url for warehouses records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "deployments_get_region",
+      "description": "Retrieve the geographic region of a deployment",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "subscriptions_get_external_reference",
+      "description": "Retrieve external reference for subscriptions records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "releases_get_state",
+      "description": "Retrieve state for releases records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "customers_get_state",
+      "description": "Retrieve state for customers records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "users_get_name",
+      "description": "Retrieve name for users records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "vendors_get_name",
+      "description": "Retrieve name for vendors records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "users_get_updated_date",
+      "description": "Retrieve updated date for users records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "projects_get_created_date",
+      "description": "Retrieve created date for projects records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "repositories_get_owner",
+      "description": "Retrieve owner for repositories records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "customers_get_name",
+      "description": "Retrieve name for customers records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "warehouses_get_created_date",
+      "description": "Retrieve created date for warehouses records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    },
+    {
+      "name": "projects_get_updated_date",
+      "description": "Retrieve updated date for projects records",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "entity_id": {
+            "type": "string",
+            "description": "Exact entity identifier from the user request"
+          }
+        },
+        "required": [
+          "entity_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true
+      }
+    }
+  ],
+  "tasks": [
+    {
+      "id": "task-01",
+      "tool": "orders_get_status",
+      "entity_id": "PO-741",
+      "expected_result": "FULFILLED",
+      "prompt": "What is the fulfillment status of purchase order PO-741? Use the available MCP service to retrieve the answer. Return its exact result. Do not read local files or use shell commands."
+    },
+    {
+      "id": "task-02",
+      "tool": "shipments_get_eta",
+      "entity_id": "SHP-203",
+      "expected_result": "2026-09-18",
+      "prompt": "When is shipment SHP-203 expected to arrive? Use the available MCP service to retrieve the answer. Return its exact result. Do not read local files or use shell commands."
+    },
+    {
+      "id": "task-03",
+      "tool": "invoices_get_balance",
+      "entity_id": "INV-809",
+      "expected_result": "USD 137.42",
+      "prompt": "How much remains unpaid on invoice INV-809? Use the available MCP service to retrieve the answer. Return its exact result. Do not read local files or use shell commands."
+    },
+    {
+      "id": "task-04",
+      "tool": "tickets_get_owner",
+      "entity_id": "TKT-615",
+      "expected_result": "Morgan Chen",
+      "prompt": "Who is assigned to support ticket TKT-615? Use the available MCP service to retrieve the answer. Return its exact result. Do not read local files or use shell commands."
+    },
+    {
+      "id": "task-05",
+      "tool": "builds_get_result",
+      "entity_id": "BLD-092",
+      "expected_result": "FAILED_TESTS",
+      "prompt": "What was the result of CI build BLD-092? Use the available MCP service to retrieve the answer. Return its exact result. Do not read local files or use shell commands."
+    },
+    {
+      "id": "task-06",
+      "tool": "deployments_get_region",
+      "entity_id": "DEP-451",
+      "expected_result": "eu-west-2",
+      "prompt": "Which region hosts deployment DEP-451? Use the available MCP service to retrieve the answer. Return its exact result. Do not read local files or use shell commands."
+    },
+    {
+      "id": "task-07",
+      "tool": "inventory_get_quantity",
+      "entity_id": "SKU-386",
+      "expected_result": "27 units",
+      "prompt": "How many units are available for item SKU-386? Use the available MCP service to retrieve the answer. Return its exact result. Do not read local files or use shell commands."
+    },
+    {
+      "id": "task-08",
+      "tool": "certificates_get_expiry",
+      "entity_id": "CERT-527",
+      "expected_result": "2027-02-11",
+      "prompt": "When does TLS certificate CERT-527 expire? Use the available MCP service to retrieve the answer. Return its exact result. Do not read local files or use shell commands."
+    },
+    {
+      "id": "task-09",
+      "tool": "refunds_get_state",
+      "entity_id": "REF-168",
+      "expected_result": "PENDING_REVIEW",
+      "prompt": "What is the processing state of refund REF-168? Use the available MCP service to retrieve the answer. Return its exact result. Do not read local files or use shell commands."
+    },
+    {
+      "id": "task-10",
+      "tool": "incidents_get_severity",
+      "entity_id": "INC-934",
+      "expected_result": "SEV-2",
+      "prompt": "What severity was assigned to operational incident INC-934? Use the available MCP service to retrieve the answer. Return its exact result. Do not read local files or use shell commands."
+    }
+  ]
+}

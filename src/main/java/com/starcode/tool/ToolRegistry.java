@@ -7,6 +7,9 @@ import java.util.concurrent.*;
 
 public final class ToolRegistry {
     private final Map<String, Tool> tools = new LinkedHashMap<>();
+    private boolean lazyMcpLoading = true;
+    public ToolRegistry lazyMcpLoading(boolean enabled) { lazyMcpLoading = enabled; return this; }
+    public boolean lazyMcpLoading() { return lazyMcpLoading; }
     public ToolRegistry register(Tool tool) {
         String name = tool.definition().name();
         if (tools.putIfAbsent(name, tool) != null) throw new IllegalArgumentException("Duplicate tool: " + name);

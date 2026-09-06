@@ -21,6 +21,7 @@ public final class McpToolAdapter implements Tool {
 
     @Override public ToolDefinition definition() { return definition; }
     @Override public boolean readOnly() { return readOnly; }
+    @Override public boolean deferred() { return true; }
     @Override public ToolResult execute(ToolCall call, ToolContext context) {
         try {
             @SuppressWarnings("unchecked")

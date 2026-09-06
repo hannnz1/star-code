@@ -105,6 +105,7 @@ public final class PermissionManager {
 
     private Descriptor describe(ToolCall call) {
         return switch (call.name()) {
+            case ModelToolCatalog.SEARCH -> new Descriptor(ModelToolCatalog.SEARCH, "", ToolCategory.READ_ONLY, false, false);
             case "read_file" -> new Descriptor("Read", call.arguments().path("path").asText(""), ToolCategory.READ_ONLY, true, true);
             case "write_file" -> new Descriptor("Write", call.arguments().path("path").asText(""), ToolCategory.FILE_WRITE, true, false);
             case "edit_file" -> new Descriptor("Edit", call.arguments().path("path").asText(""), ToolCategory.FILE_WRITE, true, true);

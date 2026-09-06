@@ -15,6 +15,12 @@ Star Code 是一个基于 Java 21 + Gradle 的终端 AI 助手，支持对话、
 
 ## 工作模式
 
+### MCP 按需加载
+
+默认以 `search_mcp_tools` 提供精简的工具名称/描述索引。模型搜索后，匹配工具的完整 schema 才加入下一轮请求；实际调用仍经过权限与 Hook 检查。加载状态属于每个 Agent，各子 Agent 独立。
+
+设置环境变量 `STAR_CODE_MCP_LOADING=full` 可恢复全量 schema 模式；默认值为 `lazy`。服务端连接和 `tools/list` 仍在启动时执行，这项优化减少的是模型请求中的 schema 暴露，不减少 MCP 协议发现量。精简索引仍随工具数增长，按需搜索可能增加模型轮次；具体开销以 `benchmarks/mcp-lazy-v1/` 的对照实验为准。
+
 ### Agent Loop
 
 Agent Loop 会在模型返回工具调用后自动继续执行下一轮：

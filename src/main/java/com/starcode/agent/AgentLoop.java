@@ -30,6 +30,7 @@ public final class AgentLoop {
     private final String actorName;
     private final Supplier<List<String>> externalReminders;
     private TokenUsage sessionUsage = TokenUsage.ZERO;
+    private final Set<String> activatedTools = ConcurrentHashMap.newKeySet();
 
     public AgentLoop(LlmClient client, ToolRegistry tools, ToolContext context) {
         this(client, tools, context, PermissionManager.trustedForTests(context),
@@ -208,6 +209,7 @@ public final class AgentLoop {
                             List<ToolDefinition> definitions,
                             CancellationToken cancellation, Consumer<AgentEvent> events) {
         List<ChatMessage> managedHistory = history;
+        ModelToolCatalog catalog = new ModelToolCatalog(tools, definitions, activatedTools);
         List<ToolExchange> exchanges = new ArrayList<>(); TokenUsage runUsage = TokenUsage.ZERO;
         int callCount = 0, unknownRounds = 0;
         String lastText = "";
@@ -223,9 +225,9 @@ public final class AgentLoop {
                                 payload(HookEvent.PRE_USER_MESSAGE).with("prompt", userText), cancellation);
                         String reminder = reminder(mode, iteration);
                         turn = exchanges.isEmpty()
-                                ? client.stream(managedHistory, userText, definitions,
+                                ? client.stream(managedHistory, userText, catalog.definitions(),
                                         new TurnContext(iteration, reminder, systemPromptOverride), event -> forward(event, events))
-                                : client.continueWithTools(managedHistory, userText, exchanges, definitions,
+                                : client.continueWithTools(managedHistory, userText, exchanges, catalog.definitions(),
                                         new TurnContext(iteration, reminder, systemPromptOverride), event -> forward(event, events));
                         break;
                     } catch (LlmException error) {
@@ -274,7 +276,7 @@ public final class AgentLoop {
                     return new AgentOutcome(AgentOutcome.Status.TOOL_LIMIT, turn.text(), iteration, runUsage,
                             exchanges);
                 }
-                List<ToolResult> results = executeOrdered(turn.toolCalls(), cancellation, events);
+                List<ToolResult> results = executeOrdered(turn.toolCalls(), cancellation, events, catalog);
                 if (contextManager != null) results = contextManager.offloadAndSnip(results);
                 callCount += turn.toolCalls().size(); exchanges.add(new ToolExchange(turn, results));
                 events.accept(new AgentEvent.ToolExchangeCompleted(exchanges.getLast()));
@@ -308,7 +310,7 @@ public final class AgentLoop {
     public void permissionMode(PermissionMode value) { permissionModeOverride = value; }
 
     private List<ToolResult> executeOrdered(List<ToolCall> calls, CancellationToken cancellation,
-                                            Consumer<AgentEvent> events) throws InterruptedException {
+                                            Consumer<AgentEvent> events, ModelToolCatalog catalog) throws InterruptedException {
         List<ToolResult> all = new ArrayList<>();
         for (int i = 0; i < calls.size();) {
             if (cancellation.isCancelled()) {
@@ -317,14 +319,14 @@ public final class AgentLoop {
             }
             if (!tools.isReadOnly(calls.get(i).name())) {
                 ToolCall call = calls.get(i++); events.accept(new AgentEvent.ToolStarted(call));
-                ToolResult result = executeAuthorized(call, cancellation); all.add(result); events.accept(new AgentEvent.ToolFinished(result));
+                ToolResult result = executeAuthorized(call, cancellation, catalog); all.add(result); events.accept(new AgentEvent.ToolFinished(result));
                 continue;
             }
             int end = i; while (end < calls.size() && tools.isReadOnly(calls.get(end).name())) end++;
             List<ToolCall> batch = calls.subList(i, end); batch.forEach(c -> events.accept(new AgentEvent.ToolStarted(c)));
             try (ExecutorService executor = Executors.newVirtualThreadPerTaskExecutor()) {
                 List<Future<ToolResult>> futures = new ArrayList<>();
-                for (ToolCall call : batch) futures.add(executor.submit(() -> executeAuthorized(call, cancellation)));
+                for (ToolCall call : batch) futures.add(executor.submit(() -> executeAuthorized(call, cancellation, catalog)));
                 for (int j = 0; j < batch.size(); j++) {
                     ToolResult result;
                     try { result = futures.get(j).get(); }
@@ -337,10 +339,12 @@ public final class AgentLoop {
         return all;
     }
 
-    private ToolResult executeAuthorized(ToolCall call, CancellationToken cancellation) throws InterruptedException {
-        if (!allowedToolNames.isEmpty() && !allowedToolNames.contains(call.name())) {
+    private ToolResult executeAuthorized(ToolCall call, CancellationToken cancellation, ModelToolCatalog catalog) throws InterruptedException {
+        if (!catalog.isSearch(call.name()) && !allowedToolNames.isEmpty() && !allowedToolNames.contains(call.name())) {
             return ToolResult.failure(call, "TOOL_NOT_ALLOWED", "Tool is not available to this SubAgent: " + call.name());
         }
+        if (!catalog.canExecute(call.name()))
+            return ToolResult.failure(call, "TOOL_NOT_LOADED", "Load this MCP tool using " + ModelToolCatalog.SEARCH + " first");
         if (subAgent && "Agent".equals(call.name())) {
             String message = forkContext ? "Fork SubAgent cannot start another Agent"
                     : "SubAgent cannot start another Agent";
@@ -360,7 +364,7 @@ public final class AgentLoop {
                 result = ToolResult.failure(call, "HOOK_BLOCKED",
                         "[hook " + before.hookName() + "] " + before.reason());
             } else {
-                result = tools.execute(call, context, cancellation);
+                result = catalog.isSearch(call.name()) ? catalog.discover(call) : tools.execute(call, context, cancellation);
                 if (contextManager != null) contextManager.trackSuccessfulRead(call, result, context);
             }
         }
