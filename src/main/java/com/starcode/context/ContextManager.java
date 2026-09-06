@@ -193,8 +193,11 @@ public final class ContextManager {
     public void recordUsage(TokenUsage usage, List<ChatMessage> messages) {
         lock.lock();
         try {
-            usageAnchor = usage.inputTokens() + usage.outputTokens()
-                    + usage.cacheReadTokens() + usage.cacheWriteTokens();
+            // Responses input_tokens already includes its cached_tokens breakdown.
+            // Anthropic reports uncached input and cache read/write as separate counts.
+            usageAnchor = usage.inputTokens() + usage.outputTokens();
+            if (!"openai-responses".equals(protocol))
+                usageAnchor += usage.cacheReadTokens() + usage.cacheWriteTokens();
             anchorCharacters = characterCount(messages);
         } finally { lock.unlock(); }
     }
@@ -326,8 +329,10 @@ public final class ContextManager {
                 .forEach(file -> out.append("\n### ").append(file.path()).append(" (").append(file.readAt()).append(")\n")
                         .append(truncateFile(file.content())).append('\n'));
         out.append("\n## Available tools\n");
-        for (ToolDefinition tool : definitions)
-            out.append("- ").append(tool.name()).append(": ").append(tool.inputSchema()).append('\n');
+          for (ToolDefinition tool : definitions)
+              out.append("- ").append(tool.name()).append('\n');
+          out.append("Tool schemas are supplied separately with each model request. Use only the currently exposed "
+                  + "tools; discover deferred MCP tools with search_mcp_tools when available.\n");
         out.append("\n## Boundary reminder\nNeed exact file contents, errors, or user wording? Re-read the source file; do not guess from the summary.\n")
                 .append("</context-recovery>");
         return out.toString();

@@ -88,6 +88,44 @@ class ContextManagerTest {
         assertTrue(result.messages().stream().noneMatch(message -> message.content().contains("draft discarded")));
     }
 
+    @Test void compactRecoveryDoesNotReinjectDeferredSchemas() throws Exception {
+        var manager = new ContextManager(temp, 128_000, "schema-recovery");
+        var schema = new com.fasterxml.jackson.databind.ObjectMapper().createObjectNode()
+                .put("type", "object").put("description", "DEFERRED_SCHEMA_SENTINEL_" + "x".repeat(10_000));
+        var tool = new ToolDefinition("mcp__fixture__tool", "deferred", schema);
+        var compacted = manager.compact(List.of(new ChatMessage(ChatMessage.Role.USER, "Continue the task")),
+                List.of(tool), new FakeSummaryClient(), ContextManager.Reason.MANUAL, ignored -> {});
+        String text = compacted.messages().stream().map(ChatMessage::modelText).reduce("", String::concat);
+        assertTrue(text.contains("mcp__fixture__tool"));
+        assertTrue(text.contains("search_mcp_tools"));
+        assertFalse(text.contains("DEFERRED_SCHEMA_SENTINEL_"));
+        assertFalse(text.contains("x".repeat(1000)));
+    }
+
+    @Test void responsesCacheBreakdownDoesNotTriggerPrematureCompaction() throws Exception {
+        var provider = new com.starcode.config.ProviderConfig("test", "openai-responses", "https://example.test",
+                "UNUSED", "test", false, 128_000);
+        ContextManager manager = new ContextManager(temp, provider);
+        var history = List.of(new ChatMessage(ChatMessage.Role.USER, "x".repeat(350)));
+        manager.recordUsage(new TokenUsage(60_000, 1000, 0, 40_000), history);
+        assertEquals(61_000, manager.estimate(history));
+        assertFalse(manager.shouldAutoCompact(history));
+        var grown = List.of(new ChatMessage(ChatMessage.Role.USER, "x".repeat(700)));
+        assertEquals(61_100, manager.estimate(grown));
+        manager.recordUsage(new TokenUsage(94_000, 1000, 0, 80_000), grown);
+        assertTrue(manager.shouldAutoCompact(grown));
+    }
+
+    @Test void anthropicCacheCountsRemainAdditive() throws Exception {
+        var provider = new com.starcode.config.ProviderConfig("test", "anthropic", "https://example.test",
+                "UNUSED", "test", false, 128_000);
+        ContextManager manager = new ContextManager(temp, provider);
+        var history = List.of(new ChatMessage(ChatMessage.Role.USER, "task"));
+        manager.recordUsage(new TokenUsage(50_000, 1000, 5_000, 40_000), history);
+        assertEquals(96_000, manager.estimate(history));
+        assertTrue(manager.shouldAutoCompact(history));
+    }
+
     @Test void estimateUsesReplacementAnchorRatherThanAccumulatingUsage() throws Exception {
         ContextManager manager = new ContextManager(temp, 100_000, "usage-test");
         List<ChatMessage> original = List.of(new ChatMessage(ChatMessage.Role.USER, "x".repeat(350)));
