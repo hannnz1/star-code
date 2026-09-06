@@ -36,3 +36,7 @@ MCP FULL/LAZY schema comparison: 40/40 serialization runs, four sizes with five 
 Full Gradle tests: 195 tests / 53 suites, zero failures/errors/skips. Report: `results/mcp-lazy-loading-final.md`; per-run CSV and machine-readable summary accompany captured raw requests/responses. Raw artifact hashes: `results/mcp-validation-artifact-index.json`.
 
 Next: real Team Multi-Agent integration feasibility. Correction to the initial inventory: ordinary isolated SubAgent calls wait synchronously, but ChatApplication Team spawning launches background tasks with independent Worktrees. Thus isolated parallel capability exists in code; E2E completion and speed remain unverified.
+
+## Phase 3 current outcome
+
+Team result retrieval bug fixed in production commit53ec9ba;199 full tests pass. Pre-fix run had UNKNOWN_TEAM_TASK due to execution/shared-task namespace confusion. Post-fix both worker results were collected and Main's unified21-check verifier passed. However parent still terminated with iteration_limit at10 rounds. Legacy component gate PASS is superseded by audited complete-run BLOCKED. Two attempts, one distinct contract; no speed experiment. See results/multi-agent-postfix-validation.md and preserved raw/current summaries. Next lower-priority phase: permission policy and session approval; multi-agent completion budget remains an open product limitation.

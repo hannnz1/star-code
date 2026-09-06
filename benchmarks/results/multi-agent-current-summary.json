@@ -1,14 +1,17 @@
 {
   "status": "BLOCKED",
+  "component_gate_status": "PASS",
+  "main_completed": false,
+  "main_terminal_message": "[Agent run ended with iteration_limit]",
   "speedup_status": "NOT_MEASURED",
-  "raw_directory": "C:\\Users\\Administrator\\Desktop\\project\\star code\\benchmarks\\results\\raw\\multi-agent-current\\2026-09-06T08-30-35.908206400Z",
+  "raw_directory": "C:\\Users\\Administrator\\Desktop\\project\\star code\\benchmarks\\results\\raw\\multi-agent-current\\2026-09-06T08-39-16.875494600Z",
   "environment": {
     "benchmark": "multi-agent-current",
-    "run_id": "2026-09-06T08-30-35.908206400Z",
-    "timestamp": "2026-09-06T08:30:35.969173900Z",
+    "run_id": "2026-09-06T08-39-16.875494600Z",
+    "timestamp": "2026-09-06T08:39:16.936003500Z",
     "baseline_commit": "014808a0b0942f25bc4f1c3f415fa63262f98176",
     "seed": 20260905,
-    "harness_build_manifest_sha256": "c09f679ffb85e6453837a057162acd0b15e8538ab08d16a005a97864d5371125",
+    "harness_build_manifest_sha256": "de8de79171f7d2cdc3dc2ee657cb34f346115208b1001cf5e6dabdd730751d3e",
     "java": "21.0.11+10-LTS",
     "os": "Windows 11",
     "os_version": "10.0",
@@ -22,17 +25,17 @@
     "input_tokens": null,
     "output_tokens": null,
     "total_tokens": null,
-    "implementation_commit": "b80f9be5a42833230226224a1171cad4670b1c35",
+    "implementation_commit": "53ec9ba423469cc4d1660b220d4b41dd790535a3",
     "fixture": "multi-agent/fixture",
     "harness_behavior": "observation and verification only; no task decomposition or merge"
   },
   "gate": {
     "benchmark": "multi-agent",
-    "run_id": "2026-09-06T08-30-35.908206400Z",
-    "timestamp": "2026-09-06T08:30:35.990153700Z",
+    "run_id": "2026-09-06T08-39-16.875494600Z",
+    "timestamp": "2026-09-06T08:39:16.953515300Z",
     "baseline_commit": "014808a0b0942f25bc4f1c3f415fa63262f98176",
     "seed": 20260905,
-    "harness_build_manifest_sha256": "c09f679ffb85e6453837a057162acd0b15e8538ab08d16a005a97864d5371125",
+    "harness_build_manifest_sha256": "de8de79171f7d2cdc3dc2ee657cb34f346115208b1001cf5e6dabdd730751d3e",
     "java": "21.0.11+10-LTS",
     "os": "Windows 11",
     "os_version": "10.0",
@@ -46,58 +49,38 @@
     "input_tokens": null,
     "output_tokens": null,
     "total_tokens": null,
-    "status": "BLOCKED",
+    "status": "PASS",
     "speedup_status": "NOT_MEASURED",
-    "repository": "C:\\Users\\Administrator\\Desktop\\project\\star code\\benchmarks\\.work\\gate-2026-09-06T08-30-35.908206400Z",
-    "fixture_commit": "177646f3fca6bd74301a68f386bfbbd22e96d9f4",
+    "repository": "C:\\Users\\Administrator\\Desktop\\project\\star code\\benchmarks\\.work\\gate-2026-09-06T08-39-16.875494600Z",
+    "fixture_commit": "606ef0c2b014e458c41b1caa429dca6a5c2edd1e",
     "verifier_unchanged": true,
     "subagent_count": 2,
-    "maximum_pair_overlap_seconds": 12.711,
+    "maximum_pair_overlap_seconds": 19.128,
     "unified_test_passed": true,
     "independent_worktree_count": 2,
     "worktrees_with_modifications": 2,
     "both_components_integrated": true,
-    "failure_reason": "End-to-end gate conditions not all met; inspect task status, Worktree changes, parent transcript and unified-test.txt. No harness merge performed.",
-    "wall_clock_seconds": 33.1678059
+    "wall_clock_seconds": 50.3068494
   },
   "calls_by_role": {
     "main": 10,
-    "subagent": 13
+    "subagent": 18
   },
   "calls_by_status": {
-    "SUCCESS": 22,
-    "FAILURE": 1
+    "SUCCESS": 28
   },
   "task_statuses": {
-    "shipping-agent": "COMPLETED",
-    "discount-agent": "RUNNING"
+    "shipping-worker": "COMPLETED",
+    "discount-worker": "COMPLETED"
   },
-  "main_tool_errors": [
-    {
-      "name": null,
-      "error_code": "UNKNOWN_TEAM_TASK",
-      "output": ""
-    },
-    {
-      "name": null,
-      "error_code": "UNKNOWN_TEAM_TASK",
-      "output": ""
-    },
-    {
-      "name": null,
-      "error_code": "NON_ZERO_EXIT",
-      "output": "exit_code: 1\nstdout:\n\nstderr:\nException in thread \"main\" java.lang.ArithmeticException: total exceeds int range\r\n\tat checkout.pricing.DiscountPolicy.totalCents(DiscountPolicy.java:30)\r\n\tat GateTest.lambda$main$7(GateTest.java:18)\r\n\tat GateTest.bad(GateTest.java:6)\r\n\tat GateTest.main(GateTest.java:18)"
-    }
-  ],
+  "main_tool_errors": [],
   "known_provider_usage": {
-    "input_tokens": 43894,
-    "output_tokens": 3672,
-    "total_tokens": 47566
+    "input_tokens": 87801,
+    "output_tokens": 3878,
+    "total_tokens": 91679
   },
-  "usage_records": 22,
-  "responses_missing_usage": [
-    "0023-response.sse"
-  ],
+  "usage_records": 28,
+  "responses_missing_usage": [],
   "limitations": [
     "A changed main-checkout file does not prove integration of a worker result.",
     "Task states are captured at Main Agent return, before resource shutdown.",

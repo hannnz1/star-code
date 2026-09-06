@@ -10,6 +10,9 @@ run, environment = read(batch/'run.json'), read(batch/'environment.json')
 calls = [read(p) for p in sorted((batch/'calls').glob('*.json'))]
 tasks = read(batch/'tasks.json') if (batch/'tasks.json').exists() else []
 conversation = read(batch/'parent-conversation.json') if (batch/'parent-conversation.json').exists() else []
+terminal = conversation[-1].get('content', '') if conversation else ''
+main_completed = bool(terminal.strip()) and not terminal.startswith('[Agent run ended with ')
+strict_status = 'PASS' if run['status'] == 'PASS' and main_completed else 'BLOCKED'
 errors = [{'name': r.get('name'), 'error_code': r.get('errorCode'), 'output': r.get('output')}
           for m in conversation for r in m.get('toolResults', []) if not r.get('success', True)]
 usage, missing = [], []
@@ -22,7 +25,8 @@ for p in sorted((batch/'wire').glob('*-response.sse')):
         if event.get('type') == 'response.completed': found = event.get('response', {}).get('usage')
     if found: usage.append(found)
     else: missing.append(p.name)
-result = {'status': run['status'], 'speedup_status': 'NOT_MEASURED', 'raw_directory': str(batch),
+result = {'status': strict_status, 'component_gate_status': run['status'], 'main_completed': main_completed,
+          'main_terminal_message': terminal, 'speedup_status': 'NOT_MEASURED', 'raw_directory': str(batch),
           'environment': environment, 'gate': run, 'calls_by_role': dict(Counter(c.get('agent_kind') for c in calls)),
           'calls_by_status': dict(Counter(c['status'] for c in calls)),
           'task_statuses': {t['name']: t['status'] for t in tasks}, 'main_tool_errors': errors,
@@ -34,6 +38,7 @@ result = {'status': run['status'], 'speedup_status': 'NOT_MEASURED', 'raw_direct
                          'Role attribution follows presence of the Agent tool; thread IDs and prompts are preserved for audit.']}
 out = root/'results'
 (out/'multi-agent-current-summary.json').write_text(json.dumps(result, indent=2), encoding='utf-8')
+(batch/'audited-summary.json').write_text(json.dumps(result, indent=2), encoding='utf-8')
 index = [{'path': p.relative_to(root).as_posix(), 'sha256': hashlib.sha256(p.read_bytes()).hexdigest(),
           'bytes': p.stat().st_size} for p in sorted(batch.rglob('*')) if p.is_file()]
 (out/'multi-agent-current-artifact-index.json').write_text(json.dumps(index, indent=2), encoding='utf-8')
