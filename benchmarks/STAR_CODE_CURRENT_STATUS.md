@@ -32,12 +32,15 @@
 - 多 Agent 三任务验证实现：`efe4a4211f78dd4a9da10925e60ee245b861092d`。
 - 缓存用量/schema 恢复修复：`7d2cb2ba82b4673655a4415d4265ffe13636bdfa`。
 - 摘要引用边界修复：`62370b7`。第三轮续跑 commit `6950232` 的生产文件哈希与其一致。
+- SSE 限流分类修复及当前交付包对应生产 commit：`ae10a0f47a216a3227371f24c12af1318d108726`。
 - [MCP 报告](results/mcp-lazy-loading-final.md)
 - [多 Agent 报告](results/multi-agent-v2-final.md)
 - [权限报告](results/permission-v1-final.md)
 - [长期上下文逐轮报告](results/long-context-v1-final.md)，同名前缀含 JSON、CSV 和原始文件 SHA256 索引。
 - [限流分类修复及测试](results/stream-rate-limit-fix.md)
 - 本轮交付包：`build/libs/star-code.jar`；打包后校验见 `results/current-package-validation.json`。
+
+交付包已验证：217 项测试通过，271 个生产 class 和 3 个资源与包内字节一致。JAR SHA256：`bac05ffa8da5ba01fa64661050cfbbd0b4148b827cc9c34e0119fbffdd53b0ba`。
 
 ## 尚未完成
 
