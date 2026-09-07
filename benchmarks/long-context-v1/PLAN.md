@@ -13,3 +13,11 @@ Before this pilot, fix two separately confirmed integration bugs: cached Respons
 ## Post-failure parser correction, preregistered before rerun
 
 The first batch (2026-09-06T12-37-10.527639900Z) failed all three sessions at the first compaction. Offline inspection confirmed that quoted inline-code examples of the summary markers were incorrectly treated as delimiters. Apply only a parser correction, freeze its commit, then run a separate three-session batch with the identical fixture and settings. Preserve both batches; do not replace original failures or pool them as if they used one implementation. Extra unquoted markers continue to fail validation. Offline replay is reported separately from model experiments.
+
+## Interrupted post-fix batch
+
+Batch 2026-09-06T12-48-46.787895100Z completed run1, then stopped during run2 without a terminal run record. Run2 has one failed request and one STARTED request with unknown final outcome. A later process inspection found no running Java process. Keep this attempt as incomplete; do not retry or replace it. Add repeat-range selection only in the harness and execute the still-unstarted run3 in a new raw directory with identical production sources and fixture. Report all three planned sessions, including interrupted run2. Missing usage and elapsed time remain unknown.
+
+## Reproduction
+
+After the normal full Gradle test gate and a clean production commit, use PowerShell7: `pwsh -File benchmarks/long-context-v1/run.ps1`. This makes real paid model calls. Optional `-FirstRepeat 3 -LastRepeat 3` runs only that planned repeat, for documented continuation; never silently replace a failed run. The frozen fixture hash is checked by Java. Rebuild reports without model calls using `python benchmarks/long-context-v1/summarize.py RAW_BATCH --prefix OUTPUT_PREFIX`. Keep raw directories together with their artifact indices and build manifests.

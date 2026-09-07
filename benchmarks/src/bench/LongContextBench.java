@@ -35,6 +35,9 @@ public final class LongContextBench {
   record.put("wall_clock_seconds",(System.nanoTime()-start)/1e9);Common.write(out.resolve(view+"-score.json"),record);
  }
  public static void main(String[] args)throws Exception {
+  if(args.length!=0&&args.length!=2)throw new IllegalArgumentException("Optional arguments: firstRepeat lastRepeat (1..3)");
+  int firstRepeat=args.length==0?1:Integer.parseInt(args[0]),lastRepeat=args.length==0?3:Integer.parseInt(args[1]);
+  if(firstRepeat<1||lastRepeat>3||firstRepeat>lastRepeat)throw new IllegalArgumentException("Repeat range must be within1..3");
   Common.root=Path.of(System.getProperty("bench.root")).toAbsolutePath();String commit=Common.git(Common.root.getParent(),"rev-parse","HEAD");
   if(!Common.git(Common.root.getParent(),"diff","HEAD","--","src/main").isBlank())throw new IllegalStateException("Commit production first");
   Path fixture=Common.root.resolve("long-context-v1/fixture.json");
@@ -45,10 +48,11 @@ public final class LongContextBench {
   Common.write(batch.resolve("environment.json"),Common.record("long-context-component-pilot",batch.getFileName().toString(),provider)
       .put("implementation_commit",commit).put("fixture_sha256",Common.hash(Files.readAllBytes(fixture)))
       .put("estimate_method","production chars/3.5; cumulative new-history load, not provider tokens")
-      .put("autonomous_coding_session",false).put("model_seed","UNSET"));
+      .put("autonomous_coding_session",false).put("model_seed","UNSET")
+      .put("first_repeat",firstRepeat).put("last_repeat",lastRepeat));
   Files.copy(Common.root.resolve(".work/build-manifest.json"),batch.resolve("build-manifest.json"));
   Common.text(Common.root.resolve("results/long-context-v1-latest.txt"),Common.root.relativize(batch).toString());
-  for(int repeat=1;repeat<=3;repeat++){
+  for(int repeat=firstRepeat;repeat<=lastRepeat;repeat++){
    Path run=batch.resolve("run-"+repeat);Files.createDirectories(run);Path workspace=run.resolve("workspace");Files.createDirectories(workspace);
    String previousHome=System.getProperty("user.home");Path isolatedHome=run.resolve("isolated-home");Files.createDirectories(isolatedHome);
    var record=Common.record("long-context-component-pilot","run-"+repeat,provider).put("implementation_commit",commit).put("status","FAILURE");

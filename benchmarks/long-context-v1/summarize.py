@@ -12,13 +12,17 @@ args = parser.parse_args()
 load = lambda p: json.loads(p.read_text(encoding="utf-8-sig"))
 runs, stages, failures = [], [], []
 for run in sorted(args.batch.glob("run-*")):
-    record = load(run / "run.json")
+    record = load(run / "run.json") if (run / "run.json").exists() else dict(
+        run_id=run.name, implementation_commit=load(args.batch / "environment.json")["implementation_commit"],
+        status="INCOMPLETE_NO_TERMINAL_RECORD", exception="No terminal run.json; inspect interruption observation and raw calls.",
+        compactions=len(list(run.glob("stage-*/compact-*"))))
     calls = [load(p) for p in sorted((run / "calls").glob("*.json"))]
     diagnostics = [load(p) for p in run.glob("stage-*/compact-*/diagnostics.json")]
     row = {k: record.get(k) for k in ("run_id", "implementation_commit", "status", "exception",
            "compactions", "cumulative_new_tokens_estimated", "wall_clock_seconds")}
     row["model_calls"] = len(calls)
     row["calls_without_response"] = sum(not c.get("response_text") for c in calls)
+    row["calls_without_terminal_status"] = sum(c.get("status") == "STARTED" for c in calls)
     row["usage_available_calls"] = sum(c.get("total_tokens") is not None for c in calls)
     for field in ("input_tokens", "output_tokens", "total_tokens"):
         row["known_" + field] = sum(c.get(field) or 0 for c in calls)
@@ -30,6 +34,10 @@ for run in sorted(args.batch.glob("run-*")):
             continue
         state = load(stage / "stage.json")
         for view in ("summary", "complete"):
+            if not (stage / f"{view}-score.json").exists():
+                failures.append(dict(run_id=record["run_id"], phase=state["phase"], view=view,
+                                     key="PROBE_NOT_COMPLETED", expected="completed probe", actual=None))
+                continue
             score = load(stage / f"{view}-score.json")
             stages.append(dict(run_id=record["run_id"], view=view, **state,
                                score_status=score["status"], passed=score["passed"], total=score["total"],
@@ -71,8 +79,9 @@ lines = ["# Long-context component pilot", "", f"Raw batch: `{args.batch}`", "",
          "| Run | Workflow | Compactions successful / attempted | Model calls | Known total tokens | Seconds |",
          "|---|---|---|---|---|---|"]
 for r in runs:
+    seconds = f"{r['wall_clock_seconds']:.2f}" if r['wall_clock_seconds'] is not None else "UNAVAILABLE"
     lines.append(f"| {r['run_id']} | {r['status']} | {r['successful_compactions']}/{r['compactions']} | "
-                 f"{r['model_calls']} | {r['known_total_tokens']} | {r['wall_clock_seconds']:.2f} |")
+                 f"{r['model_calls']} | {r['known_total_tokens']} | {seconds} |")
 lines += ["", "## State retrieval (only stages reached)", "",
           "| Run | Cumulative estimate | View | Correct fields | Retention |", "|---|---|---|---|---|"]
 for s in stages:
