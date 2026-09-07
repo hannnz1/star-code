@@ -1,0 +1,517 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.13/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+
+> Task :compileJava
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:5: 错误: 程序包com.starcode.prompt不存在
+import com.starcode.prompt.SystemReminder;
+                          ^
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:18: 错误: 找不到符号
+    private final LlmClient client; private final ToolRegistry tools; private final ToolContext context;
+                  ^
+  符号:   类 LlmClient
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\tool\ToolRegistry.java:3: 错误: 找不到符号
+import com.starcode.agent.CancellationToken;
+                         ^
+  符号:   类 CancellationToken
+  位置: 程序包 com.starcode.agent
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:18: 错误: 找不到符号
+    private final LlmClient client; private final ToolRegistry tools; private final ToolContext context;
+                                                                                    ^
+  符号:   类 ToolContext
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:19: 错误: 找不到符号
+    private final PermissionManager permissions;
+                  ^
+  符号:   类 PermissionManager
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\context\ContextManager.java:4: 错误: 找不到符号
+import com.starcode.config.ProviderConfig;
+                          ^
+  符号:   类 ProviderConfig
+  位置: 程序包 com.starcode.config
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\context\ContextManager.java:7: 错误: 程序包com.starcode.session不存在
+import com.starcode.session.SessionContext;
+                           ^
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:21: 错误: 找不到符号
+    private final HookEngine hooks;
+                  ^
+  符号:   类 HookEngine
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:22: 错误: 找不到符号
+    private final HookPayloadFactory hookPayloads;
+                  ^
+  符号:   类 HookPayloadFactory
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:26: 错误: 找不到符号
+    private volatile PermissionMode permissionModeOverride;
+                     ^
+  符号:   类 PermissionMode
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:32: 错误: 找不到符号
+    private TokenUsage sessionUsage = TokenUsage.ZERO;
+            ^
+  符号:   类 TokenUsage
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:35: 错误: 找不到符号
+    public AgentLoop(LlmClient client, ToolRegistry tools, ToolContext context) {
+                     ^
+  符号:   类 LlmClient
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:35: 错误: 找不到符号
+    public AgentLoop(LlmClient client, ToolRegistry tools, ToolContext context) {
+                                                           ^
+  符号:   类 ToolContext
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:40: 错误: 找不到符号
+    public AgentLoop(LlmClient client, ToolRegistry tools, ToolContext context,
+                     ^
+  符号:   类 LlmClient
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:40: 错误: 找不到符号
+    public AgentLoop(LlmClient client, ToolRegistry tools, ToolContext context,
+                                                           ^
+  符号:   类 ToolContext
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:46: 错误: 找不到符号
+    public AgentLoop(LlmClient client, ToolRegistry tools, ToolContext context, PermissionManager permissions) {
+                     ^
+  符号:   类 LlmClient
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:46: 错误: 找不到符号
+    public AgentLoop(LlmClient client, ToolRegistry tools, ToolContext context, PermissionManager permissions) {
+                                                           ^
+  符号:   类 ToolContext
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:46: 错误: 找不到符号
+    public AgentLoop(LlmClient client, ToolRegistry tools, ToolContext context, PermissionManager permissions) {
+                                                                                ^
+  符号:   类 PermissionManager
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:50: 错误: 找不到符号
+    public AgentLoop(LlmClient client, ToolRegistry tools, ToolContext context,
+                     ^
+  符号:   类 LlmClient
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:50: 错误: 找不到符号
+    public AgentLoop(LlmClient client, ToolRegistry tools, ToolContext context,
+                                                           ^
+  符号:   类 ToolContext
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:51: 错误: 找不到符号
+                     PermissionManager permissions, ContextManager contextManager) {
+                     ^
+  符号:   类 PermissionManager
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:55: 错误: 找不到符号
+    public AgentLoop(LlmClient client, ToolRegistry tools, ToolContext context,
+                     ^
+  符号:   类 LlmClient
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:55: 错误: 找不到符号
+    public AgentLoop(LlmClient client, ToolRegistry tools, ToolContext context,
+                                                           ^
+  符号:   类 ToolContext
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:56: 错误: 找不到符号
+                     PermissionManager permissions, ContextManager contextManager,
+                     ^
+  符号:   类 PermissionManager
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:57: 错误: 找不到符号
+                     HookEngine hooks, HookPayloadFactory hookPayloads) {
+                     ^
+  符号:   类 HookEngine
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:57: 错误: 找不到符号
+                     HookEngine hooks, HookPayloadFactory hookPayloads) {
+                                       ^
+  符号:   类 HookPayloadFactory
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:61: 错误: 找不到符号
+    public AgentLoop(LlmClient client, ToolRegistry tools, ToolContext context, PermissionManager permissions,
+                     ^
+  符号:   类 LlmClient
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:61: 错误: 找不到符号
+    public AgentLoop(LlmClient client, ToolRegistry tools, ToolContext context, PermissionManager permissions,
+                                                           ^
+  符号:   类 ToolContext
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:61: 错误: 找不到符号
+    public AgentLoop(LlmClient client, ToolRegistry tools, ToolContext context, PermissionManager permissions,
+                                                                                ^
+  符号:   类 PermissionManager
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:66: 错误: 找不到符号
+    public AgentLoop(LlmClient client, ToolRegistry tools, ToolContext context, PermissionManager permissions,
+                     ^
+  符号:   类 LlmClient
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:66: 错误: 找不到符号
+    public AgentLoop(LlmClient client, ToolRegistry tools, ToolContext context, PermissionManager permissions,
+                                                           ^
+  符号:   类 ToolContext
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:66: 错误: 找不到符号
+    public AgentLoop(LlmClient client, ToolRegistry tools, ToolContext context, PermissionManager permissions,
+                                                                                ^
+  符号:   类 PermissionManager
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:71: 错误: 找不到符号
+    public AgentLoop(LlmClient client, ToolRegistry tools, ToolContext context, PermissionManager permissions,
+                     ^
+  符号:   类 LlmClient
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:71: 错误: 找不到符号
+    public AgentLoop(LlmClient client, ToolRegistry tools, ToolContext context, PermissionManager permissions,
+                                                           ^
+  符号:   类 ToolContext
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:71: 错误: 找不到符号
+    public AgentLoop(LlmClient client, ToolRegistry tools, ToolContext context, PermissionManager permissions,
+                                                                                ^
+  符号:   类 PermissionManager
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:72: 错误: 找不到符号
+                     ContextManager contextManager, HookEngine hooks, HookPayloadFactory hookPayloads,
+                                                    ^
+  符号:   类 HookEngine
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:72: 错误: 找不到符号
+                     ContextManager contextManager, HookEngine hooks, HookPayloadFactory hookPayloads,
+                                                                      ^
+  符号:   类 HookPayloadFactory
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:79: 错误: 找不到符号
+    private AgentLoop(LlmClient client, ToolRegistry tools, ToolContext context, PermissionManager permissions,
+                      ^
+  符号:   类 LlmClient
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:79: 错误: 找不到符号
+    private AgentLoop(LlmClient client, ToolRegistry tools, ToolContext context, PermissionManager permissions,
+                                                            ^
+  符号:   类 ToolContext
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:79: 错误: 找不到符号
+    private AgentLoop(LlmClient client, ToolRegistry tools, ToolContext context, PermissionManager permissions,
+                                                                                 ^
+  符号:   类 PermissionManager
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:80: 错误: 找不到符号
+                     ContextManager contextManager, HookEngine hooks, HookPayloadFactory hookPayloads,
+                                                    ^
+  符号:   类 HookEngine
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:80: 错误: 找不到符号
+                     ContextManager contextManager, HookEngine hooks, HookPayloadFactory hookPayloads,
+                                                                      ^
+  符号:   类 HookPayloadFactory
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:83: 错误: 找不到符号
+                     PermissionMode permissionModeOverride, boolean dontAsk,
+                     ^
+  符号:   类 PermissionMode
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:100: 错误: 找不到符号
+    public static Builder builder(LlmClient client, ToolRegistry tools, ToolContext context,
+                                  ^
+  符号:   类 LlmClient
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:100: 错误: 找不到符号
+    public static Builder builder(LlmClient client, ToolRegistry tools, ToolContext context,
+                                                                        ^
+  符号:   类 ToolContext
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:101: 错误: 找不到符号
+                                  PermissionManager permissions) {
+                                  ^
+  符号:   类 PermissionManager
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:160: 错误: 找不到符号
+    public CompletableFuture<AgentOutcome> runAsync(List<ChatMessage> history, String userText, AgentMode mode,
+                                                         ^
+  符号:   类 ChatMessage
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:160: 错误: 找不到符号
+    public CompletableFuture<AgentOutcome> runAsync(List<ChatMessage> history, String userText, AgentMode mode,
+                                                                                                ^
+  符号:   类 AgentMode
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:161: 错误: 找不到符号
+                                                     CancellationToken cancellation, Consumer<AgentEvent> events) {
+                                                     ^
+  符号:   类 CancellationToken
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:161: 错误: 找不到符号
+                                                     CancellationToken cancellation, Consumer<AgentEvent> events) {
+                                                                                              ^
+  符号:   类 AgentEvent
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:160: 错误: 找不到符号
+    public CompletableFuture<AgentOutcome> runAsync(List<ChatMessage> history, String userText, AgentMode mode,
+                             ^
+  符号:   类 AgentOutcome
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:165: 错误: 找不到符号
+    public CompletableFuture<AgentOutcome> runAsync(List<ChatMessage> history, String userText, AgentMode mode,
+                                                         ^
+  符号:   类 ChatMessage
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:165: 错误: 找不到符号
+    public CompletableFuture<AgentOutcome> runAsync(List<ChatMessage> history, String userText, AgentMode mode,
+                                                                                                ^
+  符号:   类 AgentMode
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:166: 错误: 找不到符号
+                                                     List<ToolDefinition> definitions,
+                                                          ^
+  符号:   类 ToolDefinition
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:167: 错误: 找不到符号
+                                                     CancellationToken cancellation, Consumer<AgentEvent> events) {
+                                                     ^
+  符号:   类 CancellationToken
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:167: 错误: 找不到符号
+                                                     CancellationToken cancellation, Consumer<AgentEvent> events) {
+                                                                                              ^
+  符号:   类 AgentEvent
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:165: 错误: 找不到符号
+    public CompletableFuture<AgentOutcome> runAsync(List<ChatMessage> history, String userText, AgentMode mode,
+                             ^
+  符号:   类 AgentOutcome
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:177: 错误: 找不到符号
+    public AgentOutcome run(List<ChatMessage> history, String userText, AgentMode mode,
+                                 ^
+  符号:   类 ChatMessage
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:177: 错误: 找不到符号
+    public AgentOutcome run(List<ChatMessage> history, String userText, AgentMode mode,
+                                                                        ^
+  符号:   类 AgentMode
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:178: 错误: 找不到符号
+                            CancellationToken cancellation, Consumer<AgentEvent> events) {
+                            ^
+  符号:   类 CancellationToken
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:178: 错误: 找不到符号
+                            CancellationToken cancellation, Consumer<AgentEvent> events) {
+                                                                     ^
+  符号:   类 AgentEvent
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:177: 错误: 找不到符号
+    public AgentOutcome run(List<ChatMessage> history, String userText, AgentMode mode,
+           ^
+  符号:   类 AgentOutcome
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:182: 错误: 找不到符号
+    public List<ToolDefinition> definitionsFor(AgentMode mode) {
+                                               ^
+  符号:   类 AgentMode
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:182: 错误: 找不到符号
+    public List<ToolDefinition> definitionsFor(AgentMode mode) {
+                ^
+  符号:   类 ToolDefinition
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:188: 错误: 找不到符号
+    public String runToCompletion(List<ChatMessage> history, String task, CancellationToken cancellation,
+                                       ^
+  符号:   类 ChatMessage
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:188: 错误: 找不到符号
+    public String runToCompletion(List<ChatMessage> history, String task, CancellationToken cancellation,
+                                                                          ^
+  符号:   类 CancellationToken
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:189: 错误: 找不到符号
+                                  Consumer<AgentEvent> events) throws MaxTurnsReachedException {
+                                           ^
+  符号:   类 AgentEvent
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:189: 错误: 找不到符号
+                                  Consumer<AgentEvent> events) throws MaxTurnsReachedException {
+                                                                      ^
+  符号:   类 MaxTurnsReachedException
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:200: 错误: 找不到符号
+    public AgentOutcome runToCompletionOutcome(List<ChatMessage> history, String task,
+                                                    ^
+  符号:   类 ChatMessage
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:201: 错误: 找不到符号
+                                                CancellationToken cancellation,
+                                                ^
+  符号:   类 CancellationToken
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:202: 错误: 找不到符号
+                                                Consumer<AgentEvent> events) {
+                                                         ^
+  符号:   类 AgentEvent
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:200: 错误: 找不到符号
+    public AgentOutcome runToCompletionOutcome(List<ChatMessage> history, String task,
+           ^
+  符号:   类 AgentOutcome
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:208: 错误: 找不到符号
+    private AgentOutcome run(List<ChatMessage> history, String userText, AgentMode mode,
+                                  ^
+  符号:   类 ChatMessage
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:208: 错误: 找不到符号
+    private AgentOutcome run(List<ChatMessage> history, String userText, AgentMode mode,
+                                                                         ^
+  符号:   类 AgentMode
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:209: 错误: 找不到符号
+                            List<ToolDefinition> definitions,
+                                 ^
+  符号:   类 ToolDefinition
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:210: 错误: 找不到符号
+                            CancellationToken cancellation, Consumer<AgentEvent> events) {
+                            ^
+  符号:   类 CancellationToken
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:210: 错误: 找不到符号
+                            CancellationToken cancellation, Consumer<AgentEvent> events) {
+                                                                     ^
+  符号:   类 AgentEvent
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:208: 错误: 找不到符号
+    private AgentOutcome run(List<ChatMessage> history, String userText, AgentMode mode,
+            ^
+  符号:   类 AgentOutcome
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:311: 错误: 找不到符号
+    public synchronized TokenUsage sessionUsage() { return sessionUsage; }
+                        ^
+  符号:   类 TokenUsage
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:313: 错误: 找不到符号
+    public synchronized void addSessionUsage(TokenUsage usage) { sessionUsage = sessionUsage.plus(usage); }
+                                             ^
+  符号:   类 TokenUsage
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:314: 错误: 找不到符号
+    public PermissionMode permissionMode() { return permissionModeOverride; }
+           ^
+  符号:   类 PermissionMode
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:315: 错误: 找不到符号
+    public void permissionMode(PermissionMode value) { permissionModeOverride = value; }
+                               ^
+  符号:   类 PermissionMode
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:317: 错误: 找不到符号
+    private List<ToolResult> executeOrdered(List<ToolCall> calls, CancellationToken cancellation,
+                                                 ^
+  符号:   类 ToolCall
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:317: 错误: 找不到符号
+    private List<ToolResult> executeOrdered(List<ToolCall> calls, CancellationToken cancellation,
+                                                                  ^
+  符号:   类 CancellationToken
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:318: 错误: 找不到符号
+                                            Consumer<AgentEvent> events, ModelToolCatalog catalog) throws InterruptedException {
+                                                     ^
+  符号:   类 AgentEvent
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:318: 错误: 找不到符号
+                                            Consumer<AgentEvent> events, ModelToolCatalog catalog) throws InterruptedException {
+                                                                         ^
+  符号:   类 ModelToolCatalog
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:317: 错误: 找不到符号
+    private List<ToolResult> executeOrdered(List<ToolCall> calls, CancellationToken cancellation,
+                 ^
+  符号:   类 ToolResult
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:347: 错误: 找不到符号
+    private ToolResult executeAuthorized(ToolCall call, CancellationToken cancellation, ModelToolCatalog catalog) throws InterruptedException {
+                                         ^
+  符号:   类 ToolCall
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:347: 错误: 找不到符号
+    private ToolResult executeAuthorized(ToolCall call, CancellationToken cancellation, ModelToolCatalog catalog) throws InterruptedException {
+                                                        ^
+  符号:   类 CancellationToken
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:347: 错误: 找不到符号
+    private ToolResult executeAuthorized(ToolCall call, CancellationToken cancellation, ModelToolCatalog catalog) throws InterruptedException {
+                                                                                        ^
+  符号:   类 ModelToolCatalog
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:347: 错误: 找不到符号
+    private ToolResult executeAuthorized(ToolCall call, CancellationToken cancellation, ModelToolCatalog catalog) throws InterruptedException {
+            ^
+  符号:   类 ToolResult
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:382: 错误: 找不到符号
+    private HookPayload payload(HookEvent event) { return hookPayloads.create(event); }
+                                ^
+  符号:   类 HookEvent
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:382: 错误: 找不到符号
+    private HookPayload payload(HookEvent event) { return hookPayloads.create(event); }
+            ^
+  符号:   类 HookPayload
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:384: 错误: 找不到符号
+    private String reminder(AgentMode mode, int iteration) {
+                            ^
+  符号:   类 AgentMode
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:394: 错误: 找不到符号
+    private static HookPayloadFactory defaultPayloads(ToolContext context) {
+                                                      ^
+  符号:   类 ToolContext
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:394: 错误: 找不到符号
+    private static HookPayloadFactory defaultPayloads(ToolContext context) {
+                   ^
+  符号:   类 HookPayloadFactory
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:400: 错误: 找不到符号
+    private static List<ChatMessage> requestMessages(List<ChatMessage> history, String userText,
+                                                          ^
+  符号:   类 ChatMessage
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:401: 错误: 找不到符号
+                                                     List<ToolExchange> exchanges) {
+                                                          ^
+  符号:   类 ToolExchange
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:400: 错误: 找不到符号
+    private static List<ChatMessage> requestMessages(List<ChatMessage> history, String userText,
+                        ^
+  符号:   类 ChatMessage
+  位置: 类 AgentLoop
+C:\Users\Administrator\Desktop\project\star code\src\main\java\com\starcode\agent\AgentLoop.java:411: 错误: 找不到符号
+    private static void forward(StreamEvent event, Consumer<AgentEvent> events) {
+                                ^
+  符号:   类 StreamEvent
+  位置: 类 AgentLoop
+
+> Task :compileJava FAILED
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':compileJava'.
+> java.nio.file.AccessDeniedException: C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\org.jline\jline-terminal-jni\3.30.6\144438948e59a5db62b769d761d8f3b1e76f8bb7\jline-terminal-jni-3.30.6.jar
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights.
+> Get more help at https://help.gradle.org.
+
+BUILD FAILED in 30s
+1 actionable task: 1 executed
