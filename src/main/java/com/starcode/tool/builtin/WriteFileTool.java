@@ -19,8 +19,7 @@ public final class WriteFileTool implements Tool {
             if (!call.arguments().has("content")) return ToolResult.failure(call, "INVALID_ARGUMENT", "content is required");
             Path path = context.resolve(call.arguments().path("path").asText(), false);
             Path parent = path.getParent(); if (parent != null) Files.createDirectories(parent);
-            Files.writeString(path, call.arguments().path("content").asText(), StandardCharsets.UTF_8,
-                    StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+            context.writeFile(path, call.arguments().path("content").asText());
             return ToolResult.success(call, "Wrote " + context.relativize(path) + " (" + Files.size(path) + " bytes)", false);
         } catch (Exception e) { return ToolResult.failure(call, "WRITE_ERROR", e.getMessage()); }
     }

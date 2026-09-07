@@ -11,9 +11,9 @@ class CommandRegistryTest {
     @Test void builtinsAreSortedVisibleAndCaseInsensitive() {
         CommandRegistry registry = BuiltinCommands.create();
         List<String> names = registry.visibleCommands().stream().map(CommandSpec::name).toList();
-        assertEquals(18, names.size());
+        assertEquals(19, names.size());
         assertEquals(names.stream().sorted().toList(), names);
-        assertEquals(18, registry.helpText().lines().count());
+        assertEquals(19, registry.helpText().lines().count());
         FakeContext context = new FakeContext();
         assertTrue(registry.dispatch("/HeLp", context));
         assertTrue(context.output.contains("/status"));
@@ -70,8 +70,17 @@ class CommandRegistryTest {
         for (String value : values) { int position = text.indexOf(value); assertTrue(position > previous); previous = position; }
     }
 
+    @Test void rewindArgumentsGoToLocalContextWithoutAModelPrompt() {
+        var context=new FakeContext();
+        assertTrue(BuiltinCommands.create().dispatch("/rewind 12 files",context));
+        assertEquals("12 files",context.rewindArguments);
+        assertEquals("",context.prompt);
+    }
+
     private static final class FakeContext implements CommandContext {
         String output = "", prompt = ""; boolean defaultMode;
+        String rewindArguments;
+        public void rewind(String arguments) { rewindArguments=arguments; }
         public void notice(String message) { output = message; }
         public void requestExit() {}
         public void enterPlanMode() {}

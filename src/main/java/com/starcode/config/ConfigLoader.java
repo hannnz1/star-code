@@ -10,7 +10,7 @@ import java.time.Duration;
 import java.util.*;
 
 public final class ConfigLoader {
-    private static final Set<String> PROTOCOLS = Set.of("anthropic", "openai-responses");
+    private static final Set<String> PROTOCOLS = Set.of("anthropic", "openai-responses", "openai", "openai-compat");
 
     private ConfigLoader() {}
 

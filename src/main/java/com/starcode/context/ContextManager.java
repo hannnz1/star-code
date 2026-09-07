@@ -193,10 +193,14 @@ public final class ContextManager {
     public void recordUsage(TokenUsage usage, List<ChatMessage> messages) {
         lock.lock();
         try {
+            if (usage.inputTokens()==0 && usage.outputTokens()==0 && usage.cacheReadTokens()==0 && usage.cacheWriteTokens()==0) {
+                // Some compatible providers omit usage. Keep the character estimate instead of anchoring a full history at zero.
+                usageAnchor=0; anchorCharacters=0; return;
+            }
             // Responses input_tokens already includes its cached_tokens breakdown.
             // Anthropic reports uncached input and cache read/write as separate counts.
             usageAnchor = usage.inputTokens() + usage.outputTokens();
-            if (!"openai-responses".equals(protocol))
+            if (!"openai-responses".equals(protocol) && !"openai-compat".equals(protocol))
                 usageAnchor += usage.cacheReadTokens() + usage.cacheWriteTokens();
             anchorCharacters = characterCount(messages);
         } finally { lock.unlock(); }

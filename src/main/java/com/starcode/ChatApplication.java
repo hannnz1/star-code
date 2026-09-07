@@ -107,6 +107,7 @@ public final class ChatApplication implements AutoCloseable, CommandContext, Ski
         this.worktreeManager = worktreeManager;
         this.teamManager = teamManager;
         this.activeToolContext = restoredToolContext(toolContext, worktreeManager);
+        toolContext.fileHistory(new com.starcode.session.FileHistory(toolContext.workspace(), session.sessionDir()));
         this.permissions = PermissionManager.load(toolContext, ui, tools::isReadOnly);
         this.permissions.approvalObserver((request, cancellation) -> hooks.dispatch(HookEvent.NOTIFICATION,
                 basePayload(HookEvent.NOTIFICATION).with("kind", "approval")
@@ -159,6 +160,7 @@ public final class ChatApplication implements AutoCloseable, CommandContext, Ski
             AgentMode agentMode = permissions.mode() == PermissionMode.PLAN ? AgentMode.PLAN : AgentMode.DEFAULT;
             List<ToolDefinition> definitions = agent.definitionsFor(agentMode);
             List<ChatMessage> history = conversation.snapshot();
+            toolContext.fileHistory().begin(input, history);
             if (contexts.shouldAutoCompact(history)) {
                 ContextManager.CompactResult compacted = compactWithHooks(history, definitions,
                         ContextManager.Reason.AUTO, cancellation);
@@ -197,6 +199,33 @@ public final class ChatApplication implements AutoCloseable, CommandContext, Ski
     }
 
     @Override public void notice(String message) { ui.system(message); }
+    @Override public void rewind(String arguments) {
+        try {
+            if(activeCancellation!=null || subAgentTasks.list().stream().anyMatch(t -> t.status().name().equals("RUNNING")))
+                throw new IOException("Wait for active agents before rewinding");
+            var history=toolContext.fileHistory();
+            if(arguments==null||arguments.isBlank()||arguments.strip().equals("list")) {
+                var points=history.checkpoints();
+                notice(points.isEmpty()?"No file checkpoints in this session.":String.join("\n",points.stream()
+                        .map(p -> p.id()+" · "+p.label()+" ("+p.changes().size()+" file changes)").toList())
+                        +"\nUse /rewind ID files|conversation|both. Shell/external changes are not recorded.");
+                return;
+            }
+            String[] parts=arguments.strip().split("\\s+");
+            if(parts.length>2) throw new IllegalArgumentException("Usage: /rewind ID [files|conversation|both]");
+            String mode=parts.length==1?"both":parts[1];
+            if(!Set.of("files","conversation","both").contains(mode)) throw new IllegalArgumentException("Unknown rewind mode");
+            var result=history.rewind(Integer.parseInt(parts[0]),!mode.equals("conversation"));
+            if(!mode.equals("files")) {
+                // The usual UI persistence callback logs and swallows I/O failures. Rewind must report them.
+                writer.replace(result.messages());
+                conversation=conversationWithWriter(result.messages(),writer);
+                contexts=new ContextManager(session,provider); agent=newAgent(contexts,activeToolContext);
+            }
+            permissions.clearSessionApprovals();
+            notice("Restored checkpoint ("+mode+"). Files: "+result.paths());
+        } catch(Exception error) { ui.error("Rewind failed: "+safe(error)); }
+    }
     @Override public void requestExit() {
         dispatchSessionEnd();
         exitRequested = true;
@@ -274,15 +303,20 @@ public final class ChatApplication implements AutoCloseable, CommandContext, Ski
     }
 
     @Override public void clearSession() {
+        if(subAgentTasks.list().stream().anyMatch(t -> t.status().name().equals("RUNNING"))) {
+            ui.error("Wait for background agents before changing the checkpoint session"); return;
+        }
         SessionWriter replacementWriter = null;
         try {
             SessionContext replacement = SessionContext.create(toolContext.workspace());
+            var replacementHistory = new com.starcode.session.FileHistory(toolContext.workspace(), replacement.sessionDir());
             replacementWriter = SessionWriter.create(replacement, provider.model());
             Conversation replacementConversation = conversationWithWriter(List.of(), replacementWriter);
             ContextManager replacementContexts = new ContextManager(replacement, provider);
             SessionWriter previousWriter = writer;
             dispatchSessionEnd();
             session = replacement; writer = replacementWriter; replacementWriter = null;
+            toolContext.fileHistory(replacementHistory);
             conversation = replacementConversation; contexts = replacementContexts;
             permissions.clearSessionApprovals();
             hooks.resetForNewSession(); endedSessionId = null;
@@ -350,6 +384,9 @@ public final class ChatApplication implements AutoCloseable, CommandContext, Ski
     }
 
     private void resume() {
+        if(subAgentTasks.list().stream().anyMatch(t -> t.status().name().equals("RUNNING"))) {
+            ui.error("Wait for background agents before changing the checkpoint session"); return;
+        }
         ui.system("Loading sessions...");
         SessionWriter targetWriter = null;
         try {
@@ -385,7 +422,9 @@ public final class ChatApplication implements AutoCloseable, CommandContext, Ski
             }
             SessionWriter oldWriter = writer;
             dispatchSessionEnd();
+            var targetHistory = new com.starcode.session.FileHistory(toolContext.workspace(), target.sessionDir());
             session = target; writer = targetWriter; conversation = targetConversation; contexts = targetContexts;
+            toolContext.fileHistory(targetHistory);
             permissions.clearSessionApprovals();
             hooks.resetForNewSession(); endedSessionId = null;
             agent = newAgent(contexts, activeToolContext);

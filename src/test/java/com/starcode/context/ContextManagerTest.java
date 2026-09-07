@@ -13,6 +13,14 @@ import org.junit.jupiter.api.io.TempDir;
 
 class ContextManagerTest {
     @TempDir Path temp;
+    @Test void missingProviderUsageKeepsRealCompactionThresholdReachable() throws Exception {
+        var manager = new ContextManager(temp,128000,"unknown-usage");
+        var messages = List.of(new ChatMessage(ChatMessage.Role.USER,"x".repeat(350000)));
+        manager.recordUsage(new TokenUsage(1000,10,0,0),messages);
+        manager.recordUsage(TokenUsage.ZERO,messages);
+        assertEquals(100000,manager.estimate(messages));
+        assertTrue(manager.shouldAutoCompact(messages));
+    }
 
     @Test void largeResultIsOffloadedWithStablePreviewAndIdempotentFile() throws Exception {
         ContextManager manager = new ContextManager(temp, 128_000, "session-test");

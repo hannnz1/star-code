@@ -8,6 +8,16 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ConfigLoaderTest {
     @TempDir Path temp;
+    @Test void acceptsMewProtocolNamesWithoutChangingOtherProviderSettings() throws Exception {
+        Path config=temp.resolve("compat.yaml");
+        for(String protocol:java.util.List.of("openai","openai-compat")) {
+            Files.writeString(config,"providers:\n  - name: compat\n    protocol: "+protocol
+                    +"\n    base_url: http://localhost:1234/v1\n    api_key_env: PATH\n    model: local-model\n");
+            var provider=ConfigLoader.load(config).providers().getFirst();
+            assertEquals(protocol.equals("openai")?"openai-responses":protocol,provider.protocol());
+            assertEquals("http://localhost:1234/v1",provider.baseUrl());
+        }
+    }
     @Test void mainAgentBudgetsHaveBoundedDefaultsAndStrictOverrides() throws Exception {
         Path config = temp.resolve("budget.yaml");
         String provider = "providers:\n  - name: test\n    protocol: openai-responses\n    base_url: https://example.test\n    api_key_env: PATH\n    model: test\n";

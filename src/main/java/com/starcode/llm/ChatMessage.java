@@ -23,7 +23,9 @@ public record ChatMessage(
         content = content == null ? "" : content;
         toolCalls = toolCalls == null ? List.of() : List.copyOf(toolCalls);
         toolResults = toolResults == null ? List.of() : List.copyOf(toolResults);
-        protocolState = protocolState == null ? null : protocolState.deepCopy();
+        // Jackson maps an explicit JSON null to NullNode when the target type is JsonNode.
+        // It represents the same absent protocol state as the Java null used by live messages.
+        protocolState = protocolState == null || protocolState.isNull() ? null : protocolState.deepCopy();
         if (role != Role.ASSISTANT && !toolCalls.isEmpty())
             throw new IllegalArgumentException("toolCalls require an assistant message");
         if (role != Role.TOOL && !toolResults.isEmpty())

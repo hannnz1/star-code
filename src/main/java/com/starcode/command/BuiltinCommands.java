@@ -19,6 +19,8 @@ public final class BuiltinCommands {
                 (context, args) -> { context.enterDefaultMode(); context.sendPrompt(DO_PROMPT); }));
         registry.register(CommandSpec.visible("/compact", "Compact the current context", CommandKind.UI, (context, args) -> context.compactContext()));
         registry.register(CommandSpec.visible("/resume", "Resume a saved session", CommandKind.UI, (context, args) -> context.resumeSession()));
+        registry.register(CommandSpec.withArguments("/rewind", "List checkpoints or restore: /rewind ID [files|conversation|both]", CommandKind.UI,
+                (context, args) -> context.rewind(args)));
         registry.register(CommandSpec.visible("/clear", "Start a new empty session", CommandKind.UI, (context, args) -> context.clearSession()));
         registry.register(CommandSpec.visible("/help", "Show available slash commands", CommandKind.LOCAL,
                 (context, args) -> context.notice(registry.helpText())));

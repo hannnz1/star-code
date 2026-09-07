@@ -1,5 +1,7 @@
 # Star Code
 
+本轮兼容性补齐已通过233项全量测试并完成打包，源码与JAR一致性已复核。真实服务互操作、完整应用会话和跨平台运行仍待验证，使用方式与限制见 [功能对齐进度](benchmarks/feature-parity-v1/STATUS.md)。
+
 当前能力、真实 benchmark 结果及未完成事项见 [验证状态](benchmarks/STAR_CODE_CURRENT_STATUS.md)。原始性能数字不代表已验证结果。
 
 Star Code 是一个基于 Java 21 + Gradle 的终端 AI 助手，支持对话、工具调用和多步 Agent Loop。

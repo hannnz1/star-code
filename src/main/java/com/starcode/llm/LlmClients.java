@@ -9,6 +9,7 @@ public final class LlmClients {
         return switch (provider.protocol()) {
             case "anthropic" -> new AnthropicClient(provider, app);
             case "openai-responses" -> new OpenAiResponsesClient(provider, app);
+            case "openai-compat" -> new OpenAiCompatClient(provider, app);
             default -> throw new IllegalArgumentException("Unsupported protocol: " + provider.protocol());
         };
     }

@@ -18,6 +18,10 @@ proxy:
   port: 10808
 
 providers:
+  # Chat Completions-compatible service: protocol: openai-compat
+  # Set base_url to the service API root (for example http://localhost:1234/v1).
+  # The client adds /chat/completions; keep the API key in api_key_env.
+  # Mew's protocol name openai is also accepted as an alias for openai-responses.
   - name: OpenAI
     protocol: openai-responses
     base_url: https://api.openai.com/v1

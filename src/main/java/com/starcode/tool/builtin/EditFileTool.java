@@ -25,7 +25,7 @@ public final class EditFileTool implements Tool {
             if (count == 0) return ToolResult.failure(call, "NOT_FOUND", "old_text matched 0 times");
             if (count > 1) return ToolResult.failure(call, "AMBIGUOUS", "old_text matched " + count + " times");
             String updated = content.replace(oldText, call.arguments().path("new_text").asText());
-            Files.writeString(path, updated, StandardCharsets.UTF_8, StandardOpenOption.TRUNCATE_EXISTING);
+            context.writeFile(path, updated);
             return ToolResult.success(call, "Edited " + context.relativize(path), false);
         } catch (Exception e) { return ToolResult.failure(call, "EDIT_ERROR", e.getMessage()); }
     }

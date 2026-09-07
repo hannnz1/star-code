@@ -13,8 +13,9 @@ public final class BashTool implements Tool {
     public BashTool() { this(Duration.ofSeconds(30)); }
     public BashTool(Duration timeout) {
         this.timeout = timeout;
-        ObjectNode schema = Schemas.object(); Schemas.string(schema.putObject("properties"), "command", "PowerShell command to execute");
-        definition = new ToolDefinition("bash", "Run a PowerShell command in the workspace. Prefer dedicated file, glob, search, read, edit, and write tools when applicable.", Schemas.required(schema, "command"));
+        String shell = ShellRuntime.windows() ? "PowerShell" : "Bash";
+        ObjectNode schema = Schemas.object(); Schemas.string(schema.putObject("properties"), "command", shell + " command to execute");
+        definition = new ToolDefinition("bash", "Run a " + shell + " command in the workspace. Prefer dedicated file, glob, search, read, edit, and write tools when applicable.", Schemas.required(schema, "command"));
     }
     public ToolDefinition definition() { return definition; }
     public ToolResult execute(ToolCall call, ToolContext context) {
@@ -23,7 +24,7 @@ public final class BashTool implements Tool {
         if (command.isBlank()) return ToolResult.failure(call, "INVALID_ARGUMENT", "command is required");
         Process process = null;
         try (ExecutorService readers = Executors.newVirtualThreadPerTaskExecutor()) {
-            process = new ProcessBuilder("powershell.exe", "-NoLogo", "-NoProfile", "-NonInteractive", "-Command", command)
+            process = new ProcessBuilder(ShellRuntime.command(command, context.executionRoot()))
                     .directory(context.executionRoot().toFile()).start();
             Process running = process;
             Future<String> stdout = readers.submit(() -> read(running.getInputStream()));

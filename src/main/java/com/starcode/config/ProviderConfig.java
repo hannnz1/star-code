@@ -9,6 +9,9 @@ public record ProviderConfig(
         boolean thinking,
         int contextWindow
 ) {
+    public ProviderConfig {
+        if ("openai".equals(protocol)) protocol = "openai-responses";
+    }
     public ProviderConfig(String name, String protocol, String baseUrl, String apiKeyEnv,
                           String model, boolean thinking) {
         this(name, protocol, baseUrl, apiKeyEnv, model, thinking, defaultContextWindow(protocol));

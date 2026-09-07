@@ -189,6 +189,67 @@ class ProtocolToolFlowTest {
         }
     }
 
+    @Test void chatCompletionsReplaysFragmentedCallsHistoryAndUsage() throws Exception {
+        List<String> bodies = new ArrayList<>();
+        try (MockServer server = new MockServer("/chat/completions", exchange -> {
+            bodies.add(readBody(exchange));
+            respond(exchange, bodies.size() == 1 ? """
+                    data: {"choices":[{"index":0,"delta":{"content":"Checking","tool_calls":[{"index":0,"id":"c1","function":{"name":"read_file","arguments":"{\\"path\\":"}}]}}]}
+
+                    data: {"choices":[{"index":0,"delta":{"tool_calls":[{"index":0,"function":{"arguments":"\\"README.md\\"}"}}]},"finish_reason":"tool_calls"}]}
+
+                    data: {"choices":[],"usage":{"prompt_tokens":100,"completion_tokens":5,"prompt_tokens_details":{"cached_tokens":40}}}
+
+                    data: [DONE]
+
+                    """ : """
+                    data: {"choices":[{"index":0,"delta":{"content":"done"},"finish_reason":"stop"}]}
+
+                    data: [DONE]
+
+                    """);
+        })) {
+            var config = provider("openai-compat", server.baseUrl());
+            try (LlmClient client = LlmClients.create(config, app(config))) {
+                var first = client.stream(List.of(), "read", List.of(READ), ignored -> {});
+                assertEquals(new TokenUsage(100,5,0,40), first.usage());
+                assertEquals("README.md", first.toolCalls().getFirst().arguments().path("path").asText());
+                var result = ToolResult.success(first.toolCalls().getFirst(), "hello", false);
+                assertEquals("done", client.continueWithTools(List.of(), "read", first, List.of(result), List.of(READ), ignored -> {}).text());
+                client.stream(List.of(ChatMessage.assistant(first), ChatMessage.tool(List.of(result))), "continue", List.of(READ), ignored -> {});
+                var body = JSON.readTree(bodies.getFirst());
+                assertEquals("read_file", body.path("tools").get(0).path("function").path("name").asText());
+                assertTrue(body.path("stream_options").path("include_usage").asBoolean());
+                for (String followup : bodies.subList(1, bodies.size())) {
+                    var messages = JSON.readTree(followup).path("messages");
+                    boolean tool = false, assistant = false;
+                    for (var message : messages) {
+                        if (message.path("role").asText().equals("tool")) {
+                            assertEquals("c1", message.path("tool_call_id").asText()); tool = true;
+                        }
+                        if (message.has("tool_calls")) assistant = true;
+                    }
+                    assertTrue(tool && assistant);
+                }
+            }
+        }
+    }
+
+    @Test void chatCompletionsRejectsTruncatedStreamsAndPropagatesRateLimits() throws Exception {
+        for (String event : List.of(
+                "{\"choices\":[{\"delta\":{\"content\":\"partial\"}}]}",
+                "{\"choices\":[{\"delta\":{},\"finish_reason\":\"length\"}]}",
+                "{\"error\":{\"code\":\"rate_limit_exceeded\",\"message\":\"Try later\"}}")) {
+            try (MockServer server = new MockServer("/chat/completions", exchange -> respond(exchange, "data: " + event + "\n\n"))) {
+                var config = provider("openai-compat", server.baseUrl());
+                try (var client = LlmClients.create(config, app(config))) {
+                    var error = assertThrows(LlmException.class, () -> client.stream(List.of(), "hello", List.of(), ignored -> {}));
+                    assertEquals(event.contains("rate_limit") ? LlmException.Kind.RATE_LIMIT : LlmException.Kind.PROTOCOL, error.kind());
+                }
+            }
+        }
+    }
+
     private static ProviderConfig provider(String protocol, String baseUrl) {
         // PATH is guaranteed in the test process and serves only as a non-null mock
         // header value; the local server does not authenticate or expose it.

@@ -8,6 +8,28 @@ import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ConversationTest {
+    @Test void absentProtocolStateSurvivesJsonRoundTripForEveryRole() throws Exception {
+        var json = new ObjectMapper();
+        for (var role : ChatMessage.Role.values()) {
+            var original = new ChatMessage(role, "original task");
+            var restored = json.readValue(json.writeValueAsBytes(original), ChatMessage.class);
+            assertNull(restored.protocolState());
+            assertEquals(original, restored);
+            assertEquals(original, new ChatMessage(role, "original task", List.of(), List.of(), json.nullNode()));
+        }
+    }
+
+    @Test void populatedProtocolStateAndToolExchangeSurviveJsonRoundTrip() throws Exception {
+        var json = new ObjectMapper();
+        var call = new ToolCall("call-1", "read_file", json.createObjectNode().put("path", "README.md"));
+        var state = json.createArrayNode().addObject().put("type", "function_call").put("call_id", "call-1");
+        var original = new ChatMessage(ChatMessage.Role.ASSISTANT, "checking", List.of(call), List.of(), state);
+        var restored = json.readValue(json.writeValueAsBytes(original), ChatMessage.class);
+        assertEquals(original, restored);
+        state.put("type", "changed externally");
+        assertEquals("function_call", restored.protocolState().path("type").asText());
+    }
+
     @Test void onlyCommitsSuccessfulPair() {
         Conversation c = new Conversation();
         assertTrue(c.snapshot().isEmpty());

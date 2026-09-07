@@ -5,6 +5,10 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ErrorClassificationTest {
+    @Test void mewOpenAiProtocolAliasUsesResponses() {
+        var provider = new com.starcode.config.ProviderConfig("compat","openai","http://localhost","PATH","mock",false);
+        assertEquals("openai-responses",provider.protocol());
+    }
     @Test void recognizesCommonContextLimitMessages() {
         assertTrue(AbstractHttpLlmClient.isContextLength("maximum context length exceeded"));
         assertTrue(AbstractHttpLlmClient.isContextLength("context_length_exceeded"));

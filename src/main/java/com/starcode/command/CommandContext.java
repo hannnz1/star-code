@@ -13,6 +13,7 @@ public interface CommandContext {
     void compactContext();
     void resumeSession();
     void clearSession();
+    default void rewind(String arguments) { notice("File checkpoints are unavailable in this context."); }
     String permissionMode();
     TokenUsage tokenUsage();
     int toolCount();

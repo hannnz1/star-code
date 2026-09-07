@@ -9,29 +9,40 @@ public final class ToolContext {
     private final Path cwd;
     private final boolean writesAllowed;
     private final boolean bashAllowed;
+    private final java.util.concurrent.atomic.AtomicReference<com.starcode.session.FileHistory> history;
 
     public ToolContext(Path workspace) throws IOException {
         this(workspace, enabled("STAR_CODE_ALLOW_WRITES"), enabled("STAR_CODE_ALLOW_BASH"));
     }
     public ToolContext(Path workspace, boolean writesAllowed, boolean bashAllowed) throws IOException {
-        this(workspace.toRealPath(), workspace.toRealPath(), writesAllowed, bashAllowed);
+        this(workspace.toRealPath(), workspace.toRealPath(), writesAllowed, bashAllowed, new java.util.concurrent.atomic.AtomicReference<>());
     }
-    private ToolContext(Path workspace, Path cwd, boolean writesAllowed, boolean bashAllowed) {
+    private ToolContext(Path workspace, Path cwd, boolean writesAllowed, boolean bashAllowed,
+                        java.util.concurrent.atomic.AtomicReference<com.starcode.session.FileHistory> history) {
         this.workspace = workspace; this.cwd = cwd;
         this.writesAllowed = writesAllowed; this.bashAllowed = bashAllowed;
+        this.history = history;
     }
     public Path workspace() { return workspace; }
     public java.util.Optional<Path> cwd() { return java.util.Optional.of(cwd); }
     public Path executionRoot() { return cwd; }
     public boolean writesAllowed() { return writesAllowed; }
     public boolean bashAllowed() { return bashAllowed; }
+    public void fileHistory(com.starcode.session.FileHistory value) { history.set(value); }
+    public com.starcode.session.FileHistory fileHistory() { return history.get(); }
+    public void writeFile(Path path, String content) throws IOException {
+        byte[] data=content.getBytes(java.nio.charset.StandardCharsets.UTF_8);
+        var recorder=history.get();
+        if(recorder!=null) recorder.write(path,data);
+        else { Files.createDirectories(path.getParent()); Files.write(path,data); }
+    }
 
     public ToolContext withCwd(Path directory) throws IOException {
         if (directory == null) throw new IOException("Worktree cwd is required");
         Path real = directory.toRealPath();
         if (!Files.isDirectory(real)) throw new IOException("Worktree cwd is not a directory");
         if (!real.startsWith(workspace)) throw new IOException("Worktree cwd is outside the workspace sandbox");
-        return new ToolContext(workspace, real, writesAllowed, bashAllowed);
+        return new ToolContext(workspace, real, writesAllowed, bashAllowed, history);
     }
 
     public Path resolvePath(String value) throws IOException {
