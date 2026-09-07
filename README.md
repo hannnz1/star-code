@@ -1,234 +1,249 @@
 # Star Code
 
-本轮兼容性补齐已通过233项全量测试并完成打包，源码与JAR一致性已复核。真实服务互操作、完整应用会话和跨平台运行仍待验证，使用方式与限制见 [功能对齐进度](benchmarks/feature-parity-v1/STATUS.md)。
+**基于 Java 21 的终端 AI 编程助手。**
 
-当前能力、真实 benchmark 结果及未完成事项见 [验证状态](benchmarks/STAR_CODE_CURRENT_STATUS.md)。原始性能数字不代表已验证结果。
+Star Code 将大模型对话、文件工具、命令执行和多 Agent 协作组合为一个编程工作流：理解任务、读取代码、实施修改，再通过构建与测试验证结果。
 
-Star Code 是一个基于 Java 21 + Gradle 的终端 AI 助手，支持对话、工具调用和多步 Agent Loop。
+项目参考本地 Mew Code 的模块设计实现，并加入独立的 benchmark 与验证记录。当前以交互式终端为主要入口。
 
-## 功能概览
+## 核心能力
 
-- 基础对话能力
-- 文件检索与代码浏览工具
-- Bash 执行能力（受开关与超时限制）
-- 多步 Agent Loop：模型可在“观察 → 调用工具 → 查看结果 → 调整”之间自动循环
-- SubAgent 委派：定义式角色、Fork 子会话和进程内后台任务
-- Git Worktree 隔离：让指定 SubAgent 或主会话在独立工作副本中修改文件
-- Agent Team：持久化团队、共享任务、邮箱、in-process/tmux/iTerm2 队友
-- `/plan` 与 `/do` 两种工作模式
+| 模块 | 功能 |
+| --- | --- |
+| Agent Loop | 流式对话、连续工具调用、执行预算、取消与错误处理 |
+| 模型接入 | Anthropic、OpenAI Responses、Chat Completions 兼容协议 |
+| 工具系统 | 文件读取、搜索、写入、编辑与 Shell 命令执行 |
+| MCP | 接入 stdio / HTTP 服务；模型侧工具检索与完整 schema 按需加载 |
+| 上下文管理 | 大工具结果卸载、上下文压缩、恢复信息及 Token 用量记录 |
+| 会话与记忆 | 会话持久化、恢复、项目与用户级 Memory |
+| 权限管理 | 路径检查、危险命令拦截、分层规则、交互审批与会话授权 |
+| Skill / Hook | 按需加载技能；在生命周期事件中执行自动化动作 |
+| Sub-Agent | 定义式角色、Fork 子会话、后台任务与消息协作 |
+| Git Worktree / Agent Team | 独立工作副本、团队任务、成员邮箱及结果回收 |
+| 文件检查点 | 记录专用文件工具修改，支持文件和对话回退 |
 
-## 工作模式
+## 快速开始
 
-### MCP 按需加载
+### 环境要求
 
-默认以 `search_mcp_tools` 提供精简的工具名称/描述索引。模型搜索后，匹配工具的完整 schema 才加入下一轮请求；实际调用仍经过权限与 Hook 检查。加载状态属于每个 Agent，各子 Agent 独立。
+- JDK 21。
+- Git；使用 Worktree 时，工作目录必须是至少有一次提交的 Git 仓库。
+- 可访问的模型服务，以及对应的 API key。
+- 项目附带 Gradle Wrapper，无需单独安装 Gradle。
 
-设置环境变量 `STAR_CODE_MCP_LOADING=full` 可恢复全量 schema 模式；默认值为 `lazy`。服务端连接和 `tools/list` 仍在启动时执行，这项优化减少的是模型请求中的 schema 暴露，不减少 MCP 协议发现量。精简索引仍随工具数增长，按需搜索可能增加模型轮次；具体开销以 `benchmarks/mcp-lazy-v1/` 的对照实验为准。
+### 1. 获取项目并构建
 
-### Agent Loop
+Windows PowerShell：
 
-Agent Loop 会在模型返回工具调用后自动继续执行下一轮：
-
-1. 模型先生成一轮回复
-2. 如果包含工具调用，系统执行这些工具
-3. 工具结果回灌给模型
-4. 模型根据结果继续推理，直到自然完成或触发停止条件
-
-这样可以让任务自动完成，而不需要用户在每一步手动催促。
-
-### SubAgent 委派
-
-主 Agent 可以通过稳定的 `Agent` 工具把独立任务交给子 Agent：
-
-- 内置 `general-purpose`、`explore`、`plan` 三种角色
-- 支持 `~/.mewcode/agents/*.md` 和项目 `.mewcode/agents/*.md` 自定义角色，项目级同名定义优先
-- 定义式子 Agent 使用独立上下文和受角色限制的工具集
-- Fork 子 Agent 继承当前会话历史并强制进入后台执行
-- `TaskList`、`TaskGet`、`TaskStop`、`SendMessage` 用于查看、取消和继续后台任务
-- 子 Agent 复用危险命令、路径沙箱和权限规则，但保持独立的权限模式、上下文和 token 统计
-
-可在配置中用 `enable_subagent_background: false` 禁止显式后台任务和 Fork。详细设计见 `specs/013-subagent-system/`。
-
-### Git Worktree 隔离
-
-在自定义 Agent frontmatter 中设置 `isolation: worktree` 后，该子 Agent 会在临时 Git Worktree 中运行：
-
-- 子 Agent 的 Read/Write/Edit/Glob/Search/Bash 以独立副本为执行根目录
-- 没有文件变更时自动删除临时 Worktree
-- 有修改或新提交时保留目录和分支，并把位置返回给主 Agent review
-- `/worktree create/list/enter/exit/remove` 可手动管理 Worktree
-- 删除默认保护未提交修改和新提交，只有显式 `--discard` 才强制删除
-
-Worktree 功能要求启动目录已经是至少有一个提交的 Git 仓库；否则 Star Code 正常启动，但该功能会显示为未启用。它是并发开发隔离，不是 Bash 的 OS 安全沙箱。详细设计见 `specs/014-worktree-isolation/`。
-
-### Agent Team
-
-`TeamCreate` 创建持久化团队，随后可通过 `Agent` 工具传入 `team_name` 派生队友。队友在独立 Git Worktree 中运行，并使用 `TaskCreate`、`TaskUpdate`、`TaskList`、`TaskGet` 与 `SendMessage` 协作。
-
-- Windows/普通终端自动使用进程内 virtual thread 后端。
-- tmux 与 iTerm2 环境使用 `--team-member` 无界面 runner；成员完成后保持空闲，等待邮箱续派。
-- Lead 在后台轮询 mailbox，消息会显示在终端，并在下一次模型迭代作为结构化提醒注入。
-- Plan 队友完成计划后发送审批请求；Lead 用 `SendMessage` 发送 `plan_approval_response` 后才切到默认权限继续执行。
-- `/team list`、`/team info <name>`、`/team delete <name> [--force]` 是不消耗 token 的本地命令。
-
-Coordinator Mode 默认关闭，需要配置与环境变量同时开启：
-
-```yaml
-features:
-  coordinator_mode: true
-  fork_teammate: false
+```powershell
+git clone https://github.com/hannnz1/star-code.git
+cd star-code
+.\gradlew.bat test shadowJar
 ```
 
-PowerShell 启动前设置 `$env:STAR_CODE_COORDINATOR_MODE = "1"`。开启后 Lead 不能直接使用 `write_file`/`edit_file`，应把实现任务委派给团队成员。详细设计见 `specs/015-agent-team/`。
+Linux / macOS 的构建命令：
 
-### `/plan` 与 `/do`
+```bash
+git clone https://github.com/hannnz1/star-code.git
+cd star-code
+bash gradlew test shadowJar
+```
 
-Star Code 提供两种常用模式：
+生成的可执行包为 `build/libs/star-code.jar`。目前已有 Windows 全量测试记录；Linux/macOS 的完整运行验证仍待完成。
 
-| 命令 | 作用 | 工具范围 | 典型用途 |
-|---|---|---|---|
-| `/plan` | 生成计划 | 只读工具 | 分析代码、搜索信息、查看结构 |
-| `/do` | 执行计划 | 全工具 | 修改代码、落地实现、验证结果 |
+### 2. 配置模型
 
-#### `/plan`
+复制 [config.example.yaml](config.example.yaml) 为 `config.yaml`，填写模型服务信息。示例配置默认启用了本地代理；不使用该代理时，将 `proxy.enabled` 改为 `false`。
 
-- 只暴露只读工具：`Read`、`Glob`、`Search`
-- 适合先做分析、梳理思路、输出方案
-- 不会执行写入操作
+```yaml
+system_prompt: |
+  You are Star Code, a terminal AI coding assistant.
+  Reply in the user's language and verify code changes.
 
-#### `/do`
+request_timeout_seconds: 120
+proxy:
+  enabled: false
 
-- 恢复完整工具集
-- 用于执行最近一次计划
-- 适合真正修改代码并完成任务
+providers:
+  - name: My Provider
+    protocol: openai-compat
+    base_url: https://your-provider.example/v1
+    api_key_env: STAR_CODE_API_KEY
+    model: your-model-id
+    thinking: false
+    context_window: 128000
 
-## 系统提示工程化
+agent:
+  max_turns: 40
+  max_tool_calls: 100
+```
 
-Star Code 的系统提示不是单一长文本，而是按职责拆分后再统一组装。这样做的好处是：
+将示例地址、模型 ID 和上下文窗口替换为服务实际支持的值。密钥从 `api_key_env` 指定的环境变量读取。
 
-- 更容易维护和扩展
-- 不同职责之间边界清晰
-- 更容易为不同模式注入不同约束
-- 减少提示冲突，提高行为稳定性
+| `protocol` | 请求协议 |
+| --- | --- |
+| `anthropic` | Anthropic Messages |
+| `openai-responses` | OpenAI Responses |
+| `openai-compat` | Chat Completions，客户端在 API 根地址后追加 `/chat/completions` |
+| `openai` | `openai-responses` 的兼容别名 |
 
-### 组成方式
+Chat Completions 接口需支持流式工具调用；`stream_options.include_usage` 和启用思考后的 `reasoning_effort` 是否可用，取决于目标服务。
 
-系统提示由 `SystemPromptAssembler` 负责组装，当前包含这些模块：
+### 3. 启动
 
-| 模块 | 作用 |
-|---|---|
-| `identity` | 运行时配置的基础身份/角色说明 |
-| `system-constraints` | 安全边界与行为底线 |
-| `task-mode` | 终端编码代理的任务方式 |
-| `action-execution` | 先读后改、修改后验证 |
-| `tool-use` | 优先使用专用文件工具 |
-| `tone` | 输出风格要求 |
-| `text-output` | Markdown 与输出规范 |
-| `custom-instructions` | 预留的自定义指令槽位 |
-| `skills-catalog` | 已发现 Skill 的名称与描述索引 |
-| `long-term-memory` | 预留的长期记忆槽位 |
+Windows PowerShell：
 
-### 使用说明
+```powershell
+$env:STAR_CODE_API_KEY = "你的 API key"
+java -jar build/libs/star-code.jar config.yaml
+```
 
-在实际使用中，这意味着模型会被持续引导去遵守以下规则：
+Linux / macOS：
 
-- 先观察，再决定下一步
-- 改文件之前先读当前内容
-- 优先使用专用工具，而不是直接依赖 Bash
-- 发现问题要如实报告，而不是猜测
-- 输出保持简洁，并尽量使用 Markdown
+```bash
+export STAR_CODE_API_KEY="你的 API key"
+java -jar build/libs/star-code.jar config.yaml
+```
 
-### 计划模式提醒
+启动时的当前目录就是工作区。要操作其他项目，请先进入目标目录，再使用 JAR 和配置文件的绝对路径启动。
 
-`/plan` 模式下还会注入周期性的系统提醒，由 `SystemReminder` 生成。它会强调：
+## 使用方式
 
-- 只使用只读工具
-- 产出具体计划
-- 不修改文件，不运行命令
-- 不直接回答提醒本身
+可以直接输入任务，例如：
 
-这个提醒会在首轮和后续固定间隔再次出现，用来防止模型在计划阶段偏离任务边界。
+```text
+先阅读这个项目，说明入口、主要模块和测试运行方式。
+修复这个异常，补充必要的回归测试，并运行相关测试。
+将任务拆为两个可以独立修改的子任务，使用子 Agent 完成后整合验证。
+```
 
-### 如何扩展
+按 Enter 发送，Ctrl+J 换行，Shift+Tab 切换权限模式。运行中的任务可通过 Esc 取消。
 
-如果你要继续增强系统提示工程化能力，通常有三种入口：
+### 常用命令
 
-1. **新增提示模块**：在 `SystemPromptAssembler` 中增加新的 `PromptModule`
-2. **调整计划提醒**：修改 `SystemReminder` 的提醒文本或节奏
-3. **补充测试**：在 `SystemPromptEngineeringTest` 中增加覆盖，保证排序、稳定性和模式行为不回退
+| 命令 | 说明 |
+| --- | --- |
+| `/help` | 查看可用命令 |
+| `/plan` | 进入只读计划模式 |
+| `/do` | 恢复默认权限模式，并要求模型执行上一份计划 |
+| `/review` | 要求模型审查当前代码 |
+| `/status` | 查看模型、工作区、工具及 Token 用量 |
+| `/permission` | 查看当前权限模式 |
+| `/compact` | 手动压缩上下文 |
+| `/session`、`/resume` | 查看当前会话、选择恢复已保存会话 |
+| `/clear` | 开始新会话 |
+| `/rewind` | 列出检查点 |
+| `/rewind ID files` | 回退检查点对应的文件修改 |
+| `/rewind ID conversation` | 仅回退对话 |
+| `/rewind ID both` | 回退文件与对话；省略模式时默认为 both |
+| `/memory` | 查看记忆文件列表 |
+| `/skill`、`/active-skills`、`/reload-skills` | 查看、检查和刷新技能 |
+| `/hooks` | 查看已加载的 Hook |
+| `/worktree`、`/team` | 管理工作副本与团队 |
+| `/exit` | 退出 |
 
-### 实际使用建议
+## MCP 工具扩展
 
-- 如果你还不确定怎么做，先用 `/plan`
-- 如果你已经有明确方案，再切到 `/do`
-- 如果任务涉及修改文件，优先要求模型先读取目标文件，再给出编辑方案
-- 如果你在排查行为问题，可以先检查系统提示模块和提醒逻辑是否生效
+参考 [.mewcode.yaml.example](.mewcode.yaml.example) 创建项目级 `.mewcode.yaml`，配置需要连接的 MCP 服务。同名项目级服务配置覆盖用户级配置。
 
-## Hook 生命周期自动化
+默认采用模型侧按需加载：模型先通过 `search_mcp_tools` 检索工具，再在下一轮请求中获得匹配工具的完整 schema。每个 Agent 独立维护加载状态，工具执行仍经过权限和 Hook 检查。
 
-Star Code 会在会话、用户提交、模型请求、工具调用、上下文压缩和自然停止等固定时刻分派 Hook。项目级配置位于 `.mewcode/hooks.yaml`，用户级配置位于 `~/.mewcode/hooks.yaml`；示例见 `.mewcode/hooks.example.yaml`。
+需要全量暴露 schema 时，可在启动前设置：
 
-Hook 由事件、可选条件和动作组成，支持：
+```powershell
+$env:STAR_CODE_MCP_LOADING = "full"
+```
 
-- exact、glob、regex、not 条件匹配
-- shell、prompt、HTTP 动作，以及暂未执行的 subagent 占位动作
-- `only_once`、`async` 和 `timeout`
-- 对用户提交和已获权限的工具调用进行明确拦截
-- 把工具拦截作为 `HOOK_BLOCKED` 结果回灌模型，而不是终止 Agent Loop
+默认值为 `lazy`。MCP 连接和 `tools/list` 仍在启动阶段执行，按需加载减少的是发送给模型的 schema，不是服务端工具发现量。
 
-使用 `/hooks` 可查看当前加载的规则和配置来源。Hook 不会绕过危险命令黑名单、路径沙箱、权限规则或人在回路审批。
+## 上下文、会话与扩展
 
+系统提示由身份、执行规则、工具使用、输出风格、自定义指令、Skill 和 Memory 等模块组装。上下文管理结合大结果卸载、压缩摘要与恢复信息，为后续任务保留必要材料。
 
-## 安全边界
+当前版本保留以下实际配置路径；这些兼容路径不代表项目名称仍为 Mew Code：
 
-Agent Loop 不会放宽现有安全限制：
+| 内容 | 路径 |
+| --- | --- |
+| 项目指令 | `MEWCODE.md`、`.mewcode/MEWCODE.md` |
+| 用户指令 | `~/.mewcode/MEWCODE.md` |
+| 技能 | `.mewcode/skills/`、`~/.mewcode/skills/` |
+| 子 Agent 定义 | `.mewcode/agents/`、`~/.mewcode/agents/` |
+| Hook | `.mewcode/hooks.yaml`、`~/.mewcode/hooks.yaml` |
+| 会话 | `.mewcode/sessions/` |
+| 项目 / 用户记忆 | `.mewcode/memory/`、`~/.mewcode/memory/` |
+| 权限规则 | `.starcode/permissions.yaml`、`.starcode/permissions.local.yaml`、`~/.starcode/permissions.yaml` |
 
-- 文件工具只能访问启动工作区
-- 不允许绝对路径、`..` 逃逸或符号链接逃逸
-- 写入/编辑需要 `STAR_CODE_ALLOW_WRITES=true`
-- Bash 需要 `STAR_CODE_ALLOW_BASH=true`
-- Bash 仍受超时限制，不是完整 OS 沙箱
+Hook 支持条件匹配、Shell、提示词和 HTTP 动作，以及异步和超时控制；subagent 类型的 Hook 动作目前为占位能力。
 
-## 执行上限与停止条件
+## 多 Agent 协作
 
-为了避免无限循环，Agent Loop 会在以下条件下停止：
+内置 `general-purpose`、`explore`、`plan` 角色，支持自定义角色和 Fork 子会话。`TaskList`、`TaskGet`、`TaskStop` 与 `SendMessage` 用于管理后台任务。
 
-- 迭代上限：10
-- 工具调用上限：50
-- 连续未知工具阈值：2
-- 用户取消
-- Provider / 协议错误
+子 Agent 定义中设置 `isolation: worktree` 可使用独立 Git 工作副本。有修改的副本会保留供主 Agent 检查和整合；子 Agent 返回完成消息不代表整个任务已通过统一测试。
 
-## 事件与进度
+Agent Team 提供持久化团队、共享任务和成员邮箱，包含进程内、tmux 和 iTerm2 后端。Windows 默认使用进程内后端；后台执行中的子 Agent 不支持跨进程恢复。
 
-运行过程中会输出：
+可选 Coordinator Mode 需要同时配置 `features.coordinator_mode: true` 和环境变量 `STAR_CODE_COORDINATOR_MODE=1`。启用后主 Agent 将文件修改委派给团队成员。
 
-- 迭代开始
-- 文本增量
-- 工具开始 / 工具结束
-- 每轮与会话 Token 用量
-- 完成 / 取消 / 错误
+## 权限与执行边界
 
-## 已知限制
+- 专用文件工具执行路径与符号链接边界检查；命令执行受危险命令规则、权限审批和超时约束。
+- 权限弹窗支持单次允许、持久化本地规则、拒绝和本次会话允许。
+- 会话授权限定于相同工具、路径或命令参数、执行目录、Agent 身份和权限模式；新建或恢复会话时清除。
+- 主 Agent 默认最多40轮、100次工具调用，可通过 `agent` 配置调整；子 Agent 使用各自角色的轮次上限。
+- `/rewind` 只记录专用写入/编辑工具，不撤销 Shell、外部编辑、长期 Memory 或其他外部副作用；单个记录文件上限16MiB，外部修改冲突会阻止回退。
 
-- 不支持完整 OS 沙箱
-- 不支持计划审批门
-- 不支持跨会话持久化计划
-- 后台 SubAgent 不跨进程持久化，也不提供 Worktree 文件隔离
-- 当前 TUI 的 Esc 仍用于取消主轮，不支持把前台 SubAgent 手动移交后台
-- 不支持多模态
-- 工具结果不会流式输出
+可选 `STAR_CODE_SANDBOX=required` 为 Shell 子进程启用 Linux bubblewrap 或 macOS sandbox-exec。不可用时拒绝执行，不自动退回无沙箱模式；Windows 尚无该 OS 沙箱实现。网络默认禁用，可通过 `STAR_CODE_SANDBOX_NETWORK=true` 显式启用。
 
-## 开发说明
+该沙箱不覆盖主 JVM、MCP、Hook 或外部团队进程，也不限制所有系统文件读取。Linux/macOS 的实际内核隔离验证仍待完成。
 
-更多实现细节可参考 `specs/003-agent-loop/spec.md` 和 `specs/003-agent-loop/implementation-report.md`。
-# Session permission grants
+## 验证与 Benchmark
 
-The permission dialog supports Allow once, a persistent local rule, Deny once, and Allow for this session (key4). Session approval applies to the same tool and file path, or exact command/remote arguments, within the same execution directory, actor and permission mode. File content may change under a granted file-edit scope. It does not grant other files, commands, tools or Worktrees.
+已保存的 Windows 验证批次包含 **233项测试，零失败、零错误、零跳过**；对应 JAR 的279个生产类和3个资源已完成一致性核验。
 
-Session grants are held in memory and cleared when starting or resuming a session. Path checks, the command blacklist and configured rules still run before a cached grant. An explicit session grant permits repeating its scope; it is not a general classifier of safe commands. Shell execution is not an OS sandbox. See `benchmarks/permission-v1/PLAN.md` for the limited deterministic policy replay.
-# Main Agent run budgets
+| 实验 | 已有结果 | 解释范围 |
+| --- | --- | --- |
+| MCP schema | 100工具 fixture 的估计 Token 从7377降至2420，减少约67.20% | 指定 tokenizer 的 schema 估计，不是整段会话的实际账单降低比例 |
+| 多 Agent | 3个固定任务通过并行 Worktree、主 Agent 整合与统一测试 | 尚未完成单/多 Agent 配对加速比实验 |
+| 权限回放 | 10条固定轨迹的弹窗中位数从12降至8 | 注入审批选择的策略回放，不是真实用户会话统计 |
+| 长上下文 | 已保留压缩、失败、限流与中断记录 | 不足以证明8小时会话不丢上下文 |
 
-Configure `agent.max_turns` (1–200, default40) and `agent.max_tool_calls` (1–1000, default100) in config.yaml. The previous Main Agent budget was hardcoded to10 turns/50 tool calls and could stop after a successful test before returning a result. The model now sees its remaining budget; limits are still enforced and an exhausted run is not converted to success. Child Agent roles retain their own maxTurns.
+详见 [当前验证状态](benchmarks/STAR_CODE_CURRENT_STATUS.md)、[功能对齐进度](benchmarks/feature-parity-v1/STATUS.md) 和 [本地验收记录](benchmarks/results/feature-parity-accepted.json)。不同实验对应不同代码版本，请以各报告记录的 commit、fixture 和运行条件为准。
 
-Larger limits permit more model requests and spending; they are ceilings, not required call counts. To retain the previous Main budget, explicitly set10 and50. This is a production behavior change; benchmark results under the new budget must remain separate from older failed runs.
+`benchmarks/` 保存实验脚本与汇总；原始运行目录、用户配置和 Memory 默认不提交到 Git。复现实验时会在本地生成对应原始记录。
+
+## 项目结构
+
+```text
+src/main/java/com/starcode/
+├── agent/         # Agent Loop 与事件
+├── llm/           # 模型协议与流式响应
+├── tool/          # 工具注册、文件操作与 Shell
+├── mcp/           # MCP 服务连接与工具接入
+├── context/       # 上下文压缩与恢复
+├── session/       # 会话与文件检查点
+├── memory/        # 长期记忆
+├── permission/    # 权限规则与审批
+├── prompt/        # 系统提示组装
+├── command/       # Slash 命令
+├── skill/         # 技能目录与执行
+├── hook/          # 生命周期 Hook
+├── subagent/      # 子 Agent 定义与委派
+├── task/          # 后台任务
+├── worktree/      # Git 工作副本
+├── team/          # 团队协作
+└── ui/            # 终端交互
+src/test/          # 自动化测试
+benchmarks/        # 可复现实验与结果汇总
+specs/             # 模块设计与实现记录
+```
+
+## 当前边界
+
+Star Code 尚未完成与本地 Mew Code 的全部功能和性能对齐。当前未提供 Mew Code 的通用 `-p` 非交互运行、`--output-format stream-json` 或 `--remote` HTTP/WebSocket 服务入口。
+
+真实模型服务互操作、完整终端回退流程、Linux/macOS 运行与沙箱验证仍有待完成；通用多模态输入和工具结果流式输出尚未支持。公开的测试与实验记录用于说明已验证范围，不代表所有兼容性和性能目标均已达成。
+
+## 参考
+
+项目参考本地 Mew Code Java 项目的 Agent、工具、上下文及协作模块设计。Star Code 的功能状态与实验结论以本仓库实际实现和验证记录为准。
