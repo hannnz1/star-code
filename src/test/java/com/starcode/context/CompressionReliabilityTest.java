@@ -93,6 +93,20 @@ class CompressionReliabilityTest {
         assertEquals(1, manager.lastCompression().retryCount());
         assertTrue(result.messages().get(1).content().contains("730 ms"));
     }
+    @Test void rateLimitDoesNotEnterSummaryFormatRetryOrMutateHistory() throws Exception {
+        ContextManager manager = new ContextManager(temp, 128000, "rate-limit");
+        ScriptedClient client = new ScriptedClient(new LlmException(LlmException.Kind.RATE_LIMIT, "Try later"),
+                new Completion(valid()));
+        var original = history(); var copy = List.copyOf(original);
+        LlmException failure = assertThrows(LlmException.class,
+                () -> manager.compact(original, List.of(), client, ContextManager.Reason.AUTO, ignored -> {}));
+        assertEquals(LlmException.Kind.RATE_LIMIT, failure.kind());
+        assertEquals(1, client.prompts.size());
+        assertEquals(copy, original);
+        assertEquals(0, manager.lastCompression().retryCount());
+        assertEquals("FAILURE", manager.lastCompression().finalStatus());
+    }
+
     @Test void failedRetryDoesNotMutateConversationOrUsageAnchor() throws Exception {
         ContextManager manager = new ContextManager(temp, 128000, "failed");
         var original = history(); var copy = List.copyOf(original);

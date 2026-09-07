@@ -1,5 +1,7 @@
 # Star Code validation inventory
 
+> Historical inventory and append-only phase notes. The latest authoritative snapshot is [STAR_CODE_CURRENT_STATUS.md](STAR_CODE_CURRENT_STATUS.md). Earlier statements below about missing lazy loading, session grants or the 10-turn blocker have been superseded by later implementation and validation.
+
 Inventory date: 2026-09-06. This is a pre-implementation inventory, not the final validation report. Historical resume numbers are unverified hypotheses. Production code has not been changed during this inventory.
 
 ## Frozen state and environment

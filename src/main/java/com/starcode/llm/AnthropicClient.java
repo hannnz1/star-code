@@ -107,7 +107,7 @@ public final class AnthropicClient extends AbstractHttpLlmClient {
                         } else if ("input_json_delta".equals(deltaType) && calls.containsKey(index)) {
                             calls.get(index).arguments.append(delta.path("partial_json").asText());
                         }
-                    } else if ("error".equals(type)) error.set(streamError(event.path("error").path("message").asText("Streaming failed")));
+                    } else if ("error".equals(type)) error.set(streamError(event.path("error")));
                 } catch (Exception e) { error.set(new LlmException(LlmException.Kind.PROTOCOL, "Invalid Anthropic stream event", e)); }
             });
         } catch (java.io.IOException e) { throw new LlmException(LlmException.Kind.NETWORK, "Stream interrupted: " + safe(e.getMessage()), e); }

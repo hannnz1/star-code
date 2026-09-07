@@ -58,10 +58,23 @@ abstract class AbstractHttpLlmClient implements LlmClient {
 
     protected LlmException streamError(String message) {
         String safeMessage = safe(message);
+        String lower = safeMessage.toLowerCase(java.util.Locale.ROOT);
+        if (lower.contains("rate limit") || lower.contains("rate_limit")) {
+            return new LlmException(LlmException.Kind.RATE_LIMIT, safeMessage);
+        }
         if (isContextLength(safeMessage)) {
             return new LlmException(LlmException.Kind.CONTEXT_LENGTH, "Context is too long: " + safeMessage);
         }
         return new LlmException(LlmException.Kind.PROTOCOL, safeMessage);
+    }
+
+    protected LlmException streamError(JsonNode error) {
+        String message = safe(error.path("message").asText("Streaming failed"));
+        String code = error.path("code").asText(error.path("type").asText());
+        if (code.toLowerCase(java.util.Locale.ROOT).startsWith("rate_limit")) {
+            return new LlmException(LlmException.Kind.RATE_LIMIT, message);
+        }
+        return streamError(message);
     }
 
     static boolean isContextLength(String message) {

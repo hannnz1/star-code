@@ -160,6 +160,35 @@ class ProtocolToolFlowTest {
         }
     }
 
+    @Test void openAiStreamRateLimitsKeepTheirClassification() throws Exception {
+        for (String event : List.of(
+                "{\"type\":\"response.failed\",\"response\":{\"error\":{\"code\":\"rate_limit_exceeded\",\"message\":\"Try later\"}}}",
+                "{\"type\":\"error\",\"code\":\"rate_limit_exceeded\",\"message\":\"Try later\"}",
+                "{\"type\":\"error\",\"error\":{\"code\":\"rate_limit_exceeded\",\"message\":\"Try later\"}}",
+                "{\"type\":\"response.failed\",\"response\":{\"error\":{\"message\":\"Rate limit reached on tokens per min\"}}}")) {
+            try (MockServer server = new MockServer("/responses", exchange -> respond(exchange, "data: " + event + "\n\n"))) {
+                ProviderConfig provider = provider("openai-responses", server.baseUrl());
+                try (var client = new OpenAiResponsesClient(provider, app(provider))) {
+                    LlmException error = assertThrows(LlmException.class,
+                            () -> client.stream(List.of(), "hello", List.of(), ignored -> {}));
+                    assertEquals(LlmException.Kind.RATE_LIMIT, error.kind());
+                }
+            }
+        }
+    }
+
+    @Test void anthropicStreamRateLimitsKeepTheirClassification() throws Exception {
+        try (MockServer server = new MockServer("/v1/messages", exchange -> respond(exchange,
+                "data: {\"type\":\"error\",\"error\":{\"type\":\"rate_limit_error\",\"message\":\"Try later\"}}\n\n"))) {
+            ProviderConfig provider = provider("anthropic", server.baseUrl());
+            try (var client = new AnthropicClient(provider, app(provider))) {
+                LlmException error = assertThrows(LlmException.class,
+                        () -> client.stream(List.of(), "hello", List.of(), ignored -> {}));
+                assertEquals(LlmException.Kind.RATE_LIMIT, error.kind());
+            }
+        }
+    }
+
     private static ProviderConfig provider(String protocol, String baseUrl) {
         // PATH is guaranteed in the test process and serves only as a non-null mock
         // header value; the local server does not authenticate or expose it.

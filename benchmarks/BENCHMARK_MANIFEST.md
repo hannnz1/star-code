@@ -1,5 +1,7 @@
 # Benchmark claim ledger
 
+> Current consolidated snapshot: [STAR_CODE_CURRENT_STATUS.md](STAR_CODE_CURRENT_STATUS.md) (2026-09-07). The phase entries below include superseded historical states.
+
 Updated 2026-09-06. This ledger distinguishes implemented mechanisms, measured data, and untested resume hypotheses. Unfinished stages have no invented result. See STAR_CODE_VALIDATION_STATUS.md for the initial inventory and current stage notes.
 
 | Claim | Implementation commit | Benchmark commit | Dataset / sample size | Model / config | Metric and current interpretation | Raw result / report | Known limitations | Resume-safe wording |
@@ -48,3 +50,6 @@ Production session grants implemented at ba607a3b3dc489228526556127314cab8d7827c
 Ten frozen synthetic action traces,180 actions per policy: baseline ALLOW_ONCE median12 prompts versus CURRENT_SESSION median8; total130 versus80;50 session-grant reuses. Each policy denied all50 labeled risky probes, with zero unsafe auto-approvals in this finite corpus. The user choices are injected; no shell commands or models run. This is POLICY_REPLAY_COMPLETE, not real coding-session performance. Do not claim30-to-5 or general OS isolation. See results/permission-v1-final.md, CSV, per-action raw and SHA256 index.
 
 Open stages: normal Multi-Agent completion still limited by10 turns; three distinct E2E tasks/speedup unfinished. Long-horizon repeated compaction and real SWE-bench-Live cases remain NOT_RUN. Context decision remains NEEDS_MORE_TESTING. This ledger is interim, not overall validation completion.
+# Current status pointer (2026-09-07)
+
+See [STAR_CODE_CURRENT_STATUS.md](STAR_CODE_CURRENT_STATUS.md) for the current consolidated outcome. Multi-Agent now has three distinct complete E2E PASS cases; speedup remains unmeasured. Long-context post-marker-fix pilot has one completed, one interrupted and one rate-limited session; raw data and conditional scores are in results/long-context-v1-final.*. Existing entries below preserve historical states.

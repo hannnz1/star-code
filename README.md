@@ -1,5 +1,7 @@
 # Star Code
 
+当前能力、真实 benchmark 结果及未完成事项见 [验证状态](benchmarks/STAR_CODE_CURRENT_STATUS.md)。原始性能数字不代表已验证结果。
+
 Star Code 是一个基于 Java 21 + Gradle 的终端 AI 助手，支持对话、工具调用和多步 Agent Loop。
 
 ## 功能概览

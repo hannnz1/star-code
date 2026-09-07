@@ -104,8 +104,10 @@ public final class OpenAiResponsesClient extends AbstractHttpLlmClient {
                         usage.set(new TokenUsage(used.path("input_tokens").asLong(), used.path("output_tokens").asLong(), 0,
                                 used.path("input_tokens_details").path("cached_tokens").asLong()));
                     } else if ("response.failed".equals(type) || "error".equals(type)) {
-                        error.set(streamError(event.path("response").path("error").path("message")
-                                .asText(event.path("message").asText("Streaming failed"))));
+                        JsonNode failure = event.path("response").path("error");
+                        if (!failure.isObject()) failure = event.path("error");
+                        if (!failure.isObject()) failure = event;
+                        error.set(streamError(failure));
                     }
                 } catch (Exception e) { error.set(new LlmException(LlmException.Kind.PROTOCOL, "Invalid OpenAI stream event", e)); }
             });
