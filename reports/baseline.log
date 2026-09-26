@@ -1,0 +1,258 @@
+.F.....................................................................s [ 10%]
+........................................................................ [ 21%]
+........................................................................ [ 32%]
+.....s.................................................................. [ 43%]
+.........................F.............................................. [ 54%]
+...........Fs........................................................... [ 65%]
+..................F..................................................... [ 76%]
+........................................................................ [ 86%]
+........................................................................ [ 97%]
+...............                                                          [100%]
+================================== FAILURES ===================================
+_________________________ test_multi_step_autonomous __________________________
+
+self = WindowsPath('/tmp/.mewcode/sessions/default/tool-results'), mode = 511
+parents = True, exist_ok = True
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] ϵͳ�Ҳ���ָ����·����: '\\tmp\\.mewcode\\sessions\\default\\tool-results'
+
+..\..\..\..\..\..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py:1311: FileNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+self = WindowsPath('/tmp/.mewcode/sessions/default'), mode = 511, parents = True
+exist_ok = True
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] ϵͳ�Ҳ���ָ����·����: '\\tmp\\.mewcode\\sessions\\default'
+
+..\..\..\..\..\..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py:1311: FileNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+self = WindowsPath('/tmp/.mewcode/sessions'), mode = 511, parents = True
+exist_ok = True
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] ϵͳ�Ҳ���ָ����·����: '\\tmp\\.mewcode\\sessions'
+
+..\..\..\..\..\..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py:1311: FileNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+self = WindowsPath('/tmp/.mewcode'), mode = 511, parents = True, exist_ok = True
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] ϵͳ�Ҳ���ָ����·����: '\\tmp\\.mewcode'
+
+..\..\..\..\..\..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py:1311: FileNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+    @pytest.mark.asyncio
+    async def test_multi_step_autonomous():
+        """Agent �� WriteFile �� ReadFile Ȼ��ֹͣ ���� �˵��˵Ķಽ���̡�"""
+        # ���������ļ������� read-before-edit �������ļ�����
+        test_file = "/tmp/mewcode_test_hello.txt"
+        if os.path.exists(test_file):
+            os.remove(test_file)
+        client = MockLLMClient([
+            # �� 1 �֣�WriteFile
+            [
+                TextDelta("Creating file."),
+                ToolCallComplete("t1", "WriteFile", {"file_path": "/tmp/mewcode_test_hello.txt", "content": "Hello World"}),
+                StreamEnd("end_turn", input_tokens=10, output_tokens=20),
+            ],
+            # �� 2 �֣�ReadFile ������֤
+            [
+                TextDelta("Verifying content."),
+                ToolCallComplete("t2", "ReadFile", {"file_path": "/tmp/mewcode_test_hello.txt"}),
+                StreamEnd("end_turn", input_tokens=40, output_tokens=25),
+            ],
+            # �� 3 �֣����մ�
+            [
+                TextDelta("File created and verified. Content is correct."),
+                StreamEnd("end_turn", input_tokens=60, output_tokens=30),
+            ],
+        ])
+        registry = create_default_registry()
+        agent = Agent(client, registry, "anthropic", work_dir="/tmp")
+        conv = ConversationManager()
+        conv.add_user_message("Create hello.txt with Hello World, then verify")
+    
+        events = []
+>       async for e in agent.run(conv):
+
+tests\test_agent.py:158: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+mewcode\agent.py:560: in run
+    self.session_dir,
+    ^^^^^^^^^^^^^^^^
+mewcode\agent.py:363: in session_dir
+    return ensure_session_dir(self.work_dir, self.session_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+mewcode\context\manager.py:95: in ensure_session_dir
+    session_dir.mkdir(parents=True, exist_ok=True)
+..\..\..\..\..\..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py:1315: in mkdir
+    self.parent.mkdir(parents=True, exist_ok=True)
+..\..\..\..\..\..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py:1315: in mkdir
+    self.parent.mkdir(parents=True, exist_ok=True)
+..\..\..\..\..\..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py:1315: in mkdir
+    self.parent.mkdir(parents=True, exist_ok=True)
+..\..\..\..\..\..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py:1315: in mkdir
+    self.parent.mkdir(parents=True, exist_ok=True)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('/tmp'), mode = 511, parents = True, exist_ok = True
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           PermissionError: [WinError 5] �ܾ����ʡ�: '\\tmp'
+
+..\..\..\..\..\..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py:1311: PermissionError
+______________ TestLoadInstructions.test_no_files_returns_empty _______________
+
+self = <test_memory.TestLoadInstructions object at 0x0000017847C144D0>
+tmp_path = WindowsPath('C:/Users/Administrator/Documents/Codex/2026-09-26/ai-starcode-muse-coding-agent-python/outputs/muse-next/work/pytest-baseline/test_no_files_returns_empty0')
+
+    def test_no_files_returns_empty(self, tmp_path: Path) -> None:
+        result = load_instructions(str(tmp_path))
+>       assert result == ""
+E       AssertionError: assert 'Contents of ...���� snake_case' == ''
+E         
+E         + Contents of C:\Users\Administrator\Documents\Codex\2026-09-26\ai-starcode-muse-coding-agent-python\outputs\muse-next\MEWCODE.md:
+E         + 
+E         + # MewCode ��Ŀ
+E         + 
+E         + ## ����ջ
+E         + - Python...
+E         
+E         ...Full output truncated (4 lines hidden), use '-vv' to show
+
+tests\test_memory.py:151: AssertionError
+________________________ TestPathSandbox.test_home_ssh ________________________
+
+self = <mewcode.permissions.sandbox.PathSandbox object at 0x00000178486E9BE0>
+path = '~/.ssh/id_rsa'
+
+    def _resolve(self, path: str) -> tuple[Path | None, str]:
+        """������·����������ʵ����·������������ʱ����ԭ��"""
+        p = Path(path).expanduser()
+        if not p.is_absolute():
+            p = self.project_root / p
+        abs_path = p.absolute()
+    
+        try:
+>           return abs_path.resolve(strict=True), ""
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+mewcode\permissions\sandbox.py:74: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/Administrator/.ssh/id_rsa'), strict = True
+
+    def resolve(self, strict=False):
+        """
+        Make the path absolute, resolving all symlinks on the way and also
+        normalizing it.
+        """
+    
+        def check_eloop(e):
+            winerror = getattr(e, 'winerror', 0)
+            if e.errno == ELOOP or winerror == _WINERROR_CANT_RESOLVE_FILENAME:
+                raise RuntimeError("Symlink loop from %r" % e.filename)
+    
+        try:
+>           s = self._flavour.realpath(self, strict=strict)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           FileNotFoundError: [WinError 2] ϵͳ�Ҳ���ָ�����ļ���: 'C:\\Users\\Administrator\\.ssh\\id_rsa'
+
+..\..\..\..\..\..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py:1240: FileNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+self = <test_permissions.TestPathSandbox object at 0x0000017847C72240>
+
+    def test_home_ssh(self) -> None:
+>       ok, _ = self.sandbox.check("~/.ssh/id_rsa")
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_permissions.py:143: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+mewcode\permissions\sandbox.py:102: in check
+    real_path, err = self._resolve(path)
+                     ^^^^^^^^^^^^^^^^^^^
+mewcode\permissions\sandbox.py:77: in _resolve
+    while not ancestor.exists():
+              ^^^^^^^^^^^^^^^^^
+..\..\..\..\..\..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py:860: in exists
+    self.stat(follow_symlinks=follow_symlinks)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/Administrator/.ssh')
+
+    def stat(self, *, follow_symlinks=True):
+        """
+        Return the result of the stat() system call on this path, like
+        os.stat() does.
+        """
+>       return os.stat(self, follow_symlinks=follow_symlinks)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       PermissionError: [WinError 5] �ܾ����ʡ�: 'C:\\Users\\Administrator\\.ssh'
+
+..\..\..\..\..\..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py:840: PermissionError
+__________ TestSkillLoader.test_catalog_empty_without_project_skills __________
+
+self = <test_skills.TestSkillLoader object at 0x0000017847C65EB0>
+
+    def test_catalog_empty_without_project_skills(self) -> None:
+        """����Ŀ/�û� skill ���������Ƴ�ʱ��catalog Ϊ�ա�"""
+        loader = SkillLoader("/nonexistent")
+        loader.load_all()
+        catalog = loader.get_catalog()
+>       assert catalog == []
+E       AssertionError: assert [('define-goa... artifacts.')] == []
+E         
+E         Left contains one more item: ('define-goal', 'Help the user define a concrete, measurable goal before starting work, especially when they ask to us...n and goal refinement only; it does not manage durable snapshots, decision logs, or long-running execution artifacts.')
+E         Use -v to get more diff
+
+tests\test_skills.py:202: AssertionError
+------------------------------ Captured log call ------------------------------
+WARNING  mewcode.skills.loader:loader.py:84 Skipping user skill 'hello-skill': Missing YAML frontmatter (must start with ---)
+============================== warnings summary ===============================
+tests\test_consolidation.py:248
+  C:\Users\Administrator\Documents\Codex\2026-09-26\ai-starcode-muse-coding-agent-python\outputs\muse-next\tests\test_consolidation.py:248: PytestUnknownMarkWarning: Unknown pytest.mark.timeout - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.timeout(120)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_agent.py::test_multi_step_autonomous - PermissionError: [Wi...
+FAILED tests/test_memory.py::TestLoadInstructions::test_no_files_returns_empty
+FAILED tests/test_permissions.py::TestPathSandbox::test_home_ssh - Permission...
+FAILED tests/test_skills.py::TestSkillLoader::test_catalog_empty_without_project_skills
+4 failed, 656 passed, 3 skipped, 1 warning in 35.16s
