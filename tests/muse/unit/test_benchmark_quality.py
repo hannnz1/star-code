@@ -1,5 +1,7 @@
 import hashlib
+
 import pytest
+
 
 def fixture(tmp_path, body):
     data=body.encode();(tmp_path/'artifacts').mkdir();(tmp_path/'artifacts'/'1-report.md').write_bytes(data)
@@ -40,3 +42,20 @@ def test_accurate_negation_is_not_automatically_failed(tmp_path,wording):
     from benchmarks.quality import quality_checks
     artifacts,sources=fixture(tmp_path,'Atlas costs 120 USD. [Atlas](https://fixture.test/atlas) '+wording)
     assert all(quality_checks('R01',tmp_path,artifacts,sources).values())
+
+
+def test_structured_research_facts_keep_units_and_product_association():
+    from benchmarks.run import fact_covered
+
+    table = '''| Product | Price (USD; billing period unspecified) | Project limit |
+|---|---:|---:|
+| Atlas | 120 | 40 projects |
+| Birch | 180 | 75 projects |'''
+    assert fact_covered('120 USD', table, 'R02')
+    assert fact_covered('180 USD', table, 'R02')
+    assert not fact_covered('180 USD', table.replace('| Birch | 180 |', '| Birch | 190 |'), 'R02')
+    assert not fact_covered('120 USD', table.replace('Price (USD;', 'Price (EUR;'), 'R02')
+
+    fields = '# Product information: Project Cedar\n- **Price:** 240 USD\n- **Projects:** 90'
+    assert fact_covered('90 projects', fields, 'R04')
+    assert not fact_covered('90 projects', fields.replace('**Projects:** 90', '**Projects:** 19'), 'R04')

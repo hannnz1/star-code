@@ -25,10 +25,15 @@ from muse.providers.compatible import HttpModelProvider
 from muse.tasks.repository import TaskRepository
 from muse.tasks.worker import Worker
 
-from .fixtures import FACTS, make_case
 from .controls import controlled_attempt
+from .fixtures import FACTS, make_case
 from .quality import quality_checks
-from .release_manifest import write_manifest, verify_manifest, acceptance, record_settings
+from .release_manifest import (
+    acceptance,
+    record_settings,
+    verify_manifest,
+    write_manifest,
+)
 
 PRODUCT_CASES = [f"{prefix}{index:02d}" for prefix in "RD" for index in range(1, 5)] + ["C01", "C02", "C03"]
 ALL_CASES = [f"{prefix}{index:02d}" for prefix in "RDCBP" for index in range(1, 5)]
@@ -40,6 +45,20 @@ def hashes(root):
 
 def canonical(text):
     return re.sub(r"[^a-z0-9]", "", text.casefold())
+
+
+def fact_covered(fact, content, case):
+    """Accept exact facts and two unambiguous structured report forms."""
+    literal = re.sub(r"^(Project |Budget |Owner |Launch )", "", fact) if case in {"D01", "R04"} else fact
+    if canonical(literal) in canonical(content):
+        return True
+    if case == "R02" and fact in {"120 USD", "180 USD"}:
+        product, price = {"120 USD": ("Atlas", 120), "180 USD": ("Birch", 180)}[fact]
+        return bool(re.search(r"\bprice\b[^|\n]*\bUSD\b", content, re.IGNORECASE)
+                    and re.search(rf"(?im)^\|\s*{product}\s*\|\s*{price}\s*\|", content))
+    if case == "R04" and fact == "90 projects":
+        return bool(re.search(r"(?im)^\s*[-*]?\s*\*{0,2}projects\s*:\*{0,2}\s*90\b", content))
+    return False
 
 
 class WebFixture(BaseHTTPRequestHandler):
@@ -96,7 +115,7 @@ async def attempt(case, number, directory, config, origin):
     after = hashes(workspace)
     changed = [name for name in set(before)|set(after) if before.get(name) != after.get(name)]
     checks = {"expected_state": task.status == ("FAILED" if case == "C03" else "SUCCEEDED")}
-    facts = {fact:canonical(re.sub(r"^(Project |Budget |Owner |Launch )", "", fact) if case in {"D01", "R04"} else fact) in canonical(content) for fact in fixture["facts"]}
+    facts = {fact:fact_covered(fact, content, case) for fact in fixture["facts"]}
     if facts: checks["fact_coverage"] = sum(facts.values()) >= (11 if case in {"R01", "D01"} else len(facts))
     if case.startswith("R"):
         checks["source_count"] = len(sources) == {"R01":3,"R02":2,"R03":1,"R04":1}[case]
@@ -123,7 +142,7 @@ async def attempt(case, number, directory, config, origin):
     if case == "C02":
         # Hidden oracle executes outside the agent workspace; no hidden expected values are exposed.
         hidden = "import importlib.util; s=importlib.util.spec_from_file_location('candidate',r'" + str(workspace / "calculator.py") + "'); m=importlib.util.module_from_spec(s); s.loader.exec_module(m); cases=[(-9,-8,8,-8),(-8,-8,8,-8),(8,-8,8,8),(9,-8,8,8),(0,0,0,0),(1,0,0,0),(-1,0,0,0),(2.5,1.2,2.2,2.2),(1.5,1.2,2.2,1.5),(-100,10,20,10)]; assert all(m.clamp(v,l,h)==e for v,l,h,e in cases); print('10 hidden assertions passed')"
-        completed = subprocess.run([sys.executable,"-c",hidden],capture_output=True,text=True,timeout=15)
+        completed = subprocess.run([sys.executable,"-c",hidden],capture_output=True,text=True,timeout=15,check=False)  # noqa: ASYNC221 -- bounded local oracle
         checks["hidden_10_tests"] = completed.returncode == 0
         (target / "hidden-result.txt").write_text(completed.stdout+completed.stderr,encoding="utf-8")
     checks.update(quality_checks(case, target, saved, sources, final_answer=task.result))
@@ -154,7 +173,7 @@ async def run(args):
                 path=directory/"cases"/case/f"round-{number:02d}"/"result.json"
                 try:
                     records.append(await attempt(case,number,directory,args.config,origin) if case in PRODUCT_CASES else await controlled_attempt(case,number,directory,args.config))
-                except Exception as error:
+                except Exception as error:  # noqa: BLE001 -- preserve every attempted slot in the fixed denominator.
                     record={"case":case,"round":number,"track":"real-model","result":"BLOCKED","error_type":type(error).__name__}
                     path.parent.mkdir(parents=True,exist_ok=True);path.write_text(json.dumps(record),encoding="utf-8");records.append(record);print(json.dumps(record),flush=True)
                 (directory/"summary.json").write_text(json.dumps({"release_gate":"INCOMPLETE","planned_attempts":60,"completed":len(records),"records":records},ensure_ascii=False,indent=2),encoding="utf-8")
