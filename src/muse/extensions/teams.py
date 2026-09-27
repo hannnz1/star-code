@@ -16,7 +16,7 @@ class DurableTeams:
                 'dependencies': {'type': 'array', 'items': {'type': 'string'}, 'maxItems': 100},
                 'item_id': {'type': 'string'}, 'expected_revision': {'type': 'integer', 'minimum': 1}},
                 'required': ['action'], 'additionalProperties': False}), self.work)
-        registry.register(ToolDefinition(name='team_status', description='List this root task and its durable child workers. Other task groups are invisible.',
+        registry.register(ToolDefinition(name='team_status', description='List this root task and its durable child workers. Repeating an unchanged status while children are active parks this task until they finish. Other task groups are invisible.',
             parameters={'type': 'object', 'properties': {}, 'additionalProperties': False}), self.status)
         registry.register(ToolDefinition(name='team_message', risk='execute',
             description='Send a durable coordination message to a worker in this task group, with approval. Cannot message people or unrelated tasks.',
@@ -26,6 +26,12 @@ class DurableTeams:
 
     async def status(self, args, call_id):
         members = self.ctx.repo.team_members(self.ctx.task_id)
+        children = self.ctx.repo.children(self.ctx.task_id)
+        active = [(child.id, child.status) for child in children if child.status not in TERMINAL]
+        signature = [[child.id, child.status] for child in children]
+        if active and self.ctx.cp.get('team_status_last') == signature:
+            self.ctx.cp['waiting_children'] = True
+        self.ctx.cp['team_status_last'] = signature if active else []
         team = AgentTeam(name='task-' + members[0]['id'][:12], lead_agent_id=members[0]['id'])
         for member in members:
             team.add_member(TeammateInfo(name=member['id'], agent_id=member['id'], agent_type='durable-task',

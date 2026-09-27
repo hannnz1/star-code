@@ -121,6 +121,12 @@ class AgentRunner:
                     ctx.save()
                     ctx.repo.add_event(ctx.task_id, "input_required", {"question": question})
                     return AgentResult(status="WAITING_INPUT", text=question)
+            if cp.get('waiting_children'):
+                children = ctx.repo.children(task.id)
+                if any(child.status not in {'SUCCEEDED', 'FAILED', 'CANCELLED'} for child in children):
+                    ctx.save()
+                    return AgentResult(status='PAUSED', text='Waiting for delegated tasks')
+                cp.pop('waiting_children', None)
             ctx.repo.save_conversation_checkpoint(task.id, ctx.owner, ctx.epoch, cp['model_requests'], cp['messages'])
             if "final_text" in cp:
                 if task.scenario == 'coding' and cp.get('completion_repairs', 0) < 2 and cp['model_requests'] < min(ctx.settings.max_turns, cp.get('max_local_turns', ctx.settings.max_turns)):

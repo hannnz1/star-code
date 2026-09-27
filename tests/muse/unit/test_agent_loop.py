@@ -86,6 +86,39 @@ async def test_transient_model_connection_failure_retries_without_tool_dispatch(
     assert repo.calls(task.id) == []
 
 
+async def test_repeated_unchanged_team_status_parks_parent_until_children_finish(tmp_path):
+    class PollingProvider:
+        requests = 0
+
+        async def stream(self, messages, tools):
+            self.requests += 1
+            if self.requests == 1:
+                parent = repo.get(task.id)
+                repo.spawn_child(task.id, 'test-worker', parent.lease_epoch, 'spawn', 'Inspect component')
+            if self.requests <= 2:
+                yield ModelEvent(type='call', call=ToolCall(
+                    id=f'status-{self.requests}', name='team_status', arguments={}))
+            else:
+                yield ModelEvent(type='text', text='Reviewed the child result')
+            yield ModelEvent(type='done')
+
+    provider = PollingProvider()
+    repo, task, worker = runtime(tmp_path, provider)
+    await worker.run_once()
+    parked = repo.get(task.id)
+    assert parked.status == 'PAUSED'
+    assert parked.checkpoint['waiting_children'] is True
+    assert provider.requests == 2
+
+    child = repo.claim_next('child-worker')
+    assert child is not None and child.id == repo.children(task.id)[0].id
+    repo.finish(child.id, 'child-worker', child.lease_epoch, 'SUCCEEDED', 'Inspection complete')
+    await worker.run_once()
+    assert repo.get(task.id).status == 'SUCCEEDED'
+    assert provider.requests == 3
+    assert 'Inspection complete' in str(repo.get(task.id).checkpoint['messages'])
+
+
 async def test_tool_budget_stops_before_second_dispatch(tmp_path):
     scripted = ScriptedProvider([[ModelEvent(type="call", call=ToolCall(id=f"r{i}", name="read_file", arguments={"path": "hello.txt"})) for i in range(2)]])
     repo, task, worker = runtime(tmp_path, scripted, max_tool_calls=1)
