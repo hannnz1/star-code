@@ -28,7 +28,7 @@ class ToolRegistry:
         self.entries = {}
         async def ask_user(args, call_id):
             if context.repo.children(context.task_id) and re.search(
-                r'\b(?:should|can|may)\s+i\s+(?:wait|inspect|continue|review|integrate)\b',
+                r'\b(?:should|can|may)\s+i\s+(?:wait|inspect|continue|review|integrate|proceed|perform|run)\b',
                 args['question'], re.IGNORECASE,
             ):
                 return ToolResult(call_id=call_id, status='error', error_code='ROUTINE_DELEGATION',

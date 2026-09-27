@@ -97,6 +97,7 @@ async def test_ask_user_progress_statement_does_not_pause_task(tmp_path):
 @pytest.mark.parametrize('question', [
     'Should I wait for the children to finish and then continue?',
     'Should I inspect the child worktrees directly and continue?',
+    'The child commits are ready; I need approval to integrate and verify. Should I proceed?',
 ])
 async def test_ask_user_cannot_pause_for_routine_delegation_progress(tmp_path, question):
     repo, _, worker = runtime(tmp_path, ScriptedProvider([]))
