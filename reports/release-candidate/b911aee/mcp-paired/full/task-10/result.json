@@ -1,0 +1,28 @@
+{
+  "case": "task-10",
+  "mode": "FULL",
+  "checks": {
+    "completed": true,
+    "exact_result": true,
+    "exact_remote_call": true,
+    "schema_loaded": true,
+    "no_other_tools": true
+  },
+  "passed": true,
+  "model": "gpt-5.4-mini",
+  "seconds": 9.203,
+  "model_requests": 4,
+  "usage": {
+    "complete": true,
+    "input_tokens": 25450,
+    "output_tokens": 92
+  },
+  "answer": "SEV-2",
+  "error": "",
+  "remote_calls": [
+    {
+      "tool": "incidents_get_severity",
+      "entity_id": "INC-934"
+    }
+  ]
+}

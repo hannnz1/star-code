@@ -1,0 +1,263 @@
+[
+  {
+    "task_id": "088b73a6c2bc4d1e9fae51f4c732c52e",
+    "sequence": 1,
+    "type": "status",
+    "payload": {
+      "status": "QUEUED"
+    },
+    "created_at": 1790489767.8609364
+  },
+  {
+    "task_id": "088b73a6c2bc4d1e9fae51f4c732c52e",
+    "sequence": 2,
+    "type": "status",
+    "payload": {
+      "status": "RUNNING"
+    },
+    "created_at": 1790489767.8644516
+  },
+  {
+    "task_id": "088b73a6c2bc4d1e9fae51f4c732c52e",
+    "sequence": 3,
+    "type": "assistant_message",
+    "payload": {
+      "text": "",
+      "tool_count": 3
+    },
+    "created_at": 1790489769.3685539
+  },
+  {
+    "task_id": "088b73a6c2bc4d1e9fae51f4c732c52e",
+    "sequence": 4,
+    "type": "tool_prepared",
+    "payload": {
+      "arguments": {
+        "url": "http://127.0.0.1:54998/atlas"
+      },
+      "call_id": "call_46Fmh3dDMle3P8HoMMLznLzD",
+      "name": "read_url"
+    },
+    "created_at": 1790489769.3745537
+  },
+  {
+    "task_id": "088b73a6c2bc4d1e9fae51f4c732c52e",
+    "sequence": 5,
+    "type": "tool_started",
+    "payload": {
+      "call_id": "call_46Fmh3dDMle3P8HoMMLznLzD",
+      "name": "read_url"
+    },
+    "created_at": 1790489769.376589
+  },
+  {
+    "task_id": "088b73a6c2bc4d1e9fae51f4c732c52e",
+    "sequence": 6,
+    "type": "source",
+    "payload": {
+      "id": "ee62c9ac0a984433bbb1d0f7af89a2a3",
+      "retrieved_at": 1790489770.0343027,
+      "sha256": "a6a59bc365ff425fe5ff9c0b73b0495dc950d2937b8ddb577655eb96f55fb749",
+      "task_id": "088b73a6c2bc4d1e9fae51f4c732c52e",
+      "title": "atlas",
+      "url": "http://127.0.0.1:54998/atlas"
+    },
+    "created_at": 1790489770.0353084
+  },
+  {
+    "task_id": "088b73a6c2bc4d1e9fae51f4c732c52e",
+    "sequence": 7,
+    "type": "tool_result",
+    "payload": {
+      "artifact_ids": [],
+      "call_id": "call_46Fmh3dDMle3P8HoMMLznLzD",
+      "content": "{\"source_id\": \"ee62c9ac0a984433bbb1d0f7af89a2a3\", \"url\": \"http://127.0.0.1:54998/atlas\", \"title\": \"atlas\", \"text\": \"atlas\\nAtlas\\nPrice 120 USD; limit 40 projects; retention 7 days; export CSV.\", \"truncated\": false, \"blocked_requests\": 0}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "created_at": 1790489770.08744
+  },
+  {
+    "task_id": "088b73a6c2bc4d1e9fae51f4c732c52e",
+    "sequence": 8,
+    "type": "tool_prepared",
+    "payload": {
+      "arguments": {
+        "url": "http://127.0.0.1:54998/birch"
+      },
+      "call_id": "call_hg7FCn40hjWaY5mqmuj0srpy",
+      "name": "read_url"
+    },
+    "created_at": 1790489770.0940368
+  },
+  {
+    "task_id": "088b73a6c2bc4d1e9fae51f4c732c52e",
+    "sequence": 9,
+    "type": "tool_started",
+    "payload": {
+      "call_id": "call_hg7FCn40hjWaY5mqmuj0srpy",
+      "name": "read_url"
+    },
+    "created_at": 1790489770.0966141
+  },
+  {
+    "task_id": "088b73a6c2bc4d1e9fae51f4c732c52e",
+    "sequence": 10,
+    "type": "source",
+    "payload": {
+      "id": "f343f3dff1e346dd83aa03e23416d2f7",
+      "retrieved_at": 1790489770.8467746,
+      "sha256": "0172a4ffa5705d7058dd7c889837028d2b5be84f7a4007daa13bfd74c3ec9c5a",
+      "task_id": "088b73a6c2bc4d1e9fae51f4c732c52e",
+      "title": "birch",
+      "url": "http://127.0.0.1:54998/birch"
+    },
+    "created_at": 1790489770.8467746
+  },
+  {
+    "task_id": "088b73a6c2bc4d1e9fae51f4c732c52e",
+    "sequence": 11,
+    "type": "tool_result",
+    "payload": {
+      "artifact_ids": [],
+      "call_id": "call_hg7FCn40hjWaY5mqmuj0srpy",
+      "content": "{\"source_id\": \"f343f3dff1e346dd83aa03e23416d2f7\", \"url\": \"http://127.0.0.1:54998/birch\", \"title\": \"birch\", \"text\": \"birch\\nBirch\\nPrice 180 USD; limit 75 projects; retention 14 days; export JSON.\", \"truncated\": false, \"blocked_requests\": 0}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "created_at": 1790489770.909013
+  },
+  {
+    "task_id": "088b73a6c2bc4d1e9fae51f4c732c52e",
+    "sequence": 12,
+    "type": "tool_prepared",
+    "payload": {
+      "arguments": {
+        "url": "http://127.0.0.1:54998/unavailable"
+      },
+      "call_id": "call_OyVWLoqPCLxPXTJl4FChdi7h",
+      "name": "read_url"
+    },
+    "created_at": 1790489770.9176846
+  },
+  {
+    "task_id": "088b73a6c2bc4d1e9fae51f4c732c52e",
+    "sequence": 13,
+    "type": "tool_started",
+    "payload": {
+      "call_id": "call_OyVWLoqPCLxPXTJl4FChdi7h",
+      "name": "read_url"
+    },
+    "created_at": 1790489770.919709
+  },
+  {
+    "task_id": "088b73a6c2bc4d1e9fae51f4c732c52e",
+    "sequence": 14,
+    "type": "tool_result",
+    "payload": {
+      "artifact_ids": [],
+      "call_id": "call_OyVWLoqPCLxPXTJl4FChdi7h",
+      "content": "Source unavailable (HTTP 503)",
+      "error_code": "TOOL_ERROR",
+      "metadata": {},
+      "status": "error"
+    },
+    "created_at": 1790489771.6637714
+  },
+  {
+    "task_id": "088b73a6c2bc4d1e9fae51f4c732c52e",
+    "sequence": 15,
+    "type": "assistant_message",
+    "payload": {
+      "text": "",
+      "tool_count": 1
+    },
+    "created_at": 1790489773.8984404
+  },
+  {
+    "task_id": "088b73a6c2bc4d1e9fae51f4c732c52e",
+    "sequence": 16,
+    "type": "tool_prepared",
+    "payload": {
+      "arguments": {
+        "content": "# Product comparison\n\n## Sources read\n- `http://127.0.0.1:54998/atlas` — available\n- `http://127.0.0.1:54998/birch` — available\n- `http://127.0.0.1:54998/unavailable` — unavailable (HTTP 503)\n\n## Comparison\n\n| Product | Price | Project limit | Retention | Export |\n|---|---:|---:|---:|---|\n| Atlas | 120 USD | 40 projects | 7 days | CSV |\n| Birch | 180 USD | 75 projects | 14 days | JSON |\n| Unavailable | — | — | — | — |\n\n## Notes\n- Atlas is cheaper than Birch by 60 USD.\n- Birch allows more projects than Atlas and keeps data longer.\n- Atlas exports CSV, while Birch exports JSON.\n\n## Missing information\nThe `http://127.0.0.1:54998/unavailable` source could not be read because it returned HTTP 503. Its product details are unknown, so no price, project limit, retention, or export format can be compared for that source.\n",
+        "media_type": "text/markdown",
+        "name": "report.md"
+      },
+      "call_id": "call_cTNqOtdY3PK9rE6rzRbztrVL",
+      "name": "save_artifact"
+    },
+    "created_at": 1790489773.9088242
+  },
+  {
+    "task_id": "088b73a6c2bc4d1e9fae51f4c732c52e",
+    "sequence": 17,
+    "type": "tool_started",
+    "payload": {
+      "call_id": "call_cTNqOtdY3PK9rE6rzRbztrVL",
+      "name": "save_artifact"
+    },
+    "created_at": 1790489773.9108052
+  },
+  {
+    "task_id": "088b73a6c2bc4d1e9fae51f4c732c52e",
+    "sequence": 18,
+    "type": "artifact",
+    "payload": {
+      "created_at": 1790489773.9128048,
+      "id": "ef53834fb8224a6fa3ccf6abb7e07337",
+      "media_type": "text/markdown",
+      "name": "report.md",
+      "sha256": "b241fe533b3ae199c4bed6183f4cc897e8fc271681fb80ae7dce087771940001",
+      "task_id": "088b73a6c2bc4d1e9fae51f4c732c52e",
+      "version": 1
+    },
+    "created_at": 1790489773.9138238
+  },
+  {
+    "task_id": "088b73a6c2bc4d1e9fae51f4c732c52e",
+    "sequence": 19,
+    "type": "tool_result",
+    "payload": {
+      "artifact_ids": [
+        "ef53834fb8224a6fa3ccf6abb7e07337"
+      ],
+      "call_id": "call_cTNqOtdY3PK9rE6rzRbztrVL",
+      "content": "{\"id\": \"ef53834fb8224a6fa3ccf6abb7e07337\", \"task_id\": \"088b73a6c2bc4d1e9fae51f4c732c52e\", \"name\": \"report.md\", \"media_type\": \"text/markdown\", \"sha256\": \"b241fe533b3ae199c4bed6183f4cc897e8fc271681fb80ae7dce087771940001\", \"version\": 1, \"created_at\": 1790489773.9128048}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "created_at": 1790489773.9148314
+  },
+  {
+    "task_id": "088b73a6c2bc4d1e9fae51f4c732c52e",
+    "sequence": 20,
+    "type": "text_delta",
+    "payload": {
+      "text": "Done — I read all three sources and saved `report.md`.\n\nUnavailable source explicitly noted:\n- `http://127.0.0.1:54998/unavailable` returned HTTP 503, so its product details are missing and I did not invent them."
+    },
+    "created_at": 1790489775.6187162
+  },
+  {
+    "task_id": "088b73a6c2bc4d1e9fae51f4c732c52e",
+    "sequence": 21,
+    "type": "assistant_message",
+    "payload": {
+      "text": "Done — I read all three sources and saved `report.md`.\n\nUnavailable source explicitly noted:\n- `http://127.0.0.1:54998/unavailable` returned HTTP 503, so its product details are missing and I did not invent them.",
+      "tool_count": 0
+    },
+    "created_at": 1790489775.6218028
+  },
+  {
+    "task_id": "088b73a6c2bc4d1e9fae51f4c732c52e",
+    "sequence": 22,
+    "type": "status",
+    "payload": {
+      "status": "SUCCEEDED"
+    },
+    "created_at": 1790489775.6293254
+  }
+]

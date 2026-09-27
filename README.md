@@ -1,5 +1,7 @@
 # MUSE Python 集成开发版
 
+当前开发候选：0.3.0rc5。最新自动验收与待人工事项见[RC5 验收记录](docs/release-acceptance.md)和[人工 Benchmark 清单](docs/manual-benchmark-handoff.md)。历史测试数字保留在旧报告中，不能算作新候选成绩。
+
 本目录以 `mewcode-python` 为源码基线，整合 MUSE 的持久化 Worker、网页工作台、资料整理和研究能力。原 StarCode 模型、服务地址、代理和凭据来源继续使用原配置。
 
 **当前尚未达到“完整替代 Java”的验收标准。** 不覆盖桌面上的 StarCode 或 mewcode-python 原项目。来源标注保留；本地尚未确认上游主项目的根级许可证，公开分发前需核实。

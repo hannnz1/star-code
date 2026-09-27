@@ -1,0 +1,1736 @@
+[
+  {
+    "task_id": "2534b78698364ecdbe118e56353013e8",
+    "id": "call_twylOfb5aI0jtDyp26F3Sdjo",
+    "name": "mcp_search",
+    "arguments": {
+      "query": "refund REF-168 processing state",
+      "server": "fixture"
+    },
+    "risk": "read",
+    "status": "FAILED",
+    "digest": "a3e6f7a533936958372266f22599e52663673a7f5479e0f3049e11f96a2bd567",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_twylOfb5aI0jtDyp26F3Sdjo",
+      "content": "MCP catalog missing or configuration changed; rediscover with approval",
+      "error_code": "TOOL_ERROR",
+      "metadata": {},
+      "status": "error"
+    },
+    "attempts": 1,
+    "created_at": 1790489608.0237257,
+    "updated_at": 1790489608.0314567
+  },
+  {
+    "task_id": "2534b78698364ecdbe118e56353013e8",
+    "id": "call_UgUmhK716zAowocn3Gg7kKAH",
+    "name": "mcp_discover",
+    "arguments": {
+      "_connection": "1752c2407fc22e4d3c03e52064e37ec143e321d9ac816417d0e3ecc7367edeba",
+      "server": "fixture"
+    },
+    "risk": "execute",
+    "status": "DONE",
+    "digest": "7f61bee13f9a88c6410d29d8997331e94055104e740ac5044fa7787b4b1c28f3",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_UgUmhK716zAowocn3Gg7kKAH",
+      "content": "{\"tools\": [{\"name\": \"shipments_get_eta\", \"description\": \"Retrieve the estimated arrival date for a shipment\"}, {\"name\": \"repositories_get_url\", \"description\": \"Retrieve url for repositories records\"}, {\"name\": \"payments_get_region\", \"description\": \"Retrieve region for payments records\"}, {\"name\": \"repositories_get_state\", \"description\": \"Retrieve state for repositories records\"}, {\"name\": \"releases_get_tags\", \"description\": \"Retrieve tags for releases records\"}, {\"name\": \"releases_get_external_reference\", \"description\": \"Retrieve external reference for releases records\"}, {\"name\": \"subscriptions_get_created_date\", \"description\": \"Retrieve created date for subscriptions records\"}, {\"name\": \"repositories_get_region\", \"description\": \"Retrieve region for repositories records\"}, {\"name\": \"warehouses_get_description\", \"description\": \"Retrieve description for warehouses records\"}, {\"name\": \"vendors_get_url\", \"description\": \"Retrieve url for vendors records\"}, {\"name\": \"incidents_get_severity\", \"description\": \"Retrieve the severity level of an operational incident\"}, {\"name\": \"releases_get_created_date\", \"description\": \"Retrieve created date for releases records\"}, {\"name\": \"payments_get_description\", \"description\": \"Retrieve description for payments records\"}, {\"name\": \"repositories_get_tags\", \"description\": \"Retrieve tags for repositories records\"}, {\"name\": \"refunds_get_state\", \"description\": \"Retrieve the processing state of a payment refund\"}, {\"name\": \"projects_get_tags\", \"description\": \"Retrieve tags for projects records\"}, {\"name\": \"customers_get_url\", \"description\": \"Retrieve url for customers records\"}, {\"name\": \"subscriptions_get_region\", \"description\": \"Retrieve region for subscriptions records\"}, {\"name\": \"warehouses_get_owner\", \"description\": \"Retrieve owner for warehouses records\"}, {\"name\": \"projects_get_description\", \"description\": \"Retrieve description for projects records\"}, {\"name\": \"warehouses_get_external_reference\", \"description\": \"Retrieve external reference for warehouses records\"}, {\"name\": \"releases_get_name\", \"description\": \"Retrieve name for releases records\"}, {\"name\": \"subscriptions_get_state\", \"description\": \"Retrieve state for subscriptions records\"}, {\"name\": \"payments_get_tags\", \"description\": \"Retrieve tags for payments records\"}, {\"name\": \"releases_get_region\", \"description\": \"Retrieve region for releases records\"}, {\"name\": \"customers_get_external_reference\", \"description\": \"Retrieve external reference for customers records\"}, {\"name\": \"users_get_owner\", \"description\": \"Retrieve owner for users records\"}, {\"name\": \"releases_get_description\", \"description\": \"Retrieve description for releases records\"}, {\"name\": \"warehouses_get_name\", \"description\": \"Retrieve name for warehouses records\"}, {\"name\": \"users_get_tags\", \"description\": \"Retrieve tags for users records\"}, {\"name\": \"users_get_url\", \"description\": \"Retrieve url for users records\"}, {\"name\": \"payments_get_state\", \"description\": \"Retrieve state for payments records\"}, {\"name\": \"vendors_get_owner\", \"description\": \"Retrieve owner for vendors records\"}, {\"name\": \"vendors_get_created_date\", \"description\": \"Retrieve created date for vendors records\"}, {\"name\": \"projects_get_owner\", \"description\": \"Retrieve owner for projects records\"}, {\"name\": \"warehouses_get_state\", \"description\": \"Retrieve state for warehouses records\"}, {\"name\": \"releases_get_updated_date\", \"description\": \"Retrieve updated date for releases records\"}, {\"name\": \"users_get_region\", \"description\": \"Retrieve region for users records\"}, {\"name\": \"payments_get_external_reference\", \"description\": \"Retrieve external reference for payments records\"}, {\"name\": \"vendors_get_tags\", \"description\": \"Retrieve tags for vendors records\"}, {\"name\": \"vendors_get_updated_date\", \"description\": \"Retrieve updated date for vendors records\"}, {\"name\": \"users_get_state\", \"description\": \"Retrieve state for users records\"}, {\"name\": \"vendors_get_state\", \"description\": \"Retrieve state for vendors records\"}, {\"name\": \"subscriptions_get_name\", \"description\": \"Retrieve name for subscriptions records\"}, {\"name\": \"payments_get_owner\", \"description\": \"Retrieve owner for payments records\"}, {\"name\": \"subscriptions_get_updated_date\", \"description\": \"Retrieve updated date for subscriptions records\"}, {\"name\": \"customers_get_created_date\", \"description\": \"Retrieve created date for customers records\"}, {\"name\": \"invoices_get_balance\", \"description\": \"Retrieve the outstanding balance of an invoice\"}, {\"name\": \"repositories_get_created_date\", \"description\": \"Retrieve created date for repositories records\"}, {\"name\": \"payments_get_url\", \"description\": \"Retrieve url for payments records\"}, {\"name\": \"repositories_get_description\", \"description\": \"Retrieve description for repositories records\"}, {\"name\": \"payments_get_updated_date\", \"description\": \"Retrieve updated date for payments records\"}, {\"name\": \"projects_get_url\", \"description\": \"Retrieve url for projects records\"}, {\"name\": \"customers_get_tags\", \"description\": \"Retrieve tags for customers records\"}, {\"name\": \"projects_get_state\", \"description\": \"Retrieve state for projects records\"}, {\"name\": \"warehouses_get_updated_date\", \"description\": \"Retrieve updated date for warehouses records\"}, {\"name\": \"users_get_external_reference\", \"description\": \"Retrieve external reference for users records\"}, {\"name\": \"repositories_get_name\", \"description\": \"Retrieve name for repositories records\"}, {\"name\": \"warehouses_get_region\", \"description\": \"Retrieve region for warehouses records\"}, {\"name\": \"customers_get_owner\", \"description\": \"Retrieve owner for customers records\"}, {\"name\": \"users_get_description\", \"description\": \"Retrieve description for users records\"}, {\"name\": \"vendors_get_description\", \"description\": \"Retrieve description for vendors records\"}, {\"name\": \"users_get_created_date\", \"description\": \"Retrieve created date for users records\"}, {\"name\": \"vendors_get_external_reference\", \"description\": \"Retrieve external reference for vendors records\"}, {\"name\": \"projects_get_name\", \"description\": \"Retrieve name for projects records\"}, {\"name\": \"releases_get_owner\", \"description\": \"Retrieve owner for releases records\"}, {\"name\": \"tickets_get_owner\", \"description\": \"Retrieve the assigned support engineer for a support ticket\"}, {\"name\": \"payments_get_created_date\", \"description\": \"Retrieve created date for payments records\"}, {\"name\": \"customers_get_updated_date\", \"description\": \"Retrieve updated date for customers records\"}, {\"name\": \"warehouses_get_tags\", \"description\": \"Retrieve tags for warehouses records\"}, {\"name\": \"inventory_get_quantity\", \"description\": \"Retrieve the available inventory quantity for a stock item\"}, {\"name\": \"payments_get_name\", \"description\": \"Retrieve name for payments records\"}, {\"name\": \"customers_get_region\", \"description\": \"Retrieve region for customers records\"}, {\"name\": \"releases_get_url\", \"description\": \"Retrieve url for releases records\"}, {\"name\": \"vendors_get_region\", \"description\": \"Retrieve region for vendors records\"}, {\"name\": \"projects_get_external_reference\", \"description\": \"Retrieve external reference for projects records\"}, {\"name\": \"subscriptions_get_owner\", \"description\": \"Retrieve owner for subscriptions records\"}, {\"name\": \"repositories_get_updated_date\", \"description\": \"Retrieve updated date for repositories records\"}, {\"name\": \"repositories_get_external_reference\", \"description\": \"Retrieve external reference for repositories records\"}, {\"name\": \"subscriptions_get_tags\", \"description\": \"Retrieve tags for subscriptions records\"}, {\"name\": \"orders_get_status\", \"description\": \"Retrieve the fulfillment status of a purchase order\"}, {\"name\": \"builds_get_result\", \"description\": \"Retrieve the final CI build outcome\"}, {\"name\": \"subscriptions_get_url\", \"description\": \"Retrieve url for subscriptions records\"}, {\"name\": \"projects_get_region\", \"description\": \"Retrieve region for projects records\"}, {\"name\": \"certificates_get_expiry\", \"description\": \"Retrieve the expiration date of a TLS certificate\"}, {\"name\": \"customers_get_description\", \"description\": \"Retrieve description for customers records\"}, {\"name\": \"subscriptions_get_description\", \"description\": \"Retrieve description for subscriptions records\"}, {\"name\": \"warehouses_get_url\", \"description\": \"Retrieve url for warehouses records\"}, {\"name\": \"deployments_get_region\", \"description\": \"Retrieve the geographic region of a deployment\"}, {\"name\": \"subscriptions_get_external_reference\", \"description\": \"Retrieve external reference for subscriptions records\"}, {\"name\": \"releases_get_state\", \"description\": \"Retrieve state for releases records\"}, {\"name\": \"customers_get_state\", \"description\": \"Retrieve state for customers records\"}, {\"name\": \"users_get_name\", \"description\": \"Retrieve name for users records\"}, {\"name\": \"vendors_get_name\", \"description\": \"Retrieve name for vendors records\"}, {\"name\": \"users_get_updated_date\", \"description\": \"Retrieve updated date for users records\"}, {\"name\": \"projects_get_created_date\", \"description\": \"Retrieve created date for projects records\"}, {\"name\": \"repositories_get_owner\", \"description\": \"Retrieve owner for repositories records\"}, {\"name\": \"customers_get_name\", \"description\": \"Retrieve name for customers records\"}, {\"name\": \"warehouses_get_created_date\", \"description\": \"Retrieve created date for warehouses records\"}, {\"name\": \"projects_get_updated_date\", \"description\": \"Retrieve updated date for projects records\"}], \"next\": \"Use mcp_search then mcp_load for exact schemas before mcp_call.\"}",
+      "error_code": null,
+      "metadata": {
+        "mcp_catalog": {
+          "builds_get_result": {
+            "description": "Retrieve the final CI build outcome",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "certificates_get_expiry": {
+            "description": "Retrieve the expiration date of a TLS certificate",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "customers_get_created_date": {
+            "description": "Retrieve created date for customers records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "customers_get_description": {
+            "description": "Retrieve description for customers records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "customers_get_external_reference": {
+            "description": "Retrieve external reference for customers records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "customers_get_name": {
+            "description": "Retrieve name for customers records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "customers_get_owner": {
+            "description": "Retrieve owner for customers records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "customers_get_region": {
+            "description": "Retrieve region for customers records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "customers_get_state": {
+            "description": "Retrieve state for customers records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "customers_get_tags": {
+            "description": "Retrieve tags for customers records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "customers_get_updated_date": {
+            "description": "Retrieve updated date for customers records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "customers_get_url": {
+            "description": "Retrieve url for customers records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "deployments_get_region": {
+            "description": "Retrieve the geographic region of a deployment",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "incidents_get_severity": {
+            "description": "Retrieve the severity level of an operational incident",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "inventory_get_quantity": {
+            "description": "Retrieve the available inventory quantity for a stock item",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "invoices_get_balance": {
+            "description": "Retrieve the outstanding balance of an invoice",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "orders_get_status": {
+            "description": "Retrieve the fulfillment status of a purchase order",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "payments_get_created_date": {
+            "description": "Retrieve created date for payments records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "payments_get_description": {
+            "description": "Retrieve description for payments records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "payments_get_external_reference": {
+            "description": "Retrieve external reference for payments records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "payments_get_name": {
+            "description": "Retrieve name for payments records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "payments_get_owner": {
+            "description": "Retrieve owner for payments records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "payments_get_region": {
+            "description": "Retrieve region for payments records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "payments_get_state": {
+            "description": "Retrieve state for payments records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "payments_get_tags": {
+            "description": "Retrieve tags for payments records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "payments_get_updated_date": {
+            "description": "Retrieve updated date for payments records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "payments_get_url": {
+            "description": "Retrieve url for payments records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "projects_get_created_date": {
+            "description": "Retrieve created date for projects records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "projects_get_description": {
+            "description": "Retrieve description for projects records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "projects_get_external_reference": {
+            "description": "Retrieve external reference for projects records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "projects_get_name": {
+            "description": "Retrieve name for projects records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "projects_get_owner": {
+            "description": "Retrieve owner for projects records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "projects_get_region": {
+            "description": "Retrieve region for projects records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "projects_get_state": {
+            "description": "Retrieve state for projects records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "projects_get_tags": {
+            "description": "Retrieve tags for projects records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "projects_get_updated_date": {
+            "description": "Retrieve updated date for projects records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "projects_get_url": {
+            "description": "Retrieve url for projects records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "refunds_get_state": {
+            "description": "Retrieve the processing state of a payment refund",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "releases_get_created_date": {
+            "description": "Retrieve created date for releases records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "releases_get_description": {
+            "description": "Retrieve description for releases records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "releases_get_external_reference": {
+            "description": "Retrieve external reference for releases records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "releases_get_name": {
+            "description": "Retrieve name for releases records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "releases_get_owner": {
+            "description": "Retrieve owner for releases records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "releases_get_region": {
+            "description": "Retrieve region for releases records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "releases_get_state": {
+            "description": "Retrieve state for releases records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "releases_get_tags": {
+            "description": "Retrieve tags for releases records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "releases_get_updated_date": {
+            "description": "Retrieve updated date for releases records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "releases_get_url": {
+            "description": "Retrieve url for releases records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "repositories_get_created_date": {
+            "description": "Retrieve created date for repositories records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "repositories_get_description": {
+            "description": "Retrieve description for repositories records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "repositories_get_external_reference": {
+            "description": "Retrieve external reference for repositories records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "repositories_get_name": {
+            "description": "Retrieve name for repositories records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "repositories_get_owner": {
+            "description": "Retrieve owner for repositories records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "repositories_get_region": {
+            "description": "Retrieve region for repositories records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "repositories_get_state": {
+            "description": "Retrieve state for repositories records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "repositories_get_tags": {
+            "description": "Retrieve tags for repositories records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "repositories_get_updated_date": {
+            "description": "Retrieve updated date for repositories records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "repositories_get_url": {
+            "description": "Retrieve url for repositories records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "shipments_get_eta": {
+            "description": "Retrieve the estimated arrival date for a shipment",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "subscriptions_get_created_date": {
+            "description": "Retrieve created date for subscriptions records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "subscriptions_get_description": {
+            "description": "Retrieve description for subscriptions records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "subscriptions_get_external_reference": {
+            "description": "Retrieve external reference for subscriptions records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "subscriptions_get_name": {
+            "description": "Retrieve name for subscriptions records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "subscriptions_get_owner": {
+            "description": "Retrieve owner for subscriptions records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "subscriptions_get_region": {
+            "description": "Retrieve region for subscriptions records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "subscriptions_get_state": {
+            "description": "Retrieve state for subscriptions records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "subscriptions_get_tags": {
+            "description": "Retrieve tags for subscriptions records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "subscriptions_get_updated_date": {
+            "description": "Retrieve updated date for subscriptions records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "subscriptions_get_url": {
+            "description": "Retrieve url for subscriptions records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "tickets_get_owner": {
+            "description": "Retrieve the assigned support engineer for a support ticket",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "users_get_created_date": {
+            "description": "Retrieve created date for users records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "users_get_description": {
+            "description": "Retrieve description for users records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "users_get_external_reference": {
+            "description": "Retrieve external reference for users records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "users_get_name": {
+            "description": "Retrieve name for users records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "users_get_owner": {
+            "description": "Retrieve owner for users records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "users_get_region": {
+            "description": "Retrieve region for users records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "users_get_state": {
+            "description": "Retrieve state for users records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "users_get_tags": {
+            "description": "Retrieve tags for users records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "users_get_updated_date": {
+            "description": "Retrieve updated date for users records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "users_get_url": {
+            "description": "Retrieve url for users records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "vendors_get_created_date": {
+            "description": "Retrieve created date for vendors records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "vendors_get_description": {
+            "description": "Retrieve description for vendors records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "vendors_get_external_reference": {
+            "description": "Retrieve external reference for vendors records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "vendors_get_name": {
+            "description": "Retrieve name for vendors records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "vendors_get_owner": {
+            "description": "Retrieve owner for vendors records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "vendors_get_region": {
+            "description": "Retrieve region for vendors records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "vendors_get_state": {
+            "description": "Retrieve state for vendors records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "vendors_get_tags": {
+            "description": "Retrieve tags for vendors records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "vendors_get_updated_date": {
+            "description": "Retrieve updated date for vendors records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "vendors_get_url": {
+            "description": "Retrieve url for vendors records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "warehouses_get_created_date": {
+            "description": "Retrieve created date for warehouses records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "warehouses_get_description": {
+            "description": "Retrieve description for warehouses records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "warehouses_get_external_reference": {
+            "description": "Retrieve external reference for warehouses records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "warehouses_get_name": {
+            "description": "Retrieve name for warehouses records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "warehouses_get_owner": {
+            "description": "Retrieve owner for warehouses records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "warehouses_get_region": {
+            "description": "Retrieve region for warehouses records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "warehouses_get_state": {
+            "description": "Retrieve state for warehouses records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "warehouses_get_tags": {
+            "description": "Retrieve tags for warehouses records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "warehouses_get_updated_date": {
+            "description": "Retrieve updated date for warehouses records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          },
+          "warehouses_get_url": {
+            "description": "Retrieve url for warehouses records",
+            "schema": {
+              "properties": {
+                "entity_id": {
+                  "title": "Entity Id",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entity_id"
+              ],
+              "title": "lookupArguments",
+              "type": "object"
+            }
+          }
+        },
+        "mcp_fingerprint": "1752c2407fc22e4d3c03e52064e37ec143e321d9ac816417d0e3ecc7367edeba",
+        "mcp_server": "fixture"
+      },
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790489609.6192799,
+    "updated_at": 1790489609.8145442
+  },
+  {
+    "task_id": "2534b78698364ecdbe118e56353013e8",
+    "id": "call_WtiVg8DemNoqY5xskp9kZt6L",
+    "name": "mcp_search",
+    "arguments": {
+      "query": "refunds_get_state",
+      "server": "fixture"
+    },
+    "risk": "read",
+    "status": "DONE",
+    "digest": "613cab95bd343b86961debdafd6653bc5afaeae73200e5feb1207f02325fe938",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_WtiVg8DemNoqY5xskp9kZt6L",
+      "content": "[{\"name\": \"refunds_get_state\", \"description\": \"Retrieve the processing state of a payment refund\"}]",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790489611.553507,
+    "updated_at": 1790489611.5601444
+  },
+  {
+    "task_id": "2534b78698364ecdbe118e56353013e8",
+    "id": "call_N2huMgYukFpyS6nahpNC2ixP",
+    "name": "mcp_load",
+    "arguments": {
+      "server": "fixture",
+      "tools": [
+        "refunds_get_state"
+      ]
+    },
+    "risk": "read",
+    "status": "DONE",
+    "digest": "d6dcfd39a139bff308f2f1d5ed19e3796e80345391802088fde6c973604af317",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_N2huMgYukFpyS6nahpNC2ixP",
+      "content": "{\"refunds_get_state\": {\"description\": \"Retrieve the processing state of a payment refund\", \"schema\": {\"properties\": {\"entity_id\": {\"title\": \"Entity Id\", \"type\": \"string\"}}, \"required\": [\"entity_id\"], \"title\": \"lookupArguments\", \"type\": \"object\"}}}",
+      "error_code": null,
+      "metadata": {
+        "mcp_activation": {
+          "fingerprint": "1752c2407fc22e4d3c03e52064e37ec143e321d9ac816417d0e3ecc7367edeba",
+          "server": "fixture",
+          "tools": [
+            "refunds_get_state"
+          ]
+        }
+      },
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790489613.0880492,
+    "updated_at": 1790489613.0950909
+  },
+  {
+    "task_id": "2534b78698364ecdbe118e56353013e8",
+    "id": "call_TJ1wnHhprpK1JxOYEkKSDEkR",
+    "name": "mcp_call",
+    "arguments": {
+      "_connection": "1752c2407fc22e4d3c03e52064e37ec143e321d9ac816417d0e3ecc7367edeba",
+      "arguments": {
+        "entity_id": "REF-168"
+      },
+      "server": "fixture",
+      "tool": "refunds_get_state"
+    },
+    "risk": "execute",
+    "status": "DONE",
+    "digest": "29296acd81bb9333249bddc470869a2dd6b18cdbf95bf663bbbff8c3e801995b",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_TJ1wnHhprpK1JxOYEkKSDEkR",
+      "content": "PENDING_REVIEW",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790489615.1789002,
+    "updated_at": 1790489615.2963266
+  }
+]

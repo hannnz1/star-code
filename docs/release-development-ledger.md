@@ -60,3 +60,11 @@
 - Ruling: clarify the product prompt that calling an in-scope tool starts the runtime's approval flow, and that delegated commits still need the requested parent integration — observed repeat-confirmation failures justify the change — approval enforcement and the right to request missing information remain unchanged.
 - RC3 MCP campaign interrupted for this product correction; all partial files retained. No RC3 business campaign started. Final experiments will run on a fresh RC4 identity; no cross-version score pooling.
 - Test evidence for prompt behavior: RC3 three real attempts are the failing reproducer; RC4 original three-task run will determine improvement. Existing approval-resume, denial and missing-input regressions remain mandatory; a test matching prompt strings would not prove behavior.
+
+## RC4 measured results and RC5 final correction
+
+- RC4 `b911aee`: full regression 956 passed, 2 skipped, 2 dependency warnings. Three original-threshold long-context runs completed. MCP FULL 9/10 and LAZY 9/10 in one paired run; both remaining failures asked for redundant discovery approval. Business 60 attempts: 56 AUTO_PASS_REVIEW_REQUIRED, 3 P01 environment BLOCKED, 1 R04 fact-coverage FAIL. This is NOT_ACCEPTED; no score pooling.
+- Multi-Agent RC4: both children ran in all three cases; checkout children succeeded and both commits integrated but final Java verifier failed on the child-generated discount algorithm. Numeric/text parents completed and unified verifiers passed, but one child failed in each, so neither qualifies as a two-child success.
+- Ruling: compare merged contributions by Git committed blob and clean checkout, not raw working-tree bytes — observed Windows CRLF conversion made an already integrated commit look unequal. Red/green test covers true content mismatch separately. This changes scoring only, not production Git safety.
+- Ruling: clarify MCP discover's tool description to start the runtime approval directly for in-scope work — two real RC4 requests redundantly asked the user before tool invocation. The approval gate remains unchanged.
+- RC5 is required because the MCP public tool description changed. All RC4 evidence remains historical, including its business failure and multi-Agent outcomes.

@@ -1,0 +1,321 @@
+[
+  {
+    "task_id": "a9da7fcde2234d02b11f9ca685faf762",
+    "sequence": 1,
+    "type": "status",
+    "payload": {
+      "status": "QUEUED"
+    },
+    "created_at": 1790489931.0654678
+  },
+  {
+    "task_id": "a9da7fcde2234d02b11f9ca685faf762",
+    "sequence": 2,
+    "type": "status",
+    "payload": {
+      "status": "RUNNING"
+    },
+    "created_at": 1790489931.0735888
+  },
+  {
+    "task_id": "a9da7fcde2234d02b11f9ca685faf762",
+    "sequence": 3,
+    "type": "assistant_message",
+    "payload": {
+      "text": "",
+      "tool_count": 2
+    },
+    "created_at": 1790489932.6549997
+  },
+  {
+    "task_id": "a9da7fcde2234d02b11f9ca685faf762",
+    "sequence": 4,
+    "type": "tool_prepared",
+    "payload": {
+      "arguments": {
+        "path": ".",
+        "pattern": "**/*.{txt,md,pdf}"
+      },
+      "call_id": "call_Kzu3ZEKQ27ZpuwDlE74z2gpq",
+      "name": "list_files"
+    },
+    "created_at": 1790489932.6728618
+  },
+  {
+    "task_id": "a9da7fcde2234d02b11f9ca685faf762",
+    "sequence": 5,
+    "type": "tool_started",
+    "payload": {
+      "call_id": "call_Kzu3ZEKQ27ZpuwDlE74z2gpq",
+      "name": "list_files"
+    },
+    "created_at": 1790489932.675871
+  },
+  {
+    "task_id": "a9da7fcde2234d02b11f9ca685faf762",
+    "sequence": 6,
+    "type": "tool_result",
+    "payload": {
+      "artifact_ids": [],
+      "call_id": "call_Kzu3ZEKQ27ZpuwDlE74z2gpq",
+      "content": "{\"paths\": [], \"truncated\": false}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "created_at": 1790489932.6925573
+  },
+  {
+    "task_id": "a9da7fcde2234d02b11f9ca685faf762",
+    "sequence": 7,
+    "type": "tool_prepared",
+    "payload": {
+      "arguments": {
+        "path": ".",
+        "pattern": "**/*"
+      },
+      "call_id": "call_EYYj7EO6mUowhido3j4y0ExN",
+      "name": "list_files"
+    },
+    "created_at": 1790489932.707632
+  },
+  {
+    "task_id": "a9da7fcde2234d02b11f9ca685faf762",
+    "sequence": 8,
+    "type": "tool_started",
+    "payload": {
+      "call_id": "call_EYYj7EO6mUowhido3j4y0ExN",
+      "name": "list_files"
+    },
+    "created_at": 1790489932.711639
+  },
+  {
+    "task_id": "a9da7fcde2234d02b11f9ca685faf762",
+    "sequence": 9,
+    "type": "tool_result",
+    "payload": {
+      "artifact_ids": [],
+      "call_id": "call_EYYj7EO6mUowhido3j4y0ExN",
+      "content": "{\"paths\": [\"lyra.pdf\", \"orion.txt\", \"vega.md\"], \"truncated\": false}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "created_at": 1790489932.7272832
+  },
+  {
+    "task_id": "a9da7fcde2234d02b11f9ca685faf762",
+    "sequence": 10,
+    "type": "assistant_message",
+    "payload": {
+      "text": "",
+      "tool_count": 3
+    },
+    "created_at": 1790489934.4038975
+  },
+  {
+    "task_id": "a9da7fcde2234d02b11f9ca685faf762",
+    "sequence": 11,
+    "type": "tool_prepared",
+    "payload": {
+      "arguments": {
+        "path": "orion.txt"
+      },
+      "call_id": "call_TOXHd0D51JFm7kyMEk2SUql1",
+      "name": "read_file"
+    },
+    "created_at": 1790489934.4203904
+  },
+  {
+    "task_id": "a9da7fcde2234d02b11f9ca685faf762",
+    "sequence": 12,
+    "type": "tool_started",
+    "payload": {
+      "call_id": "call_TOXHd0D51JFm7kyMEk2SUql1",
+      "name": "read_file"
+    },
+    "created_at": 1790489934.4239783
+  },
+  {
+    "task_id": "a9da7fcde2234d02b11f9ca685faf762",
+    "sequence": 13,
+    "type": "tool_result",
+    "payload": {
+      "artifact_ids": [],
+      "call_id": "call_TOXHd0D51JFm7kyMEk2SUql1",
+      "content": "Project Orion\r\nBudget 42000 USD\r\nOwner Maya\r\nLaunch 2027-02-14",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "created_at": 1790489934.4373276
+  },
+  {
+    "task_id": "a9da7fcde2234d02b11f9ca685faf762",
+    "sequence": 14,
+    "type": "tool_prepared",
+    "payload": {
+      "arguments": {
+        "path": "vega.md"
+      },
+      "call_id": "call_kpQRh8zFz81DXw8J0kHQGroF",
+      "name": "read_file"
+    },
+    "created_at": 1790489934.451648
+  },
+  {
+    "task_id": "a9da7fcde2234d02b11f9ca685faf762",
+    "sequence": 15,
+    "type": "tool_started",
+    "payload": {
+      "call_id": "call_kpQRh8zFz81DXw8J0kHQGroF",
+      "name": "read_file"
+    },
+    "created_at": 1790489934.4552448
+  },
+  {
+    "task_id": "a9da7fcde2234d02b11f9ca685faf762",
+    "sequence": 16,
+    "type": "tool_result",
+    "payload": {
+      "artifact_ids": [],
+      "call_id": "call_kpQRh8zFz81DXw8J0kHQGroF",
+      "content": "Project Vega\r\nBudget 61000 USD\r\nOwner Leon\r\nLaunch 2027-03-21",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "created_at": 1790489934.467597
+  },
+  {
+    "task_id": "a9da7fcde2234d02b11f9ca685faf762",
+    "sequence": 17,
+    "type": "tool_prepared",
+    "payload": {
+      "arguments": {
+        "path": "lyra.pdf"
+      },
+      "call_id": "call_RKBeCllL2g6cxdtt4VWpLpNB",
+      "name": "read_document"
+    },
+    "created_at": 1790489934.4786294
+  },
+  {
+    "task_id": "a9da7fcde2234d02b11f9ca685faf762",
+    "sequence": 18,
+    "type": "tool_started",
+    "payload": {
+      "call_id": "call_RKBeCllL2g6cxdtt4VWpLpNB",
+      "name": "read_document"
+    },
+    "created_at": 1790489934.4816725
+  },
+  {
+    "task_id": "a9da7fcde2234d02b11f9ca685faf762",
+    "sequence": 19,
+    "type": "tool_result",
+    "payload": {
+      "artifact_ids": [],
+      "call_id": "call_RKBeCllL2g6cxdtt4VWpLpNB",
+      "content": "{\"path\": \"lyra.pdf\", \"sha256\": \"7030a98be2f9b4f5ac704ef8e7aa2d1e8de09efebde2a564a967be696de29ee3\", \"text\": \"Project Lyra\\nBudget 73000 USD\\nOwner Mira\\nLaunch 2027-04-18\\n\", \"truncated\": false}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "created_at": 1790489934.4980829
+  },
+  {
+    "task_id": "a9da7fcde2234d02b11f9ca685faf762",
+    "sequence": 20,
+    "type": "assistant_message",
+    "payload": {
+      "text": "",
+      "tool_count": 1
+    },
+    "created_at": 1790489936.4470062
+  },
+  {
+    "task_id": "a9da7fcde2234d02b11f9ca685faf762",
+    "sequence": 21,
+    "type": "tool_prepared",
+    "payload": {
+      "arguments": {
+        "content": "# Project Summary\n\n| Source file | Project name | Budget | Owner | Launch date |\n|---|---|---:|---|---|\n| orion.txt | Orion | 42000 USD | Maya | 2027-02-14 |\n| vega.md | Vega | 61000 USD | Leon | 2027-03-21 |\n| lyra.pdf | Lyra | 73000 USD | Mira | 2027-04-18 |\n",
+        "media_type": "text/markdown",
+        "name": "summary.md"
+      },
+      "call_id": "call_TNfCBISGHJLmAerbUPqlDUGi",
+      "name": "save_artifact"
+    },
+    "created_at": 1790489936.4610245
+  },
+  {
+    "task_id": "a9da7fcde2234d02b11f9ca685faf762",
+    "sequence": 22,
+    "type": "tool_started",
+    "payload": {
+      "call_id": "call_TNfCBISGHJLmAerbUPqlDUGi",
+      "name": "save_artifact"
+    },
+    "created_at": 1790489936.464808
+  },
+  {
+    "task_id": "a9da7fcde2234d02b11f9ca685faf762",
+    "sequence": 23,
+    "type": "artifact",
+    "payload": {
+      "created_at": 1790489936.4686925,
+      "id": "302579f4e6804ccb9f431b7bea5582b0",
+      "media_type": "text/markdown",
+      "name": "summary.md",
+      "sha256": "52f109e1d494ecdf3686ab3719bac687c87c10567f2ba9213044736edcd23ebf",
+      "task_id": "a9da7fcde2234d02b11f9ca685faf762",
+      "version": 1
+    },
+    "created_at": 1790489936.4703364
+  },
+  {
+    "task_id": "a9da7fcde2234d02b11f9ca685faf762",
+    "sequence": 24,
+    "type": "tool_result",
+    "payload": {
+      "artifact_ids": [
+        "302579f4e6804ccb9f431b7bea5582b0"
+      ],
+      "call_id": "call_TNfCBISGHJLmAerbUPqlDUGi",
+      "content": "{\"id\": \"302579f4e6804ccb9f431b7bea5582b0\", \"task_id\": \"a9da7fcde2234d02b11f9ca685faf762\", \"name\": \"summary.md\", \"media_type\": \"text/markdown\", \"sha256\": \"52f109e1d494ecdf3686ab3719bac687c87c10567f2ba9213044736edcd23ebf\", \"version\": 1, \"created_at\": 1790489936.4686925}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "created_at": 1790489936.4726162
+  },
+  {
+    "task_id": "a9da7fcde2234d02b11f9ca685faf762",
+    "sequence": 25,
+    "type": "text_delta",
+    "payload": {
+      "text": "Done — I read all three documents and saved `summary.md` with the project names, budgets, owners, launch dates, and source filenames.\n\nOriginal files were preserved:\n- `orion.txt`\n- `vega.md`\n- `lyra.pdf`\n\n"
+    },
+    "created_at": 1790489938.0638533
+  },
+  {
+    "task_id": "a9da7fcde2234d02b11f9ca685faf762",
+    "sequence": 26,
+    "type": "assistant_message",
+    "payload": {
+      "text": "Done — I read all three documents and saved `summary.md` with the project names, budgets, owners, launch dates, and source filenames.\n\nOriginal files were preserved:\n- `orion.txt`\n- `vega.md`\n- `lyra.pdf`\n\n",
+      "tool_count": 0
+    },
+    "created_at": 1790489938.070564
+  },
+  {
+    "task_id": "a9da7fcde2234d02b11f9ca685faf762",
+    "sequence": 27,
+    "type": "status",
+    "payload": {
+      "status": "SUCCEEDED"
+    },
+    "created_at": 1790489938.0885987
+  }
+]

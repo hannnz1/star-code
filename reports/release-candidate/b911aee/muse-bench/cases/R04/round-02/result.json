@@ -1,0 +1,49 @@
+{
+  "case": "R04",
+  "round": 2,
+  "track": "real-model",
+  "result": "AUTO_PASS_REVIEW_REQUIRED",
+  "checks": {
+    "expected_state": true,
+    "fact_coverage": true,
+    "source_count": true,
+    "citations_exist": true,
+    "report_exists": true,
+    "workspace_unchanged": true,
+    "no_dangerous_tools": true,
+    "deliverable_bytes_valid": true,
+    "source_bytes_valid": true,
+    "citations_in_deliverable": true,
+    "citation_labels_match_sources": true,
+    "explicit_doubling_consistent": true
+  },
+  "facts": {
+    "Project Cedar": true,
+    "240 USD": true,
+    "90 projects": true
+  },
+  "task_status": "SUCCEEDED",
+  "error": "",
+  "model": "gpt-5.4-mini",
+  "protocol": "openai-responses",
+  "duration_seconds": 6.437,
+  "usage": {
+    "complete": true,
+    "input_tokens": 6295,
+    "output_tokens": 168
+  },
+  "model_requests": 3,
+  "tool_calls": 2,
+  "changed_files": [],
+  "artifacts": [
+    {
+      "id": "3acb9934144249a794f50e40520a9d4e",
+      "task_id": "668b06b287134e42875846db9e598f79",
+      "name": "report.md",
+      "media_type": "text/markdown",
+      "sha256": "dc04f1078d322e51c7d814d70e21b1695726d6551f874b805afa35685a970491",
+      "version": 1,
+      "created_at": 1790489787.70288
+    }
+  ]
+}

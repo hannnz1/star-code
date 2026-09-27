@@ -1,0 +1,102 @@
+{
+  "read": {
+    "killed_pid": 51904,
+    "checkpoint_before": {
+      "active_seconds": 1.9219999999986612,
+      "messages": [
+        {
+          "content": "Read one.txt first and two.txt second with read_file. Report both facts. No modifications.",
+          "role": "user"
+        },
+        {
+          "content": "",
+          "role": "assistant",
+          "tool_calls": [
+            {
+              "arguments": {
+                "path": "one.txt"
+              },
+              "id": "call_hmKwTgDmwFXWbCaSFcBx04Qt",
+              "name": "read_file"
+            },
+            {
+              "arguments": {
+                "path": "two.txt"
+              },
+              "id": "call_f2FNQE46P4S8BhbYIZlwN5JG",
+              "name": "read_file"
+            }
+          ]
+        },
+        {
+          "content": "{\"call_id\": \"call_hmKwTgDmwFXWbCaSFcBx04Qt\", \"status\": \"success\", \"content\": \"First fact: 31\", \"artifact_ids\": [], \"error_code\": null, \"metadata\": {}}",
+          "role": "tool",
+          "tool_call_id": "call_hmKwTgDmwFXWbCaSFcBx04Qt"
+        }
+      ],
+      "model_requests": 1,
+      "pending_calls": [
+        {
+          "arguments": {
+            "path": "two.txt"
+          },
+          "id": "call_f2FNQE46P4S8BhbYIZlwN5JG",
+          "name": "read_file"
+        }
+      ],
+      "pending_hook_events": [],
+      "project_guidance": {
+        "content": "",
+        "sources": []
+      },
+      "team_message_ids": [],
+      "tool_calls": 1,
+      "usage": {
+        "complete": true,
+        "input_tokens": 2034,
+        "output_tokens": 50
+      },
+      "usage_pending": false
+    },
+    "calls_before": [
+      {
+        "task_id": "487c5336b61c483083ac317b2af05ade",
+        "id": "call_hmKwTgDmwFXWbCaSFcBx04Qt",
+        "name": "read_file",
+        "arguments": {
+          "path": "one.txt"
+        },
+        "risk": "read",
+        "status": "DONE",
+        "digest": "216957840308d93b944244387f5dc5b0166c65d42fda40d7fbcc4d6bb9a53679",
+        "result": {
+          "artifact_ids": [],
+          "call_id": "call_hmKwTgDmwFXWbCaSFcBx04Qt",
+          "content": "First fact: 31",
+          "error_code": null,
+          "metadata": {},
+          "status": "success"
+        },
+        "attempts": 1,
+        "created_at": 1790489725.0530736,
+        "updated_at": 1790489725.0675955
+      },
+      {
+        "task_id": "487c5336b61c483083ac317b2af05ade",
+        "id": "call_f2FNQE46P4S8BhbYIZlwN5JG",
+        "name": "read_file",
+        "arguments": {
+          "path": "two.txt"
+        },
+        "risk": "read",
+        "status": "EXECUTING",
+        "digest": "0fc498a045f8f48b84291788a2f0adb69a6e727d74895cdf295af21441033f38",
+        "result": null,
+        "attempts": 1,
+        "created_at": 1790489725.0737436,
+        "updated_at": 1790489725.075745
+      }
+    ],
+    "recovered_status": "QUEUED"
+  }
+}

@@ -1,0 +1,180 @@
+{
+  "fa47ac65c6ba43b7a8e9d04f44defd0a": [
+    {
+      "task_id": "fa47ac65c6ba43b7a8e9d04f44defd0a",
+      "sequence": 1,
+      "type": "status",
+      "payload": {
+        "status": "QUEUED"
+      },
+      "created_at": 1790489748.825723
+    },
+    {
+      "task_id": "fa47ac65c6ba43b7a8e9d04f44defd0a",
+      "sequence": 2,
+      "type": "status",
+      "payload": {
+        "status": "RUNNING"
+      },
+      "created_at": 1790489748.8293605
+    },
+    {
+      "task_id": "fa47ac65c6ba43b7a8e9d04f44defd0a",
+      "sequence": 3,
+      "type": "assistant_message",
+      "payload": {
+        "text": "",
+        "tool_count": 2
+      },
+      "created_at": 1790489750.2830608
+    },
+    {
+      "task_id": "fa47ac65c6ba43b7a8e9d04f44defd0a",
+      "sequence": 4,
+      "type": "tool_prepared",
+      "payload": {
+        "arguments": {
+          "query": "PREFERENCE_MANDARIN_3197"
+        },
+        "call_id": "call_5pRe8tlrypZjNLxhVaq98fb1",
+        "name": "search_memory"
+      },
+      "created_at": 1790489750.2895684
+    },
+    {
+      "task_id": "fa47ac65c6ba43b7a8e9d04f44defd0a",
+      "sequence": 5,
+      "type": "tool_started",
+      "payload": {
+        "call_id": "call_5pRe8tlrypZjNLxhVaq98fb1",
+        "name": "search_memory"
+      },
+      "created_at": 1790489750.291569
+    },
+    {
+      "task_id": "fa47ac65c6ba43b7a8e9d04f44defd0a",
+      "sequence": 6,
+      "type": "tool_result",
+      "payload": {
+        "artifact_ids": [],
+        "call_id": "call_5pRe8tlrypZjNLxhVaq98fb1",
+        "content": "[{\"id\": \"facd0604a90443d1aa355c8a7ea47b74\", \"scope\": \"project\", \"workspace_id\": \"23ee56443ac649bbb7af33c953b8b89c\", \"title\": \"Project preference\", \"content\": \"PREFERENCE_MANDARIN_3197\", \"source_task_id\": null, \"updated_at\": 1790489748.8247237}]",
+        "error_code": null,
+        "metadata": {},
+        "status": "success"
+      },
+      "created_at": 1790489750.294569
+    },
+    {
+      "task_id": "fa47ac65c6ba43b7a8e9d04f44defd0a",
+      "sequence": 7,
+      "type": "tool_prepared",
+      "payload": {
+        "arguments": {},
+        "call_id": "call_fFfyolrkwWxJMn8kRNW2sVWr",
+        "name": "team_status"
+      },
+      "created_at": 1790489750.2997713
+    },
+    {
+      "task_id": "fa47ac65c6ba43b7a8e9d04f44defd0a",
+      "sequence": 8,
+      "type": "tool_started",
+      "payload": {
+        "call_id": "call_fFfyolrkwWxJMn8kRNW2sVWr",
+        "name": "team_status"
+      },
+      "created_at": 1790489750.3017833
+    },
+    {
+      "task_id": "fa47ac65c6ba43b7a8e9d04f44defd0a",
+      "sequence": 9,
+      "type": "tool_result",
+      "payload": {
+        "artifact_ids": [],
+        "call_id": "call_fFfyolrkwWxJMn8kRNW2sVWr",
+        "content": "{\"team\": {\"name\": \"task-fa47ac65c6ba\", \"description\": \"\", \"createdAt\": 1790489750, \"leadAgentId\": \"fa47ac65c6ba43b7a8e9d04f44defd0a\", \"members\": [{\"agentId\": \"fa47ac65c6ba43b7a8e9d04f44defd0a\", \"name\": \"fa47ac65c6ba43b7a8e9d04f44defd0a\", \"agentType\": \"durable-task\", \"model\": \"gpt-5.4-mini\", \"joinedAt\": 0, \"worktreePath\": \"C:\\\\Users\\\\Administrator\\\\Documents\\\\Codex\\\\2026-09-26\\\\ai-starcode-muse-coding-agent-python\\\\outputs\\\\muse-next\\\\work\\\\rc-b911aee\\\\muse-bench\\\\cases\\\\P03\\\\round-01\\\\workspace\", \"backendType\": \"durable-worker\", \"isActive\": true}]}, \"statuses\": {\"fa47ac65c6ba43b7a8e9d04f44defd0a\": \"RUNNING\"}}",
+        "error_code": null,
+        "metadata": {},
+        "status": "success"
+      },
+      "created_at": 1790489750.3041518
+    },
+    {
+      "task_id": "fa47ac65c6ba43b7a8e9d04f44defd0a",
+      "sequence": 10,
+      "type": "text_delta",
+      "payload": {
+        "text": "I found one applicable project preference in user-managed memory:\n\n- **Project preference:** `PREFERENCE_MANDARIN_3197`\n\nIt appears to be a project-scoped preference token, but no human-readable description is stored alongside it."
+      },
+      "created_at": 1790489751.9264174
+    },
+    {
+      "task_id": "fa47ac65c6ba43b7a8e9d04f44defd0a",
+      "sequence": 11,
+      "type": "assistant_message",
+      "payload": {
+        "text": "I found one applicable project preference in user-managed memory:\n\n- **Project preference:** `PREFERENCE_MANDARIN_3197`\n\nIt appears to be a project-scoped preference token, but no human-readable description is stored alongside it.",
+        "tool_count": 0
+      },
+      "created_at": 1790489751.9290414
+    },
+    {
+      "task_id": "fa47ac65c6ba43b7a8e9d04f44defd0a",
+      "sequence": 12,
+      "type": "status",
+      "payload": {
+        "status": "SUCCEEDED"
+      },
+      "created_at": 1790489751.9366302
+    }
+  ],
+  "05da8902f6c44dccba121701bb6b2ad9": [
+    {
+      "task_id": "05da8902f6c44dccba121701bb6b2ad9",
+      "sequence": 1,
+      "type": "status",
+      "payload": {
+        "status": "QUEUED"
+      },
+      "created_at": 1790489751.9391122
+    },
+    {
+      "task_id": "05da8902f6c44dccba121701bb6b2ad9",
+      "sequence": 2,
+      "type": "status",
+      "payload": {
+        "status": "RUNNING"
+      },
+      "created_at": 1790489751.941155
+    },
+    {
+      "task_id": "05da8902f6c44dccba121701bb6b2ad9",
+      "sequence": 3,
+      "type": "text_delta",
+      "payload": {
+        "text": "No user-managed preferences are currently available."
+      },
+      "created_at": 1790489753.9228265
+    },
+    {
+      "task_id": "05da8902f6c44dccba121701bb6b2ad9",
+      "sequence": 4,
+      "type": "assistant_message",
+      "payload": {
+        "text": "No user-managed preferences are currently available.",
+        "tool_count": 0
+      },
+      "created_at": 1790489753.9258285
+    },
+    {
+      "task_id": "05da8902f6c44dccba121701bb6b2ad9",
+      "sequence": 5,
+      "type": "status",
+      "payload": {
+        "status": "SUCCEEDED"
+      },
+      "created_at": 1790489753.9333978
+    }
+  ]
+}

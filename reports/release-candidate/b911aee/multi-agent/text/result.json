@@ -1,0 +1,77 @@
+{
+  "case": "text",
+  "checks": {
+    "parent_completed": true,
+    "two_children": true,
+    "children_completed": false,
+    "independent_workspaces": true,
+    "overlap": true,
+    "unified_verifier": true,
+    "agent_ran_verifier": true,
+    "contract_preserved": true,
+    "committed_child_contributions": false
+  },
+  "passed": false,
+  "fixture_hashes": {
+    ".gitignore": "d732d5b08731425c80b19f110884169b471748c9c63c7c87ee6da09fb1b61931",
+    "contract.json": "693cc3084b36d81c3fb5027c16fea714efcf8b6c62fd7a334567377583d8af37",
+    "README.md": "a6265b2a31cfe792f88fb33f8149534f6a52259a01ddfe9e4d278e7c8b738502",
+    "verify.ps1": "f4911184168b0fef72963412eb1c51ada344d79b3337f8a93690947daef6b884",
+    "tests/GateTest.java": "dc735e704a1aa32e0b84248c71159daf3908e86dd8ce7c6d4b8a6b85d130e406",
+    "src/text/Header.java": "bb4871b11aca61bb7491479cf6228ed2c4488ad583457606b41244e1967b68c8",
+    "src/text/Slug.java": "3589ff114ea2af9c55133cb013ca69eeea51795eda943b43ac83bfd73d54b37b"
+  },
+  "overlap_seconds": 15.59172511100769,
+  "parent_status": "SUCCEEDED",
+  "error": "",
+  "usage": {
+    "complete": true,
+    "input_tokens": 104902,
+    "output_tokens": 2048
+  },
+  "seconds": 58.21899999999732,
+  "contributions": [
+    {
+      "child_id": "6cdd7837119144019b3aa834c7d32641",
+      "commit": "80af81bf39ea7e858024ba58db846eb598f6c865",
+      "changed": [
+        "src/text/Slug.java"
+      ],
+      "reviewed": true,
+      "integrated": true,
+      "ancestor": true,
+      "files_equal": false
+    },
+    {
+      "child_id": "0ff36bc2d6bb4b25be01af7ddb35901c",
+      "commit": "7f6e00c98cd68733197f38024fe882e6a652fd95",
+      "changed": [
+        "src/text/Header.java"
+      ],
+      "reviewed": true,
+      "integrated": true,
+      "ancestor": true,
+      "files_equal": false
+    }
+  ],
+  "children": [
+    {
+      "id": "6cdd7837119144019b3aa834c7d32641",
+      "status": "SUCCEEDED",
+      "usage": {
+        "complete": true,
+        "input_tokens": 22123,
+        "output_tokens": 684
+      }
+    },
+    {
+      "id": "0ff36bc2d6bb4b25be01af7ddb35901c",
+      "status": "FAILED",
+      "usage": {
+        "complete": true,
+        "input_tokens": 21938,
+        "output_tokens": 565
+      }
+    }
+  ]
+}

@@ -67,7 +67,7 @@ class DurableMCP:
             return
         common = {'server': {'type': 'string', 'enum': list(self.configs)}, '_connection': {'type': 'string'}}
         registry.register(ToolDefinition(name='mcp_discover', risk='execute',
-            description='Connect to one configured MCP server and list tools; explicit approval required even for discovery.',
+            description='Connect to one configured MCP server and list tools. Call this directly when the user requested MCP research; the runtime asks for approval before connecting. Do not call ask_user to request the same approval.',
             parameters={'type': 'object', 'properties': common, 'required': ['server'], 'additionalProperties': False}), self.discover)
         registry.register(ToolDefinition(name='mcp_call', risk='execute',
             description='Call a tool after mcp_search and mcp_load provide its exact schema. Every remote call requires separate approval.',

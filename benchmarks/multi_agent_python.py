@@ -40,6 +40,22 @@ def intervention_required(statuses):
     return any(status in {'WAITING_INPUT', 'INTERRUPTED'} for status in statuses)
 
 
+def integrated_source_equal(workspace, source_commit, changed):
+    """Compare committed Git content; Windows checkout line endings may differ."""
+    for path in changed:
+        parent = subprocess.run(['git', 'rev-parse', 'HEAD:' + path], cwd=workspace,
+                                capture_output=True, text=True, check=False)
+        source = subprocess.run(['git', 'rev-parse', source_commit + ':' + path], cwd=workspace,
+                                capture_output=True, text=True, check=False)
+        if parent.returncode or source.returncode or parent.stdout.strip() != source.stdout.strip():
+            return False
+        clean = subprocess.run(['git', 'diff', '--quiet', 'HEAD', '--', path], cwd=workspace,
+                               capture_output=True, check=False)
+        if clean.returncode:
+            return False
+    return True
+
+
 def approve_fixture_action(name, args):
     if name == 'spawn_worktree':
         return True  # production binds exact base/path/role and checks workspace
@@ -160,10 +176,9 @@ async def run(args):
                              and c['arguments'].get('action') in {'merge', 'integrate'} and c['arguments'].get('source_commit') == source
                              and c['result'] and c['result']['status'] == 'success' for c in calls)
             ancestor = subprocess.run(['git', 'merge-base', '--is-ancestor', source, 'HEAD'], cwd=workspace, capture_output=True, check=False).returncode == 0  # noqa: ASYNC221 -- short local observer, after workers stop.
-            child_hashes = hashes(child_path)
             contributions.append({'child_id': child.id, 'commit': source, 'changed': changed,
                                   'reviewed': reviewed, 'integrated': integrated, 'ancestor': ancestor,
-                                  'files_equal': all(after.get(name) == child_hashes.get(name) for name in changed)})
+                                  'files_equal': integrated_source_equal(workspace, source, changed)})
         checks = {'parent_completed': current.status == 'SUCCEEDED', 'two_children': len(children) == 2,
                   'children_completed': all(c.status == 'SUCCEEDED' for c in children),
                   'independent_workspaces': len({c.workspace_id for c in children}) == 2,

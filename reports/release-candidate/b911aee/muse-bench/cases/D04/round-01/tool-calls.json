@@ -1,0 +1,117 @@
+[
+  {
+    "task_id": "80d77cb940e949aa8d7904e9ebe98396",
+    "id": "call_xv7mlmuiHQfGzoIhs4Leta0s",
+    "name": "list_files",
+    "arguments": {
+      "path": ".",
+      "pattern": "**/*.{txt,pdf}"
+    },
+    "risk": "read",
+    "status": "DONE",
+    "digest": "776f38b47a96c7b9e8a2be39f4cbb33d16f693bee88519ba3604d6e94c77fe5c",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_xv7mlmuiHQfGzoIhs4Leta0s",
+      "content": "{\"paths\": [], \"truncated\": false}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790489681.8537312,
+    "updated_at": 1790489681.8674133
+  },
+  {
+    "task_id": "80d77cb940e949aa8d7904e9ebe98396",
+    "id": "call_mTF3qzNlvgL8zwASVJ6V0oqP",
+    "name": "read_file",
+    "arguments": {
+      "path": "valid.txt"
+    },
+    "risk": "read",
+    "status": "DONE",
+    "digest": "4026dee4cd3f40c29d72dc7a4f7ac1e8e16dcb40e8bd65895228f86d9868f03f",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_mTF3qzNlvgL8zwASVJ6V0oqP",
+      "content": "The readable document's fact: project Falcon launches in May 2027.",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790489681.8784885,
+    "updated_at": 1790489681.8910365
+  },
+  {
+    "task_id": "80d77cb940e949aa8d7904e9ebe98396",
+    "id": "call_OD0WtpLzAqwd4n4rCRsrR5y9",
+    "name": "read_document",
+    "arguments": {
+      "path": "scan.pdf"
+    },
+    "risk": "read",
+    "status": "FAILED",
+    "digest": "3cc84db02f9dd4c2bb63c72ceee6fa8a80d9f69ee07973f5ccf4ba76d97cbbbb",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_OD0WtpLzAqwd4n4rCRsrR5y9",
+      "content": "PDF has no extractable text; OCR is not supported in this version",
+      "error_code": "TOOL_ERROR",
+      "metadata": {},
+      "status": "error"
+    },
+    "attempts": 1,
+    "created_at": 1790489681.90094,
+    "updated_at": 1790489681.9159708
+  },
+  {
+    "task_id": "80d77cb940e949aa8d7904e9ebe98396",
+    "id": "call_3ezMW8S1CcIikIpIiKHYfUEE",
+    "name": "read_document",
+    "arguments": {
+      "path": "broken.pdf"
+    },
+    "risk": "read",
+    "status": "FAILED",
+    "digest": "05ec975c123495b81f459d7760d2b65d9437cd4237ec5bb3e6c1cedde68132d9",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_3ezMW8S1CcIikIpIiKHYfUEE",
+      "content": "PDF could not be parsed or is encrypted",
+      "error_code": "TOOL_ERROR",
+      "metadata": {},
+      "status": "error"
+    },
+    "attempts": 1,
+    "created_at": 1790489681.9277413,
+    "updated_at": 1790489681.9427385
+  },
+  {
+    "task_id": "80d77cb940e949aa8d7904e9ebe98396",
+    "id": "call_0dN4C66j26KPlcmYW59x1Upi",
+    "name": "save_artifact",
+    "arguments": {
+      "content": "# Summary\n\n## valid.txt\n- Readable content: “The readable document's fact: project Falcon launches in May 2027.”\n\n## Unsupported / unreadable PDFs\n- `scan.pdf` — unsupported because the PDF has no extractable text; OCR is not supported in this version.\n- `broken.pdf` — unreadable because the PDF could not be parsed or is encrypted.\n\n## Notes\n- I did not invent or infer any PDF content.\n- Originals were preserved; no files were modified.\n",
+      "media_type": "text/markdown",
+      "name": "summary.md"
+    },
+    "risk": "write",
+    "status": "DONE",
+    "digest": "2ac83660e573e828eeddf7b710a9dc61503d3ddf5321711c4a2ebb5346aa21b5",
+    "result": {
+      "artifact_ids": [
+        "86b5446ec7ae45f3b854598071070266"
+      ],
+      "call_id": "call_0dN4C66j26KPlcmYW59x1Upi",
+      "content": "{\"id\": \"86b5446ec7ae45f3b854598071070266\", \"task_id\": \"80d77cb940e949aa8d7904e9ebe98396\", \"name\": \"summary.md\", \"media_type\": \"text/markdown\", \"sha256\": \"8664af8b84c273a3c1d0fef15437737261d2ca0491dbbb452bdb70f97bcb97b6\", \"version\": 1, \"created_at\": 1790489683.6978323}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790489683.6908796,
+    "updated_at": 1790489683.7019904
+  }
+]

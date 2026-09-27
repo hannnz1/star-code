@@ -4,7 +4,7 @@ import pytest
 
 
 def test_manifest_is_exclusive_and_rejects_missing_evidence(tmp_path):
-    from benchmarks.release_manifest import write_manifest, verify_manifest
+    from benchmarks.release_manifest import verify_manifest, write_manifest
     output = tmp_path / 'evidence'
     path = write_manifest(output)
     data = json.loads(path.read_text())
@@ -41,7 +41,7 @@ def test_context_probe_rejects_wrong_types_and_missing_facts():
 
 
 def test_multi_agent_overlap_requires_actual_running_intervals():
-    from benchmarks.multi_agent_python import overlap_seconds, approve_fixture_action
+    from benchmarks.multi_agent_python import approve_fixture_action, overlap_seconds
     assert overlap_seconds([(0, 2)], [(3, 4)]) == 0
     assert overlap_seconds([(0, 3)], [(2, 4)]) == 1
     assert approve_fixture_action('verify_command', {'command': 'powershell.exe -NoProfile -File ./verify.ps1'})
@@ -54,9 +54,10 @@ def test_multi_agent_overlap_requires_actual_running_intervals():
 
 
 def test_full_catalog_adapter_keeps_activation_task_local_and_execution_approval(tmp_path):
+    from test_agent_loop import ScriptedProvider, runtime
+
     from benchmarks.mcp_paired_python import FullCatalogRegistry
     from muse.tools.context import ExecutionContext
-    from test_agent_loop import ScriptedProvider, runtime
     repo, task, worker = runtime(tmp_path, ScriptedProvider([]))
     config = tmp_path / 'mcp.yaml'
     config.write_text('mcp_servers:\n  - name: fixture\n    command: synthetic\n')
@@ -87,13 +88,37 @@ def test_multi_agent_gate_rejects_idle_children_even_when_parent_verifier_passes
 
 
 def test_multi_agent_controller_stops_for_child_input_without_treating_it_as_pass():
-    from benchmarks.multi_agent_python import intervention_required, approve_fixture_action
+    from benchmarks.multi_agent_python import (
+        approve_fixture_action,
+        intervention_required,
+    )
     assert intervention_required(['PAUSED', 'WAITING_INPUT', 'SUCCEEDED'])
     assert intervention_required(['RUNNING', 'INTERRUPTED'])
     assert not intervention_required(['PAUSED', 'FAILED', 'RUNNING'])
     assert not intervention_required(['RUNNING', 'SUCCEEDED'])
     assert approve_fixture_action('run_command', {'command': 'javac -d build src/stats/Mean.java'})
     assert not approve_fixture_action('run_command', {'command': 'javac -d C:/outside src/stats/Mean.java'})
+
+
+def test_integrated_source_comparison_uses_git_content_across_line_endings(tmp_path):
+    import subprocess
+
+    from benchmarks.multi_agent_python import integrated_source_equal
+
+    repo = tmp_path / 'repo'
+    repo.mkdir()
+    subprocess.run(['git', 'init', '-q'], cwd=repo, check=True)
+    subprocess.run(['git', 'config', 'user.name', 'Fixture'], cwd=repo, check=True)
+    subprocess.run(['git', 'config', 'user.email', 'fixture@example.invalid'], cwd=repo, check=True)
+    (repo / 'source.txt').write_bytes(b'first\nsecond\n')
+    subprocess.run(['git', 'add', 'source.txt'], cwd=repo, check=True)
+    subprocess.run(['git', 'commit', '-qm', 'source'], cwd=repo, check=True)
+    source = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=repo, text=True).strip()
+    subprocess.run(['git', 'config', 'core.autocrlf', 'true'], cwd=repo, check=True)
+    (repo / 'source.txt').write_bytes(b'first\r\nsecond\r\n')
+    assert integrated_source_equal(repo, source, ['source.txt'])
+    (repo / 'source.txt').write_bytes(b'first\r\nchanged\r\n')
+    assert not integrated_source_equal(repo, source, ['source.txt'])
 
 
 def test_export_uses_the_actual_frozen_manifest(tmp_path):

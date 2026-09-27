@@ -1,0 +1,49 @@
+[
+  {
+    "task_id": "d3f2ea6ea6f1420a986a703610155e58",
+    "id": "call_YpTmpZN371fzx828vECQ1TeS",
+    "name": "mcp_search",
+    "arguments": {
+      "query": "tool to get item inventory by SKU available units",
+      "server": "fixture"
+    },
+    "risk": "read",
+    "status": "FAILED",
+    "digest": "40d83b9f55613614b68cdca14f23202240b1f1966a2bbc2f8c0b51502ddb4603",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_YpTmpZN371fzx828vECQ1TeS",
+      "content": "MCP catalog missing or configuration changed; rediscover with approval",
+      "error_code": "TOOL_ERROR",
+      "metadata": {},
+      "status": "error"
+    },
+    "attempts": 1,
+    "created_at": 1790489595.3602123,
+    "updated_at": 1790489595.366219
+  },
+  {
+    "task_id": "d3f2ea6ea6f1420a986a703610155e58",
+    "id": "call_AtdH5EKA0phmg4awDHKrAVxy",
+    "name": "ask_user",
+    "arguments": {
+      "question": "I need approval to rediscover the available MCP tools for the configured fixture server so I can retrieve the SKU answer. Approve rediscovery?"
+    },
+    "risk": "read",
+    "status": "DONE",
+    "digest": "77547c218eb65bfda994becfea469d02f77082b5812443561136dc7a1d991e1b",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_AtdH5EKA0phmg4awDHKrAVxy",
+      "content": "Question recorded; execution will wait for the user's reply.",
+      "error_code": null,
+      "metadata": {
+        "question": "I need approval to rediscover the available MCP tools for the configured fixture server so I can retrieve the SKU answer. Approve rediscovery?"
+      },
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790489597.0167534,
+    "updated_at": 1790489597.0225797
+  }
+]

@@ -1,0 +1,21 @@
+{
+  "case": "P03",
+  "round": 1,
+  "track": "real-model-with-controlled-faults",
+  "result": "AUTO_PASS_REVIEW_REQUIRED",
+  "checks": {
+    "first_request_has_memory": true,
+    "next_request_has_no_deleted_memory": true,
+    "storage_deleted": true,
+    "real_tasks_completed": true
+  },
+  "model": "gpt-5.4-mini",
+  "protocol": "openai-responses",
+  "duration_seconds": 5.11,
+  "model_requests": 3,
+  "tool_calls": 2,
+  "task_statuses": [
+    "SUCCEEDED",
+    "SUCCEEDED"
+  ]
+}

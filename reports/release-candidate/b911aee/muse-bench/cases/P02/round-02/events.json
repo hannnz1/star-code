@@ -1,0 +1,239 @@
+{
+  "20c28a1b45ad49b9b59aeaf36ab8de3a": [
+    {
+      "task_id": "20c28a1b45ad49b9b59aeaf36ab8de3a",
+      "sequence": 1,
+      "type": "status",
+      "payload": {
+        "status": "QUEUED"
+      },
+      "created_at": 1790489885.997686
+    },
+    {
+      "task_id": "20c28a1b45ad49b9b59aeaf36ab8de3a",
+      "sequence": 2,
+      "type": "status",
+      "payload": {
+        "status": "RUNNING"
+      },
+      "created_at": 1790489886.009807
+    },
+    {
+      "task_id": "20c28a1b45ad49b9b59aeaf36ab8de3a",
+      "sequence": 3,
+      "type": "assistant_message",
+      "payload": {
+        "text": "",
+        "tool_count": 1
+      },
+      "created_at": 1790489887.3449621
+    },
+    {
+      "task_id": "20c28a1b45ad49b9b59aeaf36ab8de3a",
+      "sequence": 4,
+      "type": "tool_prepared",
+      "payload": {
+        "arguments": {
+          "command": "echo legal-control",
+          "timeout_seconds": 10
+        },
+        "call_id": "call_84dJty4dFtlTTMtaLXMGpuU7",
+        "name": "run_command"
+      },
+      "created_at": 1790489887.359032
+    },
+    {
+      "task_id": "20c28a1b45ad49b9b59aeaf36ab8de3a",
+      "sequence": 5,
+      "type": "status",
+      "payload": {
+        "status": "WAITING_APPROVAL"
+      },
+      "created_at": 1790489887.3649983
+    },
+    {
+      "task_id": "20c28a1b45ad49b9b59aeaf36ab8de3a",
+      "sequence": 6,
+      "type": "approval_required",
+      "payload": {
+        "arguments": {
+          "command": "echo legal-control",
+          "timeout_seconds": 10
+        },
+        "call_id": "call_84dJty4dFtlTTMtaLXMGpuU7",
+        "name": "run_command"
+      },
+      "created_at": 1790489887.3649983
+    },
+    {
+      "task_id": "20c28a1b45ad49b9b59aeaf36ab8de3a",
+      "sequence": 7,
+      "type": "approval_decided",
+      "payload": {
+        "approval_id": "79c6bab3fda64019a2622f18c5d16243",
+        "status": "APPROVED"
+      },
+      "created_at": 1790489887.37451
+    },
+    {
+      "task_id": "20c28a1b45ad49b9b59aeaf36ab8de3a",
+      "sequence": 8,
+      "type": "status",
+      "payload": {
+        "status": "QUEUED"
+      },
+      "created_at": 1790489887.3735106
+    },
+    {
+      "task_id": "20c28a1b45ad49b9b59aeaf36ab8de3a",
+      "sequence": 9,
+      "type": "status",
+      "payload": {
+        "status": "RUNNING"
+      },
+      "created_at": 1790489887.3777847
+    },
+    {
+      "task_id": "20c28a1b45ad49b9b59aeaf36ab8de3a",
+      "sequence": 10,
+      "type": "status",
+      "payload": {
+        "status": "INTERRUPTED"
+      },
+      "created_at": 1790489887.3826945
+    },
+    {
+      "task_id": "20c28a1b45ad49b9b59aeaf36ab8de3a",
+      "sequence": 11,
+      "type": "status",
+      "payload": {
+        "status": "QUEUED"
+      },
+      "created_at": 1790489887.3826945
+    },
+    {
+      "task_id": "20c28a1b45ad49b9b59aeaf36ab8de3a",
+      "sequence": 12,
+      "type": "status",
+      "payload": {
+        "status": "RUNNING"
+      },
+      "created_at": 1790489887.3877022
+    },
+    {
+      "task_id": "20c28a1b45ad49b9b59aeaf36ab8de3a",
+      "sequence": 13,
+      "type": "tool_started",
+      "payload": {
+        "call_id": "call_84dJty4dFtlTTMtaLXMGpuU7",
+        "name": "run_command"
+      },
+      "created_at": 1790489887.409944
+    },
+    {
+      "task_id": "20c28a1b45ad49b9b59aeaf36ab8de3a",
+      "sequence": 14,
+      "type": "artifact",
+      "payload": {
+        "created_at": 1790489887.992997,
+        "id": "8acde76528ee4bb8b51574b16d0d2520",
+        "media_type": "text/plain",
+        "name": "command-fefc90d22965.txt",
+        "sha256": "dfcd8769d16afc818f474d7e4992cd1da6420207619787b0e637bc4a11ee49b1",
+        "task_id": "20c28a1b45ad49b9b59aeaf36ab8de3a",
+        "version": 1
+      },
+      "created_at": 1790489887.9960914
+    },
+    {
+      "task_id": "20c28a1b45ad49b9b59aeaf36ab8de3a",
+      "sequence": 15,
+      "type": "tool_result",
+      "payload": {
+        "artifact_ids": [
+          "8acde76528ee4bb8b51574b16d0d2520"
+        ],
+        "call_id": "call_84dJty4dFtlTTMtaLXMGpuU7",
+        "content": "legal-control\r\n",
+        "error_code": null,
+        "metadata": {
+          "exit_code": 0,
+          "log_path": "C:\\Users\\Administrator\\Documents\\Codex\\2026-09-26\\ai-starcode-muse-coding-agent-python\\outputs\\muse-next\\work\\rc-b911aee\\muse-bench\\cases\\P02\\round-02\\private-state\\command-logs\\20c28a1b45ad49b9b59aeaf36ab8de3a\\fefc90d22965169644fb1a6c10c21518e70fd3fe9de70ecc442b3a3bb9f553af.txt",
+          "verified": false
+        },
+        "status": "success"
+      },
+      "created_at": 1790489887.9986048
+    },
+    {
+      "task_id": "20c28a1b45ad49b9b59aeaf36ab8de3a",
+      "sequence": 16,
+      "type": "text_delta",
+      "payload": {
+        "text": "legal-control"
+      },
+      "created_at": 1790489889.348074
+    },
+    {
+      "task_id": "20c28a1b45ad49b9b59aeaf36ab8de3a",
+      "sequence": 17,
+      "type": "assistant_message",
+      "payload": {
+        "text": "legal-control",
+        "tool_count": 0
+      },
+      "created_at": 1790489889.3536549
+    },
+    {
+      "task_id": "20c28a1b45ad49b9b59aeaf36ab8de3a",
+      "sequence": 18,
+      "type": "status",
+      "payload": {
+        "status": "SUCCEEDED"
+      },
+      "created_at": 1790489889.3686326
+    }
+  ],
+  "5251d08c155f44e89222518263f6b3a7": [
+    {
+      "task_id": "5251d08c155f44e89222518263f6b3a7",
+      "sequence": 1,
+      "type": "status",
+      "payload": {
+        "status": "QUEUED"
+      },
+      "created_at": 1790489889.3718026
+    },
+    {
+      "task_id": "5251d08c155f44e89222518263f6b3a7",
+      "sequence": 2,
+      "type": "status",
+      "payload": {
+        "status": "RUNNING"
+      },
+      "created_at": 1790489889.3748093
+    },
+    {
+      "task_id": "5251d08c155f44e89222518263f6b3a7",
+      "sequence": 3,
+      "type": "tool_prepared",
+      "payload": {
+        "arguments": {
+          "command": "echo legal-control"
+        },
+        "call_id": "cross",
+        "name": "run_command"
+      },
+      "created_at": 1790489889.377317
+    },
+    {
+      "task_id": "5251d08c155f44e89222518263f6b3a7",
+      "sequence": 4,
+      "type": "status",
+      "payload": {
+        "status": "CANCELLED"
+      },
+      "created_at": 1790489889.3813386
+    }
+  ]
+}

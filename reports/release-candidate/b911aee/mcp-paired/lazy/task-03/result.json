@@ -1,0 +1,28 @@
+{
+  "case": "task-03",
+  "mode": "LAZY",
+  "checks": {
+    "completed": true,
+    "exact_result": true,
+    "exact_remote_call": true,
+    "schema_loaded": true,
+    "no_other_tools": true
+  },
+  "passed": true,
+  "model": "gpt-5.4-mini",
+  "seconds": 9.234,
+  "model_requests": 5,
+  "usage": {
+    "complete": true,
+    "input_tokens": 21254,
+    "output_tokens": 120
+  },
+  "answer": "USD 137.42",
+  "error": "",
+  "remote_calls": [
+    {
+      "tool": "invoices_get_balance",
+      "entity_id": "INV-809"
+    }
+  ]
+}

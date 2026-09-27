@@ -1,0 +1,281 @@
+{
+  "fixture_sha256": "5323253770e21083ef297d0446e9451dd16c0120a7f36ad3c6bc859512bddeee",
+  "planned": 10,
+  "records": [
+    {
+      "case": "task-01",
+      "mode": "FULL",
+      "checks": {
+        "completed": true,
+        "exact_result": true,
+        "exact_remote_call": true,
+        "schema_loaded": true,
+        "no_other_tools": true
+      },
+      "passed": true,
+      "model": "gpt-5.4-mini",
+      "seconds": 13.437,
+      "model_requests": 5,
+      "usage": {
+        "complete": true,
+        "input_tokens": 33634,
+        "output_tokens": 119
+      },
+      "answer": "FULFILLED",
+      "error": "",
+      "remote_calls": [
+        {
+          "tool": "orders_get_status",
+          "entity_id": "PO-741"
+        }
+      ]
+    },
+    {
+      "case": "task-02",
+      "mode": "FULL",
+      "checks": {
+        "completed": true,
+        "exact_result": true,
+        "exact_remote_call": true,
+        "schema_loaded": true,
+        "no_other_tools": true
+      },
+      "passed": true,
+      "model": "gpt-5.4-mini",
+      "seconds": 12.375,
+      "model_requests": 5,
+      "usage": {
+        "complete": true,
+        "input_tokens": 33381,
+        "output_tokens": 117
+      },
+      "answer": "2026-09-18",
+      "error": "",
+      "remote_calls": [
+        {
+          "tool": "shipments_get_eta",
+          "entity_id": "SHP-203"
+        }
+      ]
+    },
+    {
+      "case": "task-03",
+      "mode": "FULL",
+      "checks": {
+        "completed": true,
+        "exact_result": true,
+        "exact_remote_call": true,
+        "schema_loaded": true,
+        "no_other_tools": true
+      },
+      "passed": true,
+      "model": "gpt-5.4-mini",
+      "seconds": 12.531,
+      "model_requests": 5,
+      "usage": {
+        "complete": true,
+        "input_tokens": 33431,
+        "output_tokens": 119
+      },
+      "answer": "USD 137.42",
+      "error": "",
+      "remote_calls": [
+        {
+          "tool": "invoices_get_balance",
+          "entity_id": "INV-809"
+        }
+      ]
+    },
+    {
+      "case": "task-04",
+      "mode": "FULL",
+      "checks": {
+        "completed": true,
+        "exact_result": true,
+        "exact_remote_call": true,
+        "schema_loaded": true,
+        "no_other_tools": true
+      },
+      "passed": true,
+      "model": "gpt-5.4-mini",
+      "seconds": 11.0,
+      "model_requests": 5,
+      "usage": {
+        "complete": true,
+        "input_tokens": 33632,
+        "output_tokens": 117
+      },
+      "answer": "Morgan Chen",
+      "error": "",
+      "remote_calls": [
+        {
+          "tool": "tickets_get_owner",
+          "entity_id": "TKT-615"
+        }
+      ]
+    },
+    {
+      "case": "task-05",
+      "mode": "FULL",
+      "checks": {
+        "completed": false,
+        "exact_result": false,
+        "exact_remote_call": false,
+        "schema_loaded": true,
+        "no_other_tools": false
+      },
+      "passed": false,
+      "model": "gpt-5.4-mini",
+      "seconds": 3.516,
+      "model_requests": 2,
+      "usage": {
+        "complete": true,
+        "input_tokens": 4633,
+        "output_tokens": 71
+      },
+      "answer": "I need to rediscover the configured MCP catalog to query CI build BLD-092. May I proceed with MCP discovery?",
+      "error": "",
+      "remote_calls": []
+    },
+    {
+      "case": "task-06",
+      "mode": "FULL",
+      "checks": {
+        "completed": true,
+        "exact_result": true,
+        "exact_remote_call": true,
+        "schema_loaded": true,
+        "no_other_tools": true
+      },
+      "passed": true,
+      "model": "gpt-5.4-mini",
+      "seconds": 8.453,
+      "model_requests": 4,
+      "usage": {
+        "complete": true,
+        "input_tokens": 25450,
+        "output_tokens": 90
+      },
+      "answer": "eu-west-2",
+      "error": "",
+      "remote_calls": [
+        {
+          "tool": "deployments_get_region",
+          "entity_id": "DEP-451"
+        }
+      ]
+    },
+    {
+      "case": "task-07",
+      "mode": "FULL",
+      "checks": {
+        "completed": true,
+        "exact_result": true,
+        "exact_remote_call": true,
+        "schema_loaded": true,
+        "no_other_tools": true
+      },
+      "passed": true,
+      "model": "gpt-5.4-mini",
+      "seconds": 12.406,
+      "model_requests": 5,
+      "usage": {
+        "complete": true,
+        "input_tokens": 33360,
+        "output_tokens": 113
+      },
+      "answer": "27 units",
+      "error": "",
+      "remote_calls": [
+        {
+          "tool": "inventory_get_quantity",
+          "entity_id": "SKU-386"
+        }
+      ]
+    },
+    {
+      "case": "task-08",
+      "mode": "FULL",
+      "checks": {
+        "completed": true,
+        "exact_result": true,
+        "exact_remote_call": true,
+        "schema_loaded": true,
+        "no_other_tools": true
+      },
+      "passed": true,
+      "model": "gpt-5.4-mini",
+      "seconds": 12.484,
+      "model_requests": 5,
+      "usage": {
+        "complete": true,
+        "input_tokens": 33386,
+        "output_tokens": 121
+      },
+      "answer": "2027-02-11",
+      "error": "",
+      "remote_calls": [
+        {
+          "tool": "certificates_get_expiry",
+          "entity_id": "CERT-527"
+        }
+      ]
+    },
+    {
+      "case": "task-09",
+      "mode": "FULL",
+      "checks": {
+        "completed": true,
+        "exact_result": true,
+        "exact_remote_call": true,
+        "schema_loaded": true,
+        "no_other_tools": true
+      },
+      "passed": true,
+      "model": "gpt-5.4-mini",
+      "seconds": 13.0,
+      "model_requests": 5,
+      "usage": {
+        "complete": true,
+        "input_tokens": 33659,
+        "output_tokens": 119
+      },
+      "answer": "PENDING_REVIEW",
+      "error": "",
+      "remote_calls": [
+        {
+          "tool": "refunds_get_state",
+          "entity_id": "REF-168"
+        }
+      ]
+    },
+    {
+      "case": "task-10",
+      "mode": "FULL",
+      "checks": {
+        "completed": true,
+        "exact_result": true,
+        "exact_remote_call": true,
+        "schema_loaded": true,
+        "no_other_tools": true
+      },
+      "passed": true,
+      "model": "gpt-5.4-mini",
+      "seconds": 9.203,
+      "model_requests": 4,
+      "usage": {
+        "complete": true,
+        "input_tokens": 25450,
+        "output_tokens": 92
+      },
+      "answer": "SEV-2",
+      "error": "",
+      "remote_calls": [
+        {
+          "tool": "incidents_get_severity",
+          "entity_id": "INC-934"
+        }
+      ]
+    }
+  ]
+}

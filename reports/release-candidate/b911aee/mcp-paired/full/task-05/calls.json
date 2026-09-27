@@ -1,0 +1,49 @@
+[
+  {
+    "task_id": "f60e650e728b489295b045423bfc8cfe",
+    "id": "call_5ASGpnvT2gsUDMjixz2QWj1J",
+    "name": "mcp_search",
+    "arguments": {
+      "query": "CI build BLD-092 result",
+      "server": "fixture"
+    },
+    "risk": "read",
+    "status": "FAILED",
+    "digest": "b886432245ace985ed38a8a0d699de75908aaedd0ed48dccc41f41374dec01d9",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_5ASGpnvT2gsUDMjixz2QWj1J",
+      "content": "MCP catalog missing or configuration changed; rediscover with approval",
+      "error_code": "TOOL_ERROR",
+      "metadata": {},
+      "status": "error"
+    },
+    "attempts": 1,
+    "created_at": 1790489480.2865143,
+    "updated_at": 1790489480.292938
+  },
+  {
+    "task_id": "f60e650e728b489295b045423bfc8cfe",
+    "id": "call_Q8npkjckwPZTF0qEVB3CqjFJ",
+    "name": "ask_user",
+    "arguments": {
+      "question": "I need to rediscover the configured MCP catalog to query CI build BLD-092. May I proceed with MCP discovery?"
+    },
+    "risk": "read",
+    "status": "DONE",
+    "digest": "83d2b992e471c5bbf3c52cde6745a2615ce40bf979c2e87bf6d77a58466b46fb",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_Q8npkjckwPZTF0qEVB3CqjFJ",
+      "content": "Question recorded; execution will wait for the user's reply.",
+      "error_code": null,
+      "metadata": {
+        "question": "I need to rediscover the configured MCP catalog to query CI build BLD-092. May I proceed with MCP discovery?"
+      },
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790489482.1640973,
+    "updated_at": 1790489482.1706405
+  }
+]

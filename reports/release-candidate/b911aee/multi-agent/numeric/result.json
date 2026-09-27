@@ -1,0 +1,77 @@
+{
+  "case": "numeric",
+  "checks": {
+    "parent_completed": true,
+    "two_children": true,
+    "children_completed": false,
+    "independent_workspaces": true,
+    "overlap": true,
+    "unified_verifier": true,
+    "agent_ran_verifier": true,
+    "contract_preserved": true,
+    "committed_child_contributions": false
+  },
+  "passed": false,
+  "fixture_hashes": {
+    ".gitignore": "d732d5b08731425c80b19f110884169b471748c9c63c7c87ee6da09fb1b61931",
+    "contract.json": "709e384c2a9fd2e58988d0cf6bdef585eb7368f9a5eb829e8515c78fc8b8be22",
+    "README.md": "acdb3ddba972a7d1276a81fd5f024e8e63be9c797b2f5c25c994ef364cf3b119",
+    "verify.ps1": "f4911184168b0fef72963412eb1c51ada344d79b3337f8a93690947daef6b884",
+    "tests/GateTest.java": "12c55da6a4e4316a80cd58accd5af85a2449d97853318d0e31a8cc715348a033",
+    "src/retry/Delay.java": "34056f50674dcf4d7befc2d661e9c2a46ca2a722dc0994409d1e521ef20254d7",
+    "src/stats/Mean.java": "a6d5a5f112a25a18b46632c71ba3379c2f2c5da62aa720dae9f654622f08df3c"
+  },
+  "overlap_seconds": 15.247859239578247,
+  "parent_status": "SUCCEEDED",
+  "error": "",
+  "usage": {
+    "complete": true,
+    "input_tokens": 101646,
+    "output_tokens": 1855
+  },
+  "seconds": 55.1559999999954,
+  "contributions": [
+    {
+      "child_id": "b50d362ec5e04cb5a1a033aec05a0695",
+      "commit": "3e32cc1d1221db3aed9d235cc9639ddba79c62e2",
+      "changed": [
+        "src/stats/Mean.java"
+      ],
+      "reviewed": true,
+      "integrated": true,
+      "ancestor": true,
+      "files_equal": false
+    },
+    {
+      "child_id": "8102acd3050846f1aed6c4cfda86a6e3",
+      "commit": "9975b82250ff0ed75ca4807a93025d5df04b7b57",
+      "changed": [
+        "src/retry/Delay.java"
+      ],
+      "reviewed": true,
+      "integrated": true,
+      "ancestor": true,
+      "files_equal": false
+    }
+  ],
+  "children": [
+    {
+      "id": "b50d362ec5e04cb5a1a033aec05a0695",
+      "status": "FAILED",
+      "usage": {
+        "complete": true,
+        "input_tokens": 24447,
+        "output_tokens": 670
+      }
+    },
+    {
+      "id": "8102acd3050846f1aed6c4cfda86a6e3",
+      "status": "SUCCEEDED",
+      "usage": {
+        "complete": true,
+        "input_tokens": 27643,
+        "output_tokens": 584
+      }
+    }
+  ]
+}
