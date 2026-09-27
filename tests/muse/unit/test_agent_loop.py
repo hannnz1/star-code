@@ -1,10 +1,8 @@
-import importlib.util
 import asyncio
-
-import pytest
+import importlib.util
 
 from muse.config import load_settings
-from muse.contracts import TaskRequest, ModelEvent, ToolCall
+from muse.contracts import ModelEvent, TaskRequest, ToolCall
 from muse.tasks.repository import TaskRepository
 
 
@@ -107,3 +105,24 @@ async def test_cancel_interrupts_a_waiting_model_and_preserves_task(tmp_path):
     await asyncio.wait_for(running, 3)
     assert repo.get(task.id).status == "CANCELLED"
     assert repo.get(task.id).checkpoint["model_requests"] == 1
+
+
+def test_runtime_progress_prefers_successful_delegation_over_earlier_error():
+    from types import SimpleNamespace
+
+    from muse.agent.loop import runtime_progress
+
+    calls = [
+        {'name': 'spawn_worktree', 'status': 'FAILED', 'result': {'status': 'error',
+            'content': 'Unknown role; private child prompt must not be copied'}},
+        {'name': 'spawn_worktree', 'status': 'DONE', 'result': {'status': 'success',
+            'metadata': {'child_id': 'child-1'}, 'content': 'private workspace path'}},
+    ]
+    repo = SimpleNamespace(children=lambda _: [SimpleNamespace(id='child-1', status='RUNNING')],
+                           calls=lambda _: calls)
+    progress = runtime_progress(SimpleNamespace(repo=repo, task_id='parent'))
+    assert progress['children'] == [{'id': 'child-1', 'status': 'RUNNING'}]
+    assert progress['successful_worktree_spawns'] == ['child-1']
+    assert progress['recent_worktree_actions'][-1]['status'] == 'success'
+    assert 'private child prompt' not in str(progress)
+    assert 'private workspace path' not in str(progress)

@@ -1,4 +1,4 @@
-> 当前候选 0.3.0rc6 的验收记录见 [RC6 验收记录](release-acceptance.md)。下方交付数字属于早期历史快照，不能用于 RC6 发布判定。
+> 当前候选 0.3.0rc7 的验收记录见 [当前验收记录](release-acceptance.md)。RC6 的历史成绩保存在 [RC6 验收记录](rc6-release-acceptance.md)；下方更早的数字也不能用于 RC7 发布判定。
 
 > 修复更新：长上下文原文保留、最新显式用户值、历史检索和 MCP 按需 schema 加载已实现；最终真实模型检查点 11/11、17/17、23/23，MCP 原十题 10/10。详见 [本次实现与验证](retention-and-mcp-loading.md)。下方迁移缺口是修复前审计结论，旧记录保留。
 

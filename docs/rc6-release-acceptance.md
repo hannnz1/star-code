@@ -1,6 +1,6 @@
-# MUSE Python RC7 验收记录（执行中）
+# MUSE Python RC6 验收记录
 
-版本：0.3.0rc7。当前发布判定：**NOT_ACCEPTED**。RC7 自动批次尚未完成；下方 RC6 数字仅作历史对照，不能当成 RC7 成绩。RC6 的完整封存报告见 [RC6 验收记录](rc6-release-acceptance.md)。人工 Benchmark 评分和独立 Windows 验收按用户要求留到最后。
+版本：0.3.0rc6。当前发布判定：**NOT_ACCEPTED**。开发与自动验证先行，人工 Benchmark 评分和独立 Windows 验收按用户要求留到最后。
 
 ## 实现范围
 

@@ -86,3 +86,8 @@
 - RC6 wheel/source ZIP from same candidate commit created, 207 wheel files, fresh local install and no-Java PATH process smoke passed, archive secret and forbidden-file scan zero; SHA-256 manifest validated.
 - Ruling: final publication remains NOT_ACCEPTED until failed multi-Agent 3/3, independent host P01 and human review gates close. This is a local reviewable RC, not a public or Java-equivalence release.
 - RC6 local performance replay completed: p95 task creation 5.21 ms, event-to-browser 831.43 ms, cancel confirmation 5.78 ms, process tree stop 119.43 ms, expired lease recovery 7.47 ms. No RSS or real-model timing claim. Backup/restore and legacy v1→8 copy preservation are included in the 958-pass regression.
+
+## RC7 runtime state clarification
+
+- Ruling: RC6 showed a parent denying delegation after a failed role attempt even though later spawn calls succeeded. Add a bounded, server-derived child/action status summary to every model request after delegation. It contains no prompts, tool outputs, paths or permissions; it cannot authorize a tool. A later successful action is explicitly distinguishable from an earlier failed attempt. Existing task-scoped approval remains enforced.
+- A red/green regression checks the exact failure class, including omitted private prompt/path; targeted agent/worktree suite 15 passed. New candidate and full automated rerun are required. RC6 is preserved as a local reviewable historical candidate, not promoted to PASS.
