@@ -120,6 +120,23 @@ class AgentRunner:
                     return AgentResult(status="WAITING_INPUT", text=question)
             ctx.repo.save_conversation_checkpoint(task.id, ctx.owner, ctx.epoch, cp['model_requests'], cp['messages'])
             if "final_text" in cp:
+                if task.scenario == 'coding' and cp.get('completion_repairs', 0) < 2 and cp['model_requests'] < min(ctx.settings.max_turns, cp.get('max_local_turns', ctx.settings.max_turns)):
+                    from muse.tools.verification import mutation_ids
+                    completed_calls = ctx.repo.calls(task.id)
+                    mutations = mutation_ids(completed_calls)
+                    checks = [call for call in completed_calls if call['name'] == 'verify_command' and call['result']]
+                    latest = checks[-1]['result'].get('metadata', {}) if checks else None
+                    unverified = mutations and (not latest or latest.get('exit_code') != 0
+                                                or not mutations.issubset(set(latest.get('mutation_call_ids', []))))
+                    if unverified or (latest and latest.get('exit_code') != 0):
+                        cp['completion_repairs'] = cp.get('completion_repairs', 0) + 1
+                        cp['messages'].append({'role': 'user', 'content':
+                            'Runtime completion check: code changes are not successfully verified after the last edit. '
+                            'Continue the task using the preceding tool results. Resolve the failure and run verify_command '
+                            'after the final change; if completion is impossible, state the blocker explicitly.'})
+                        cp.pop('final_text')
+                        ctx.save()
+                        continue
                 await registry.hooks.emit('session_end', 'session')
                 await registry.hooks.emit('shutdown', 'session')
                 children = ctx.repo.children(task.id)

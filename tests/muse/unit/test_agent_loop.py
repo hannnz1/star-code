@@ -67,10 +67,28 @@ async def test_code_changes_without_verification_are_not_success(tmp_path):
         [ModelEvent(type="call", call=ToolCall(id="w", name="write_file", arguments={"path": "hello.txt", "content": "changed"}))],
         [ModelEvent(type="text", text="Everything passed!")],
     ])
-    repo, task, worker = runtime(tmp_path, scripted)
+    repo, task, worker = runtime(tmp_path, scripted, max_turns=2)
     await worker.run_once()
     assert repo.get(task.id).status == "FAILED"
     assert "verification" in repo.get(task.id).error.lower()
+
+
+async def test_coding_agent_gets_one_repair_turn_after_unverified_final(tmp_path):
+    scripted = ScriptedProvider([
+        [ModelEvent(type="call", call=ToolCall(id="w", name="write_file", arguments={"path": "hello.txt", "content": "changed"}))],
+        [ModelEvent(type="text", text="Done")],
+        [ModelEvent(type="call", call=ToolCall(id="v", name="verify_command", arguments={"command": "echo verified"}))],
+        [ModelEvent(type="text", text="Verified after writing")],
+    ])
+    repo, task, worker = runtime(tmp_path, scripted)
+    await worker.run_once()
+    assert repo.get(task.id).status == "WAITING_APPROVAL"
+    approval = repo.approvals(task.id)[0]
+    repo.decide_approval(approval["id"], True, approval["action_digest"])
+    await worker.run_once()
+    assert repo.get(task.id).status == "SUCCEEDED"
+    assert len(scripted.requests) == 4
+    assert "verify_command" in scripted.requests[2][-1]["content"]
 
 
 async def test_approval_resume_uses_saved_call_not_a_second_model_decision(tmp_path):

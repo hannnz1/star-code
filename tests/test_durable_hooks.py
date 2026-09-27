@@ -1,15 +1,16 @@
 import yaml
+from test_agent_loop import ScriptedProvider, runtime
+
 from muse.agent.loop import AgentRunner
 from muse.contracts import ModelEvent, ToolCall
 from muse.tasks.worker import Worker
-from test_agent_loop import ScriptedProvider, runtime
 
 
 async def test_hook_rejects_write_before_file_mutation(tmp_path):
     provider = ScriptedProvider([
         [ModelEvent(type='call', call=ToolCall(id='write', name='write_file', arguments={'path': 'hello.txt', 'content': 'forbidden'}))],
         [ModelEvent(type='text', text='The configured hook blocked the write.')]])
-    repo, task, original = runtime(tmp_path, provider)
+    repo, _, original = runtime(tmp_path, provider)
     config = tmp_path / 'hooks.yaml'
     config.write_text(yaml.safe_dump({'hooks': [{'id': 'guard', 'event': 'pre_tool_use',
         'if': 'tool == "write_file"', 'reject': True, 'action': {'type': 'prompt', 'message': 'blocked by project hook'}}]}))
@@ -23,7 +24,7 @@ async def test_command_hook_requires_approval_before_read(tmp_path):
     provider = ScriptedProvider([
         [ModelEvent(type='call', call=ToolCall(id='read', name='read_file', arguments={'path': 'hello.txt'}))],
         [ModelEvent(type='text', text='Read completed.')]])
-    repo, task, original = runtime(tmp_path, provider)
+    repo, task, original = runtime(tmp_path, provider, max_turns=2)
     config = tmp_path / 'hooks.yaml'
     config.write_text(yaml.safe_dump({'hooks': [{'id': 'notify', 'event': 'pre_tool_use',
         'if': 'tool == "read_file"', 'action': {'type': 'command', 'command': 'echo hook-evidence'}}]}))

@@ -81,8 +81,10 @@ class DurableWorktrees:
             raise ValueError('Finish all tasks using this checkout before changing it')
         if parent_status or child_status:
             raise ValueError('Both checkouts must be clean; existing changes are preserved')
-        if args.get('source_commit', '').lower() != source_commit.lower() or args.get('parent_commit', '').lower() != parent_commit.lower():
-            raise ValueError('Checkout commit changed after review')
+        if args.get('source_commit', '').lower() != source_commit.lower():
+            raise ValueError('Child checkout commit changed; review this child again before retrying')
+        if args.get('parent_commit', '').lower() != parent_commit.lower():
+            raise ValueError('Parent checkout commit changed after another integration; review this child again before retrying')
         if args['action'] == 'merge':
             await self.git(call_id + ':merge', 'merge', '--ff-only', '--no-overwrite-ignore', source_commit)
         elif args['action'] == 'integrate':
