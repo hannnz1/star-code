@@ -1990,6 +1990,9 @@ class MewCodeApp(App):
                 for t in tasks:
                     if not t.done():
                         t.cancel()
+                await asyncio.gather(*tasks, return_exceptions=True)
+            if self.hook_engine:
+                await self.hook_engine.close()
 
             if self._stale_cleanup_task and not self._stale_cleanup_task.done():
                 self._stale_cleanup_task.cancel()

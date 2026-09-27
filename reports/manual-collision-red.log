@@ -1,0 +1,33 @@
+..F..                                                                    [100%]
+================================== FAILURES ===================================
+_____ test_manual_compaction_preserves_new_evidence_at_existing_sequence ______
+
+api = (<starlette.testclient.TestClient object at 0x000001C8C789D0A0>, <fastapi.applications.FastAPI object at 0x000001C8C789D130>)
+
+    def test_manual_compaction_preserves_new_evidence_at_existing_sequence(api):
+        from muse.agent.context import recall_history
+        from types import SimpleNamespace
+        client, app = api
+        repo = app.state.repository
+        from muse.terminal import TerminalClient
+        terminal = TerminalClient(client, client.get('/api/workspaces').json()[0]['id'])
+        terminal.handle('Goal')
+        terminal.handle('/pause')
+        original = [{'role': 'user', 'content': 'Original checkpoint'}]
+        messages = [{'role': 'user', 'content': 'Goal'},
+                    {'role': 'user', 'content': 'New needle ' + 'x' * 15000}]
+        with repo.db.transaction() as conn:
+            conn.execute(text('INSERT INTO conversation_checkpoints VALUES(:id,0,:messages,0)'),
+                         {'id': terminal.task_id, 'messages': json.dumps(original)})
+            conn.execute(text('UPDATE tasks SET checkpoint=:cp WHERE id=:id'),
+                         {'id': terminal.task_id, 'cp': json.dumps({'messages': messages, 'model_requests': 0})})
+        terminal.handle('/compact')
+        ctx = SimpleNamespace(repo=repo, task_id=terminal.task_id, safe=lambda value: value)
+>       assert 'New needle' in recall_history(ctx, 'New needle')
+E       assert 'New needle' in '{"matches": [], "matches_truncated": false, "has_more": false, "next_offset": null, "searched_checkpoints": 1, "note"...quence wins conflicts. Each page searches at most 100 checkpoints; no match does not prove absence from older pages."}'
+E        +  where '{"matches": [], "matches_truncated": false, "has_more": false, "next_offset": null, "searched_checkpoints": 1, "note"...quence wins conflicts. Each page searches at most 100 checkpoints; no match does not prove absence from older pages."}' = <function recall_history at 0x000001C8C78880E0>(namespace(repo=<muse.tasks.repository.TaskRepository object at 0x000001C8C789CAA0>, task_id='8f2c2a04f4d34f5dbe82f62be...=<function test_manual_compaction_preserves_new_evidence_at_existing_sequence.<locals>.<lambda> at 0x000001C8C78D7C40>), 'New needle')
+
+tests\test_terminal_context.py:61: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_terminal_context.py::test_manual_compaction_preserves_new_evidence_at_existing_sequence
+1 failed, 4 passed in 4.05s

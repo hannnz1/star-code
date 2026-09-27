@@ -20,6 +20,7 @@ def test_compact_requires_inactive_turn_and_preserves_goal_and_tool_pair(api):
         conn.execute(text('UPDATE tasks SET checkpoint=:cp WHERE id=:id'), {'id': terminal.task_id, 'cp': json.dumps({'messages': messages})})
     terminal.handle('/compact')
     saved = repo.get(terminal.task_id)
+    assert repo.conversation_checkpoints(terminal.task_id), 'Manual compaction must archive the original messages for recall'
     assert saved.status == 'PAUSED'
     assert len(saved.checkpoint['messages']) < len(messages)
     assert saved.checkpoint['messages'][0]['content'] == 'Original goal'
@@ -36,6 +37,30 @@ def test_command_completion_matches_public_commands():
     assert '/compact' in complete_command('/com')
     assert '/cancel' in complete_command('/can')
     assert complete_command('ordinary text') == []
+
+
+def test_manual_compaction_preserves_new_evidence_at_existing_sequence(api):
+    from muse.agent.context import recall_history
+    from types import SimpleNamespace
+    client, app = api
+    repo = app.state.repository
+    from muse.terminal import TerminalClient
+    terminal = TerminalClient(client, client.get('/api/workspaces').json()[0]['id'])
+    terminal.handle('Goal')
+    terminal.handle('/pause')
+    original = [{'role': 'user', 'content': 'Original checkpoint'}]
+    messages = [{'role': 'user', 'content': 'Goal'},
+                {'role': 'user', 'content': 'New needle ' + 'x' * 15000}]
+    with repo.db.transaction() as conn:
+        conn.execute(text('INSERT INTO conversation_checkpoints VALUES(:id,0,:messages,0)'),
+                     {'id': terminal.task_id, 'messages': json.dumps(original)})
+        conn.execute(text('UPDATE tasks SET checkpoint=:cp WHERE id=:id'),
+                     {'id': terminal.task_id, 'cp': json.dumps({'messages': messages, 'model_requests': 0})})
+    terminal.handle('/compact')
+    ctx = SimpleNamespace(repo=repo, task_id=terminal.task_id, safe=lambda value: value)
+    assert 'New needle' in recall_history(ctx, 'New needle')
+    old = repo.db.rows('SELECT messages FROM conversation_checkpoints WHERE task_id=:id AND sequence=0', {'id': terminal.task_id})
+    assert json.loads(old[0]['messages']) == original
 
 
 def test_terminal_conversation_rewind_uses_durable_fork(api):

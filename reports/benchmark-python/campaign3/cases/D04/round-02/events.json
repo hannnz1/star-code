@@ -1,0 +1,273 @@
+[
+  {
+    "task_id": "70511198641d406981ec1dcb68ce208a",
+    "sequence": 1,
+    "type": "status",
+    "payload": {
+      "status": "QUEUED"
+    },
+    "created_at": 1790478673.9177122
+  },
+  {
+    "task_id": "70511198641d406981ec1dcb68ce208a",
+    "sequence": 2,
+    "type": "status",
+    "payload": {
+      "status": "RUNNING"
+    },
+    "created_at": 1790478673.9244506
+  },
+  {
+    "task_id": "70511198641d406981ec1dcb68ce208a",
+    "sequence": 3,
+    "type": "assistant_message",
+    "payload": {
+      "text": "",
+      "tool_count": 4
+    },
+    "created_at": 1790478675.4736502
+  },
+  {
+    "task_id": "70511198641d406981ec1dcb68ce208a",
+    "sequence": 4,
+    "type": "tool_prepared",
+    "payload": {
+      "arguments": {
+        "path": ".",
+        "pattern": "**/*"
+      },
+      "call_id": "call_Ht3EJK6xrOpRj8KLIlmnR6HJ",
+      "name": "list_files"
+    },
+    "created_at": 1790478675.4847791
+  },
+  {
+    "task_id": "70511198641d406981ec1dcb68ce208a",
+    "sequence": 5,
+    "type": "tool_started",
+    "payload": {
+      "call_id": "call_Ht3EJK6xrOpRj8KLIlmnR6HJ",
+      "name": "list_files"
+    },
+    "created_at": 1790478675.488572
+  },
+  {
+    "task_id": "70511198641d406981ec1dcb68ce208a",
+    "sequence": 6,
+    "type": "tool_result",
+    "payload": {
+      "artifact_ids": [],
+      "call_id": "call_Ht3EJK6xrOpRj8KLIlmnR6HJ",
+      "content": "{\"paths\": [\"broken.pdf\", \"scan.pdf\", \"valid.txt\"], \"truncated\": false}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "created_at": 1790478675.5003235
+  },
+  {
+    "task_id": "70511198641d406981ec1dcb68ce208a",
+    "sequence": 7,
+    "type": "tool_prepared",
+    "payload": {
+      "arguments": {
+        "path": "valid.txt"
+      },
+      "call_id": "call_0B1nCQg7JRdHDSIwp3jQO9eX",
+      "name": "read_document"
+    },
+    "created_at": 1790478675.5081708
+  },
+  {
+    "task_id": "70511198641d406981ec1dcb68ce208a",
+    "sequence": 8,
+    "type": "tool_started",
+    "payload": {
+      "call_id": "call_0B1nCQg7JRdHDSIwp3jQO9eX",
+      "name": "read_document"
+    },
+    "created_at": 1790478675.5106132
+  },
+  {
+    "task_id": "70511198641d406981ec1dcb68ce208a",
+    "sequence": 9,
+    "type": "tool_result",
+    "payload": {
+      "artifact_ids": [],
+      "call_id": "call_0B1nCQg7JRdHDSIwp3jQO9eX",
+      "content": "{\"path\": \"valid.txt\", \"sha256\": \"4536bba88cb8940d1adba0208dd4c485b5d4957a72502f0c7b10c40df1a09af9\", \"text\": \"The readable document's fact: project Falcon launches in May 2027.\", \"truncated\": false}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "created_at": 1790478675.5240097
+  },
+  {
+    "task_id": "70511198641d406981ec1dcb68ce208a",
+    "sequence": 10,
+    "type": "tool_prepared",
+    "payload": {
+      "arguments": {
+        "path": "scan.pdf"
+      },
+      "call_id": "call_Lwz4K6Fhz59lPQ1NJneSqriT",
+      "name": "read_document"
+    },
+    "created_at": 1790478675.53165
+  },
+  {
+    "task_id": "70511198641d406981ec1dcb68ce208a",
+    "sequence": 11,
+    "type": "tool_started",
+    "payload": {
+      "call_id": "call_Lwz4K6Fhz59lPQ1NJneSqriT",
+      "name": "read_document"
+    },
+    "created_at": 1790478675.5337868
+  },
+  {
+    "task_id": "70511198641d406981ec1dcb68ce208a",
+    "sequence": 12,
+    "type": "tool_result",
+    "payload": {
+      "artifact_ids": [],
+      "call_id": "call_Lwz4K6Fhz59lPQ1NJneSqriT",
+      "content": "PDF has no extractable text; OCR is not supported in this version",
+      "error_code": "TOOL_ERROR",
+      "metadata": {},
+      "status": "error"
+    },
+    "created_at": 1790478675.548463
+  },
+  {
+    "task_id": "70511198641d406981ec1dcb68ce208a",
+    "sequence": 13,
+    "type": "tool_prepared",
+    "payload": {
+      "arguments": {
+        "path": "broken.pdf"
+      },
+      "call_id": "call_YW9jaysgL4t3ojXU47JSh4sG",
+      "name": "read_document"
+    },
+    "created_at": 1790478675.5558972
+  },
+  {
+    "task_id": "70511198641d406981ec1dcb68ce208a",
+    "sequence": 14,
+    "type": "tool_started",
+    "payload": {
+      "call_id": "call_YW9jaysgL4t3ojXU47JSh4sG",
+      "name": "read_document"
+    },
+    "created_at": 1790478675.5578995
+  },
+  {
+    "task_id": "70511198641d406981ec1dcb68ce208a",
+    "sequence": 15,
+    "type": "tool_result",
+    "payload": {
+      "artifact_ids": [],
+      "call_id": "call_YW9jaysgL4t3ojXU47JSh4sG",
+      "content": "PDF could not be parsed or is encrypted",
+      "error_code": "TOOL_ERROR",
+      "metadata": {},
+      "status": "error"
+    },
+    "created_at": 1790478675.5739121
+  },
+  {
+    "task_id": "70511198641d406981ec1dcb68ce208a",
+    "sequence": 16,
+    "type": "assistant_message",
+    "payload": {
+      "text": "",
+      "tool_count": 1
+    },
+    "created_at": 1790478677.6374543
+  },
+  {
+    "task_id": "70511198641d406981ec1dcb68ce208a",
+    "sequence": 17,
+    "type": "tool_prepared",
+    "payload": {
+      "arguments": {
+        "content": "# Summary\n\n## valid.txt\n- Read successfully.\n- Content: \"The readable document's fact: project Falcon launches in May 2027.\"\n- Summary: The document states that project Falcon is scheduled to launch in May 2027.\n\n## Unsupported / unreadable files\n- **scan.pdf** — unsupported for text extraction because the PDF has no extractable text, and OCR is not supported in this version.\n- **broken.pdf** — unreadable because the PDF could not be parsed or is encrypted.\n\n## Notes\n- I did not invent or infer any PDF content.\n- Original files were preserved; no source files were modified.",
+        "media_type": "text/markdown",
+        "name": "summary.md"
+      },
+      "call_id": "call_EhxPKrWsKlViHw1seaLbXf1z",
+      "name": "save_artifact"
+    },
+    "created_at": 1790478677.6475847
+  },
+  {
+    "task_id": "70511198641d406981ec1dcb68ce208a",
+    "sequence": 18,
+    "type": "tool_started",
+    "payload": {
+      "call_id": "call_EhxPKrWsKlViHw1seaLbXf1z",
+      "name": "save_artifact"
+    },
+    "created_at": 1790478677.650074
+  },
+  {
+    "task_id": "70511198641d406981ec1dcb68ce208a",
+    "sequence": 19,
+    "type": "artifact",
+    "payload": {
+      "created_at": 1790478677.653081,
+      "id": "055be3fe356443ed9cd37b3effacba86",
+      "media_type": "text/markdown",
+      "name": "summary.md",
+      "sha256": "8c07a6094c809ab0d012de246c2379b43df9cda74b08504d80e904b557df8563",
+      "task_id": "70511198641d406981ec1dcb68ce208a",
+      "version": 1
+    },
+    "created_at": 1790478677.6553173
+  },
+  {
+    "task_id": "70511198641d406981ec1dcb68ce208a",
+    "sequence": 20,
+    "type": "tool_result",
+    "payload": {
+      "artifact_ids": [
+        "055be3fe356443ed9cd37b3effacba86"
+      ],
+      "call_id": "call_EhxPKrWsKlViHw1seaLbXf1z",
+      "content": "{\"id\": \"055be3fe356443ed9cd37b3effacba86\", \"task_id\": \"70511198641d406981ec1dcb68ce208a\", \"name\": \"summary.md\", \"media_type\": \"text/markdown\", \"sha256\": \"8c07a6094c809ab0d012de246c2379b43df9cda74b08504d80e904b557df8563\", \"version\": 1, \"created_at\": 1790478677.653081}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "created_at": 1790478677.6563182
+  },
+  {
+    "task_id": "70511198641d406981ec1dcb68ce208a",
+    "sequence": 21,
+    "type": "text_delta",
+    "payload": {
+      "text": "Done — I read all three files and saved `summary.md`.\n\nSummary:\n- `valid.txt` says: project Falcon launches in May 2027.\n- `scan.pdf` is unsupported: no extractable text, and OCR isn’t supported.\n- `broken.pdf` is unreadable: it could not be parsed or is encrypted.\n\nI did not invent any PDF content, and the originals were preserved."
+    },
+    "created_at": 1790478679.2268527
+  },
+  {
+    "task_id": "70511198641d406981ec1dcb68ce208a",
+    "sequence": 22,
+    "type": "assistant_message",
+    "payload": {
+      "text": "Done — I read all three files and saved `summary.md`.\n\nSummary:\n- `valid.txt` says: project Falcon launches in May 2027.\n- `scan.pdf` is unsupported: no extractable text, and OCR isn’t supported.\n- `broken.pdf` is unreadable: it could not be parsed or is encrypted.\n\nI did not invent any PDF content, and the originals were preserved.",
+      "tool_count": 0
+    },
+    "created_at": 1790478679.2313662
+  },
+  {
+    "task_id": "70511198641d406981ec1dcb68ce208a",
+    "sequence": 23,
+    "type": "status",
+    "payload": {
+      "status": "SUCCEEDED"
+    },
+    "created_at": 1790478679.2458959
+  }
+]

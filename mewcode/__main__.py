@@ -25,6 +25,14 @@ def main() -> None:
 
 
 async def _run_prompt(config, permission_mode, hook_engine, prompt: str, output_format: str = "text") -> None:
+    try:
+        await _run_prompt_impl(config, permission_mode, hook_engine, prompt, output_format)
+    finally:
+        if hook_engine is not None:
+            await hook_engine.close()
+
+
+async def _run_prompt_impl(config, permission_mode, hook_engine, prompt: str, output_format: str = "text") -> None:
     from mewcode.agent import (
         Agent,
         CompactNotification,

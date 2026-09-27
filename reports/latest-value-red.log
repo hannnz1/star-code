@@ -1,0 +1,22 @@
+F                                                                        [100%]
+================================== FAILURES ===================================
+________ test_compaction_explicit_latest_values_do_not_use_tool_claims ________
+
+    def test_compaction_explicit_latest_values_do_not_use_tool_claims():
+        from muse.agent.context import RETAINED_PREFIX
+        messages = [{'role': 'user', 'content': 'Goal'},
+                    {'role': 'user', 'content': 'State: {"timeout_ms": 1000}'},
+                    {'role': 'user', 'content': 'State: {"timeout_ms": 3000, "allow_network": false}'},
+                    {'role': 'assistant', 'tool_calls': [{'id': 'x', 'name': 'read_file', 'arguments': {}}]},
+                    {'role': 'tool', 'tool_call_id': 'x', 'content': '{"timeout_ms": 1, "allow_network": true}'},
+                    {'role': 'assistant', 'content': 'log ' * 10000}]
+        compacted = compact_messages(messages, max_chars=12000)
+        records = json.loads(next(m['content'][len(RETAINED_PREFIX):] for m in compacted if m.get('_muse_retained')))
+>       latest = next(r for r in records if r['role'] == 'latest_explicit_user_json_values')
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       StopIteration
+
+tests\test_migration_retention_loading.py:37: StopIteration
+=========================== short test summary info ===========================
+FAILED tests/test_migration_retention_loading.py::test_compaction_explicit_latest_values_do_not_use_tool_claims
+1 failed in 0.59s

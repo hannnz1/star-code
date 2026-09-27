@@ -1,0 +1,48 @@
+......FFF                                                                [100%]
+================================== FAILURES ===================================
+______ test_json_examples_and_negation_are_not_promoted_to_current_state ______
+
+    def test_json_examples_and_negation_are_not_promoted_to_current_state():
+        from muse.agent.context import RETAINED_PREFIX
+        messages = [{'role': 'user', 'content': 'Goal'},
+                    {'role': 'user', 'content': 'State: {"timeout_ms": 3000}'},
+                    {'role': 'user', 'content': 'Do not use this example: {"timeout_ms": 1}'},
+                    {'role': 'assistant', 'content': 'log ' * 10000}]
+        result = compact_messages(messages, max_chars=12000)
+        records = json.loads(result[1]['content'][len(RETAINED_PREFIX):])
+        latest = next(r for r in records if r['role'] == 'latest_explicit_user_json_values')
+>       assert json.loads(latest['text'])['timeout_ms'] == 3000
+E       assert 1 == 3000
+
+tests\test_migration_retention_loading.py:130: AssertionError
+______ test_recall_reports_incomplete_search_and_can_page_older_history _______
+
+tmp_path = WindowsPath('C:/Users/Administrator/Documents/Codex/2026-09-26/ai-starcode-muse-coding-agent-python/outputs/muse-next/work/rc-boundaries-red/test_recall_reports_incomplete0')
+
+    def test_recall_reports_incomplete_search_and_can_page_older_history(tmp_path):
+        from muse.agent.context import recall_history
+        repo, task, worker = runtime(tmp_path, ScriptedProvider([]))
+        owned = repo.claim_next('test')
+        ctx = ExecutionContext(worker.settings, repo, owned, 'test')
+        for sequence in range(105):
+            repo.save_conversation_checkpoint(task.id, 'test', owned.lease_epoch, sequence,
+                [{'role': 'user', 'content': 'ancient needle' if sequence == 0 else 'ordinary'}])
+        first = json.loads(recall_history(ctx, 'needle'))
+        assert first['matches'] == []
+>       assert first['has_more'] is True
+               ^^^^^^^^^^^^^^^^^
+E       KeyError: 'has_more'
+
+tests\test_migration_retention_loading.py:144: KeyError
+_________ test_old_mcp_catalog_is_scrubbed_from_model_visible_history _________
+
+    def test_old_mcp_catalog_is_scrubbed_from_model_visible_history():
+>       from muse.agent.context import model_visible_messages
+E       ImportError: cannot import name 'model_visible_messages' from 'muse.agent.context' (C:\Users\Administrator\Documents\Codex\2026-09-26\ai-starcode-muse-coding-agent-python\outputs\muse-next\src\muse\agent\context.py)
+
+tests\test_migration_retention_loading.py:151: ImportError
+=========================== short test summary info ===========================
+FAILED tests/test_migration_retention_loading.py::test_json_examples_and_negation_are_not_promoted_to_current_state
+FAILED tests/test_migration_retention_loading.py::test_recall_reports_incomplete_search_and_can_page_older_history
+FAILED tests/test_migration_retention_loading.py::test_old_mcp_catalog_is_scrubbed_from_model_visible_history
+3 failed, 6 passed in 5.76s

@@ -25,9 +25,9 @@ class DurableWorktrees:
                 'additionalProperties': False}), self.spawn)
         commit = {'type': 'string', 'pattern': '^[a-fA-F0-9]{40}([a-fA-F0-9]{24})?$'}
         registry.register(ToolDefinition(name='worktree_manage', risk='execute',
-            description='Review, fast-forward merge, or remove a managed child checkout with approval. Merge/remove require exact source and parent commits, clean checkouts, and finished child tasks. Removal requires the child commit already merged; branches are retained.',
+            description='Review, fast-forward merge, integrate divergent commits with a merge commit, or remove a managed child checkout with approval. Changes require exact source and parent commits, clean checkouts, and finished child tasks. Conflicts are retained for review; no automatic reset. Removal requires the child commit already merged; branches are retained.',
             parameters={'type': 'object', 'properties': {'child_id': {'type': 'string'},
-                'action': {'type': 'string', 'enum': ['review', 'merge', 'remove']},
+                'action': {'type': 'string', 'enum': ['review', 'merge', 'integrate', 'remove']},
                 'source_commit': commit, 'parent_commit': commit}, 'required': ['child_id', 'action'],
                 'additionalProperties': False}), self.manage)
 
@@ -85,6 +85,8 @@ class DurableWorktrees:
             raise ValueError('Checkout commit changed after review')
         if args['action'] == 'merge':
             await self.git(call_id + ':merge', 'merge', '--ff-only', '--no-overwrite-ignore', source_commit)
+        elif args['action'] == 'integrate':
+            await self.git(call_id + ':integrate', 'merge', '--no-ff', '--no-edit', '--no-overwrite-ignore', source_commit)
         elif args['action'] == 'remove':
             ignored = await self.git(call_id + ':ignored', '-C', str(target), 'status', '--porcelain', '--ignored')
             if ignored:

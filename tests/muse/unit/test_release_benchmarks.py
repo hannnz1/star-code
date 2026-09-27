@@ -1,0 +1,82 @@
+import json
+
+import pytest
+
+
+def test_manifest_is_exclusive_and_rejects_missing_evidence(tmp_path):
+    from benchmarks.release_manifest import write_manifest, verify_manifest
+    output = tmp_path / 'evidence'
+    path = write_manifest(output)
+    data = json.loads(path.read_text())
+    assert data['files']['src/muse/agent/context.py']
+    assert data['planned_attempts'] == 60
+    assert data['human_review'] == 'PENDING'
+    with pytest.raises(FileExistsError):
+        write_manifest(output)
+    assert verify_manifest(path)
+    data['files']['nonexistent-required-evidence'] = 'bad'
+    path.write_text(json.dumps(data))
+    with pytest.raises(ValueError, match='changed|missing'):
+        verify_manifest(path)
+
+
+def test_release_gate_keeps_missing_and_unreviewed_attempts_in_denominator():
+    from benchmarks.release_manifest import acceptance
+    rows = [{'case': f'{prefix}{i:02}', 'round': r, 'result': 'AUTO_PASS_REVIEW_REQUIRED'}
+            for r in range(1, 4) for prefix in 'RDCBP' for i in range(1, 5)]
+    result = acceptance(rows)
+    assert result['planned'] == 60
+    assert result['release_gate'] == 'NOT_ACCEPTED'
+    assert result['pending_human'] == 60
+    assert acceptance(rows[:-1])['missing'] == 1
+    with pytest.raises(ValueError, match='Duplicate'):
+        acceptance(rows + rows[:1])
+
+
+def test_context_probe_rejects_wrong_types_and_missing_facts():
+    from benchmarks.long_context_python import score_answer
+    assert score_answer('{"limit": true}', {'limit': 1, 'path': 'src/a.py'}) == {'limit': False, 'path': False}
+    assert score_answer('not JSON', {'limit': 1}) == {'limit': False}
+    assert score_answer('{"limit": 1}', {'limit': 1}) == {'limit': True}
+
+
+def test_multi_agent_overlap_requires_actual_running_intervals():
+    from benchmarks.multi_agent_python import overlap_seconds, approve_fixture_action
+    assert overlap_seconds([(0, 2)], [(3, 4)]) == 0
+    assert overlap_seconds([(0, 3)], [(2, 4)]) == 1
+    assert approve_fixture_action('verify_command', {'command': 'powershell.exe -NoProfile -File ./verify.ps1'})
+    assert not approve_fixture_action('run_command', {'command': 'git status; Remove-Item C:\\data -Recurse'})
+    assert not approve_fixture_action('run_command', {'command': 'git push origin HEAD'})
+
+
+def test_full_catalog_adapter_keeps_activation_task_local_and_execution_approval(tmp_path):
+    from benchmarks.mcp_paired_python import FullCatalogRegistry
+    from muse.tools.context import ExecutionContext
+    from test_agent_loop import ScriptedProvider, runtime
+    repo, task, worker = runtime(tmp_path, ScriptedProvider([]))
+    config = tmp_path / 'mcp.yaml'
+    config.write_text('mcp_servers:\n  - name: fixture\n    command: synthetic\n')
+    ctx = ExecutionContext(worker.settings.model_copy(update={'config_path': config}), repo, task, 'test')
+    registry = FullCatalogRegistry(ctx)
+    ctx.cp['mcp_catalogs'] = {'fixture': {'fingerprint': registry.mcp.fingerprint('fixture'),
+        'tools': {f'lookup_{i}': {'description': '', 'schema': {'type': 'object', 'properties': {f'field_{i}': {'type': 'string'}}}} for i in range(100)}}}
+    definitions = registry.definitions()
+    call = next(d for d in definitions if d.name == 'mcp_call')
+    assert len(call.parameters['oneOf']) == 100
+    assert call.risk == 'execute'
+    assert 'mcp_active' not in ctx.cp
+    from muse.tools.registry import ToolRegistry
+    production = next(d for d in ToolRegistry(ctx).definitions() if d.name == 'mcp_call')
+    assert 'oneOf' not in production.parameters
+
+
+def test_multi_agent_gate_rejects_idle_children_even_when_parent_verifier_passes():
+    from benchmarks.multi_agent_python import contributions_valid
+    assert not contributions_valid('base', ['a.py', 'b.py'], [
+        {'commit': 'base', 'changed': [], 'reviewed': True, 'integrated': True, 'ancestor': True, 'files_equal': True},
+        {'commit': 'base', 'changed': [], 'reviewed': True, 'integrated': True, 'ancestor': True, 'files_equal': True}])
+    good = [{'commit': name, 'changed': [name], 'reviewed': True, 'integrated': True, 'ancestor': True, 'files_equal': True}
+            for name in ['a.py', 'b.py']]
+    assert contributions_valid('base', ['a.py', 'b.py'], good)
+    good[1]['integrated'] = False
+    assert not contributions_valid('base', ['a.py', 'b.py'], good)

@@ -38,3 +38,35 @@ async def test_worktree_merge_and_retirement_preserve_unmerged_and_dirty_work(tm
     await manager.manage({**args, 'source_commit': head, 'parent_commit': head}, 'remove')
     assert not child_root.exists()
     assert git(root, 'cat-file', '-t', head) == 'commit'
+
+
+async def test_reviewed_divergent_child_can_be_integrated_without_discarding_parent(tmp_path):
+    repo, _, worker = runtime(tmp_path, ScriptedProvider([]))
+    parent = repo.claim_next('parent')
+    root = tmp_path / 'project'
+    git(root, 'init')
+    git(root, 'config', 'user.name', 'Fixture')
+    git(root, 'config', 'user.email', 'fixture@example.invalid')
+    git(root, 'add', 'hello.txt')
+    git(root, 'commit', '-m', 'base')
+    base = git(root, 'rev-parse', 'HEAD')
+    manager = ToolRegistry(ExecutionContext(worker.settings, repo, parent, 'parent')).worktrees
+    created = await manager.spawn({'base_commit': base, 'prompt': 'Inspect'}, 'spawn')
+    child_id = json.loads(created.content)['child_id']
+    child = repo.claim_next('child')
+    repo.finish(child.id, 'child', child.lease_epoch, 'SUCCEEDED', 'Done')
+    child_root = Path(repo.workspace(child.workspace_id)['path'])
+    (child_root / 'child.txt').write_text('child contribution')
+    git(child_root, 'add', 'child.txt')
+    git(child_root, 'commit', '-m', 'child')
+    source = git(child_root, 'rev-parse', 'HEAD')
+    (root / 'parent.txt').write_text('parent contribution')
+    git(root, 'add', 'parent.txt')
+    git(root, 'commit', '-m', 'parent')
+    head = git(root, 'rev-parse', 'HEAD')
+    await manager.manage({'child_id': child_id, 'action': 'integrate', 'source_commit': source, 'parent_commit': head}, 'integrate')
+    assert (root / 'child.txt').read_text() == 'child contribution'
+    assert (root / 'parent.txt').read_text() == 'parent contribution'
+    assert child_root.is_dir()
+    git(root, 'merge-base', '--is-ancestor', source, 'HEAD')
+    git(root, 'merge-base', '--is-ancestor', head, 'HEAD')

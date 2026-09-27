@@ -503,7 +503,7 @@ class TestHookEngine:
         ctx = HookContext(event_name="post_tool_use")
         await engine.run_hooks("post_tool_use", ctx)
         # 给异步任务一点时间完成
-        await asyncio.sleep(0.1)
+        await engine.close()
 
 # ---------------------------------------------------------------------------
 # Agent 循环集成

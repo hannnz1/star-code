@@ -52,6 +52,11 @@ SCHEMA = [
         task_id TEXT NOT NULL REFERENCES tasks(id), sequence INTEGER NOT NULL, messages TEXT NOT NULL,
         created_at REAL NOT NULL, PRIMARY KEY(task_id,sequence))""",
     "INSERT OR IGNORE INTO schema_version(version) VALUES(7)",
+    """CREATE TABLE IF NOT EXISTS conversation_archives(
+        task_id TEXT NOT NULL REFERENCES tasks(id), revision INTEGER NOT NULL,
+        sequence INTEGER NOT NULL, messages TEXT NOT NULL, created_at REAL NOT NULL,
+        PRIMARY KEY(task_id,revision))""",
+    "INSERT OR IGNORE INTO schema_version(version) VALUES(8)",
 ]
 
 
@@ -71,7 +76,7 @@ class Database:
         with self.transaction() as connection:
             for statement in SCHEMA:
                 connection.exec_driver_sql(statement)
-            if connection.exec_driver_sql("SELECT MAX(version) FROM schema_version").scalar() != 7:
+            if connection.exec_driver_sql("SELECT MAX(version) FROM schema_version").scalar() != 8:
                 raise ValueError("Unsupported database schema version")
             columns = {row[1] for row in connection.exec_driver_sql('PRAGMA table_info(tasks)')}
             if 'read_only' not in columns:

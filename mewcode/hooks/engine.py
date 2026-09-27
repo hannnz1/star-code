@@ -27,6 +27,12 @@ class HookEngine:
         self.hooks: list[Hook] = hooks or []
         self._prompt_messages: list[str] = []
         self._notifications: list[HookNotification] = []
+        self._background_tasks: set[asyncio.Task] = set()
+
+    async def close(self) -> None:
+        """Drain owned Hooks before their event loop is closed."""
+        while self._background_tasks:
+            await asyncio.gather(*tuple(self._background_tasks), return_exceptions=True)
 
 
     def find_matching_hooks(self, event: str, ctx: HookContext) -> list[Hook]:
@@ -47,7 +53,9 @@ class HookEngine:
         for hook in matched:
             hook.mark_executed()
             if hook.async_exec:
-                asyncio.ensure_future(self._run_single(hook, ctx))
+                task = asyncio.create_task(self._run_single(hook, ctx))
+                self._background_tasks.add(task)
+                task.add_done_callback(self._background_tasks.discard)
             else:
                 await self._run_single(hook, ctx)
 

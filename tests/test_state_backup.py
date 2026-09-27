@@ -89,7 +89,7 @@ def test_v1_backup_upgrades_to_v7_without_changing_rollback_copy(tmp_path):
     restored = tmp_path / 'upgraded'
     restore_state(archive, restored)
     repo = TaskRepository(restored / 'state.sqlite3')
-    assert repo.db.rows('SELECT MAX(version) AS version FROM schema_version')[0]['version'] == 7
+    assert repo.db.rows('SELECT MAX(version) AS version FROM schema_version')[0]['version'] == 8
     assert repo.get('old-task').checkpoint['model_requests'] == 3
     assert repo.get('old-task').read_only is False
     assert repo.conversation_checkpoints('old-task') == []

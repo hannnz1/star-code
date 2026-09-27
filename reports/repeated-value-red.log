@@ -1,0 +1,19 @@
+F                                                                        [100%]
+================================== FAILURES ===================================
+__________ test_repeating_an_earlier_user_value_is_a_new_correction ___________
+
+    def test_repeating_an_earlier_user_value_is_a_new_correction():
+        from muse.agent.context import RETAINED_PREFIX
+        messages = [{'role': 'user', 'content': 'Goal'}]
+        messages += [{'role': 'user', 'content': json.dumps({'timeout_ms': n})} for n in (1000, 3000, 1000)]
+        messages.append({'role': 'assistant', 'content': 'log ' * 10000})
+        compacted = compact_messages(messages, max_chars=12000)
+        records = json.loads(next(m['content'][len(RETAINED_PREFIX):] for m in compacted if m.get('_muse_retained')))
+        latest = next(r for r in records if r['role'] == 'latest_explicit_user_json_values')
+>       assert json.loads(latest['text'])['timeout_ms'] == 1000
+E       assert 3000 == 1000
+
+tests\test_migration_retention_loading.py:49: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_migration_retention_loading.py::test_repeating_an_earlier_user_value_is_a_new_correction
+1 failed in 0.62s

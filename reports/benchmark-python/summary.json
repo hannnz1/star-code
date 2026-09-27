@@ -18,5 +18,30 @@
     "PASS_WITH_DOCUMENTED_AUTO_FALSE_NEGATIVE": 1
   },
   "reviewed_pass_total": 35,
-  "note": "Two complete campaigns are separate; no best-round pooling. Local no-JVM-path smoke is not clean-host acceptance. Async Hook fixes were subsequently covered by regression, not by these frozen product cases."
+  "note": "All three complete campaigns remain separate. Campaign 2 reviewed_pass_total is historical; campaign 3 has 57 automatic passes pending review and 3 P01 blocks. No best-round pooling. Independent clean Windows acceptance remains pending.",
+  "campaign3_automatic": {
+    "release_gate": "NOT_ACCEPTED",
+    "recorded_attempts": 60,
+    "counts": {
+      "AUTO_PASS_REVIEW_REQUIRED": 57,
+      "BLOCKED": 3
+    },
+    "rounds": {
+      "1": {
+        "AUTO_PASS_REVIEW_REQUIRED": 19,
+        "BLOCKED": 1
+      },
+      "2": {
+        "AUTO_PASS_REVIEW_REQUIRED": 19,
+        "BLOCKED": 1
+      },
+      "3": {
+        "AUTO_PASS_REVIEW_REQUIRED": 19,
+        "BLOCKED": 1
+      }
+    },
+    "human_semantic_review": "PENDING",
+    "note": "Automatic checks are not formal PASS. P01 requires file symlink privilege. Existing campaigns remain unchanged. This is not independent clean-host acceptance."
+  },
+  "latest_campaign": "campaign3"
 }

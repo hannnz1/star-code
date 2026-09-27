@@ -1,0 +1,40 @@
+.........FF                                                              [100%]
+================================== FAILURES ===================================
+__________ test_mcp_activation_total_payload_is_bounded_across_loads __________
+
+tmp_path = WindowsPath('C:/Users/Administrator/Documents/Codex/2026-09-26/ai-starcode-muse-coding-agent-python/outputs/muse-next/work/mcp-bound-red/test_mcp_activation_total_payl0')
+
+    async def test_mcp_activation_total_payload_is_bounded_across_loads(tmp_path):
+        repo, task, worker = runtime(tmp_path, ScriptedProvider([]))
+        config = tmp_path / 'mcp.yaml'
+        config.write_text('mcp_servers:\n  - name: local\n    command: synthetic\n')
+        worker.settings = worker.settings.model_copy(update={'config_path': config})
+        ctx = ExecutionContext(worker.settings, repo, task, 'probe')
+        registry = ToolRegistry(ctx)
+        ctx.cp['mcp_catalogs'] = {'local': {'fingerprint': registry.mcp.fingerprint('local'),
+            'tools': {name: {'description': '', 'schema': {'type': 'object', 'description': 'x' * 14000}}
+                      for name in ('first', 'second')}}}
+        registry.mcp.restore(await registry.mcp.load({'server': 'local', 'tools': ['first']}, 'first'))
+>       with pytest.raises(ValueError, match='payload'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ValueError'>
+
+tests\test_migration_retention_loading.py:171: Failed
+________ test_legacy_mcp_metadata_inside_retained_capsule_is_scrubbed _________
+
+    def test_legacy_mcp_metadata_inside_retained_capsule_is_scrubbed():
+        from muse.agent.context import RETAINED_PREFIX, model_visible_messages
+        old = {'role': 'tool', 'text': json.dumps({'content': 'index', 'metadata': {'mcp_catalog': {'secret_schema': {}}}})}
+        messages = [{'role': 'user', '_muse_retained': True, 'content': RETAINED_PREFIX + json.dumps([old])}]
+>       assert 'secret_schema' not in json.dumps(model_visible_messages(messages))
+E       assert 'secret_schema' not in '[{"role": "...}}}}\\"}]"}]'
+E         
+E         'secret_schema' is contained here:
+E           \\": {\\\"secret_schema\\\": {}}}}\"}]"}]
+E         ?           +++++++++++++
+
+tests\test_migration_retention_loading.py:179: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_migration_retention_loading.py::test_mcp_activation_total_payload_is_bounded_across_loads
+FAILED tests/test_migration_retention_loading.py::test_legacy_mcp_metadata_inside_retained_capsule_is_scrubbed
+2 failed, 9 passed in 2.51s

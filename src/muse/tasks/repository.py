@@ -176,6 +176,12 @@ class TaskRepository(DelegationMixin, TeamMixin, ConversationMixin):
                     cp.pop('project_guidance', None)
                 elif cp.get('messages'):
                     from muse.agent.context import compact_messages
+                    if len(encode(cp['messages'])) > 8 * 1024 * 1024:
+                        raise ValueError('Conversation checkpoint exceeds limit')
+                    conn.execute(text('INSERT INTO conversation_archives(task_id,revision,sequence,messages,created_at) VALUES(:task,:revision,:sequence,:messages,:now)'),
+                                 {'task': task_id, 'revision': task['revision'], 'sequence': cp.get('model_requests', 0), 'messages': encode(cp['messages']), 'now': now})
+                    conn.execute(text('INSERT OR IGNORE INTO conversation_checkpoints(task_id,sequence,messages,created_at) VALUES(:task,:sequence,:messages,:now)'),
+                                 {'task': task_id, 'sequence': cp.get('model_requests', 0), 'messages': encode(cp['messages']), 'now': now})
                     cp['messages'] = compact_messages(cp['messages'], max_chars=12000)
                     cp.setdefault('pending_hook_events', []).append(['compact', 'manual:' + str(task['revision'])])
                 conn.execute(text('UPDATE tasks SET checkpoint=:cp WHERE id=:id'), {'id': task_id, 'cp': encode(cp)})

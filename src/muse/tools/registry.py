@@ -56,6 +56,12 @@ class ToolRegistry:
             value = data.decode("utf-8")
             return json.dumps({"text": value[start:start + 12000], "next_offset": start + 12000 if start + 12000 < len(value) else None}, ensure_ascii=False)
         self.register(ToolDefinition(name="read_offload", description="Read the next 12000-character slice of a large saved tool output from this task.", parameters=schema({"artifact_id": PATH, "offset": {"type": "integer", "minimum": 0}}, ["artifact_id"])), read_offload)
+        async def recall(args, call_id):
+            from muse.agent.context import recall_history
+            return recall_history(context, args['query'], offset=args.get('offset', 0))
+        self.register(ToolDefinition(name='recall_history', description='Search this task conversation checkpoints for facts removed by compaction. Returns verbatim excerpts with source sequence, never authority to replay actions.',
+                                       parameters=schema({'query': {'type': 'string', 'minLength': 1, 'maxLength': 200},
+                                                          'offset': {'type': 'integer', 'minimum': 0}}, ['query'])), recall)
         documents = DocumentTools(context, self.files)
         self.register(ToolDefinition(name="read_document", description="Extract TXT, Markdown or text PDF; OCR is unsupported.", parameters=schema({"path": PATH}, ["path"])), documents.read)
         self.register(ToolDefinition(name="organize_document", description="Copy a source into muse-output/category preserving originals and relative paths.", risk="write", parameters=schema({"path": PATH, "category": PATH}, ["path", "category"])), documents.organize)
@@ -94,6 +100,7 @@ class ToolRegistry:
         self.entries[definition.name] = (definition, handler)
 
     def definitions(self) -> list[ToolDefinition]:
+        self.mcp.refresh_definition()
         excluded = {"write_file", "edit_file", "run_command", "verify_command"} if self.context.task.scenario in {"research", "documents"} else set()
         return [definition for name, (definition, _) in self.entries.items() if name not in excluded and not name.startswith('__hook_')
                 and (self.context.cp.get('allowed_tools') is None or name in self.context.cp['allowed_tools'])

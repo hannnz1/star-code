@@ -1,0 +1,50 @@
+{
+  "case": "D01",
+  "round": 1,
+  "track": "real-model",
+  "result": "AUTO_PASS_REVIEW_REQUIRED",
+  "checks": {
+    "expected_state": true,
+    "fact_coverage": true,
+    "source_hashes_unchanged": true,
+    "deliverable_bytes_valid": true
+  },
+  "facts": {
+    "Project Orion": true,
+    "Budget 42000 USD": true,
+    "Owner Maya": true,
+    "Launch 2027-02-14": true,
+    "Project Vega": true,
+    "Budget 61000 USD": true,
+    "Owner Leon": true,
+    "Launch 2027-03-21": true,
+    "Project Lyra": true,
+    "Budget 73000 USD": true,
+    "Owner Mira": true,
+    "Launch 2027-04-18": true
+  },
+  "task_status": "SUCCEEDED",
+  "error": "",
+  "model": "gpt-5.4-mini",
+  "protocol": "openai-responses",
+  "duration_seconds": 8.656,
+  "usage": {
+    "complete": true,
+    "input_tokens": 14299,
+    "output_tokens": 397
+  },
+  "model_requests": 6,
+  "tool_calls": 9,
+  "changed_files": [],
+  "artifacts": [
+    {
+      "id": "4f332563b0154d5da3926279aebe0f8e",
+      "task_id": "e0f11187c5da49e59b8dee4d3af9e68d",
+      "name": "summary.md",
+      "media_type": "text/markdown",
+      "sha256": "e2b57f1cc169776fd0adcbdb270db31aa03b479c600a87ca14f82a24aaa77105",
+      "version": 1,
+      "created_at": 1790478522.9748044
+    }
+  ]
+}

@@ -1,0 +1,168 @@
+..........FF.....F                                                       [100%]
+================================== FAILURES ===================================
+___ test_prompt_owner_drains_hooks_on_early_return_and_cancellation[False] ____
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000180FFE3AD50>
+cancel = False
+
+    @pytest.mark.parametrize('cancel', [False, True])
+    async def test_prompt_owner_drains_hooks_on_early_return_and_cancellation(monkeypatch, cancel):
+        import mewcode.__main__ as cli
+        engine = HookEngine([Hook(id='exit', event='post_tool_use',
+            action=Action(type='command', command='echo completed'), async_exec=True)])
+        async def implementation(*args):
+            await engine.run_hooks('post_tool_use', HookContext(event_name='post_tool_use'))
+            if cancel:
+                raise asyncio.CancelledError
+        monkeypatch.setattr(cli, '_run_prompt_impl', implementation, raising=False)
+        if cancel:
+            with pytest.raises(asyncio.CancelledError):
+                await cli._run_prompt(None, None, engine, 'test')
+        else:
+>           await cli._run_prompt(None, None, engine, 'test')
+
+tests\test_legacy_hook_shutdown.py:31: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+config = None, permission_mode = None
+hook_engine = <mewcode.hooks.engine.HookEngine object at 0x00000180FFE3B0B0>
+prompt = 'test', output_format = 'text'
+
+    async def _run_prompt(config, permission_mode, hook_engine, prompt: str, output_format: str = "text") -> None:
+        from mewcode.agent import (
+            Agent,
+            CompactNotification,
+            ErrorEvent,
+            LoopComplete,
+            PermissionRequest,
+            PermissionResponse,
+            RetryEvent,
+            StreamText,
+            ThinkingText,
+            ToolResultEvent,
+            ToolUseEvent,
+            TurnComplete,
+            UsageEvent,
+        )
+        from mewcode.client import create_client, resolve_context_window
+        from mewcode.conversation import ConversationManager
+        from mewcode.memory.instructions import load_instructions
+        from mewcode.permissions import (
+            DangerousCommandDetector,
+            PathSandbox,
+            PermissionChecker,
+            RuleEngine,
+        )
+        from mewcode.tools import create_default_registry
+        from mewcode.agents.loader import AgentLoader
+        from mewcode.agents.task_manager import TaskManager
+        from mewcode.agents.trace import TraceManager
+        from mewcode.tools.agent_tool import AgentTool
+        from mewcode.tools.impl.tool_search import ToolSearchTool
+        from mewcode.tools.mcp_call import McpCallTool
+        from mewcode.teams.manager import TeamManager
+        from mewcode.teams.models import BackendType
+        from mewcode.tools.team_create import TeamCreateTool
+        from mewcode.tools.team_delete import TeamDeleteTool
+        from mewcode.worktree import WorktreeManager
+        from mewcode.config import WorktreeConfig
+    
+        is_json = output_format == "stream-json"
+    
+        def emit_json(obj: dict) -> None:
+            """���һ�� NDJSON �� stdout"""
+            print(json.dumps(obj, ensure_ascii=False), flush=True)
+    
+>       provider = config.providers[0]
+                   ^^^^^^^^^^^^^^^^
+E       AttributeError: 'NoneType' object has no attribute 'providers'
+
+mewcode\__main__.py:72: AttributeError
+____ test_prompt_owner_drains_hooks_on_early_return_and_cancellation[True] ____
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000018084481910>
+cancel = True
+
+    @pytest.mark.parametrize('cancel', [False, True])
+    async def test_prompt_owner_drains_hooks_on_early_return_and_cancellation(monkeypatch, cancel):
+        import mewcode.__main__ as cli
+        engine = HookEngine([Hook(id='exit', event='post_tool_use',
+            action=Action(type='command', command='echo completed'), async_exec=True)])
+        async def implementation(*args):
+            await engine.run_hooks('post_tool_use', HookContext(event_name='post_tool_use'))
+            if cancel:
+                raise asyncio.CancelledError
+        monkeypatch.setattr(cli, '_run_prompt_impl', implementation, raising=False)
+        if cancel:
+            with pytest.raises(asyncio.CancelledError):
+>               await cli._run_prompt(None, None, engine, 'test')
+
+tests\test_legacy_hook_shutdown.py:29: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+config = None, permission_mode = None
+hook_engine = <mewcode.hooks.engine.HookEngine object at 0x0000018084481D30>
+prompt = 'test', output_format = 'text'
+
+    async def _run_prompt(config, permission_mode, hook_engine, prompt: str, output_format: str = "text") -> None:
+        from mewcode.agent import (
+            Agent,
+            CompactNotification,
+            ErrorEvent,
+            LoopComplete,
+            PermissionRequest,
+            PermissionResponse,
+            RetryEvent,
+            StreamText,
+            ThinkingText,
+            ToolResultEvent,
+            ToolUseEvent,
+            TurnComplete,
+            UsageEvent,
+        )
+        from mewcode.client import create_client, resolve_context_window
+        from mewcode.conversation import ConversationManager
+        from mewcode.memory.instructions import load_instructions
+        from mewcode.permissions import (
+            DangerousCommandDetector,
+            PathSandbox,
+            PermissionChecker,
+            RuleEngine,
+        )
+        from mewcode.tools import create_default_registry
+        from mewcode.agents.loader import AgentLoader
+        from mewcode.agents.task_manager import TaskManager
+        from mewcode.agents.trace import TraceManager
+        from mewcode.tools.agent_tool import AgentTool
+        from mewcode.tools.impl.tool_search import ToolSearchTool
+        from mewcode.tools.mcp_call import McpCallTool
+        from mewcode.teams.manager import TeamManager
+        from mewcode.teams.models import BackendType
+        from mewcode.tools.team_create import TeamCreateTool
+        from mewcode.tools.team_delete import TeamDeleteTool
+        from mewcode.worktree import WorktreeManager
+        from mewcode.config import WorktreeConfig
+    
+        is_json = output_format == "stream-json"
+    
+        def emit_json(obj: dict) -> None:
+            """���һ�� NDJSON �� stdout"""
+            print(json.dumps(obj, ensure_ascii=False), flush=True)
+    
+>       provider = config.providers[0]
+                   ^^^^^^^^^^^^^^^^
+E       AttributeError: 'NoneType' object has no attribute 'providers'
+
+mewcode\__main__.py:72: AttributeError
+_ test_multi_agent_gate_rejects_idle_children_even_when_parent_verifier_passes _
+
+    def test_multi_agent_gate_rejects_idle_children_even_when_parent_verifier_passes():
+>       from benchmarks.multi_agent_python import contributions_valid
+E       ImportError: cannot import name 'contributions_valid' from 'benchmarks.multi_agent_python' (C:\Users\Administrator\Documents\Codex\2026-09-26\ai-starcode-muse-coding-agent-python\outputs\muse-next\benchmarks\multi_agent_python.py)
+
+tests\muse\unit\test_release_benchmarks.py:74: ImportError
+=========================== short test summary info ===========================
+FAILED tests/test_legacy_hook_shutdown.py::test_prompt_owner_drains_hooks_on_early_return_and_cancellation[False]
+FAILED tests/test_legacy_hook_shutdown.py::test_prompt_owner_drains_hooks_on_early_return_and_cancellation[True]
+FAILED tests/muse/unit/test_release_benchmarks.py::test_multi_agent_gate_rejects_idle_children_even_when_parent_verifier_passes
+3 failed, 15 passed in 12.23s

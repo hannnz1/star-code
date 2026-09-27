@@ -1,0 +1,148 @@
+{
+  "cd1dbe9dc87947a19c116ab7bb121a91": [
+    {
+      "task_id": "cd1dbe9dc87947a19c116ab7bb121a91",
+      "sequence": 1,
+      "type": "status",
+      "payload": {
+        "status": "QUEUED"
+      },
+      "created_at": 1790478572.5577545
+    },
+    {
+      "task_id": "cd1dbe9dc87947a19c116ab7bb121a91",
+      "sequence": 2,
+      "type": "status",
+      "payload": {
+        "status": "RUNNING"
+      },
+      "created_at": 1790478572.561271
+    },
+    {
+      "task_id": "cd1dbe9dc87947a19c116ab7bb121a91",
+      "sequence": 3,
+      "type": "text_delta",
+      "payload": {
+        "text": "I’ll run exactly `python slow.py` with a 120s timeout and won’t modify any files."
+      },
+      "created_at": 1790478574.0203815
+    },
+    {
+      "task_id": "cd1dbe9dc87947a19c116ab7bb121a91",
+      "sequence": 4,
+      "type": "assistant_message",
+      "payload": {
+        "text": "I’ll run exactly `python slow.py` with a 120s timeout and won’t modify any files.",
+        "tool_count": 1
+      },
+      "created_at": 1790478574.024403
+    },
+    {
+      "task_id": "cd1dbe9dc87947a19c116ab7bb121a91",
+      "sequence": 5,
+      "type": "tool_prepared",
+      "payload": {
+        "arguments": {
+          "command": "python slow.py",
+          "timeout_seconds": 120
+        },
+        "call_id": "call_GL1z5YmVpyJFrEddx8A32580",
+        "name": "run_command"
+      },
+      "created_at": 1790478574.031945
+    },
+    {
+      "task_id": "cd1dbe9dc87947a19c116ab7bb121a91",
+      "sequence": 6,
+      "type": "status",
+      "payload": {
+        "status": "WAITING_APPROVAL"
+      },
+      "created_at": 1790478574.0346844
+    },
+    {
+      "task_id": "cd1dbe9dc87947a19c116ab7bb121a91",
+      "sequence": 7,
+      "type": "approval_required",
+      "payload": {
+        "arguments": {
+          "command": "python slow.py",
+          "timeout_seconds": 120
+        },
+        "call_id": "call_GL1z5YmVpyJFrEddx8A32580",
+        "name": "run_command"
+      },
+      "created_at": 1790478574.0346844
+    },
+    {
+      "task_id": "cd1dbe9dc87947a19c116ab7bb121a91",
+      "sequence": 8,
+      "type": "approval_decided",
+      "payload": {
+        "approval_id": "73a25a62fd7946ceb017ef0a0ac60d2a",
+        "status": "APPROVED"
+      },
+      "created_at": 1790478574.0390806
+    },
+    {
+      "task_id": "cd1dbe9dc87947a19c116ab7bb121a91",
+      "sequence": 9,
+      "type": "status",
+      "payload": {
+        "status": "QUEUED"
+      },
+      "created_at": 1790478574.0376823
+    },
+    {
+      "task_id": "cd1dbe9dc87947a19c116ab7bb121a91",
+      "sequence": 10,
+      "type": "status",
+      "payload": {
+        "status": "RUNNING"
+      },
+      "created_at": 1790478574.0424125
+    },
+    {
+      "task_id": "cd1dbe9dc87947a19c116ab7bb121a91",
+      "sequence": 11,
+      "type": "tool_started",
+      "payload": {
+        "call_id": "call_GL1z5YmVpyJFrEddx8A32580",
+        "name": "run_command"
+      },
+      "created_at": 1790478574.064662
+    },
+    {
+      "task_id": "cd1dbe9dc87947a19c116ab7bb121a91",
+      "sequence": 12,
+      "type": "status",
+      "payload": {
+        "status": "RUNNING"
+      },
+      "created_at": 1790478574.6815643
+    },
+    {
+      "task_id": "cd1dbe9dc87947a19c116ab7bb121a91",
+      "sequence": 13,
+      "type": "tool_result",
+      "payload": {
+        "artifact_ids": [],
+        "call_id": "call_GL1z5YmVpyJFrEddx8A32580",
+        "content": "CANCELLED",
+        "error_code": "CANCELLED",
+        "metadata": {},
+        "status": "cancelled"
+      },
+      "created_at": 1790478574.7532651
+    },
+    {
+      "task_id": "cd1dbe9dc87947a19c116ab7bb121a91",
+      "sequence": 14,
+      "type": "status",
+      "payload": {
+        "status": "CANCELLED"
+      },
+      "created_at": 1790478574.7581184
+    }
+  ]
+}

@@ -1,0 +1,156 @@
+...........FF                                                            [100%]
+================================== FAILURES ===================================
+_____ test_latest_large_user_correction_survives_larger_assistant_output ______
+
+    def test_latest_large_user_correction_survives_larger_assistant_output():
+        correction = 'Use the corrected requirement: ' + 'x' * 4000
+        messages = [{'role': 'user', 'content': 'Original task'},
+                    {'role': 'user', 'content': correction},
+                    {'role': 'assistant', 'content': 'y' * 10000}]
+        result = compact_messages(messages, max_chars=12000)
+>       assert any(m.get('content') == correction for m in result)
+E       assert False
+E        +  where False = any(<generator object test_latest_large_user_correction_survives_larger_assistant_output.<locals>.<genexpr> at 0x0000026718BE8AC0>)
+
+tests\test_migration_retention_loading.py:188: AssertionError
+_______ test_activated_schema_preserves_local_reference_resource_roots ________
+
+self = Resource(contents={'$id': 'https://example.invalid/root', 'type': 'object', '$defs': {'integer': {'type': 'integer'}},...rties': {'word': {'$ref': '#/properties/arguments/$defs/text'}}}}}, _specification=<Specification name='draft2020-12'>)
+pointer = '/properties/arguments/$defs/integer'
+resolver = Resolver(_base_uri='https://example.invalid/root', _registry=<Registry (23 resources)>)
+
+    def pointer(self, pointer: str, resolver: Resolver[D]) -> Resolved[D]:
+        """
+        Resolve the given JSON pointer.
+    
+        Raises:
+    
+            `exceptions.PointerToNowhere`
+    
+                if the pointer points to a location not present in the document
+    
+        """
+        if not pointer:
+            return Resolved(contents=self.contents, resolver=resolver)
+    
+        contents = self.contents
+        segments: list[int | str] = []
+        for segment in unquote(pointer[1:]).split("/"):
+            if isinstance(contents, Sequence):
+                segment = int(segment)
+            else:
+                segment = segment.replace("~1", "/").replace("~0", "~")
+            try:
+>               contents = contents[segment]  # type: ignore[reportUnknownArgumentType]
+                           ^^^^^^^^^^^^^^^^^
+E               KeyError: 'arguments'
+
+.venv\Lib\site-packages\referencing\_core.py:276: KeyError
+
+The above exception was the direct cause of the following exception:
+
+self = Draft202012Validator(schema={'$ref': '#/properties...$defs/integer'}, format_checker=None)
+ref = '#/properties/arguments/$defs/integer', instance = 5
+
+    def _validate_reference(self, ref, instance):
+        if self._ref_resolver is None:
+            try:
+>               resolved = self._resolver.lookup(ref)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.venv\Lib\site-packages\jsonschema\validators.py:462: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+.venv\Lib\site-packages\referencing\_core.py:690: in lookup
+    return retrieved.value.pointer(pointer=fragment, resolver=resolver)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = Resource(contents={'$id': 'https://example.invalid/root', 'type': 'object', '$defs': {'integer': {'type': 'integer'}},...rties': {'word': {'$ref': '#/properties/arguments/$defs/text'}}}}}, _specification=<Specification name='draft2020-12'>)
+pointer = '/properties/arguments/$defs/integer'
+resolver = Resolver(_base_uri='https://example.invalid/root', _registry=<Registry (23 resources)>)
+
+    def pointer(self, pointer: str, resolver: Resolver[D]) -> Resolved[D]:
+        """
+        Resolve the given JSON pointer.
+    
+        Raises:
+    
+            `exceptions.PointerToNowhere`
+    
+                if the pointer points to a location not present in the document
+    
+        """
+        if not pointer:
+            return Resolved(contents=self.contents, resolver=resolver)
+    
+        contents = self.contents
+        segments: list[int | str] = []
+        for segment in unquote(pointer[1:]).split("/"):
+            if isinstance(contents, Sequence):
+                segment = int(segment)
+            else:
+                segment = segment.replace("~1", "/").replace("~0", "~")
+            try:
+                contents = contents[segment]  # type: ignore[reportUnknownArgumentType]
+            except LookupError as lookup_error:
+                error = exceptions.PointerToNowhere(ref=pointer, resource=self)
+>               raise error from lookup_error
+E               referencing.exceptions.PointerToNowhere: '/properties/arguments/$defs/integer' does not exist within {'$id': 'https://example.invalid/root', 'type': 'object', '$defs': {'integer': {'type': 'integer'}}, 'properties': {'value': {'$ref': '#/properties/arguments/$defs/integer'}, 'nested': {'$id': 'child', 'type': 'object', '$defs': {'text': {'type': 'string'}}, 'properties': {'word': {'$ref': '#/properties/arguments/$defs/text'}}}}}
+
+.venv\Lib\site-packages\referencing\_core.py:279: PointerToNowhere
+
+The above exception was the direct cause of the following exception:
+
+    def test_activated_schema_preserves_local_reference_resource_roots():
+        import jsonschema
+        from muse.extensions.mcp import _embedded_schema
+        schema = {'$id': 'https://example.invalid/root', 'type': 'object',
+                  '$defs': {'integer': {'type': 'integer'}},
+                  'properties': {'value': {'$ref': '#/$defs/integer'}, 'nested': {
+                      '$id': 'child', 'type': 'object', '$defs': {'text': {'type': 'string'}},
+                      'properties': {'word': {'$ref': '#/$defs/text'}}}}}
+        wrapped = {'type': 'object', 'properties': {'arguments': _embedded_schema(schema, '#/properties/arguments')}}
+>       jsonschema.validate({'arguments': {'value': 5, 'nested': {'word': 'ok'}}}, wrapped)
+
+tests\test_migration_retention_loading.py:201: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+.venv\Lib\site-packages\jsonschema\validators.py:1330: in validate
+    error = exceptions.best_match(validator.iter_errors(instance))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\jsonschema\exceptions.py:479: in best_match
+    best = max(errors, key=key, default=None)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\jsonschema\validators.py:383: in iter_errors
+    for error in errors:
+                 ^^^^^^
+.venv\Lib\site-packages\jsonschema\_keywords.py:296: in properties
+    yield from validator.descend(
+.venv\Lib\site-packages\jsonschema\validators.py:431: in descend
+    for error in errors:
+                 ^^^^^^
+.venv\Lib\site-packages\jsonschema\_keywords.py:296: in properties
+    yield from validator.descend(
+.venv\Lib\site-packages\jsonschema\validators.py:431: in descend
+    for error in errors:
+                 ^^^^^^
+.venv\Lib\site-packages\jsonschema\_keywords.py:275: in ref
+    yield from validator._validate_reference(ref=ref, instance=instance)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = Draft202012Validator(schema={'$ref': '#/properties...$defs/integer'}, format_checker=None)
+ref = '#/properties/arguments/$defs/integer', instance = 5
+
+    def _validate_reference(self, ref, instance):
+        if self._ref_resolver is None:
+            try:
+                resolved = self._resolver.lookup(ref)
+            except referencing.exceptions.Unresolvable as err:
+>               raise exceptions._WrappedReferencingError(err) from err
+E               jsonschema.exceptions._WrappedReferencingError: PointerToNowhere: '/properties/arguments/$defs/integer' does not exist within {'$id': 'https://example.invalid/root', 'type': 'object', '$defs': {'integer': {'type': 'integer'}}, 'properties': {'value': {'$ref': '#/properties/arguments/$defs/integer'}, 'nested': {'$id': 'child', 'type': 'object', '$defs': {'text': {'type': 'string'}}, 'properties': {'word': {'$ref': '#/properties/arguments/$defs/text'}}}}}
+
+.venv\Lib\site-packages\jsonschema\validators.py:464: _WrappedReferencingError
+=========================== short test summary info ===========================
+FAILED tests/test_migration_retention_loading.py::test_latest_large_user_correction_survives_larger_assistant_output
+FAILED tests/test_migration_retention_loading.py::test_activated_schema_preserves_local_reference_resource_roots
+2 failed, 11 passed in 2.56s

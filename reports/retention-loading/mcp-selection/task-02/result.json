@@ -1,0 +1,27 @@
+{
+  "case": "task-02",
+  "checks": {
+    "completed": true,
+    "exact_result": true,
+    "exact_remote_call": true,
+    "schema_loaded": true,
+    "no_other_tools": true
+  },
+  "passed": true,
+  "model": "gpt-5.4-mini",
+  "seconds": 8.157,
+  "model_requests": 5,
+  "usage": {
+    "complete": true,
+    "input_tokens": 20366,
+    "output_tokens": 132
+  },
+  "answer": "2026-09-18",
+  "error": "",
+  "remote_calls": [
+    {
+      "tool": "shipments_get_eta",
+      "entity_id": "SHP-203"
+    }
+  ]
+}

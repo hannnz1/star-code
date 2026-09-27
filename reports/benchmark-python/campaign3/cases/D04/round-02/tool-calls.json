@@ -1,0 +1,117 @@
+[
+  {
+    "task_id": "70511198641d406981ec1dcb68ce208a",
+    "id": "call_Ht3EJK6xrOpRj8KLIlmnR6HJ",
+    "name": "list_files",
+    "arguments": {
+      "path": ".",
+      "pattern": "**/*"
+    },
+    "risk": "read",
+    "status": "DONE",
+    "digest": "160d968d25b7336c0ce1aad18ecf2b89785c9716bcb782c3bd5f7cb068fa5bcf",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_Ht3EJK6xrOpRj8KLIlmnR6HJ",
+      "content": "{\"paths\": [\"broken.pdf\", \"scan.pdf\", \"valid.txt\"], \"truncated\": false}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790478675.4847791,
+    "updated_at": 1790478675.5003235
+  },
+  {
+    "task_id": "70511198641d406981ec1dcb68ce208a",
+    "id": "call_0B1nCQg7JRdHDSIwp3jQO9eX",
+    "name": "read_document",
+    "arguments": {
+      "path": "valid.txt"
+    },
+    "risk": "read",
+    "status": "DONE",
+    "digest": "432bf911f95c7d92bb9123b8792218f49c279a4226a5131810040556f84baedc",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_0B1nCQg7JRdHDSIwp3jQO9eX",
+      "content": "{\"path\": \"valid.txt\", \"sha256\": \"4536bba88cb8940d1adba0208dd4c485b5d4957a72502f0c7b10c40df1a09af9\", \"text\": \"The readable document's fact: project Falcon launches in May 2027.\", \"truncated\": false}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790478675.5081708,
+    "updated_at": 1790478675.5240097
+  },
+  {
+    "task_id": "70511198641d406981ec1dcb68ce208a",
+    "id": "call_Lwz4K6Fhz59lPQ1NJneSqriT",
+    "name": "read_document",
+    "arguments": {
+      "path": "scan.pdf"
+    },
+    "risk": "read",
+    "status": "FAILED",
+    "digest": "e9a624d69399bac473b15571382eb642d85676eb3df2b707e6826ca92257cc98",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_Lwz4K6Fhz59lPQ1NJneSqriT",
+      "content": "PDF has no extractable text; OCR is not supported in this version",
+      "error_code": "TOOL_ERROR",
+      "metadata": {},
+      "status": "error"
+    },
+    "attempts": 1,
+    "created_at": 1790478675.53165,
+    "updated_at": 1790478675.548463
+  },
+  {
+    "task_id": "70511198641d406981ec1dcb68ce208a",
+    "id": "call_YW9jaysgL4t3ojXU47JSh4sG",
+    "name": "read_document",
+    "arguments": {
+      "path": "broken.pdf"
+    },
+    "risk": "read",
+    "status": "FAILED",
+    "digest": "c9418f1d1ff71a031bc6caff75e3ccf5a8c77e821894cbab1006485e878ee27c",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_YW9jaysgL4t3ojXU47JSh4sG",
+      "content": "PDF could not be parsed or is encrypted",
+      "error_code": "TOOL_ERROR",
+      "metadata": {},
+      "status": "error"
+    },
+    "attempts": 1,
+    "created_at": 1790478675.5558972,
+    "updated_at": 1790478675.5739121
+  },
+  {
+    "task_id": "70511198641d406981ec1dcb68ce208a",
+    "id": "call_EhxPKrWsKlViHw1seaLbXf1z",
+    "name": "save_artifact",
+    "arguments": {
+      "content": "# Summary\n\n## valid.txt\n- Read successfully.\n- Content: \"The readable document's fact: project Falcon launches in May 2027.\"\n- Summary: The document states that project Falcon is scheduled to launch in May 2027.\n\n## Unsupported / unreadable files\n- **scan.pdf** — unsupported for text extraction because the PDF has no extractable text, and OCR is not supported in this version.\n- **broken.pdf** — unreadable because the PDF could not be parsed or is encrypted.\n\n## Notes\n- I did not invent or infer any PDF content.\n- Original files were preserved; no source files were modified.",
+      "media_type": "text/markdown",
+      "name": "summary.md"
+    },
+    "risk": "write",
+    "status": "DONE",
+    "digest": "4010085f89e3d6cffcd8b873bced2b7c416c384620f82bf4ec9e0906d8cfb8c5",
+    "result": {
+      "artifact_ids": [
+        "055be3fe356443ed9cd37b3effacba86"
+      ],
+      "call_id": "call_EhxPKrWsKlViHw1seaLbXf1z",
+      "content": "{\"id\": \"055be3fe356443ed9cd37b3effacba86\", \"task_id\": \"70511198641d406981ec1dcb68ce208a\", \"name\": \"summary.md\", \"media_type\": \"text/markdown\", \"sha256\": \"8c07a6094c809ab0d012de246c2379b43df9cda74b08504d80e904b557df8563\", \"version\": 1, \"created_at\": 1790478677.653081}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790478677.6475847,
+    "updated_at": 1790478677.6563182
+  }
+]

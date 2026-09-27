@@ -1,0 +1,84 @@
+.F                                                                       [100%]
+================================== FAILURES ===================================
+__ test_reviewed_divergent_child_can_be_integrated_without_discarding_parent __
+
+tmp_path = WindowsPath('C:/Users/Administrator/Documents/Codex/2026-09-26/ai-starcode-muse-coding-agent-python/outputs/muse-next/work/integrate-red/test_reviewed_divergent_child_0')
+
+    async def test_reviewed_divergent_child_can_be_integrated_without_discarding_parent(tmp_path):
+        repo, _, worker = runtime(tmp_path, ScriptedProvider([]))
+        parent = repo.claim_next('parent')
+        root = tmp_path / 'project'
+        git(root, 'init')
+        git(root, 'config', 'user.name', 'Fixture')
+        git(root, 'config', 'user.email', 'fixture@example.invalid')
+        git(root, 'add', 'hello.txt')
+        git(root, 'commit', '-m', 'base')
+        base = git(root, 'rev-parse', 'HEAD')
+        manager = ToolRegistry(ExecutionContext(worker.settings, repo, parent, 'parent')).worktrees
+        created = await manager.spawn({'base_commit': base, 'prompt': 'Inspect'}, 'spawn')
+        child_id = json.loads(created.content)['child_id']
+        child = repo.claim_next('child')
+        repo.finish(child.id, 'child', child.lease_epoch, 'SUCCEEDED', 'Done')
+        child_root = Path(repo.workspace(child.workspace_id)['path'])
+        (child_root / 'child.txt').write_text('child contribution')
+        git(child_root, 'add', 'child.txt')
+        git(child_root, 'commit', '-m', 'child')
+        source = git(child_root, 'rev-parse', 'HEAD')
+        (root / 'parent.txt').write_text('parent contribution')
+        git(root, 'add', 'parent.txt')
+        git(root, 'commit', '-m', 'parent')
+        head = git(root, 'rev-parse', 'HEAD')
+>       await manager.manage({'child_id': child_id, 'action': 'integrate', 'source_commit': source, 'parent_commit': head}, 'integrate')
+
+tests\test_worktree_lifecycle.py:67: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <muse.extensions.worktrees.DurableWorktrees object at 0x000002E8455FA090>
+args = {'action': 'integrate', 'child_id': '9fa17a1984ca4d60ade66ab15dcadd28', 'parent_commit': '4e3134d5695bc2064a1c6b520b083ae92754ca0d', 'source_commit': '570918fd7ff99ec96fb98b2c797736fd454d6f88'}
+call_id = 'integrate'
+
+    async def manage(self, args, call_id):
+        child = next((c for c in self.ctx.repo.children(self.ctx.task_id) if c.id == args['child_id']), None)
+        if child is None:
+            raise ValueError('Checkout is not a child of this task')
+        link = self.ctx.repo.db.rows('SELECT call_id FROM task_delegations WHERE child_id=:id', {'id': child.id})[0]
+        target = Path(self.ctx.repo.workspace(child.workspace_id)['path']).absolute()
+        managed = self.managed_root().absolute()
+        if managed.resolve() != managed or target != self.path(link['call_id']) or target.resolve() != target or not target.is_relative_to(managed):
+            raise PermissionError('Checkout is not an unchanged managed path')
+        root = await self.git(call_id + ':root', 'rev-parse', '--show-toplevel')
+        if Path(root).resolve() != self.ctx.workspace.resolve():
+            raise ValueError('Parent workspace must be the repository root')
+        parent_commit = await self.git(call_id + ':parent', 'rev-parse', 'HEAD')
+        source_commit = await self.git(call_id + ':source', '-C', str(target), 'rev-parse', 'HEAD')
+        parent_status = await self.git(call_id + ':parent-status', 'status', '--porcelain')
+        child_status = await self.git(call_id + ':child-status', '-C', str(target), 'status', '--porcelain')
+        if args['action'] == 'review':
+            diff = await self.git(call_id + ':diff', 'diff', '--no-ext-diff', '--no-textconv', '--stat', parent_commit, source_commit)
+            return ToolResult(call_id=call_id, content=json.dumps({'child_id': child.id, 'path': str(target),
+                'parent_commit': parent_commit, 'source_commit': source_commit, 'parent_status': parent_status,
+                'child_status': child_status, 'diff_stat': diff}))
+        active = self.ctx.repo.db.rows("SELECT id FROM tasks WHERE workspace_id=:id AND status NOT IN ('SUCCEEDED','FAILED','CANCELLED')", {'id': child.workspace_id})
+        if child.status not in TERMINAL or active:
+            raise ValueError('Finish all tasks using this checkout before changing it')
+        if parent_status or child_status:
+            raise ValueError('Both checkouts must be clean; existing changes are preserved')
+        if args.get('source_commit', '').lower() != source_commit.lower() or args.get('parent_commit', '').lower() != parent_commit.lower():
+            raise ValueError('Checkout commit changed after review')
+        if args['action'] == 'merge':
+            await self.git(call_id + ':merge', 'merge', '--ff-only', '--no-overwrite-ignore', source_commit)
+        elif args['action'] == 'remove':
+            ignored = await self.git(call_id + ':ignored', '-C', str(target), 'status', '--porcelain', '--ignored')
+            if ignored:
+                raise ValueError('Checkout must be clean including ignored files; retained for review')
+            await self.git(call_id + ':merged', 'merge-base', '--is-ancestor', source_commit, parent_commit)
+            # Git refuses dirty or locked checkouts; no --force and no branch deletion.
+            await self.git(call_id + ':remove', 'worktree', 'remove', str(target))
+        else:
+>           raise ValueError('Unknown worktree action')
+E           ValueError: Unknown worktree action
+
+src\muse\extensions\worktrees.py:96: ValueError
+=========================== short test summary info ===========================
+FAILED tests/test_worktree_lifecycle.py::test_reviewed_divergent_child_can_be_integrated_without_discarding_parent
+1 failed, 1 passed in 9.99s

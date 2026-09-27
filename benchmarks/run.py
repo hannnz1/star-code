@@ -28,6 +28,7 @@ from muse.tasks.worker import Worker
 from .fixtures import FACTS, make_case
 from .controls import controlled_attempt
 from .quality import quality_checks
+from .release_manifest import write_manifest, verify_manifest, acceptance, record_settings
 
 PRODUCT_CASES = [f"{prefix}{index:02d}" for prefix in "RD" for index in range(1, 5)] + ["C01", "C02", "C03"]
 ALL_CASES = [f"{prefix}{index:02d}" for prefix in "RDCBP" for index in range(1, 5)]
@@ -137,7 +138,11 @@ async def attempt(case, number, directory, config, origin):
 
 async def run(args):
     directory = Path(args.output).resolve()
-    directory.mkdir(parents=True,exist_ok=True)
+    # Each invocation owns a fresh campaign, even after an interrupted run.
+    # Reusing slots can silently pool evidence from different code/configurations.
+    directory.mkdir(parents=True,exist_ok=False)
+    manifest = write_manifest(directory)
+    record_settings(manifest, load_settings(args.config, data_dir=directory / 'private-manifest-state'))
     os.environ.setdefault("PLAYWRIGHT_BROWSERS_PATH",str(Path(__file__).resolve().parents[1]/"work"/"browsers"))
     server = ThreadingHTTPServer(("127.0.0.1",0),WebFixture)
     threading.Thread(target=server.serve_forever,daemon=True).start()
@@ -147,7 +152,6 @@ async def run(args):
         for number in range(1,args.rounds+1):
             for case in args.cases.split(",") if args.cases else ALL_CASES:
                 path=directory/"cases"/case/f"round-{number:02d}"/"result.json"
-                if path.exists(): records.append(json.loads(path.read_text(encoding="utf-8")));continue
                 try:
                     records.append(await attempt(case,number,directory,args.config,origin) if case in PRODUCT_CASES else await controlled_attempt(case,number,directory,args.config))
                 except Exception as error:
@@ -156,7 +160,8 @@ async def run(args):
                 (directory/"summary.json").write_text(json.dumps({"release_gate":"INCOMPLETE","planned_attempts":60,"completed":len(records),"records":records},ensure_ascii=False,indent=2),encoding="utf-8")
     finally: server.shutdown();server.server_close()
     missing=[{"case":case,"round":n,"result":"NOT_RUN"} for n in range(1,4) for case in ALL_CASES if not any(r["case"]==case and r["round"]==n for r in records)]
-    (directory/"summary.json").write_text(json.dumps({"release_gate":"INCOMPLETE","planned_attempts":60,"records":records+missing,"note":"Automatic checks require semantic review. Engineering control tests are reported separately and never substituted for unrun real-model cases."},ensure_ascii=False,indent=2),encoding="utf-8")
+    verify_manifest(manifest)
+    (directory/"summary.json").write_text(json.dumps({**acceptance(records+missing),"planned_attempts":60,"records":records+missing,"note":"Automatic checks require semantic review. Engineering control tests are reported separately and never substituted for unrun real-model cases."},ensure_ascii=False,indent=2),encoding="utf-8")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,208 @@
+[
+  {
+    "task_id": "e0f11187c5da49e59b8dee4d3af9e68d",
+    "id": "call_8RY1TSnJY4pZ065I5AuST9cC",
+    "name": "list_files",
+    "arguments": {
+      "path": ".",
+      "pattern": "**/*"
+    },
+    "risk": "read",
+    "status": "DONE",
+    "digest": "e3909f121a1d78360e8116b3efd73c27e87120485a67b51afc60aff35d64549a",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_8RY1TSnJY4pZ065I5AuST9cC",
+      "content": "{\"paths\": [\"lyra.pdf\", \"orion.txt\", \"vega.md\"], \"truncated\": false}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790478517.202275,
+    "updated_at": 1790478517.2200046
+  },
+  {
+    "task_id": "e0f11187c5da49e59b8dee4d3af9e68d",
+    "id": "call_gPH1s2pStusvRplEEqtBxS4A",
+    "name": "read_document",
+    "arguments": {
+      "path": "."
+    },
+    "risk": "read",
+    "status": "FAILED",
+    "digest": "987adb7e50931de83f745c7c5793597b592ad04fa5842c87d5dadb286bf53bda",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_gPH1s2pStusvRplEEqtBxS4A",
+      "content": "Not a regular file or file exceeds 16 MiB",
+      "error_code": "TOOL_ERROR",
+      "metadata": {},
+      "status": "error"
+    },
+    "attempts": 1,
+    "created_at": 1790478517.2279632,
+    "updated_at": 1790478517.2365358
+  },
+  {
+    "task_id": "e0f11187c5da49e59b8dee4d3af9e68d",
+    "id": "call_yJTEez6Vf6WGaxONgaXsDO5S",
+    "name": "read_document",
+    "arguments": {
+      "path": "orion.txt"
+    },
+    "risk": "read",
+    "status": "DONE",
+    "digest": "3ca26e6f33c0e303ec8f7fe561c319c31477db7b2d0afc51a39a4637465c1efb",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_yJTEez6Vf6WGaxONgaXsDO5S",
+      "content": "{\"path\": \"orion.txt\", \"sha256\": \"338148f00d2b25e14564bd25ac268bde67c02d7250f0f46e8541a970300e7d2a\", \"text\": \"Project Orion\\r\\nBudget 42000 USD\\r\\nOwner Maya\\r\\nLaunch 2027-02-14\", \"truncated\": false}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790478518.5005186,
+    "updated_at": 1790478518.518097
+  },
+  {
+    "task_id": "e0f11187c5da49e59b8dee4d3af9e68d",
+    "id": "call_MF5HdLrnST2EXObIJaEP7qYD",
+    "name": "read_document",
+    "arguments": {
+      "path": "vega.md"
+    },
+    "risk": "read",
+    "status": "DONE",
+    "digest": "1b1972efcd88e8b743c7806b389774da8e5611f46f7e45586e126c9e7b24d3c4",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_MF5HdLrnST2EXObIJaEP7qYD",
+      "content": "{\"path\": \"vega.md\", \"sha256\": \"6d37a98afb64d9b40f5568c87ce8a10bcc6d82a2302d4193d2d3d336496d3969\", \"text\": \"Project Vega\\r\\nBudget 61000 USD\\r\\nOwner Leon\\r\\nLaunch 2027-03-21\", \"truncated\": false}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790478518.527213,
+    "updated_at": 1790478518.5456712
+  },
+  {
+    "task_id": "e0f11187c5da49e59b8dee4d3af9e68d",
+    "id": "call_3PopWw8GKbTFYulflBj92jvR",
+    "name": "read_document",
+    "arguments": {
+      "path": "lyra.pdf"
+    },
+    "risk": "read",
+    "status": "DONE",
+    "digest": "ec16dcd9a32179c8cfde43cbfe8db7a78a020b90bfeac9ed5b3885fc83acdf06",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_3PopWw8GKbTFYulflBj92jvR",
+      "content": "{\"path\": \"lyra.pdf\", \"sha256\": \"7030a98be2f9b4f5ac704ef8e7aa2d1e8de09efebde2a564a967be696de29ee3\", \"text\": \"Project Lyra\\nBudget 73000 USD\\nOwner Mira\\nLaunch 2027-04-18\\n\", \"truncated\": false}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790478518.5541534,
+    "updated_at": 1790478518.5712798
+  },
+  {
+    "task_id": "e0f11187c5da49e59b8dee4d3af9e68d",
+    "id": "call_EEE3B65GgKPVGXo32cI5MI4o",
+    "name": "organize_document",
+    "arguments": {
+      "category": "source",
+      "path": "orion.txt"
+    },
+    "risk": "write",
+    "status": "DONE",
+    "digest": "83fdb9013fad802ab37550f33debd3f1a9c48735e28915ec508db9f2350726c4",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_EEE3B65GgKPVGXo32cI5MI4o",
+      "content": "{\"source\": \"orion.txt\", \"copy\": \"muse-output/source/orion.txt\", \"sha256\": \"338148f00d2b25e14564bd25ac268bde67c02d7250f0f46e8541a970300e7d2a\", \"original_preserved\": true}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790478519.8935177,
+    "updated_at": 1790478519.9209678
+  },
+  {
+    "task_id": "e0f11187c5da49e59b8dee4d3af9e68d",
+    "id": "call_VAc546BbuhhnnwkDJkyuqU3D",
+    "name": "organize_document",
+    "arguments": {
+      "category": "source",
+      "path": "vega.md"
+    },
+    "risk": "write",
+    "status": "DONE",
+    "digest": "085b632dc3e7f05fd097bf6adf296d1b4d3be986482059df687d1d8754d44e33",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_VAc546BbuhhnnwkDJkyuqU3D",
+      "content": "{\"source\": \"vega.md\", \"copy\": \"muse-output/source/vega.md\", \"sha256\": \"6d37a98afb64d9b40f5568c87ce8a10bcc6d82a2302d4193d2d3d336496d3969\", \"original_preserved\": true}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790478521.373032,
+    "updated_at": 1790478521.4028225
+  },
+  {
+    "task_id": "e0f11187c5da49e59b8dee4d3af9e68d",
+    "id": "call_PO1aiVoUNTfen1tV6e4CWO3v",
+    "name": "organize_document",
+    "arguments": {
+      "category": "source",
+      "path": "lyra.pdf"
+    },
+    "risk": "write",
+    "status": "DONE",
+    "digest": "8dff9ccd2f77ea8c44b48114aa2e0b238d40ffcbd9ff3dd84536266ddb1c00d4",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_PO1aiVoUNTfen1tV6e4CWO3v",
+      "content": "{\"source\": \"lyra.pdf\", \"copy\": \"muse-output/source/lyra.pdf\", \"sha256\": \"7030a98be2f9b4f5ac704ef8e7aa2d1e8de09efebde2a564a967be696de29ee3\", \"original_preserved\": true}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790478521.4112263,
+    "updated_at": 1790478521.442159
+  },
+  {
+    "task_id": "e0f11187c5da49e59b8dee4d3af9e68d",
+    "id": "call_7ORuBybDm7lEE6QgCK4472WS",
+    "name": "save_artifact",
+    "arguments": {
+      "content": "# Project Summary\n\n| Source file | Project name | Budget | Owner | Launch date |\n|---|---|---:|---|---|\n| orion.txt | Project Orion | 42000 USD | Maya | 2027-02-14 |\n| vega.md | Project Vega | 61000 USD | Leon | 2027-03-21 |\n| lyra.pdf | Project Lyra | 73000 USD | Mira | 2027-04-18 |\n",
+      "media_type": "text/markdown",
+      "name": "summary.md"
+    },
+    "risk": "write",
+    "status": "DONE",
+    "digest": "aa925256b12ee964d420f0211a790dc96ef0cb7cad8b5fe1cb9ddb7fae3fce07",
+    "result": {
+      "artifact_ids": [
+        "4f332563b0154d5da3926279aebe0f8e"
+      ],
+      "call_id": "call_7ORuBybDm7lEE6QgCK4472WS",
+      "content": "{\"id\": \"4f332563b0154d5da3926279aebe0f8e\", \"task_id\": \"e0f11187c5da49e59b8dee4d3af9e68d\", \"name\": \"summary.md\", \"media_type\": \"text/markdown\", \"sha256\": \"e2b57f1cc169776fd0adcbdb270db31aa03b479c600a87ca14f82a24aaa77105\", \"version\": 1, \"created_at\": 1790478522.9748044}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790478522.9700868,
+    "updated_at": 1790478522.976834
+  }
+]
