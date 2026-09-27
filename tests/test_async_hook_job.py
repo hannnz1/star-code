@@ -1,8 +1,8 @@
-import yaml
 import pytest
+import yaml
+from test_agent_loop import ScriptedProvider, runtime
 
 from muse.contracts import ModelEvent
-from test_agent_loop import ScriptedProvider, runtime
 
 
 async def test_async_hook_is_a_durable_job_without_extra_model_request(tmp_path):
@@ -102,3 +102,29 @@ async def test_async_command_verification_must_follow_actual_job(timing, tmp_pat
             break
     assert repo.get(task.id).status == ('FAILED' if timing == 'before' else 'SUCCEEDED')
     assert (tmp_path / 'project/changed.txt').exists()
+
+
+async def test_async_command_gets_repair_turn_when_earlier_verification_is_stale(tmp_path):
+    from muse.contracts import ToolCall
+    verify_before = [ModelEvent(type='call', call=ToolCall(id='verify-before', name='verify_command',
+                                                           arguments={'command': 'echo before-fixture'}))]
+    verify_after = [ModelEvent(type='call', call=ToolCall(id='verify-after', name='verify_command',
+                                                          arguments={'command': 'echo after-fixture'}))]
+    done = [ModelEvent(type='text', text='Done')]
+    provider = ScriptedProvider([verify_before, done, done, verify_after, done])
+    repo, task, worker = runtime(tmp_path, provider)
+    config = tmp_path / 'hooks.yaml'
+    config.write_text(yaml.safe_dump({'hooks': [{'id': 'write', 'event': 'session_start', 'async': True,
+        'action': {'type': 'command', 'command': 'echo fixture > changed.txt'}}]}))
+    worker.settings = worker.settings.model_copy(update={'config_path': config})
+    for _ in range(25):
+        await worker.run_once()
+        for candidate in repo.list():
+            for item in repo.approvals(candidate.id):
+                if item['status'] == 'PENDING':
+                    repo.decide_approval(item['id'], True, item['action_digest'])
+        if repo.get(task.id).status in {'SUCCEEDED', 'FAILED'}:
+            break
+    assert repo.get(task.id).status == 'SUCCEEDED'
+    assert len(provider.requests) == 5
+    assert 'Runtime completion check' in str(provider.requests[3])

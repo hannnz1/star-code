@@ -119,6 +119,37 @@ async def test_repeated_unchanged_team_status_parks_parent_until_children_finish
     assert 'Inspection complete' in str(repo.get(task.id).checkpoint['messages'])
 
 
+async def test_team_message_wakes_parked_parent_while_child_is_active(tmp_path):
+    class CoordinatingProvider:
+        requests = 0
+
+        async def stream(self, messages, tools):
+            self.requests += 1
+            if self.requests == 1:
+                parent = repo.get(task.id)
+                repo.spawn_child(task.id, 'test-worker', parent.lease_epoch, 'spawn', 'Inspect component')
+            if self.requests <= 2:
+                yield ModelEvent(type='call', call=ToolCall(
+                    id=f'status-{self.requests}', name='team_status', arguments={}))
+            else:
+                assert 'Need parent coordination' in str(messages)
+                yield ModelEvent(type='text', text='Received coordination request')
+            yield ModelEvent(type='done')
+
+    provider = CoordinatingProvider()
+    repo, task, worker = runtime(tmp_path, provider)
+    await worker.run_once()
+    assert repo.get(task.id).status == 'PAUSED'
+    child = repo.claim_next('child-worker')
+    repo.send_team_message(child.id, 'child-worker', child.lease_epoch, 'coordinate', task.id,
+                           'Need parent coordination')
+    repo.finish(child.id, 'child-worker', child.lease_epoch, 'PAUSED')
+    await worker.run_once()
+    assert provider.requests == 3
+    assert repo.get(task.id).status == 'PAUSED'
+    assert 'Need parent coordination' in str(repo.get(task.id).checkpoint['messages'])
+
+
 async def test_tool_budget_stops_before_second_dispatch(tmp_path):
     scripted = ScriptedProvider([[ModelEvent(type="call", call=ToolCall(id=f"r{i}", name="read_file", arguments={"path": "hello.txt"})) for i in range(2)]])
     repo, task, worker = runtime(tmp_path, scripted, max_tool_calls=1)

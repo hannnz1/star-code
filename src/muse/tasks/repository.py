@@ -36,7 +36,15 @@ _NO_CHANGES = re.compile(
 
 def explicit_read_only(prompt: str) -> bool:
     """Honor unambiguous no-write instructions even when the client omits the flag."""
-    return bool(_NO_CHANGES.search(prompt))
+    match = _NO_CHANGES.search(prompt)
+    if not match:
+        return False
+    # A no-write instruction for an inspection phase must not disable later
+    # requested repairs. Ambiguous task-wide intent remains writable.
+    later = prompt[match.end():]
+    return not bool(re.search(r'(?:\b(?:then|afterwards|next|subsequently)\b|然后|随后|接着).{0,120}'
+                              r'(?:\b(?:fix|edit|modify|change|implement|write|update|repair)\b|修复|修改|改动|编辑|写入|实现)',
+                              later, re.IGNORECASE | re.DOTALL))
 
 
 def row_task(row) -> TaskRecord:

@@ -38,3 +38,16 @@ def test_editing_a_read_only_feature_remains_writable(tmp_path):
     task = repo.create(TaskRequest(prompt='Implement a read-only mode in calculator.py and run tests.', workspace_id=ws['id'],
                                    scenario='coding', client_request_id='edit'))
     assert task.read_only is False
+
+
+def test_read_only_inspection_followed_by_repair_remains_writable(tmp_path):
+    settings = load_settings(data_dir=tmp_path / 'data', require_provider=False)
+    repo = TaskRepository(settings.data_dir / 'state.sqlite3')
+    workspace = tmp_path / 'project'
+    workspace.mkdir()
+    ws = repo.register_workspace(str(workspace))
+    for prompt in ('Inspect tests without changing code, then fix the bug',
+                   '先只读检查代码，然后修改文件修复问题'):
+        task = repo.create(TaskRequest(prompt=prompt, workspace_id=ws['id'],
+                                       scenario='coding', client_request_id=prompt))
+        assert task.read_only is False

@@ -4,6 +4,8 @@
 
 **日期与状态：** 2026-09-27；计划已编写，下面未勾选的项目尚未完成。现有 RC7 的发布结论是 **NOT_ACCEPTED**，不能把“Python 已可运行”写成“Java 已验收替代”。
 
+**实施更新：** RC8 的质量模型已固定为 `gpt-6-sol`，启动器默认值同步为 Sol；`gpt-6-luna` 保留显式经济试用入口。下面“当前”列及原 Mini 建议保留计划形成时的历史背景，不表示可合并不同模型成绩。最终验收仍必须针对同一冻结候选重跑并完成独立 Windows 与人工门槛。
+
 **目标：** 交付本地单用户 MUSE：Python Agent 核心保留编程能力，并可做带来源的网页研究、资料整理、可恢复后台任务；具备长期事实保留、MCP 按需加载和可控授权。发行包安装、启动、执行与恢复均不依赖 JVM、Java 或 Gradle。网页继续使用 React/TypeScript；“替代 Java”指运行时与产品能力，不禁止助手修改 Java 项目。
 
 **基线与标准：** [原修改计划](../../../../MUSE项目修改计划.md)、[Java 替代方案](../../../../MUSE基于mewcode-python的替代方案.md)、[测试与 Benchmark 标准](../../../../MUSE测试与Benchmark标准.md)、[RC7 验收记录](../../release-acceptance.md)、[模型试验](../../model-cost-selection.md)、[人工评分清单](../../manual-benchmark-handoff.md)、[独立 Windows 清单](../../clean-windows-acceptance.md)、[Java 行为矩阵](../../java-migration-matrix.csv)。前三个链接是相对于本文件所在目录的路径；实施前应核对链接与文件位置。

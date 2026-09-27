@@ -146,10 +146,11 @@ class AgentRunner:
                     latest = checks[-1]['result'].get('metadata', {}) if checks else None
                     unverified = mutations and (not latest or latest.get('exit_code') != 0
                                                 or not mutations.issubset(set(latest.get('mutation_call_ids', []))))
-                    if unverified or (latest and latest.get('exit_code') != 0):
+                    stale_hook = self._stale_async_hook(ctx, completed_calls, checks)
+                    if unverified or stale_hook or (latest and latest.get('exit_code') != 0):
                         cp['completion_repairs'] = cp.get('completion_repairs', 0) + 1
                         cp['messages'].append({'role': 'user', 'content':
-                            'Runtime completion check: code changes are not successfully verified after the last edit. '
+                            'Runtime completion check: code changes or asynchronous Hook effects are not successfully verified after the last change. '
                             'Continue the task using the preceding tool results. Resolve the failure and run verify_command '
                             'after the final change; if completion is impossible, state the blocker explicitly.'})
                         cp.pop('final_text')
@@ -259,6 +260,16 @@ class AgentRunner:
             ctx.repo.add_event(ctx.task_id, "assistant_message", {"text": answer, "tool_count": len(calls)})
 
     @staticmethod
+    def _stale_async_hook(context, calls, verifications):
+        for call in calls:
+            child_id = (call.get('result') or {}).get('metadata', {}).get('hook_child_id')
+            if child_id and call['arguments'].get('action_preview', {}).get('type') in {'command', 'http'}:
+                child = context.repo.get(child_id)
+                if not verifications or verifications[-1]['updated_at'] < child.updated_at:
+                    return True
+        return False
+
+    @staticmethod
     def _verified_result(context, text: str) -> AgentResult:
         cp = context.cp
         if any(item['root_id'] == context.task_id and item['status'] not in {'completed', 'cancelled'}
@@ -279,12 +290,8 @@ class AgentRunner:
         if not reference_subtask and context.task.scenario == "research" and not cp.get("source_ids"):
             raise TaskControl("FAILED", "Research has no successfully read sources")
         if context.task.scenario == "coding":
-            for call in calls:
-                child_id = (call.get('result') or {}).get('metadata', {}).get('hook_child_id')
-                if child_id and call['arguments'].get('action_preview', {}).get('type') in {'command', 'http'}:
-                    child = context.repo.get(child_id)
-                    if not verifications or verifications[-1]['updated_at'] < child.updated_at:
-                        raise TaskControl('FAILED', 'Asynchronous Hook effects have no verification after job completion')
+            if AgentRunner._stale_async_hook(context, calls, verifications):
+                raise TaskControl('FAILED', 'Asynchronous Hook effects have no verification after job completion')
             if mutations and (not verification or verification.get("exit_code") != 0 or not mutations.issubset(set(verification.get("mutation_call_ids", [])))):
                 raise TaskControl("FAILED", "Code changes have no successful verification after the last edit")
             if verification and verification.get("exit_code") != 0:

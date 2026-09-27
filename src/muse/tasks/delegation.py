@@ -174,6 +174,17 @@ class DelegationMixin:
                 cp = json.loads(parent['checkpoint'])
                 if not cp.get('waiting_children'):
                     continue
+                seen = cp.get('team_message_ids', [])
+                unread_message = conn.execute(text('SELECT id FROM team_messages WHERE recipient_id=:id'),
+                                              {'id': parent['id']}).scalars().all()
+                if any(identifier not in seen for identifier in unread_message):
+                    cp.pop('waiting_children', None)
+                    cp.pop('team_status_last', None)
+                    cp.pop('final_text', None)
+                    conn.execute(text('UPDATE tasks SET checkpoint=:cp WHERE id=:id'),
+                                 {'cp': json.dumps(cp, ensure_ascii=False), 'id': parent['id']})
+                    self._state(conn, parent['id'], 'QUEUED', time.time())
+                    continue
                 children = conn.execute(text('SELECT t.* FROM tasks t JOIN task_delegations d ON d.child_id=t.id WHERE d.parent_id=:id'), {'id': parent['id']}).mappings().all()
                 if children and all(child['status'] in TERMINAL for child in children):
                     cp.pop('waiting_children', None)

@@ -1,6 +1,6 @@
 # MUSE 模型性价比试验
 
-日期：2026-09-27。用户要求在给原 API 账户充值后改用更有性价比的模型。MUSE 保留原 StarCode 的 OpenAI Responses 地址、代理及环境变量凭据；原 `config.yaml` 未修改。`Start-MUSE.ps1` 默认以 `MUSE_MODEL=gpt-6-luna` 启动 API 与 Worker，`-Model gpt-5.4-mini` 可以切回原模型。直接运行 Python 命令时，未设置 `MUSE_MODEL` 仍读取原配置中的 `gpt-5.4-mini`。
+日期：2026-09-27。用户要求在给原 API 账户充值后改用更有性价比的模型。MUSE 保留原 StarCode 的 OpenAI Responses 地址、代理及环境变量凭据；原 `config.yaml` 未修改。`Start-MUSE.ps1` 默认以当前质量验收模型 `MUSE_MODEL=gpt-6-sol` 启动 API 与 Worker；`-Model gpt-6-luna` 可用于经济试用，`-Model gpt-5.4-mini` 可以切回原模型。直接运行 Python 命令时，未设置 `MUSE_MODEL` 仍读取原配置中的 `gpt-5.4-mini`。
 
 ## 价格和适用范围
 
@@ -16,11 +16,11 @@
 
 该轮记录 113,846 输入及 5,565 输出 token。按上述标准价并把输入全部视为未缓存，估算 $0.014167。历史 RC6 的 Mini 第 1 轮为 19 AUTO_PASS_REVIEW_REQUIRED、1 BLOCKED，记录 106,279 输入及 4,664 输出 token；同法估算 $0.100697。两个版本与运行时条件不同，这只是量级比较，**不是受控 A/B、账单金额或质量等效证明**；缓存、额外工具费用和重试成本未计入。
 
-Luna 的本轮成本估算约低 85.9%，但 C01 缺漏表明其不可直接替代质量模型的复杂编程验收成绩。当前将 Luna 作为省钱试用默认；重要代码修改可以通过 `-Model gpt-5.4-mini` 使用原模型，或显式选用 Sol，并分别记录模型身份及结果。完整三轮、长上下文、MCP、多 Agent 和人工质量复核尚未针对 Luna 完成，不把其他模型成绩记给 Luna。
+Luna 的本轮成本估算约低 85.9%，但 C01 缺漏表明其不可直接替代质量模型的复杂编程验收成绩。当前将 Sol 作为启动器默认质量模型，Luna 仍可用 `-Model gpt-6-luna` 显式选择；分别记录模型身份及结果。完整三轮、长上下文、MCP、多 Agent 和人工质量复核尚未针对 Luna 完成，不把其他模型成绩记给 Luna。
 
 ## RC8 质量模型边界
 
-后续真实多 Agent 原夹具显示 `gpt-6-sol` 在修复父任务等待与最终验证顺序后的预冻结源码 `a416e60` 上达到 checkout、numeric、text **3/3**；同一源码的长上下文三次与 MCP FULL/LAZY 各十题亦完成。正式 RC8 质量批次固定使用 Sol，启动器的 Luna 仍为经济试用默认，原 `config.yaml` 的 Mini 模型、地址、代理和密钥来源不变。Sol 的结果不能转给 Luna 或 Mini；最终发布判定仍需 RC8 同一冻结源码的完整复测、业务 60 次、独立 Windows 和人工审核。模型价格以各自 [Sol 官方页](https://developers.openai.com/api/docs/models/gpt-6-sol)与[Luna 官方页](https://developers.openai.com/api/docs/models/gpt-6-luna)的当前信息和实际账单为准。
+后续真实多 Agent 原夹具显示 `gpt-6-sol` 在修复父任务等待与最终验证顺序后的预冻结源码 `a416e60` 上达到 checkout、numeric、text **3/3**；同一源码的长上下文三次与 MCP FULL/LAZY 各十题亦完成。正式 RC8 质量批次固定使用 Sol，启动器现默认 Sol，Luna 是显式经济试用选项；原 `config.yaml` 的 Mini 模型、地址、代理和密钥来源不变。Sol 的结果不能转给 Luna 或 Mini；最终发布判定仍需 RC8 同一冻结源码的完整复测、业务 60 次、独立 Windows 和人工审核。模型价格以各自 [Sol 官方页](https://developers.openai.com/api/docs/models/gpt-6-sol)与[Luna 官方页](https://developers.openai.com/api/docs/models/gpt-6-luna)的当前信息和实际账单为准。
 
 ## 工程验证
 

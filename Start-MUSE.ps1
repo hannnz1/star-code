@@ -1,6 +1,6 @@
 param(
     [string]$Config = 'C:\Users\Administrator\Desktop\project\star code\config.yaml',
-    [ValidateNotNullOrEmpty()][string]$Model = 'gpt-6-luna',
+    [ValidateNotNullOrEmpty()][string]$Model = 'gpt-6-sol',
     [int]$Port = 8765,
     [switch]$NoBrowser,
     [switch]$Quiet
