@@ -1,11 +1,11 @@
 import pytest
+from test_agent_loop import ScriptedProvider, runtime
 
 from muse.tasks.repository import TaskRepository
-from test_agent_loop import ScriptedProvider, runtime
 
 
 def test_shared_board_dependencies_ownership_revisions_and_replay(tmp_path):
-    repo, task, _ = runtime(tmp_path, ScriptedProvider([]))
+    repo, _, _ = runtime(tmp_path, ScriptedProvider([]))
     parent = repo.claim_next('parent')
     child = repo.spawn_child(parent.id, 'parent', parent.lease_epoch, 'spawn', 'Work')
     child = repo.claim_next('child')
@@ -41,6 +41,21 @@ def test_board_does_not_cross_task_groups(tmp_path):
     assert repo.team_board(other.id) == []
     with pytest.raises(ValueError, match='group'):
         repo.team_work(other.id, 'other', other.lease_epoch, 'claim', {'action': 'claim', 'item_id': item['id'], 'expected_revision': 1})
+
+
+def test_board_keeps_creation_order_when_timestamps_match(tmp_path, monkeypatch):
+    from types import SimpleNamespace
+
+    repo, _, _ = runtime(tmp_path, ScriptedProvider([]))
+    parent = repo.claim_next('parent')
+    monkeypatch.setattr('muse.tasks.teams.time.time', lambda: parent.created_at + 1)
+    identifiers = iter(['f' * 32, '0' * 32])
+    monkeypatch.setattr('muse.tasks.teams.uuid.uuid4', lambda: SimpleNamespace(hex=next(identifiers)))
+    first = repo.team_work(parent.id, 'parent', parent.lease_epoch, 'first',
+                           {'action': 'create', 'title': 'First'})
+    second = repo.team_work(parent.id, 'parent', parent.lease_epoch, 'second',
+                            {'action': 'create', 'title': 'Second'})
+    assert [item['id'] for item in repo.team_board(parent.id)] == [first['id'], second['id']]
 
 
 def test_finished_member_releases_unfinished_work_for_lead(tmp_path):

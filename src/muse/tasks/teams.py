@@ -13,7 +13,7 @@ class TeamMixin:
         with self.db.engine.connect() as conn:
             root = self._root_id(conn, task_id)
             return [{**dict(row), 'dependencies': json.loads(row['dependencies'])} for row in conn.execute(
-                text('SELECT * FROM team_work_items WHERE root_id=:root ORDER BY created_at,id'), {'root': root}).mappings()]
+                text('SELECT * FROM team_work_items WHERE root_id=:root ORDER BY rowid'), {'root': root}).mappings()]
 
     def team_work(self, task_id, owner, epoch, call_id, args):
         now = time.time()
