@@ -91,3 +91,13 @@
 
 - Ruling: RC6 showed a parent denying delegation after a failed role attempt even though later spawn calls succeeded. Add a bounded, server-derived child/action status summary to every model request after delegation. It contains no prompts, tool outputs, paths or permissions; it cannot authorize a tool. A later successful action is explicitly distinguishable from an earlier failed attempt. Existing task-scoped approval remains enforced.
 - A red/green regression checks the exact failure class, including omitted private prompt/path; targeted agent/worktree suite 15 passed. New candidate and full automated rerun are required. RC6 is preserved as a local reviewable historical candidate, not promoted to PASS.
+
+## RC7 frozen outcome and external service gate
+
+- RC7 `7ccedb5` / 0.3.0rc7: full regression 959 passed, 2 skipped, 2 dependency warnings; Ruff/OpenAPI/lock checks passed. New wheel/source ZIP built and fresh local install plus no-Java PATH process smoke passed. Package hash/known-secret scan passed.
+- Original multi-Agent: 1/3, text passed complete contribution/verifier gate; checkout integrated two successful children but final discount boundary verifier failed; numeric did not complete valid integration. This is the remaining automated capability gap, not a human review task.
+- Long-context run 1 complete (11/11, 17/17, 23/23 in complete and retained views); runs 2/3 incomplete after provider error. MCP FULL and LAZY all ten each received the same provider error, no completed questions.
+- Business run stopped after 11 consecutive provider-error FAILs. Planned 60 slots retained: 11 FAIL, 49 NOT_RUN. No RC6 result attributed to RC7.
+- A minimal synthetic request to the original provider returned HTTP 200 with an SSE `error` event. The sanitized event had no recognized code or reason; only a billing-related message category could be established. Do not claim quota, balance or specific spend control. Ruling: stop additional paid calls until account/API status changes — repeated immediate failures cannot advance development and could consume resources. Preserve all attempted evidence.
+- Human semantic review, independent clean Windows/file-symlink, original multi-Agent 3/3 and a full RC7 model campaign remain open. Final status NOT_ACCEPTED; historical RC6 full-campaign evidence is a separate comparison only.
+- RC7 local engineering-performance replay completed. p95 task creation 6.60 ms, event commit to browser 835.24 ms, cancellation repository acknowledgement 2.98 ms, process tree stop 93.39 ms, expired lease recovery 3.85 ms. UI click latency, independent-host performance, full RSS and 8-hour endurance remain unmeasured.

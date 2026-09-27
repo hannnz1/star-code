@@ -2,7 +2,7 @@
 
 按用户要求：开发和自动检查先完成，人工判断集中到本清单。`AUTO_PASS_REVIEW_REQUIRED` 只是自动预筛通过，不能直接改成正式 PASS。
 
-RC6 本机批次的逐项入口：[60 行人工审核表](../reports/release-candidate/da71920/manual-review.csv)与[脱敏证据目录](../reports/release-candidate/da71920)。当前 57 项待人工审核、3 项 P01 环境阻塞；请勿在审核表中将阻塞项改为 PASS。独立 Windows 执行后要为该环境保存一份新的完整 60 项记录。
+RC6 完整旧批次的逐项入口：[60 行人工审核表](../reports/release-candidate/da71920/manual-review.csv)与[脱敏证据目录](../reports/release-candidate/da71920)。其中 57 项仅自动预筛通过、3 项 P01 环境阻塞。RC7 的[中止批次审核表](../reports/release-candidate/7ccedb5/manual-review.csv)包含 11 项服务错误导致的 FAIL、49 项 NOT_RUN，不可作为待人工评分的完整批次。两个版本不得混用；模型服务恢复后需固定一个候选重跑，独立 Windows 环境也需一份新的完整 60 项记录。
 
 ## 先核对版本
 

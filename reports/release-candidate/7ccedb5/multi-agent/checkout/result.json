@@ -1,0 +1,77 @@
+{
+  "case": "checkout",
+  "checks": {
+    "parent_completed": false,
+    "two_children": true,
+    "children_completed": true,
+    "independent_workspaces": true,
+    "overlap": true,
+    "unified_verifier": false,
+    "agent_ran_verifier": false,
+    "contract_preserved": true,
+    "committed_child_contributions": true
+  },
+  "passed": false,
+  "fixture_hashes": {
+    ".gitignore": "d732d5b08731425c80b19f110884169b471748c9c63c7c87ee6da09fb1b61931",
+    "contract.json": "9a4db2e37dd8bfa297ec54dd9f47fa34cc546907c3c81ed2956a91794e09183e",
+    "README.md": "cf10f78ace4a65089c9cbef69a8da0e645c8f53cda5b526599772e64fb4c12bf",
+    "verify.ps1": "f4911184168b0fef72963412eb1c51ada344d79b3337f8a93690947daef6b884",
+    "tests/GateTest.java": "010d1b5b3058b7c3a6089a2a8d7a08442eb7322f449cac38f6589bd49dbcf64a",
+    "src/checkout/pricing/DiscountPolicy.java": "5d65c8aef252f546a91acbcb5ed751ef7ceb5477155bab1fe7ed984a37917daa",
+    "src/checkout/shipping/ShippingQuote.java": "f2c25619191f285fc292169a3df2c893aa4269b4bc764817f2c1638a83190706"
+  },
+  "overlap_seconds": 15.116612195968628,
+  "parent_status": "FAILED",
+  "error": "Code changes have no successful verification after the last edit",
+  "usage": {
+    "complete": true,
+    "input_tokens": 66670,
+    "output_tokens": 1482
+  },
+  "seconds": 53.562999999994645,
+  "contributions": [
+    {
+      "child_id": "48109d6c040444cb878298ce44a030e5",
+      "commit": "4301d8f35508c04987229f8798b16cfab1e5584e",
+      "changed": [
+        "src/checkout/shipping/ShippingQuote.java"
+      ],
+      "reviewed": true,
+      "integrated": true,
+      "ancestor": true,
+      "files_equal": true
+    },
+    {
+      "child_id": "be88b307bbc547dfa1838b14058228e8",
+      "commit": "44169b832d895b542519240a7c1ed01c68b5de77",
+      "changed": [
+        "src/checkout/pricing/DiscountPolicy.java"
+      ],
+      "reviewed": true,
+      "integrated": true,
+      "ancestor": true,
+      "files_equal": true
+    }
+  ],
+  "children": [
+    {
+      "id": "48109d6c040444cb878298ce44a030e5",
+      "status": "SUCCEEDED",
+      "usage": {
+        "complete": true,
+        "input_tokens": 25867,
+        "output_tokens": 782
+      }
+    },
+    {
+      "id": "be88b307bbc547dfa1838b14058228e8",
+      "status": "SUCCEEDED",
+      "usage": {
+        "complete": true,
+        "input_tokens": 23037,
+        "output_tokens": 727
+      }
+    }
+  ]
+}

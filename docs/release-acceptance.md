@@ -1,51 +1,38 @@
-# MUSE Python RC7 验收记录（执行中）
+# MUSE Python RC7 验收记录
 
-版本：0.3.0rc7。当前发布判定：**NOT_ACCEPTED**。RC7 自动批次尚未完成；下方 RC6 数字仅作历史对照，不能当成 RC7 成绩。RC6 的完整封存报告见 [RC6 验收记录](rc6-release-acceptance.md)。人工 Benchmark 评分和独立 Windows 验收按用户要求留到最后。
+版本 0.3.0rc7；冻结源码提交 `7ccedb5`；当前发布判定 **NOT_ACCEPTED**。Python 已承担 Agent、持久化任务、API、Worker、终端、审批、研究、文档与扩展运行时；网页仍使用 React/TypeScript。原 StarCode 模型与服务配置沿用，未覆盖桌面上的两个原项目。
 
-## 实现范围
+## 已完成的工程验证
 
-Python 承担 Agent、工具调度、持久化任务、API、Worker、终端、审批、扩展与恢复；网页仍使用 React/TypeScript。产品安装与运行不需要 Java/JVM/Gradle。原多 Agent benchmark 中的 Java 文件仅是被助手修改的目标项目，需要 JDK 执行原验证器，不是 MUSE 的运行依赖。
+- 完整 pytest：959 通过、2 跳过、2 条第三方依赖弃用警告，见 `reports/rc7-full.xml`。跳过项涉及基线外部在线测试及本机无法创建的文件符号链接，均不记通过。
+- Ruff、OpenAPI 类型同步、70 包锁文件离线一致性通过。前端源码未变，RC6 的 TypeScript/Vite 构建通过；RC7 wheel 包含 207 个条目和网页资源。
+- 新本地虚拟环境在 Java/Javac/Gradle 不在 PATH 时，wheel 的 API 200、网页 200、Worker 完成、两个命令入口及进程启停均通过；这不是独立干净 Windows 机器。
+- 180 动作权限回放：中位数 9、总确认 94、50/50 风险探针拒绝，无正常动作错误。原 Java 的 8 次确认属于不同的会话授权策略，未复现。
+- RC7 本机工程性能回放 p95：任务创建 6.60 ms、事件提交至浏览器可见 835.24 ms、取消状态确认 2.98 ms、进程树停止 93.39 ms、过期租约恢复 3.85 ms，见 `reports/rc7-performance.json`。未测 UI 点击延迟、跨机器耗时或独立进程 RSS，不能据此声称满足这些指标。
+- 原 407 个登记源文件哈希保持不变；发行包内未检出原模型密钥、Java/JAR/class、数据库或私有配置。数据备份、旧 v1→v8 副本升级和恢复回归包含在全量测试中。
 
-沿用 StarCode 原配置。模型、服务与默认 40 次模型请求 / 100 次工具调用 / 900 秒活动预算保持不变。源项目不覆盖，凭据不打包。
+RC7 wheel：`dist/rc-7ccedb5/muse_personal_agent-0.3.0rc7-py3-none-any.whl`，SHA-256 `7da4011d981cb95e080e7f22b6286ff0177b5b666abfad6b51fa767053be10cb`。
 
-本候选增加或修复：长上下文原文保留与分页历史检索、手动压缩归档、MCP 按需 schema 激活与引用边界、审批后的分支整合、Hook 退出清理、可纠正的参数错误提示及脱敏服务错误码。存储版本为 8；回滚必须使用升级前备份，不能把新数据库交给旧版本直接打开。
+RC7 源码 ZIP：`dist/rc-7ccedb5/MUSE-Python-0.3.0rc7-7ccedb5.zip`，SHA-256 `cf9a9d27d4250808d33d58525d721a94eced15309dfe8533fad118a67481b4b5`。两者均从同一冻结提交制作，哈希记录在同目录 `SHA256.json`；本验收文档作为包外证据单独交付。
 
-## 验证记录
+## 自动 Benchmark 的真实结果
 
-冻结产品与实验代码提交：`da719205ba2d965e5da40e7c70b7385f1cd91205`。完整回归 `reports/rc6-full.xml`：958 通过、2 跳过、2 条依赖弃用警告；Ruff、OpenAPI 类型同步、锁文件离线一致性及前端构建通过。跳过项分别是未启用的基线在线模型测试及本机 WinError 1314 文件符号链接用例，均不计通过。
-
-同一提交的真实模型自动试验：
-
-| 项目 | RC6 结果 | 判定 |
+| 项目 | RC7 结果 | 结论 |
 | --- | --- | --- |
-| 原长上下文 100K/200K/300K | 三次完整运行，每次完整/保留视图均为 11/11、17/17、23/23 | 组件指标通过；不代表 8 小时耐久 |
-| 原 MCP 十题 FULL/LAZY | 两组各 10/10，各 10 次预期远程调用 | 配对正确率通过；实际费用未知 |
-| 原多 Agent 三项目 | 1/3（numeric）；checkout 与 text 未通过 | **未达到 3/3**；不能称原多 Agent 指标已迁移 |
-| 原权限 180 动作 | 中位 9 次、总 94 次确认；50/50 风险探针拒绝 | 安全替代契约通过，旧 8 次指标未复现 |
-| MUSE-Bench 20 场景 ×3 | 57 `AUTO_PASS_REVIEW_REQUIRED`、3 P01 `BLOCKED`、0 `FAIL` | **NOT_ACCEPTED**：阻塞项与人工复核未关闭 |
+| 原多 Agent 三题 | 1/3；text 通过，checkout 最终 Java 边界验证失败，numeric 未完成有效整合 | 未达到计划 3/3，不能宣称原指标完全迁移 |
+| 原长上下文三次 | 第 1 次完整；后 2 次遇到服务错误，未完成 | RC7 不能沿用 RC6 的三次通过成绩 |
+| 原 MCP FULL/LAZY 各十题 | 20/20 遇到同一服务错误，0 项完成 | 不能用 RC6 的 10/10 + 10/10 充当 RC7 成绩 |
+| MUSE-Bench 固定 60 槽位 | 11 FAIL、49 NOT_RUN；11 项均发生模型服务错误 | 本批次中止，固定分母和原始失败全部保留 |
 
-MCP 累计工具 schema token：FULL 449,516；LAZY 128,147。实际模型输入 token：FULL 344,391；LAZY 210,346。记录为同一对照试验的总量，不把 token 差额直接换算为费用节省。
+在运行中，原服务对一个仅含合成 “Reply with OK” 的最小请求返回 HTTP 200 与流内 `error` 事件；脱敏诊断只识别到 billing 相关文字类别，未得到可辨认的具体错误码。不能据此断定余额、组织额度或项目上限中的哪一项。错误证据见 `reports/rc7-provider-probe.json`、`reports/rc7-provider-event-probe.json`。为避免继续消耗调用，11 个业务用例连续失败后停止批次。请按 [OpenAI 官方 API 用量与支出排查说明](https://help.openai.com/en/articles/6614457-troubleshooting-api-usage-and-spend-limits)检查原配置所属账户的 API 余额、组织及项目限制；不要在聊天中粘贴密钥。
 
-业务三轮分别为 19 自动预筛通过、1 P01 阻塞。自动预筛不替代事实、引用与关键断言的人工判定。逐项证据、原输入、输出、哈希、事件和工具调用位于 `reports/release-candidate/da71920/`；`manual-review.csv` 已固定 60 行。冻结清单与全部文件哈希复验通过，脱敏证据导出 1,019 个文件，未命中原配置密钥。历史 RC1—RC5 结果不能拼入 RC6 分数。
+脱敏证据导出位于 `reports/release-candidate/7ccedb5/`，含 60 行 `manual-review.csv`：11 项 FAIL、49 项 NOT_RUN，不能当作人工可评分的完整正式批次。RC6 的完整旧批次是 57 项自动预筛待人工审核、3 项本机符号链接阻塞；详见 [RC6 封存报告](rc6-release-acceptance.md)。两个版本不可拼接或替换分数。
 
-独立安装检查：新的本地虚拟环境在 Java/Javac/Gradle 不在 PATH 时，wheel 中 API 200、网页 200、Worker 完成、两个命令入口和 API/Worker 进程启停通过。wheel 有 207 个归档条目，无 Java/JAR/class/数据库或私有配置；该机器仍不是独立 Windows 验收环境。
+## 最后需要关闭的门槛
 
-发行物位于 `dist/rc-da71920/`：wheel SHA-256 `6c3bed6fbdec08d65ab60c56019bcdcbbd2f1cb6eea84ce30a1e836cfb231487`；源码 ZIP SHA-256 `3fc10959c457a916f52d1f2a1483f1e07c3ced8fff303dd26e7a8a0282746ec5`。`SHA256.json` 含字节数与归档扫描，复算均相符。源码 ZIP 对应冻结提交；本验收文档随后更新，单独交付。
+1. 模型服务恢复后，以固定 RC7 源码、原模型配置和同一预算重新完整执行长上下文、MCP 配对、原多 Agent 三题及 MUSE-Bench 60 槽位；所有新失败继续保留，不与旧轮次拼接。
+2. 多 Agent 必须在同一候选的三题中达到 3/3，包括两个子任务实际提交、重叠、主任务复核整合与统一验证；当前 1/3 是未关闭的自动质量问题，不能转为人工待审。
+3. 按 [人工 Benchmark 清单](manual-benchmark-handoff.md)审阅完整批次的事实、引用和成果，并由第二位独立人工评审复核文本通过项及争议项。
+4. 按 [独立 Windows 验收](clean-windows-acceptance.md)在无 Java 的干净机器安装同一包，实际创建文件符号链接并通过越界拒绝用例；本机 WinError 1314 与跳过不能计通过。
 
-本机工程性能采样见 `reports/rc6-performance.json`：任务创建 ASGI 内处理 p95 5.21 ms、事件写入到浏览器观察 p95 831.43 ms、取消确认 p95 5.78 ms、确认后进程树停止 p95 119.43 ms、过期租约恢复 p95 7.47 ms。各指标的样本数与上限在原始 JSON 中；浏览器值包含固定观察轮询，未测独立 UI 点击延迟、整进程 RSS 或真实模型耗时，不能作为硬 SLA 或 8 小时耐久证明。
-
-## 行为差异
-
-- 权限采用逐动作摘要审批。原 180 动作夹具的历史中位数为 9 次，原 Java 为 8 次；这是公开的替代契约，不宣称旧次数已经复现。
-- 长上下文使用受限原文证据和可检索归档，不等于无限记忆、任意事实永久保留或 8 小时耐久。
-- MCP 加载工具定义不授予执行权限；局部 schema token 降幅不等于整体费用降幅。
-- 多 Agent 只有真实子任务贡献、提交复核、整合及最终验证齐全才计通过；父任务独自完成不算通过。
-- 完整行为映射见 [Java 行为审计](java-behavior-audit.md)；不以工程测试总数宣称所有 Java 行为逐项等价。
-
-## 最后交给用户的验收
-
-1. 按 [人工 Benchmark 清单](manual-benchmark-handoff.md) 审阅 60 个固定槽位的成果与证据，完成第二位独立人工复核。
-2. 按 [独立 Windows 验收](clean-windows-acceptance.md) 在干净无 Java 环境安装同一包，并真正执行文件符号链接场景。当前机器的 WinError 1314 和跳过不能计为通过。
-3. 人工与独立环境全部通过后再决定正式发布。原来源主许可证尚未核实，当前只做本地候选交付。
-
-8 小时耐久、至少 8 个任务的单/多 Agent 加速比属于 P1 扩展，尚未完成，不作为宣传指标。
+发行范围还需要源项目主许可证核实；本包仅供本地验收，不公开推送或分发。8 小时耐久、完整 RSS 和单/多 Agent 加速比未测，不作为已实现指标。

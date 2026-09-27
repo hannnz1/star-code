@@ -1,0 +1,32 @@
+{
+  "case": "C01",
+  "round": 1,
+  "track": "real-model",
+  "result": "FAIL",
+  "checks": {
+    "expected_state": false,
+    "fact_coverage": false,
+    "read_only": true
+  },
+  "facts": {
+    "app.py": false,
+    "main": false,
+    "calculator.py": false,
+    "settings.py": false,
+    "unittest": false
+  },
+  "task_status": "FAILED",
+  "error": "Model response failed or was incomplete (event=error, code=unknown, reason=unknown)",
+  "model": "gpt-5.4-mini",
+  "protocol": "openai-responses",
+  "duration_seconds": 1.531,
+  "usage": {
+    "complete": false,
+    "input_tokens": 0,
+    "output_tokens": 0
+  },
+  "model_requests": 1,
+  "tool_calls": 0,
+  "changed_files": [],
+  "artifacts": []
+}

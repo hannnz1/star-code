@@ -1,0 +1,40 @@
+{
+  "case": "D01",
+  "round": 1,
+  "track": "real-model",
+  "result": "FAIL",
+  "checks": {
+    "expected_state": false,
+    "fact_coverage": false,
+    "source_hashes_unchanged": true,
+    "deliverable_bytes_valid": false
+  },
+  "facts": {
+    "Project Orion": false,
+    "Budget 42000 USD": false,
+    "Owner Maya": false,
+    "Launch 2027-02-14": false,
+    "Project Vega": false,
+    "Budget 61000 USD": false,
+    "Owner Leon": false,
+    "Launch 2027-03-21": false,
+    "Project Lyra": false,
+    "Budget 73000 USD": false,
+    "Owner Mira": false,
+    "Launch 2027-04-18": false
+  },
+  "task_status": "FAILED",
+  "error": "Model response failed or was incomplete (event=error, code=unknown, reason=unknown)",
+  "model": "gpt-5.4-mini",
+  "protocol": "openai-responses",
+  "duration_seconds": 1.234,
+  "usage": {
+    "complete": false,
+    "input_tokens": 0,
+    "output_tokens": 0
+  },
+  "model_requests": 1,
+  "tool_calls": 0,
+  "changed_files": [],
+  "artifacts": []
+}
