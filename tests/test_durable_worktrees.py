@@ -2,12 +2,24 @@ import json
 import subprocess
 from pathlib import Path
 
-from muse.contracts import ModelEvent, ToolCall
 from test_agent_loop import ScriptedProvider, runtime
+
+from muse.contracts import ModelEvent, ToolCall
+from muse.tools.context import ExecutionContext
+from muse.tools.registry import ToolRegistry
 
 
 def git(root, *args):
     return subprocess.run(['git', '-C', str(root), *args], check=True, capture_output=True, text=True).stdout.strip()
+
+
+def test_worktree_tool_explains_registered_role_requirement(tmp_path):
+    repo, _, worker = runtime(tmp_path, ScriptedProvider([]))
+    task = repo.claim_next('parent')
+    registry = ToolRegistry(ExecutionContext(worker.settings, repo, task, 'parent'))
+    tool = registry.entries['spawn_worktree'][0]
+    assert 'omit role' in tool.description.lower()
+    assert 'display name' in tool.parameters['properties']['role']['description'].lower()
 
 
 async def test_worktree_child_uses_isolated_checkout_and_survives_restart(tmp_path):

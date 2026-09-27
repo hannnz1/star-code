@@ -16,11 +16,11 @@ class DurableWorktrees:
         self.registry = registry
         self.ctx = registry.context
         registry.register(ToolDefinition(name='spawn_worktree', risk='execute',
-            description='Create a retained isolated Git checkout at an exact commit and delegate a child. Shares budgets, requires approval, preserves parent changes. No automatic merge or deletion.',
+            description='Create a retained isolated Git checkout at an exact commit and delegate a child. Omit role for the default general worker; role is a registered capability profile, not a worker display name. Use list_roles to discover project roles. Shares budgets, requires approval, preserves parent changes. No automatic merge or deletion.',
             parameters={'type': 'object', 'properties': {
                 'base_commit': {'type': 'string', 'pattern': '^[a-fA-F0-9]{40}([a-fA-F0-9]{24})?$'},
                 'prompt': {'type': 'string', 'minLength': 1, 'maxLength': 50000},
-                'role': {'type': 'string', 'maxLength': 64}, '_role_sha256': {'type': 'string'},
+                'role': {'type': 'string', 'maxLength': 64, 'description': 'Registered role name only; not a display name. Omit for general, or use general/explore/plan/verification or a role returned by list_roles.'}, '_role_sha256': {'type': 'string'},
                 'worktree_path': {'type': 'string'}}, 'required': ['base_commit', 'prompt'],
                 'additionalProperties': False}), self.spawn)
         commit = {'type': 'string', 'pattern': '^[a-fA-F0-9]{40}([a-fA-F0-9]{24})?$'}
