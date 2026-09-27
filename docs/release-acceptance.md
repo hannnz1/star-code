@@ -1,6 +1,6 @@
-# MUSE Python RC5 验收记录
+# MUSE Python RC6 验收记录
 
-版本：0.3.0rc5。当前发布判定：**NOT_ACCEPTED**。开发与自动验证先行，人工 Benchmark 评分和独立 Windows 验收按用户要求留到最后。
+版本：0.3.0rc6。当前发布判定：**NOT_ACCEPTED**。开发与自动验证先行，人工 Benchmark 评分和独立 Windows 验收按用户要求留到最后。
 
 ## 实现范围
 
@@ -12,7 +12,7 @@ Python 承担 Agent、工具调度、持久化任务、API、Worker、终端、�
 
 ## 验证记录
 
-候选提交、自动回归、真实模型试验和发行物哈希记录在本版本的 `reports/release-candidate/` 导出目录及发行哈希清单。历史 RC1—RC4 结果不能算作 RC5 成绩；所有失败保留。最终数字以同一候选目录中的原始 `summary.json` 为准。
+候选提交、自动回归、真实模型试验和发行物哈希记录在本版本的 `reports/release-candidate/` 导出目录及发行哈希清单。历史 RC1—RC5 结果不能算作 RC6 成绩；所有失败保留。最终数字以同一候选目录中的原始 `summary.json` 为准。
 
 ## 行为差异
 

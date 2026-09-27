@@ -1,12 +1,13 @@
 import asyncio
 from pathlib import Path
 
+from test_agent_loop import ScriptedProvider, runtime
+
 from muse.contracts import ModelEvent, TaskRequest, ToolCall
 from muse.main import create_app
 from muse.memory.service import MemoryService
 from muse.tools.context import ExecutionContext
 from muse.tools.files import FileTools
-from test_agent_loop import ScriptedProvider, runtime
 
 
 async def test_pause_finishes_current_model_turn_and_resume_does_not_repeat(tmp_path):
@@ -76,6 +77,19 @@ async def test_ask_user_waits_and_continues_without_repeating_question(tmp_path)
     await worker.run_once()
     assert repo.get(task.id).status == "SUCCEEDED"
     assert provider.requests[-1][-1] == {"role": "user", "content": "reports"}
+
+
+async def test_ask_user_progress_statement_does_not_pause_task(tmp_path):
+    provider = ScriptedProvider([
+        [ModelEvent(type="call", call=ToolCall(id="progress", name="ask_user", arguments={
+            "question": "I have spawned both children and will continue once they finish."}))],
+        [ModelEvent(type="text", text="Completed after checking the work")],
+    ])
+    repo, task, worker = runtime(tmp_path, provider)
+    await worker.run_once()
+    assert repo.get(task.id).status == "SUCCEEDED"
+    assert repo.calls(task.id) == []
+    assert "direct question" in provider.requests[1][-1]["content"]
 
 
 async def test_research_without_sources_and_artifact_is_not_success(tmp_path):

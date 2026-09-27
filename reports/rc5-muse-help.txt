@@ -1,0 +1,26 @@
+usage: muse [-h] [--workspace WORKSPACE] [--config CONFIG]
+            [--provider PROVIDER] [--data-dir DATA_DIR] [--port PORT]
+            [--source SOURCE] [--apply-digest APPLY_DIGEST]
+            [--scope {user,project}] [--workspace-id WORKSPACE_ID]
+            [--output OUTPUT]
+            {api,worker,terminal,tui,doctor,token,probe,import-memory,import-history,backup-state,restore-state}
+
+MUSE personal task assistant
+
+positional arguments:
+  {api,worker,terminal,tui,doctor,token,probe,import-memory,import-history,backup-state,restore-state}
+
+options:
+  -h, --help            show this help message and exit
+  --workspace WORKSPACE
+  --config CONFIG       Explicit StarCode/MUSE provider configuration
+  --provider PROVIDER   Provider name within that configuration
+  --data-dir DATA_DIR
+  --port PORT
+  --source SOURCE
+  --apply-digest APPLY_DIGEST
+                        Apply an unchanged memory import after reviewing its
+                        preview
+  --scope {user,project}
+  --workspace-id WORKSPACE_ID
+  --output OUTPUT       Explicit new Markdown history archive path

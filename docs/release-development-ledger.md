@@ -68,3 +68,10 @@
 - Ruling: compare merged contributions by Git committed blob and clean checkout, not raw working-tree bytes — observed Windows CRLF conversion made an already integrated commit look unequal. Red/green test covers true content mismatch separately. This changes scoring only, not production Git safety.
 - Ruling: clarify MCP discover's tool description to start the runtime approval directly for in-scope work — two real RC4 requests redundantly asked the user before tool invocation. The approval gate remains unchanged.
 - RC5 is required because the MCP public tool description changed. All RC4 evidence remains historical, including its business failure and multi-Agent outcomes.
+
+## RC5 interrupted run and RC6 correction
+
+- RC5 `76b7ce7`: 957 passed, 2 skipped, 2 dependency warnings; fresh wheel installed and API/web/Worker/CLI process smoke passed without Java on PATH. Source ZIP and wheel hashes retained under `dist/rc-76b7ce7`.
+- Multi-Agent 0/3 in RC5. Two parents used `ask_user` to emit progress statements with no question, causing WAITING_INPUT. The third parent failed final verification. This is an actionable product input-validation issue, so the subsequent paid batch was stopped after one long-context phase; partial evidence is retained, not counted as a complete RC5 campaign.
+- Ruling: `ask_user` requires a direct question ending in `?` or `？`; invalid progress statements return actionable INVALID_ARGUMENTS without pausing. This syntactic guard cannot determine whether an otherwise well-formed question is necessary. Existing valid clarification/resume behavior remains.
+- RC6 red/green regression covers observed statement; source and model tests must be rerun because the public tool schema changed. RC5 data cannot be attributed to RC6.
