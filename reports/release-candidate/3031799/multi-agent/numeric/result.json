@@ -1,0 +1,77 @@
+{
+  "case": "numeric",
+  "checks": {
+    "parent_completed": false,
+    "two_children": true,
+    "children_completed": true,
+    "independent_workspaces": true,
+    "overlap": true,
+    "unified_verifier": false,
+    "agent_ran_verifier": false,
+    "contract_preserved": true,
+    "committed_child_contributions": false
+  },
+  "passed": false,
+  "fixture_hashes": {
+    ".gitignore": "d732d5b08731425c80b19f110884169b471748c9c63c7c87ee6da09fb1b61931",
+    "contract.json": "709e384c2a9fd2e58988d0cf6bdef585eb7368f9a5eb829e8515c78fc8b8be22",
+    "README.md": "acdb3ddba972a7d1276a81fd5f024e8e63be9c797b2f5c25c994ef364cf3b119",
+    "verify.ps1": "f4911184168b0fef72963412eb1c51ada344d79b3337f8a93690947daef6b884",
+    "tests/GateTest.java": "12c55da6a4e4316a80cd58accd5af85a2449d97853318d0e31a8cc715348a033",
+    "src/retry/Delay.java": "34056f50674dcf4d7befc2d661e9c2a46ca2a722dc0994409d1e521ef20254d7",
+    "src/stats/Mean.java": "a6d5a5f112a25a18b46632c71ba3379c2f2c5da62aa720dae9f654622f08df3c"
+  },
+  "overlap_seconds": 16.316292762756348,
+  "parent_status": "FAILED",
+  "error": "Code changes have no successful verification after the last edit",
+  "usage": {
+    "complete": true,
+    "input_tokens": 61055,
+    "output_tokens": 1661
+  },
+  "seconds": 46.40699999999924,
+  "contributions": [
+    {
+      "child_id": "bbaf322757b0400e9a6221df7b300b95",
+      "commit": "b71406740964ffc74e5db366ae3f7872afcfe23d",
+      "changed": [
+        "src/stats/Mean.java"
+      ],
+      "reviewed": true,
+      "integrated": false,
+      "ancestor": false,
+      "files_equal": false
+    },
+    {
+      "child_id": "9861d2276a144c0e981b02ce527f7b08",
+      "commit": "3ea5cea9dd45d3841060e6536a4d796efb00e938",
+      "changed": [
+        "src/retry/Delay.java"
+      ],
+      "reviewed": true,
+      "integrated": false,
+      "ancestor": false,
+      "files_equal": false
+    }
+  ],
+  "children": [
+    {
+      "id": "bbaf322757b0400e9a6221df7b300b95",
+      "status": "SUCCEEDED",
+      "usage": {
+        "complete": true,
+        "input_tokens": 23214,
+        "output_tokens": 661
+      }
+    },
+    {
+      "id": "9861d2276a144c0e981b02ce527f7b08",
+      "status": "SUCCEEDED",
+      "usage": {
+        "complete": true,
+        "input_tokens": 26550,
+        "output_tokens": 496
+      }
+    }
+  ]
+}

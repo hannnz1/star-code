@@ -1,0 +1,77 @@
+{
+  "case": "checkout",
+  "checks": {
+    "parent_completed": false,
+    "two_children": true,
+    "children_completed": true,
+    "independent_workspaces": true,
+    "overlap": true,
+    "unified_verifier": false,
+    "agent_ran_verifier": false,
+    "contract_preserved": true,
+    "committed_child_contributions": false
+  },
+  "passed": false,
+  "fixture_hashes": {
+    ".gitignore": "d732d5b08731425c80b19f110884169b471748c9c63c7c87ee6da09fb1b61931",
+    "contract.json": "9a4db2e37dd8bfa297ec54dd9f47fa34cc546907c3c81ed2956a91794e09183e",
+    "README.md": "cf10f78ace4a65089c9cbef69a8da0e645c8f53cda5b526599772e64fb4c12bf",
+    "verify.ps1": "f4911184168b0fef72963412eb1c51ada344d79b3337f8a93690947daef6b884",
+    "tests/GateTest.java": "010d1b5b3058b7c3a6089a2a8d7a08442eb7322f449cac38f6589bd49dbcf64a",
+    "src/checkout/pricing/DiscountPolicy.java": "5d65c8aef252f546a91acbcb5ed751ef7ceb5477155bab1fe7ed984a37917daa",
+    "src/checkout/shipping/ShippingQuote.java": "f2c25619191f285fc292169a3df2c893aa4269b4bc764817f2c1638a83190706"
+  },
+  "overlap_seconds": 13.236625671386719,
+  "parent_status": "WAITING_INPUT",
+  "error": "",
+  "usage": {
+    "complete": true,
+    "input_tokens": 29410,
+    "output_tokens": 1052
+  },
+  "seconds": 50.82800000000134,
+  "contributions": [
+    {
+      "child_id": "41df4907e1434f618412385c6dea4dd9",
+      "commit": "ef121115bedb7b3894bfd10675bdef99762172b0",
+      "changed": [
+        "src/checkout/shipping/ShippingQuote.java"
+      ],
+      "reviewed": true,
+      "integrated": false,
+      "ancestor": false,
+      "files_equal": false
+    },
+    {
+      "child_id": "2b7c132806fe4622b0e40e2c848406f4",
+      "commit": "3230aed109a824262560391ef75040e0fa489947",
+      "changed": [
+        "src/checkout/pricing/DiscountPolicy.java"
+      ],
+      "reviewed": true,
+      "integrated": false,
+      "ancestor": false,
+      "files_equal": false
+    }
+  ],
+  "children": [
+    {
+      "id": "41df4907e1434f618412385c6dea4dd9",
+      "status": "SUCCEEDED",
+      "usage": {
+        "complete": true,
+        "input_tokens": 18866,
+        "output_tokens": 644
+      }
+    },
+    {
+      "id": "2b7c132806fe4622b0e40e2c848406f4",
+      "status": "SUCCEEDED",
+      "usage": {
+        "complete": true,
+        "input_tokens": 18686,
+        "output_tokens": 573
+      }
+    }
+  ]
+}

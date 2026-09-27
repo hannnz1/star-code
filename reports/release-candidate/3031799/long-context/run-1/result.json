@@ -1,0 +1,260 @@
+{
+  "run": 1,
+  "error": null,
+  "phases": [
+    {
+      "phase": 1,
+      "cumulative_estimated_tokens": 103426,
+      "compactions": 20,
+      "reload_equal": true,
+      "no_replay": true,
+      "total_fields": 11,
+      "views": {
+        "complete": {
+          "answer": "{\"phase1_path\":\"src/parser/Service.java\",\"phase1_method\":\"Service.parserRequest\",\"phase1_limit\":10,\"phase1_endpoint\":\"POST /v1/parser\",\"phase1_rejected\":\"global_cache\",\"phase1_reason\":\"cross_request_state_leak\",\"timeout_ms\":1250,\"active_task\":\"parser\",\"next_step\":\"implement_parser\",\"allow_network\":false,\"preserve_public_api\":true}",
+          "usage": [
+            {
+              "input_tokens": 21824,
+              "input_tokens_details": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 21248
+              },
+              "output_tokens": 86,
+              "output_tokens_details": {
+                "reasoning_tokens": 0
+              },
+              "total_tokens": 21910
+            }
+          ],
+          "checks": {
+            "phase1_path": true,
+            "phase1_method": true,
+            "phase1_limit": true,
+            "phase1_endpoint": true,
+            "phase1_rejected": true,
+            "phase1_reason": true,
+            "timeout_ms": true,
+            "active_task": true,
+            "next_step": true,
+            "allow_network": true,
+            "preserve_public_api": true
+          },
+          "status": "SCORED"
+        },
+        "retained": {
+          "answer": "{\"phase1_path\":\"src/parser/Service.java\",\"phase1_method\":\"Service.parserRequest\",\"phase1_limit\":10,\"phase1_endpoint\":\"POST /v1/parser\",\"phase1_rejected\":\"global_cache\",\"phase1_reason\":\"cross_request_state_leak\",\"timeout_ms\":1250,\"active_task\":\"parser\",\"next_step\":\"implement_parser\",\"allow_network\":false,\"preserve_public_api\":true}",
+          "usage": [
+            {
+              "input_tokens": 401,
+              "input_tokens_details": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0
+              },
+              "output_tokens": 86,
+              "output_tokens_details": {
+                "reasoning_tokens": 0
+              },
+              "total_tokens": 487
+            }
+          ],
+          "checks": {
+            "phase1_path": true,
+            "phase1_method": true,
+            "phase1_limit": true,
+            "phase1_endpoint": true,
+            "phase1_rejected": true,
+            "phase1_reason": true,
+            "timeout_ms": true,
+            "active_task": true,
+            "next_step": true,
+            "allow_network": true,
+            "preserve_public_api": true
+          },
+          "status": "SCORED"
+        }
+      }
+    },
+    {
+      "phase": 2,
+      "cumulative_estimated_tokens": 203055,
+      "compactions": 27,
+      "reload_equal": true,
+      "no_replay": true,
+      "total_fields": 17,
+      "views": {
+        "complete": {
+          "answer": "{\"phase1_path\":\"src/parser/Service.java\",\"phase1_method\":\"Service.parserRequest\",\"phase1_limit\":10,\"phase1_endpoint\":\"POST /v1/parser\",\"phase1_rejected\":\"global_cache\",\"phase1_reason\":\"cross_request_state_leak\",\"timeout_ms\":2400,\"active_task\":\"retry\",\"next_step\":\"verify_retry\",\"allow_network\":false,\"preserve_public_api\":true,\"phase2_path\":\"src/retry/Service.java\",\"phase2_method\":\"Service.retryRequest\",\"phase2_limit\":17,\"phase2_endpoint\":\"POST /v2/retry\",\"phase2_rejected\":\"global_cache\",\"phase2_reason\":\"cross_request_state_leak\"}",
+          "usage": [
+            {
+              "input_tokens": 22178,
+              "input_tokens_details": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 21760
+              },
+              "output_tokens": 140,
+              "output_tokens_details": {
+                "reasoning_tokens": 0
+              },
+              "total_tokens": 22318
+            }
+          ],
+          "checks": {
+            "phase1_path": true,
+            "phase1_method": true,
+            "phase1_limit": true,
+            "phase1_endpoint": true,
+            "phase1_rejected": true,
+            "phase1_reason": true,
+            "timeout_ms": true,
+            "active_task": true,
+            "next_step": true,
+            "allow_network": true,
+            "preserve_public_api": true,
+            "phase2_path": true,
+            "phase2_method": true,
+            "phase2_limit": true,
+            "phase2_endpoint": true,
+            "phase2_rejected": true,
+            "phase2_reason": true
+          },
+          "status": "SCORED"
+        },
+        "retained": {
+          "answer": "{\"phase1_path\":\"src/parser/Service.java\",\"phase1_method\":\"Service.parserRequest\",\"phase1_limit\":10,\"phase1_endpoint\":\"POST /v1/parser\",\"phase1_rejected\":\"global_cache\",\"phase1_reason\":\"cross_request_state_leak\",\"timeout_ms\":2400,\"active_task\":\"retry\",\"next_step\":\"verify_retry\",\"allow_network\":false,\"preserve_public_api\":true,\"phase2_path\":\"src/retry/Service.java\",\"phase2_method\":\"Service.retryRequest\",\"phase2_limit\":17,\"phase2_endpoint\":\"POST /v2/retry\",\"phase2_rejected\":\"global_cache\",\"phase2_reason\":\"cross_request_state_leak\"}",
+          "usage": [
+            {
+              "input_tokens": 656,
+              "input_tokens_details": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0
+              },
+              "output_tokens": 140,
+              "output_tokens_details": {
+                "reasoning_tokens": 0
+              },
+              "total_tokens": 796
+            }
+          ],
+          "checks": {
+            "phase1_path": true,
+            "phase1_method": true,
+            "phase1_limit": true,
+            "phase1_endpoint": true,
+            "phase1_rejected": true,
+            "phase1_reason": true,
+            "timeout_ms": true,
+            "active_task": true,
+            "next_step": true,
+            "allow_network": true,
+            "preserve_public_api": true,
+            "phase2_path": true,
+            "phase2_method": true,
+            "phase2_limit": true,
+            "phase2_endpoint": true,
+            "phase2_rejected": true,
+            "phase2_reason": true
+          },
+          "status": "SCORED"
+        }
+      }
+    },
+    {
+      "phase": 3,
+      "cumulative_estimated_tokens": 302701,
+      "compactions": 27,
+      "reload_equal": true,
+      "no_replay": true,
+      "total_fields": 23,
+      "views": {
+        "complete": {
+          "answer": "{\"phase1_path\":\"src/parser/Service.java\",\"phase1_method\":\"Service.parserRequest\",\"phase1_limit\":10,\"phase1_endpoint\":\"POST /v1/parser\",\"phase1_rejected\":\"global_cache\",\"phase1_reason\":\"cross_request_state_leak\",\"timeout_ms\":3600,\"active_task\":\"release\",\"next_step\":\"run_release_tests\",\"allow_network\":false,\"preserve_public_api\":true,\"phase2_path\":\"src/retry/Service.java\",\"phase2_method\":\"Service.retryRequest\",\"phase2_limit\":17,\"phase2_endpoint\":\"POST /v2/retry\",\"phase2_rejected\":\"global_cache\",\"phase2_reason\":\"cross_request_state_leak\",\"phase3_path\":\"src/release/Service.java\",\"phase3_method\":\"Service.releaseRequest\",\"phase3_limit\":24,\"phase3_endpoint\":\"POST /v3/release\",\"phase3_rejected\":\"global_cache\",\"phase3_reason\":\"cross_request_state_leak\"}",
+          "usage": [
+            {
+              "input_tokens": 22545,
+              "input_tokens_details": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 22272
+              },
+              "output_tokens": 195,
+              "output_tokens_details": {
+                "reasoning_tokens": 0
+              },
+              "total_tokens": 22740
+            }
+          ],
+          "checks": {
+            "phase1_path": true,
+            "phase1_method": true,
+            "phase1_limit": true,
+            "phase1_endpoint": true,
+            "phase1_rejected": true,
+            "phase1_reason": true,
+            "timeout_ms": true,
+            "active_task": true,
+            "next_step": true,
+            "allow_network": true,
+            "preserve_public_api": true,
+            "phase2_path": true,
+            "phase2_method": true,
+            "phase2_limit": true,
+            "phase2_endpoint": true,
+            "phase2_rejected": true,
+            "phase2_reason": true,
+            "phase3_path": true,
+            "phase3_method": true,
+            "phase3_limit": true,
+            "phase3_endpoint": true,
+            "phase3_rejected": true,
+            "phase3_reason": true
+          },
+          "status": "SCORED"
+        },
+        "retained": {
+          "answer": "{\"phase1_path\":\"src/parser/Service.java\",\"phase1_method\":\"Service.parserRequest\",\"phase1_limit\":10,\"phase1_endpoint\":\"POST /v1/parser\",\"phase1_rejected\":\"global_cache\",\"phase1_reason\":\"cross_request_state_leak\",\"timeout_ms\":3600,\"active_task\":\"release\",\"next_step\":\"run_release_tests\",\"allow_network\":false,\"preserve_public_api\":true,\"phase2_path\":\"src/retry/Service.java\",\"phase2_method\":\"Service.retryRequest\",\"phase2_limit\":17,\"phase2_endpoint\":\"POST /v2/retry\",\"phase2_rejected\":\"global_cache\",\"phase2_reason\":\"cross_request_state_leak\",\"phase3_path\":\"src/release/Service.java\",\"phase3_method\":\"Service.releaseRequest\",\"phase3_limit\":24,\"phase3_endpoint\":\"POST /v3/release\",\"phase3_rejected\":\"global_cache\",\"phase3_reason\":\"cross_request_state_leak\"}",
+          "usage": [
+            {
+              "input_tokens": 915,
+              "input_tokens_details": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0
+              },
+              "output_tokens": 195,
+              "output_tokens_details": {
+                "reasoning_tokens": 0
+              },
+              "total_tokens": 1110
+            }
+          ],
+          "checks": {
+            "phase1_path": true,
+            "phase1_method": true,
+            "phase1_limit": true,
+            "phase1_endpoint": true,
+            "phase1_rejected": true,
+            "phase1_reason": true,
+            "timeout_ms": true,
+            "active_task": true,
+            "next_step": true,
+            "allow_network": true,
+            "preserve_public_api": true,
+            "phase2_path": true,
+            "phase2_method": true,
+            "phase2_limit": true,
+            "phase2_endpoint": true,
+            "phase2_rejected": true,
+            "phase2_reason": true,
+            "phase3_path": true,
+            "phase3_method": true,
+            "phase3_limit": true,
+            "phase3_endpoint": true,
+            "phase3_rejected": true,
+            "phase3_reason": true
+          },
+          "status": "SCORED"
+        }
+      }
+    }
+  ],
+  "completed": true,
+  "mode": "real-model"
+}

@@ -1,0 +1,23 @@
+usage: mewcode [-h] [--config CONFIG] [--provider PROVIDER]
+               [--data-dir DATA_DIR] [--workspace WORKSPACE] [--port PORT]
+               [-p PROMPT] [--output-format {text,stream-json}]
+               [--wait-seconds WAIT_SECONDS]
+               [--mode {default,acceptEdits,plan}] [--remote]
+
+MUSE compatibility entry; start API and Worker with Start-MUSE.ps1 first.
+
+options:
+  -h, --help            show this help message and exit
+  --config CONFIG
+  --provider PROVIDER
+  --data-dir DATA_DIR
+  --workspace WORKSPACE
+  --port PORT
+  -p PROMPT
+  --output-format {text,stream-json}
+  --wait-seconds WAIT_SECONDS
+  --mode {default,acceptEdits,plan}
+                        plan enforces read-only prompts; all execution still
+                        requires durable approval
+  --remote              Run the loopback MUSE web API; Worker is started
+                        separately

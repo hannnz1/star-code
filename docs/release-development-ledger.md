@@ -52,3 +52,11 @@
 - Ruling: stop and record an attempted benchmark when any child needs input — unattended waiting cannot resolve that condition — failure remains in the record instead of spending the entire timeout.
 - Targeted regression: 31 passed (`reports/diagnostics-final.xml`), including controller intervention, strict command allowlist, safe provider diagnostics and invalid argument guidance. No source fixture answers changed.
 - Ruling: run final paid campaigns serially to reduce concurrent load while diagnosing service failures; this does not establish concurrency as their cause. Preserve every attempted run and do not pool best cases.
+
+## RC3 measured results and approval-flow clarification
+
+- RC3 `3031799`: full regression 956 passed, 2 skipped, 2 dependency deprecations. Fresh installed API/web/Worker/CLI and owned process startup/shutdown passed without Java on PATH. Permission replay: 180 actions, median 9 / total 94, 50/50 risk probes denied, no normal-action errors.
+- Three original-threshold long-context runs completed. Multi-Agent 0/3: all six children completed, but each parent ran the final verifier before integrating and asked for redundant confirmation to perform the originally requested integration. This is a real-model workflow failure, not a human-review gate.
+- Ruling: clarify the product prompt that calling an in-scope tool starts the runtime's approval flow, and that delegated commits still need the requested parent integration — observed repeat-confirmation failures justify the change — approval enforcement and the right to request missing information remain unchanged.
+- RC3 MCP campaign interrupted for this product correction; all partial files retained. No RC3 business campaign started. Final experiments will run on a fresh RC4 identity; no cross-version score pooling.
+- Test evidence for prompt behavior: RC3 three real attempts are the failing reproducer; RC4 original three-task run will determine improvement. Existing approval-resume, denial and missing-input regressions remain mandatory; a test matching prompt strings would not prove behavior.
