@@ -129,6 +129,15 @@ class AgentRunner:
                 cp.pop('waiting_children', None)
             ctx.repo.save_conversation_checkpoint(task.id, ctx.owner, ctx.epoch, cp['model_requests'], cp['messages'])
             if "final_text" in cp:
+                await registry.hooks.emit('session_end', 'session')
+                await registry.hooks.emit('shutdown', 'session')
+                children = ctx.repo.children(task.id)
+                if any(child.checkpoint.get('hook_job') and child.status in {'FAILED', 'CANCELLED'} for child in children):
+                    raise TaskControl('FAILED', 'An asynchronous Hook did not complete successfully; inspect child tasks')
+                if children and any(child.id not in cp.get('reviewed_child_ids', []) for child in children):
+                    cp['waiting_children'] = True
+                    ctx.save()
+                    return AgentResult(status='PAUSED', text='Waiting for child tasks and result review')
                 if task.scenario == 'coding' and cp.get('completion_repairs', 0) < 2 and cp['model_requests'] < min(ctx.settings.max_turns, cp.get('max_local_turns', ctx.settings.max_turns)):
                     from muse.tools.verification import mutation_ids
                     completed_calls = ctx.repo.calls(task.id)
@@ -146,15 +155,6 @@ class AgentRunner:
                         cp.pop('final_text')
                         ctx.save()
                         continue
-                await registry.hooks.emit('session_end', 'session')
-                await registry.hooks.emit('shutdown', 'session')
-                children = ctx.repo.children(task.id)
-                if any(child.checkpoint.get('hook_job') and child.status in {'FAILED', 'CANCELLED'} for child in children):
-                    raise TaskControl('FAILED', 'An asynchronous Hook did not complete successfully; inspect child tasks')
-                if children and any(child.id not in cp.get('reviewed_child_ids', []) for child in children):
-                    cp['waiting_children'] = True
-                    ctx.save()
-                    return AgentResult(status='PAUSED', text='Waiting for child tasks and result review')
                 return self._verified_result(ctx, cp["final_text"])
             if cp["model_requests"] >= min(ctx.settings.max_turns, cp.get('max_local_turns', ctx.settings.max_turns)):
                 raise TaskControl("FAILED", "Model request budget exhausted")
@@ -232,7 +232,10 @@ class AgentRunner:
                     ctx.save()
                     await asyncio.sleep(0.2 * (2 ** retries))
                     continue
-                cp['pending_failure'] = ctx.safe(str(error))[:2000]
+                failure = ctx.safe(str(error))[:2000]
+                if cp.get('completion_repairs'):
+                    failure = 'Code changes remain without successful verification after repair attempt: ' + failure
+                cp['pending_failure'] = failure
                 cp['pending_hook_events'].append(['error', str(cp['model_requests'])])
                 ctx.save()
                 continue
