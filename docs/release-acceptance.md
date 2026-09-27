@@ -26,6 +26,8 @@ RC7 源码 ZIP：`dist/rc-7ccedb5/MUSE-Python-0.3.0rc7-7ccedb5.zip`，SHA-256 `c
 
 在运行中，原服务对一个仅含合成 “Reply with OK” 的最小请求返回 HTTP 200 与流内 `error` 事件；脱敏诊断只识别到 billing 相关文字类别，未得到可辨认的具体错误码。不能据此断定余额、组织额度或项目上限中的哪一项。错误证据见 `reports/rc7-provider-probe.json`、`reports/rc7-provider-event-probe.json`。为避免继续消耗调用，11 个业务用例连续失败后停止批次。请按 [OpenAI 官方 API 用量与支出排查说明](https://help.openai.com/en/articles/6614457-troubleshooting-api-usage-and-spend-limits)检查原配置所属账户的 API 余额、组织及项目限制；不要在聊天中粘贴密钥。
 
+2026-09-27 按用户要求使用本机 OpenAI API 再试一次最小请求，仍为 HTTP 200、流内 `error`、脱敏类别 `billing`，见 `reports/provider-resume-probe.json`。本机 `OPENAI_API_KEY` 与原 StarCode 配置中的密钥相同，因此没有发现另一套可供切换的本机凭据；未继续发起需要模型输出的批量测试。
+
 脱敏证据导出位于 `reports/release-candidate/7ccedb5/`，含 60 行 `manual-review.csv`：11 项 FAIL、49 项 NOT_RUN，不能当作人工可评分的完整正式批次。RC6 的完整旧批次是 57 项自动预筛待人工审核、3 项本机符号链接阻塞；详见 [RC6 封存报告](rc6-release-acceptance.md)。两个版本不可拼接或替换分数。
 
 ## 最后需要关闭的门槛
