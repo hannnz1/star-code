@@ -126,8 +126,8 @@ def test_json_examples_and_negation_are_not_promoted_to_current_state():
                 {'role': 'assistant', 'content': 'log ' * 10000}]
     result = compact_messages(messages, max_chars=12000)
     records = json.loads(result[1]['content'][len(RETAINED_PREFIX):])
-    latest = next(r for r in records if r['role'] == 'latest_explicit_user_json_values')
-    assert json.loads(latest['text'])['timeout_ms'] == 3000
+    assert not any(r['role'] == 'latest_explicit_user_json_values' for r in records)
+    assert any('3000' in r['text'] for r in records)
     assert any('Do not use this example' in r['text'] for r in records)
 
 
@@ -203,3 +203,35 @@ def test_activated_schema_preserves_local_reference_resource_roots():
         jsonschema.validate({'arguments': {'value': 'wrong'}}, wrapped)
     with pytest.raises(jsonschema.ValidationError):
         jsonschema.validate({'arguments': {'nested': {'word': 5}}}, wrapped)
+
+
+async def test_mcp_internal_binding_is_not_a_model_argument(tmp_path):
+    repo, task, worker = runtime(tmp_path, ScriptedProvider([]))
+    config = tmp_path / 'config.yaml'
+    config.write_text('mcp_servers:\n  - name: local\n    command: synthetic\n')
+    owned = repo.claim_next('test')
+    ctx = ExecutionContext(worker.settings.model_copy(update={'config_path': config}), repo, owned, 'test')
+    registry = ToolRegistry(ctx)
+    ctx.cp['mcp_catalogs'] = {'local': {'fingerprint': registry.mcp.fingerprint('local'),
+        'tools': {'lookup': {'description': 'Lookup', 'schema': {'type': 'object'}}}}}
+    for definition in registry.definitions():
+        if definition.name.startswith('mcp_'):
+            assert '_connection' not in definition.parameters['properties']
+    result = await registry.execute(ToolCall(id='load', name='mcp_load', arguments={
+        'server': 'local', 'tools': ['lookup'], '_connection': 'untrusted-model-value'}))
+    assert result.status == 'success'
+    bound = registry.mcp.bind(ToolCall(id='remote', name='mcp_call', arguments={
+        'server': 'local', 'tool': 'lookup', 'arguments': {}, '_connection': 'untrusted-model-value'}))
+    assert bound.arguments['_connection'] == registry.mcp.fingerprint('local')
+
+
+def test_later_prose_invalidates_derived_json_state_without_losing_sources():
+    from muse.agent.context import RETAINED_PREFIX
+    messages = [{'role': 'user', 'content': 'Goal'},
+                {'role': 'user', 'content': '{"timeout_ms": 1000}'},
+                {'role': 'user', 'content': 'Correction: use timeout_ms 5000 instead.'},
+                {'role': 'assistant', 'content': 'log ' * 10000}]
+    result = compact_messages(messages, max_chars=12000)
+    records = json.loads(result[1]['content'][len(RETAINED_PREFIX):])
+    assert not any(r['role'] == 'latest_explicit_user_json_values' for r in records)
+    assert 'timeout_ms 5000' in json.dumps(result)

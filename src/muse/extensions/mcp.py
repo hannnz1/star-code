@@ -163,12 +163,23 @@ class DurableMCP:
         return hmac.new(key, payload, hashlib.sha256).hexdigest()
 
     def bind(self, call):
+        if call.name in {'mcp_search', 'mcp_load'}:
+            return call.model_copy(update={'arguments': {k: v for k, v in call.arguments.items() if k != '_connection'}})
         if call.name not in {'mcp_discover', 'mcp_call'}:
             return call
         server = call.arguments.get('server')
         if server not in self.configs:
             return call
         return call.model_copy(update={'arguments': {**call.arguments, '_connection': self.fingerprint(server)}})
+
+    @staticmethod
+    def public_definition(definition):
+        if definition.name not in {'mcp_discover', 'mcp_call'}:
+            return definition
+        parameters = json.loads(json.dumps(definition.parameters))
+        for node in [parameters, *parameters.get('oneOf', [])]:
+            node.get('properties', {}).pop('_connection', None)
+        return definition.model_copy(update={'parameters': parameters})
 
     async def _connected(self, server, operation):
         from mewcode.mcp.client import MCPClient

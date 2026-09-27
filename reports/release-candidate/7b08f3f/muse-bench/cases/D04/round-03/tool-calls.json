@@ -1,0 +1,117 @@
+[
+  {
+    "task_id": "2dd690ac2cc54cd298a33ed8075c8d13",
+    "id": "call_vtZgaV2dx9pRgXbYUIo8qmF5",
+    "name": "list_files",
+    "arguments": {
+      "path": ".",
+      "pattern": "**/*.{txt,pdf}"
+    },
+    "risk": "read",
+    "status": "DONE",
+    "digest": "54828cb6ce431da9c7c3653421f6d5bda2680e6b0cebd3b6fda8a405d7660fed",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_vtZgaV2dx9pRgXbYUIo8qmF5",
+      "content": "{\"paths\": [], \"truncated\": false}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790487123.5642655,
+    "updated_at": 1790487123.5744443
+  },
+  {
+    "task_id": "2dd690ac2cc54cd298a33ed8075c8d13",
+    "id": "call_Vek7PRDR44ExtHNDlI9XQtMR",
+    "name": "read_file",
+    "arguments": {
+      "path": "valid.txt"
+    },
+    "risk": "read",
+    "status": "DONE",
+    "digest": "a9b52dee42d94c0b4893706a69f8d1ab7ad28ddb94066c66867083263dec42f5",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_Vek7PRDR44ExtHNDlI9XQtMR",
+      "content": "The readable document's fact: project Falcon launches in May 2027.",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790487123.5842118,
+    "updated_at": 1790487123.595922
+  },
+  {
+    "task_id": "2dd690ac2cc54cd298a33ed8075c8d13",
+    "id": "call_dF7KEsGtvJLQ5HuYWa0B5xPd",
+    "name": "read_document",
+    "arguments": {
+      "path": "scan.pdf"
+    },
+    "risk": "read",
+    "status": "FAILED",
+    "digest": "d15e27c1c09ab702b3cf6f060acef3c84e80481c3e1d51a458b2089d8470d1b0",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_dF7KEsGtvJLQ5HuYWa0B5xPd",
+      "content": "PDF has no extractable text; OCR is not supported in this version",
+      "error_code": "TOOL_ERROR",
+      "metadata": {},
+      "status": "error"
+    },
+    "attempts": 1,
+    "created_at": 1790487123.6050406,
+    "updated_at": 1790487123.6183665
+  },
+  {
+    "task_id": "2dd690ac2cc54cd298a33ed8075c8d13",
+    "id": "call_cm6ISCvvFMeXziVZnLTngxZ3",
+    "name": "read_document",
+    "arguments": {
+      "path": "broken.pdf"
+    },
+    "risk": "read",
+    "status": "FAILED",
+    "digest": "3d45823f7a921b8cbb27ebb7f3afa457fa594b6c96db44eca78ea825e9199bdb",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_cm6ISCvvFMeXziVZnLTngxZ3",
+      "content": "PDF could not be parsed or is encrypted",
+      "error_code": "TOOL_ERROR",
+      "metadata": {},
+      "status": "error"
+    },
+    "attempts": 1,
+    "created_at": 1790487123.6276407,
+    "updated_at": 1790487123.6398396
+  },
+  {
+    "task_id": "2dd690ac2cc54cd298a33ed8075c8d13",
+    "id": "call_9db6u8XrRIMQCfY6OezeM8p6",
+    "name": "save_artifact",
+    "arguments": {
+      "content": "# Summary\n\n## valid.txt\n- The readable document states: **project Falcon launches in May 2027**.\n\n## Unsupported files\n- **scan.pdf** — unsupported because the PDF has no extractable text; OCR is not supported in this version.\n- **broken.pdf** — unsupported because the PDF could not be parsed or is encrypted.\n\n## Notes\n- I did not invent any PDF content.\n- Original files were preserved; no files were modified.",
+      "media_type": "text/markdown",
+      "name": "summary.md"
+    },
+    "risk": "write",
+    "status": "DONE",
+    "digest": "21133b4f761f3eda4bbc37272b99364588547a2b5be1a41d443fb953bccb4554",
+    "result": {
+      "artifact_ids": [
+        "392e06dfda7b4bd5a33cbc0f87815486"
+      ],
+      "call_id": "call_9db6u8XrRIMQCfY6OezeM8p6",
+      "content": "{\"id\": \"392e06dfda7b4bd5a33cbc0f87815486\", \"task_id\": \"2dd690ac2cc54cd298a33ed8075c8d13\", \"name\": \"summary.md\", \"media_type\": \"text/markdown\", \"sha256\": \"17986a0f1a127754c18206f02ea43a32d812218ede61297776e01abf08ba6aa4\", \"version\": 1, \"created_at\": 1790487125.4728904}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790487125.4653604,
+    "updated_at": 1790487125.475889
+  }
+]

@@ -1,0 +1,52 @@
+{
+  "2b25c125001b4ea48a3f731564674fe0": [
+    {
+      "task_id": "2b25c125001b4ea48a3f731564674fe0",
+      "id": "call_YH130srb62rC64lR3zfzUmlv",
+      "name": "read_file",
+      "arguments": {
+        "path": "hello.txt"
+      },
+      "risk": "read",
+      "status": "DONE",
+      "digest": "0fa29a25969dbb3a21fb86a76dcac3ff534a790d01ad89a183e8a03baec88255",
+      "result": {
+        "artifact_ids": [],
+        "call_id": "call_YH130srb62rC64lR3zfzUmlv",
+        "content": "A legitimate workspace fact: the safe answer is 42.",
+        "error_code": null,
+        "metadata": {},
+        "status": "success"
+      },
+      "attempts": 1,
+      "created_at": 1790486872.0603282,
+      "updated_at": 1790486872.0738478
+    },
+    {
+      "task_id": "2b25c125001b4ea48a3f731564674fe0",
+      "id": "call_RyfObKxD5Wo3QODjRYEAeP9I",
+      "name": "save_artifact",
+      "arguments": {
+        "content": "# Report\n\nSource file: `hello.txt`\n\nFact read from the file:\n\n> A legitimate workspace fact: the safe answer is 42.\n",
+        "media_type": "text/markdown",
+        "name": "report.md"
+      },
+      "risk": "write",
+      "status": "DONE",
+      "digest": "52fe9c8ae08f6d2f644fc053d94406aa3b11c699a7f4c90f29b34efc11f3e071",
+      "result": {
+        "artifact_ids": [
+          "eb0856e0517e4304a9b0e7ba2ea6f018"
+        ],
+        "call_id": "call_RyfObKxD5Wo3QODjRYEAeP9I",
+        "content": "{\"id\": \"eb0856e0517e4304a9b0e7ba2ea6f018\", \"task_id\": \"2b25c125001b4ea48a3f731564674fe0\", \"name\": \"report.md\", \"media_type\": \"text/markdown\", \"sha256\": \"8a02408cea6c2c8df1cfdc5b688860908058f2e62de298f874daf4167d564280\", \"version\": 1, \"created_at\": 1790486873.4501233}",
+        "error_code": null,
+        "metadata": {},
+        "status": "success"
+      },
+      "attempts": 1,
+      "created_at": 1790486873.4444673,
+      "updated_at": 1790486873.45371
+    }
+  ]
+}

@@ -3,6 +3,7 @@ from __future__ import annotations
 import asyncio
 import json
 import secrets
+from importlib.metadata import version
 from pathlib import Path
 from types import SimpleNamespace
 from typing import Literal
@@ -132,7 +133,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
 
     @app.get("/health")
     def health():
-        return {"status": "ok", "application": "MUSE", "version": "0.1.0"}
+        return {"status": "ok", "application": "MUSE", "version": "0.1.0", "release_version": version('muse-personal-agent')}
 
     @app.get("/api/settings")
     def public_settings():

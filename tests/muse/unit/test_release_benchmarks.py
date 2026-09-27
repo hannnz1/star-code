@@ -47,6 +47,8 @@ def test_multi_agent_overlap_requires_actual_running_intervals():
     assert approve_fixture_action('verify_command', {'command': 'powershell.exe -NoProfile -File ./verify.ps1'})
     assert not approve_fixture_action('run_command', {'command': 'git status; Remove-Item C:\\data -Recurse'})
     assert not approve_fixture_action('run_command', {'command': 'git push origin HEAD'})
+    assert approve_fixture_action('verify_command', {'command': 'javac -d build src/stats/Mean.java'})
+    assert not approve_fixture_action('verify_command', {'command': 'javac -d C:/outside src/stats/Mean.java'})
 
 
 def test_full_catalog_adapter_keeps_activation_task_local_and_execution_approval(tmp_path):
@@ -80,3 +82,17 @@ def test_multi_agent_gate_rejects_idle_children_even_when_parent_verifier_passes
     assert contributions_valid('base', ['a.py', 'b.py'], good)
     good[1]['integrated'] = False
     assert not contributions_valid('base', ['a.py', 'b.py'], good)
+
+
+def test_export_uses_the_actual_frozen_manifest(tmp_path):
+    from benchmarks.export import export
+    source = tmp_path / 'campaign'
+    source.mkdir()
+    (source / 'manifest.json').write_text(json.dumps({'head': 'candidate-identity',
+        'effective_settings': {'model': 'original-config-model'}, 'files': {}}))
+    target = tmp_path / 'export'
+    export(source, target, 'candidate-identity')
+    manifest = json.loads((target / 'run-manifest.json').read_text())
+    assert manifest['head'] == 'candidate-identity'
+    assert manifest['effective_settings']['model'] == 'original-config-model'
+    assert manifest['semantic_reviewer'] is None

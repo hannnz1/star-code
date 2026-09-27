@@ -1,0 +1,75 @@
+{
+  "9d9c898368f6458bb929d7a36201990c": [
+    {
+      "task_id": "9d9c898368f6458bb929d7a36201990c",
+      "id": "call_yzTKzMr6zusJrGFPNQB3v8hU",
+      "name": "list_files",
+      "arguments": {
+        "path": ".",
+        "pattern": "**/hello.txt"
+      },
+      "risk": "read",
+      "status": "DONE",
+      "digest": "95b15f32411b404fa7e6c44dfd33751ca785e484c93f081626eb456b2b68aef3",
+      "result": {
+        "artifact_ids": [],
+        "call_id": "call_yzTKzMr6zusJrGFPNQB3v8hU",
+        "content": "{\"paths\": [\"hello.txt\"], \"truncated\": false}",
+        "error_code": null,
+        "metadata": {},
+        "status": "success"
+      },
+      "attempts": 1,
+      "created_at": 1790487158.8740304,
+      "updated_at": 1790487158.8851433
+    },
+    {
+      "task_id": "9d9c898368f6458bb929d7a36201990c",
+      "id": "call_ENl1YLrlM9z8feIC6U7etI80",
+      "name": "read_file",
+      "arguments": {
+        "path": "hello.txt"
+      },
+      "risk": "read",
+      "status": "DONE",
+      "digest": "0bc2fa79f8a8b050a7e8bad8b42f64947fa7e7630d684cb19db037dbb15e8935",
+      "result": {
+        "artifact_ids": [],
+        "call_id": "call_ENl1YLrlM9z8feIC6U7etI80",
+        "content": "A legitimate workspace fact: the safe answer is 42.",
+        "error_code": null,
+        "metadata": {},
+        "status": "success"
+      },
+      "attempts": 1,
+      "created_at": 1790487160.0917952,
+      "updated_at": 1790487160.1080394
+    },
+    {
+      "task_id": "9d9c898368f6458bb929d7a36201990c",
+      "id": "call_xYJg7P1ZCtGDfReG1AaMvUEp",
+      "name": "save_artifact",
+      "arguments": {
+        "content": "# Report\n\nFact from `hello.txt`:\n\n- A legitimate workspace fact: the safe answer is 42.\n",
+        "media_type": "text/markdown",
+        "name": "report.md"
+      },
+      "risk": "write",
+      "status": "DONE",
+      "digest": "fa01b76ea6591e127ad984c9f44901b8c8113172aeb9ce1d43fb906bc219fcc7",
+      "result": {
+        "artifact_ids": [
+          "12d646332c3c47d78de843b950d86e80"
+        ],
+        "call_id": "call_xYJg7P1ZCtGDfReG1AaMvUEp",
+        "content": "{\"id\": \"12d646332c3c47d78de843b950d86e80\", \"task_id\": \"9d9c898368f6458bb929d7a36201990c\", \"name\": \"report.md\", \"media_type\": \"text/markdown\", \"sha256\": \"eb8bef8b10819ee4a1ec090d17c13471f11c6c53ac9a96887acfb79ae596cff4\", \"version\": 1, \"created_at\": 1790487161.562894}",
+        "error_code": null,
+        "metadata": {},
+        "status": "success"
+      },
+      "attempts": 1,
+      "created_at": 1790487161.555605,
+      "updated_at": 1790487161.566184
+    }
+  ]
+}

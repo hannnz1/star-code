@@ -1,0 +1,72 @@
+[
+  {
+    "task_id": "386337293c934a78abbf7e43374ac51b",
+    "id": "call_McR2454LT1sl0RQZyeyCAqia",
+    "name": "read_url",
+    "arguments": {
+      "url": "http://127.0.0.1:59302/versions"
+    },
+    "risk": "read",
+    "status": "DONE",
+    "digest": "ae442b7c6d057fa2456d3372900dc8fed008e64de70c2176807c3e93821ca345",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_McR2454LT1sl0RQZyeyCAqia",
+      "content": "{\"source_id\": \"ebcd901844644582971955883038f058\", \"url\": \"http://127.0.0.1:59302/versions\", \"title\": \"versions\", \"text\": \"versions\\nVersions\\nversion 1: 10 USD; 2 projects; 1 day; TXT; US-East.\\nversion 2: 350 USD; 110 projects; 45 days; YAML; EU-West.\", \"truncated\": false, \"blocked_requests\": 0}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790486801.2645347,
+    "updated_at": 1790486801.9481795
+  },
+  {
+    "task_id": "386337293c934a78abbf7e43374ac51b",
+    "id": "call_X4u73e6LNKx9PdNHGTKVen6A",
+    "name": "read_url",
+    "arguments": {
+      "url": "http://127.0.0.1:59302/versions"
+    },
+    "risk": "read",
+    "status": "DONE",
+    "digest": "ae442b7c6d057fa2456d3372900dc8fed008e64de70c2176807c3e93821ca345",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_X4u73e6LNKx9PdNHGTKVen6A",
+      "content": "{\"source_id\": \"ebcd901844644582971955883038f058\", \"url\": \"http://127.0.0.1:59302/versions\", \"title\": \"versions\", \"text\": \"versions\\nVersions\\nversion 1: 10 USD; 2 projects; 1 day; TXT; US-East.\\nversion 2: 350 USD; 110 projects; 45 days; YAML; EU-West.\", \"truncated\": false, \"blocked_requests\": 0}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790486801.9538424,
+    "updated_at": 1790486802.5734842
+  },
+  {
+    "task_id": "386337293c934a78abbf7e43374ac51b",
+    "id": "call_xH5W2O9jYE9aLA1pkGoPF9bn",
+    "name": "save_artifact",
+    "arguments": {
+      "content": "# Version 2 values\n\n- Version: 2\n- Price: 350 USD\n- Project limit: 110 projects\n- Retention: 45 days\n- Export: YAML\n- Region: EU-West\n\nSource: http://127.0.0.1:59302/versions (read twice; both reads returned the same version list).",
+      "media_type": "text/markdown",
+      "name": "report.md"
+    },
+    "risk": "write",
+    "status": "DONE",
+    "digest": "7b9b448fee9c79c4123b5d2b1e4975884a57d47c590d5adcb151257f08e6dd0e",
+    "result": {
+      "artifact_ids": [
+        "15eadc48aca24ec1b5d04259adbf0fbb"
+      ],
+      "call_id": "call_xH5W2O9jYE9aLA1pkGoPF9bn",
+      "content": "{\"id\": \"15eadc48aca24ec1b5d04259adbf0fbb\", \"task_id\": \"386337293c934a78abbf7e43374ac51b\", \"name\": \"report.md\", \"media_type\": \"text/markdown\", \"sha256\": \"df4046b6f0b34c23d467661350732900461077718a976bdf8638b370bcb65004\", \"version\": 1, \"created_at\": 1790486804.0956454}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790486804.0917795,
+    "updated_at": 1790486804.0973659
+  }
+]

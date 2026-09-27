@@ -1,0 +1,94 @@
+[
+  {
+    "task_id": "60dfb35a98f846f7a3cb5f0741e87ffc",
+    "id": "call_6wBAofZ2h25ilVkWsZQmOtM0",
+    "name": "read_url",
+    "arguments": {
+      "url": "http://127.0.0.1:59302/atlas"
+    },
+    "risk": "read",
+    "status": "DONE",
+    "digest": "681659bffeb8fa95a517e318d1cc364924ccc5be8704699c0f63a504c893ba9e",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_6wBAofZ2h25ilVkWsZQmOtM0",
+      "content": "{\"source_id\": \"5ba1cc0b6aa04c93b1dda7ecbc5d5848\", \"url\": \"http://127.0.0.1:59302/atlas\", \"title\": \"atlas\", \"text\": \"atlas\\nAtlas\\nPrice 120 USD; limit 40 projects; retention 7 days; export CSV.\", \"truncated\": false, \"blocked_requests\": 0}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790487071.4441524,
+    "updated_at": 1790487072.1491027
+  },
+  {
+    "task_id": "60dfb35a98f846f7a3cb5f0741e87ffc",
+    "id": "call_j3VtDkyEKcXMchP7CJxALs4Q",
+    "name": "read_url",
+    "arguments": {
+      "url": "http://127.0.0.1:59302/birch"
+    },
+    "risk": "read",
+    "status": "DONE",
+    "digest": "ab57d048fe7e06e4996047ebd2aa8542ab670016770968263acb88e29cc32b19",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_j3VtDkyEKcXMchP7CJxALs4Q",
+      "content": "{\"source_id\": \"abb1f97201fa4f26a435790729f6d80a\", \"url\": \"http://127.0.0.1:59302/birch\", \"title\": \"birch\", \"text\": \"birch\\nBirch\\nPrice 180 USD; limit 75 projects; retention 14 days; export JSON.\", \"truncated\": false, \"blocked_requests\": 0}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790487072.1559854,
+    "updated_at": 1790487072.892948
+  },
+  {
+    "task_id": "60dfb35a98f846f7a3cb5f0741e87ffc",
+    "id": "call_HQTMMcdVSHNazDdkuCEHWIa0",
+    "name": "read_url",
+    "arguments": {
+      "url": "http://127.0.0.1:59302/unavailable"
+    },
+    "risk": "read",
+    "status": "FAILED",
+    "digest": "8e44446a552a71616919885ad32c07ca55ecb8f129c437c4d69bef94c3b16582",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_HQTMMcdVSHNazDdkuCEHWIa0",
+      "content": "Source unavailable (HTTP 503)",
+      "error_code": "TOOL_ERROR",
+      "metadata": {},
+      "status": "error"
+    },
+    "attempts": 1,
+    "created_at": 1790487072.8990116,
+    "updated_at": 1790487073.5504158
+  },
+  {
+    "task_id": "60dfb35a98f846f7a3cb5f0741e87ffc",
+    "id": "call_vZCdh2AlitvAmIJtP4UzXZwh",
+    "name": "save_artifact",
+    "arguments": {
+      "content": "# Product comparison report\n\n## Sources reviewed\n- **Atlas**: available at `http://127.0.0.1:59302/atlas`\n- **Birch**: available at `http://127.0.0.1:59302/birch`\n- **Unavailable source**: `http://127.0.0.1:59302/unavailable` returned **HTTP 503** and could not be read\n\n## Comparison of available products\n\n| Product | Price | Project limit | Retention | Export |\n|---|---:|---:|---:|---|\n| Atlas | 120 USD | 40 projects | 7 days | CSV |\n| Birch | 180 USD | 75 projects | 14 days | JSON |\n\n## Notes\n- **Atlas** is the lower-priced option.\n- **Birch** offers a higher project limit, longer retention, and JSON export.\n\n## Unavailable source and missing information\n- The source at `http://127.0.0.1:59302/unavailable` was **unavailable** and returned **HTTP 503**.\n- Because the page could not be read, its product details are **missing**:\n  - product name/details\n  - price\n  - project limit\n  - retention period\n  - export format\n\nNo content was inferred for the unavailable source.",
+      "media_type": "text/markdown",
+      "name": "report.md"
+    },
+    "risk": "write",
+    "status": "DONE",
+    "digest": "0c2f96ae50e85c282e691ca72d8905cc87a89e1fb26090e5321960c510ed4423",
+    "result": {
+      "artifact_ids": [
+        "dbaff67b7a434947b5dd1a110cc21355"
+      ],
+      "call_id": "call_vZCdh2AlitvAmIJtP4UzXZwh",
+      "content": "{\"id\": \"dbaff67b7a434947b5dd1a110cc21355\", \"task_id\": \"60dfb35a98f846f7a3cb5f0741e87ffc\", \"name\": \"report.md\", \"media_type\": \"text/markdown\", \"sha256\": \"74da16a079b895f37661e8eced531809254d8ae63de188c461d24d784c1598d7\", \"version\": 1, \"created_at\": 1790487078.4589338}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790487078.4560628,
+    "updated_at": 1790487078.4599707
+  }
+]

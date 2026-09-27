@@ -1,0 +1,283 @@
+[
+  {
+    "task_id": "338b96527caf47669d3f28a3158d30ce",
+    "sequence": 1,
+    "type": "status",
+    "payload": {
+      "status": "QUEUED"
+    },
+    "created_at": 1790486810.8967655
+  },
+  {
+    "task_id": "338b96527caf47669d3f28a3158d30ce",
+    "sequence": 2,
+    "type": "status",
+    "payload": {
+      "status": "RUNNING"
+    },
+    "created_at": 1790486810.9015808
+  },
+  {
+    "task_id": "338b96527caf47669d3f28a3158d30ce",
+    "sequence": 3,
+    "type": "assistant_message",
+    "payload": {
+      "text": "",
+      "tool_count": 1
+    },
+    "created_at": 1790486812.2158277
+  },
+  {
+    "task_id": "338b96527caf47669d3f28a3158d30ce",
+    "sequence": 4,
+    "type": "tool_prepared",
+    "payload": {
+      "arguments": {
+        "path": ".",
+        "pattern": "**/*"
+      },
+      "call_id": "call_EyFxBGXo4ERbJpDzFa1Pq8n1",
+      "name": "list_files"
+    },
+    "created_at": 1790486812.2223716
+  },
+  {
+    "task_id": "338b96527caf47669d3f28a3158d30ce",
+    "sequence": 5,
+    "type": "tool_started",
+    "payload": {
+      "call_id": "call_EyFxBGXo4ERbJpDzFa1Pq8n1",
+      "name": "list_files"
+    },
+    "created_at": 1790486812.2245345
+  },
+  {
+    "task_id": "338b96527caf47669d3f28a3158d30ce",
+    "sequence": 6,
+    "type": "tool_result",
+    "payload": {
+      "artifact_ids": [],
+      "call_id": "call_EyFxBGXo4ERbJpDzFa1Pq8n1",
+      "content": "{\"paths\": [\"lyra.pdf\", \"orion.txt\", \"vega.md\"], \"truncated\": false}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "created_at": 1790486812.2315917
+  },
+  {
+    "task_id": "338b96527caf47669d3f28a3158d30ce",
+    "sequence": 7,
+    "type": "assistant_message",
+    "payload": {
+      "text": "",
+      "tool_count": 3
+    },
+    "created_at": 1790486813.6172836
+  },
+  {
+    "task_id": "338b96527caf47669d3f28a3158d30ce",
+    "sequence": 8,
+    "type": "tool_prepared",
+    "payload": {
+      "arguments": {
+        "path": "lyra.pdf"
+      },
+      "call_id": "call_0ZinnKI7GtAsxWMoyLks9sJ5",
+      "name": "read_document"
+    },
+    "created_at": 1790486813.6220908
+  },
+  {
+    "task_id": "338b96527caf47669d3f28a3158d30ce",
+    "sequence": 9,
+    "type": "tool_started",
+    "payload": {
+      "call_id": "call_0ZinnKI7GtAsxWMoyLks9sJ5",
+      "name": "read_document"
+    },
+    "created_at": 1790486813.6232293
+  },
+  {
+    "task_id": "338b96527caf47669d3f28a3158d30ce",
+    "sequence": 10,
+    "type": "tool_result",
+    "payload": {
+      "artifact_ids": [],
+      "call_id": "call_0ZinnKI7GtAsxWMoyLks9sJ5",
+      "content": "{\"path\": \"lyra.pdf\", \"sha256\": \"7030a98be2f9b4f5ac704ef8e7aa2d1e8de09efebde2a564a967be696de29ee3\", \"text\": \"Project Lyra\\nBudget 73000 USD\\nOwner Mira\\nLaunch 2027-04-18\\n\", \"truncated\": false}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "created_at": 1790486813.6351407
+  },
+  {
+    "task_id": "338b96527caf47669d3f28a3158d30ce",
+    "sequence": 11,
+    "type": "tool_prepared",
+    "payload": {
+      "arguments": {
+        "path": "orion.txt"
+      },
+      "call_id": "call_jKOF6zO7WXDWpltm2nrS4Iwf",
+      "name": "read_file"
+    },
+    "created_at": 1790486813.6408412
+  },
+  {
+    "task_id": "338b96527caf47669d3f28a3158d30ce",
+    "sequence": 12,
+    "type": "tool_started",
+    "payload": {
+      "call_id": "call_jKOF6zO7WXDWpltm2nrS4Iwf",
+      "name": "read_file"
+    },
+    "created_at": 1790486813.6428728
+  },
+  {
+    "task_id": "338b96527caf47669d3f28a3158d30ce",
+    "sequence": 13,
+    "type": "tool_result",
+    "payload": {
+      "artifact_ids": [],
+      "call_id": "call_jKOF6zO7WXDWpltm2nrS4Iwf",
+      "content": "Project Orion\r\nBudget 42000 USD\r\nOwner Maya\r\nLaunch 2027-02-14",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "created_at": 1790486813.650124
+  },
+  {
+    "task_id": "338b96527caf47669d3f28a3158d30ce",
+    "sequence": 14,
+    "type": "tool_prepared",
+    "payload": {
+      "arguments": {
+        "path": "vega.md"
+      },
+      "call_id": "call_MG1thX8rBPddW5Ar4eVwrbDN",
+      "name": "read_file"
+    },
+    "created_at": 1790486813.6560671
+  },
+  {
+    "task_id": "338b96527caf47669d3f28a3158d30ce",
+    "sequence": 15,
+    "type": "tool_started",
+    "payload": {
+      "call_id": "call_MG1thX8rBPddW5Ar4eVwrbDN",
+      "name": "read_file"
+    },
+    "created_at": 1790486813.6570666
+  },
+  {
+    "task_id": "338b96527caf47669d3f28a3158d30ce",
+    "sequence": 16,
+    "type": "tool_result",
+    "payload": {
+      "artifact_ids": [],
+      "call_id": "call_MG1thX8rBPddW5Ar4eVwrbDN",
+      "content": "Project Vega\r\nBudget 61000 USD\r\nOwner Leon\r\nLaunch 2027-03-21",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "created_at": 1790486813.6641746
+  },
+  {
+    "task_id": "338b96527caf47669d3f28a3158d30ce",
+    "sequence": 17,
+    "type": "assistant_message",
+    "payload": {
+      "text": "",
+      "tool_count": 1
+    },
+    "created_at": 1790486815.443807
+  },
+  {
+    "task_id": "338b96527caf47669d3f28a3158d30ce",
+    "sequence": 18,
+    "type": "tool_prepared",
+    "payload": {
+      "arguments": {
+        "content": "# Project Summary\n\n| Source file | Project name | Budget | Owner | Launch date |\n|---|---|---:|---|---|\n| lyra.pdf | Lyra | 73,000 USD | Mira | 2027-04-18 |\n| orion.txt | Orion | 42,000 USD | Maya | 2027-02-14 |\n| vega.md | Vega | 61,000 USD | Leon | 2027-03-21 |\n",
+        "media_type": "text/markdown",
+        "name": "summary.md"
+      },
+      "call_id": "call_7cjOp6eZvcS8HYzlL1pQAh4Y",
+      "name": "save_artifact"
+    },
+    "created_at": 1790486815.4496496
+  },
+  {
+    "task_id": "338b96527caf47669d3f28a3158d30ce",
+    "sequence": 19,
+    "type": "tool_started",
+    "payload": {
+      "call_id": "call_7cjOp6eZvcS8HYzlL1pQAh4Y",
+      "name": "save_artifact"
+    },
+    "created_at": 1790486815.4505806
+  },
+  {
+    "task_id": "338b96527caf47669d3f28a3158d30ce",
+    "sequence": 20,
+    "type": "artifact",
+    "payload": {
+      "created_at": 1790486815.4517725,
+      "id": "a9fc19bd868d4c8bac244bc7f141a045",
+      "media_type": "text/markdown",
+      "name": "summary.md",
+      "sha256": "14eb8c3fa9cbaabccc316985e32cbf9f47fe070f08a6de3e643c8778c6916f73",
+      "task_id": "338b96527caf47669d3f28a3158d30ce",
+      "version": 1
+    },
+    "created_at": 1790486815.452835
+  },
+  {
+    "task_id": "338b96527caf47669d3f28a3158d30ce",
+    "sequence": 21,
+    "type": "tool_result",
+    "payload": {
+      "artifact_ids": [
+        "a9fc19bd868d4c8bac244bc7f141a045"
+      ],
+      "call_id": "call_7cjOp6eZvcS8HYzlL1pQAh4Y",
+      "content": "{\"id\": \"a9fc19bd868d4c8bac244bc7f141a045\", \"task_id\": \"338b96527caf47669d3f28a3158d30ce\", \"name\": \"summary.md\", \"media_type\": \"text/markdown\", \"sha256\": \"14eb8c3fa9cbaabccc316985e32cbf9f47fe070f08a6de3e643c8778c6916f73\", \"version\": 1, \"created_at\": 1790486815.4517725}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "created_at": 1790486815.4533587
+  },
+  {
+    "task_id": "338b96527caf47669d3f28a3158d30ce",
+    "sequence": 22,
+    "type": "text_delta",
+    "payload": {
+      "text": "Done — I read all three documents and saved `summary.md`.\n\nProjects summarized:\n- Lyra — `lyra.pdf`\n- Orion — `orion.txt`\n- Vega — `vega.md`\n\nOriginal files were preserved."
+    },
+    "created_at": 1790486816.9057586
+  },
+  {
+    "task_id": "338b96527caf47669d3f28a3158d30ce",
+    "sequence": 23,
+    "type": "assistant_message",
+    "payload": {
+      "text": "Done — I read all three documents and saved `summary.md`.\n\nProjects summarized:\n- Lyra — `lyra.pdf`\n- Orion — `orion.txt`\n- Vega — `vega.md`\n\nOriginal files were preserved.",
+      "tool_count": 0
+    },
+    "created_at": 1790486816.90816
+  },
+  {
+    "task_id": "338b96527caf47669d3f28a3158d30ce",
+    "sequence": 24,
+    "type": "status",
+    "payload": {
+      "status": "SUCCEEDED"
+    },
+    "created_at": 1790486816.913288
+  }
+]

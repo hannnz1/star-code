@@ -1,0 +1,171 @@
+{
+  "964db86f4fd449fda0c268e39ee70854": [
+    {
+      "task_id": "964db86f4fd449fda0c268e39ee70854",
+      "sequence": 1,
+      "type": "status",
+      "payload": {
+        "status": "QUEUED"
+      },
+      "created_at": 1790487017.376646
+    },
+    {
+      "task_id": "964db86f4fd449fda0c268e39ee70854",
+      "sequence": 2,
+      "type": "status",
+      "payload": {
+        "status": "RUNNING"
+      },
+      "created_at": 1790487018.2975893
+    },
+    {
+      "task_id": "964db86f4fd449fda0c268e39ee70854",
+      "sequence": 3,
+      "type": "assistant_message",
+      "payload": {
+        "text": "",
+        "tool_count": 2
+      },
+      "created_at": 1790487020.6072645
+    },
+    {
+      "task_id": "964db86f4fd449fda0c268e39ee70854",
+      "sequence": 4,
+      "type": "tool_prepared",
+      "payload": {
+        "arguments": {
+          "path": "one.txt"
+        },
+        "call_id": "call_IjHXuVtjpI6x44JWbD01gMXr",
+        "name": "read_file"
+      },
+      "created_at": 1790487020.6218987
+    },
+    {
+      "task_id": "964db86f4fd449fda0c268e39ee70854",
+      "sequence": 5,
+      "type": "tool_started",
+      "payload": {
+        "call_id": "call_IjHXuVtjpI6x44JWbD01gMXr",
+        "name": "read_file"
+      },
+      "created_at": 1790487020.6259143
+    },
+    {
+      "task_id": "964db86f4fd449fda0c268e39ee70854",
+      "sequence": 6,
+      "type": "tool_result",
+      "payload": {
+        "artifact_ids": [],
+        "call_id": "call_IjHXuVtjpI6x44JWbD01gMXr",
+        "content": "First fact: 31",
+        "error_code": null,
+        "metadata": {},
+        "status": "success"
+      },
+      "created_at": 1790487020.635927
+    },
+    {
+      "task_id": "964db86f4fd449fda0c268e39ee70854",
+      "sequence": 7,
+      "type": "tool_prepared",
+      "payload": {
+        "arguments": {
+          "path": "two.txt"
+        },
+        "call_id": "call_5U26nQ7V6XhqUCzIftLVcbrd",
+        "name": "read_file"
+      },
+      "created_at": 1790487020.647433
+    },
+    {
+      "task_id": "964db86f4fd449fda0c268e39ee70854",
+      "sequence": 8,
+      "type": "tool_started",
+      "payload": {
+        "call_id": "call_5U26nQ7V6XhqUCzIftLVcbrd",
+        "name": "read_file"
+      },
+      "created_at": 1790487020.6506317
+    },
+    {
+      "task_id": "964db86f4fd449fda0c268e39ee70854",
+      "sequence": 9,
+      "type": "status",
+      "payload": {
+        "status": "INTERRUPTED"
+      },
+      "created_at": 1790487022.914863
+    },
+    {
+      "task_id": "964db86f4fd449fda0c268e39ee70854",
+      "sequence": 10,
+      "type": "status",
+      "payload": {
+        "status": "QUEUED"
+      },
+      "created_at": 1790487022.914863
+    },
+    {
+      "task_id": "964db86f4fd449fda0c268e39ee70854",
+      "sequence": 11,
+      "type": "status",
+      "payload": {
+        "status": "RUNNING"
+      },
+      "created_at": 1790487022.918532
+    },
+    {
+      "task_id": "964db86f4fd449fda0c268e39ee70854",
+      "sequence": 12,
+      "type": "tool_started",
+      "payload": {
+        "call_id": "call_5U26nQ7V6XhqUCzIftLVcbrd",
+        "name": "read_file"
+      },
+      "created_at": 1790487022.9348178
+    },
+    {
+      "task_id": "964db86f4fd449fda0c268e39ee70854",
+      "sequence": 13,
+      "type": "tool_result",
+      "payload": {
+        "artifact_ids": [],
+        "call_id": "call_5U26nQ7V6XhqUCzIftLVcbrd",
+        "content": "Second fact: 73",
+        "error_code": null,
+        "metadata": {},
+        "status": "success"
+      },
+      "created_at": 1790487022.9439552
+    },
+    {
+      "task_id": "964db86f4fd449fda0c268e39ee70854",
+      "sequence": 14,
+      "type": "text_delta",
+      "payload": {
+        "text": "First fact: 31  \nSecond fact: 73"
+      },
+      "created_at": 1790487024.33054
+    },
+    {
+      "task_id": "964db86f4fd449fda0c268e39ee70854",
+      "sequence": 15,
+      "type": "assistant_message",
+      "payload": {
+        "text": "First fact: 31  \nSecond fact: 73",
+        "tool_count": 0
+      },
+      "created_at": 1790487024.3356423
+    },
+    {
+      "task_id": "964db86f4fd449fda0c268e39ee70854",
+      "sequence": 16,
+      "type": "status",
+      "payload": {
+        "status": "SUCCEEDED"
+      },
+      "created_at": 1790487024.348922
+    }
+  ]
+}

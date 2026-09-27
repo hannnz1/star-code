@@ -41,6 +41,7 @@ def compact_messages(messages: list[dict], max_chars: int = 120000) -> list[dict
         try:
             value = decoder.decode(source)
         except ValueError:
+            latest = {}  # Later prose can correct any field; do not promote a stale derived view.
             continue
         if isinstance(value, dict):
             for key, item in value.items():

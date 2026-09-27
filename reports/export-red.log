@@ -1,0 +1,23 @@
+......F                                                                  [100%]
+================================== FAILURES ===================================
+_________________ test_export_uses_the_actual_frozen_manifest _________________
+
+tmp_path = WindowsPath('C:/Users/Administrator/Documents/Codex/2026-09-26/ai-starcode-muse-coding-agent-python/outputs/muse-next/work/export-red/test_export_uses_the_actual_fr0')
+
+    def test_export_uses_the_actual_frozen_manifest(tmp_path):
+        from benchmarks.export import export
+        source = tmp_path / 'campaign'
+        source.mkdir()
+        (source / 'manifest.json').write_text(json.dumps({'head': 'candidate-identity',
+            'effective_settings': {'model': 'original-config-model'}, 'files': {}}))
+        target = tmp_path / 'export'
+        export(source, target, 'candidate-identity')
+        manifest = json.loads((target / 'run-manifest.json').read_text())
+>       assert manifest['head'] == 'candidate-identity'
+               ^^^^^^^^^^^^^^^^
+E       KeyError: 'head'
+
+tests\muse\unit\test_release_benchmarks.py:96: KeyError
+=========================== short test summary info ===========================
+FAILED tests/muse/unit/test_release_benchmarks.py::test_export_uses_the_actual_frozen_manifest
+1 failed, 6 passed in 2.97s

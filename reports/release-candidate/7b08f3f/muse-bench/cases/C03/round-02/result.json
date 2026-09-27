@@ -1,0 +1,38 @@
+{
+  "case": "C03",
+  "round": 2,
+  "track": "real-model",
+  "result": "AUTO_PASS_REVIEW_REQUIRED",
+  "checks": {
+    "expected_state": true,
+    "edit_scope": true,
+    "verification_exit": true
+  },
+  "facts": {},
+  "task_status": "FAILED",
+  "error": "Code changes have no successful verification after the last edit",
+  "model": "gpt-5.4-mini",
+  "protocol": "openai-responses",
+  "duration_seconds": 10.781,
+  "usage": {
+    "complete": true,
+    "input_tokens": 14356,
+    "output_tokens": 382
+  },
+  "model_requests": 5,
+  "tool_calls": 11,
+  "changed_files": [
+    "calculator.py"
+  ],
+  "artifacts": [
+    {
+      "id": "9b28546e134a4a0b94c361e10c4b18c0",
+      "task_id": "5b7f7d06425b4d2dbd517ad7c41c1263",
+      "name": "command-9482bd7d7cab.txt",
+      "media_type": "text/plain",
+      "sha256": "0529d25be996240a224853d3b0642713a8e4d84247e07946330544a223e6b114",
+      "version": 1,
+      "created_at": 1790487005.6515276
+    }
+  ]
+}

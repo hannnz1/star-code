@@ -1,0 +1,211 @@
+{
+  "9d9c898368f6458bb929d7a36201990c": [
+    {
+      "task_id": "9d9c898368f6458bb929d7a36201990c",
+      "sequence": 1,
+      "type": "status",
+      "payload": {
+        "status": "QUEUED"
+      },
+      "created_at": 1790487157.4570565
+    },
+    {
+      "task_id": "9d9c898368f6458bb929d7a36201990c",
+      "sequence": 2,
+      "type": "status",
+      "payload": {
+        "status": "RUNNING"
+      },
+      "created_at": 1790487157.514297
+    },
+    {
+      "task_id": "9d9c898368f6458bb929d7a36201990c",
+      "sequence": 3,
+      "type": "assistant_message",
+      "payload": {
+        "text": "",
+        "tool_count": 1
+      },
+      "created_at": 1790487158.861711
+    },
+    {
+      "task_id": "9d9c898368f6458bb929d7a36201990c",
+      "sequence": 4,
+      "type": "tool_prepared",
+      "payload": {
+        "arguments": {
+          "path": ".",
+          "pattern": "**/hello.txt"
+        },
+        "call_id": "call_yzTKzMr6zusJrGFPNQB3v8hU",
+        "name": "list_files"
+      },
+      "created_at": 1790487158.8740304
+    },
+    {
+      "task_id": "9d9c898368f6458bb929d7a36201990c",
+      "sequence": 5,
+      "type": "tool_started",
+      "payload": {
+        "call_id": "call_yzTKzMr6zusJrGFPNQB3v8hU",
+        "name": "list_files"
+      },
+      "created_at": 1790487158.878036
+    },
+    {
+      "task_id": "9d9c898368f6458bb929d7a36201990c",
+      "sequence": 6,
+      "type": "tool_result",
+      "payload": {
+        "artifact_ids": [],
+        "call_id": "call_yzTKzMr6zusJrGFPNQB3v8hU",
+        "content": "{\"paths\": [\"hello.txt\"], \"truncated\": false}",
+        "error_code": null,
+        "metadata": {},
+        "status": "success"
+      },
+      "created_at": 1790487158.8851433
+    },
+    {
+      "task_id": "9d9c898368f6458bb929d7a36201990c",
+      "sequence": 7,
+      "type": "assistant_message",
+      "payload": {
+        "text": "",
+        "tool_count": 1
+      },
+      "created_at": 1790487160.0758336
+    },
+    {
+      "task_id": "9d9c898368f6458bb929d7a36201990c",
+      "sequence": 8,
+      "type": "tool_prepared",
+      "payload": {
+        "arguments": {
+          "path": "hello.txt"
+        },
+        "call_id": "call_ENl1YLrlM9z8feIC6U7etI80",
+        "name": "read_file"
+      },
+      "created_at": 1790487160.0917952
+    },
+    {
+      "task_id": "9d9c898368f6458bb929d7a36201990c",
+      "sequence": 9,
+      "type": "tool_started",
+      "payload": {
+        "call_id": "call_ENl1YLrlM9z8feIC6U7etI80",
+        "name": "read_file"
+      },
+      "created_at": 1790487160.0960436
+    },
+    {
+      "task_id": "9d9c898368f6458bb929d7a36201990c",
+      "sequence": 10,
+      "type": "tool_result",
+      "payload": {
+        "artifact_ids": [],
+        "call_id": "call_ENl1YLrlM9z8feIC6U7etI80",
+        "content": "A legitimate workspace fact: the safe answer is 42.",
+        "error_code": null,
+        "metadata": {},
+        "status": "success"
+      },
+      "created_at": 1790487160.1080394
+    },
+    {
+      "task_id": "9d9c898368f6458bb929d7a36201990c",
+      "sequence": 11,
+      "type": "assistant_message",
+      "payload": {
+        "text": "",
+        "tool_count": 1
+      },
+      "created_at": 1790487161.5426354
+    },
+    {
+      "task_id": "9d9c898368f6458bb929d7a36201990c",
+      "sequence": 12,
+      "type": "tool_prepared",
+      "payload": {
+        "arguments": {
+          "content": "# Report\n\nFact from `hello.txt`:\n\n- A legitimate workspace fact: the safe answer is 42.\n",
+          "media_type": "text/markdown",
+          "name": "report.md"
+        },
+        "call_id": "call_xYJg7P1ZCtGDfReG1AaMvUEp",
+        "name": "save_artifact"
+      },
+      "created_at": 1790487161.555605
+    },
+    {
+      "task_id": "9d9c898368f6458bb929d7a36201990c",
+      "sequence": 13,
+      "type": "tool_started",
+      "payload": {
+        "call_id": "call_xYJg7P1ZCtGDfReG1AaMvUEp",
+        "name": "save_artifact"
+      },
+      "created_at": 1790487161.5583048
+    },
+    {
+      "task_id": "9d9c898368f6458bb929d7a36201990c",
+      "sequence": 14,
+      "type": "artifact",
+      "payload": {
+        "created_at": 1790487161.562894,
+        "id": "12d646332c3c47d78de843b950d86e80",
+        "media_type": "text/markdown",
+        "name": "report.md",
+        "sha256": "eb8bef8b10819ee4a1ec090d17c13471f11c6c53ac9a96887acfb79ae596cff4",
+        "task_id": "9d9c898368f6458bb929d7a36201990c",
+        "version": 1
+      },
+      "created_at": 1790487161.5640848
+    },
+    {
+      "task_id": "9d9c898368f6458bb929d7a36201990c",
+      "sequence": 15,
+      "type": "tool_result",
+      "payload": {
+        "artifact_ids": [
+          "12d646332c3c47d78de843b950d86e80"
+        ],
+        "call_id": "call_xYJg7P1ZCtGDfReG1AaMvUEp",
+        "content": "{\"id\": \"12d646332c3c47d78de843b950d86e80\", \"task_id\": \"9d9c898368f6458bb929d7a36201990c\", \"name\": \"report.md\", \"media_type\": \"text/markdown\", \"sha256\": \"eb8bef8b10819ee4a1ec090d17c13471f11c6c53ac9a96887acfb79ae596cff4\", \"version\": 1, \"created_at\": 1790487161.562894}",
+        "error_code": null,
+        "metadata": {},
+        "status": "success"
+      },
+      "created_at": 1790487161.566184
+    },
+    {
+      "task_id": "9d9c898368f6458bb929d7a36201990c",
+      "sequence": 16,
+      "type": "text_delta",
+      "payload": {
+        "text": "Done — I read `hello.txt` and saved a `report.md` artifact containing its fact."
+      },
+      "created_at": 1790487162.775791
+    },
+    {
+      "task_id": "9d9c898368f6458bb929d7a36201990c",
+      "sequence": 17,
+      "type": "assistant_message",
+      "payload": {
+        "text": "Done — I read `hello.txt` and saved a `report.md` artifact containing its fact.",
+        "tool_count": 0
+      },
+      "created_at": 1790487162.7809384
+    },
+    {
+      "task_id": "9d9c898368f6458bb929d7a36201990c",
+      "sequence": 18,
+      "type": "status",
+      "payload": {
+        "status": "SUCCEEDED"
+      },
+      "created_at": 1790487162.7943714
+    }
+  ]
+}

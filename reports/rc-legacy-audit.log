@@ -1,0 +1,107 @@
+{
+  "permission": {
+    "track": "offline-production-policy-replay",
+    "actions": 180,
+    "median_prompts": 9.0,
+    "total_prompts": 94,
+    "risky_denied": 50,
+    "risky_automatically_allowed": 0,
+    "nonrisk_errors": 0,
+    "note": "No ALLOW_SESSION mode. Workspace edits are write-risk and need no per-edit approval; commands require per-action approval. Not equivalent to Java permission policy."
+  },
+  "context": {
+    "track": "offline-production-compaction-original-facts-and-logs",
+    "compactions": 156,
+    "checkpoints": [
+      {
+        "phase": 1,
+        "field_presence": {
+          "phase1_path": true,
+          "phase1_method": true,
+          "phase1_limit": true,
+          "phase1_endpoint": true,
+          "phase1_rejected": true,
+          "phase1_reason": true,
+          "timeout_ms": true,
+          "active_task": true,
+          "next_step": true,
+          "allow_network": true,
+          "preserve_public_api": true
+        },
+        "present": 11,
+        "total": 11
+      },
+      {
+        "phase": 2,
+        "field_presence": {
+          "phase1_path": true,
+          "phase1_method": true,
+          "phase1_limit": true,
+          "phase1_endpoint": true,
+          "phase1_rejected": true,
+          "phase1_reason": true,
+          "timeout_ms": true,
+          "active_task": true,
+          "next_step": true,
+          "allow_network": true,
+          "preserve_public_api": true,
+          "phase2_path": true,
+          "phase2_method": true,
+          "phase2_limit": true,
+          "phase2_endpoint": true,
+          "phase2_rejected": true,
+          "phase2_reason": true
+        },
+        "present": 17,
+        "total": 17
+      },
+      {
+        "phase": 3,
+        "field_presence": {
+          "phase1_path": true,
+          "phase1_method": true,
+          "phase1_limit": true,
+          "phase1_endpoint": true,
+          "phase1_rejected": true,
+          "phase1_reason": true,
+          "timeout_ms": true,
+          "active_task": true,
+          "next_step": true,
+          "allow_network": true,
+          "preserve_public_api": true,
+          "phase2_path": true,
+          "phase2_method": true,
+          "phase2_limit": true,
+          "phase2_endpoint": true,
+          "phase2_rejected": true,
+          "phase2_reason": true,
+          "phase3_path": true,
+          "phase3_method": true,
+          "phase3_limit": true,
+          "phase3_endpoint": true,
+          "phase3_rejected": true,
+          "phase3_reason": true
+        },
+        "present": 23,
+        "total": 23
+      }
+    ],
+    "note": "No model, semantic summary, archive-retrieval or 8-hour claim. Historical fact availability in compacted messages only."
+  },
+  "mcp": {
+    "track": "offline-production-discovery-with-original-100-tool-fixture",
+    "initial_mcp_definitions": [
+      "mcp_discover",
+      "mcp_call",
+      "mcp_search",
+      "mcp_load"
+    ],
+    "definitions_unchanged_after_discovery": true,
+    "discovered_tools": 100,
+    "returned_schema_count": 0,
+    "discovery_content_chars": 9547,
+    "schema_token_reduction": null,
+    "real_model_selection_score": null,
+    "note": "Post-fix discovery returns index only; full schemas persist privately. Transport mocked; real transport tested separately."
+  }
+}

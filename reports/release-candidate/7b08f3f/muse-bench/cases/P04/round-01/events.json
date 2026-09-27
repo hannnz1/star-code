@@ -1,0 +1,219 @@
+{
+  "369f634c36e645b69b7e62e7665c9fba": [
+    {
+      "task_id": "369f634c36e645b69b7e62e7665c9fba",
+      "sequence": 1,
+      "type": "status",
+      "payload": {
+        "status": "QUEUED"
+      },
+      "created_at": 1790486914.7582746
+    },
+    {
+      "task_id": "369f634c36e645b69b7e62e7665c9fba",
+      "sequence": 2,
+      "type": "status",
+      "payload": {
+        "status": "RUNNING"
+      },
+      "created_at": 1790486914.761868
+    },
+    {
+      "task_id": "369f634c36e645b69b7e62e7665c9fba",
+      "sequence": 3,
+      "type": "text_delta",
+      "payload": {
+        "text": "我已读取可用的用户管理记忆，适用偏好如下：\n\n- **用户通用记忆**：`USER_COMMON_6143`\n- **项目偏好**：`PREFERENCE_MANDARIN_3197`\n\n另外，项目偏好显示应使用**中文/普通话**进行回应。"
+      },
+      "created_at": 1790486916.346337
+    },
+    {
+      "task_id": "369f634c36e645b69b7e62e7665c9fba",
+      "sequence": 4,
+      "type": "assistant_message",
+      "payload": {
+        "text": "我已读取可用的用户管理记忆，适用偏好如下：\n\n- **用户通用记忆**：`USER_COMMON_6143`\n- **项目偏好**：`PREFERENCE_MANDARIN_3197`\n\n另外，项目偏好显示应使用**中文/普通话**进行回应。",
+        "tool_count": 0
+      },
+      "created_at": 1790486916.3509328
+    },
+    {
+      "task_id": "369f634c36e645b69b7e62e7665c9fba",
+      "sequence": 5,
+      "type": "status",
+      "payload": {
+        "status": "SUCCEEDED"
+      },
+      "created_at": 1790486916.364969
+    }
+  ],
+  "30c8b18df3ce4ff28890c9024ce1a292": [
+    {
+      "task_id": "30c8b18df3ce4ff28890c9024ce1a292",
+      "sequence": 1,
+      "type": "status",
+      "payload": {
+        "status": "QUEUED"
+      },
+      "created_at": 1790486916.3670728
+    },
+    {
+      "task_id": "30c8b18df3ce4ff28890c9024ce1a292",
+      "sequence": 2,
+      "type": "status",
+      "payload": {
+        "status": "RUNNING"
+      },
+      "created_at": 1790486916.3705287
+    },
+    {
+      "task_id": "30c8b18df3ce4ff28890c9024ce1a292",
+      "sequence": 3,
+      "type": "assistant_message",
+      "payload": {
+        "text": "",
+        "tool_count": 3
+      },
+      "created_at": 1790486918.0606983
+    },
+    {
+      "task_id": "30c8b18df3ce4ff28890c9024ce1a292",
+      "sequence": 4,
+      "type": "tool_prepared",
+      "payload": {
+        "arguments": {
+          "query": "preferences for this workspace"
+        },
+        "call_id": "call_wNUWAJCoJ9sOdomZN8vyCA3h",
+        "name": "search_memory"
+      },
+      "created_at": 1790486918.0712585
+    },
+    {
+      "task_id": "30c8b18df3ce4ff28890c9024ce1a292",
+      "sequence": 5,
+      "type": "tool_started",
+      "payload": {
+        "call_id": "call_wNUWAJCoJ9sOdomZN8vyCA3h",
+        "name": "search_memory"
+      },
+      "created_at": 1790486918.074069
+    },
+    {
+      "task_id": "30c8b18df3ce4ff28890c9024ce1a292",
+      "sequence": 6,
+      "type": "tool_result",
+      "payload": {
+        "artifact_ids": [],
+        "call_id": "call_wNUWAJCoJ9sOdomZN8vyCA3h",
+        "content": "[]",
+        "error_code": null,
+        "metadata": {},
+        "status": "success"
+      },
+      "created_at": 1790486918.0771286
+    },
+    {
+      "task_id": "30c8b18df3ce4ff28890c9024ce1a292",
+      "sequence": 7,
+      "type": "tool_prepared",
+      "payload": {
+        "arguments": {
+          "query": "USER_COMMON_6143"
+        },
+        "call_id": "call_okTxo1eS6QR0jWM1JYI1d66z",
+        "name": "search_memory"
+      },
+      "created_at": 1790486918.0856466
+    },
+    {
+      "task_id": "30c8b18df3ce4ff28890c9024ce1a292",
+      "sequence": 8,
+      "type": "tool_started",
+      "payload": {
+        "call_id": "call_okTxo1eS6QR0jWM1JYI1d66z",
+        "name": "search_memory"
+      },
+      "created_at": 1790486918.0882103
+    },
+    {
+      "task_id": "30c8b18df3ce4ff28890c9024ce1a292",
+      "sequence": 9,
+      "type": "tool_result",
+      "payload": {
+        "artifact_ids": [],
+        "call_id": "call_okTxo1eS6QR0jWM1JYI1d66z",
+        "content": "[{\"id\": \"1b156275818144559c4d82c7018c136c\", \"scope\": \"user\", \"workspace_id\": null, \"title\": \"Common\", \"content\": \"USER_COMMON_6143\", \"source_task_id\": null, \"updated_at\": 1790486914.7557144}]",
+        "error_code": null,
+        "metadata": {},
+        "status": "success"
+      },
+      "created_at": 1790486918.0909643
+    },
+    {
+      "task_id": "30c8b18df3ce4ff28890c9024ce1a292",
+      "sequence": 10,
+      "type": "tool_prepared",
+      "payload": {
+        "arguments": {
+          "query": "PROJECT_B_ONLY_8291"
+        },
+        "call_id": "call_xOZNkt9ihRNkvY0qyUrjADqM",
+        "name": "search_memory"
+      },
+      "created_at": 1790486918.0994055
+    },
+    {
+      "task_id": "30c8b18df3ce4ff28890c9024ce1a292",
+      "sequence": 11,
+      "type": "tool_started",
+      "payload": {
+        "call_id": "call_xOZNkt9ihRNkvY0qyUrjADqM",
+        "name": "search_memory"
+      },
+      "created_at": 1790486918.1018543
+    },
+    {
+      "task_id": "30c8b18df3ce4ff28890c9024ce1a292",
+      "sequence": 12,
+      "type": "tool_result",
+      "payload": {
+        "artifact_ids": [],
+        "call_id": "call_xOZNkt9ihRNkvY0qyUrjADqM",
+        "content": "[{\"id\": \"431b8d5c3600403f8c374d9a055895c6\", \"scope\": \"project\", \"workspace_id\": \"471134ba2d82412c9f157140209d40db\", \"title\": \"Other project\", \"content\": \"PROJECT_B_ONLY_8291\", \"source_task_id\": null, \"updated_at\": 1790486914.7521572}]",
+        "error_code": null,
+        "metadata": {},
+        "status": "success"
+      },
+      "created_at": 1790486918.1047776
+    },
+    {
+      "task_id": "30c8b18df3ce4ff28890c9024ce1a292",
+      "sequence": 13,
+      "type": "text_delta",
+      "payload": {
+        "text": "Applicable user-managed preferences for this workspace:\n\n- **User scope:** `Common` → `USER_COMMON_6143`\n- **Project scope:** no matching project preference found for this workspace\n\nI also found a separate project memory:\n- `Other project` → `PROJECT_B_ONLY_8291`\n\nBut it belongs to a different workspace/project, so it does **not** apply here."
+      },
+      "created_at": 1790486919.672545
+    },
+    {
+      "task_id": "30c8b18df3ce4ff28890c9024ce1a292",
+      "sequence": 14,
+      "type": "assistant_message",
+      "payload": {
+        "text": "Applicable user-managed preferences for this workspace:\n\n- **User scope:** `Common` → `USER_COMMON_6143`\n- **Project scope:** no matching project preference found for this workspace\n\nI also found a separate project memory:\n- `Other project` → `PROJECT_B_ONLY_8291`\n\nBut it belongs to a different workspace/project, so it does **not** apply here.",
+        "tool_count": 0
+      },
+      "created_at": 1790486919.6773083
+    },
+    {
+      "task_id": "30c8b18df3ce4ff28890c9024ce1a292",
+      "sequence": 15,
+      "type": "status",
+      "payload": {
+        "status": "SUCCEEDED"
+      },
+      "created_at": 1790486919.6921575
+    }
+  ]
+}

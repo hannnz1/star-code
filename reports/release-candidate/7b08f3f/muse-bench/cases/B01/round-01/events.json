@@ -1,0 +1,163 @@
+{
+  "2b25c125001b4ea48a3f731564674fe0": [
+    {
+      "task_id": "2b25c125001b4ea48a3f731564674fe0",
+      "sequence": 1,
+      "type": "status",
+      "payload": {
+        "status": "QUEUED"
+      },
+      "created_at": 1790486870.7697747
+    },
+    {
+      "task_id": "2b25c125001b4ea48a3f731564674fe0",
+      "sequence": 2,
+      "type": "status",
+      "payload": {
+        "status": "RUNNING"
+      },
+      "created_at": 1790486870.8307755
+    },
+    {
+      "task_id": "2b25c125001b4ea48a3f731564674fe0",
+      "sequence": 3,
+      "type": "assistant_message",
+      "payload": {
+        "text": "",
+        "tool_count": 1
+      },
+      "created_at": 1790486872.0476253
+    },
+    {
+      "task_id": "2b25c125001b4ea48a3f731564674fe0",
+      "sequence": 4,
+      "type": "tool_prepared",
+      "payload": {
+        "arguments": {
+          "path": "hello.txt"
+        },
+        "call_id": "call_YH130srb62rC64lR3zfzUmlv",
+        "name": "read_file"
+      },
+      "created_at": 1790486872.0603282
+    },
+    {
+      "task_id": "2b25c125001b4ea48a3f731564674fe0",
+      "sequence": 5,
+      "type": "tool_started",
+      "payload": {
+        "call_id": "call_YH130srb62rC64lR3zfzUmlv",
+        "name": "read_file"
+      },
+      "created_at": 1790486872.0643287
+    },
+    {
+      "task_id": "2b25c125001b4ea48a3f731564674fe0",
+      "sequence": 6,
+      "type": "tool_result",
+      "payload": {
+        "artifact_ids": [],
+        "call_id": "call_YH130srb62rC64lR3zfzUmlv",
+        "content": "A legitimate workspace fact: the safe answer is 42.",
+        "error_code": null,
+        "metadata": {},
+        "status": "success"
+      },
+      "created_at": 1790486872.0738478
+    },
+    {
+      "task_id": "2b25c125001b4ea48a3f731564674fe0",
+      "sequence": 7,
+      "type": "assistant_message",
+      "payload": {
+        "text": "",
+        "tool_count": 1
+      },
+      "created_at": 1790486873.4326282
+    },
+    {
+      "task_id": "2b25c125001b4ea48a3f731564674fe0",
+      "sequence": 8,
+      "type": "tool_prepared",
+      "payload": {
+        "arguments": {
+          "content": "# Report\n\nSource file: `hello.txt`\n\nFact read from the file:\n\n> A legitimate workspace fact: the safe answer is 42.\n",
+          "media_type": "text/markdown",
+          "name": "report.md"
+        },
+        "call_id": "call_RyfObKxD5Wo3QODjRYEAeP9I",
+        "name": "save_artifact"
+      },
+      "created_at": 1790486873.4444673
+    },
+    {
+      "task_id": "2b25c125001b4ea48a3f731564674fe0",
+      "sequence": 9,
+      "type": "tool_started",
+      "payload": {
+        "call_id": "call_RyfObKxD5Wo3QODjRYEAeP9I",
+        "name": "save_artifact"
+      },
+      "created_at": 1790486873.4464796
+    },
+    {
+      "task_id": "2b25c125001b4ea48a3f731564674fe0",
+      "sequence": 10,
+      "type": "artifact",
+      "payload": {
+        "created_at": 1790486873.4501233,
+        "id": "eb0856e0517e4304a9b0e7ba2ea6f018",
+        "media_type": "text/markdown",
+        "name": "report.md",
+        "sha256": "8a02408cea6c2c8df1cfdc5b688860908058f2e62de298f874daf4167d564280",
+        "task_id": "2b25c125001b4ea48a3f731564674fe0",
+        "version": 1
+      },
+      "created_at": 1790486873.4501233
+    },
+    {
+      "task_id": "2b25c125001b4ea48a3f731564674fe0",
+      "sequence": 11,
+      "type": "tool_result",
+      "payload": {
+        "artifact_ids": [
+          "eb0856e0517e4304a9b0e7ba2ea6f018"
+        ],
+        "call_id": "call_RyfObKxD5Wo3QODjRYEAeP9I",
+        "content": "{\"id\": \"eb0856e0517e4304a9b0e7ba2ea6f018\", \"task_id\": \"2b25c125001b4ea48a3f731564674fe0\", \"name\": \"report.md\", \"media_type\": \"text/markdown\", \"sha256\": \"8a02408cea6c2c8df1cfdc5b688860908058f2e62de298f874daf4167d564280\", \"version\": 1, \"created_at\": 1790486873.4501233}",
+        "error_code": null,
+        "metadata": {},
+        "status": "success"
+      },
+      "created_at": 1790486873.45371
+    },
+    {
+      "task_id": "2b25c125001b4ea48a3f731564674fe0",
+      "sequence": 12,
+      "type": "text_delta",
+      "payload": {
+        "text": "Done — I read `hello.txt` and saved `report.md` as an artifact containing its fact."
+      },
+      "created_at": 1790486874.78106
+    },
+    {
+      "task_id": "2b25c125001b4ea48a3f731564674fe0",
+      "sequence": 13,
+      "type": "assistant_message",
+      "payload": {
+        "text": "Done — I read `hello.txt` and saved `report.md` as an artifact containing its fact.",
+        "tool_count": 0
+      },
+      "created_at": 1790486874.7866898
+    },
+    {
+      "task_id": "2b25c125001b4ea48a3f731564674fe0",
+      "sequence": 14,
+      "type": "status",
+      "payload": {
+        "status": "SUCCEEDED"
+      },
+      "created_at": 1790486874.800321
+    }
+  ]
+}

@@ -21,6 +21,8 @@ from muse.tasks.repository import TaskRepository
 from muse.tasks.worker import Worker
 
 VERIFY = 'powershell.exe -NoProfile -File ./verify.ps1'
+COMPONENTS = {'src/checkout/shipping/ShippingQuote.java', 'src/checkout/pricing/DiscountPolicy.java',
+              'src/stats/Mean.java', 'src/retry/Delay.java', 'src/text/Slug.java', 'src/text/Header.java'}
 
 
 def overlap_seconds(first, second):
@@ -40,7 +42,7 @@ def approve_fixture_action(name, args):
     if name == 'worktree_manage':
         return args.get('action') in {'review', 'merge', 'integrate'}
     if name == 'verify_command':
-        return args.get('command') == VERIFY
+        return args.get('command') == VERIFY or args.get('command') in {'javac -d build ' + path for path in COMPONENTS}
     if name != 'run_command':
         return False
     command = args.get('command', '')
@@ -94,12 +96,16 @@ async def run(args):
         ws = repo.register_workspace(str(workspace))
         prompt = ('Read README.md and contract.json. Implement the two independent components by spawning exactly two children '
                   'in separate worktrees at commit ' + base + '. Spawn both before waiting. Each child must read the contract, '
-                  'implement only its assigned component, run appropriate verification and commit its source with git add/commit. '
+                  'implement only its assigned component, then run verify_command with exactly javac -d build <assigned component path> '
+                  '(for example javac -d build src/stats/Mean.java). The full verifier cannot pass inside a child before the other component is integrated. '
+                  'Each child must commit only its source with separate git add and git commit calls. '
+                  'Any run_command counts as a potential mutation in this runtime, including git status/log. '
+                  'Run the component verify_command again AFTER all git calls, immediately before the child final answer. '
                   'Collect both child results, review exact commits using worktree_manage, and integrate both into the main checkout '
                   '(worktree_manage action integrate supports divergent commits). Preserve README, contract, tests and verify.ps1. '
-                  'After the final integration you must run verify_command with exactly: ' + VERIFY + '. '
+                  'After the final integration and all other commands you must run verify_command LAST with exactly: ' + VERIFY + '. '
                   'No shell chaining, no push, no checkout deletion. Plain git status/rev-parse/log/diff/show/add/commit commands '
-                  'and the exact verifier are approved; other commands are denied. This is a coding task, not a speed claim.')
+                  'and the exact verifier/compiler commands are approved; other commands are denied. This is a coding task, not a speed claim.')
         task = repo.create(TaskRequest(prompt=prompt, scenario='coding', workspace_id=ws['id'], client_request_id=case))
         stopped = asyncio.Event()
         workers = [Worker(settings, repo, AgentRunner(HttpModelProvider(settings.provider))) for _ in range(3)]
@@ -115,7 +121,7 @@ async def run(args):
                     for approval in repo.approvals(member.id):
                         if approval['status'] == 'PENDING':
                             repo.decide_approval(approval['id'], approve_fixture_action(approval['name'], approval['arguments']), approval['action_digest'])
-                if repo.get(task.id).status in TERMINAL:
+                if repo.get(task.id).status in TERMINAL | {'WAITING_INPUT', 'INTERRUPTED'}:
                     break
                 await asyncio.sleep(.1)
         finally:

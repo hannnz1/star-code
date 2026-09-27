@@ -102,7 +102,7 @@ class ToolRegistry:
     def definitions(self) -> list[ToolDefinition]:
         self.mcp.refresh_definition()
         excluded = {"write_file", "edit_file", "run_command", "verify_command"} if self.context.task.scenario in {"research", "documents"} else set()
-        return [definition for name, (definition, _) in self.entries.items() if name not in excluded and not name.startswith('__hook_')
+        return [self.mcp.public_definition(definition) for name, (definition, _) in self.entries.items() if name not in excluded and not name.startswith('__hook_')
                 and (self.context.cp.get('allowed_tools') is None or name in self.context.cp['allowed_tools'])
                 and (not self.context.task.read_only or definition.risk == 'read')]
 

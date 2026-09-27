@@ -1,0 +1,55 @@
+.............FF...F..                                                    [100%]
+================================== FAILURES ===================================
+______________ test_mcp_internal_binding_is_not_a_model_argument ______________
+
+tmp_path = WindowsPath('C:/Users/Administrator/Documents/Codex/2026-09-26/ai-starcode-muse-coding-agent-python/outputs/muse-next/work/rc2-red/test_mcp_internal_binding_is_n0')
+
+    async def test_mcp_internal_binding_is_not_a_model_argument(tmp_path):
+        repo, task, worker = runtime(tmp_path, ScriptedProvider([]))
+        config = tmp_path / 'config.yaml'
+        config.write_text('mcp_servers:\n  - name: local\n    command: synthetic\n')
+        owned = repo.claim_next('test')
+        ctx = ExecutionContext(worker.settings.model_copy(update={'config_path': config}), repo, owned, 'test')
+        registry = ToolRegistry(ctx)
+        ctx.cp['mcp_catalogs'] = {'local': {'fingerprint': registry.mcp.fingerprint('local'),
+            'tools': {'lookup': {'description': 'Lookup', 'schema': {'type': 'object'}}}}}
+        for definition in registry.definitions():
+            if definition.name.startswith('mcp_'):
+>               assert '_connection' not in definition.parameters['properties']
+E               AssertionError: assert '_connection' not in {'_connection': {'type': 'string'}, 'server': {'enum': ['local'], 'type': 'string'}}
+
+tests\test_migration_retention_loading.py:219: AssertionError
+___ test_later_prose_invalidates_derived_json_state_without_losing_sources ____
+
+    def test_later_prose_invalidates_derived_json_state_without_losing_sources():
+        from muse.agent.context import RETAINED_PREFIX
+        messages = [{'role': 'user', 'content': 'Goal'},
+                    {'role': 'user', 'content': '{"timeout_ms": 1000}'},
+                    {'role': 'user', 'content': 'Correction: use timeout_ms 5000 instead.'},
+                    {'role': 'assistant', 'content': 'log ' * 10000}]
+        result = compact_messages(messages, max_chars=12000)
+        records = json.loads(result[1]['content'][len(RETAINED_PREFIX):])
+>       assert not any(r['role'] == 'latest_explicit_user_json_values' for r in records)
+E       assert not True
+E        +  where True = any(<generator object test_later_prose_invalidates_derived_json_state_without_losing_sources.<locals>.<genexpr> at 0x0000027E188B1220>)
+
+tests\test_migration_retention_loading.py:236: AssertionError
+_________ test_multi_agent_overlap_requires_actual_running_intervals __________
+
+    def test_multi_agent_overlap_requires_actual_running_intervals():
+        from benchmarks.multi_agent_python import overlap_seconds, approve_fixture_action
+        assert overlap_seconds([(0, 2)], [(3, 4)]) == 0
+        assert overlap_seconds([(0, 3)], [(2, 4)]) == 1
+        assert approve_fixture_action('verify_command', {'command': 'powershell.exe -NoProfile -File ./verify.ps1'})
+        assert not approve_fixture_action('run_command', {'command': 'git status; Remove-Item C:\\data -Recurse'})
+        assert not approve_fixture_action('run_command', {'command': 'git push origin HEAD'})
+>       assert approve_fixture_action('verify_command', {'command': 'javac -d build src/stats/Mean.java'})
+E       AssertionError: assert False
+E        +  where False = <function approve_fixture_action at 0x0000027E188BBD80>('verify_command', {'command': 'javac -d build src/stats/Mean.java'})
+
+tests\muse\unit\test_release_benchmarks.py:50: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_migration_retention_loading.py::test_mcp_internal_binding_is_not_a_model_argument
+FAILED tests/test_migration_retention_loading.py::test_later_prose_invalidates_derived_json_state_without_losing_sources
+FAILED tests/muse/unit/test_release_benchmarks.py::test_multi_agent_overlap_requires_actual_running_intervals
+3 failed, 18 passed in 4.46s

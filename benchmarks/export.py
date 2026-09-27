@@ -82,7 +82,14 @@ def export(source, target, revision):
         writer.writeheader(); writer.writerows(records)
     dump(target / "summary.json", {"release_gate": "INCOMPLETE", "planned_attempts": 60, "recorded_attempts": len(records), "counts": dict(Counter(r["status"] for r in records)), "rounds": {str(n): dict(Counter(r["status"] for r in records if r["round"] == n)) for n in (1, 2, 3)}})
     fixtures = [Path("benchmarks/fixtures.py"), Path("benchmarks/run.py"), Path("benchmarks/controls.py"), Path("benchmarks/crash_worker.py")]
-    dump(target / "run-manifest.json", {"run_id": source.name, "code_revision": revision, "python": platform.python_version(), "os": platform.platform(), "fixture_hashes": {str(p): digest(p) for p in fixtures}, "model": "gpt-5.4-mini", "protocol": "openai-responses", "credentials": "Not exported; original explicit StarCode configuration reused.", "source_database_exported": False, "semantic_reviewer": "development assistant, not an independent human panel", "git_worktree_diff": "See reports/review-fixes.patch for final run based on d6911a6."})
+    manifest_path = source / 'manifest.json'
+    manifest = json.loads(manifest_path.read_text(encoding='utf-8')) if manifest_path.is_file() else {
+        'code_revision': revision, 'python': platform.python_version(), 'os': platform.platform(),
+        'fixture_hashes_at_export': {str(p): digest(p) for p in fixtures},
+        'note': 'Historical campaign without a frozen manifest; export-time hashes do not prove run-time identity.'}
+    dump(target / "run-manifest.json", {**manifest, 'run_id': source.name,
+        'credentials': 'Not exported; original explicit StarCode configuration reused.',
+        'source_database_exported': False, 'semantic_reviewer': None})
     return records
 
 

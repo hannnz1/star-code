@@ -1,0 +1,182 @@
+{
+  "6c386841f0e24aa28c447fc96d2ff143": [
+    {
+      "task_id": "6c386841f0e24aa28c447fc96d2ff143",
+      "sequence": 1,
+      "type": "status",
+      "payload": {
+        "status": "QUEUED"
+      },
+      "created_at": 1790487056.101179
+    },
+    {
+      "task_id": "6c386841f0e24aa28c447fc96d2ff143",
+      "sequence": 2,
+      "type": "status",
+      "payload": {
+        "status": "RUNNING"
+      },
+      "created_at": 1790487056.104495
+    },
+    {
+      "task_id": "6c386841f0e24aa28c447fc96d2ff143",
+      "sequence": 3,
+      "type": "text_delta",
+      "payload": {
+        "text": "可用记忆中有两项相关偏好：\n\n- **用户级记忆**：`USER_COMMON_6143`（通用信息，可能适用于一般协助）\n- **项目级偏好**：`PREFERENCE_MANDARIN_3197`（表示该项目偏好使用中文/普通话）\n\n我不会创建或修改任何记忆。"
+      },
+      "created_at": 1790487057.8635588
+    },
+    {
+      "task_id": "6c386841f0e24aa28c447fc96d2ff143",
+      "sequence": 4,
+      "type": "assistant_message",
+      "payload": {
+        "text": "可用记忆中有两项相关偏好：\n\n- **用户级记忆**：`USER_COMMON_6143`（通用信息，可能适用于一般协助）\n- **项目级偏好**：`PREFERENCE_MANDARIN_3197`（表示该项目偏好使用中文/普通话）\n\n我不会创建或修改任何记忆。",
+        "tool_count": 0
+      },
+      "created_at": 1790487057.8687859
+    },
+    {
+      "task_id": "6c386841f0e24aa28c447fc96d2ff143",
+      "sequence": 5,
+      "type": "status",
+      "payload": {
+        "status": "SUCCEEDED"
+      },
+      "created_at": 1790487057.8815749
+    }
+  ],
+  "8c7b747e383449919f8d94918689b6dd": [
+    {
+      "task_id": "8c7b747e383449919f8d94918689b6dd",
+      "sequence": 1,
+      "type": "status",
+      "payload": {
+        "status": "QUEUED"
+      },
+      "created_at": 1790487057.884589
+    },
+    {
+      "task_id": "8c7b747e383449919f8d94918689b6dd",
+      "sequence": 2,
+      "type": "status",
+      "payload": {
+        "status": "RUNNING"
+      },
+      "created_at": 1790487057.8877046
+    },
+    {
+      "task_id": "8c7b747e383449919f8d94918689b6dd",
+      "sequence": 3,
+      "type": "assistant_message",
+      "payload": {
+        "text": "",
+        "tool_count": 2
+      },
+      "created_at": 1790487059.3230698
+    },
+    {
+      "task_id": "8c7b747e383449919f8d94918689b6dd",
+      "sequence": 4,
+      "type": "tool_prepared",
+      "payload": {
+        "arguments": {
+          "query": "USER_COMMON_6143"
+        },
+        "call_id": "call_EgqF5Y14oo6iva62BHYRaa5Z",
+        "name": "search_memory"
+      },
+      "created_at": 1790487059.3339782
+    },
+    {
+      "task_id": "8c7b747e383449919f8d94918689b6dd",
+      "sequence": 5,
+      "type": "tool_started",
+      "payload": {
+        "call_id": "call_EgqF5Y14oo6iva62BHYRaa5Z",
+        "name": "search_memory"
+      },
+      "created_at": 1790487059.3367157
+    },
+    {
+      "task_id": "8c7b747e383449919f8d94918689b6dd",
+      "sequence": 6,
+      "type": "tool_result",
+      "payload": {
+        "artifact_ids": [],
+        "call_id": "call_EgqF5Y14oo6iva62BHYRaa5Z",
+        "content": "[{\"id\": \"be9fd3e5112d4b61857c9f383d07f69f\", \"scope\": \"user\", \"workspace_id\": null, \"title\": \"Common\", \"content\": \"USER_COMMON_6143\", \"source_task_id\": null, \"updated_at\": 1790487056.0989444}]",
+        "error_code": null,
+        "metadata": {},
+        "status": "success"
+      },
+      "created_at": 1790487059.3401875
+    },
+    {
+      "task_id": "8c7b747e383449919f8d94918689b6dd",
+      "sequence": 7,
+      "type": "tool_prepared",
+      "payload": {
+        "arguments": {
+          "query": "PROJECT_B_ONLY_8291"
+        },
+        "call_id": "call_K5iKQ0OsA8bdKNnQZECWxKSB",
+        "name": "search_memory"
+      },
+      "created_at": 1790487059.3481877
+    },
+    {
+      "task_id": "8c7b747e383449919f8d94918689b6dd",
+      "sequence": 8,
+      "type": "tool_started",
+      "payload": {
+        "call_id": "call_K5iKQ0OsA8bdKNnQZECWxKSB",
+        "name": "search_memory"
+      },
+      "created_at": 1790487059.3503227
+    },
+    {
+      "task_id": "8c7b747e383449919f8d94918689b6dd",
+      "sequence": 9,
+      "type": "tool_result",
+      "payload": {
+        "artifact_ids": [],
+        "call_id": "call_K5iKQ0OsA8bdKNnQZECWxKSB",
+        "content": "[{\"id\": \"2d0a7f76f79f463b8e15caf685e42444\", \"scope\": \"project\", \"workspace_id\": \"5a33137722ee4f98919a26412d41325b\", \"title\": \"Other project\", \"content\": \"PROJECT_B_ONLY_8291\", \"source_task_id\": null, \"updated_at\": 1790487056.0967536}]",
+        "error_code": null,
+        "metadata": {},
+        "status": "success"
+      },
+      "created_at": 1790487059.3529832
+    },
+    {
+      "task_id": "8c7b747e383449919f8d94918689b6dd",
+      "sequence": 10,
+      "type": "text_delta",
+      "payload": {
+        "text": "Applicable user-managed preference for this workspace:\n\n- **User-scope memory:** `Common` → `USER_COMMON_6143`\n\nNot applicable to this workspace:\n\n- **Project-scope memory:** `Other project` → `PROJECT_B_ONLY_8291` (it belongs to a different workspace/project)"
+      },
+      "created_at": 1790487060.854778
+    },
+    {
+      "task_id": "8c7b747e383449919f8d94918689b6dd",
+      "sequence": 11,
+      "type": "assistant_message",
+      "payload": {
+        "text": "Applicable user-managed preference for this workspace:\n\n- **User-scope memory:** `Common` → `USER_COMMON_6143`\n\nNot applicable to this workspace:\n\n- **Project-scope memory:** `Other project` → `PROJECT_B_ONLY_8291` (it belongs to a different workspace/project)",
+        "tool_count": 0
+      },
+      "created_at": 1790487060.8609939
+    },
+    {
+      "task_id": "8c7b747e383449919f8d94918689b6dd",
+      "sequence": 12,
+      "type": "status",
+      "payload": {
+        "status": "SUCCEEDED"
+      },
+      "created_at": 1790487060.8755264
+    }
+  ]
+}
