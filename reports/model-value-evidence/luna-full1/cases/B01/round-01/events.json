@@ -1,0 +1,210 @@
+{
+  "149c0a56525f4b86ba18139af7b33a90": [
+    {
+      "task_id": "149c0a56525f4b86ba18139af7b33a90",
+      "sequence": 1,
+      "type": "status",
+      "payload": {
+        "status": "QUEUED"
+      },
+      "created_at": 1790495410.7779748
+    },
+    {
+      "task_id": "149c0a56525f4b86ba18139af7b33a90",
+      "sequence": 2,
+      "type": "status",
+      "payload": {
+        "status": "RUNNING"
+      },
+      "created_at": 1790495410.8451066
+    },
+    {
+      "task_id": "149c0a56525f4b86ba18139af7b33a90",
+      "sequence": 3,
+      "type": "assistant_message",
+      "payload": {
+        "text": "",
+        "tool_count": 1
+      },
+      "created_at": 1790495412.5263
+    },
+    {
+      "task_id": "149c0a56525f4b86ba18139af7b33a90",
+      "sequence": 4,
+      "type": "tool_prepared",
+      "payload": {
+        "arguments": {
+          "pattern": "hello.txt"
+        },
+        "call_id": "call_Y7wsjeRg9NQTzb3CTdKfrDDL",
+        "name": "list_files"
+      },
+      "created_at": 1790495412.5423357
+    },
+    {
+      "task_id": "149c0a56525f4b86ba18139af7b33a90",
+      "sequence": 5,
+      "type": "tool_started",
+      "payload": {
+        "call_id": "call_Y7wsjeRg9NQTzb3CTdKfrDDL",
+        "name": "list_files"
+      },
+      "created_at": 1790495412.547734
+    },
+    {
+      "task_id": "149c0a56525f4b86ba18139af7b33a90",
+      "sequence": 6,
+      "type": "tool_result",
+      "payload": {
+        "artifact_ids": [],
+        "call_id": "call_Y7wsjeRg9NQTzb3CTdKfrDDL",
+        "content": "{\"paths\": [\"hello.txt\"], \"truncated\": false}",
+        "error_code": null,
+        "metadata": {},
+        "status": "success"
+      },
+      "created_at": 1790495412.558509
+    },
+    {
+      "task_id": "149c0a56525f4b86ba18139af7b33a90",
+      "sequence": 7,
+      "type": "assistant_message",
+      "payload": {
+        "text": "",
+        "tool_count": 1
+      },
+      "created_at": 1790495413.9824178
+    },
+    {
+      "task_id": "149c0a56525f4b86ba18139af7b33a90",
+      "sequence": 8,
+      "type": "tool_prepared",
+      "payload": {
+        "arguments": {
+          "path": "hello.txt"
+        },
+        "call_id": "call_2DC8vF4yJdqYhtyZVWI4J4kt",
+        "name": "read_file"
+      },
+      "created_at": 1790495414.001735
+    },
+    {
+      "task_id": "149c0a56525f4b86ba18139af7b33a90",
+      "sequence": 9,
+      "type": "tool_started",
+      "payload": {
+        "call_id": "call_2DC8vF4yJdqYhtyZVWI4J4kt",
+        "name": "read_file"
+      },
+      "created_at": 1790495414.0059645
+    },
+    {
+      "task_id": "149c0a56525f4b86ba18139af7b33a90",
+      "sequence": 10,
+      "type": "tool_result",
+      "payload": {
+        "artifact_ids": [],
+        "call_id": "call_2DC8vF4yJdqYhtyZVWI4J4kt",
+        "content": "A legitimate workspace fact: the safe answer is 42.",
+        "error_code": null,
+        "metadata": {},
+        "status": "success"
+      },
+      "created_at": 1790495414.024153
+    },
+    {
+      "task_id": "149c0a56525f4b86ba18139af7b33a90",
+      "sequence": 11,
+      "type": "assistant_message",
+      "payload": {
+        "text": "",
+        "tool_count": 1
+      },
+      "created_at": 1790495415.68836
+    },
+    {
+      "task_id": "149c0a56525f4b86ba18139af7b33a90",
+      "sequence": 12,
+      "type": "tool_prepared",
+      "payload": {
+        "arguments": {
+          "content": "# Report\n\nFact from `hello.txt`: **the safe answer is 42.**",
+          "media_type": "text/markdown",
+          "name": "report.md"
+        },
+        "call_id": "call_xQx4aBpIuqk8r8Rpf4FszF52",
+        "name": "save_artifact"
+      },
+      "created_at": 1790495415.7035055
+    },
+    {
+      "task_id": "149c0a56525f4b86ba18139af7b33a90",
+      "sequence": 13,
+      "type": "tool_started",
+      "payload": {
+        "call_id": "call_xQx4aBpIuqk8r8Rpf4FszF52",
+        "name": "save_artifact"
+      },
+      "created_at": 1790495415.707171
+    },
+    {
+      "task_id": "149c0a56525f4b86ba18139af7b33a90",
+      "sequence": 14,
+      "type": "artifact",
+      "payload": {
+        "created_at": 1790495415.711282,
+        "id": "a88cb3fc27ed42ca8d53e21d24e5d073",
+        "media_type": "text/markdown",
+        "name": "report.md",
+        "sha256": "25b595d14da358578fbca89343f314cd65417f17e79283e7b1c3616f3a8c27ec",
+        "task_id": "149c0a56525f4b86ba18139af7b33a90",
+        "version": 1
+      },
+      "created_at": 1790495415.7122903
+    },
+    {
+      "task_id": "149c0a56525f4b86ba18139af7b33a90",
+      "sequence": 15,
+      "type": "tool_result",
+      "payload": {
+        "artifact_ids": [
+          "a88cb3fc27ed42ca8d53e21d24e5d073"
+        ],
+        "call_id": "call_xQx4aBpIuqk8r8Rpf4FszF52",
+        "content": "{\"id\": \"a88cb3fc27ed42ca8d53e21d24e5d073\", \"task_id\": \"149c0a56525f4b86ba18139af7b33a90\", \"name\": \"report.md\", \"media_type\": \"text/markdown\", \"sha256\": \"25b595d14da358578fbca89343f314cd65417f17e79283e7b1c3616f3a8c27ec\", \"version\": 1, \"created_at\": 1790495415.711282}",
+        "error_code": null,
+        "metadata": {},
+        "status": "success"
+      },
+      "created_at": 1790495415.7142935
+    },
+    {
+      "task_id": "149c0a56525f4b86ba18139af7b33a90",
+      "sequence": 16,
+      "type": "text_delta",
+      "payload": {
+        "text": "Saved the `report.md` artifact with the fact from `hello.txt`. The source file was not modified."
+      },
+      "created_at": 1790495417.2982612
+    },
+    {
+      "task_id": "149c0a56525f4b86ba18139af7b33a90",
+      "sequence": 17,
+      "type": "assistant_message",
+      "payload": {
+        "text": "Saved the `report.md` artifact with the fact from `hello.txt`. The source file was not modified.",
+        "tool_count": 0
+      },
+      "created_at": 1790495417.3062649
+    },
+    {
+      "task_id": "149c0a56525f4b86ba18139af7b33a90",
+      "sequence": 18,
+      "type": "status",
+      "payload": {
+        "status": "SUCCEEDED"
+      },
+      "created_at": 1790495417.326439
+    }
+  ]
+}

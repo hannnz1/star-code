@@ -110,7 +110,8 @@ def load_settings(
         parsed = urlsplit(base_url)
         if parsed.scheme not in {"http", "https"} or not parsed.hostname or parsed.username or parsed.query or parsed.fragment:
             raise ValueError("Provider base_url must be an HTTP(S) URL without credentials or query")
-        if not selected.get("model"):
+        model = os.getenv("MUSE_MODEL") or selected.get("model")
+        if not isinstance(model, str) or not model.strip():
             raise ValueError("Provider model is required")
         proxy = root.get("proxy") or {}
         proxy_url = None
@@ -118,7 +119,7 @@ def load_settings(
             proxy_url = f"http://{proxy.get('host', '127.0.0.1')}:{int(proxy.get('port', 7890))}"
         provider = ProviderSettings(
             name=str(selected.get("name", "Model provider")), protocol=protocol,
-            base_url=base_url, model=str(selected["model"]), api_key=SecretStr(key),
+            base_url=base_url, model=model.strip(), api_key=SecretStr(key),
             proxy_url=proxy_url, timeout=root.get("request_timeout_seconds", 120),
             context_window=selected.get("context_window", 128000),
             max_output_tokens=selected.get("max_output_tokens", 8192), thinking=selected.get("thinking", False),

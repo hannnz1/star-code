@@ -1,0 +1,38 @@
+{
+  "case": "C03",
+  "round": 1,
+  "track": "real-model",
+  "result": "AUTO_PASS_REVIEW_REQUIRED",
+  "checks": {
+    "expected_state": true,
+    "edit_scope": true,
+    "verification_exit": true
+  },
+  "facts": {},
+  "task_status": "FAILED",
+  "error": "Code changes have no successful verification after the last edit",
+  "model": "gpt-6-luna",
+  "protocol": "openai-responses",
+  "duration_seconds": 14.813,
+  "usage": {
+    "complete": true,
+    "input_tokens": 17917,
+    "output_tokens": 515
+  },
+  "model_requests": 6,
+  "tool_calls": 10,
+  "changed_files": [
+    "calculator.py"
+  ],
+  "artifacts": [
+    {
+      "id": "4a0516b3ba3840e9b5a40da69dd4d47b",
+      "task_id": "fbcc6f01388745c3a875f241af07b783",
+      "name": "command-ea4256c10535.txt",
+      "media_type": "text/plain",
+      "sha256": "ea0202a74f335a2f2ddf2c5ef48705f382233cfce333e43413448c65f03e3c47",
+      "version": 1,
+      "created_at": 1790495401.6656086
+    }
+  ]
+}

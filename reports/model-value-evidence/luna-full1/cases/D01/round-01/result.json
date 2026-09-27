@@ -1,0 +1,50 @@
+{
+  "case": "D01",
+  "round": 1,
+  "track": "real-model",
+  "result": "FAIL",
+  "checks": {
+    "expected_state": true,
+    "fact_coverage": false,
+    "source_hashes_unchanged": true,
+    "deliverable_bytes_valid": true
+  },
+  "facts": {
+    "Project Orion": true,
+    "Budget 42000 USD": false,
+    "Owner Maya": true,
+    "Launch 2027-02-14": true,
+    "Project Vega": true,
+    "Budget 61000 USD": false,
+    "Owner Leon": true,
+    "Launch 2027-03-21": true,
+    "Project Lyra": true,
+    "Budget 73000 USD": false,
+    "Owner Mira": true,
+    "Launch 2027-04-18": true
+  },
+  "task_status": "SUCCEEDED",
+  "error": "",
+  "model": "gpt-6-luna",
+  "protocol": "openai-responses",
+  "duration_seconds": 7.765,
+  "usage": {
+    "complete": true,
+    "input_tokens": 9155,
+    "output_tokens": 321
+  },
+  "model_requests": 4,
+  "tool_calls": 5,
+  "changed_files": [],
+  "artifacts": [
+    {
+      "id": "f10fc950691a415bbc010da707532293",
+      "task_id": "3ef10f0d0620400490ed8eaec8a5d23c",
+      "name": "summary.md",
+      "media_type": "text/markdown",
+      "sha256": "612f51859807c531353ee73281cdcd0bf846ff5028e23302ef0645179b2a4b86",
+      "version": 1,
+      "created_at": 1790495332.905173
+    }
+  ]
+}

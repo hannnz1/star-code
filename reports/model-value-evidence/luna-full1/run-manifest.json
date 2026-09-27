@@ -1,0 +1,888 @@
+{
+  "format": 1,
+  "source_root": "C:\\Users\\Administrator\\Documents\\Codex\\2026-09-26\\ai-starcode-muse-coding-agent-python\\outputs\\muse-next",
+  "head": "2bab42a39f809ca358d00f7cfc004b656eeb5c43",
+  "tracked_patch_sha256": "8c1c470977c0ab109913172e76f817b032db2f420c703f65e55db643826658f9",
+  "files": {
+    "benchmarks/__init__.py": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+    "benchmarks/cases.yaml": "cc8a3ae9814d824ed4a037f08aa0014e2a5ad7cc49fe1365066a5326d0dfff5f",
+    "benchmarks/context_recall_probe.py": "0a9eb4af96c945b9b829f4ff78a36cd080f72ba8d80487b033e7bacb7d5c0c6f",
+    "benchmarks/controls.py": "9da3877f992cd672912de6faa251c39d3994903c224049b0162fa65476e2e51a",
+    "benchmarks/crash_worker.py": "09e7756c769f072a8407b08d489e9675843933f276f7c36bc0247cc44e52522c",
+    "benchmarks/export.py": "f41fe797be87e39de85b9ef1e272555dc32c675df8c0fdbe209ed2b34adc58cd",
+    "benchmarks/fixtures.py": "8ecbb4268aaade1809748ef0d59aced121be87c0754984223d8df9de07168940",
+    "benchmarks/legacy_metrics_audit.py": "532196065aed7ad7bee9c1c24e2cf143f43e0a5c29ddcf9c49b1a67fe5fb71a6",
+    "benchmarks/long_context_python.py": "3c1864725e5e392bb3927141d4d8746e8900f35b3e3a182b49566af11ce2fbfe",
+    "benchmarks/mcp_paired_python.py": "49de090f8182376f8fe367ceb333df4b08e951b8b030f2e4d6c845f70a5a9add",
+    "benchmarks/mcp_selection_python.py": "b26edc0fa671b844ac9b1a64dfc86aab73f665cdffa73d98923eaf136ed2d4be",
+    "benchmarks/mcp_token_probe.py": "c9d432af7c0a808a01ab2c17d95abd74de4b7a7612478914a0136c6e2d736a9c",
+    "benchmarks/multi_agent_python.py": "def104a2d6ed4f65de21092c59b86fcd98a1ccd480696f60708efe12b3a48af7",
+    "benchmarks/performance.py": "74e333a8ded30d5ad67bf253d3c1d68fcc89f4b0cd231a51f6788fcb37989caf",
+    "benchmarks/quality.py": "ad9890c1e306d51068cea741d8ff40d97e660f64a05942f700b2c035b7c3625c",
+    "benchmarks/release_manifest.py": "255fb1783d10bac07794649dffefdeb5780bce7d69bc67b0e86ba2ac16423f21",
+    "benchmarks/run.py": "7d84d7aa91b26faf93d195a9644c9a26bf4e3e09030d3391f9d0337d8ddab65e",
+    "frontend/package-lock.json": "2dcaea50665cf99b70df9391fbb7ed00d52de1f5c30126a756bc0aa0149e8ad2",
+    "frontend/src/api.generated.ts": "9902d9f4cd6a66a4522a6145613b307caae78fda98966a23ca76a6cb25cd311c",
+    "frontend/src/main.tsx": "602d3fe12223d6782e5be3c7dc0ad8e97b775cf43abc16f53f47e72b988ab2a3",
+    "frontend/src/style.css": "123ebe570e9a51cf79455ebf2b010c3b2261e8e3242c420227a807ed2e0e3e02",
+    "hatch_build.py": "496449cb7c22f47596a1c3a902c4b9541b2c1642105105fcab503fd771aad311",
+    "mewcode/__init__.py": "912b03d585da1e8fa109dc2773d2ef81879503771b988d8a0f50f090d2ea7ed6",
+    "mewcode/__main__.py": "135286c835d10072d828995258f557755d6cdd590f3db66c836dadd0b50526d8",
+    "mewcode/agent.py": "6656dd640d371dbf94d9352f140d933794a105f11af88a0b261f69c96008b19e",
+    "mewcode/agents/__init__.py": "3e6260fe06a9cc1593522431bcf58b6020b5a6c7de910beabbbecbadb2d8e968",
+    "mewcode/agents/builtins/__init__.py": "912b03d585da1e8fa109dc2773d2ef81879503771b988d8a0f50f090d2ea7ed6",
+    "mewcode/agents/fork.py": "94caaa807c116b02d336384efa59c2721594bdd46f665a827ba68e4c410d48e2",
+    "mewcode/agents/loader.py": "36f33bc18a5226c46481fb814f6490e9815f136d3fd3bdd7f5c39e2f5ba0f4c0",
+    "mewcode/agents/notification.py": "228694016bc8d2a81f202dc0f9db7b67c0b7dbd80d5a3d7ce8b404354ca890da",
+    "mewcode/agents/parser.py": "8163343ce3dfdd72c90f0a1464fe2aab1c30017e03d473c98297aecde726a179",
+    "mewcode/agents/task_manager.py": "c42d81ddc1535a55fec0c0345831128f8e3cd219b1e31e94c16f81f6ff2dc06e",
+    "mewcode/agents/tool_filter.py": "6523a73917bf22ff8a24161c27e86f04bee875a7f741a919ac49426bfe116532",
+    "mewcode/agents/trace.py": "01197d87cb4d78072f71374630dfb92eddc64abbe115a1ffb89a8f820b786d20",
+    "mewcode/app.py": "2af56e6d7853607234e61a31a28489e43ca631f50b5ecb9cffec64ac40b9edda",
+    "mewcode/askuser_dialog.py": "afe6b2ba5467826aa5cc716b952690b3d849363317e5bcedecf7dbc8a4f9a3d3",
+    "mewcode/client.py": "44530a529328bf6ff48706ea894a253dc1467e9651baf277d157c2f820bc290f",
+    "mewcode/commands/__init__.py": "c6ec6952e2d1f990437ff5e9e64c52f3944a134e559e513569bbaf824f973aec",
+    "mewcode/commands/completion.py": "1c5c4c40a5a10c33624d6f09186965a6d16e859bdaadeb2514a94256cb175fc7",
+    "mewcode/commands/handlers/__init__.py": "05229cec5516c1b00ce6bee4c7abdebe8058dbb33b0e6a57bbd073d084ed207e",
+    "mewcode/commands/handlers/clear.py": "055ca0c6c2f8c7ec8b896297e13a39434694ac2b5ee4e879459bdccc036dd7a8",
+    "mewcode/commands/handlers/compact.py": "b395f4e2bd2fb77dbb8d64afcec3a85bd12ec0486f9b8476f4b369b1fc7286c8",
+    "mewcode/commands/handlers/help.py": "636ee0585df09c7fa24f76ed419b39ffefa3dcd37d7ca6b7b3f80c241d78481c",
+    "mewcode/commands/handlers/mcp.py": "26b3a6d3ada63cd62872520a1f391f5f10d715ff35128f9302ff203921142296",
+    "mewcode/commands/handlers/memory.py": "3d85363ef3bde5afea02d6f6bb7472176d64673b039e809fa4db4cff37c4bf06",
+    "mewcode/commands/handlers/plan.py": "86bfcda106e29d9edd0895086937bb1d9e3167094321f7ddfd029207c4ff84c3",
+    "mewcode/commands/handlers/review.py": "704f2dd5163c276f773580aa424f39b8832fbb7b625d9630d8e2a0fcd5b01894",
+    "mewcode/commands/handlers/rewind.py": "8dda69c276991bcbc45970cd7f6f4b7ba3e72fea4e01d87efbda90aa757391d3",
+    "mewcode/commands/handlers/sandbox.py": "45b628e0c51d47b57a5b22834fc86f1f2e44f68d075810e72f8d1b7ac2e20aaf",
+    "mewcode/commands/handlers/session.py": "42dd2a433df463273ce73c0868f976c4f6dede866f8a3d4c46f3053efd04c179",
+    "mewcode/commands/handlers/skill.py": "06ab821a1a3397c0ef4e2d4b3a17993aca8e36a9802950fc8c80296966116926",
+    "mewcode/commands/handlers/skill_register.py": "b3bc8e1f4ce5ba793d82b50be124a058451401f3ed7664db7c6a4515225d9f66",
+    "mewcode/commands/handlers/status.py": "03e7912136c0fdf61c73c1064f70a6b10f18bcc67f094acedcdd6de1f83edc96",
+    "mewcode/commands/handlers/tasks.py": "7ff315f0c635654e3b60de2785ca1674ac2b7783ca39659119024c20451f0327",
+    "mewcode/commands/handlers/trace.py": "2f41a5db79787bad7fb42cf9a37a9bbdeb6628f9bbb8276366a794c324322108",
+    "mewcode/commands/handlers/worktree.py": "abd0ebaaa8d11016b50c2cc009bcd936d3c6e13d703eb6c56311ad8754d254ea",
+    "mewcode/commands/loader.py": "d63d5198759595e864fa87512aef0a0cb8005c35013dd742d607c41d0befdf70",
+    "mewcode/commands/parser.py": "a603158122bef60ed9e3fb155f313e9c6cef94b3ebfff282521e922b11d5f6aa",
+    "mewcode/commands/registry.py": "fbfe1a4ae8a29b77b2cb82a138f4666b318d370f05d74a02e39f233220a9e453",
+    "mewcode/config.py": "8d6f1d838dccbfcac0d8a577cec7cec0f1f7d43147ed47f75f3123dba8c2a19b",
+    "mewcode/context/__init__.py": "9c534b5463ec92f27c0eed2f472e460c3f5be96dd8a01fcc6c55d47c1e994735",
+    "mewcode/context/manager.py": "3dbacde6fa38e5ac5cb9a963e4931b0d0ba109e137f9f13394eb7cf834cb5833",
+    "mewcode/conversation.py": "a1cbe133ffc9a28b97f73419a6cdee4cdbbbf9a106a3e59829c2e938944db88d",
+    "mewcode/conversation_pairing.py": "4336055154e950007192d765adcf3293c1ccc3f4a6d345ef990ed800dec150ce",
+    "mewcode/driver.py": "e1c24780ca124a683a64a6d1b9eec37fe25e06b3cb2d515ec93f14eea5e39873",
+    "mewcode/filehistory/__init__.py": "9c51aa48decf8958cb4cc9058e651f279093ca9ec458592aff9e6d9c12cf209c",
+    "mewcode/filehistory/history.py": "8a56c3b899ed6e8096dfe061d846f49887e30a49f3d15d3b4943d2b0544b6402",
+    "mewcode/hooks/__init__.py": "eeadeda2a7005fef1b6736466449cec121f75d949dfd014de90fa46a873641c9",
+    "mewcode/hooks/conditions.py": "d11485198df8f4ebf76a009c4b13eaf51883ae0a1bbc14f734779d684817f870",
+    "mewcode/hooks/engine.py": "c27356ad467bbdd7d04fe57cae4aff02dc5fc326c102df18e020cfa046bfd09a",
+    "mewcode/hooks/events.py": "80ddc57659d63b4a6edca6254f1e95d6e0b6e06a6101749e33368503cd6ee4e8",
+    "mewcode/hooks/executors.py": "6320bc6b049e9b15bf819dbc760b2e65ad46255f52b4b24b6f202cecd891aa72",
+    "mewcode/hooks/loader.py": "f70cd9c61d908f98f7666171aae1789f806cdd5bc04ea518f2e6219c01d38914",
+    "mewcode/hooks/models.py": "0a07d8f977875f523398ca5972eb11c1be0a074df7045711e758f92bfb416e19",
+    "mewcode/mcp/__init__.py": "1c61fd6f08dc5e6de98ab97e8644246922a93ee3e879e9425d9aa23276b35231",
+    "mewcode/mcp/client.py": "237e7f95af3768b1af24867ef9808ff64a23a9fad3e59254495b85a3c43643e6",
+    "mewcode/mcp/loading_strategy.py": "0079f4cf289c0933d79ea348ceb335a86fecdf33f331d7a16d9797fbfe19b98c",
+    "mewcode/mcp/manager.py": "1ff4eb9fc2b983141768adc47059bf565684d3cccb38b57b44fa97565d69197d",
+    "mewcode/mcp/tool_wrapper.py": "07a1e15e9b7294a035a9d6679dc3adab9295cee4ee3f4f65b53a9321b819191e",
+    "mewcode/memory/__init__.py": "f24d20724eb36462565ad1ff57d0f8a9190629b0edaa5950e8b015e50dd0f38b",
+    "mewcode/memory/auto_memory.py": "541b09b4ab66af430ea6deffc895bdf46cf48c5ad5d98438c3a68218199be73b",
+    "mewcode/memory/consolidation.py": "d31196d12c67a26c476ae6e75c731f5c9cc0d1ce05b84d061142102ec1f05f45",
+    "mewcode/memory/instructions.py": "3085f99c137b5105733be120cabefc0a859fcb9c9de400088ce3d2ca66d45a55",
+    "mewcode/memory/recall.py": "4830e291e0aed2ffadfd4ec7d54198975044ae86041d62eee0ee996b12fdb7bd",
+    "mewcode/memory/session.py": "29680ac533fe7a8c2591669e8863b67f3a856d543890df5224f36c541e7c9b0c",
+    "mewcode/permission_dialog.py": "0706ecbf9ced45363e0f75b7aff86b22382849db5056e8eb558c51ecfa7e5613",
+    "mewcode/permissions/__init__.py": "4ba4fce645a7b225cc349bb15c785282b238d2f7a5f0e6b21d2c0df67dd6ed0b",
+    "mewcode/permissions/checker.py": "32b698174e874914fc3c3e0ce4c8fb729843ae69db1f52ba4bc6deb577591b0f",
+    "mewcode/permissions/dangerous.py": "6de120e749f1aaa3ea12fe657891c0b2bf944d26e5de33bdefecbd0bf6443d95",
+    "mewcode/permissions/modes.py": "524406d0e2ba8f78f863296fd59adb5edd6c955e36525672a488a50a7dceac28",
+    "mewcode/permissions/rules.py": "fa771a335a6855f858e06ceab725b6306db7f08f795e65e89c84dbc336051b90",
+    "mewcode/permissions/sandbox.py": "b5661c78e3571d33e12ef1de533614f4a2bcb759d2a69ab1ca71010cd4c4a3d1",
+    "mewcode/plan_dialog.py": "2cd62b557ce95613e2642244402d306ab468b8b2e4a5af01e23d95281094a302",
+    "mewcode/prompts.py": "e10cc0b31e3fc6d86ce31e05aa5bf4897f9896345df3d69fa88a09938c64386c",
+    "mewcode/remote.py": "07bb247cdacd9c16d62e4b535e18baf302677ccd35ce382e4fdb70534bc59180",
+    "mewcode/sandbox/__init__.py": "9c0bf0e02715611a81618dd68d1c2cc62e8426e912bf3d87b56371cc3ddb70c8",
+    "mewcode/sandbox/bwrap.py": "dc1f5cf9fb40dbfaa720936e413d5b0c76cd22c622f24605d96e960c70e6da66",
+    "mewcode/sandbox/seatbelt.py": "01f0195cb029c81f84cd1a5faab56bfd5ddfc0af59341911d926baa942006752",
+    "mewcode/serialization.py": "d7c115e1a966a35dbfd38d1ba74adbd7438df9f281b96673949f443761ea1edc",
+    "mewcode/session_dialog.py": "f0e7f8d2b6421548a478885a0ea1437f8f413e6a84483f10b3cd315a149d8353",
+    "mewcode/skills/__init__.py": "e3dd72fd2125adeff487dffa4556581e34ad069f2b94224b24df91a6832b12c5",
+    "mewcode/skills/builtins/__init__.py": "912b03d585da1e8fa109dc2773d2ef81879503771b988d8a0f50f090d2ea7ed6",
+    "mewcode/skills/executor.py": "adf85d6eca7a44ffe3904bf8adc8f20b3e415aa22ffc46b31f4f8a71680624f4",
+    "mewcode/skills/install.py": "68dc8a2c700ed11de2f3ff99511976e43df17f0034b85c5bf7fce9927d7690e1",
+    "mewcode/skills/loader.py": "18c16e6c623d7b47d5a94608f1bc50510f18e5ebcd2b31200eb353c2842d60c4",
+    "mewcode/skills/parser.py": "37c972df838a624d19ff8e50d5a5e46b00bbb53164d49684f25616c5a5be283e",
+    "mewcode/teammate_tree.py": "744b0ffdd0ed84385e2b3e5732cdafc1c384f9ee57f8f424e39c9ea30543b940",
+    "mewcode/teams/__init__.py": "0fbc8c2d541304b512cb416ee347980280dc5b88688f0461e9ac6a13100d3517",
+    "mewcode/teams/backend_detect.py": "51d1341b6b2ea87bb1b7337751403245cc26436605695f5dc9d10429fe1f51e0",
+    "mewcode/teams/coordinator.py": "9b76858fc95a708288c9d5be75300e0405c85f935d5c3c78bb82a095f797c8fc",
+    "mewcode/teams/mailbox.py": "3d3cfc58e902997c9ac5b51b446c28199e765637b4120a5f9257f551a54d1055",
+    "mewcode/teams/manager.py": "0e9202ac5543d7bab700dfa5a43ef16cd11844a3d2cf8e52d9bc36f0705ace5c",
+    "mewcode/teams/models.py": "e485167560adbb476d5c4212922be1606480917d99773d00ab1dccadfdbad710",
+    "mewcode/teams/progress.py": "3fd0b2adf15690dff0273015558f787226c4d14bdb0167b521923531ff55cd3e",
+    "mewcode/teams/protocol.py": "d31d34e359133ef900318896601cb066fbf7846e5b7d07b983ef1b40ef375b45",
+    "mewcode/teams/registry.py": "81e4030eaa09b8961409072e466c2866b11eb1caf06f1295c721bbc1acb353e7",
+    "mewcode/teams/shared_task.py": "0bbab37fefc2c23ee53a98f086444e30eb597396acae72b694b6c60134724c26",
+    "mewcode/teams/spawn.py": "2525c2e2ef39a1fe78acf545ea8c743b36bf5b2534f6a0b628cc1c1ca909d5d6",
+    "mewcode/teams/spawn_inprocess.py": "a503f586d4efe8aed81b819affa0eaa2ac76db3c9fe6670e174335c19328dbeb",
+    "mewcode/teams/spawn_iterm2.py": "bda63435eb3780e530b3650aedec7eaf48c8bdd94912293c29aa9cd804a0f66f",
+    "mewcode/teams/spawn_tmux.py": "4e0082d43b5c8a83be4da0eaa7b12c480d0547979b8cd6963266791af70b2b22",
+    "mewcode/teams/transcript.py": "98fe1d12ad09a19cb35c88ab7d0e35ef3832e791ac15096eadf64137742838dd",
+    "mewcode/tools/__init__.py": "e09ea8a93a6a6520adf5a9be0b9c56e43daaf3dee8edb2ba7c14e35292b4f25c",
+    "mewcode/tools/agent_tool.py": "c8b3a0df8aae97d1624bfe7cede4e246f5a40cd005105172d7cd141db81d0645",
+    "mewcode/tools/ask_user.py": "fc3bbb851597308890da4cf2a62a0feff5a1662fd9c4b35d8d9a5abfe171c6c9",
+    "mewcode/tools/base.py": "bdee1b481f2eebfea6105bf48a34dcdd85ad8668edf15722b25d6430dbd4d94c",
+    "mewcode/tools/bash.py": "ca668fd333de05caaad10adef447dabeb12edcaeb0cee96b5a51bf69d155ee42",
+    "mewcode/tools/diff.py": "657b865fc735441c031508139f8a1d06272f9acb8c7017ee3358543ab829f6e7",
+    "mewcode/tools/edit_file.py": "4db4571b556c0f06340b1ad185356b98a2eb939ecdbddbae64f0ad51992bd5b3",
+    "mewcode/tools/enter_worktree.py": "d099ece2784af5f843ec4d8ce47f967b99125838baf267a06cace47258a5e67e",
+    "mewcode/tools/exit_plan_mode.py": "754375d9f9710fca1b799c96045edf6dc7b76dd719bb160d2663ed8e5c5b2aa4",
+    "mewcode/tools/exit_worktree.py": "2e4031c3023115d94b3a72c5501f5c39dc2930fe8950ea34cf60d1af6dd51950",
+    "mewcode/tools/file_state_cache.py": "60d62c35962146b0d6948fe8f0cc6a298e4d3edb4f1fb5dd04c6e790eef3da3e",
+    "mewcode/tools/glob.py": "1c0aa84b336d976dc2b4b0c8d43fee53174f2abfa73e05ac25522baa833c5733",
+    "mewcode/tools/grep.py": "5407a428025edbff6d48ce4dfad82c71787fcf122fb924c21c318a5675fec228",
+    "mewcode/tools/impl/__init__.py": "912b03d585da1e8fa109dc2773d2ef81879503771b988d8a0f50f090d2ea7ed6",
+    "mewcode/tools/impl/tool_search.py": "bb8067906c5624a13e9acaf4270af9d3fb2a7b4cc31b7029d505d70751af9874",
+    "mewcode/tools/install_skill.py": "f79f76e8243f57c67df761d57cc5a0efda969bee199319042cf8892b24dc4a9f",
+    "mewcode/tools/load_skill.py": "a4a357fe20ea72113be59203577d0f4066415b0ba132154bd33dd1dfcb081134",
+    "mewcode/tools/mcp_call.py": "d9bd56b93d2099cb087c1113aae640359a76f993764085ca12564212bddf96ad",
+    "mewcode/tools/read_file.py": "18fd656ba78698782a1dd483513cc26372e81e53e811ab6b60616bcf1e501417",
+    "mewcode/tools/send_message.py": "f69b3421b3ccea2541a2cd8e0f89cec92bdd94d0198cb1874ea20933895d8377",
+    "mewcode/tools/synthetic_output.py": "0ab19384b4fc61d5f9e04634343281a69df4d4ccde04f9c75b0954f2605fabd4",
+    "mewcode/tools/task_create.py": "95d37b386b289f5e9d7e014ec091d9bfb4503c688f7fe2674f96e9b2a0459276",
+    "mewcode/tools/task_get.py": "7f897811a516511bbde82b7981af6f94fdff1ba0b7ee4df756177d30d20f1f0f",
+    "mewcode/tools/task_list.py": "fa3b3014d26f95a100b27bb220c787f93405cdd7d70fd856f6b110c017a9913f",
+    "mewcode/tools/task_stop.py": "71345ae91196be6c9ee8dcc75f41793c0c21b776668d8f5451fcb67f69fe7f50",
+    "mewcode/tools/task_update.py": "f7337199668ca8f66a0a4179cb863f33b2d68a458907d3e104aab44cfef553f9",
+    "mewcode/tools/team_create.py": "0d302466137c1ef614b30132c5258f3ddcd01b098e2535f66eb89b84e28be82a",
+    "mewcode/tools/team_delete.py": "46489876875313cadaac7cd5aa89cb56f870aa55ca7fac8e1339339c32488236",
+    "mewcode/tools/write_file.py": "30c267ba4359f537db11f7e5480cfc6912ddbd49836172a03a6c5b16388f8bdb",
+    "mewcode/validator.py": "6eb5092c1b848d497004be6c282bd0e7d75d76e385767d20ca7c8f994c701354",
+    "mewcode/web_content.py": "48f68a8fe57ac85f3c42734ea1849c1e6b96eb44903c1ffcd308ddb7e9ba4eba",
+    "mewcode/worktree/__init__.py": "3a585e9cdc8bb6cc49ee9295389dee68a739b3c4802dfc5691a2a98ab470d364",
+    "mewcode/worktree/changes.py": "c6fb2558390f33730f600d9da23dbdb32d2680658271ea03d67cf5368529e1d4",
+    "mewcode/worktree/cleanup.py": "682639b1b2e5cd2cbb0e589858ea91aa4ae03a0cd7114ce4b1376728039cf2d2",
+    "mewcode/worktree/integration.py": "e591873be8edd05b148f98692407968eb39c721d7156092c15d698692751c88e",
+    "mewcode/worktree/manager.py": "e2d174439a5a6674fcfe7114d7dd197908a35f0db8ddf09f3a6be89c9a0f72d7",
+    "mewcode/worktree/models.py": "96ae44187b0f16061909feddaebe31a3accbb9cf3f1e9d1abfce82adab9a5eff",
+    "mewcode/worktree/session.py": "8394b33e4427374ef1d46fd5a20bac85d8a6b20eeb7b00b897a5911e8f0cd706",
+    "mewcode/worktree/setup.py": "220d3d72283334ad7d68a28734a0b207ca395b88fa3c66b8b24496efcf8f7bd6",
+    "mewcode/worktree/slug.py": "bad85f5d429d23a8355b113d324964fc0f8d18f71a4004cc9eecc68ab1957fa5",
+    "pyproject.toml": "fdba79bfbcdf0fc7590b9f71481c80612b20100ed7bd1c4c7afaff9f7fd38218",
+    "Setup-MUSE.ps1": "e8c1a72c4e1ed6c3dd380a1c98abb77d8b82c7c4b4012ff887a5a2c0a7323b18",
+    "src/muse/__init__.py": "01e21dfa8f0d1de1ce8c9d268f68da65b816275f6985f14d489fc73167de11f3",
+    "src/muse/__main__.py": "8f0c7c37a9356c2cf15446e3949882fa7f5b2db8aa0ac49709d7c66bdf2b8c12",
+    "src/muse/agent/__init__.py": "3f1b397a907cbba124303023a9650c247c75eba1eddda832418b576661fb2617",
+    "src/muse/agent/context.py": "c1007011f6e67130eea5b8642c1bde0f13d323a514979a86ffa3e0f72ebfe789",
+    "src/muse/agent/instructions.py": "8241b2681cc85cc99981d52168221450b5f415b8c41cacd40bcf608d2ebade4e",
+    "src/muse/agent/loop.py": "b0bfe82464c7701ea8ce600b17192d7c42e6cd6a1f43f938274205a6cce56e89",
+    "src/muse/artifacts/__init__.py": "4f55fc60a747293e4c24ada47aa1cc4763799780ea1d27fb81440f4329e15b84",
+    "src/muse/artifacts/service.py": "30ad6b0a24c395fddf27c9c91a29c9b3e4a24b6bd3350df213e08778d7f8ecd5",
+    "src/muse/cli.py": "4d29f41c4fb6329fa7573bf1a5e3ed34c4dcc45a5dbcb5dce63760eb72b5d3bc",
+    "src/muse/compat_cli.py": "d5b1f46b41194713f720964a1ebc6128542f1e950f906fd7de47f1920895f2e2",
+    "src/muse/config.py": "f7aab5297f892c627546dd851ef920200b7072a6bc518394f854953a59e2b61c",
+    "src/muse/contracts.py": "97ef5307985b932aaac6a87483ebe88a4a5fc578c2f7df6ef5d22c841ba8ad3a",
+    "src/muse/extensions/__init__.py": "c71041b2a88e89160152cfdfa54dff10776fdd86429e2af182dc74949ec3b597",
+    "src/muse/extensions/hooks.py": "7c885c854e9f50dcf32ca83e8caa7246aa768d4ae46a5d8fef43057f31f1709d",
+    "src/muse/extensions/mcp.py": "0e4d48acbffd8cfe7beaf2dc7f5cc6cd39ea76c78717425c9a08ec2c29406046",
+    "src/muse/extensions/memory.py": "09986489a2018bbf4fbb40a5129a7aa6f201a25ff22c0fae7d1bc80e19ad3e04",
+    "src/muse/extensions/roles.py": "4c3eb1ef9b6ef102dfa504fcb5389fc0f13a10246a5419ec68e1d9413aad9717",
+    "src/muse/extensions/skill_install.py": "f0ace480a08e28cca880002236d71872bb50c5cc2be14edb5a27d5d1695d069d",
+    "src/muse/extensions/skills.py": "e9b6caaf036b998dab7017139029ed9ead9e894b0420eb6a60c76b65112e82a5",
+    "src/muse/extensions/stdio.py": "14e9b7eae6f841ffb6bfde045e7084ed95af767e3895d08d6cd717f8d39f36fb",
+    "src/muse/extensions/teams.py": "154cc2b4abe60e1a634a59c88834c66cf56db79eb63c6bf9ab5c663c08aaa946",
+    "src/muse/extensions/worktrees.py": "8e70a792b3ce0ccdde25fc2e2b128c8ed88f2b3fc00e3c6ca6b1fe1fc79b7d13",
+    "src/muse/main.py": "1064facbd09c1ef6635fba5e05cf4dbc166fec7e2706427d473ef978651c24a1",
+    "src/muse/memory/__init__.py": "ae1cb7a66c081d6a6b5cfdb5104844cbae8a4e09fa8dfc6cd6355dbf7c0243f0",
+    "src/muse/memory/importer.py": "073afa1379a60a1c5e8147eae1815eaa22774a781b475f6547481ca51ccb00e9",
+    "src/muse/memory/service.py": "3500625291a65e12765c14b50e2e09272d28bc1e4fbe75b5b86a17938da3b57a",
+    "src/muse/openapi_types.py": "60be4d5548a093c7da59c2d2f7d61cdec78a03cf93121c27e53cbea6a331a141",
+    "src/muse/permissions/__init__.py": "a263a7a115ab4dfc66003b3e0ecaa256a520ec12d73e8cb68747dd62396270a9",
+    "src/muse/permissions/policy.py": "08af9d0c4044adbc1932ea4e12e0cb70ef84aa96e719e0bc611f565d59dc8114",
+    "src/muse/permissions/secrets.py": "386b5555d4d99aa82d6c3b5d4d0656f0f5c0d01a5fb40e09245386fc5d9d5a7f",
+    "src/muse/providers/__init__.py": "478da17f4331b7649395e2925401ca013caf3f10b6fcc5d286f1f480832fc12a",
+    "src/muse/providers/anthropic.py": "dfb3de3edd2784c28b3b83dccd78a01d31404332c387cbba9f5a7f29e8188322",
+    "src/muse/providers/base.py": "68b559bbfece771df45d8c217d843f2b36d18ad11a3137df32dfacf524bae410",
+    "src/muse/providers/compatible.py": "ec042ba64502c81fd37c0a2d6600e25989c6a3874c67a2aa4c43f71b78f80236",
+    "src/muse/public_contracts.py": "4ab26696b49d33d453849cc41704d97a62b68f1a941fffb4636943365c3c65b7",
+    "src/muse/storage/__init__.py": "3bd8a7c88e874762b7f4655ea1fbcc6e2ca29ecc8f9a5cd84b3c3c25b1647a11",
+    "src/muse/storage/backup.py": "fe709d801ddc1b59b57f687f66bbe1eea3e47d584173459dd847dcb5dcb58e94",
+    "src/muse/storage/database.py": "98c3e34d05f5da661113d05f8db8513b393876366a3a5f47da030d00e72e7338",
+    "src/muse/tasks/__init__.py": "91873faad1e8feb7125ca0959987c2fc0db1fe5922ecf5817c1a9e96282dd785",
+    "src/muse/tasks/conversation.py": "3a11fd0b1e86e987dce9d1c5eedc73d0d03f5c77c80bbd3ecbdb305f5de5730a",
+    "src/muse/tasks/delegation.py": "7422ec891ab661e2809efda1de16c127d823c7779346915dbfc509b6ae522b45",
+    "src/muse/tasks/repository.py": "d8fd817b41e60139a45ea32d8bd3adf50a8e369748e9ec6b2286e01b189ab307",
+    "src/muse/tasks/teams.py": "227cecffce2092296dade3264b75478fc0728001d83df519269f0234b8c5bbb8",
+    "src/muse/tasks/worker.py": "bdf9c4baec898d4228b443b64dad172578e9b1b770afa2e1370e2fac92913393",
+    "src/muse/terminal.py": "64858716025548168d77dd749fa27060053b32a6bd1c505318fe65a43337a18b",
+    "src/muse/tools/__init__.py": "e2a3f59e2e68c8af7204e1237d37721871ef4bcc3297ad7632c00c73f781f316",
+    "src/muse/tools/browser.py": "5f820ec61add947ad4a7cef766371c81bd080468a298986f379d5816bf8f0805",
+    "src/muse/tools/context.py": "07230cde63bec340ff1997d15e0497a73a7c9f0612cdb4a6daa79362dd2a6bc1",
+    "src/muse/tools/documents.py": "3bfe44a648c6a4d9fff5fca515c912d672765ea91c4c02aae24582b13c4ba574",
+    "src/muse/tools/files.py": "dc62e9d6dfbeea856ac8fde5ff29b128c3aada8b3f5aa60317a3b1c3e9bd8a2d",
+    "src/muse/tools/process_tree.py": "c79e9ce398710ddcd6eb35ae5bb8f46475c0a32214d2b6dfa15592bd657adb5f",
+    "src/muse/tools/registry.py": "d5a604c55a448d06587d0d37036335f4f4d332e2d76eca472626c22cc26cc529",
+    "src/muse/tools/shell.py": "bd4aee49204bd2c4f13122405f2428ed0c09a94501d86c7cb5aad1a969def821",
+    "src/muse/tools/verification.py": "61fd655f123c3c721a4342a6fccb603a6c0ed587450118ef16c57908cf4252a4",
+    "src/muse/tui.py": "ba68901611b2441821b1190000e012d67ec33f5f0dad5342d56aacb4dba07c2e",
+    "Start-MUSE.ps1": "9cb1fb343203dd4c8e688373ce6c3e7f027c51bd3be8bb8fa92ab2826e4b3cda",
+    "Stop-MUSE.ps1": "cd33da47bdde99ea33f075b6156ff75d0cd2d60a52c4d6f71bb1f04ad854c69b",
+    "tests/conftest.py": "0fa01230cd1543e02322e8162e87dee049acbe762eed1239fbf0580458b1758a",
+    "tests/muse/helpers/crash_state.py": "e9be0287c423affba983bd8efea754af9eaf93df7c3df7c168246e9d60dc2193",
+    "tests/muse/integration/test_api_contract.py": "7986d9be285decb81149469d80bf832afe04cb71991cf682b4c7abfb28887b39",
+    "tests/muse/integration/test_artifacts_documents_memory.py": "888b0fa86517a63bb9e617761dd0dc8fa9313eed0bbd3c9b47153571f5fd6f00",
+    "tests/muse/integration/test_crash_process.py": "366a54d92a86df3988083c9a20e0d209688c477c38b6a4333f9fe7696c43d5b6",
+    "tests/muse/integration/test_frontend.py": "069b68dec76cff64ee7ca12e86307973a60e33583b62711c42413465b23b0824",
+    "tests/muse/integration/test_generated_contracts.py": "7df9b4b52fba1fecfe8684205578e6fea70486e45f63741300d2f642bc0a9358",
+    "tests/muse/integration/test_install_and_storage.py": "076c80e4c191c28b618fe83d400cca32755cc7efb4b55eca66207e30e6d315cb",
+    "tests/muse/integration/test_launcher.py": "05757c5d97f954f20459f9069bf56b821fd4ca4f663d267becbc5eba8ac90cb1",
+    "tests/muse/integration/test_migration.py": "3d590466b67203db190d689cd6359befcf8e15fc37703503b7a82512d9c4414f",
+    "tests/muse/integration/test_reconciliation.py": "ed3b2066fa8f31e4acccc5529e584ab04336b98c0b087ad2babca282cdb128d4",
+    "tests/muse/integration/test_recovery.py": "7cbfe6b85d1ba3a4b4725919a9192e3e2070adba9ea3dd41eee5c3716acf06fd",
+    "tests/muse/integration/test_research_flow.py": "59a40537c838d6accb4a526416fcdbc552a93206f80c86b5fd4f373fba2af40c",
+    "tests/muse/integration/test_review_regressions.py": "dec654675936124d0c423962a13e30edf7d77eeb8a50ab8267972d0733e5236f",
+    "tests/muse/integration/test_shell_runtime.py": "6520724188f553e6f1f5c3cd9df64323ca40abe51ba19d2ab0c12f9ab5f973f1",
+    "tests/muse/integration/test_task_lifecycle.py": "420df8cf08eea1fe72f9a07ba47286c8f701bd415a078a74aad7c27dd24d5e86",
+    "tests/muse/integration/test_workspace_tools.py": "ca2349a6b6e386b297009fdb8180fb3ad3bb36e8af27b05ae4e276d7b8cdf1d2",
+    "tests/muse/unit/test_agent_completion.py": "206376670fb3a2435937dddc292be6d8da9c7d2e0a908dab93fda36c972299ba",
+    "tests/muse/unit/test_agent_loop.py": "e8987fc54aef3f23e8ef85ba43ed5eb1126eebe7993feea827c778242b631510",
+    "tests/muse/unit/test_benchmark_output.py": "45d33c06f3e21c1d24808a7695638361a6c38533057f026269bd1ebf87f73e37",
+    "tests/muse/unit/test_benchmark_quality.py": "0e1fd08ff7c83f5c78fa28ea56bc48d978f035de661e2b0d29980edcf52e4b25",
+    "tests/muse/unit/test_browser_policy.py": "12dc406d1d6cee6a98b2a19c1f68d697236887ec50c35d280ab2731dae910166",
+    "tests/muse/unit/test_config.py": "d6d14b7804562c3a921190ea6889edc9870b1c14de907a09307a314a79564883",
+    "tests/muse/unit/test_context.py": "b760c50c9686f0f0a5e2a62d0508353174f1078341f1b0c2484591c9076ac168",
+    "tests/muse/unit/test_permissions.py": "73c78605a3fc88a2d1fc214244f1bfb24e17daf15c2202721194742c1d77add4",
+    "tests/muse/unit/test_provider_stream.py": "4ebd02d0f02f995cf53c43ce16dd206bf2dae3138025d7e703bd5a7bf98dbb9e",
+    "tests/muse/unit/test_release_benchmarks.py": "38d5eb0c040d09ce889d0d7830962298cce7b5ecb67fcf8686d7ac0b10e128ce",
+    "tests/muse/unit/test_release_identity.py": "8d65b36cc83aeab560ce32feb6b12fcb6de71d7b646f6489ff516815ba36b959",
+    "tests/muse/unit/test_schema_composition.py": "bd0c3933ad35baeee1beed28d8bbeede0efa4735244a4ed70138b80b1f35290a",
+    "tests/test_active_group_budget.py": "90fcf52e6f8c8ed199a0d60d94611607c58790e1a17d69b4fb3cb4de4ba14c17",
+    "tests/test_agent.py": "5bb9ee8ebae461117232086272b3c85ccf62bd44cd947e3ad418132c1dfa8046",
+    "tests/test_async_hook_job.py": "3d86428fbaa659cce8753efee31bcae5f1ed72ddd034cb3cb10d0cee61e65107",
+    "tests/test_baseline_config_protection.py": "68a81e8b4a7848d2efdc8529368f5e0e4289e2aee1e5d3943c5abc0c85455142",
+    "tests/test_clear.py": "e569157f1e8f65fc08790b3bc3b503b0fc9df89f4b8b590a8d4dc0916d685724",
+    "tests/test_commands.py": "82acf125e8bf812bd6f69b933727f5baacb10c129bbb8e0bbcdfe990d522bf8f",
+    "tests/test_compat_entry.py": "2185782eeac750925cdd8ffed2c81d2a706d5e382cec28f8307928e0d3d7edd3",
+    "tests/test_consolidation.py": "1d5a396045ecbd0eb81dc90bba5200b13216e29e971dc8f017129d549592f18a",
+    "tests/test_context.py": "23f7407a01e210c6288abd02d811534fa1ebc1ccf325602bf15e2120e2aeba14",
+    "tests/test_context_window.py": "060b88f7ecb3768bdb99ab35542bfc9899fdfd86f20663127199aa30231dd695",
+    "tests/test_conversation_checkpoints.py": "77ac98e110fb63737ddb4817400fa42c1b233e7780652a65c56eb62673b50d9d",
+    "tests/test_conversation_pairing.py": "222fdfc892c0beb06babb484932042add21277c7390b876b23d7d17c5a3e5c50",
+    "tests/test_coordinator_multi_team.py": "e7aa267da8301f0b32830778c3c78754d91ee27fd53f80101ab7084d8c21fae2",
+    "tests/test_diff.py": "8078fe8340fe0ac3a030a628a7b07d75b1f96fb77410f2c8ec891d2fd75ea7fa",
+    "tests/test_distribution_integration.py": "8282134b434239e500287261f548945ec65423b9a10a52d6c62523008d527b87",
+    "tests/test_durable_anthropic.py": "0c8d22440fead64d65e9d54b24195430ac5612ff30bd50cbc1c31329b0f3b9c6",
+    "tests/test_durable_delegation.py": "b191a4c1f7bf013973ecd45e781bb2b1fa6c068b7f145efcdcd4511271c7cd49",
+    "tests/test_durable_hooks.py": "5e529d5d5f64dac223148af467452ee6d38f883093b7a68ca848f510519584bd",
+    "tests/test_durable_mcp.py": "fd65dc146c761183173862a635970be09bbdbeb1887d5377fd7ea0d956584f17",
+    "tests/test_durable_memory_tools.py": "2b628cc7ffe03d4a3381177275e8c254fbc465ea08361015c2d115e366978dbd",
+    "tests/test_durable_roles.py": "b3314c7903b64fad2697895baec0544b98c5cb994178d9c0fcedd9ecc96ec212",
+    "tests/test_durable_skills.py": "5d88ca5c1f11bacb6049925e0958bad4fd2b8979d9e64871c6924ba12d201cf6",
+    "tests/test_durable_teams.py": "30e8cbf1a7c22bd2b35a8aae8e20c0a3285bf17e46e52d528e18ce2935947572",
+    "tests/test_durable_tui.py": "30bd0fdd7d86b5e235eed98401be5b4c02960014d1ceadfcf6d9851e2933486c",
+    "tests/test_durable_worktrees.py": "9ebca8d418c85462d8678f586772da9dbd582ff822f942fd20b7f40611719213",
+    "tests/test_edit_file.py": "0af2ad0693381968960314bf660e2a5eca461b6fc117b8442c026b4ce532de03",
+    "tests/test_extension_receipts.py": "afab9173143452164ec35395854eb87fd1702c18eb267a4ffb29d4ec33acfaed",
+    "tests/test_extension_redaction.py": "cffa96b5dee026dd8ff04253ff26db809883f037c4b11f6d863bc310d709d3b3",
+    "tests/test_external_reconciliation.py": "991011dc4bc9b503e46dde5f85ac133716859f8c9bb221b4423b1cab15818899",
+    "tests/test_hello_world.py": "dde20eb73159e294e4190766a5da7f53d96682da3c675d5c868428e828b746e1",
+    "tests/test_hook_lifecycle.py": "82fae5b80b9fde97fbc46d5d5414b25c60df3a1ffdf2a6416dea6f3013009aa8",
+    "tests/test_hooks.py": "55616a9a632c9354a0133e143fae31495701598c521c46bd85a09ef48a3f7081",
+    "tests/test_legacy_hook_shutdown.py": "fbf0d179185cdc5ade9b2530f7175282818043c107a5c0861f56b0402ade29bf",
+    "tests/test_mcp.py": "f13d484f0796e25b43f00db1f2a851da0b7073bb1f9a3d2191b6d831199ada2e",
+    "tests/test_mcp_call.py": "b38c54ac9261336301bc1cded7cbd35e36d8ba4986618148db336c682f340d4e",
+    "tests/test_mcp_http_integration.py": "41007f00711a9b0036466e9ec1aac9734565cd4991941b05b843de3b26071982",
+    "tests/test_mcp_pagination.py": "71a9aaede012dea7946a29b65e83553f23aa589723bb8c0ac256b2563c28807a",
+    "tests/test_mcp_transport_safety.py": "87d69bfd905e62677ebfc78adde9655c9c7db2e7c8b943d8dfffc3458a4fd489",
+    "tests/test_memory.py": "815074863b382e2252b058a5c7284eb2586e43f6d3d767b6b4a352cbaada5a50",
+    "tests/test_migration_retention_loading.py": "dd466153e2c9617a2d1fb44499b7a55915d0ee9fce763d105e880a5c4eebc692",
+    "tests/test_mutation_verification.py": "407719aecb563c0c34440cd4032e0444c7cc1b3ac277e03c187a2f8200403992",
+    "tests/test_permissions.py": "1496684571bcfb2aeeef96d0133d146f404b812285dc9e362be842d2ddb2312b",
+    "tests/test_project_guidance.py": "21797ae1377b68384e2981f81b83ff029b6ee63457340ed3f7f68adaea3d950d",
+    "tests/test_prompt_event_pages.py": "df91eaaee18f1d8248cc5619f9f9c819d64cefff76e372b0706c2563147c0ecf",
+    "tests/test_recovery.py": "d5457b2c2fdf95cb073de9543843ffc922ff1c1e6f1e7c50fa498dbd48270f06",
+    "tests/test_review_regressions.py": "51fb4ffd0cff4de6685daeaa5619d88f59bdc9303af186c406458fbf1946627e",
+    "tests/test_serialization.py": "e85295cbb5a38c98fdf1d5096dc9d6b840f653222030a1acf48befd2706257b0",
+    "tests/test_shell_lifecycle.py": "6b4ae0d4d80b7610bffadb5c26562be3ae09ba5ec458259dd27bd92f302b41c2",
+    "tests/test_skill_install.py": "536f7c5464272aef5ab44e4912dd31a1476111999ef8ecba8c4b714ecf3113aa",
+    "tests/test_skills.py": "7c7f281a6543e8cd65e96a7ff6b2bf7904f6d8fe80e11f58ba1015740942b28d",
+    "tests/test_starcode_provider.py": "ef967c8630eefefd614b1e3300d7b5059deac402d517bdebbf4ff4f23cd604eb",
+    "tests/test_state_backup.py": "67223e18c182bdebd4a2824f10b9051ba3e5da8e72d8b3a639c3403516ea3ecc",
+    "tests/test_subagent.py": "4039e4af1b7d60bd4f5763acb807cb503e236a78a3a02d93b57d6ee2f0909748",
+    "tests/test_team_board.py": "8b1d7a5ab9bc0c944295b8eff7756eb62e43333e8429ef63b6c74f8d32169b28",
+    "tests/test_team_protocol.py": "007f0ad6cec45ffe70e8f9747b684c1e17c7fd95f10926c03a369fb42fad457f",
+    "tests/test_teammate_registry.py": "056d36af2feae0ddb5532665da19c95ce14386e8018da1e3348b6bc5da05724a",
+    "tests/test_teams.py": "e2ca9c17d034c299c3ebe91f77fcfd61bdf09c3631d2332b80f2fb9d216fbb8f",
+    "tests/test_terminal_context.py": "22581aed4bcf40e6a6342e5469189ab47194b3a4132a7745eb7e17ee9dca42e0",
+    "tests/test_terminal_service.py": "aedab7e24fee02fc8304ad2ec8ea050d6e923187374c8d76d20680c9b4064312",
+    "tests/test_tool_call_block.py": "97be026b8451c015061804d1b70d0b913263dced4a5fbc7d3b2429466d21de17",
+    "tests/test_tool_search.py": "742f3a22fc3e119419d22c479c4add4733b67498a28d16cadf552e407f7a2768",
+    "tests/test_toolresult_wiring.py": "8cf47bf1447daac774886885de71a381adab08af486c4d23fb46a36efbb4516a",
+    "tests/test_worktree.py": "3dfcabda3df44300c85f69688465fd45237db078345ecaa701cf5e19225fa6c8",
+    "tests/test_worktree_lifecycle.py": "9382a6dcca0b908a4fa14edd33f4eaf4ac58e48e1d8de5abd595ae6196f37d7a",
+    "tests/verify_subagent.py": "2908e7b15fa6d455d469eb060f6804daefca2faf721bc4dc89fc0137647377f9",
+    "uv.lock": "63427185279a3ec2a126dac6b82ee809c965aaceec885f0c9882032039870b09"
+  },
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.22631-SP0",
+  "dependencies": [
+    [
+      "PyJWT",
+      "2.12.1"
+    ],
+    [
+      "PyYAML",
+      "6.0.3"
+    ],
+    [
+      "Pygments",
+      "2.20.0"
+    ],
+    [
+      "SQLAlchemy",
+      "2.1.1"
+    ],
+    [
+      "annotated-doc",
+      "0.0.5"
+    ],
+    [
+      "annotated-types",
+      "0.7.0"
+    ],
+    [
+      "anthropic",
+      "0.98.1"
+    ],
+    [
+      "anyio",
+      "4.13.0"
+    ],
+    [
+      "attrs",
+      "26.1.0"
+    ],
+    [
+      "beautifulsoup4",
+      "4.15.0"
+    ],
+    [
+      "certifi",
+      "2026.4.22"
+    ],
+    [
+      "cffi",
+      "2.0.0"
+    ],
+    [
+      "charset-normalizer",
+      "3.5.1"
+    ],
+    [
+      "click",
+      "8.3.3"
+    ],
+    [
+      "colorama",
+      "0.4.6"
+    ],
+    [
+      "cryptography",
+      "48.0.0"
+    ],
+    [
+      "distro",
+      "1.9.0"
+    ],
+    [
+      "docstring_parser",
+      "0.18.0"
+    ],
+    [
+      "fastapi",
+      "0.141.1"
+    ],
+    [
+      "greenlet",
+      "3.5.6"
+    ],
+    [
+      "h11",
+      "0.16.0"
+    ],
+    [
+      "httpcore",
+      "1.0.9"
+    ],
+    [
+      "httpx",
+      "0.28.1"
+    ],
+    [
+      "httpx-sse",
+      "0.4.3"
+    ],
+    [
+      "idna",
+      "3.13"
+    ],
+    [
+      "iniconfig",
+      "2.3.0"
+    ],
+    [
+      "jiter",
+      "0.14.0"
+    ],
+    [
+      "jsonschema",
+      "4.26.0"
+    ],
+    [
+      "jsonschema-specifications",
+      "2025.9.1"
+    ],
+    [
+      "linkify-it-py",
+      "2.1.0"
+    ],
+    [
+      "markdown-it-py",
+      "4.0.0"
+    ],
+    [
+      "mcp",
+      "1.27.0"
+    ],
+    [
+      "mdit-py-plugins",
+      "0.5.0"
+    ],
+    [
+      "mdurl",
+      "0.1.2"
+    ],
+    [
+      "muse-personal-agent",
+      "0.3.0rc4"
+    ],
+    [
+      "openai",
+      "2.34.0"
+    ],
+    [
+      "packaging",
+      "26.2"
+    ],
+    [
+      "pillow",
+      "12.3.0"
+    ],
+    [
+      "platformdirs",
+      "4.9.6"
+    ],
+    [
+      "playwright",
+      "1.63.0"
+    ],
+    [
+      "pluggy",
+      "1.6.0"
+    ],
+    [
+      "psutil",
+      "7.2.2"
+    ],
+    [
+      "pycparser",
+      "3.0"
+    ],
+    [
+      "pydantic",
+      "2.13.3"
+    ],
+    [
+      "pydantic-settings",
+      "2.14.0"
+    ],
+    [
+      "pydantic_core",
+      "2.46.3"
+    ],
+    [
+      "pyee",
+      "13.0.1"
+    ],
+    [
+      "pypdf",
+      "6.19.0"
+    ],
+    [
+      "pytest",
+      "9.0.3"
+    ],
+    [
+      "pytest-asyncio",
+      "1.3.0"
+    ],
+    [
+      "python-dotenv",
+      "1.2.2"
+    ],
+    [
+      "python-multipart",
+      "0.0.27"
+    ],
+    [
+      "pywin32",
+      "311"
+    ],
+    [
+      "referencing",
+      "0.37.0"
+    ],
+    [
+      "regex",
+      "2026.9.10"
+    ],
+    [
+      "reportlab",
+      "4.5.1"
+    ],
+    [
+      "requests",
+      "2.34.2"
+    ],
+    [
+      "rich",
+      "15.0.0"
+    ],
+    [
+      "rpds-py",
+      "0.30.0"
+    ],
+    [
+      "ruff",
+      "0.16.9"
+    ],
+    [
+      "sniffio",
+      "1.3.1"
+    ],
+    [
+      "socksio",
+      "1.0.0"
+    ],
+    [
+      "soupsieve",
+      "2.10"
+    ],
+    [
+      "sse-starlette",
+      "3.4.1"
+    ],
+    [
+      "starlette",
+      "1.0.0"
+    ],
+    [
+      "textual",
+      "8.2.5"
+    ],
+    [
+      "tiktoken",
+      "0.12.0"
+    ],
+    [
+      "tqdm",
+      "4.67.3"
+    ],
+    [
+      "typing-inspection",
+      "0.4.2"
+    ],
+    [
+      "typing_extensions",
+      "4.15.0"
+    ],
+    [
+      "uc-micro-py",
+      "2.0.0"
+    ],
+    [
+      "urllib3",
+      "2.8.0"
+    ],
+    [
+      "uvicorn",
+      "0.46.0"
+    ],
+    [
+      "websockets",
+      "16.0"
+    ]
+  ],
+  "planned_attempts": 60,
+  "order": [
+    {
+      "round": 1,
+      "case": "R01"
+    },
+    {
+      "round": 1,
+      "case": "R02"
+    },
+    {
+      "round": 1,
+      "case": "R03"
+    },
+    {
+      "round": 1,
+      "case": "R04"
+    },
+    {
+      "round": 1,
+      "case": "D01"
+    },
+    {
+      "round": 1,
+      "case": "D02"
+    },
+    {
+      "round": 1,
+      "case": "D03"
+    },
+    {
+      "round": 1,
+      "case": "D04"
+    },
+    {
+      "round": 1,
+      "case": "C01"
+    },
+    {
+      "round": 1,
+      "case": "C02"
+    },
+    {
+      "round": 1,
+      "case": "C03"
+    },
+    {
+      "round": 1,
+      "case": "C04"
+    },
+    {
+      "round": 1,
+      "case": "B01"
+    },
+    {
+      "round": 1,
+      "case": "B02"
+    },
+    {
+      "round": 1,
+      "case": "B03"
+    },
+    {
+      "round": 1,
+      "case": "B04"
+    },
+    {
+      "round": 1,
+      "case": "P01"
+    },
+    {
+      "round": 1,
+      "case": "P02"
+    },
+    {
+      "round": 1,
+      "case": "P03"
+    },
+    {
+      "round": 1,
+      "case": "P04"
+    },
+    {
+      "round": 2,
+      "case": "R01"
+    },
+    {
+      "round": 2,
+      "case": "R02"
+    },
+    {
+      "round": 2,
+      "case": "R03"
+    },
+    {
+      "round": 2,
+      "case": "R04"
+    },
+    {
+      "round": 2,
+      "case": "D01"
+    },
+    {
+      "round": 2,
+      "case": "D02"
+    },
+    {
+      "round": 2,
+      "case": "D03"
+    },
+    {
+      "round": 2,
+      "case": "D04"
+    },
+    {
+      "round": 2,
+      "case": "C01"
+    },
+    {
+      "round": 2,
+      "case": "C02"
+    },
+    {
+      "round": 2,
+      "case": "C03"
+    },
+    {
+      "round": 2,
+      "case": "C04"
+    },
+    {
+      "round": 2,
+      "case": "B01"
+    },
+    {
+      "round": 2,
+      "case": "B02"
+    },
+    {
+      "round": 2,
+      "case": "B03"
+    },
+    {
+      "round": 2,
+      "case": "B04"
+    },
+    {
+      "round": 2,
+      "case": "P01"
+    },
+    {
+      "round": 2,
+      "case": "P02"
+    },
+    {
+      "round": 2,
+      "case": "P03"
+    },
+    {
+      "round": 2,
+      "case": "P04"
+    },
+    {
+      "round": 3,
+      "case": "R01"
+    },
+    {
+      "round": 3,
+      "case": "R02"
+    },
+    {
+      "round": 3,
+      "case": "R03"
+    },
+    {
+      "round": 3,
+      "case": "R04"
+    },
+    {
+      "round": 3,
+      "case": "D01"
+    },
+    {
+      "round": 3,
+      "case": "D02"
+    },
+    {
+      "round": 3,
+      "case": "D03"
+    },
+    {
+      "round": 3,
+      "case": "D04"
+    },
+    {
+      "round": 3,
+      "case": "C01"
+    },
+    {
+      "round": 3,
+      "case": "C02"
+    },
+    {
+      "round": 3,
+      "case": "C03"
+    },
+    {
+      "round": 3,
+      "case": "C04"
+    },
+    {
+      "round": 3,
+      "case": "B01"
+    },
+    {
+      "round": 3,
+      "case": "B02"
+    },
+    {
+      "round": 3,
+      "case": "B03"
+    },
+    {
+      "round": 3,
+      "case": "B04"
+    },
+    {
+      "round": 3,
+      "case": "P01"
+    },
+    {
+      "round": 3,
+      "case": "P02"
+    },
+    {
+      "round": 3,
+      "case": "P03"
+    },
+    {
+      "round": 3,
+      "case": "P04"
+    }
+  ],
+  "human_review": "PENDING",
+  "independent_windows": "PENDING",
+  "config": "Original StarCode provider; credentials and raw configuration excluded",
+  "cost": null,
+  "effective_settings": {
+    "provider": "OpenAI",
+    "model": "gpt-6-luna",
+    "protocol": "openai-responses",
+    "endpoint": "https://api.openai.com/v1",
+    "context_window": 128000,
+    "max_output_tokens": 8192,
+    "timeout": 120.0,
+    "thinking": false,
+    "max_turns": 40,
+    "max_tool_calls": 100,
+    "max_active_seconds": 900.0
+  },
+  "run_id": "model-value-bench-luna-full1",
+  "credentials": "Not exported; original explicit StarCode configuration reused.",
+  "source_database_exported": false,
+  "semantic_reviewer": null
+}

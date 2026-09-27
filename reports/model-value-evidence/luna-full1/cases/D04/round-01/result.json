@@ -1,0 +1,43 @@
+{
+  "case": "D04",
+  "round": 1,
+  "track": "real-model",
+  "result": "AUTO_PASS_REVIEW_REQUIRED",
+  "checks": {
+    "expected_state": true,
+    "fact_coverage": true,
+    "source_hashes_unchanged": true,
+    "two_extraction_errors": true,
+    "deliverable_bytes_valid": true
+  },
+  "facts": {
+    "Falcon": true,
+    "May 2027": true,
+    "scan.pdf": true,
+    "broken.pdf": true
+  },
+  "task_status": "SUCCEEDED",
+  "error": "",
+  "model": "gpt-6-luna",
+  "protocol": "openai-responses",
+  "duration_seconds": 8.25,
+  "usage": {
+    "complete": true,
+    "input_tokens": 8858,
+    "output_tokens": 382
+  },
+  "model_requests": 4,
+  "tool_calls": 5,
+  "changed_files": [],
+  "artifacts": [
+    {
+      "id": "6a716ee4b9554a429be09c58459c85aa",
+      "task_id": "4d10b43d91b14341a91e9fbaceb7d13e",
+      "name": "summary.md",
+      "media_type": "text/markdown",
+      "sha256": "29a1b97f6824168c13a4547bccb1ba614d13feffb37c2718e8bc8448fa2e0a00",
+      "version": 1,
+      "created_at": 1790495366.2490344
+    }
+  ]
+}

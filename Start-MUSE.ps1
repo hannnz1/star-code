@@ -1,5 +1,6 @@
 param(
     [string]$Config = 'C:\Users\Administrator\Desktop\project\star code\config.yaml',
+    [ValidateNotNullOrEmpty()][string]$Model = 'gpt-6-luna',
     [int]$Port = 8765,
     [switch]$NoBrowser,
     [switch]$Quiet
@@ -24,10 +25,12 @@ if (Test-Path -LiteralPath $processFile) {
 }
 $listener = [System.Net.Sockets.TcpListener]::new([System.Net.IPAddress]::Loopback,$Port)
 try { $listener.Start() } finally { $listener.Stop() }
-& $python -m muse doctor --config $Config --data-dir $data | Out-Null
-if ($LASTEXITCODE -ne 0) { throw 'Configuration validation failed.' }
+$previousModel = $env:MUSE_MODEL
+$env:MUSE_MODEL = $Model
 $records = @()
 try {
+& $python -m muse doctor --config $Config --data-dir $data | Out-Null
+if ($LASTEXITCODE -ne 0) { throw 'Configuration validation failed.' }
     foreach ($role in @('api','worker')) {
         $arguments = @('-m','muse',$role,'--config',('"'+$Config+'"'),'--data-dir',('"'+$data+'"'),'--port',$Port)
         $process = Start-Process -FilePath $python -ArgumentList $arguments -WorkingDirectory $projectRoot -WindowStyle Hidden -PassThru -RedirectStandardOutput (Join-Path $data "$role.out.log") -RedirectStandardError (Join-Path $data "$role.err.log")
@@ -52,4 +55,7 @@ try {
         if ($running -and $running.StartTime.ToUniversalTime() -eq ([datetime]$entry.started).ToUniversalTime()) { & "$env:SystemRoot\System32\taskkill.exe" /PID $entry.pid /T /F | Out-Null }
     }
     throw
+} finally {
+    if ($null -eq $previousModel) { Remove-Item Env:MUSE_MODEL -ErrorAction SilentlyContinue }
+    else { $env:MUSE_MODEL = $previousModel }
 }

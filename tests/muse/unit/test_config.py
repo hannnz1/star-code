@@ -1,6 +1,5 @@
 import importlib.util
 import json
-from pathlib import Path
 
 import pytest
 
@@ -37,6 +36,23 @@ def test_explicit_provider_selection_and_env_key(tmp_path, monkeypatch):
     assert settings.provider.model == "two"
     assert settings.provider.api_key.get_secret_value() == "ephemeral-test-secret"
     assert "ephemeral-test-secret" not in repr(settings)
+
+
+def test_model_override_keeps_selected_provider_and_source_unchanged(tmp_path, monkeypatch):
+    source = tmp_path / "starcode.yaml"
+    original = ('providers:\n  - name: OpenAI\n    protocol: openai-responses\n'
+                '    base_url: https://api.openai.com/v1\n    api_key_env: MUSE_TEST_PROVIDER_KEY\n'
+                '    model: gpt-5.4-mini\n')
+    source.write_text(original, encoding="utf-8")
+    monkeypatch.setenv("MUSE_TEST_PROVIDER_KEY", "ephemeral-test-secret")
+    monkeypatch.setenv("MUSE_MODEL", "gpt-6-luna")
+    settings = config_module().load_settings(source, data_dir=tmp_path / "data")
+    assert settings.provider.model == "gpt-6-luna"
+    assert settings.provider.base_url == "https://api.openai.com/v1"
+    assert settings.provider.api_key.get_secret_value() == "ephemeral-test-secret"
+    assert source.read_text(encoding="utf-8") == original
+    monkeypatch.delenv("MUSE_MODEL")
+    assert config_module().load_settings(source, data_dir=tmp_path / "data").provider.model == "gpt-5.4-mini"
 
 
 def test_no_implicit_legacy_import_or_openai_key(tmp_path, monkeypatch):

@@ -1,0 +1,283 @@
+[
+  {
+    "task_id": "4d10b43d91b14341a91e9fbaceb7d13e",
+    "sequence": 1,
+    "type": "status",
+    "payload": {
+      "status": "QUEUED"
+    },
+    "created_at": 1790495359.8767653
+  },
+  {
+    "task_id": "4d10b43d91b14341a91e9fbaceb7d13e",
+    "sequence": 2,
+    "type": "status",
+    "payload": {
+      "status": "RUNNING"
+    },
+    "created_at": 1790495359.8913748
+  },
+  {
+    "task_id": "4d10b43d91b14341a91e9fbaceb7d13e",
+    "sequence": 3,
+    "type": "assistant_message",
+    "payload": {
+      "text": "",
+      "tool_count": 1
+    },
+    "created_at": 1790495361.6154428
+  },
+  {
+    "task_id": "4d10b43d91b14341a91e9fbaceb7d13e",
+    "sequence": 4,
+    "type": "tool_prepared",
+    "payload": {
+      "arguments": {
+        "path": ".",
+        "pattern": "*"
+      },
+      "call_id": "call_HxrBJjOLnT0v3tajJriAHGyE",
+      "name": "list_files"
+    },
+    "created_at": 1790495361.6418388
+  },
+  {
+    "task_id": "4d10b43d91b14341a91e9fbaceb7d13e",
+    "sequence": 5,
+    "type": "tool_started",
+    "payload": {
+      "call_id": "call_HxrBJjOLnT0v3tajJriAHGyE",
+      "name": "list_files"
+    },
+    "created_at": 1790495361.648345
+  },
+  {
+    "task_id": "4d10b43d91b14341a91e9fbaceb7d13e",
+    "sequence": 6,
+    "type": "tool_result",
+    "payload": {
+      "artifact_ids": [],
+      "call_id": "call_HxrBJjOLnT0v3tajJriAHGyE",
+      "content": "{\"paths\": [\"broken.pdf\", \"scan.pdf\", \"valid.txt\"], \"truncated\": false}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "created_at": 1790495361.669845
+  },
+  {
+    "task_id": "4d10b43d91b14341a91e9fbaceb7d13e",
+    "sequence": 7,
+    "type": "assistant_message",
+    "payload": {
+      "text": "",
+      "tool_count": 3
+    },
+    "created_at": 1790495363.2608566
+  },
+  {
+    "task_id": "4d10b43d91b14341a91e9fbaceb7d13e",
+    "sequence": 8,
+    "type": "tool_prepared",
+    "payload": {
+      "arguments": {
+        "path": "valid.txt"
+      },
+      "call_id": "call_0pjzCkmgSz4AtZ8WwXtU8ebj",
+      "name": "read_document"
+    },
+    "created_at": 1790495363.275181
+  },
+  {
+    "task_id": "4d10b43d91b14341a91e9fbaceb7d13e",
+    "sequence": 9,
+    "type": "tool_started",
+    "payload": {
+      "call_id": "call_0pjzCkmgSz4AtZ8WwXtU8ebj",
+      "name": "read_document"
+    },
+    "created_at": 1790495363.2797005
+  },
+  {
+    "task_id": "4d10b43d91b14341a91e9fbaceb7d13e",
+    "sequence": 10,
+    "type": "tool_result",
+    "payload": {
+      "artifact_ids": [],
+      "call_id": "call_0pjzCkmgSz4AtZ8WwXtU8ebj",
+      "content": "{\"path\": \"valid.txt\", \"sha256\": \"4536bba88cb8940d1adba0208dd4c485b5d4957a72502f0c7b10c40df1a09af9\", \"text\": \"The readable document's fact: project Falcon launches in May 2027.\", \"truncated\": false}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "created_at": 1790495363.2971766
+  },
+  {
+    "task_id": "4d10b43d91b14341a91e9fbaceb7d13e",
+    "sequence": 11,
+    "type": "tool_prepared",
+    "payload": {
+      "arguments": {
+        "path": "scan.pdf"
+      },
+      "call_id": "call_UUJNu7BeW9wmA8OR0w6YNgYy",
+      "name": "read_document"
+    },
+    "created_at": 1790495363.421325
+  },
+  {
+    "task_id": "4d10b43d91b14341a91e9fbaceb7d13e",
+    "sequence": 12,
+    "type": "tool_started",
+    "payload": {
+      "call_id": "call_UUJNu7BeW9wmA8OR0w6YNgYy",
+      "name": "read_document"
+    },
+    "created_at": 1790495363.425677
+  },
+  {
+    "task_id": "4d10b43d91b14341a91e9fbaceb7d13e",
+    "sequence": 13,
+    "type": "tool_result",
+    "payload": {
+      "artifact_ids": [],
+      "call_id": "call_UUJNu7BeW9wmA8OR0w6YNgYy",
+      "content": "PDF has no extractable text; OCR is not supported in this version",
+      "error_code": "TOOL_ERROR",
+      "metadata": {},
+      "status": "error"
+    },
+    "created_at": 1790495363.4455147
+  },
+  {
+    "task_id": "4d10b43d91b14341a91e9fbaceb7d13e",
+    "sequence": 14,
+    "type": "tool_prepared",
+    "payload": {
+      "arguments": {
+        "path": "broken.pdf"
+      },
+      "call_id": "call_0x7uUzTEnEFB49xsZdhQfoug",
+      "name": "read_document"
+    },
+    "created_at": 1790495363.4607477
+  },
+  {
+    "task_id": "4d10b43d91b14341a91e9fbaceb7d13e",
+    "sequence": 15,
+    "type": "tool_started",
+    "payload": {
+      "call_id": "call_0x7uUzTEnEFB49xsZdhQfoug",
+      "name": "read_document"
+    },
+    "created_at": 1790495363.4648128
+  },
+  {
+    "task_id": "4d10b43d91b14341a91e9fbaceb7d13e",
+    "sequence": 16,
+    "type": "tool_result",
+    "payload": {
+      "artifact_ids": [],
+      "call_id": "call_0x7uUzTEnEFB49xsZdhQfoug",
+      "content": "PDF could not be parsed or is encrypted",
+      "error_code": "TOOL_ERROR",
+      "metadata": {},
+      "status": "error"
+    },
+    "created_at": 1790495363.481529
+  },
+  {
+    "task_id": "4d10b43d91b14341a91e9fbaceb7d13e",
+    "sequence": 17,
+    "type": "assistant_message",
+    "payload": {
+      "text": "",
+      "tool_count": 1
+    },
+    "created_at": 1790495366.223783
+  },
+  {
+    "task_id": "4d10b43d91b14341a91e9fbaceb7d13e",
+    "sequence": 18,
+    "type": "tool_prepared",
+    "payload": {
+      "arguments": {
+        "content": "# Document summary\n\n## Readable file\n\n- **valid.txt**: States that Project Falcon launches in May 2027.\n\n## Files that could not be read\n\n- **scan.pdf**: No extractable text was available. OCR is not supported by the document-reading tool, so no content could be extracted or verified.\n- **broken.pdf**: The PDF could not be parsed or is encrypted. Its content could not be extracted or verified.\n\nNo PDF content has been inferred. The original files were left unchanged.",
+        "media_type": "text/markdown",
+        "name": "summary.md"
+      },
+      "call_id": "call_lguNcFSIp9HRtkrFP4fo6iRo",
+      "name": "save_artifact"
+    },
+    "created_at": 1790495366.240033
+  },
+  {
+    "task_id": "4d10b43d91b14341a91e9fbaceb7d13e",
+    "sequence": 19,
+    "type": "tool_started",
+    "payload": {
+      "call_id": "call_lguNcFSIp9HRtkrFP4fo6iRo",
+      "name": "save_artifact"
+    },
+    "created_at": 1790495366.244044
+  },
+  {
+    "task_id": "4d10b43d91b14341a91e9fbaceb7d13e",
+    "sequence": 20,
+    "type": "artifact",
+    "payload": {
+      "created_at": 1790495366.2490344,
+      "id": "6a716ee4b9554a429be09c58459c85aa",
+      "media_type": "text/markdown",
+      "name": "summary.md",
+      "sha256": "29a1b97f6824168c13a4547bccb1ba614d13feffb37c2718e8bc8448fa2e0a00",
+      "task_id": "4d10b43d91b14341a91e9fbaceb7d13e",
+      "version": 1
+    },
+    "created_at": 1790495366.2509966
+  },
+  {
+    "task_id": "4d10b43d91b14341a91e9fbaceb7d13e",
+    "sequence": 21,
+    "type": "tool_result",
+    "payload": {
+      "artifact_ids": [
+        "6a716ee4b9554a429be09c58459c85aa"
+      ],
+      "call_id": "call_lguNcFSIp9HRtkrFP4fo6iRo",
+      "content": "{\"id\": \"6a716ee4b9554a429be09c58459c85aa\", \"task_id\": \"4d10b43d91b14341a91e9fbaceb7d13e\", \"name\": \"summary.md\", \"media_type\": \"text/markdown\", \"sha256\": \"29a1b97f6824168c13a4547bccb1ba614d13feffb37c2718e8bc8448fa2e0a00\", \"version\": 1, \"created_at\": 1790495366.2490344}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "created_at": 1790495366.253994
+  },
+  {
+    "task_id": "4d10b43d91b14341a91e9fbaceb7d13e",
+    "sequence": 22,
+    "type": "text_delta",
+    "payload": {
+      "text": "Saved **summary.md**. It summarizes the readable fact from **valid.txt** and lists **scan.pdf** (no extractable text; OCR unsupported) and **broken.pdf** (could not be parsed or may be encrypted) as unreadable. No PDF content was invented, and all originals were left unchanged."
+    },
+    "created_at": 1790495368.0821388
+  },
+  {
+    "task_id": "4d10b43d91b14341a91e9fbaceb7d13e",
+    "sequence": 23,
+    "type": "assistant_message",
+    "payload": {
+      "text": "Saved **summary.md**. It summarizes the readable fact from **valid.txt** and lists **scan.pdf** (no extractable text; OCR unsupported) and **broken.pdf** (could not be parsed or may be encrypted) as unreadable. No PDF content was invented, and all originals were left unchanged.",
+      "tool_count": 0
+    },
+    "created_at": 1790495368.091439
+  },
+  {
+    "task_id": "4d10b43d91b14341a91e9fbaceb7d13e",
+    "sequence": 24,
+    "type": "status",
+    "payload": {
+      "status": "SUCCEEDED"
+    },
+    "created_at": 1790495368.1134975
+  }
+]

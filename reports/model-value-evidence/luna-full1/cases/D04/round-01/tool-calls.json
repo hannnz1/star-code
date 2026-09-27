@@ -1,0 +1,117 @@
+[
+  {
+    "task_id": "4d10b43d91b14341a91e9fbaceb7d13e",
+    "id": "call_HxrBJjOLnT0v3tajJriAHGyE",
+    "name": "list_files",
+    "arguments": {
+      "path": ".",
+      "pattern": "*"
+    },
+    "risk": "read",
+    "status": "DONE",
+    "digest": "afd64f0f84338aea213bd668f9a54ce7afde86de9463bed6a01e27b9f30bc7ff",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_HxrBJjOLnT0v3tajJriAHGyE",
+      "content": "{\"paths\": [\"broken.pdf\", \"scan.pdf\", \"valid.txt\"], \"truncated\": false}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790495361.6418388,
+    "updated_at": 1790495361.669845
+  },
+  {
+    "task_id": "4d10b43d91b14341a91e9fbaceb7d13e",
+    "id": "call_0pjzCkmgSz4AtZ8WwXtU8ebj",
+    "name": "read_document",
+    "arguments": {
+      "path": "valid.txt"
+    },
+    "risk": "read",
+    "status": "DONE",
+    "digest": "a0f9b2b55835c6f6ca2f96e0056400a1c168d8410644a964f90845544ca274fb",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_0pjzCkmgSz4AtZ8WwXtU8ebj",
+      "content": "{\"path\": \"valid.txt\", \"sha256\": \"4536bba88cb8940d1adba0208dd4c485b5d4957a72502f0c7b10c40df1a09af9\", \"text\": \"The readable document's fact: project Falcon launches in May 2027.\", \"truncated\": false}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790495363.275181,
+    "updated_at": 1790495363.2971766
+  },
+  {
+    "task_id": "4d10b43d91b14341a91e9fbaceb7d13e",
+    "id": "call_UUJNu7BeW9wmA8OR0w6YNgYy",
+    "name": "read_document",
+    "arguments": {
+      "path": "scan.pdf"
+    },
+    "risk": "read",
+    "status": "FAILED",
+    "digest": "c4a1272949833a6acd94ba874c051578aef3d00fe5c8120f4627ccc867439978",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_UUJNu7BeW9wmA8OR0w6YNgYy",
+      "content": "PDF has no extractable text; OCR is not supported in this version",
+      "error_code": "TOOL_ERROR",
+      "metadata": {},
+      "status": "error"
+    },
+    "attempts": 1,
+    "created_at": 1790495363.421325,
+    "updated_at": 1790495363.4455147
+  },
+  {
+    "task_id": "4d10b43d91b14341a91e9fbaceb7d13e",
+    "id": "call_0x7uUzTEnEFB49xsZdhQfoug",
+    "name": "read_document",
+    "arguments": {
+      "path": "broken.pdf"
+    },
+    "risk": "read",
+    "status": "FAILED",
+    "digest": "42450ccd19f4e38ebded524a73d595c306ce076686d123b342cca11c37dc3a43",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_0x7uUzTEnEFB49xsZdhQfoug",
+      "content": "PDF could not be parsed or is encrypted",
+      "error_code": "TOOL_ERROR",
+      "metadata": {},
+      "status": "error"
+    },
+    "attempts": 1,
+    "created_at": 1790495363.4607477,
+    "updated_at": 1790495363.481529
+  },
+  {
+    "task_id": "4d10b43d91b14341a91e9fbaceb7d13e",
+    "id": "call_lguNcFSIp9HRtkrFP4fo6iRo",
+    "name": "save_artifact",
+    "arguments": {
+      "content": "# Document summary\n\n## Readable file\n\n- **valid.txt**: States that Project Falcon launches in May 2027.\n\n## Files that could not be read\n\n- **scan.pdf**: No extractable text was available. OCR is not supported by the document-reading tool, so no content could be extracted or verified.\n- **broken.pdf**: The PDF could not be parsed or is encrypted. Its content could not be extracted or verified.\n\nNo PDF content has been inferred. The original files were left unchanged.",
+      "media_type": "text/markdown",
+      "name": "summary.md"
+    },
+    "risk": "write",
+    "status": "DONE",
+    "digest": "89a1aee3a71c85365e4352c0dcd5b215b111666e29c87092120850e4d0c35e00",
+    "result": {
+      "artifact_ids": [
+        "6a716ee4b9554a429be09c58459c85aa"
+      ],
+      "call_id": "call_lguNcFSIp9HRtkrFP4fo6iRo",
+      "content": "{\"id\": \"6a716ee4b9554a429be09c58459c85aa\", \"task_id\": \"4d10b43d91b14341a91e9fbaceb7d13e\", \"name\": \"summary.md\", \"media_type\": \"text/markdown\", \"sha256\": \"29a1b97f6824168c13a4547bccb1ba614d13feffb37c2718e8bc8448fa2e0a00\", \"version\": 1, \"created_at\": 1790495366.2490344}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790495366.240033,
+    "updated_at": 1790495366.253994
+  }
+]

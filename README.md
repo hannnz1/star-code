@@ -1,8 +1,8 @@
 # MUSE Python 集成开发版
 
-当前开发候选：0.3.0rc7。最新自动验收与待人工事项见[当前验收记录](docs/release-acceptance.md)和[人工 Benchmark 清单](docs/manual-benchmark-handoff.md)。RC6 的历史成绩见[RC6 验收记录](docs/rc6-release-acceptance.md)，不能算作新候选成绩。
+最近封存的验收候选：0.3.0rc7。当前分支新增模型性价比试验，尚未重新冻结发行候选；最新自动验收与待人工事项见[当前验收记录](docs/release-acceptance.md)和[人工 Benchmark 清单](docs/manual-benchmark-handoff.md)。RC6 的历史成绩见[RC6 验收记录](docs/rc6-release-acceptance.md)，不能算作新候选成绩。
 
-本目录以 `mewcode-python` 为源码基线，整合 MUSE 的持久化 Worker、网页工作台、资料整理和研究能力。原 StarCode 模型、服务地址、代理和凭据来源继续使用原配置。
+本目录以 `mewcode-python` 为源码基线，整合 MUSE 的持久化 Worker、网页工作台、资料整理和研究能力。原 StarCode 服务地址、代理和凭据来源继续使用原配置；启动器现在默认选择 `gpt-6-luna` 作为省钱试用模型，原配置文件本身不变。模型选择和实测限制见[模型性价比记录](docs/model-cost-selection.md)。
 
 **当前尚未达到“完整替代 Java”的验收标准。** 不覆盖桌面上的 StarCode 或 mewcode-python 原项目。来源标注保留；本地尚未确认上游主项目的根级许可证，公开分发前需核实。
 
@@ -25,6 +25,8 @@
 .\Setup-MUSE.ps1
 .\Start-MUSE.ps1 -Config 'C:\Users\Administrator\Desktop\project\star code\config.yaml'
 ```
+
+启动器默认使用 `gpt-6-luna`。复杂编程任务可指定 `-Model gpt-5.4-mini` 使用原模型；直接运行 `muse api`、`muse worker` 或 Benchmark 时，在启动这些进程前设置 `MUSE_MODEL=gpt-6-luna`。该覆盖只改变模型 ID，仍使用选中配置中的 API 地址、代理和凭据；不修改原 StarCode 配置。API 与 Worker 必须使用相同模型设置。
 
 API 和 Worker 启动后，可另开终端使用同一数据目录：
 

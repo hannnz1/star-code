@@ -1,0 +1,171 @@
+{
+  "11f463279d0e4f709de17d77e126fc0c": [
+    {
+      "task_id": "11f463279d0e4f709de17d77e126fc0c",
+      "sequence": 1,
+      "type": "status",
+      "payload": {
+        "status": "QUEUED"
+      },
+      "created_at": 1790495418.06824
+    },
+    {
+      "task_id": "11f463279d0e4f709de17d77e126fc0c",
+      "sequence": 2,
+      "type": "status",
+      "payload": {
+        "status": "RUNNING"
+      },
+      "created_at": 1790495419.9165435
+    },
+    {
+      "task_id": "11f463279d0e4f709de17d77e126fc0c",
+      "sequence": 3,
+      "type": "assistant_message",
+      "payload": {
+        "text": "",
+        "tool_count": 2
+      },
+      "created_at": 1790495422.5252733
+    },
+    {
+      "task_id": "11f463279d0e4f709de17d77e126fc0c",
+      "sequence": 4,
+      "type": "tool_prepared",
+      "payload": {
+        "arguments": {
+          "path": "one.txt"
+        },
+        "call_id": "call_Vps3zUNiW2X8M47mN3R0jJiI",
+        "name": "read_file"
+      },
+      "created_at": 1790495422.5449882
+    },
+    {
+      "task_id": "11f463279d0e4f709de17d77e126fc0c",
+      "sequence": 5,
+      "type": "tool_started",
+      "payload": {
+        "call_id": "call_Vps3zUNiW2X8M47mN3R0jJiI",
+        "name": "read_file"
+      },
+      "created_at": 1790495422.5494714
+    },
+    {
+      "task_id": "11f463279d0e4f709de17d77e126fc0c",
+      "sequence": 6,
+      "type": "tool_result",
+      "payload": {
+        "artifact_ids": [],
+        "call_id": "call_Vps3zUNiW2X8M47mN3R0jJiI",
+        "content": "First fact: 31",
+        "error_code": null,
+        "metadata": {},
+        "status": "success"
+      },
+      "created_at": 1790495422.5656118
+    },
+    {
+      "task_id": "11f463279d0e4f709de17d77e126fc0c",
+      "sequence": 7,
+      "type": "tool_prepared",
+      "payload": {
+        "arguments": {
+          "path": "two.txt"
+        },
+        "call_id": "call_OXLfP09NchQMKZdj39WcEh3W",
+        "name": "read_file"
+      },
+      "created_at": 1790495422.5857186
+    },
+    {
+      "task_id": "11f463279d0e4f709de17d77e126fc0c",
+      "sequence": 8,
+      "type": "tool_started",
+      "payload": {
+        "call_id": "call_OXLfP09NchQMKZdj39WcEh3W",
+        "name": "read_file"
+      },
+      "created_at": 1790495422.5905418
+    },
+    {
+      "task_id": "11f463279d0e4f709de17d77e126fc0c",
+      "sequence": 9,
+      "type": "status",
+      "payload": {
+        "status": "INTERRUPTED"
+      },
+      "created_at": 1790495424.8495617
+    },
+    {
+      "task_id": "11f463279d0e4f709de17d77e126fc0c",
+      "sequence": 10,
+      "type": "status",
+      "payload": {
+        "status": "QUEUED"
+      },
+      "created_at": 1790495424.8495617
+    },
+    {
+      "task_id": "11f463279d0e4f709de17d77e126fc0c",
+      "sequence": 11,
+      "type": "status",
+      "payload": {
+        "status": "RUNNING"
+      },
+      "created_at": 1790495424.856242
+    },
+    {
+      "task_id": "11f463279d0e4f709de17d77e126fc0c",
+      "sequence": 12,
+      "type": "tool_started",
+      "payload": {
+        "call_id": "call_OXLfP09NchQMKZdj39WcEh3W",
+        "name": "read_file"
+      },
+      "created_at": 1790495424.8814838
+    },
+    {
+      "task_id": "11f463279d0e4f709de17d77e126fc0c",
+      "sequence": 13,
+      "type": "tool_result",
+      "payload": {
+        "artifact_ids": [],
+        "call_id": "call_OXLfP09NchQMKZdj39WcEh3W",
+        "content": "Second fact: 73",
+        "error_code": null,
+        "metadata": {},
+        "status": "success"
+      },
+      "created_at": 1790495424.8942428
+    },
+    {
+      "task_id": "11f463279d0e4f709de17d77e126fc0c",
+      "sequence": 14,
+      "type": "text_delta",
+      "payload": {
+        "text": "one.txt: First fact: 31  \ntwo.txt: Second fact: 73"
+      },
+      "created_at": 1790495426.209267
+    },
+    {
+      "task_id": "11f463279d0e4f709de17d77e126fc0c",
+      "sequence": 15,
+      "type": "assistant_message",
+      "payload": {
+        "text": "one.txt: First fact: 31  \ntwo.txt: Second fact: 73",
+        "tool_count": 0
+      },
+      "created_at": 1790495426.2148762
+    },
+    {
+      "task_id": "11f463279d0e4f709de17d77e126fc0c",
+      "sequence": 16,
+      "type": "status",
+      "payload": {
+        "status": "SUCCEEDED"
+      },
+      "created_at": 1790495426.22921
+    }
+  ]
+}

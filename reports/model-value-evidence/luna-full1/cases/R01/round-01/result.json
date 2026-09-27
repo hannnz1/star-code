@@ -1,0 +1,57 @@
+{
+  "case": "R01",
+  "round": 1,
+  "track": "real-model",
+  "result": "AUTO_PASS_REVIEW_REQUIRED",
+  "checks": {
+    "expected_state": true,
+    "fact_coverage": true,
+    "source_count": true,
+    "citations_exist": true,
+    "report_exists": true,
+    "workspace_unchanged": true,
+    "deliverable_bytes_valid": true,
+    "source_bytes_valid": true,
+    "citations_in_deliverable": true,
+    "citation_labels_match_sources": true,
+    "explicit_doubling_consistent": true
+  },
+  "facts": {
+    "120 USD": true,
+    "40 projects": true,
+    "7 days": true,
+    "CSV": true,
+    "180 USD": true,
+    "75 projects": true,
+    "14 days": true,
+    "JSON": true,
+    "240 USD": true,
+    "90 projects": true,
+    "30 days": true,
+    "XML": true
+  },
+  "task_status": "SUCCEEDED",
+  "error": "",
+  "model": "gpt-6-luna",
+  "protocol": "openai-responses",
+  "duration_seconds": 12.688,
+  "usage": {
+    "complete": true,
+    "input_tokens": 7463,
+    "output_tokens": 653
+  },
+  "model_requests": 3,
+  "tool_calls": 4,
+  "changed_files": [],
+  "artifacts": [
+    {
+      "id": "247a5f9da9ee452db4b32293c1aaff24",
+      "task_id": "404211d1274f4e5392ddb6fadee03611",
+      "name": "report.md",
+      "media_type": "text/markdown",
+      "sha256": "fde6b6817d756a38d6c3ba786bd2807ea74dc657fd4d2572e1c8bcf1b83a9b8b",
+      "version": 1,
+      "created_at": 1790495295.889966
+    }
+  ]
+}

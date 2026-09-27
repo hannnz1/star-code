@@ -1,0 +1,100 @@
+[
+  {
+    "model": "gpt-5.4-mini",
+    "case": "reply",
+    "usage": {
+      "input_tokens": 11,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 0
+      },
+      "output_tokens": 5,
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      },
+      "total_tokens": 16
+    },
+    "completed": true,
+    "seconds": 2.15,
+    "text": "OK",
+    "calls": [],
+    "passed": true
+  },
+  {
+    "model": "gpt-5.4-mini",
+    "case": "tool",
+    "usage": {
+      "input_tokens": 60,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 0
+      },
+      "output_tokens": 18,
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      },
+      "total_tokens": 78
+    },
+    "completed": true,
+    "seconds": 1.52,
+    "text": "",
+    "calls": [
+      {
+        "name": "inspect_fixture",
+        "arguments": {
+          "name": "alpha"
+        }
+      }
+    ],
+    "passed": true
+  },
+  {
+    "model": "gpt-6-luna",
+    "case": "reply",
+    "usage": {
+      "input_tokens": 11,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 0
+      },
+      "output_tokens": 16,
+      "output_tokens_details": {
+        "reasoning_tokens": 9
+      },
+      "total_tokens": 27
+    },
+    "completed": true,
+    "seconds": 1.54,
+    "text": "OK",
+    "calls": [],
+    "passed": true
+  },
+  {
+    "model": "gpt-6-luna",
+    "case": "tool",
+    "usage": {
+      "input_tokens": 60,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 0
+      },
+      "output_tokens": 18,
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      },
+      "total_tokens": 78
+    },
+    "completed": true,
+    "seconds": 1.23,
+    "text": "",
+    "calls": [
+      {
+        "name": "inspect_fixture",
+        "arguments": {
+          "name": "alpha"
+        }
+      }
+    ],
+    "passed": true
+  }
+]

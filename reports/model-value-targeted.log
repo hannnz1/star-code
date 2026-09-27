@@ -1,0 +1,54 @@
+...F..................................................                   [100%]
+================================== FAILURES ===================================
+________ test_stop_script_matches_serialized_process_time[True-False] _________
+
+tmp_path = WindowsPath('C:/Users/Administrator/Documents/Codex/t/pytest-of-Administrator/pytest-0/test_stop_script_matches_seria0')
+matching_time = True, race_after_lookup = False
+
+    @pytest.mark.parametrize('matching_time,race_after_lookup', [(True, False), (False, False), (True, True)])
+    def test_stop_script_matches_serialized_process_time(tmp_path, matching_time, race_after_lookup):
+        shell = shutil.which("pwsh") or shutil.which("powershell")
+        assert shell, "PowerShell is required for Windows launcher tests"
+        script = Path(__file__).resolve().parents[3] / "Stop-MUSE.ps1"
+        shutil.copy2(script, tmp_path / script.name)
+        if race_after_lookup:
+            copied = tmp_path / script.name
+            source = copied.read_text(encoding='utf-8-sig')
+            command = '& "$env:SystemRoot\\System32\\taskkill.exe" /PID $entry.pid /T /F | Out-Null'
+            assert command in source
+            # Deterministically simulate the matched, test-owned process exiting
+            # just before taskkill returns its nonzero "not running" status.
+            copied.write_text(source.replace(command, 'Stop-Process -Id $entry.pid -Force\n        $global:LASTEXITCODE = 128'), encoding='utf-8')
+        state = tmp_path / ".muse"
+        state.mkdir()
+        child = subprocess.Popen([sys.executable, "-c", "import time; time.sleep(90)"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        try:
+            timestamp = subprocess.run([shell, "-NoProfile", "-Command", f"(Get-Process -Id {child.pid}).StartTime.ToUniversalTime().ToString('o')"], capture_output=True, text=True, check=True).stdout.strip()
+            (state / "processes.json").write_text(json.dumps([{"pid": child.pid, "role": "fixture", "started": timestamp if matching_time else "2000-01-01T00:00:00.0000000Z"}]), encoding="utf-8")
+            stopped = subprocess.run([shell, "-NoProfile", "-File", str(tmp_path / script.name)], capture_output=True, text=True, encoding='utf-8', errors='replace')
+>           assert stopped.returncode == 0, stopped.stdout + stopped.stderr
+E           AssertionError: ERROR: Access denied
+E             
+E             Exception: C:\Users\Administrator\Documents\Codex\t\pytest-of-Administrator\pytest-0\test_stop_script_matches_seria0\Stop-MUSE.ps1:12
+E             Line |
+E               12 |  ��             throw "Could not stop MUSE $($entry.role); the process ma ��
+E                  |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E                  | Could not stop MUSE fixture; the process may still be running.
+E             
+E           assert 1 == 0
+E            +  where 1 = CompletedProcess(args=['C:\\Users\\Administrator\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\...~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n     | Could not stop MUSE fixture; the process may still be running.\n').returncode
+
+tests\muse\integration\test_launcher.py:31: AssertionError
+============================== warnings summary ===============================
+tests/muse/integration/test_frontend.py::test_browser_create_pause_resume_cancel_memory_and_reconnect
+  C:\Users\Administrator\Documents\Codex\2026-09-26\ai-starcode-muse-coding-agent-python\outputs\muse-next\.venv\Lib\site-packages\websockets\legacy\__init__.py:6: DeprecationWarning: websockets.legacy is deprecated; see https://websockets.readthedocs.io/en/stable/howto/upgrade.html for upgrade instructions
+    warnings.warn(  # deprecated in 14.0 - 2024-11-09
+
+tests/muse/integration/test_frontend.py::test_browser_create_pause_resume_cancel_memory_and_reconnect
+  C:\Users\Administrator\Documents\Codex\2026-09-26\ai-starcode-muse-coding-agent-python\outputs\muse-next\.venv\Lib\site-packages\uvicorn\protocols\websockets\websockets_impl.py:17: DeprecationWarning: websockets.server.WebSocketServerProtocol is deprecated
+    from websockets.server import WebSocketServerProtocol
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/muse/integration/test_launcher.py::test_stop_script_matches_serialized_process_time[True-False]
+1 failed, 53 passed, 2 warnings in 63.05s (0:01:03)

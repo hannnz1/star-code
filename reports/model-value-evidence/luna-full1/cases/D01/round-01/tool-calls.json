@@ -1,0 +1,114 @@
+[
+  {
+    "task_id": "3ef10f0d0620400490ed8eaec8a5d23c",
+    "id": "call_JLjeRxsYJU4wjyUKpEAKDd0b",
+    "name": "list_files",
+    "arguments": {},
+    "risk": "read",
+    "status": "DONE",
+    "digest": "d1b2a7e5f7c508891cdf52dbc0d75fc72f31974e3351fac830d2da04142eb06f",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_JLjeRxsYJU4wjyUKpEAKDd0b",
+      "content": "{\"paths\": [\"lyra.pdf\", \"orion.txt\", \"vega.md\"], \"truncated\": false}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790495328.369643,
+    "updated_at": 1790495328.3897693
+  },
+  {
+    "task_id": "3ef10f0d0620400490ed8eaec8a5d23c",
+    "id": "call_rpdxZ61jNU26pOTxKAxyi07B",
+    "name": "read_document",
+    "arguments": {
+      "path": "lyra.pdf"
+    },
+    "risk": "read",
+    "status": "DONE",
+    "digest": "1177870af48183be93c2129a4dc738c58762a6927cea05dc1f12d23b1b53f9d9",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_rpdxZ61jNU26pOTxKAxyi07B",
+      "content": "{\"path\": \"lyra.pdf\", \"sha256\": \"7030a98be2f9b4f5ac704ef8e7aa2d1e8de09efebde2a564a967be696de29ee3\", \"text\": \"Project Lyra\\nBudget 73000 USD\\nOwner Mira\\nLaunch 2027-04-18\\n\", \"truncated\": false}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790495330.4875898,
+    "updated_at": 1790495330.50812
+  },
+  {
+    "task_id": "3ef10f0d0620400490ed8eaec8a5d23c",
+    "id": "call_Rnj5QsnDBAZtO1Sso4rw7E45",
+    "name": "read_document",
+    "arguments": {
+      "path": "orion.txt"
+    },
+    "risk": "read",
+    "status": "DONE",
+    "digest": "e0753f1e0f22a40e153b61b46caf54666d77104e74c77534afb04710e19fe53b",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_Rnj5QsnDBAZtO1Sso4rw7E45",
+      "content": "{\"path\": \"orion.txt\", \"sha256\": \"338148f00d2b25e14564bd25ac268bde67c02d7250f0f46e8541a970300e7d2a\", \"text\": \"Project Orion\\r\\nBudget 42000 USD\\r\\nOwner Maya\\r\\nLaunch 2027-02-14\", \"truncated\": false}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790495330.516098,
+    "updated_at": 1790495330.5323262
+  },
+  {
+    "task_id": "3ef10f0d0620400490ed8eaec8a5d23c",
+    "id": "call_tYTlvqWDur413tWJo66dhIS5",
+    "name": "read_document",
+    "arguments": {
+      "path": "vega.md"
+    },
+    "risk": "read",
+    "status": "DONE",
+    "digest": "beb9636278aebf8bb1948896efd64fd4b682f1120ebc25070d49479e2521280c",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_tYTlvqWDur413tWJo66dhIS5",
+      "content": "{\"path\": \"vega.md\", \"sha256\": \"6d37a98afb64d9b40f5568c87ce8a10bcc6d82a2302d4193d2d3d336496d3969\", \"text\": \"Project Vega\\r\\nBudget 61000 USD\\r\\nOwner Leon\\r\\nLaunch 2027-03-21\", \"truncated\": false}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790495330.5395064,
+    "updated_at": 1790495330.5566535
+  },
+  {
+    "task_id": "3ef10f0d0620400490ed8eaec8a5d23c",
+    "id": "call_4ZDYZ93Ls8j135ycltG5Y83Q",
+    "name": "save_artifact",
+    "arguments": {
+      "content": "# Project Summary\n\n| Project | Budget | Owner | Launch date | Source filename |\n|---|---:|---|---|---|\n| Orion | USD 42,000 | Maya | 2027-02-14 | `orion.txt` |\n| Vega | USD 61,000 | Leon | 2027-03-21 | `vega.md` |\n| Lyra | USD 73,000 | Mira | 2027-04-18 | `lyra.pdf` |\n",
+      "media_type": "text/markdown",
+      "name": "summary.md"
+    },
+    "risk": "write",
+    "status": "DONE",
+    "digest": "33f75fcfc884343fccc5df993430f6f79d231698216b46cc63c651772aa95c26",
+    "result": {
+      "artifact_ids": [
+        "f10fc950691a415bbc010da707532293"
+      ],
+      "call_id": "call_4ZDYZ93Ls8j135ycltG5Y83Q",
+      "content": "{\"id\": \"f10fc950691a415bbc010da707532293\", \"task_id\": \"3ef10f0d0620400490ed8eaec8a5d23c\", \"name\": \"summary.md\", \"media_type\": \"text/markdown\", \"sha256\": \"612f51859807c531353ee73281cdcd0bf846ff5028e23302ef0645179b2a4b86\", \"version\": 1, \"created_at\": 1790495332.905173}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790495332.900366,
+    "updated_at": 1790495332.9083323
+  }
+]
