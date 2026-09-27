@@ -13,6 +13,14 @@ class ProviderError(RuntimeError):
     pass
 
 
+def failure_code(value):
+    known = {'rate_limit_exceeded', 'insufficient_quota', 'invalid_api_key', 'server_error',
+             'invalid_prompt', 'context_length_exceeded', 'max_output_tokens', 'content_filter',
+             'invalid_request_error', 'model_not_found', 'unsupported_parameter', 'quota_exceeded',
+             'billing_hard_limit_reached'}
+    return value if isinstance(value, str) and value in known else 'unknown'
+
+
 def responses_input(messages: list[dict]) -> list[dict]:
     result = []
     for message in messages:
@@ -157,7 +165,12 @@ class HttpModelProvider:
                     if item.get("type") == "function_call":
                         calls[index] = item
             elif kind in {"response.failed", "response.incomplete", "error"}:
-                raise ProviderError("Model response failed or was incomplete")
+                details = event.get('response') or event
+                error = details.get('error') or {}
+                incomplete = details.get('incomplete_details') or {}
+                code = failure_code(error.get('code') if isinstance(error, dict) else None)
+                reason = failure_code(incomplete.get('reason') if isinstance(incomplete, dict) else None)
+                raise ProviderError(f'Model response failed or was incomplete (event={kind}, code={code}, reason={reason})')
         if not complete:
             raise ProviderError("Model stream was incomplete; no tools were dispatched")
         parsed = checked_calls([calls[key] for key in sorted(calls)])

@@ -41,3 +41,14 @@
 - Multi-Agent attempt 1: checkout children could not pass the whole-project verifier with the other module intentionally absent. Parent requested input; the controller was stopped, all state retained. Ruling: permit exact single-component `javac -d build <fixture component>` verification for children, with final whole-project verifier mandatory on the parent. Do not widen to arbitrary commands. Explicitly instruct verification after Git operations because all shell calls conservatively invalidate earlier verification.
 - RC2 additionally clears derived JSON state after ambiguous later prose, preserves source excerpts, and exposes installed release identity separately from API contract version. Targeted RC2 suite: 23 passed.
 - Ruling: these real-experiment findings require a new candidate and complete automated rerun; RC1 evidence is historical and is not attributed to RC2.
+
+## RC2 observations and RC3 corrective work
+
+- RC2 `0ccc9f3`: 953 passed, 2 skipped, 2 dependency warnings. Installed wheel, API/web/Worker and no-Java-PATH startup/shutdown passed locally.
+- RC2 original MCP paired run: FULL 4/10, LAZY 10/10; six FULL failures reported incomplete provider responses. Long context: one complete run, two incomplete provider responses. Do not infer rate limit or quota without a concrete error code.
+- RC2 multi-Agent: 0/3. Observed invented role names, invalid metadata arguments, denied Git chaining, and incomplete provider responses. RC3 adds actionable parameter/role diagnostics and safe allowlisted provider error codes without logging response bodies or secrets.
+- Ruling: the fixed benchmark controller accepts exactly one `git add ... && git commit ...` pair and exact component compilation through either shell tool — these are normal fixture operations, not implementation assistance — ordinary compilation still does not satisfy the required verification receipt.
+- Diagnostic repeat stopped after a child requested input. Parent prompt had omitted the verification tool name from its child instructions. RC3 asks the parent to forward the tool name explicitly; it still owns all delegation and implementation.
+- Ruling: stop and record an attempted benchmark when any child needs input — unattended waiting cannot resolve that condition — failure remains in the record instead of spending the entire timeout.
+- Targeted regression: 31 passed (`reports/diagnostics-final.xml`), including controller intervention, strict command allowlist, safe provider diagnostics and invalid argument guidance. No source fixture answers changed.
+- Ruling: run final paid campaigns serially to reduce concurrent load while diagnosing service failures; this does not establish concurrency as their cause. Preserve every attempted run and do not pool best cases.

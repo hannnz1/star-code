@@ -142,8 +142,11 @@ class ToolRegistry:
                 self.files.policy.resolve(call.arguments["path"])
         except PermissionError as error:
             return ToolResult(call_id=call.id, status="denied", content=str(error), error_code="PATH_DENIED")
-        except jsonschema.ValidationError:
-            return ToolResult(call_id=call.id, status="error", content="Tool arguments do not match the required schema", error_code="INVALID_ARGUMENTS")
+        except jsonschema.ValidationError as error:
+            fields = ', '.join(definition.parameters.get('properties', {})) or '(none; use {})'
+            required = ', '.join(definition.parameters.get('required', [])) or '(none)'
+            diagnostic = f'Invalid arguments for {call.name}: {error.validator}. Allowed top-level fields: {fields}. Required: {required}. Retry using the declared schema; do not add metadata fields.'
+            return ToolResult(call_id=call.id, status="error", content=ctx.safe(diagnostic), error_code="INVALID_ARGUMENTS")
         record = ctx.repo.prepare_call(ctx.task_id, ctx.owner, ctx.epoch, call.id, call.name, call.arguments, definition.risk)
         if record["status"] in {"DONE", "FAILED"}:
             saved = record["result"]

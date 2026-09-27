@@ -64,7 +64,7 @@ class DurableRoles:
     def prompt(self, name, prompt, *, isolated=False):
         if name not in self.custom:
             if name not in {'general', 'explore', 'plan', 'verification'}:
-                raise ValueError('Unknown role; use list_roles')
+                raise ValueError('Unknown role. Builtin roles: general, explore, plan, verification. Use list_roles with {} for registered project roles, or omit role to use general. Role is not a worker display name.')
             return role_prompt(name, prompt)
         item = self.custom[name]
         meta = item['meta']

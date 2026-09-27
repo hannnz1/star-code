@@ -235,3 +235,17 @@ def test_later_prose_invalidates_derived_json_state_without_losing_sources():
     records = json.loads(result[1]['content'][len(RETAINED_PREFIX):])
     assert not any(r['role'] == 'latest_explicit_user_json_values' for r in records)
     assert 'timeout_ms 5000' in json.dumps(result)
+
+
+async def test_invalid_tool_parameters_explain_contract_without_echoing_values(tmp_path):
+    repo, task, worker = runtime(tmp_path, ScriptedProvider([]))
+    owned = repo.claim_next('test')
+    registry = ToolRegistry(ExecutionContext(worker.settings, repo, owned, 'test'))
+    result = await registry.execute(ToolCall(id='bad', name='list_roles', arguments={'call_id': 'private-user-value'}))
+    assert result.status == 'error'
+    assert 'additionalProperties' in result.content
+    assert 'list_roles' in result.content
+    assert 'private-user-value' not in result.content
+    assert repo.tool_attempts(task.id) == 0
+    with pytest.raises(ValueError, match='general'):
+        registry.roles.prompt('invented-worker', 'Do work')

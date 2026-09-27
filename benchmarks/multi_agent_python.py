@@ -36,6 +36,10 @@ def contributions_valid(base, components, contributions):
             and {name for c in contributions for name in c['changed']} == set(components))
 
 
+def intervention_required(statuses):
+    return any(status in {'WAITING_INPUT', 'INTERRUPTED'} for status in statuses)
+
+
 def approve_fixture_action(name, args):
     if name == 'spawn_worktree':
         return True  # production binds exact base/path/role and checks workspace
@@ -46,9 +50,15 @@ def approve_fixture_action(name, args):
     if name != 'run_command':
         return False
     command = args.get('command', '')
+    if command in {'javac -d build ' + path for path in COMPONENTS}:
+        return True  # Compilation is permitted, but does not create a verification receipt.
+    if '&&' in command:
+        parts = [part.strip() for part in command.split('&&')]
+        return (len(parts) == 2 and parts[0].startswith('git add ') and parts[1].startswith('git commit ')
+                and all(approve_fixture_action(name, {'command': part}) for part in parts))
     if any(char in command for char in '\n\r;&|`$><:') or '..' in command:
         return False
-    return bool(re.fullmatch(r'git (?:status|rev-parse|log|diff|show|add|commit) [a-zA-Z0-9_./\\ :"\-=]+|git status', command))
+    return bool(re.fullmatch(r'''git (?:status|rev-parse|log|diff|show|add|commit) [a-zA-Z0-9_./\\ :"'\-=]+|git status''', command))
 
 
 def hashes(root):
@@ -96,15 +106,16 @@ async def run(args):
         ws = repo.register_workspace(str(workspace))
         prompt = ('Read README.md and contract.json. Implement the two independent components by spawning exactly two children '
                   'in separate worktrees at commit ' + base + '. Spawn both before waiting. Each child must read the contract, '
+                  'Include the tool name verify_command explicitly in each child prompt, not only the shell command. '
                   'implement only its assigned component, then run verify_command with exactly javac -d build <assigned component path> '
                   '(for example javac -d build src/stats/Mean.java). The full verifier cannot pass inside a child before the other component is integrated. '
-                  'Each child must commit only its source with separate git add and git commit calls. '
+                  'Each child must commit only its source with git add and git commit (separate calls or one git add ... && git commit ... pair). '
                   'Any run_command counts as a potential mutation in this runtime, including git status/log. '
                   'Run the component verify_command again AFTER all git calls, immediately before the child final answer. '
                   'Collect both child results, review exact commits using worktree_manage, and integrate both into the main checkout '
                   '(worktree_manage action integrate supports divergent commits). Preserve README, contract, tests and verify.ps1. '
                   'After the final integration and all other commands you must run verify_command LAST with exactly: ' + VERIFY + '. '
-                  'No shell chaining, no push, no checkout deletion. Plain git status/rev-parse/log/diff/show/add/commit commands '
+                  'No shell chaining except a single git add ... && git commit ... pair; no push, no checkout deletion. Plain git status/rev-parse/log/diff/show/add/commit commands '
                   'and the exact verifier/compiler commands are approved; other commands are denied. This is a coding task, not a speed claim.')
         task = repo.create(TaskRequest(prompt=prompt, scenario='coding', workspace_id=ws['id'], client_request_id=case))
         stopped = asyncio.Event()
@@ -117,11 +128,12 @@ async def run(args):
         start = time.monotonic()
         try:
             while time.monotonic() - start < 1200:
-                for member in [repo.get(task.id), *repo.children(task.id)]:
+                members = [repo.get(task.id), *repo.children(task.id)]
+                for member in members:
                     for approval in repo.approvals(member.id):
                         if approval['status'] == 'PENDING':
                             repo.decide_approval(approval['id'], approve_fixture_action(approval['name'], approval['arguments']), approval['action_digest'])
-                if repo.get(task.id).status in TERMINAL | {'WAITING_INPUT', 'INTERRUPTED'}:
+                if repo.get(task.id).status in TERMINAL or intervention_required([m.status for m in members]):
                     break
                 await asyncio.sleep(.1)
         finally:

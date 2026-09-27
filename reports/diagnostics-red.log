@@ -1,0 +1,38 @@
+......F...............F                                                  [100%]
+================================== FAILURES ===================================
+___ test_failed_response_exposes_only_safe_code_and_never_dispatches_calls ____
+
+    async def test_failed_response_exposes_only_safe_code_and_never_dispatches_calls():
+        events = [{'type': 'response.output_item.done', 'output_index': 0,
+                   'item': {'type': 'function_call', 'name': 'write_file', 'call_id': 'x', 'arguments': '{}'}},
+                  {'type': 'response.failed', 'response': {'error': {'code': 'rate_limit_exceeded', 'message': 'never-log-key'}}}]
+        async with httpx.AsyncClient(transport=httpx.MockTransport(lambda r: httpx.Response(200, content=sse(events)))) as client:
+            actual = []
+            with pytest.raises(RuntimeError) as caught:
+                async for item in provider(client).stream([], []):
+                    actual.append(item)
+>       assert 'rate_limit_exceeded' in str(caught.value)
+E       AssertionError: assert 'rate_limit_exceeded' in 'Model response failed or was incomplete'
+E        +  where 'Model response failed or was incomplete' = str(ProviderError('Model response failed or was incomplete'))
+E        +    where ProviderError('Model response failed or was incomplete') = <ExceptionInfo ProviderError('Model response failed or was incomplete') tblen=3>.value
+
+tests\muse\unit\test_provider_stream.py:107: AssertionError
+____ test_invalid_tool_parameters_explain_contract_without_echoing_values _____
+
+tmp_path = WindowsPath('C:/Users/Administrator/Documents/Codex/2026-09-26/ai-starcode-muse-coding-agent-python/outputs/muse-next/work/diagnostics-red/test_invalid_tool_parameters_e0')
+
+    async def test_invalid_tool_parameters_explain_contract_without_echoing_values(tmp_path):
+        repo, task, worker = runtime(tmp_path, ScriptedProvider([]))
+        owned = repo.claim_next('test')
+        registry = ToolRegistry(ExecutionContext(worker.settings, repo, owned, 'test'))
+        result = await registry.execute(ToolCall(id='bad', name='list_roles', arguments={'call_id': 'private-user-value'}))
+        assert result.status == 'error'
+>       assert 'additionalProperties' in result.content
+E       AssertionError: assert 'additionalProperties' in 'Tool arguments do not match the required schema'
+E        +  where 'Tool arguments do not match the required schema' = ToolResult(call_id='bad', status='error', content='Tool arguments do not match the required schema', artifact_ids=[], error_code='INVALID_ARGUMENTS', metadata={}).content
+
+tests\test_migration_retention_loading.py:246: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/muse/unit/test_provider_stream.py::test_failed_response_exposes_only_safe_code_and_never_dispatches_calls
+FAILED tests/test_migration_retention_loading.py::test_invalid_tool_parameters_explain_contract_without_echoing_values
+2 failed, 21 passed in 2.60s

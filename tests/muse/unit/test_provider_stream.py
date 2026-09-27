@@ -93,3 +93,17 @@ async def test_http_failure_does_not_expose_response_or_key():
             _ = [e async for e in instance.stream([], [])]
         assert "401" in str(caught.value)
         assert "never-log-key" not in str(caught.value)
+
+
+async def test_failed_response_exposes_only_safe_code_and_never_dispatches_calls():
+    events = [{'type': 'response.output_item.done', 'output_index': 0,
+               'item': {'type': 'function_call', 'name': 'write_file', 'call_id': 'x', 'arguments': '{}'}},
+              {'type': 'response.failed', 'response': {'error': {'code': 'rate_limit_exceeded', 'message': 'never-log-key'}}}]
+    async with httpx.AsyncClient(transport=httpx.MockTransport(lambda r: httpx.Response(200, content=sse(events)))) as client:
+        actual = []
+        with pytest.raises(RuntimeError) as caught:
+            async for item in provider(client).stream([], []):
+                actual.append(item)
+    assert 'rate_limit_exceeded' in str(caught.value)
+    assert 'never-log-key' not in str(caught.value)
+    assert not any(e.type == 'call' for e in actual)

@@ -47,6 +47,8 @@ def test_multi_agent_overlap_requires_actual_running_intervals():
     assert approve_fixture_action('verify_command', {'command': 'powershell.exe -NoProfile -File ./verify.ps1'})
     assert not approve_fixture_action('run_command', {'command': 'git status; Remove-Item C:\\data -Recurse'})
     assert not approve_fixture_action('run_command', {'command': 'git push origin HEAD'})
+    assert approve_fixture_action('run_command', {'command': 'git add src/stats/Mean.java && git commit -m "Implement mean"'})
+    assert not approve_fixture_action('run_command', {'command': 'git add src/stats/Mean.java && git push origin HEAD'})
     assert approve_fixture_action('verify_command', {'command': 'javac -d build src/stats/Mean.java'})
     assert not approve_fixture_action('verify_command', {'command': 'javac -d C:/outside src/stats/Mean.java'})
 
@@ -82,6 +84,16 @@ def test_multi_agent_gate_rejects_idle_children_even_when_parent_verifier_passes
     assert contributions_valid('base', ['a.py', 'b.py'], good)
     good[1]['integrated'] = False
     assert not contributions_valid('base', ['a.py', 'b.py'], good)
+
+
+def test_multi_agent_controller_stops_for_child_input_without_treating_it_as_pass():
+    from benchmarks.multi_agent_python import intervention_required, approve_fixture_action
+    assert intervention_required(['PAUSED', 'WAITING_INPUT', 'SUCCEEDED'])
+    assert intervention_required(['RUNNING', 'INTERRUPTED'])
+    assert not intervention_required(['PAUSED', 'FAILED', 'RUNNING'])
+    assert not intervention_required(['RUNNING', 'SUCCEEDED'])
+    assert approve_fixture_action('run_command', {'command': 'javac -d build src/stats/Mean.java'})
+    assert not approve_fixture_action('run_command', {'command': 'javac -d C:/outside src/stats/Mean.java'})
 
 
 def test_export_uses_the_actual_frozen_manifest(tmp_path):
