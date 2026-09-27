@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 import time
 import uuid
 from pathlib import Path
@@ -21,6 +22,21 @@ def encode(value) -> str:
 
 def timestamp(value: float | None) -> float:
     return time.time() if value is None else value
+
+
+_NO_CHANGES = re.compile(
+    r'\bwithout (?:changing|modifying|editing|writing|altering) (?:any |the )?(?:files?|code|project)\b'
+    r'|\bdo not (?:change|modify|edit|write|alter) (?:any |the )?(?:files?|code|project)\b'
+    r'|^\s*(?:please )?(?:read[- ]only|analyze only)\b'
+    r'|^\s*(?:请)?只读(?:分析|查看|检查)'
+    r'|(?:不要|不|请勿)(?:修改|改动|编辑|写入)(?:任何)?(?:文件|代码|项目)',
+    re.IGNORECASE,
+)
+
+
+def explicit_read_only(prompt: str) -> bool:
+    """Honor unambiguous no-write instructions even when the client omits the flag."""
+    return bool(_NO_CHANGES.search(prompt))
 
 
 def row_task(row) -> TaskRecord:
@@ -94,6 +110,8 @@ class TaskRepository(DelegationMixin, TeamMixin, ConversationMixin):
         return task
 
     def create(self, request: TaskRequest) -> TaskRecord:
+        if not request.read_only and explicit_read_only(request.prompt):
+            request = request.model_copy(update={'read_only': True})
         now = time.time()
         with self.db.transaction() as conn:
             old = conn.execute(text("SELECT * FROM tasks WHERE client_request_id=:key"), {"key": request.client_request_id}).mappings().first()
