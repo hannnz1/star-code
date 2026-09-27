@@ -58,6 +58,12 @@ def fact_covered(fact, content, case):
                     and re.search(rf"(?im)^\|\s*{product}\s*\|\s*{price}\s*\|", content))
     if case == "R04" and fact == "90 projects":
         return bool(re.search(r"(?im)^\s*[-*]?\s*\*{0,2}projects\s*:\*{0,2}\s*90\b", content))
+    if case == "D01" and fact in {"Budget 42000 USD", "Budget 61000 USD", "Budget 73000 USD"}:
+        amount = fact.split()[1]
+        project = {"42000": "Orion", "61000": "Vega", "73000": "Lyra"}[amount]
+        display = re.escape(f"{int(amount):,}")
+        return bool(re.search(r"(?im)^\|\s*Project\s*\|\s*Budget\s*\|", content)
+                    and re.search(rf"(?im)^\|\s*{project}\s*\|\s*USD\s*(?:{display}|{amount})\s*\|", content))
     return False
 
 

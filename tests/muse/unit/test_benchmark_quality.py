@@ -59,3 +59,18 @@ def test_structured_research_facts_keep_units_and_product_association():
     fields = '# Product information: Project Cedar\n- **Price:** 240 USD\n- **Projects:** 90'
     assert fact_covered('90 projects', fields, 'R04')
     assert not fact_covered('90 projects', fields.replace('**Projects:** 90', '**Projects:** 19'), 'R04')
+
+
+def test_document_budget_table_accepts_currency_before_amount_only_for_correct_project():
+    from benchmarks.run import fact_covered
+
+    table = '''| Project | Budget | Owner |
+|---|---:|---|
+| Lyra | USD 73,000 | Mira |
+| Orion | USD 42,000 | Maya |
+| Vega | USD 61,000 | Leon |'''
+    assert fact_covered('Budget 42000 USD', table, 'D01')
+    assert fact_covered('Budget 61000 USD', table, 'D01')
+    assert fact_covered('Budget 73000 USD', table, 'D01')
+    assert not fact_covered('Budget 42000 USD', table.replace('| Orion | USD 42,000 |', '| Orion | USD 41,000 |'), 'D01')
+    assert not fact_covered('Budget 42000 USD', table.replace('| Orion | USD 42,000 |', '| Orion | EUR 42,000 |'), 'D01')
