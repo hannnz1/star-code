@@ -1,0 +1,117 @@
+[
+  {
+    "task_id": "c6861cfe77eb4bc0813496047d3e9ecd",
+    "id": "call_DsCU760Jz45t8w69oSoqICZA",
+    "name": "list_files",
+    "arguments": {
+      "path": ".",
+      "pattern": "**/*"
+    },
+    "risk": "read",
+    "status": "DONE",
+    "digest": "a82b799b3a1e469b3b730de4a9f72e11ebe9c90a3f886bed5666889c1b70fed0",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_DsCU760Jz45t8w69oSoqICZA",
+      "content": "{\"paths\": [\"broken.pdf\", \"scan.pdf\", \"valid.txt\"], \"truncated\": false}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790457191.728238,
+    "updated_at": 1790457191.734461
+  },
+  {
+    "task_id": "c6861cfe77eb4bc0813496047d3e9ecd",
+    "id": "call_80naCLZub2yLFSgNfwuQmm0k",
+    "name": "read_document",
+    "arguments": {
+      "path": "valid.txt"
+    },
+    "risk": "read",
+    "status": "DONE",
+    "digest": "557552623f8d3d03e4128f491cf3bc31e9492685357257520b04940c56b0cc2b",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_80naCLZub2yLFSgNfwuQmm0k",
+      "content": "{\"path\": \"valid.txt\", \"sha256\": \"4536bba88cb8940d1adba0208dd4c485b5d4957a72502f0c7b10c40df1a09af9\", \"text\": \"The readable document's fact: project Falcon launches in May 2027.\", \"truncated\": false}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790457191.7386415,
+    "updated_at": 1790457191.7478247
+  },
+  {
+    "task_id": "c6861cfe77eb4bc0813496047d3e9ecd",
+    "id": "call_tOUiAT4gqT94ANVyuHx837gC",
+    "name": "read_document",
+    "arguments": {
+      "path": "scan.pdf"
+    },
+    "risk": "read",
+    "status": "FAILED",
+    "digest": "1d9d849c1029c769dce8627af07693bae05f3cce3e82b0478272cc413e0c20f0",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_tOUiAT4gqT94ANVyuHx837gC",
+      "content": "PDF has no extractable text; OCR is not supported in this version",
+      "error_code": "TOOL_ERROR",
+      "metadata": {},
+      "status": "error"
+    },
+    "attempts": 1,
+    "created_at": 1790457191.754,
+    "updated_at": 1790457191.7664285
+  },
+  {
+    "task_id": "c6861cfe77eb4bc0813496047d3e9ecd",
+    "id": "call_xdal8gwHptHO7CNYbbnaqLra",
+    "name": "read_document",
+    "arguments": {
+      "path": "broken.pdf"
+    },
+    "risk": "read",
+    "status": "FAILED",
+    "digest": "807d7f88612725ffc49eaf509e11d8a84bbb3aab9c5b78570979f58240fc91d1",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_xdal8gwHptHO7CNYbbnaqLra",
+      "content": "PDF could not be parsed or is encrypted",
+      "error_code": "TOOL_ERROR",
+      "metadata": {},
+      "status": "error"
+    },
+    "attempts": 1,
+    "created_at": 1790457191.7736893,
+    "updated_at": 1790457191.786459
+  },
+  {
+    "task_id": "c6861cfe77eb4bc0813496047d3e9ecd",
+    "id": "call_2mVDL6fluTHqp2Y5FzxJSndu",
+    "name": "save_artifact",
+    "arguments": {
+      "content": "# Summary\n\n## valid.txt\n- Read successfully.\n- Content: \"The readable document's fact: project Falcon launches in May 2027.\"\n\n## Unsupported file: scan.pdf\n- Could not be extracted.\n- Reason: PDF has no extractable text; OCR is not supported in this version.\n- No PDF content is inferred or invented.\n\n## Damaged file: broken.pdf\n- Could not be extracted.\n- Reason: PDF could not be parsed or is encrypted.\n- No PDF content is inferred or invented.\n",
+      "media_type": "text/markdown",
+      "name": "summary.md"
+    },
+    "risk": "write",
+    "status": "DONE",
+    "digest": "5bae2c6d5af716bd9a2b58140e2d01d9c8cf6b74b198d57d90548db91e1e2f34",
+    "result": {
+      "artifact_ids": [
+        "c7ae66e69cdc4bb9bd7c5b438538e48b"
+      ],
+      "call_id": "call_2mVDL6fluTHqp2Y5FzxJSndu",
+      "content": "{\"id\": \"c7ae66e69cdc4bb9bd7c5b438538e48b\", \"task_id\": \"c6861cfe77eb4bc0813496047d3e9ecd\", \"name\": \"summary.md\", \"media_type\": \"text/markdown\", \"sha256\": \"dcd77b7b8eeb7f976a5284038f471119df21dea78ceb4cfc308c3ecd040ab8dc\", \"version\": 1, \"created_at\": 1790457193.554369}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790457193.550348,
+    "updated_at": 1790457193.5564387
+  }
+]

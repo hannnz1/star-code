@@ -1,0 +1,710 @@
+..........FFFFFFFFFFFFFFFFFFFF..F..............F........................ [  7%]
+........................................................................ [ 15%]
+........................................................................ [ 23%]
+.........s.............................................................. [ 31%]
+........................................................................ [ 39%]
+........................................................................ [ 47%]
+........................................................................ [ 55%]
+........................................................................ [ 63%]
+.s...................................................................... [ 71%]
+........................................................................ [ 79%]
+........................................................................ [ 87%]
+........................................................................ [ 95%]
+..........................................                               [100%]
+================================== FAILURES ===================================
+_ test_real_process_kill_preserves_checkpoint_and_fences_unknown_writes[read-0] _
+
+tmp_path = WindowsPath('C:/Users/Administrator/Documents/Codex/2026-09-26/ai-starcode-muse-coding-agent-python/outputs/muse-next/work/unattended-regression/test_real_process_kill_preserv0')
+risk = 'read', iteration = 0
+
+    @pytest.mark.parametrize("iteration", range(10))
+    @pytest.mark.parametrize("risk", ["read", "write"])
+    def test_real_process_kill_preserves_checkpoint_and_fences_unknown_writes(tmp_path, risk, iteration):
+        repo, ws = make_repo(tmp_path)
+        task = create(repo, ws)
+        barrier = tmp_path / "barrier"
+        helper = Path(__file__).resolve().parents[1] / "helpers" / "crash_state.py"
+        process = subprocess.Popen([sys.executable,str(helper),str(tmp_path / "state.sqlite3"),str(barrier),risk], stdout=subprocess.DEVNULL,stderr=subprocess.PIPE,
+                                   creationflags=subprocess.CREATE_NO_WINDOW if os.name=="nt" else 0)
+        try:
+            deadline=time.monotonic()+10
+            while not barrier.exists() and process.poll() is None and time.monotonic()<deadline: time.sleep(.02)
+            assert barrier.exists()
+            process.kill();process.wait(5)
+            repo.recover_expired_tasks(now=time.time()+100)
+            saved=repo.get(task.id)
+            assert saved.checkpoint["model_requests"]==3
+>           assert saved.checkpoint["active_seconds"]==7
+E           assert 66.9983057975769 == 7
+
+tests\muse\integration\test_crash_process.py:29: AssertionError
+_ test_real_process_kill_preserves_checkpoint_and_fences_unknown_writes[read-1] _
+
+tmp_path = WindowsPath('C:/Users/Administrator/Documents/Codex/2026-09-26/ai-starcode-muse-coding-agent-python/outputs/muse-next/work/unattended-regression/test_real_process_kill_preserv1')
+risk = 'read', iteration = 1
+
+    @pytest.mark.parametrize("iteration", range(10))
+    @pytest.mark.parametrize("risk", ["read", "write"])
+    def test_real_process_kill_preserves_checkpoint_and_fences_unknown_writes(tmp_path, risk, iteration):
+        repo, ws = make_repo(tmp_path)
+        task = create(repo, ws)
+        barrier = tmp_path / "barrier"
+        helper = Path(__file__).resolve().parents[1] / "helpers" / "crash_state.py"
+        process = subprocess.Popen([sys.executable,str(helper),str(tmp_path / "state.sqlite3"),str(barrier),risk], stdout=subprocess.DEVNULL,stderr=subprocess.PIPE,
+                                   creationflags=subprocess.CREATE_NO_WINDOW if os.name=="nt" else 0)
+        try:
+            deadline=time.monotonic()+10
+            while not barrier.exists() and process.poll() is None and time.monotonic()<deadline: time.sleep(.02)
+            assert barrier.exists()
+            process.kill();process.wait(5)
+            repo.recover_expired_tasks(now=time.time()+100)
+            saved=repo.get(task.id)
+            assert saved.checkpoint["model_requests"]==3
+>           assert saved.checkpoint["active_seconds"]==7
+E           assert 66.99896669387817 == 7
+
+tests\muse\integration\test_crash_process.py:29: AssertionError
+_ test_real_process_kill_preserves_checkpoint_and_fences_unknown_writes[read-2] _
+
+tmp_path = WindowsPath('C:/Users/Administrator/Documents/Codex/2026-09-26/ai-starcode-muse-coding-agent-python/outputs/muse-next/work/unattended-regression/test_real_process_kill_preserv2')
+risk = 'read', iteration = 2
+
+    @pytest.mark.parametrize("iteration", range(10))
+    @pytest.mark.parametrize("risk", ["read", "write"])
+    def test_real_process_kill_preserves_checkpoint_and_fences_unknown_writes(tmp_path, risk, iteration):
+        repo, ws = make_repo(tmp_path)
+        task = create(repo, ws)
+        barrier = tmp_path / "barrier"
+        helper = Path(__file__).resolve().parents[1] / "helpers" / "crash_state.py"
+        process = subprocess.Popen([sys.executable,str(helper),str(tmp_path / "state.sqlite3"),str(barrier),risk], stdout=subprocess.DEVNULL,stderr=subprocess.PIPE,
+                                   creationflags=subprocess.CREATE_NO_WINDOW if os.name=="nt" else 0)
+        try:
+            deadline=time.monotonic()+10
+            while not barrier.exists() and process.poll() is None and time.monotonic()<deadline: time.sleep(.02)
+            assert barrier.exists()
+            process.kill();process.wait(5)
+            repo.recover_expired_tasks(now=time.time()+100)
+            saved=repo.get(task.id)
+            assert saved.checkpoint["model_requests"]==3
+>           assert saved.checkpoint["active_seconds"]==7
+E           assert 66.99799513816833 == 7
+
+tests\muse\integration\test_crash_process.py:29: AssertionError
+_ test_real_process_kill_preserves_checkpoint_and_fences_unknown_writes[read-3] _
+
+tmp_path = WindowsPath('C:/Users/Administrator/Documents/Codex/2026-09-26/ai-starcode-muse-coding-agent-python/outputs/muse-next/work/unattended-regression/test_real_process_kill_preserv3')
+risk = 'read', iteration = 3
+
+    @pytest.mark.parametrize("iteration", range(10))
+    @pytest.mark.parametrize("risk", ["read", "write"])
+    def test_real_process_kill_preserves_checkpoint_and_fences_unknown_writes(tmp_path, risk, iteration):
+        repo, ws = make_repo(tmp_path)
+        task = create(repo, ws)
+        barrier = tmp_path / "barrier"
+        helper = Path(__file__).resolve().parents[1] / "helpers" / "crash_state.py"
+        process = subprocess.Popen([sys.executable,str(helper),str(tmp_path / "state.sqlite3"),str(barrier),risk], stdout=subprocess.DEVNULL,stderr=subprocess.PIPE,
+                                   creationflags=subprocess.CREATE_NO_WINDOW if os.name=="nt" else 0)
+        try:
+            deadline=time.monotonic()+10
+            while not barrier.exists() and process.poll() is None and time.monotonic()<deadline: time.sleep(.02)
+            assert barrier.exists()
+            process.kill();process.wait(5)
+            repo.recover_expired_tasks(now=time.time()+100)
+            saved=repo.get(task.id)
+            assert saved.checkpoint["model_requests"]==3
+>           assert saved.checkpoint["active_seconds"]==7
+E           assert 66.9974935054779 == 7
+
+tests\muse\integration\test_crash_process.py:29: AssertionError
+_ test_real_process_kill_preserves_checkpoint_and_fences_unknown_writes[read-4] _
+
+tmp_path = WindowsPath('C:/Users/Administrator/Documents/Codex/2026-09-26/ai-starcode-muse-coding-agent-python/outputs/muse-next/work/unattended-regression/test_real_process_kill_preserv4')
+risk = 'read', iteration = 4
+
+    @pytest.mark.parametrize("iteration", range(10))
+    @pytest.mark.parametrize("risk", ["read", "write"])
+    def test_real_process_kill_preserves_checkpoint_and_fences_unknown_writes(tmp_path, risk, iteration):
+        repo, ws = make_repo(tmp_path)
+        task = create(repo, ws)
+        barrier = tmp_path / "barrier"
+        helper = Path(__file__).resolve().parents[1] / "helpers" / "crash_state.py"
+        process = subprocess.Popen([sys.executable,str(helper),str(tmp_path / "state.sqlite3"),str(barrier),risk], stdout=subprocess.DEVNULL,stderr=subprocess.PIPE,
+                                   creationflags=subprocess.CREATE_NO_WINDOW if os.name=="nt" else 0)
+        try:
+            deadline=time.monotonic()+10
+            while not barrier.exists() and process.poll() is None and time.monotonic()<deadline: time.sleep(.02)
+            assert barrier.exists()
+            process.kill();process.wait(5)
+            repo.recover_expired_tasks(now=time.time()+100)
+            saved=repo.get(task.id)
+            assert saved.checkpoint["model_requests"]==3
+>           assert saved.checkpoint["active_seconds"]==7
+E           assert 66.99791431427002 == 7
+
+tests\muse\integration\test_crash_process.py:29: AssertionError
+_ test_real_process_kill_preserves_checkpoint_and_fences_unknown_writes[read-5] _
+
+tmp_path = WindowsPath('C:/Users/Administrator/Documents/Codex/2026-09-26/ai-starcode-muse-coding-agent-python/outputs/muse-next/work/unattended-regression/test_real_process_kill_preserv5')
+risk = 'read', iteration = 5
+
+    @pytest.mark.parametrize("iteration", range(10))
+    @pytest.mark.parametrize("risk", ["read", "write"])
+    def test_real_process_kill_preserves_checkpoint_and_fences_unknown_writes(tmp_path, risk, iteration):
+        repo, ws = make_repo(tmp_path)
+        task = create(repo, ws)
+        barrier = tmp_path / "barrier"
+        helper = Path(__file__).resolve().parents[1] / "helpers" / "crash_state.py"
+        process = subprocess.Popen([sys.executable,str(helper),str(tmp_path / "state.sqlite3"),str(barrier),risk], stdout=subprocess.DEVNULL,stderr=subprocess.PIPE,
+                                   creationflags=subprocess.CREATE_NO_WINDOW if os.name=="nt" else 0)
+        try:
+            deadline=time.monotonic()+10
+            while not barrier.exists() and process.poll() is None and time.monotonic()<deadline: time.sleep(.02)
+            assert barrier.exists()
+            process.kill();process.wait(5)
+            repo.recover_expired_tasks(now=time.time()+100)
+            saved=repo.get(task.id)
+            assert saved.checkpoint["model_requests"]==3
+>           assert saved.checkpoint["active_seconds"]==7
+E           assert 66.99800038337708 == 7
+
+tests\muse\integration\test_crash_process.py:29: AssertionError
+_ test_real_process_kill_preserves_checkpoint_and_fences_unknown_writes[read-6] _
+
+tmp_path = WindowsPath('C:/Users/Administrator/Documents/Codex/2026-09-26/ai-starcode-muse-coding-agent-python/outputs/muse-next/work/unattended-regression/test_real_process_kill_preserv6')
+risk = 'read', iteration = 6
+
+    @pytest.mark.parametrize("iteration", range(10))
+    @pytest.mark.parametrize("risk", ["read", "write"])
+    def test_real_process_kill_preserves_checkpoint_and_fences_unknown_writes(tmp_path, risk, iteration):
+        repo, ws = make_repo(tmp_path)
+        task = create(repo, ws)
+        barrier = tmp_path / "barrier"
+        helper = Path(__file__).resolve().parents[1] / "helpers" / "crash_state.py"
+        process = subprocess.Popen([sys.executable,str(helper),str(tmp_path / "state.sqlite3"),str(barrier),risk], stdout=subprocess.DEVNULL,stderr=subprocess.PIPE,
+                                   creationflags=subprocess.CREATE_NO_WINDOW if os.name=="nt" else 0)
+        try:
+            deadline=time.monotonic()+10
+            while not barrier.exists() and process.poll() is None and time.monotonic()<deadline: time.sleep(.02)
+            assert barrier.exists()
+            process.kill();process.wait(5)
+            repo.recover_expired_tasks(now=time.time()+100)
+            saved=repo.get(task.id)
+            assert saved.checkpoint["model_requests"]==3
+>           assert saved.checkpoint["active_seconds"]==7
+E           assert 66.99810481071472 == 7
+
+tests\muse\integration\test_crash_process.py:29: AssertionError
+_ test_real_process_kill_preserves_checkpoint_and_fences_unknown_writes[read-7] _
+
+tmp_path = WindowsPath('C:/Users/Administrator/Documents/Codex/2026-09-26/ai-starcode-muse-coding-agent-python/outputs/muse-next/work/unattended-regression/test_real_process_kill_preserv7')
+risk = 'read', iteration = 7
+
+    @pytest.mark.parametrize("iteration", range(10))
+    @pytest.mark.parametrize("risk", ["read", "write"])
+    def test_real_process_kill_preserves_checkpoint_and_fences_unknown_writes(tmp_path, risk, iteration):
+        repo, ws = make_repo(tmp_path)
+        task = create(repo, ws)
+        barrier = tmp_path / "barrier"
+        helper = Path(__file__).resolve().parents[1] / "helpers" / "crash_state.py"
+        process = subprocess.Popen([sys.executable,str(helper),str(tmp_path / "state.sqlite3"),str(barrier),risk], stdout=subprocess.DEVNULL,stderr=subprocess.PIPE,
+                                   creationflags=subprocess.CREATE_NO_WINDOW if os.name=="nt" else 0)
+        try:
+            deadline=time.monotonic()+10
+            while not barrier.exists() and process.poll() is None and time.monotonic()<deadline: time.sleep(.02)
+            assert barrier.exists()
+            process.kill();process.wait(5)
+            repo.recover_expired_tasks(now=time.time()+100)
+            saved=repo.get(task.id)
+            assert saved.checkpoint["model_requests"]==3
+>           assert saved.checkpoint["active_seconds"]==7
+E           assert 66.99832057952881 == 7
+
+tests\muse\integration\test_crash_process.py:29: AssertionError
+_ test_real_process_kill_preserves_checkpoint_and_fences_unknown_writes[read-8] _
+
+tmp_path = WindowsPath('C:/Users/Administrator/Documents/Codex/2026-09-26/ai-starcode-muse-coding-agent-python/outputs/muse-next/work/unattended-regression/test_real_process_kill_preserv8')
+risk = 'read', iteration = 8
+
+    @pytest.mark.parametrize("iteration", range(10))
+    @pytest.mark.parametrize("risk", ["read", "write"])
+    def test_real_process_kill_preserves_checkpoint_and_fences_unknown_writes(tmp_path, risk, iteration):
+        repo, ws = make_repo(tmp_path)
+        task = create(repo, ws)
+        barrier = tmp_path / "barrier"
+        helper = Path(__file__).resolve().parents[1] / "helpers" / "crash_state.py"
+        process = subprocess.Popen([sys.executable,str(helper),str(tmp_path / "state.sqlite3"),str(barrier),risk], stdout=subprocess.DEVNULL,stderr=subprocess.PIPE,
+                                   creationflags=subprocess.CREATE_NO_WINDOW if os.name=="nt" else 0)
+        try:
+            deadline=time.monotonic()+10
+            while not barrier.exists() and process.poll() is None and time.monotonic()<deadline: time.sleep(.02)
+            assert barrier.exists()
+            process.kill();process.wait(5)
+            repo.recover_expired_tasks(now=time.time()+100)
+            saved=repo.get(task.id)
+            assert saved.checkpoint["model_requests"]==3
+>           assert saved.checkpoint["active_seconds"]==7
+E           assert 66.99815940856934 == 7
+
+tests\muse\integration\test_crash_process.py:29: AssertionError
+_ test_real_process_kill_preserves_checkpoint_and_fences_unknown_writes[read-9] _
+
+tmp_path = WindowsPath('C:/Users/Administrator/Documents/Codex/2026-09-26/ai-starcode-muse-coding-agent-python/outputs/muse-next/work/unattended-regression/test_real_process_kill_preserv9')
+risk = 'read', iteration = 9
+
+    @pytest.mark.parametrize("iteration", range(10))
+    @pytest.mark.parametrize("risk", ["read", "write"])
+    def test_real_process_kill_preserves_checkpoint_and_fences_unknown_writes(tmp_path, risk, iteration):
+        repo, ws = make_repo(tmp_path)
+        task = create(repo, ws)
+        barrier = tmp_path / "barrier"
+        helper = Path(__file__).resolve().parents[1] / "helpers" / "crash_state.py"
+        process = subprocess.Popen([sys.executable,str(helper),str(tmp_path / "state.sqlite3"),str(barrier),risk], stdout=subprocess.DEVNULL,stderr=subprocess.PIPE,
+                                   creationflags=subprocess.CREATE_NO_WINDOW if os.name=="nt" else 0)
+        try:
+            deadline=time.monotonic()+10
+            while not barrier.exists() and process.poll() is None and time.monotonic()<deadline: time.sleep(.02)
+            assert barrier.exists()
+            process.kill();process.wait(5)
+            repo.recover_expired_tasks(now=time.time()+100)
+            saved=repo.get(task.id)
+            assert saved.checkpoint["model_requests"]==3
+>           assert saved.checkpoint["active_seconds"]==7
+E           assert 66.99801659584045 == 7
+
+tests\muse\integration\test_crash_process.py:29: AssertionError
+_ test_real_process_kill_preserves_checkpoint_and_fences_unknown_writes[write-0] _
+
+tmp_path = WindowsPath('C:/Users/Administrator/Documents/Codex/2026-09-26/ai-starcode-muse-coding-agent-python/outputs/muse-next/work/unattended-regression/test_real_process_kill_preserv10')
+risk = 'write', iteration = 0
+
+    @pytest.mark.parametrize("iteration", range(10))
+    @pytest.mark.parametrize("risk", ["read", "write"])
+    def test_real_process_kill_preserves_checkpoint_and_fences_unknown_writes(tmp_path, risk, iteration):
+        repo, ws = make_repo(tmp_path)
+        task = create(repo, ws)
+        barrier = tmp_path / "barrier"
+        helper = Path(__file__).resolve().parents[1] / "helpers" / "crash_state.py"
+        process = subprocess.Popen([sys.executable,str(helper),str(tmp_path / "state.sqlite3"),str(barrier),risk], stdout=subprocess.DEVNULL,stderr=subprocess.PIPE,
+                                   creationflags=subprocess.CREATE_NO_WINDOW if os.name=="nt" else 0)
+        try:
+            deadline=time.monotonic()+10
+            while not barrier.exists() and process.poll() is None and time.monotonic()<deadline: time.sleep(.02)
+            assert barrier.exists()
+            process.kill();process.wait(5)
+            repo.recover_expired_tasks(now=time.time()+100)
+            saved=repo.get(task.id)
+            assert saved.checkpoint["model_requests"]==3
+>           assert saved.checkpoint["active_seconds"]==7
+E           assert 66.99799251556396 == 7
+
+tests\muse\integration\test_crash_process.py:29: AssertionError
+_ test_real_process_kill_preserves_checkpoint_and_fences_unknown_writes[write-1] _
+
+tmp_path = WindowsPath('C:/Users/Administrator/Documents/Codex/2026-09-26/ai-starcode-muse-coding-agent-python/outputs/muse-next/work/unattended-regression/test_real_process_kill_preserv11')
+risk = 'write', iteration = 1
+
+    @pytest.mark.parametrize("iteration", range(10))
+    @pytest.mark.parametrize("risk", ["read", "write"])
+    def test_real_process_kill_preserves_checkpoint_and_fences_unknown_writes(tmp_path, risk, iteration):
+        repo, ws = make_repo(tmp_path)
+        task = create(repo, ws)
+        barrier = tmp_path / "barrier"
+        helper = Path(__file__).resolve().parents[1] / "helpers" / "crash_state.py"
+        process = subprocess.Popen([sys.executable,str(helper),str(tmp_path / "state.sqlite3"),str(barrier),risk], stdout=subprocess.DEVNULL,stderr=subprocess.PIPE,
+                                   creationflags=subprocess.CREATE_NO_WINDOW if os.name=="nt" else 0)
+        try:
+            deadline=time.monotonic()+10
+            while not barrier.exists() and process.poll() is None and time.monotonic()<deadline: time.sleep(.02)
+            assert barrier.exists()
+            process.kill();process.wait(5)
+            repo.recover_expired_tasks(now=time.time()+100)
+            saved=repo.get(task.id)
+            assert saved.checkpoint["model_requests"]==3
+>           assert saved.checkpoint["active_seconds"]==7
+E           assert 66.99828553199768 == 7
+
+tests\muse\integration\test_crash_process.py:29: AssertionError
+_ test_real_process_kill_preserves_checkpoint_and_fences_unknown_writes[write-2] _
+
+tmp_path = WindowsPath('C:/Users/Administrator/Documents/Codex/2026-09-26/ai-starcode-muse-coding-agent-python/outputs/muse-next/work/unattended-regression/test_real_process_kill_preserv12')
+risk = 'write', iteration = 2
+
+    @pytest.mark.parametrize("iteration", range(10))
+    @pytest.mark.parametrize("risk", ["read", "write"])
+    def test_real_process_kill_preserves_checkpoint_and_fences_unknown_writes(tmp_path, risk, iteration):
+        repo, ws = make_repo(tmp_path)
+        task = create(repo, ws)
+        barrier = tmp_path / "barrier"
+        helper = Path(__file__).resolve().parents[1] / "helpers" / "crash_state.py"
+        process = subprocess.Popen([sys.executable,str(helper),str(tmp_path / "state.sqlite3"),str(barrier),risk], stdout=subprocess.DEVNULL,stderr=subprocess.PIPE,
+                                   creationflags=subprocess.CREATE_NO_WINDOW if os.name=="nt" else 0)
+        try:
+            deadline=time.monotonic()+10
+            while not barrier.exists() and process.poll() is None and time.monotonic()<deadline: time.sleep(.02)
+            assert barrier.exists()
+            process.kill();process.wait(5)
+            repo.recover_expired_tasks(now=time.time()+100)
+            saved=repo.get(task.id)
+            assert saved.checkpoint["model_requests"]==3
+>           assert saved.checkpoint["active_seconds"]==7
+E           assert 66.99778604507446 == 7
+
+tests\muse\integration\test_crash_process.py:29: AssertionError
+_ test_real_process_kill_preserves_checkpoint_and_fences_unknown_writes[write-3] _
+
+tmp_path = WindowsPath('C:/Users/Administrator/Documents/Codex/2026-09-26/ai-starcode-muse-coding-agent-python/outputs/muse-next/work/unattended-regression/test_real_process_kill_preserv13')
+risk = 'write', iteration = 3
+
+    @pytest.mark.parametrize("iteration", range(10))
+    @pytest.mark.parametrize("risk", ["read", "write"])
+    def test_real_process_kill_preserves_checkpoint_and_fences_unknown_writes(tmp_path, risk, iteration):
+        repo, ws = make_repo(tmp_path)
+        task = create(repo, ws)
+        barrier = tmp_path / "barrier"
+        helper = Path(__file__).resolve().parents[1] / "helpers" / "crash_state.py"
+        process = subprocess.Popen([sys.executable,str(helper),str(tmp_path / "state.sqlite3"),str(barrier),risk], stdout=subprocess.DEVNULL,stderr=subprocess.PIPE,
+                                   creationflags=subprocess.CREATE_NO_WINDOW if os.name=="nt" else 0)
+        try:
+            deadline=time.monotonic()+10
+            while not barrier.exists() and process.poll() is None and time.monotonic()<deadline: time.sleep(.02)
+            assert barrier.exists()
+            process.kill();process.wait(5)
+            repo.recover_expired_tasks(now=time.time()+100)
+            saved=repo.get(task.id)
+            assert saved.checkpoint["model_requests"]==3
+>           assert saved.checkpoint["active_seconds"]==7
+E           assert 66.99787449836731 == 7
+
+tests\muse\integration\test_crash_process.py:29: AssertionError
+_ test_real_process_kill_preserves_checkpoint_and_fences_unknown_writes[write-4] _
+
+tmp_path = WindowsPath('C:/Users/Administrator/Documents/Codex/2026-09-26/ai-starcode-muse-coding-agent-python/outputs/muse-next/work/unattended-regression/test_real_process_kill_preserv14')
+risk = 'write', iteration = 4
+
+    @pytest.mark.parametrize("iteration", range(10))
+    @pytest.mark.parametrize("risk", ["read", "write"])
+    def test_real_process_kill_preserves_checkpoint_and_fences_unknown_writes(tmp_path, risk, iteration):
+        repo, ws = make_repo(tmp_path)
+        task = create(repo, ws)
+        barrier = tmp_path / "barrier"
+        helper = Path(__file__).resolve().parents[1] / "helpers" / "crash_state.py"
+        process = subprocess.Popen([sys.executable,str(helper),str(tmp_path / "state.sqlite3"),str(barrier),risk], stdout=subprocess.DEVNULL,stderr=subprocess.PIPE,
+                                   creationflags=subprocess.CREATE_NO_WINDOW if os.name=="nt" else 0)
+        try:
+            deadline=time.monotonic()+10
+            while not barrier.exists() and process.poll() is None and time.monotonic()<deadline: time.sleep(.02)
+            assert barrier.exists()
+            process.kill();process.wait(5)
+            repo.recover_expired_tasks(now=time.time()+100)
+            saved=repo.get(task.id)
+            assert saved.checkpoint["model_requests"]==3
+>           assert saved.checkpoint["active_seconds"]==7
+E           assert 66.99731588363647 == 7
+
+tests\muse\integration\test_crash_process.py:29: AssertionError
+_ test_real_process_kill_preserves_checkpoint_and_fences_unknown_writes[write-5] _
+
+tmp_path = WindowsPath('C:/Users/Administrator/Documents/Codex/2026-09-26/ai-starcode-muse-coding-agent-python/outputs/muse-next/work/unattended-regression/test_real_process_kill_preserv15')
+risk = 'write', iteration = 5
+
+    @pytest.mark.parametrize("iteration", range(10))
+    @pytest.mark.parametrize("risk", ["read", "write"])
+    def test_real_process_kill_preserves_checkpoint_and_fences_unknown_writes(tmp_path, risk, iteration):
+        repo, ws = make_repo(tmp_path)
+        task = create(repo, ws)
+        barrier = tmp_path / "barrier"
+        helper = Path(__file__).resolve().parents[1] / "helpers" / "crash_state.py"
+        process = subprocess.Popen([sys.executable,str(helper),str(tmp_path / "state.sqlite3"),str(barrier),risk], stdout=subprocess.DEVNULL,stderr=subprocess.PIPE,
+                                   creationflags=subprocess.CREATE_NO_WINDOW if os.name=="nt" else 0)
+        try:
+            deadline=time.monotonic()+10
+            while not barrier.exists() and process.poll() is None and time.monotonic()<deadline: time.sleep(.02)
+            assert barrier.exists()
+            process.kill();process.wait(5)
+            repo.recover_expired_tasks(now=time.time()+100)
+            saved=repo.get(task.id)
+            assert saved.checkpoint["model_requests"]==3
+>           assert saved.checkpoint["active_seconds"]==7
+E           assert 66.99799799919128 == 7
+
+tests\muse\integration\test_crash_process.py:29: AssertionError
+_ test_real_process_kill_preserves_checkpoint_and_fences_unknown_writes[write-6] _
+
+tmp_path = WindowsPath('C:/Users/Administrator/Documents/Codex/2026-09-26/ai-starcode-muse-coding-agent-python/outputs/muse-next/work/unattended-regression/test_real_process_kill_preserv16')
+risk = 'write', iteration = 6
+
+    @pytest.mark.parametrize("iteration", range(10))
+    @pytest.mark.parametrize("risk", ["read", "write"])
+    def test_real_process_kill_preserves_checkpoint_and_fences_unknown_writes(tmp_path, risk, iteration):
+        repo, ws = make_repo(tmp_path)
+        task = create(repo, ws)
+        barrier = tmp_path / "barrier"
+        helper = Path(__file__).resolve().parents[1] / "helpers" / "crash_state.py"
+        process = subprocess.Popen([sys.executable,str(helper),str(tmp_path / "state.sqlite3"),str(barrier),risk], stdout=subprocess.DEVNULL,stderr=subprocess.PIPE,
+                                   creationflags=subprocess.CREATE_NO_WINDOW if os.name=="nt" else 0)
+        try:
+            deadline=time.monotonic()+10
+            while not barrier.exists() and process.poll() is None and time.monotonic()<deadline: time.sleep(.02)
+            assert barrier.exists()
+            process.kill();process.wait(5)
+            repo.recover_expired_tasks(now=time.time()+100)
+            saved=repo.get(task.id)
+            assert saved.checkpoint["model_requests"]==3
+>           assert saved.checkpoint["active_seconds"]==7
+E           assert 66.99822974205017 == 7
+
+tests\muse\integration\test_crash_process.py:29: AssertionError
+_ test_real_process_kill_preserves_checkpoint_and_fences_unknown_writes[write-7] _
+
+tmp_path = WindowsPath('C:/Users/Administrator/Documents/Codex/2026-09-26/ai-starcode-muse-coding-agent-python/outputs/muse-next/work/unattended-regression/test_real_process_kill_preserv17')
+risk = 'write', iteration = 7
+
+    @pytest.mark.parametrize("iteration", range(10))
+    @pytest.mark.parametrize("risk", ["read", "write"])
+    def test_real_process_kill_preserves_checkpoint_and_fences_unknown_writes(tmp_path, risk, iteration):
+        repo, ws = make_repo(tmp_path)
+        task = create(repo, ws)
+        barrier = tmp_path / "barrier"
+        helper = Path(__file__).resolve().parents[1] / "helpers" / "crash_state.py"
+        process = subprocess.Popen([sys.executable,str(helper),str(tmp_path / "state.sqlite3"),str(barrier),risk], stdout=subprocess.DEVNULL,stderr=subprocess.PIPE,
+                                   creationflags=subprocess.CREATE_NO_WINDOW if os.name=="nt" else 0)
+        try:
+            deadline=time.monotonic()+10
+            while not barrier.exists() and process.poll() is None and time.monotonic()<deadline: time.sleep(.02)
+            assert barrier.exists()
+            process.kill();process.wait(5)
+            repo.recover_expired_tasks(now=time.time()+100)
+            saved=repo.get(task.id)
+            assert saved.checkpoint["model_requests"]==3
+>           assert saved.checkpoint["active_seconds"]==7
+E           assert 66.99780535697937 == 7
+
+tests\muse\integration\test_crash_process.py:29: AssertionError
+_ test_real_process_kill_preserves_checkpoint_and_fences_unknown_writes[write-8] _
+
+tmp_path = WindowsPath('C:/Users/Administrator/Documents/Codex/2026-09-26/ai-starcode-muse-coding-agent-python/outputs/muse-next/work/unattended-regression/test_real_process_kill_preserv18')
+risk = 'write', iteration = 8
+
+    @pytest.mark.parametrize("iteration", range(10))
+    @pytest.mark.parametrize("risk", ["read", "write"])
+    def test_real_process_kill_preserves_checkpoint_and_fences_unknown_writes(tmp_path, risk, iteration):
+        repo, ws = make_repo(tmp_path)
+        task = create(repo, ws)
+        barrier = tmp_path / "barrier"
+        helper = Path(__file__).resolve().parents[1] / "helpers" / "crash_state.py"
+        process = subprocess.Popen([sys.executable,str(helper),str(tmp_path / "state.sqlite3"),str(barrier),risk], stdout=subprocess.DEVNULL,stderr=subprocess.PIPE,
+                                   creationflags=subprocess.CREATE_NO_WINDOW if os.name=="nt" else 0)
+        try:
+            deadline=time.monotonic()+10
+            while not barrier.exists() and process.poll() is None and time.monotonic()<deadline: time.sleep(.02)
+            assert barrier.exists()
+            process.kill();process.wait(5)
+            repo.recover_expired_tasks(now=time.time()+100)
+            saved=repo.get(task.id)
+            assert saved.checkpoint["model_requests"]==3
+>           assert saved.checkpoint["active_seconds"]==7
+E           assert 66.99892926216125 == 7
+
+tests\muse\integration\test_crash_process.py:29: AssertionError
+_ test_real_process_kill_preserves_checkpoint_and_fences_unknown_writes[write-9] _
+
+tmp_path = WindowsPath('C:/Users/Administrator/Documents/Codex/2026-09-26/ai-starcode-muse-coding-agent-python/outputs/muse-next/work/unattended-regression/test_real_process_kill_preserv19')
+risk = 'write', iteration = 9
+
+    @pytest.mark.parametrize("iteration", range(10))
+    @pytest.mark.parametrize("risk", ["read", "write"])
+    def test_real_process_kill_preserves_checkpoint_and_fences_unknown_writes(tmp_path, risk, iteration):
+        repo, ws = make_repo(tmp_path)
+        task = create(repo, ws)
+        barrier = tmp_path / "barrier"
+        helper = Path(__file__).resolve().parents[1] / "helpers" / "crash_state.py"
+        process = subprocess.Popen([sys.executable,str(helper),str(tmp_path / "state.sqlite3"),str(barrier),risk], stdout=subprocess.DEVNULL,stderr=subprocess.PIPE,
+                                   creationflags=subprocess.CREATE_NO_WINDOW if os.name=="nt" else 0)
+        try:
+            deadline=time.monotonic()+10
+            while not barrier.exists() and process.poll() is None and time.monotonic()<deadline: time.sleep(.02)
+            assert barrier.exists()
+            process.kill();process.wait(5)
+            repo.recover_expired_tasks(now=time.time()+100)
+            saved=repo.get(task.id)
+            assert saved.checkpoint["model_requests"]==3
+>           assert saved.checkpoint["active_seconds"]==7
+E           assert 66.99824333190918 == 7
+
+tests\muse\integration\test_crash_process.py:29: AssertionError
+________ test_public_openapi_contracts_and_generated_types_are_current ________
+
+api = (<starlette.testclient.TestClient object at 0x000001FB9BBD7BF0>, <fastapi.applications.FastAPI object at 0x000001FB9BB58DD0>)
+
+    def test_public_openapi_contracts_and_generated_types_are_current(api):
+        client, app = api
+        schema = app.openapi()
+        response = schema['paths']['/api/tasks']['get']['responses']['200']['content']['application/json']['schema']
+        assert response.get('items', {}).get('$ref') == '#/components/schemas/TaskView'
+        from muse.openapi_types import render_types
+        generated = render_types(schema)
+        assert 'WAITING_INPUT' in generated
+        assert 'checkpoint' not in schema['components']['schemas']['TaskView']['properties']
+>       assert Path('frontend/src/api.generated.ts').read_text(encoding='utf-8') == generated
+E       assert '// Generated...: number };\n' == '// Generated...: number };\n'
+E         
+E         Skipping 558 identical leading characters in diff, use -v to show
+E         - port type ConversationForkInput = { "sequence": number; "expected_revision": number; "prompt": string; "client_request_id": string };
+E         - export type DecisionInput = { "allow": boolean; "action_digest": string };
+E         ? --
+E         + port type DecisionInput = { "allow": boolean; "action_digest": string };
+E           export type EventView = { "task_id": string; "sequence": number; "type": string; "payload": Record<string, unknown>; "created_at": number };...
+E         
+E         ...Full output truncated (16 lines hidden), use '-vv' to show
+
+tests\muse\integration\test_generated_contracts.py:14: AssertionError
+___________ test_stop_script_matches_serialized_process_time[True] ____________
+
+tmp_path = WindowsPath('C:/Users/Administrator/Documents/Codex/2026-09-26/ai-starcode-muse-coding-agent-python/outputs/muse-next/work/unattended-regression/test_stop_script_matches_seria0')
+matching_time = True
+
+    @pytest.mark.parametrize("matching_time", [True, False])
+    def test_stop_script_matches_serialized_process_time(tmp_path, matching_time):
+        shell = shutil.which("pwsh") or shutil.which("powershell")
+        assert shell, "PowerShell is required for Windows launcher tests"
+        script = Path(__file__).resolve().parents[3] / "Stop-MUSE.ps1"
+        shutil.copy2(script, tmp_path / script.name)
+        state = tmp_path / ".muse"
+        state.mkdir()
+        child = subprocess.Popen([sys.executable, "-c", "import time; time.sleep(90)"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        try:
+            timestamp = subprocess.run([shell, "-NoProfile", "-Command", f"(Get-Process -Id {child.pid}).StartTime.ToUniversalTime().ToString('o')"], capture_output=True, text=True, check=True).stdout.strip()
+            (state / "processes.json").write_text(json.dumps([{"pid": child.pid, "role": "fixture", "started": timestamp if matching_time else "2000-01-01T00:00:00.0000000Z"}]), encoding="utf-8")
+>           stopped = subprocess.run([shell, "-NoProfile", "-File", str(tmp_path / script.name)], capture_output=True, text=True, check=True)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\muse\integration\test_launcher.py:22: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+input = None, capture_output = True, timeout = None, check = True
+popenargs = (['C:\\Users\\Administrator\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.EXE...oding-agent-python\\outputs\\muse-next\\work\\unattended-regression\\test_stop_script_matches_seria0\\Stop-MUSE.ps1'],)
+kwargs = {'stderr': -1, 'stdout': -1, 'text': True}
+process = <Popen: returncode: 1 args: ['C:\\Users\\Administrator\\.cache\\codex-runtim...>
+stdout = '', stderr = None, retcode = 1
+
+    def run(*popenargs,
+            input=None, capture_output=False, timeout=None, check=False, **kwargs):
+        """Run command with arguments and return a CompletedProcess instance.
+    
+        The returned instance will have attributes args, returncode, stdout and
+        stderr. By default, stdout and stderr are not captured, and those attributes
+        will be None. Pass stdout=PIPE and/or stderr=PIPE in order to capture them,
+        or pass capture_output=True to capture both.
+    
+        If check is True and the exit code was non-zero, it raises a
+        CalledProcessError. The CalledProcessError object will have the return code
+        in the returncode attribute, and output & stderr attributes if those streams
+        were captured.
+    
+        If timeout (seconds) is given and the process takes too long,
+         a TimeoutExpired exception will be raised.
+    
+        There is an optional argument "input", allowing you to
+        pass bytes or a string to the subprocess's stdin.  If you use this argument
+        you may not also use the Popen constructor's "stdin" argument, as
+        it will be used internally.
+    
+        By default, all communication is in bytes, and therefore any "input" should
+        be bytes, and the stdout and stderr will be bytes. If in text mode, any
+        "input" should be a string, and stdout and stderr will be strings decoded
+        according to locale encoding, or by "encoding" if set. Text mode is
+        triggered by setting any of text, encoding, errors or universal_newlines.
+    
+        The other arguments are the same as for the Popen constructor.
+        """
+        if input is not None:
+            if kwargs.get('stdin') is not None:
+                raise ValueError('stdin and input arguments may not both be used.')
+            kwargs['stdin'] = PIPE
+    
+        if capture_output:
+            if kwargs.get('stdout') is not None or kwargs.get('stderr') is not None:
+                raise ValueError('stdout and stderr arguments may not be used '
+                                 'with capture_output.')
+            kwargs['stdout'] = PIPE
+            kwargs['stderr'] = PIPE
+    
+        with Popen(*popenargs, **kwargs) as process:
+            try:
+                stdout, stderr = process.communicate(input, timeout=timeout)
+            except TimeoutExpired as exc:
+                process.kill()
+                if _mswindows:
+                    # Windows accumulates the output in a single blocking
+                    # read() call run on child threads, with the timeout
+                    # being done in a join() on those threads.  communicate()
+                    # _after_ kill() is required to collect that and add it
+                    # to the exception.
+                    exc.stdout, exc.stderr = process.communicate()
+                else:
+                    # POSIX _communicate already populated the output so
+                    # far into the TimeoutExpired exception.
+                    process.wait()
+                raise
+            except:  # Including KeyboardInterrupt, communicate handled that.
+                process.kill()
+                # We don't call process.wait() as .__exit__ does that for us.
+                raise
+            retcode = process.poll()
+            if check and retcode:
+>               raise CalledProcessError(retcode, process.args,
+                                         output=stdout, stderr=stderr)
+E               subprocess.CalledProcessError: Command '['C:\\Users\\Administrator\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.EXE', '-NoProfile', '-File', 'C:\\Users\\Administrator\\Documents\\Codex\\2026-09-26\\ai-starcode-muse-coding-agent-python\\outputs\\muse-next\\work\\unattended-regression\\test_stop_script_matches_seria0\\Stop-MUSE.ps1']' returned non-zero exit status 1.
+
+..\..\..\..\..\..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\subprocess.py:571: CalledProcessError
+============================== warnings summary ===============================
+tests/muse/integration/test_frontend.py::test_browser_create_pause_resume_cancel_memory_and_reconnect
+  C:\Users\Administrator\Documents\Codex\2026-09-26\ai-starcode-muse-coding-agent-python\outputs\muse-next\.venv\Lib\site-packages\websockets\legacy\__init__.py:6: DeprecationWarning: websockets.legacy is deprecated; see https://websockets.readthedocs.io/en/stable/howto/upgrade.html for upgrade instructions
+    warnings.warn(  # deprecated in 14.0 - 2024-11-09
+
+tests/muse/integration/test_frontend.py::test_browser_create_pause_resume_cancel_memory_and_reconnect
+  C:\Users\Administrator\Documents\Codex\2026-09-26\ai-starcode-muse-coding-agent-python\outputs\muse-next\.venv\Lib\site-packages\uvicorn\protocols\websockets\websockets_impl.py:17: DeprecationWarning: websockets.server.WebSocketServerProtocol is deprecated
+    from websockets.server import WebSocketServerProtocol
+
+tests/muse/integration/test_launcher.py::test_stop_script_matches_serialized_process_time[True]
+  C:\Users\Administrator\Documents\Codex\2026-09-26\ai-starcode-muse-coding-agent-python\outputs\muse-next\.venv\Lib\site-packages\_pytest\threadexception.py:58: PytestUnhandledThreadExceptionWarning: Exception in thread Thread-15 (_readerthread)
+  
+  Traceback (most recent call last):
+    File "C:\Users\Administrator\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\threading.py", line 1075, in _bootstrap_inner
+      self.run()
+    File "C:\Users\Administrator\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\threading.py", line 1012, in run
+      self._target(*self._args, **self._kwargs)
+    File "C:\Users\Administrator\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\subprocess.py", line 1599, in _readerthread
+      buffer.append(fh.read())
+                    ^^^^^^^^^
+  UnicodeDecodeError: 'gbk' codec can't decode byte 0xa6 in position 351: illegal multibyte sequence
+  
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+    warnings.warn(pytest.PytestUnhandledThreadExceptionWarning(msg))
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/muse/integration/test_crash_process.py::test_real_process_kill_preserves_checkpoint_and_fences_unknown_writes[read-0]
+FAILED tests/muse/integration/test_crash_process.py::test_real_process_kill_preserves_checkpoint_and_fences_unknown_writes[read-1]
+FAILED tests/muse/integration/test_crash_process.py::test_real_process_kill_preserves_checkpoint_and_fences_unknown_writes[read-2]
+FAILED tests/muse/integration/test_crash_process.py::test_real_process_kill_preserves_checkpoint_and_fences_unknown_writes[read-3]
+FAILED tests/muse/integration/test_crash_process.py::test_real_process_kill_preserves_checkpoint_and_fences_unknown_writes[read-4]
+FAILED tests/muse/integration/test_crash_process.py::test_real_process_kill_preserves_checkpoint_and_fences_unknown_writes[read-5]
+FAILED tests/muse/integration/test_crash_process.py::test_real_process_kill_preserves_checkpoint_and_fences_unknown_writes[read-6]
+FAILED tests/muse/integration/test_crash_process.py::test_real_process_kill_preserves_checkpoint_and_fences_unknown_writes[read-7]
+FAILED tests/muse/integration/test_crash_process.py::test_real_process_kill_preserves_checkpoint_and_fences_unknown_writes[read-8]
+FAILED tests/muse/integration/test_crash_process.py::test_real_process_kill_preserves_checkpoint_and_fences_unknown_writes[read-9]
+FAILED tests/muse/integration/test_crash_process.py::test_real_process_kill_preserves_checkpoint_and_fences_unknown_writes[write-0]
+FAILED tests/muse/integration/test_crash_process.py::test_real_process_kill_preserves_checkpoint_and_fences_unknown_writes[write-1]
+FAILED tests/muse/integration/test_crash_process.py::test_real_process_kill_preserves_checkpoint_and_fences_unknown_writes[write-2]
+FAILED tests/muse/integration/test_crash_process.py::test_real_process_kill_preserves_checkpoint_and_fences_unknown_writes[write-3]
+FAILED tests/muse/integration/test_crash_process.py::test_real_process_kill_preserves_checkpoint_and_fences_unknown_writes[write-4]
+FAILED tests/muse/integration/test_crash_process.py::test_real_process_kill_preserves_checkpoint_and_fences_unknown_writes[write-5]
+FAILED tests/muse/integration/test_crash_process.py::test_real_process_kill_preserves_checkpoint_and_fences_unknown_writes[write-6]
+FAILED tests/muse/integration/test_crash_process.py::test_real_process_kill_preserves_checkpoint_and_fences_unknown_writes[write-7]
+FAILED tests/muse/integration/test_crash_process.py::test_real_process_kill_preserves_checkpoint_and_fences_unknown_writes[write-8]
+FAILED tests/muse/integration/test_crash_process.py::test_real_process_kill_preserves_checkpoint_and_fences_unknown_writes[write-9]
+FAILED tests/muse/integration/test_generated_contracts.py::test_public_openapi_contracts_and_generated_types_are_current
+FAILED tests/muse/integration/test_launcher.py::test_stop_script_matches_serialized_process_time[True]
+22 failed, 882 passed, 2 skipped, 3 warnings in 92.68s (0:01:32)

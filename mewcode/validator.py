@@ -65,6 +65,9 @@ def validate_providers(raw_providers: list) -> list[dict]:
             raise ConfigError(f"Provider #{i + 1}: missing fields: {', '.join(missing)}")
 
         protocol = entry["protocol"]
+        key_env = entry.get('api_key_env', '')
+        if not isinstance(key_env, str) or (key_env and (not key_env.isidentifier() or not key_env.isascii())):
+            raise ConfigError(f'Provider #{i + 1}: invalid api_key_env')
         if protocol == "openai-responses":
             protocol = "openai"
         if protocol not in VALID_PROTOCOLS:

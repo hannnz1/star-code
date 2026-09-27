@@ -8,6 +8,7 @@ from __future__ import annotations
 import asyncio
 import re
 import shlex
+from muse.tools.process_tree import ProcessTree
 from typing import TYPE_CHECKING
 
 from pydantic import BaseModel, Field
@@ -110,7 +111,7 @@ def _exit_code_hint(command: str, exit_code: int) -> str:
 
 class Params(BaseModel):
     command: str = Field(description="Shell command to execute")
-    timeout: int = Field(default=120, description="Timeout in seconds (max 600)")
+    timeout: int = Field(default=120, ge=1, le=600, description="Timeout in seconds (max 600)")
 
 
 class Bash(Tool):
@@ -134,26 +135,67 @@ class Bash(Tool):
         if self.sandbox and self.sandbox_config and self.sandbox.available():
             actual_command = self.sandbox.wrap(params.command, self.sandbox_config)
 
+        proc = None
+        tree = None
+        reader = None
         try:
             proc = await asyncio.create_subprocess_shell(
                 actual_command,
                 stdout=asyncio.subprocess.PIPE,
                 stderr=asyncio.subprocess.STDOUT,  # 合并 stderr 到 stdout
                 cwd=self.work_dir,
+                **ProcessTree.launch_options(),
             )
-            stdout, _ = await asyncio.wait_for(proc.communicate(), timeout=timeout)
+            tree = ProcessTree(proc.pid)
+
+            async def drain():
+                output = bytearray()
+                truncated = False
+                while chunk := await proc.stdout.read(8192):
+                    remaining = max(0, 120000 - len(output))
+                    output.extend(chunk[:remaining])
+                    truncated |= len(chunk) > remaining
+                if truncated:
+                    output.extend(b'\n[output truncated]')
+                return bytes(output)
+
+            reader = asyncio.create_task(drain())
+
+            async def lifecycle():
+                while proc.returncode is None:
+                    await asyncio.sleep(.02)
+                tree.close()
+                output = await reader
+                await proc.wait()
+                return output
+
+            stdout = await asyncio.wait_for(lifecycle(), timeout=timeout)
         except asyncio.TimeoutError:
-            proc.kill()
-            await proc.wait()
             return ToolResult(output=f"Error: command timed out after {timeout}s", is_error=True)
         except Exception as e:
             return ToolResult(output=f"Error executing command: {e}", is_error=True)
+        finally:
+            if tree is not None:
+                tree.close()
+            if proc is not None:
+                if proc.returncode is None:
+                    try:
+                        proc.kill()
+                    except ProcessLookupError:
+                        pass
+                try:
+                    await asyncio.wait_for(proc.wait(), 2)
+                except TimeoutError:
+                    pass
+            if reader is not None:
+                if not reader.done():
+                    reader.cancel()
+                await asyncio.gather(reader, return_exceptions=True)
 
         # 合并流输出，不再区分 stdout/stderr
         output = stdout.decode(errors="replace") if stdout else ""
 
-        # 非零退出码时追加退出码信息，但 is_error 始终为 False
-        # 只有超时和异常才设置 is_error=True
+        # Preserve a machine-readable exit code for verification and presentation.
         exit_code = proc.returncode or 0
         if exit_code != 0:
             hint = _exit_code_hint(params.command, exit_code)
@@ -165,5 +207,4 @@ class Bash(Tool):
         if not output:
             output = "(no output)"
 
-        return ToolResult(output=output, is_error=False)
-
+        return ToolResult(output=output, is_error=exit_code != 0, exit_code=exit_code)

@@ -1,0 +1,134 @@
+FF                                                                       [100%]
+================================== FAILURES ===================================
+______ test_anthropic_complete_calls_only_and_protocol_headers[tool_use] ______
+
+stop_reason = 'tool_use'
+
+    @pytest.mark.parametrize('stop_reason', ['tool_use', 'max_tokens'])
+    async def test_anthropic_complete_calls_only_and_protocol_headers(stop_reason):
+        received = []
+        events = [
+            {'type': 'message_start', 'message': {'usage': {'input_tokens': 12, 'output_tokens': 0}}},
+            {'type': 'content_block_start', 'index': 0, 'content_block': {'type': 'tool_use', 'id': 'c1', 'name': 'read_file', 'input': {}}},
+            {'type': 'content_block_delta', 'index': 0, 'delta': {'type': 'input_json_delta', 'partial_json': '{"path":"hello.txt"}'}},
+            {'type': 'content_block_stop', 'index': 0},
+            {'type': 'message_delta', 'delta': {'stop_reason': stop_reason}, 'usage': {'output_tokens': 5}},
+            {'type': 'message_stop'},
+        ]
+        def handler(request):
+            received.append(request)
+            return httpx.Response(200, content=sse(events))
+        actual = []
+        async with httpx.AsyncClient(transport=httpx.MockTransport(handler)) as client:
+            try:
+>               async for event in provider(client, 'anthropic').stream([
+                    {'role': 'system', 'content': 'system prompt'}, {'role': 'user', 'content': 'Read'}], []):
+
+tests\test_durable_anthropic.py:24: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\muse\providers\compatible.py:111: in stream
+    async for item in parser:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <muse.providers.compatible.HttpModelProvider object at 0x000001CCFA053AA0>
+response = <Response [200 OK]>
+
+    async def _chat(self, response: httpx.Response) -> AsyncIterator[ModelEvent]:
+        calls = {}
+        complete = False
+        finish_reason = None
+        usage = None
+        async for data in sse_data(response):
+            if data == "[DONE]":
+                complete = True
+                break
+            chunk = json.loads(data)
+            usage = chunk.get("usage") or usage
+            for choice in chunk.get("choices", []):
+                finish_reason = choice.get("finish_reason") or finish_reason
+                delta = choice.get("delta", {})
+                if delta.get("content"):
+                    yield ModelEvent(type="text", text=delta["content"])
+                for part in delta.get("tool_calls", []):
+                    item = calls.setdefault(part["index"], {"call_id": "", "name": "", "arguments": ""})
+                    if part.get("id"):
+                        item["call_id"] = part["id"]
+                    function = part.get("function", {})
+                    item["name"] += function.get("name", "")
+                    item["arguments"] += function.get("arguments", "")
+        if not complete or finish_reason not in {"stop", "tool_calls"}:
+>           raise ProviderError("Model stream was incomplete; no tools were dispatched")
+E           muse.providers.compatible.ProviderError: Model stream was incomplete; no tools were dispatched
+
+src\muse\providers\compatible.py:179: ProviderError
+
+During handling of the above exception, another exception occurred:
+
+stop_reason = 'tool_use'
+
+    @pytest.mark.parametrize('stop_reason', ['tool_use', 'max_tokens'])
+    async def test_anthropic_complete_calls_only_and_protocol_headers(stop_reason):
+        received = []
+        events = [
+            {'type': 'message_start', 'message': {'usage': {'input_tokens': 12, 'output_tokens': 0}}},
+            {'type': 'content_block_start', 'index': 0, 'content_block': {'type': 'tool_use', 'id': 'c1', 'name': 'read_file', 'input': {}}},
+            {'type': 'content_block_delta', 'index': 0, 'delta': {'type': 'input_json_delta', 'partial_json': '{"path":"hello.txt"}'}},
+            {'type': 'content_block_stop', 'index': 0},
+            {'type': 'message_delta', 'delta': {'stop_reason': stop_reason}, 'usage': {'output_tokens': 5}},
+            {'type': 'message_stop'},
+        ]
+        def handler(request):
+            received.append(request)
+            return httpx.Response(200, content=sse(events))
+        actual = []
+        async with httpx.AsyncClient(transport=httpx.MockTransport(handler)) as client:
+            try:
+                async for event in provider(client, 'anthropic').stream([
+                    {'role': 'system', 'content': 'system prompt'}, {'role': 'user', 'content': 'Read'}], []):
+                    actual.append(event)
+            except RuntimeError:
+>               assert stop_reason == 'max_tokens'
+E               AssertionError: assert 'tool_use' == 'max_tokens'
+E                 
+E                 - max_tokens
+E                 + tool_use
+
+tests\test_durable_anthropic.py:28: AssertionError
+_____ test_anthropic_complete_calls_only_and_protocol_headers[max_tokens] _____
+
+stop_reason = 'max_tokens'
+
+    @pytest.mark.parametrize('stop_reason', ['tool_use', 'max_tokens'])
+    async def test_anthropic_complete_calls_only_and_protocol_headers(stop_reason):
+        received = []
+        events = [
+            {'type': 'message_start', 'message': {'usage': {'input_tokens': 12, 'output_tokens': 0}}},
+            {'type': 'content_block_start', 'index': 0, 'content_block': {'type': 'tool_use', 'id': 'c1', 'name': 'read_file', 'input': {}}},
+            {'type': 'content_block_delta', 'index': 0, 'delta': {'type': 'input_json_delta', 'partial_json': '{"path":"hello.txt"}'}},
+            {'type': 'content_block_stop', 'index': 0},
+            {'type': 'message_delta', 'delta': {'stop_reason': stop_reason}, 'usage': {'output_tokens': 5}},
+            {'type': 'message_stop'},
+        ]
+        def handler(request):
+            received.append(request)
+            return httpx.Response(200, content=sse(events))
+        actual = []
+        async with httpx.AsyncClient(transport=httpx.MockTransport(handler)) as client:
+            try:
+                async for event in provider(client, 'anthropic').stream([
+                    {'role': 'system', 'content': 'system prompt'}, {'role': 'user', 'content': 'Read'}], []):
+                    actual.append(event)
+            except RuntimeError:
+                assert stop_reason == 'max_tokens'
+>       assert str(received[0].url).endswith('/messages')
+E       AssertionError: assert False
+E        +  where False = <built-in method endswith of str object at 0x000001CCFA7E7630>('/messages')
+E        +    where <built-in method endswith of str object at 0x000001CCFA7E7630> = 'https://model.example/v1/chat/completions'.endswith
+E        +      where 'https://model.example/v1/chat/completions' = str(URL('https://model.example/v1/chat/completions'))
+E        +        where URL('https://model.example/v1/chat/completions') = <Request('POST', 'https://model.example/v1/chat/completions')>.url
+
+tests\test_durable_anthropic.py:29: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_durable_anthropic.py::test_anthropic_complete_calls_only_and_protocol_headers[tool_use]
+FAILED tests/test_durable_anthropic.py::test_anthropic_complete_calls_only_and_protocol_headers[max_tokens]
+2 failed in 1.46s

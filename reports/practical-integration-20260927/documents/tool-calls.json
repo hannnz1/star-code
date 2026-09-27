@@ -1,0 +1,163 @@
+[
+  {
+    "task_id": "dc0ece2d50924f4b91432e1a14770e92",
+    "id": "call_U1lYCxQTo3mf2RNvcowADx4A",
+    "name": "list_files",
+    "arguments": {
+      "path": ".",
+      "pattern": "**/quickstart.md"
+    },
+    "risk": "read",
+    "status": "DONE",
+    "digest": "764e0e67ff8c2224d3a8180966aaed64a8051d4b527b10ba6fa36ef76cfb010c",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_U1lYCxQTo3mf2RNvcowADx4A",
+      "content": "{\"paths\": [\"quickstart.md\"], \"truncated\": false}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790444287.2895424,
+    "updated_at": 1790444287.2956855
+  },
+  {
+    "task_id": "dc0ece2d50924f4b91432e1a14770e92",
+    "id": "call_MWJkmNA5qA2blq7w6KBiHK4A",
+    "name": "list_files",
+    "arguments": {
+      "path": ".",
+      "pattern": "**/security.md"
+    },
+    "risk": "read",
+    "status": "DONE",
+    "digest": "c3a7b5c6a5947bd2ec949e8f7d13b7921f71c69b3829dafd03d489f340546fcd",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_MWJkmNA5qA2blq7w6KBiHK4A",
+      "content": "{\"paths\": [\"security.md\"], \"truncated\": false}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790444287.3035688,
+    "updated_at": 1790444287.3143356
+  },
+  {
+    "task_id": "dc0ece2d50924f4b91432e1a14770e92",
+    "id": "call_328OYifVriSxntW57271imVt",
+    "name": "list_files",
+    "arguments": {
+      "path": ".",
+      "pattern": "**/architecture.md"
+    },
+    "risk": "read",
+    "status": "DONE",
+    "digest": "85c059e7d1a749837296dfafae8c8c5c15c52367934961ec519afb52c41135f3",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_328OYifVriSxntW57271imVt",
+      "content": "{\"paths\": [\"architecture.md\"], \"truncated\": false}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790444287.3213494,
+    "updated_at": 1790444287.3327904
+  },
+  {
+    "task_id": "dc0ece2d50924f4b91432e1a14770e92",
+    "id": "call_d3wtRuzdIykOEQI5LNpbqk9n",
+    "name": "read_document",
+    "arguments": {
+      "path": "quickstart.md"
+    },
+    "risk": "read",
+    "status": "DONE",
+    "digest": "f6b2df61dbadc0e477094dcede18aef08b32a10b47d2c65522efc5e24c3cc311",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_d3wtRuzdIykOEQI5LNpbqk9n",
+      "content": "{\"path\": \"quickstart.md\", \"sha256\": \"fe0871f0ef75c3167bf54f49ecb03e867aff193b7fd4c5cc65b9535924003801\", \"text\": \"# MUSE 快速上手\\r\\n\\r\\n## 第一个任务\\r\\n\\r\\n1. 执行项目根目录的 `Start-MUSE.ps1`；用启动窗口显示的**本地访问令牌**进入工作台。它与模型 API 密钥不同。\\r\\n2. 点击左下工作区，添加一个已有文件夹。这个操作授权该任务使用其中的非敏感文件。\\r\\n3. 选择场景，输入目标，点击发送。阅读报告和工具过程时，可以直接关闭网页，Worker 仍会执行。\\r\\n4. 代码命令会停在等待批准状态，显示准确命令和工作区；拒绝后模型会收到拒绝结果。\\r\\n5. 来源位于右侧“来源”，报告位于“成果”。点击成果下载其对应版本。\\r\\n\\r\\n示例：\\r\\n\\r\\n```text\\r\\n网页研究：阅读 https://docs.python.org/3/ 和 https://fastapi.tiangolo.com/，\\r\\n说明它们分别解决什么问题，生成带引用的 report.md。\\r\\n\\r\\n资料整理：读取当前文件夹中的 TXT、Markdown 和文本 PDF，\\r\\n按主题生成摘要，并将分类副本放入 muse-output，保留原件。\\r\\n\\r\\n编程：先找出项目入口和测试命令；修复指定问题后运行验证，\\r\\n只报告实际执行的结果，不修改测试来让结果通过。\\r\\n```\\r\\n\\r\\n## 控制任务\\r\\n\\r\\n- 暂停：当前模型响应/工具完成后，在安全边界停下；继续时使用已保存的结果。\\r\\n- 取消：中断模型请求、导航或受控命令；已产生的文件/外部效果不会被自动撤销。\\r\\n- 等待补充：填写任务中的输入框，继续原任务。\\r\\n- 已结束任务：填写跟进目标，创建关联的新任务，保留原结果。\\r\\n- 中断：已确认的只读步骤保留；无法确定副作用的调用不会自动重放。专用文件写入可通过哈希核对，外部命令须人工检查后取消旧任务并创建新的任务。\\r\\n- 文件回退：只回退专用写入工具跟踪的文件；用户后续修改造成哈希冲突时拒绝覆盖。\\r\\n\\r\\n## 手动启动与诊断\\r\\n\\r\\n```powershell\\r\\n# 两个终端使用完全相同的配置和数据目录\\r\\n.\\\\.venv\\\\Scripts\\\\python.exe -m muse api --config 'C:\\\\path\\\\config.yaml' --data-dir .muse\\r\\n.\\\\.venv\\\\Scripts\\\\python.exe -m muse worker --config 'C:\\\\path\\\\config.yaml' --data-dir .muse\\r\\n\\r\\n# 安全配置检查，不调用模型，不输出模型密钥\\r\\n.\\\\.venv\\\\Scripts\\\\python.exe -m muse doctor --config 'C:\\\\path\\\\config.yaml'\\r\\n# 显式读取本机访问令牌，勿转发给他人\\r\\n.\\\\.venv\\\\Scripts\\\\python.exe -m muse token --data-dir .muse\\r\\n```\\r\\n\\r\\n任务停在排队中：检查 Worker 是否运行及 `.muse/worker.err.log`。无法访问网页：确认 URL 为公开 HTTP(S) 地址，检查网络和 Chromium 安装。模型认证失败：检查原配置引用的环境变量在启动 MUSE 的进程中是否可用。\\r\\n\\r\\n默认活动预算为 40 次模型请求、100 次工具执行、900 秒活动时间；等待审批和用户输入不计入活动时间。用量来自服务商响应；没有价格配置时不展示推测的费用。\\r\\n\\r\\n网页读取采用静态公开文档模式，禁用 JavaScript 和跨域跳转；若链接跳转，请提供最终页面地址。网页工具不使用模型代理，模型配置本身保持不变。\\r\\n\", \"truncated\": false}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790444288.6023335,
+    "updated_at": 1790444288.6151726
+  },
+  {
+    "task_id": "dc0ece2d50924f4b91432e1a14770e92",
+    "id": "call_jRA2jPK4kpaIIrvILYWtm81j",
+    "name": "read_document",
+    "arguments": {
+      "path": "security.md"
+    },
+    "risk": "read",
+    "status": "DONE",
+    "digest": "b1de11d65c9f194f6600017c66354f66c148e483dc014d5a336199c739aa4453",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_jRA2jPK4kpaIIrvILYWtm81j",
+      "content": "{\"path\": \"security.md\", \"sha256\": \"bcc1e8d73694d47252bd7579ea37dfa560c03fd29ae6c2b2c6d51ee841fa3cfd\", \"text\": \"# 本地权限边界\\r\\n\\r\\n仅监听 `127.0.0.1`，校验 Host、Origin 和本地 bearer 令牌。工作台按当前系统用户运行，不包含多用户隔离。不要将端口直接映射到公网。\\r\\n\\r\\n模型密钥只在服务进程内读取原配置所引用的环境变量；不会进入设置响应、前端代码或迁移导出。工具结果、模型文字和记忆内容进行敏感串检查/脱敏；自动识别不能代替用户避免向任务粘贴秘密。\\r\\n\\r\\n文件工具限制在注册工作区，拒绝父目录穿越、外部绝对路径、符号链接、junction、Git/SSH/环境变量文件和应用状态目录。文件操作前再次检查路径。该边界不是针对能并发篡改宿主文件系统的恶意本机程序设计的操作系统级隔离。\\r\\n\\r\\nShell 必须批准具体命令，继承受限环境变量；执行仍具有本机用户权限。审批意味着用户审阅命令的实际副作用，路径工具的限制不能被描述为对所有 Shell 命令的沙箱保证。Windows 命令在挂起状态加入 Job Object 后才恢复执行，退出、超时或取消会关闭 Job 并终止受控进程树，但无法撤销已完成的网络请求或文件写入。\\r\\n\\r\\n网页工具仅访问公开 HTTP(S) URL，拒绝私有/回环/特殊地址、凭证 URL、非 GET 请求和 WebSocket，阻止下载；页面内容作为不可信资料传给模型。单独浏览器上下文不共享用户浏览器登录态。浏览器固定连接已经校验的 IP，关闭代理、JavaScript、服务工作线程和预解析，仅放行同源文档 GET；跨域跳转需用户另行提供最终 URL。因此依赖脚本渲染、登录、跳转或专用代理的网站可能无法读取。此限制仅用于网页工具，模型仍沿用原配置的代理。Benchmark 的本地来源白名单只由测试程序显式设置，不从模型参数读取。\\r\\n\\r\\n未知副作用不会自动重试；人工文件核对也必须满足当前哈希。回退只覆盖跟踪文件的对应版本，不宣称撤销任意 Shell/MCP/网络操作。MCP 和 Skill 不在本版本中开放。\\r\\n\\r\\n测试证据中的 API 令牌和原始运行数据库不纳入分享报告。工作目录 `.muse`、`work`、`.venv` 均被 Git 忽略。共享源码时使用源码归档，不直接打包整个含运行状态的文件夹。\\r\\n\", \"truncated\": false}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790444288.621581,
+    "updated_at": 1790444288.6346838
+  },
+  {
+    "task_id": "dc0ece2d50924f4b91432e1a14770e92",
+    "id": "call_AG6iGTNA3k8SHS464BQRsPNQ",
+    "name": "read_document",
+    "arguments": {
+      "path": "architecture.md"
+    },
+    "risk": "read",
+    "status": "DONE",
+    "digest": "57488f7891babac11e673cbe6a800ea110dd76fb6efd3eee5040f003bba23d4a",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_AG6iGTNA3k8SHS464BQRsPNQ",
+      "content": "{\"path\": \"architecture.md\", \"sha256\": \"d8a9338cc7d5b9768605a8b0f6fa1790040f16574ecf804b8e4110ea5a1ac20b\", \"text\": \"# 架构与持久化\\r\\n\\r\\nReact/TypeScript/Vite → 本地 FastAPI → SQLite（WAL/FULL）← 独立 Python Worker → 模型与工具。\\r\\n\\r\\nAPI 负责创建、控制、事件回放与成果下载；关闭页面不影响 Worker。SQLite 以 `BEGIN IMMEDIATE` 原子领取任务，Worker 使用 owner + epoch + lease 截止时间防止旧进程提交结果。任务状态和对应事件在同一事务中写入，事件具有单调 sequence。\\r\\n\\r\\nAgent 循环先持久化完整模型工具调用，再依次执行。模型流断开或参数 JSON 不完整时不执行该调用。Responses 和 Chat Completions 两种适配器都保留 call ID。调用结果与 assistant 工具请求成对进入上下文；大输出保存为可分段读取的成果，压缩仅移除完整旧轮次。任务预算、来源、成果及 pending call 保存在独立检查点字段中。\\r\\n\\r\\n工具生命周期：`PREPARED → EXECUTING → DONE/FAILED`。崩溃时只读调用退回 PREPARED；副作用调用转为 UNKNOWN，并将任务保持 INTERRUPTED。文件专用工具具备 before/after 哈希，可显式核对已提交写入；不承诺任意命令或外部服务的“恰好一次”。\\r\\n\\r\\n审批绑定 task ID、workspace ID、工具名与参数摘要，并设过期时间。审批拒绝不调度命令；重复批准不产生第二次执行。命令日志是可下载成果。修改代码后必须在最后一次修改之后执行成功的 verify_command，才允许标记 SUCCEEDED。\\r\\n\\r\\n记忆每次请求重新查询当前工作区与用户作用域，不使用跨任务隐式缓存。成果采用独立文件和数据库元数据，下载校验 SHA256。源网页存储实际读取文本、URL、时间和哈希。\\r\\n\\r\\n数据库当前为 v1。未知更高版本拒绝打开；当前不是成熟的跨版本升级系统。首次发布依赖锁文件为 `uv.lock` 和 `frontend/package-lock.json`。\\r\\n\\r\\n接口采用 revision 检查防止旧页面覆盖任务状态。SSE 使用带 Authorization 的 fetch 流；不把令牌放入 URL 查询参数。客户端以 sequence 去重，重连从最后一个已确认事件继续。\\r\\n\\r\\n恢复时从持久化工具结果重建成果、来源、等待输入和变更记录。代码验证必须覆盖所有已尝试执行的写入/编辑/Shell 调用 ID；检查点丢失不能绕过验证。模型请求中的 usage_pending 标识用来识别崩溃期间未知用量，未知值不显示为完整统计。\\r\\n\", \"truncated\": false}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790444288.641495,
+    "updated_at": 1790444288.6545558
+  },
+  {
+    "task_id": "dc0ece2d50924f4b91432e1a14770e92",
+    "id": "call_TT6dmDbXkljpIi3YQzJSVTH9",
+    "name": "save_artifact",
+    "arguments": {
+      "content": "# 新用户使用指南（Onboarding）\n\n> 说明：以下内容仅依据 `quickstart.md`、`security.md`、`architecture.md` 整理；每项要点都标注来源文件名。未在原文明确说明的功能不做扩展解释。\n\n## 1. 启动与令牌\n\n- 先执行项目根目录的 `Start-MUSE.ps1`；启动窗口会显示**本地访问令牌**，用它进入工作台。该令牌与模型 API 密钥不同。来源：`quickstart.md`\n- 如需手动启动，`api` 和 `worker` 两个终端要使用**完全相同**的配置和数据目录；可用 `doctor` 做安全配置检查，`token` 可显式读取本机访问令牌。来源：`quickstart.md`\n- 安全边界说明：服务仅监听 `127.0.0.1`，并校验 Host、Origin 和本地 bearer 令牌；不要将端口直接映射到公网。来源：`security.md`\n- 模型密钥只在服务进程内读取原配置所引用的环境变量，不会进入设置响应、前端代码或迁移导出。来源：`security.md`\n- 原配置中的环境变量必须在启动 MUSE 的进程中可用；若模型认证失败，应检查这一点。来源：`quickstart.md`\n\n## 2. 原模型配置\n\n- 网页工具**不使用模型代理**，模型配置本身保持不变。来源：`quickstart.md`\n- 模型密钥只从原配置引用的环境变量读取，且仅在服务进程内使用。来源：`security.md`\n- 任务恢复时会从持久化结果重建成果、来源、等待输入和变更记录，这不等同于修改原模型配置。来源：`architecture.md`\n\n## 3. 网页研究限制\n\n- 网页读取采用**静态公开文档模式**，禁用 JavaScript 和跨域跳转；如果页面会跳转，请直接提供最终页面地址。来源：`quickstart.md`\n- 网页工具仅访问公开 HTTP(S) URL，拒绝私有/回环/特殊地址、凭证 URL、非 GET 请求和 WebSocket，并阻止下载。来源：`security.md`\n- 浏览器不共享用户浏览器登录态，且固定连接已经校验的 IP；关闭代理、JavaScript、服务工作线程和预解析，只放行同源文档 GET。来源：`security.md`\n- 因上述限制，依赖脚本渲染、登录、跳转或专用代理的网站可能无法读取。来源：`security.md`\n- 网页内容会作为不可信资料传给模型。来源：`security.md`\n\n## 4. 文件与命令权限\n\n- 文件工具只在**注册工作区**内工作；会拒绝父目录穿越、外部绝对路径、符号链接、junction、Git/SSH/环境变量文件和应用状态目录。来源：`security.md`\n- 添加一个已有文件夹后，任务就被授权使用其中的**非敏感文件**。来源：`quickstart.md`\n- Shell 命令必须经过批准，且会继承受限环境变量；审批时应审阅命令的实际副作用。来源：`security.md`\n- 命令执行仍具有本机用户权限；路径工具的限制不能被理解为对所有 Shell 命令的沙箱保证。来源：`security.md`\n- 代码命令会停在等待批准状态，界面会显示准确命令和工作区；拒绝后模型会收到拒绝结果。来源：`quickstart.md`\n- Windows 命令在挂起状态加入 Job Object 后才恢复执行；退出、超时或取消会关闭 Job 并终止受控进程树，但无法撤销已完成的网络请求或文件写入。来源：`security.md`\n\n## 5. 暂停、取消、恢复\n\n- **暂停**：当前模型响应/工具完成后，在安全边界停下；继续时使用已保存的结果。来源：`quickstart.md`\n- **取消**：可中断模型请求、导航或受控命令；但已产生的文件/外部效果不会自动撤销。来源：`quickstart.md`\n- **等待补充**：在任务输入框填写内容后继续原任务。来源：`quickstart.md`\n- **已结束任务**：填写跟进目标，会创建关联的新任务并保留原结果。来源：`quickstart.md`\n- **中断**：已确认的只读步骤保留；无法确定副作用的调用不会自动重放。专用文件写入可通过哈希核对，外部命令需人工检查后取消旧任务并创建新任务。来源：`quickstart.md`\n- **文件回退**：只回退专用写入工具跟踪的文件；若用户后续修改导致哈希冲突，则拒绝覆盖。来源：`quickstart.md`\n- 恢复时会从持久化工具结果重建成果、来源、等待输入和变更记录；客户端重连时按 sequence 继续。来源：`architecture.md`\n- 工具崩溃时：只读调用退回 PREPARED；副作用调用转为 UNKNOWN，并将任务保持 INTERRUPTED。来源：`architecture.md`\n\n## 6. 成果\n\n- 来源位于右侧“来源”，报告位于“成果”；点击成果可下载其对应版本。来源：`quickstart.md`\n- 大输出会保存为可分段读取的成果。来源：`architecture.md`\n- 成果采用独立文件和数据库元数据，下载时校验 SHA256。来源：`architecture.md`\n- 命令日志也是可下载成果。来源：`architecture.md`\n- 保存后的成果会在任务恢复时被重建。来源：`architecture.md`\n\n## 7. 额外提示\n\n- 默认活动预算为 40 次模型请求、100 次工具执行、900 秒活动时间；等待审批和用户输入不计入活动时间。来源：`quickstart.md`\n- 任务排队时，可检查 Worker 是否运行以及 `.muse/worker.err.log`。来源：`quickstart.md`\n- 无法访问网页时，可检查 URL 是否为公开 HTTP(S) 地址，以及网络和 Chromium 安装。来源：`quickstart.md`\n\n",
+      "media_type": "text/markdown",
+      "name": "onboarding.md"
+    },
+    "risk": "write",
+    "status": "DONE",
+    "digest": "e3015c8749a54054496e6ba2b2318c1bb2130f12021674cf3e0601a4c2b7b407",
+    "result": {
+      "artifact_ids": [
+        "2173a123674d4a05b7bb0c83446c2033"
+      ],
+      "call_id": "call_TT6dmDbXkljpIi3YQzJSVTH9",
+      "content": "{\"id\": \"2173a123674d4a05b7bb0c83446c2033\", \"task_id\": \"dc0ece2d50924f4b91432e1a14770e92\", \"name\": \"onboarding.md\", \"media_type\": \"text/markdown\", \"sha256\": \"bac47482ca698f60c874c237fa5a86f10c19bbab1263baa34b73a95b77634f31\", \"version\": 1, \"created_at\": 1790444297.1388736}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790444297.134339,
+    "updated_at": 1790444297.1407478
+  }
+]

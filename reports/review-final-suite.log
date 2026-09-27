@@ -1,0 +1,97 @@
+...............................................F........................ [  7%]
+........................................................................ [ 15%]
+........................................................................ [ 23%]
+.............s.......................................................... [ 31%]
+........................................................................ [ 39%]
+........................................................................ [ 47%]
+........................................................................ [ 55%]
+........................................................................ [ 62%]
+......s................................................................. [ 70%]
+........................................................................ [ 78%]
+........................................................................ [ 86%]
+........................................................................ [ 94%]
+...................................................                      [100%]
+================================== FAILURES ===================================
+___________ test_stop_script_matches_serialized_process_time[True] ____________
+
+tmp_path = WindowsPath('C:/Users/Administrator/Documents/Codex/2026-09-26/ai-starcode-muse-coding-agent-python/outputs/muse-next/work/review-final-suite/test_stop_script_matches_seria0')
+matching_time = True
+
+    @pytest.mark.parametrize("matching_time", [True, False])
+    def test_stop_script_matches_serialized_process_time(tmp_path, matching_time):
+        shell = shutil.which("pwsh") or shutil.which("powershell")
+        assert shell, "PowerShell is required for Windows launcher tests"
+        script = Path(__file__).resolve().parents[3] / "Stop-MUSE.ps1"
+        shutil.copy2(script, tmp_path / script.name)
+        state = tmp_path / ".muse"
+        state.mkdir()
+        child = subprocess.Popen([sys.executable, "-c", "import time; time.sleep(90)"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        try:
+            timestamp = subprocess.run([shell, "-NoProfile", "-Command", f"(Get-Process -Id {child.pid}).StartTime.ToUniversalTime().ToString('o')"], capture_output=True, text=True, check=True).stdout.strip()
+            (state / "processes.json").write_text(json.dumps([{"pid": child.pid, "role": "fixture", "started": timestamp if matching_time else "2000-01-01T00:00:00.0000000Z"}]), encoding="utf-8")
+            stopped = subprocess.run([shell, "-NoProfile", "-File", str(tmp_path / script.name)], capture_output=True, text=True, encoding='utf-8', errors='replace')
+>           assert stopped.returncode == 0, stopped.stdout + stopped.stderr
+E           AssertionError: ERROR: The process with PID 53452 (child process of PID 35788) could not be terminated.
+E             Reason: There is no running instance of the task.
+E             
+E             Exception: C:\Users\Administrator\Documents\Codex\2026-09-26\ai-starcode-muse-coding-agent-python\outputs\muse-next\work\review-final-suite\test_stop_script_matches_seria0\Stop-MUSE.ps1:9
+E             Line |
+E                9 |  �� DE -ne 0) { throw "Could not stop MUSE $($entry.role); the process ma ��
+E                  |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E                  | Could not stop MUSE fixture; the process may still be running.
+E             
+E           assert 1 == 0
+E            +  where 1 = CompletedProcess(args=['C:\\Users\\Administrator\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\...~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n     | Could not stop MUSE fixture; the process may still be running.\n').returncode
+
+tests\muse\integration\test_launcher.py:23: AssertionError
+============================== warnings summary ===============================
+tests/muse/integration/test_frontend.py::test_browser_create_pause_resume_cancel_memory_and_reconnect
+  C:\Users\Administrator\Documents\Codex\2026-09-26\ai-starcode-muse-coding-agent-python\outputs\muse-next\.venv\Lib\site-packages\websockets\legacy\__init__.py:6: DeprecationWarning: websockets.legacy is deprecated; see https://websockets.readthedocs.io/en/stable/howto/upgrade.html for upgrade instructions
+    warnings.warn(  # deprecated in 14.0 - 2024-11-09
+
+tests/muse/integration/test_frontend.py::test_browser_create_pause_resume_cancel_memory_and_reconnect
+  C:\Users\Administrator\Documents\Codex\2026-09-26\ai-starcode-muse-coding-agent-python\outputs\muse-next\.venv\Lib\site-packages\uvicorn\protocols\websockets\websockets_impl.py:17: DeprecationWarning: websockets.server.WebSocketServerProtocol is deprecated
+    from websockets.server import WebSocketServerProtocol
+
+tests/test_hooks.py::TestAgentHookIntegration::test_pre_tool_use_reject_skips_tool
+  C:\Users\Administrator\Documents\Codex\2026-09-26\ai-starcode-muse-coding-agent-python\outputs\muse-next\.venv\Lib\site-packages\_pytest\unraisableexception.py:67: PytestUnraisableExceptionWarning: Exception ignored in: <function _ProactorBasePipeTransport.__del__ at 0x000001CB73B39EE0>
+  
+  Traceback (most recent call last):
+    File "C:\Users\Administrator\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\proactor_events.py", line 116, in __del__
+      _warn(f"unclosed transport {self!r}", ResourceWarning, source=self)
+                                 ^^^^^^^^
+    File "C:\Users\Administrator\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\proactor_events.py", line 80, in __repr__
+      info.append(f'fd={self._sock.fileno()}')
+                        ^^^^^^^^^^^^^^^^^^^
+    File "C:\Users\Administrator\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\windows_utils.py", line 102, in fileno
+      raise ValueError("I/O operation on closed pipe")
+  ValueError: I/O operation on closed pipe
+  
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+    warnings.warn(pytest.PytestUnraisableExceptionWarning(msg))
+
+tests/test_hooks.py::TestAgentHookIntegration::test_pre_tool_use_reject_skips_tool
+  C:\Users\Administrator\Documents\Codex\2026-09-26\ai-starcode-muse-coding-agent-python\outputs\muse-next\.venv\Lib\site-packages\_pytest\unraisableexception.py:67: PytestUnraisableExceptionWarning: Exception ignored in: <function BaseSubprocessTransport.__del__ at 0x000001CB73B385E0>
+  
+  Traceback (most recent call last):
+    File "C:\Users\Administrator\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\base_subprocess.py", line 126, in __del__
+      self.close()
+    File "C:\Users\Administrator\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\base_subprocess.py", line 104, in close
+      proto.pipe.close()
+    File "C:\Users\Administrator\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\proactor_events.py", line 109, in close
+      self._loop.call_soon(self._call_connection_lost, None)
+    File "C:\Users\Administrator\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\base_events.py", line 799, in call_soon
+      self._check_closed()
+    File "C:\Users\Administrator\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\base_events.py", line 545, in _check_closed
+      raise RuntimeError('Event loop is closed')
+  RuntimeError: Event loop is closed
+  
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+    warnings.warn(pytest.PytestUnraisableExceptionWarning(msg))
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/muse/integration/test_launcher.py::test_stop_script_matches_serialized_process_time[True]
+1 failed, 912 passed, 2 skipped, 4 warnings in 351.79s (0:05:51)

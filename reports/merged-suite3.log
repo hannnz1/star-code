@@ -1,0 +1,110 @@
+...............................F........................................ [  8%]
+........................................................................ [ 17%]
+....................................................................s... [ 26%]
+........................................................................ [ 35%]
+........................................................................ [ 44%]
+...s.................................................................... [ 53%]
+........................................................................ [ 61%]
+..........s............................................................. [ 70%]
+........................................................................ [ 79%]
+........................................................................ [ 88%]
+........................................................................ [ 97%]
+.......................                                                  [100%]
+================================== FAILURES ===================================
+______________ test_browser_input_approval_download_and_followup ______________
+
+tmp_path = WindowsPath('C:/Users/Administrator/Documents/Codex/2026-09-26/ai-starcode-muse-coding-agent-python/outputs/muse-next/work/merged-suite3/test_browser_input_approval_do0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000021F95A9C800>
+
+    def test_browser_input_approval_download_and_followup(tmp_path, monkeypatch):
+        import asyncio
+        import re
+        from muse.agent.loop import AgentRunner
+        from muse.contracts import ModelEvent, ToolCall
+        from muse.tasks.worker import Worker
+        from test_agent_loop import ScriptedProvider
+        root=Path(__file__).resolve().parents[3]
+        monkeypatch.setenv('PLAYWRIGHT_BROWSERS_PATH',str(root/'work/browsers'))
+        settings=load_settings(data_dir=tmp_path/'data',require_provider=False)
+        with socket.socket() as sock:
+            sock.bind(('127.0.0.1',0));port=sock.getsockname()[1]
+        origin=f'http://127.0.0.1:{port}';settings.allowed_origins.append(origin)
+        app=create_app(settings);repo=app.state.repository
+        call=lambda id,name,arguments:[ModelEvent(type='call',call=ToolCall(id=id,name=name,arguments=arguments))]
+        provider=ScriptedProvider([
+            call('question','ask_user',{'question':'Which format?'}),
+            call('denied','run_command',{'command':'echo must-not-run'}),
+            call('approved','run_command',{'command':'echo approved-fixture'}),
+            call('report','save_artifact',{'name':'report.md','content':'# Verified deliverable\nOriginal version.'}),
+            [ModelEvent(type='text',text='Report saved.')],
+            [ModelEvent(type='text',text='Follow-up completed.')],
+        ])
+        worker=Worker(settings,repo,AgentRunner(provider))
+        def run_worker():
+            from concurrent.futures import ThreadPoolExecutor
+            with ThreadPoolExecutor(max_workers=1) as executor:
+                executor.submit(lambda: asyncio.run(worker.run_once())).result(timeout=30)
+        server=uvicorn.Server(uvicorn.Config(app,host='127.0.0.1',port=port,log_level='error'))
+        thread=threading.Thread(target=server.run,daemon=True);thread.start()
+        try:
+            for _ in range(100):
+                if server.started:break
+                time.sleep(.05)
+            with sync_playwright() as pw:
+>               browser=pw.chromium.launch();page=browser.new_page();errors=[]
+                        ^^^^^^^^^^^^^^^^^^^^
+
+tests\muse\integration\test_frontend.py:127: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+.venv\Lib\site-packages\playwright\sync_api\_generated.py:16814: in launch
+    self._sync(
+.venv\Lib\site-packages\playwright\_impl\_browser_type.py:101: in launch
+    await self._channel.send(
+.venv\Lib\site-packages\playwright\_impl\_connection.py:76: in send
+    return await self._connection.wrap_api_call(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <playwright._impl._connection.Connection object at 0x0000021F95DEB320>
+cb = <function Channel.send.<locals>.<lambda> at 0x0000021F95DBB6A0>
+is_internal = False, title = None
+
+    async def wrap_api_call(
+        self, cb: Callable[[], Any], is_internal: bool = False, title: str = None
+    ) -> Any:
+        if self._api_zone.get():
+            return await cb()
+        task = asyncio.current_task(self._loop)
+        parsed_st = _attach_api_call_information(
+            getattr(task, "__pw_stack__", None) or _capture_stack_trace(),
+            is_internal,
+            title,
+        )
+        self._api_zone.set(parsed_st)
+        try:
+            return await cb()
+        except Exception as error:
+>           raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+E           playwright._impl._errors.Error: BrowserType.launch: Executable doesn't exist at C:\Users\Administrator\Documents\Codex\2026-09-26\ai-starcode-muse-coding-agent-python\outputs\muse-next\work\browsers\chromium_headless_shell-1243\chrome-headless-shell-win64\chrome-headless-shell.exe
+E           �X�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�[
+E           �U Looks like Playwright was just installed or updated.       �U
+E           �U Please run the following command to download new browsers: �U
+E           �U                                                            �U
+E           �U     playwright install                                     �U
+E           �U                                                            �U
+E           �U <3 Playwright Team                                         �U
+E           �^�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�T�a
+
+.venv\Lib\site-packages\playwright\_impl\_connection.py:632: Error
+============================== warnings summary ===============================
+tests/muse/integration/test_frontend.py::test_browser_create_pause_resume_cancel_memory_and_reconnect
+  C:\Users\Administrator\Documents\Codex\2026-09-26\ai-starcode-muse-coding-agent-python\outputs\muse-next\.venv\Lib\site-packages\websockets\legacy\__init__.py:6: DeprecationWarning: websockets.legacy is deprecated; see https://websockets.readthedocs.io/en/stable/howto/upgrade.html for upgrade instructions
+    warnings.warn(  # deprecated in 14.0 - 2024-11-09
+
+tests/muse/integration/test_frontend.py::test_browser_create_pause_resume_cancel_memory_and_reconnect
+  C:\Users\Administrator\Documents\Codex\2026-09-26\ai-starcode-muse-coding-agent-python\outputs\muse-next\.venv\Lib\site-packages\uvicorn\protocols\websockets\websockets_impl.py:17: DeprecationWarning: websockets.server.WebSocketServerProtocol is deprecated
+    from websockets.server import WebSocketServerProtocol
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/muse/integration/test_frontend.py::test_browser_input_approval_download_and_followup
+1 failed, 811 passed, 3 skipped, 2 warnings in 68.15s (0:01:08)

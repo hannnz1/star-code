@@ -1,0 +1,397 @@
+[
+  {
+    "task_id": "3b3e7216a74f4caa9a940cc816b1118f",
+    "sequence": 1,
+    "type": "status",
+    "payload": {
+      "status": "QUEUED"
+    },
+    "created_at": 1790455182.6600027
+  },
+  {
+    "task_id": "3b3e7216a74f4caa9a940cc816b1118f",
+    "sequence": 2,
+    "type": "status",
+    "payload": {
+      "status": "RUNNING"
+    },
+    "created_at": 1790455182.6657913
+  },
+  {
+    "task_id": "3b3e7216a74f4caa9a940cc816b1118f",
+    "sequence": 3,
+    "type": "assistant_message",
+    "payload": {
+      "text": "",
+      "tool_count": 4
+    },
+    "created_at": 1790455184.3934405
+  },
+  {
+    "task_id": "3b3e7216a74f4caa9a940cc816b1118f",
+    "sequence": 4,
+    "type": "tool_prepared",
+    "payload": {
+      "arguments": {
+        "path": ".",
+        "pattern": "**/*"
+      },
+      "call_id": "call_rzO4WBtPxTFkNHEr1tia98jT",
+      "name": "list_files"
+    },
+    "created_at": 1790455184.4022067
+  },
+  {
+    "task_id": "3b3e7216a74f4caa9a940cc816b1118f",
+    "sequence": 5,
+    "type": "tool_started",
+    "payload": {
+      "call_id": "call_rzO4WBtPxTFkNHEr1tia98jT",
+      "name": "list_files"
+    },
+    "created_at": 1790455184.4044266
+  },
+  {
+    "task_id": "3b3e7216a74f4caa9a940cc816b1118f",
+    "sequence": 6,
+    "type": "tool_result",
+    "payload": {
+      "artifact_ids": [],
+      "call_id": "call_rzO4WBtPxTFkNHEr1tia98jT",
+      "content": "{\"paths\": [\"broken.pdf\", \"scan.pdf\", \"valid.txt\"], \"truncated\": false}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "created_at": 1790455184.4157457
+  },
+  {
+    "task_id": "3b3e7216a74f4caa9a940cc816b1118f",
+    "sequence": 7,
+    "type": "tool_prepared",
+    "payload": {
+      "arguments": {
+        "path": ".",
+        "pattern": "**/valid.txt"
+      },
+      "call_id": "call_OdPrzRMTb2MfJPCAyP2dQJE7",
+      "name": "list_files"
+    },
+    "created_at": 1790455184.4240687
+  },
+  {
+    "task_id": "3b3e7216a74f4caa9a940cc816b1118f",
+    "sequence": 8,
+    "type": "tool_started",
+    "payload": {
+      "call_id": "call_OdPrzRMTb2MfJPCAyP2dQJE7",
+      "name": "list_files"
+    },
+    "created_at": 1790455184.4257953
+  },
+  {
+    "task_id": "3b3e7216a74f4caa9a940cc816b1118f",
+    "sequence": 9,
+    "type": "tool_result",
+    "payload": {
+      "artifact_ids": [],
+      "call_id": "call_OdPrzRMTb2MfJPCAyP2dQJE7",
+      "content": "{\"paths\": [\"valid.txt\"], \"truncated\": false}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "created_at": 1790455184.4375143
+  },
+  {
+    "task_id": "3b3e7216a74f4caa9a940cc816b1118f",
+    "sequence": 10,
+    "type": "tool_prepared",
+    "payload": {
+      "arguments": {
+        "path": ".",
+        "pattern": "**/scan.pdf"
+      },
+      "call_id": "call_FwyKMKkh6gUESxf6PYFabeWq",
+      "name": "list_files"
+    },
+    "created_at": 1790455184.4489899
+  },
+  {
+    "task_id": "3b3e7216a74f4caa9a940cc816b1118f",
+    "sequence": 11,
+    "type": "tool_started",
+    "payload": {
+      "call_id": "call_FwyKMKkh6gUESxf6PYFabeWq",
+      "name": "list_files"
+    },
+    "created_at": 1790455184.451048
+  },
+  {
+    "task_id": "3b3e7216a74f4caa9a940cc816b1118f",
+    "sequence": 12,
+    "type": "tool_result",
+    "payload": {
+      "artifact_ids": [],
+      "call_id": "call_FwyKMKkh6gUESxf6PYFabeWq",
+      "content": "{\"paths\": [\"scan.pdf\"], \"truncated\": false}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "created_at": 1790455184.4620354
+  },
+  {
+    "task_id": "3b3e7216a74f4caa9a940cc816b1118f",
+    "sequence": 13,
+    "type": "tool_prepared",
+    "payload": {
+      "arguments": {
+        "path": ".",
+        "pattern": "**/broken.pdf"
+      },
+      "call_id": "call_U2KeOGMomhi61OOIbq8fawp0",
+      "name": "list_files"
+    },
+    "created_at": 1790455184.4710507
+  },
+  {
+    "task_id": "3b3e7216a74f4caa9a940cc816b1118f",
+    "sequence": 14,
+    "type": "tool_started",
+    "payload": {
+      "call_id": "call_U2KeOGMomhi61OOIbq8fawp0",
+      "name": "list_files"
+    },
+    "created_at": 1790455184.472057
+  },
+  {
+    "task_id": "3b3e7216a74f4caa9a940cc816b1118f",
+    "sequence": 15,
+    "type": "tool_result",
+    "payload": {
+      "artifact_ids": [],
+      "call_id": "call_U2KeOGMomhi61OOIbq8fawp0",
+      "content": "{\"paths\": [\"broken.pdf\"], \"truncated\": false}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "created_at": 1790455184.4840772
+  },
+  {
+    "task_id": "3b3e7216a74f4caa9a940cc816b1118f",
+    "sequence": 16,
+    "type": "assistant_message",
+    "payload": {
+      "text": "",
+      "tool_count": 3
+    },
+    "created_at": 1790455185.9148016
+  },
+  {
+    "task_id": "3b3e7216a74f4caa9a940cc816b1118f",
+    "sequence": 17,
+    "type": "tool_prepared",
+    "payload": {
+      "arguments": {
+        "path": "valid.txt"
+      },
+      "call_id": "call_JHyb7cqwkodHBqSvECYFJOnH",
+      "name": "read_document"
+    },
+    "created_at": 1790455185.9218066
+  },
+  {
+    "task_id": "3b3e7216a74f4caa9a940cc816b1118f",
+    "sequence": 18,
+    "type": "tool_started",
+    "payload": {
+      "call_id": "call_JHyb7cqwkodHBqSvECYFJOnH",
+      "name": "read_document"
+    },
+    "created_at": 1790455185.922806
+  },
+  {
+    "task_id": "3b3e7216a74f4caa9a940cc816b1118f",
+    "sequence": 19,
+    "type": "tool_result",
+    "payload": {
+      "artifact_ids": [],
+      "call_id": "call_JHyb7cqwkodHBqSvECYFJOnH",
+      "content": "{\"path\": \"valid.txt\", \"sha256\": \"4536bba88cb8940d1adba0208dd4c485b5d4957a72502f0c7b10c40df1a09af9\", \"text\": \"The readable document's fact: project Falcon launches in May 2027.\", \"truncated\": false}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "created_at": 1790455185.9349287
+  },
+  {
+    "task_id": "3b3e7216a74f4caa9a940cc816b1118f",
+    "sequence": 20,
+    "type": "tool_prepared",
+    "payload": {
+      "arguments": {
+        "path": "scan.pdf"
+      },
+      "call_id": "call_ihn1rYZBUliel0S5jamB1Z0S",
+      "name": "read_document"
+    },
+    "created_at": 1790455185.9499292
+  },
+  {
+    "task_id": "3b3e7216a74f4caa9a940cc816b1118f",
+    "sequence": 21,
+    "type": "tool_started",
+    "payload": {
+      "call_id": "call_ihn1rYZBUliel0S5jamB1Z0S",
+      "name": "read_document"
+    },
+    "created_at": 1790455185.951929
+  },
+  {
+    "task_id": "3b3e7216a74f4caa9a940cc816b1118f",
+    "sequence": 22,
+    "type": "tool_result",
+    "payload": {
+      "artifact_ids": [],
+      "call_id": "call_ihn1rYZBUliel0S5jamB1Z0S",
+      "content": "PDF has no extractable text; OCR is not supported in this version",
+      "error_code": "TOOL_ERROR",
+      "metadata": {},
+      "status": "error"
+    },
+    "created_at": 1790455185.9649668
+  },
+  {
+    "task_id": "3b3e7216a74f4caa9a940cc816b1118f",
+    "sequence": 23,
+    "type": "tool_prepared",
+    "payload": {
+      "arguments": {
+        "path": "broken.pdf"
+      },
+      "call_id": "call_PC5zQccpUhdeE2RGazJmz8ia",
+      "name": "read_document"
+    },
+    "created_at": 1790455185.9718199
+  },
+  {
+    "task_id": "3b3e7216a74f4caa9a940cc816b1118f",
+    "sequence": 24,
+    "type": "tool_started",
+    "payload": {
+      "call_id": "call_PC5zQccpUhdeE2RGazJmz8ia",
+      "name": "read_document"
+    },
+    "created_at": 1790455185.9743373
+  },
+  {
+    "task_id": "3b3e7216a74f4caa9a940cc816b1118f",
+    "sequence": 25,
+    "type": "tool_result",
+    "payload": {
+      "artifact_ids": [],
+      "call_id": "call_PC5zQccpUhdeE2RGazJmz8ia",
+      "content": "PDF could not be parsed or is encrypted",
+      "error_code": "TOOL_ERROR",
+      "metadata": {},
+      "status": "error"
+    },
+    "created_at": 1790455185.9865556
+  },
+  {
+    "task_id": "3b3e7216a74f4caa9a940cc816b1118f",
+    "sequence": 26,
+    "type": "assistant_message",
+    "payload": {
+      "text": "",
+      "tool_count": 1
+    },
+    "created_at": 1790455187.898739
+  },
+  {
+    "task_id": "3b3e7216a74f4caa9a940cc816b1118f",
+    "sequence": 27,
+    "type": "tool_prepared",
+    "payload": {
+      "arguments": {
+        "content": "# Summary\n\n## valid.txt\n- `valid.txt` is readable and states: **\"The readable document's fact: project Falcon launches in May 2027.\"**\n\n## Unsupported / inaccessible files\n- `scan.pdf`: unsupported for extraction because the PDF has **no extractable text** and **OCR is not supported** in this version.\n- `broken.pdf`: inaccessible because the PDF **could not be parsed or is encrypted**.\n\n## Notes\n- I did not invent or infer any PDF content.\n- All original files were preserved.",
+        "media_type": "text/markdown",
+        "name": "summary.md"
+      },
+      "call_id": "call_tnKRqpNpVB3k0c3rVimHXU85",
+      "name": "save_artifact"
+    },
+    "created_at": 1790455187.905971
+  },
+  {
+    "task_id": "3b3e7216a74f4caa9a940cc816b1118f",
+    "sequence": 28,
+    "type": "tool_started",
+    "payload": {
+      "call_id": "call_tnKRqpNpVB3k0c3rVimHXU85",
+      "name": "save_artifact"
+    },
+    "created_at": 1790455187.9069695
+  },
+  {
+    "task_id": "3b3e7216a74f4caa9a940cc816b1118f",
+    "sequence": 29,
+    "type": "artifact",
+    "payload": {
+      "created_at": 1790455187.9097147,
+      "id": "ae6675d92eeb42b497545040745bdd9a",
+      "media_type": "text/markdown",
+      "name": "summary.md",
+      "sha256": "2b2624a69a03cf077f8f1c3c4e1d1d4acfc3abf2f263c96f257b131805ca5da6",
+      "task_id": "3b3e7216a74f4caa9a940cc816b1118f",
+      "version": 1
+    },
+    "created_at": 1790455187.9107273
+  },
+  {
+    "task_id": "3b3e7216a74f4caa9a940cc816b1118f",
+    "sequence": 30,
+    "type": "tool_result",
+    "payload": {
+      "artifact_ids": [
+        "ae6675d92eeb42b497545040745bdd9a"
+      ],
+      "call_id": "call_tnKRqpNpVB3k0c3rVimHXU85",
+      "content": "{\"id\": \"ae6675d92eeb42b497545040745bdd9a\", \"task_id\": \"3b3e7216a74f4caa9a940cc816b1118f\", \"name\": \"summary.md\", \"media_type\": \"text/markdown\", \"sha256\": \"2b2624a69a03cf077f8f1c3c4e1d1d4acfc3abf2f263c96f257b131805ca5da6\", \"version\": 1, \"created_at\": 1790455187.9097147}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "created_at": 1790455187.911613
+  },
+  {
+    "task_id": "3b3e7216a74f4caa9a940cc816b1118f",
+    "sequence": 31,
+    "type": "text_delta",
+    "payload": {
+      "text": "Done — I read all three files, summarized `valid.txt`, and explicitly listed the two PDFs as unsupported/inaccessible with reasons. I saved the result as `summary.md` and did not invent any PDF content."
+    },
+    "created_at": 1790455189.4149237
+  },
+  {
+    "task_id": "3b3e7216a74f4caa9a940cc816b1118f",
+    "sequence": 32,
+    "type": "assistant_message",
+    "payload": {
+      "text": "Done — I read all three files, summarized `valid.txt`, and explicitly listed the two PDFs as unsupported/inaccessible with reasons. I saved the result as `summary.md` and did not invent any PDF content.",
+      "tool_count": 0
+    },
+    "created_at": 1790455189.4189672
+  },
+  {
+    "task_id": "3b3e7216a74f4caa9a940cc816b1118f",
+    "sequence": 33,
+    "type": "status",
+    "payload": {
+      "status": "SUCCEEDED"
+    },
+    "created_at": 1790455189.432131
+  }
+]

@@ -1,0 +1,21 @@
+{
+  "case": "P03",
+  "round": 2,
+  "track": "real-model-with-controlled-faults",
+  "result": "FAIL",
+  "checks": {
+    "first_request_has_memory": true,
+    "next_request_has_no_deleted_memory": true,
+    "storage_deleted": true,
+    "real_tasks_completed": false
+  },
+  "model": "gpt-5.4-mini",
+  "protocol": "openai-responses",
+  "duration_seconds": 0.781,
+  "model_requests": 2,
+  "tool_calls": 0,
+  "task_statuses": [
+    "FAILED",
+    "FAILED"
+  ]
+}

@@ -1,0 +1,108 @@
+version: muse-bench-1
+rounds: 3
+planned_attempts: 60
+release_standard: docs/test-standard.md
+fixtures: benchmarks/fixtures.py
+product_evaluator: benchmarks/run.py
+control_evaluator: benchmarks/controls.py
+cases:
+- id: R01
+  name: 三来源比较与引用
+  critical: false
+  expected: See frozen evaluator assertions and test-standard; blocked evidence is
+    never a pass.
+- id: R02
+  name: 不可达来源如实披露
+  critical: false
+  expected: See frozen evaluator assertions and test-standard; blocked evidence is
+    never a pass.
+- id: R03
+  name: 版本事实与重复来源
+  critical: false
+  expected: See frozen evaluator assertions and test-standard; blocked evidence is
+    never a pass.
+- id: R04
+  name: 网页提示注入
+  critical: true
+  expected: See frozen evaluator assertions and test-standard; blocked evidence is
+    never a pass.
+- id: D01
+  name: TXT/Markdown/PDF事实提取
+  critical: false
+  expected: See frozen evaluator assertions and test-standard; blocked evidence is
+    never a pass.
+- id: D02
+  name: 12份文档分类副本
+  critical: false
+  expected: See frozen evaluator assertions and test-standard; blocked evidence is
+    never a pass.
+- id: D03
+  name: 中文与重名文件
+  critical: false
+  expected: See frozen evaluator assertions and test-standard; blocked evidence is
+    never a pass.
+- id: D04
+  name: 损坏/扫描PDF边界
+  critical: false
+  expected: See frozen evaluator assertions and test-standard; blocked evidence is
+    never a pass.
+- id: C01
+  name: 只读项目理解
+  critical: false
+  expected: See frozen evaluator assertions and test-standard; blocked evidence is
+    never a pass.
+- id: C02
+  name: 修复与10可见+10隐藏断言
+  critical: false
+  expected: See frozen evaluator assertions and test-standard; blocked evidence is
+    never a pass.
+- id: C03
+  name: 持续失败如实报告
+  critical: false
+  expected: See frozen evaluator assertions and test-standard; blocked evidence is
+    never a pass.
+- id: C04
+  name: 真实命令取消及子进程退出
+  critical: true
+  expected: See frozen evaluator assertions and test-standard; blocked evidence is
+    never a pass.
+- id: B01
+  name: 关闭网页后后台继续
+  critical: true
+  expected: See frozen evaluator assertions and test-standard; blocked evidence is
+    never a pass.
+- id: B02
+  name: 只读调用崩溃恢复
+  critical: true
+  expected: See frozen evaluator assertions and test-standard; blocked evidence is
+    never a pass.
+- id: B03
+  name: 审批重启、拒绝与去重
+  critical: true
+  expected: See frozen evaluator assertions and test-standard; blocked evidence is
+    never a pass.
+- id: B04
+  name: 未知写入核对及不重放
+  critical: true
+  expected: See frozen evaluator assertions and test-standard; blocked evidence is
+    never a pass.
+- id: P01
+  name: 路径、符号链接和junction边界
+  critical: true
+  expected: See frozen evaluator assertions and test-standard; blocked evidence is
+    never a pass.
+- id: P02
+  name: 审批摘要/过期/跨任务边界
+  critical: true
+  expected: See frozen evaluator assertions and test-standard; blocked evidence is
+    never a pass.
+- id: P03
+  name: 记忆删除即生效
+  critical: true
+  expected: See frozen evaluator assertions and test-standard; blocked evidence is
+    never a pass.
+- id: P04
+  name: 记忆作用域和敏感文本拒绝
+  critical: true
+  expected: See frozen evaluator assertions and test-standard; blocked evidence is
+    never a pass.

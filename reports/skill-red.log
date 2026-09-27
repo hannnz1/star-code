@@ -1,0 +1,180 @@
+FF                                                                       [100%]
+================================== FAILURES ===================================
+__________ test_inline_skill_uses_baseline_parser_and_records_source __________
+
+tmp_path = WindowsPath('C:/Users/Administrator/Documents/Codex/2026-09-26/ai-starcode-muse-coding-agent-python/outputs/muse-next/work/skill-red/test_inline_skill_uses_baselin0')
+
+    async def test_inline_skill_uses_baseline_parser_and_records_source(tmp_path):
+        provider = ScriptedProvider([
+            [ModelEvent(type='call', call=ToolCall(id='load', name='load_skill', arguments={'name': 'inspect'}))],
+            [ModelEvent(type='text', text='Loaded the inspection instructions.')]])
+        repo, task, worker = runtime(tmp_path, provider)
+        skills = tmp_path / 'project/.muse/skills'
+        skills.mkdir(parents=True)
+        (skills / 'inspect.md').write_text('---\nname: inspect\ndescription: Inspect files\n---\nRead hello.txt before proposing changes.')
+        await worker.run_once()
+>       call = next(c for c in repo.calls(task.id) if c['id'] == 'load')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       StopIteration
+
+tests\test_durable_skills.py:15: StopIteration
+
+The above exception was the direct cause of the following exception:
+
+self = <Coroutine test_inline_skill_uses_baseline_parser_and_records_source>
+
+    def runtest(self) -> None:
+        runner_fixture_id = f"_{self._loop_scope}_scoped_runner"
+        runner = self._request.getfixturevalue(runner_fixture_id)
+        context = contextvars.copy_context()
+        synchronized_obj = _synchronize_coroutine(
+            getattr(*self._synchronization_target_attr), runner, context
+        )
+        with MonkeyPatch.context() as c:
+            c.setattr(*self._synchronization_target_attr, synchronized_obj)
+>           super().runtest()
+
+.venv\Lib\site-packages\pytest_asyncio\plugin.py:469: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+.venv\Lib\site-packages\pytest_asyncio\plugin.py:716: in inner
+    runner.run(coro, context=context)
+..\..\..\..\..\..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\runners.py:118: in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <ProactorEventLoop running=False closed=False debug=False>
+future = <Task finished name='Task-1' coro=<test_inline_skill_uses_baseline_parser_and_records_source() done, defined at C:\Use...gent-python\outputs\muse-next\tests\test_durable_skills.py:6> exception=RuntimeError('coroutine raised StopIteration')>
+
+    def run_until_complete(self, future):
+        """Run until the Future is done.
+    
+        If the argument is a coroutine, it is wrapped in a Task.
+    
+        WARNING: It would be disastrous to call run_until_complete()
+        with the same coroutine twice -- it would wrap it in two
+        different Tasks and that can't be good.
+    
+        Return the Future's result, or raise its exception.
+        """
+        self._check_closed()
+        self._check_running()
+    
+        new_task = not futures.isfuture(future)
+        future = tasks.ensure_future(future, loop=self)
+        if new_task:
+            # An exception is raised if the future didn't complete, so there
+            # is no need to log the "destroy pending task" message
+            future._log_destroy_pending = False
+    
+        future.add_done_callback(_run_until_complete_cb)
+        try:
+            self.run_forever()
+        except:
+            if new_task and future.done() and not future.cancelled():
+                # The coroutine raised a BaseException. Consume the exception
+                # to not log a warning, the caller doesn't have access to the
+                # local task.
+                future.exception()
+            raise
+        finally:
+            future.remove_done_callback(_run_until_complete_cb)
+        if not future.done():
+            raise RuntimeError('Event loop stopped before Future completed.')
+    
+>       return future.result()
+               ^^^^^^^^^^^^^^^
+E       RuntimeError: coroutine raised StopIteration
+
+..\..\..\..\..\..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\base_events.py:691: RuntimeError
+_______________ test_fork_skill_does_not_leak_body_into_parent ________________
+
+tmp_path = WindowsPath('C:/Users/Administrator/Documents/Codex/2026-09-26/ai-starcode-muse-coding-agent-python/outputs/muse-next/work/skill-red/test_fork_skill_does_not_leak_0')
+
+    async def test_fork_skill_does_not_leak_body_into_parent(tmp_path):
+        provider = ScriptedProvider([
+            [ModelEvent(type='call', call=ToolCall(id='load', name='load_skill', arguments={'name': 'inspect'}))],
+            [ModelEvent(type='text', text='Fork is required.')]])
+        repo, task, worker = runtime(tmp_path, provider)
+        skills = tmp_path / 'project/.muse/skills'
+        skills.mkdir(parents=True)
+        (skills / 'inspect.md').write_text('---\nname: inspect\ndescription: Inspect files\nmode: fork\n---\nFORK-ONLY-INSTRUCTIONS')
+        await worker.run_once()
+>       call = next(c for c in repo.calls(task.id) if c['id'] == 'load')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       StopIteration
+
+tests\test_durable_skills.py:30: StopIteration
+
+The above exception was the direct cause of the following exception:
+
+self = <Coroutine test_fork_skill_does_not_leak_body_into_parent>
+
+    def runtest(self) -> None:
+        runner_fixture_id = f"_{self._loop_scope}_scoped_runner"
+        runner = self._request.getfixturevalue(runner_fixture_id)
+        context = contextvars.copy_context()
+        synchronized_obj = _synchronize_coroutine(
+            getattr(*self._synchronization_target_attr), runner, context
+        )
+        with MonkeyPatch.context() as c:
+            c.setattr(*self._synchronization_target_attr, synchronized_obj)
+>           super().runtest()
+
+.venv\Lib\site-packages\pytest_asyncio\plugin.py:469: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+.venv\Lib\site-packages\pytest_asyncio\plugin.py:716: in inner
+    runner.run(coro, context=context)
+..\..\..\..\..\..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\runners.py:118: in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <ProactorEventLoop running=False closed=False debug=False>
+future = <Task finished name='Task-7' coro=<test_fork_skill_does_not_leak_body_into_parent() done, defined at C:\Users\Administ...ent-python\outputs\muse-next\tests\test_durable_skills.py:21> exception=RuntimeError('coroutine raised StopIteration')>
+
+    def run_until_complete(self, future):
+        """Run until the Future is done.
+    
+        If the argument is a coroutine, it is wrapped in a Task.
+    
+        WARNING: It would be disastrous to call run_until_complete()
+        with the same coroutine twice -- it would wrap it in two
+        different Tasks and that can't be good.
+    
+        Return the Future's result, or raise its exception.
+        """
+        self._check_closed()
+        self._check_running()
+    
+        new_task = not futures.isfuture(future)
+        future = tasks.ensure_future(future, loop=self)
+        if new_task:
+            # An exception is raised if the future didn't complete, so there
+            # is no need to log the "destroy pending task" message
+            future._log_destroy_pending = False
+    
+        future.add_done_callback(_run_until_complete_cb)
+        try:
+            self.run_forever()
+        except:
+            if new_task and future.done() and not future.cancelled():
+                # The coroutine raised a BaseException. Consume the exception
+                # to not log a warning, the caller doesn't have access to the
+                # local task.
+                future.exception()
+            raise
+        finally:
+            future.remove_done_callback(_run_until_complete_cb)
+        if not future.done():
+            raise RuntimeError('Event loop stopped before Future completed.')
+    
+>       return future.result()
+               ^^^^^^^^^^^^^^^
+E       RuntimeError: coroutine raised StopIteration
+
+..\..\..\..\..\..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\base_events.py:691: RuntimeError
+=========================== short test summary info ===========================
+FAILED tests/test_durable_skills.py::test_inline_skill_uses_baseline_parser_and_records_source
+FAILED tests/test_durable_skills.py::test_fork_skill_does_not_leak_body_into_parent
+2 failed in 1.21s

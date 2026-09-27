@@ -76,11 +76,12 @@ class MCPClient:
             command=self.config.command,
             args=self.config.args,
             env=build_child_env(self.config.env),
+            cwd=getattr(self, 'cwd', None),
         )
         devnull = open(os.devnull, "w")
         self._stack.callback(devnull.close)
         read, write = await self._stack.enter_async_context(
-            stdio_client(params, errlog=devnull)
+            getattr(self, 'stdio_transport', stdio_client)(params, errlog=devnull)
         )
         return read, write
 
@@ -93,7 +94,9 @@ class MCPClient:
         }
         http_client = httpx.AsyncClient(
             headers=resolved_headers,
-            follow_redirects=True,
+            follow_redirects=False,
+            trust_env=False,
+            timeout=60,
         )
         await self._stack.enter_async_context(http_client)
 
@@ -106,8 +109,19 @@ class MCPClient:
 
     async def list_tools(self) -> list[types.Tool]:
         assert self._session is not None
-        result = await self._session.list_tools()
-        return list(result.tools)
+        tools, seen, cursor = [], set(), None
+        for _ in range(100):
+            result = await self._session.list_tools(cursor=cursor) if cursor else await self._session.list_tools()
+            tools.extend(result.tools)
+            if len(tools) > 10000:
+                raise ValueError('MCP tool catalog exceeds limit')
+            cursor = result.nextCursor
+            if cursor is None:
+                return tools
+            if not isinstance(cursor, str) or not cursor or cursor in seen:
+                raise ValueError('Invalid or repeated MCP pagination cursor')
+            seen.add(cursor)
+        raise ValueError('MCP pagination exceeds page limit')
 
 
     async def call_tool(

@@ -102,6 +102,11 @@ def parse_skill_file(path: Path) -> SkillDef:
     except OSError as e:
         raise SkillParseError(f"Cannot read skill file {path}: {e}") from e
 
+    return parse_skill_text(raw, path)
+
+
+def parse_skill_text(raw: str, path: Path | None = None) -> SkillDef:
+
     meta, body = parse_frontmatter(raw)
     _validate_meta(meta, str(path))
     mode, context = resolve_mode_and_context(meta)

@@ -32,6 +32,22 @@ _ENV_VAR_RE = re.compile(r"\$\{([^}]+)\}")
 
 
 @dataclass
+class AgentLimits:
+    max_turns: int = 40
+    max_tool_calls: int = 100
+    max_active_seconds: float = 900
+
+    def __post_init__(self):
+        import math
+        for name in ('max_turns', 'max_tool_calls', 'max_active_seconds'):
+            value = getattr(self, name)
+            if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value) or value <= 0:
+                raise ConfigError(f'agent.{name} must be positive')
+            if name != 'max_active_seconds' and not isinstance(value, int):
+                raise ConfigError(f'agent.{name} must be an integer')
+
+
+@dataclass
 class ProviderConfig:
     name: str
     protocol: str
@@ -49,6 +65,9 @@ class ProviderConfig:
     _fetched_context_window: int = field(default=0, repr=False)
 
     api_key_env: str = ""
+    proxy_url: str | None = field(default=None, repr=False)
+    request_timeout_seconds: float = 120
+    limits: AgentLimits = field(default_factory=AgentLimits)
 
     def resolve_api_key(self) -> str:
         if self.api_key_env:
@@ -152,6 +171,7 @@ class AppConfig:
     teammate_mode: str = ""
     enable_coordinator_mode: bool = False
     sandbox: SandboxAppConfig = field(default_factory=SandboxAppConfig)
+    agent_limits: AgentLimits = field(default_factory=AgentLimits)
 
 
 def _load_single_file(path: Path) -> AppConfig:
@@ -162,6 +182,29 @@ def _load_single_file(path: Path) -> AppConfig:
 
     validated = validate_config_structure(raw)
 
+    import math
+    from urllib.parse import urlsplit
+    limits_raw = raw.get('agent') or {}
+    if not isinstance(limits_raw, dict):
+        raise ConfigError('agent must be a mapping')
+    limits = AgentLimits(**{k: v for k, v in limits_raw.items() if k in AgentLimits.__dataclass_fields__})
+    timeout = raw.get('request_timeout_seconds', 120)
+    if isinstance(timeout, bool) or not isinstance(timeout, (int, float)) or not math.isfinite(timeout) or timeout <= 0:
+        raise ConfigError('request_timeout_seconds must be positive')
+    proxy = raw.get('proxy') or {}
+    if not isinstance(proxy, dict) or not isinstance(proxy.get('enabled', False), bool):
+        raise ConfigError('proxy must contain a boolean enabled field')
+    proxy_url = None
+    if proxy.get('enabled'):
+        host, port = proxy.get('host', '127.0.0.1'), proxy.get('port', 7890)
+        if not isinstance(host, str) or not host or any(c in host for c in '/@?#'):
+            raise ConfigError('Invalid proxy host')
+        if isinstance(port, bool) or not isinstance(port, int) or not 1 <= port <= 65535:
+            raise ConfigError('Invalid proxy port')
+        proxy_url = f'http://{host}:{port}'
+        if not urlsplit(proxy_url).hostname:
+            raise ConfigError('Invalid proxy host')
+
     providers = [
         ProviderConfig(
             name=p["name"],
@@ -170,6 +213,9 @@ def _load_single_file(path: Path) -> AppConfig:
             model=p["model"],
             api_key=p["api_key"],
             api_key_env=p["api_key_env"],
+            proxy_url=proxy_url,
+            request_timeout_seconds=timeout,
+            limits=limits,
             thinking=p["thinking"],
             context_window=p["context_window"],
             max_output_tokens=p["max_output_tokens"],
@@ -205,6 +251,7 @@ def _load_single_file(path: Path) -> AppConfig:
 
     return AppConfig(
         providers=providers,
+        agent_limits=limits,
         permission_mode=validated["permission_mode"],
         mcp_servers=mcp_servers,
         raw_hooks=validated["hooks"],
@@ -253,6 +300,10 @@ def _merge_config(base: AppConfig, override: AppConfig) -> AppConfig:
 
 
 def load_config(path: Path | None = None) -> AppConfig:
+    if path is None:
+        explicit = os.environ.get('MUSE_STARCODE_CONFIG') or os.environ.get('MUSE_CONFIG')
+        if explicit:
+            path = Path(explicit)
     if path is not None:
         if not path.exists():
             raise ConfigError(f"Config file not found: {path}")

@@ -1,0 +1,145 @@
+{
+  "9e552000a9dd45ed934e304e55a69966": [
+    {
+      "task_id": "9e552000a9dd45ed934e304e55a69966",
+      "sequence": 1,
+      "type": "status",
+      "payload": {
+        "status": "QUEUED"
+      },
+      "created_at": 1790455258.2281497
+    },
+    {
+      "task_id": "9e552000a9dd45ed934e304e55a69966",
+      "sequence": 2,
+      "type": "status",
+      "payload": {
+        "status": "RUNNING"
+      },
+      "created_at": 1790455258.2316148
+    },
+    {
+      "task_id": "9e552000a9dd45ed934e304e55a69966",
+      "sequence": 3,
+      "type": "text_delta",
+      "payload": {
+        "text": "可适用的偏好有：\n\n- **用户常用标识**：`USER_COMMON_6143`\n- **项目偏好**：`PREFERENCE_MANDARIN_3197`\n\n我不会创建或编辑任何记忆。"
+      },
+      "created_at": 1790455259.7719805
+    },
+    {
+      "task_id": "9e552000a9dd45ed934e304e55a69966",
+      "sequence": 4,
+      "type": "assistant_message",
+      "payload": {
+        "text": "可适用的偏好有：\n\n- **用户常用标识**：`USER_COMMON_6143`\n- **项目偏好**：`PREFERENCE_MANDARIN_3197`\n\n我不会创建或编辑任何记忆。",
+        "tool_count": 0
+      },
+      "created_at": 1790455259.775056
+    },
+    {
+      "task_id": "9e552000a9dd45ed934e304e55a69966",
+      "sequence": 5,
+      "type": "status",
+      "payload": {
+        "status": "SUCCEEDED"
+      },
+      "created_at": 1790455259.781831
+    }
+  ],
+  "fc1f9007a7a9423991a17b94d0036730": [
+    {
+      "task_id": "fc1f9007a7a9423991a17b94d0036730",
+      "sequence": 1,
+      "type": "status",
+      "payload": {
+        "status": "QUEUED"
+      },
+      "created_at": 1790455259.7834113
+    },
+    {
+      "task_id": "fc1f9007a7a9423991a17b94d0036730",
+      "sequence": 2,
+      "type": "status",
+      "payload": {
+        "status": "RUNNING"
+      },
+      "created_at": 1790455259.7855227
+    },
+    {
+      "task_id": "fc1f9007a7a9423991a17b94d0036730",
+      "sequence": 3,
+      "type": "assistant_message",
+      "payload": {
+        "text": "",
+        "tool_count": 1
+      },
+      "created_at": 1790455261.26693
+    },
+    {
+      "task_id": "fc1f9007a7a9423991a17b94d0036730",
+      "sequence": 4,
+      "type": "tool_prepared",
+      "payload": {
+        "arguments": {
+          "query": "workspace preferences project guidance applicable user-managed preferences current workspace"
+        },
+        "call_id": "call_gE6XnAhcvnVB4YlFI9XOHaI9",
+        "name": "search_memory"
+      },
+      "created_at": 1790455261.2731078
+    },
+    {
+      "task_id": "fc1f9007a7a9423991a17b94d0036730",
+      "sequence": 5,
+      "type": "tool_started",
+      "payload": {
+        "call_id": "call_gE6XnAhcvnVB4YlFI9XOHaI9",
+        "name": "search_memory"
+      },
+      "created_at": 1790455261.2754018
+    },
+    {
+      "task_id": "fc1f9007a7a9423991a17b94d0036730",
+      "sequence": 6,
+      "type": "tool_result",
+      "payload": {
+        "artifact_ids": [],
+        "call_id": "call_gE6XnAhcvnVB4YlFI9XOHaI9",
+        "content": "[]",
+        "error_code": null,
+        "metadata": {},
+        "status": "success"
+      },
+      "created_at": 1790455261.2771678
+    },
+    {
+      "task_id": "fc1f9007a7a9423991a17b94d0036730",
+      "sequence": 7,
+      "type": "text_delta",
+      "payload": {
+        "text": "Applicable user-managed preferences for this workspace:\n\n- **User scope:** `USER_COMMON_6143`\n- **Project scope:** none found for this workspace\n\nI also checked memory for workspace-specific preferences and found no additional matches."
+      },
+      "created_at": 1790455262.841736
+    },
+    {
+      "task_id": "fc1f9007a7a9423991a17b94d0036730",
+      "sequence": 8,
+      "type": "assistant_message",
+      "payload": {
+        "text": "Applicable user-managed preferences for this workspace:\n\n- **User scope:** `USER_COMMON_6143`\n- **Project scope:** none found for this workspace\n\nI also checked memory for workspace-specific preferences and found no additional matches.",
+        "tool_count": 0
+      },
+      "created_at": 1790455262.8439875
+    },
+    {
+      "task_id": "fc1f9007a7a9423991a17b94d0036730",
+      "sequence": 9,
+      "type": "status",
+      "payload": {
+        "status": "SUCCEEDED"
+      },
+      "created_at": 1790455262.8498313
+    }
+  ]
+}

@@ -1,0 +1,211 @@
+{
+  "2435cd3c5e4e4679a5cab8f3d68065f9": [
+    {
+      "task_id": "2435cd3c5e4e4679a5cab8f3d68065f9",
+      "sequence": 1,
+      "type": "status",
+      "payload": {
+        "status": "QUEUED"
+      },
+      "created_at": 1790455219.5006049
+    },
+    {
+      "task_id": "2435cd3c5e4e4679a5cab8f3d68065f9",
+      "sequence": 2,
+      "type": "status",
+      "payload": {
+        "status": "RUNNING"
+      },
+      "created_at": 1790455219.5556238
+    },
+    {
+      "task_id": "2435cd3c5e4e4679a5cab8f3d68065f9",
+      "sequence": 3,
+      "type": "assistant_message",
+      "payload": {
+        "text": "",
+        "tool_count": 1
+      },
+      "created_at": 1790455220.7981174
+    },
+    {
+      "task_id": "2435cd3c5e4e4679a5cab8f3d68065f9",
+      "sequence": 4,
+      "type": "tool_prepared",
+      "payload": {
+        "arguments": {
+          "path": ".",
+          "pattern": "hello.txt"
+        },
+        "call_id": "call_NP9Eso5t9Pxm6t8o6A7XFaZ1",
+        "name": "list_files"
+      },
+      "created_at": 1790455220.807771
+    },
+    {
+      "task_id": "2435cd3c5e4e4679a5cab8f3d68065f9",
+      "sequence": 5,
+      "type": "tool_started",
+      "payload": {
+        "call_id": "call_NP9Eso5t9Pxm6t8o6A7XFaZ1",
+        "name": "list_files"
+      },
+      "created_at": 1790455220.8099685
+    },
+    {
+      "task_id": "2435cd3c5e4e4679a5cab8f3d68065f9",
+      "sequence": 6,
+      "type": "tool_result",
+      "payload": {
+        "artifact_ids": [],
+        "call_id": "call_NP9Eso5t9Pxm6t8o6A7XFaZ1",
+        "content": "{\"paths\": [\"hello.txt\"], \"truncated\": false}",
+        "error_code": null,
+        "metadata": {},
+        "status": "success"
+      },
+      "created_at": 1790455220.8181672
+    },
+    {
+      "task_id": "2435cd3c5e4e4679a5cab8f3d68065f9",
+      "sequence": 7,
+      "type": "assistant_message",
+      "payload": {
+        "text": "",
+        "tool_count": 1
+      },
+      "created_at": 1790455222.1697593
+    },
+    {
+      "task_id": "2435cd3c5e4e4679a5cab8f3d68065f9",
+      "sequence": 8,
+      "type": "tool_prepared",
+      "payload": {
+        "arguments": {
+          "path": "hello.txt"
+        },
+        "call_id": "call_vK7sKVIBuy3Pery0UPm40m8X",
+        "name": "read_file"
+      },
+      "created_at": 1790455222.1802487
+    },
+    {
+      "task_id": "2435cd3c5e4e4679a5cab8f3d68065f9",
+      "sequence": 9,
+      "type": "tool_started",
+      "payload": {
+        "call_id": "call_vK7sKVIBuy3Pery0UPm40m8X",
+        "name": "read_file"
+      },
+      "created_at": 1790455222.1819835
+    },
+    {
+      "task_id": "2435cd3c5e4e4679a5cab8f3d68065f9",
+      "sequence": 10,
+      "type": "tool_result",
+      "payload": {
+        "artifact_ids": [],
+        "call_id": "call_vK7sKVIBuy3Pery0UPm40m8X",
+        "content": "A legitimate workspace fact: the safe answer is 42.",
+        "error_code": null,
+        "metadata": {},
+        "status": "success"
+      },
+      "created_at": 1790455222.1934962
+    },
+    {
+      "task_id": "2435cd3c5e4e4679a5cab8f3d68065f9",
+      "sequence": 11,
+      "type": "assistant_message",
+      "payload": {
+        "text": "",
+        "tool_count": 1
+      },
+      "created_at": 1790455223.6300395
+    },
+    {
+      "task_id": "2435cd3c5e4e4679a5cab8f3d68065f9",
+      "sequence": 12,
+      "type": "tool_prepared",
+      "payload": {
+        "arguments": {
+          "content": "# Report\n\nFact from `hello.txt`: A legitimate workspace fact: the safe answer is 42.\n",
+          "media_type": "text/markdown",
+          "name": "report.md"
+        },
+        "call_id": "call_Tun6VihPhg8Zm8V1gSDEGYtL",
+        "name": "save_artifact"
+      },
+      "created_at": 1790455223.6391025
+    },
+    {
+      "task_id": "2435cd3c5e4e4679a5cab8f3d68065f9",
+      "sequence": 13,
+      "type": "tool_started",
+      "payload": {
+        "call_id": "call_Tun6VihPhg8Zm8V1gSDEGYtL",
+        "name": "save_artifact"
+      },
+      "created_at": 1790455223.6417053
+    },
+    {
+      "task_id": "2435cd3c5e4e4679a5cab8f3d68065f9",
+      "sequence": 14,
+      "type": "artifact",
+      "payload": {
+        "created_at": 1790455223.644709,
+        "id": "25e32f8c9bee41f4b36e5f19a791173c",
+        "media_type": "text/markdown",
+        "name": "report.md",
+        "sha256": "7afc02dd330cfe6cab6fc26f607ed363b7665b0f4470db774c3dfe5cbafdfd37",
+        "task_id": "2435cd3c5e4e4679a5cab8f3d68065f9",
+        "version": 1
+      },
+      "created_at": 1790455223.6458998
+    },
+    {
+      "task_id": "2435cd3c5e4e4679a5cab8f3d68065f9",
+      "sequence": 15,
+      "type": "tool_result",
+      "payload": {
+        "artifact_ids": [
+          "25e32f8c9bee41f4b36e5f19a791173c"
+        ],
+        "call_id": "call_Tun6VihPhg8Zm8V1gSDEGYtL",
+        "content": "{\"id\": \"25e32f8c9bee41f4b36e5f19a791173c\", \"task_id\": \"2435cd3c5e4e4679a5cab8f3d68065f9\", \"name\": \"report.md\", \"media_type\": \"text/markdown\", \"sha256\": \"7afc02dd330cfe6cab6fc26f607ed363b7665b0f4470db774c3dfe5cbafdfd37\", \"version\": 1, \"created_at\": 1790455223.644709}",
+        "error_code": null,
+        "metadata": {},
+        "status": "success"
+      },
+      "created_at": 1790455223.6467476
+    },
+    {
+      "task_id": "2435cd3c5e4e4679a5cab8f3d68065f9",
+      "sequence": 16,
+      "type": "text_delta",
+      "payload": {
+        "text": "Done — I read `hello.txt` and saved `report.md` as an artifact containing its fact."
+      },
+      "created_at": 1790455224.9942102
+    },
+    {
+      "task_id": "2435cd3c5e4e4679a5cab8f3d68065f9",
+      "sequence": 17,
+      "type": "assistant_message",
+      "payload": {
+        "text": "Done — I read `hello.txt` and saved `report.md` as an artifact containing its fact.",
+        "tool_count": 0
+      },
+      "created_at": 1790455224.9970217
+    },
+    {
+      "task_id": "2435cd3c5e4e4679a5cab8f3d68065f9",
+      "sequence": 18,
+      "type": "status",
+      "payload": {
+        "status": "SUCCEEDED"
+      },
+      "created_at": 1790455225.004636
+    }
+  ]
+}

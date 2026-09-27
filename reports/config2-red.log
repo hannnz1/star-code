@@ -1,0 +1,124 @@
+..FFFF                                                                   [100%]
+================================== FAILURES ===================================
+_____________ test_selected_config_preserves_transport_and_limits _____________
+
+tmp_path = WindowsPath('C:/Users/Administrator/Documents/Codex/2026-09-26/ai-starcode-muse-coding-agent-python/outputs/muse-next/work/config2-red/test_selected_config_preserves0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000002D36AC247D0>
+
+    def test_selected_config_preserves_transport_and_limits(tmp_path, monkeypatch):
+        path = tmp_path / 'original.yaml'
+        path.write_text('''request_timeout_seconds: 17
+    proxy:
+      enabled: true
+      host: 127.0.0.1
+      port: 7899
+    agent:
+      max_turns: 7
+      max_tool_calls: 12
+      max_active_seconds: 90
+    providers:
+      - name: Original
+        protocol: openai-responses
+        base_url: https://example.test/v1
+        model: original-model
+        api_key_env: STAR_CODE_API_KEY
+    ''', encoding='utf-8')
+        monkeypatch.setenv('STAR_CODE_API_KEY', 'fixture')
+        monkeypatch.setenv('MUSE_STARCODE_CONFIG', str(path))
+>       config = load_config()
+                 ^^^^^^^^^^^^^
+
+tests\test_starcode_provider.py:59: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = None
+
+    def load_config(path: Path | None = None) -> AppConfig:
+        if path is not None:
+            if not path.exists():
+                raise ConfigError(f"Config file not found: {path}")
+            return _load_single_file(path)
+    
+        cwd = Path.cwd()
+        home = Path.home()
+        candidates = [
+            home / ".mewcode" / "config.yaml",
+            cwd / ".mewcode" / "config.yaml",
+            cwd / ".mewcode" / "config.local.yaml",
+        ]
+    
+        merged: AppConfig | None = None
+        for p in candidates:
+            if not p.exists():
+                continue
+            layer = _load_single_file(p)
+            if merged is None:
+                merged = layer
+            else:
+                merged = _merge_config(merged, layer)
+    
+        if merged is None:
+>           raise ConfigError(
+                "No config file found. Expected .mewcode/config.yaml "
+                "in project or ~/.mewcode/config.yaml"
+            )
+E           mewcode.validator.ConfigError: No config file found. Expected .mewcode/config.yaml in project or ~/.mewcode/config.yaml
+
+mewcode\config.py:280: ConfigError
+______________ test_invalid_credential_environment_rejected[23] _______________
+
+tmp_path = WindowsPath('C:/Users/Administrator/Documents/Codex/2026-09-26/ai-starcode-muse-coding-agent-python/outputs/muse-next/work/config2-red/test_invalid_credential_enviro0')
+value = 23
+
+    @pytest.mark.parametrize('value', [23, ['KEY'], True])
+    def test_invalid_credential_environment_rejected(tmp_path, value):
+        import yaml
+        from mewcode.config import ConfigError
+        path = tmp_path / 'invalid.yaml'
+        path.write_text(yaml.safe_dump({'providers': [{'name': 'p', 'protocol': 'openai',
+            'base_url': 'https://example.test', 'model': 'model', 'api_key_env': value}]}))
+>       with pytest.raises(ConfigError, match='api_key_env'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'mewcode.validator.ConfigError'>
+
+tests\test_starcode_provider.py:80: Failed
+____________ test_invalid_credential_environment_rejected[value1] _____________
+
+tmp_path = WindowsPath('C:/Users/Administrator/Documents/Codex/2026-09-26/ai-starcode-muse-coding-agent-python/outputs/muse-next/work/config2-red/test_invalid_credential_enviro1')
+value = ['KEY']
+
+    @pytest.mark.parametrize('value', [23, ['KEY'], True])
+    def test_invalid_credential_environment_rejected(tmp_path, value):
+        import yaml
+        from mewcode.config import ConfigError
+        path = tmp_path / 'invalid.yaml'
+        path.write_text(yaml.safe_dump({'providers': [{'name': 'p', 'protocol': 'openai',
+            'base_url': 'https://example.test', 'model': 'model', 'api_key_env': value}]}))
+>       with pytest.raises(ConfigError, match='api_key_env'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'mewcode.validator.ConfigError'>
+
+tests\test_starcode_provider.py:80: Failed
+_____________ test_invalid_credential_environment_rejected[True] ______________
+
+tmp_path = WindowsPath('C:/Users/Administrator/Documents/Codex/2026-09-26/ai-starcode-muse-coding-agent-python/outputs/muse-next/work/config2-red/test_invalid_credential_enviro2')
+value = True
+
+    @pytest.mark.parametrize('value', [23, ['KEY'], True])
+    def test_invalid_credential_environment_rejected(tmp_path, value):
+        import yaml
+        from mewcode.config import ConfigError
+        path = tmp_path / 'invalid.yaml'
+        path.write_text(yaml.safe_dump({'providers': [{'name': 'p', 'protocol': 'openai',
+            'base_url': 'https://example.test', 'model': 'model', 'api_key_env': value}]}))
+>       with pytest.raises(ConfigError, match='api_key_env'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'mewcode.validator.ConfigError'>
+
+tests\test_starcode_provider.py:80: Failed
+=========================== short test summary info ===========================
+FAILED tests/test_starcode_provider.py::test_selected_config_preserves_transport_and_limits
+FAILED tests/test_starcode_provider.py::test_invalid_credential_environment_rejected[23]
+FAILED tests/test_starcode_provider.py::test_invalid_credential_environment_rejected[value1]
+FAILED tests/test_starcode_provider.py::test_invalid_credential_environment_rejected[True]
+4 failed, 2 passed in 0.19s

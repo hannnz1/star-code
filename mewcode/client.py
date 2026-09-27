@@ -41,6 +41,13 @@ ANTHROPIC_MODEL_FETCH_TIMEOUT = 3.0
 _EPHEMERAL = {"type": "ephemeral"}
 
 
+def _transport_options(config: ProviderConfig) -> dict:
+    import httpx
+    return {'timeout': config.request_timeout_seconds, 'max_retries': 0,
+            'http_client': httpx.AsyncClient(proxy=config.proxy_url, trust_env=False,
+                                           timeout=config.request_timeout_seconds)}
+
+
 def _mark_last_user_tail_for_cache(messages: list[dict[str, Any]]) -> None:
     """给最后一条 user 消息的最后一个 block 附加 cache_control。
 
@@ -148,7 +155,8 @@ class AnthropicClient(LLMClient):
                 "Anthropic API key not found. "
                 "Set it in .mewcode/config.yaml or via ANTHROPIC_API_KEY env var."
             )
-        self._client = AsyncAnthropic(api_key=api_key, base_url=config.base_url)
+        self.limits = config.limits
+        self._client = AsyncAnthropic(api_key=api_key, base_url=config.base_url, **_transport_options(config))
 
     def set_max_output_tokens(self, tokens: int) -> None:
         self.max_output_tokens = tokens
@@ -352,7 +360,8 @@ class OpenAIClient(LLMClient):
                 "OpenAI API key not found. "
                 "Set it in .mewcode/config.yaml or via OPENAI_API_KEY env var."
             )
-        self._client = AsyncOpenAI(api_key=api_key, base_url=config.base_url)
+        self.limits = config.limits
+        self._client = AsyncOpenAI(api_key=api_key, base_url=config.base_url, **_transport_options(config))
 
     def set_max_output_tokens(self, tokens: int) -> None:
         self.max_output_tokens = tokens
@@ -485,7 +494,8 @@ class OpenAICompatClient(LLMClient):
                 "OpenAI-compatible API key not found. "
                 "Set it in .mewcode/config.yaml or via OPENAI_API_KEY env var."
             )
-        self._client = AsyncOpenAI(api_key=api_key, base_url=config.base_url)
+        self.limits = config.limits
+        self._client = AsyncOpenAI(api_key=api_key, base_url=config.base_url, **_transport_options(config))
 
     def set_max_output_tokens(self, tokens: int) -> None:
         self.max_output_tokens = tokens

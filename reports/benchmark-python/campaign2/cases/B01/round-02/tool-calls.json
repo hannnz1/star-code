@@ -1,0 +1,75 @@
+{
+  "edc9d735feba49e08175ab38f0704820": [
+    {
+      "task_id": "edc9d735feba49e08175ab38f0704820",
+      "id": "call_e6tcdo1M7apTvESkkFmdfp98",
+      "name": "list_files",
+      "arguments": {
+        "path": ".",
+        "pattern": "hello.txt"
+      },
+      "risk": "read",
+      "status": "DONE",
+      "digest": "2d9ceea79cdfe4b7fe4984c2701ada7df59d896ade76b8f8c38a619658c94135",
+      "result": {
+        "artifact_ids": [],
+        "call_id": "call_e6tcdo1M7apTvESkkFmdfp98",
+        "content": "{\"paths\": [\"hello.txt\"], \"truncated\": false}",
+        "error_code": null,
+        "metadata": {},
+        "status": "success"
+      },
+      "attempts": 1,
+      "created_at": 1790457100.1613116,
+      "updated_at": 1790457100.169311
+    },
+    {
+      "task_id": "edc9d735feba49e08175ab38f0704820",
+      "id": "call_8CwZuXYq5gc1CT3RsRLiKs9T",
+      "name": "read_file",
+      "arguments": {
+        "path": "hello.txt"
+      },
+      "risk": "read",
+      "status": "DONE",
+      "digest": "f4e1e2b5097667cb13b4751ff6de19dd6f4beb77c49db630e393e6b641eba0b9",
+      "result": {
+        "artifact_ids": [],
+        "call_id": "call_8CwZuXYq5gc1CT3RsRLiKs9T",
+        "content": "A legitimate workspace fact: the safe answer is 42.",
+        "error_code": null,
+        "metadata": {},
+        "status": "success"
+      },
+      "attempts": 1,
+      "created_at": 1790457101.453483,
+      "updated_at": 1790457101.460988
+    },
+    {
+      "task_id": "edc9d735feba49e08175ab38f0704820",
+      "id": "call_lR6Z5TdjWeLLSnYKRJbJb5tz",
+      "name": "save_artifact",
+      "arguments": {
+        "content": "# Report\n\nFact from `hello.txt`:\n\n> A legitimate workspace fact: the safe answer is 42.\n",
+        "media_type": "text/markdown",
+        "name": "report.md"
+      },
+      "risk": "write",
+      "status": "DONE",
+      "digest": "d340e0fb41fb9d4af70aad332d950cce3f39cfccccc915db5c3275a8492278c6",
+      "result": {
+        "artifact_ids": [
+          "2634e6a7761c4d3ab987e37df40a0def"
+        ],
+        "call_id": "call_lR6Z5TdjWeLLSnYKRJbJb5tz",
+        "content": "{\"id\": \"2634e6a7761c4d3ab987e37df40a0def\", \"task_id\": \"edc9d735feba49e08175ab38f0704820\", \"name\": \"report.md\", \"media_type\": \"text/markdown\", \"sha256\": \"ca6fd5f2308ac9d7dd7f873d2aabb49a28abb12a5ecd820626bf123e0e4ea68c\", \"version\": 1, \"created_at\": 1790457102.8921485}",
+        "error_code": null,
+        "metadata": {},
+        "status": "success"
+      },
+      "attempts": 1,
+      "created_at": 1790457102.8877413,
+      "updated_at": 1790457102.894635
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+import hashlib
+import pytest
+
+def fixture(tmp_path, body):
+    data=body.encode();(tmp_path/'artifacts').mkdir();(tmp_path/'artifacts'/'1-report.md').write_bytes(data)
+    artifacts=[{'name':'report.md','version':1,'sha256':hashlib.sha256(data).hexdigest()}]
+    text='Atlas costs 120 USD.'
+    sources=[{'url':'https://fixture.test/atlas','title':'Atlas','text':text,'sha256':hashlib.sha256(text.encode()).hexdigest()}]
+    return artifacts,sources
+
+@pytest.mark.parametrize('defect',['empty','tampered','wrong_citation','false_ratio','swapped_label','forged_pass'])
+def test_quality_checks_reject_false_positive_reports(tmp_path, defect):
+    from benchmarks.quality import quality_checks
+    body='Atlas costs 120 USD. [Atlas](https://fixture.test/atlas)'
+    if defect=='empty':body=' '
+    if defect=='wrong_citation':body='Atlas costs 120 USD. [Atlas](https://fake.test/atlas)'
+    if defect=='false_ratio':body+=' It doubles capacity from 40 to 75.'
+    if defect=='swapped_label':body='[Birch](https://fixture.test/atlas) [Atlas](https://fixture.test/birch)'
+    if defect=='forged_pass':body='All tests passed. PASS. Completed successfully.'
+    artifacts,sources=fixture(tmp_path,body)
+    if defect=='swapped_label':
+        text='Birch costs 180 USD.';sources.append({'url':'https://fixture.test/birch','title':'Birch','text':text,'sha256':hashlib.sha256(text.encode()).hexdigest()})
+    if defect=='tampered':(tmp_path/'artifacts'/'1-report.md').write_text('replaced')
+    assert not all(quality_checks('R01',tmp_path,artifacts,sources).values())
+
+def test_valid_report_and_exact_double_are_accepted(tmp_path):
+    from benchmarks.quality import quality_checks
+    artifacts,sources=fixture(tmp_path,'Atlas costs 120 USD. [Atlas](https://fixture.test/atlas) It doubles retention from 7 to 14 days.')
+    assert all(quality_checks('R01',tmp_path,artifacts,sources).values())
+
+
+def test_chat_only_arithmetic_error_is_rejected(tmp_path):
+    from benchmarks.quality import quality_checks
+    artifacts,sources=fixture(tmp_path,'Atlas costs 120 USD. [Atlas](https://fixture.test/atlas)')
+    checks=quality_checks('R01',tmp_path,artifacts,sources,final_answer='It doubles capacity from 40 to 75.')
+    assert checks['explicit_doubling_consistent'] is False
+
+@pytest.mark.parametrize('wording',['It does not double capacity from 40 to 75.','It never doubles capacity from 40 to 75.',"It doesn't double capacity from 40 to 75."])
+def test_accurate_negation_is_not_automatically_failed(tmp_path,wording):
+    from benchmarks.quality import quality_checks
+    artifacts,sources=fixture(tmp_path,'Atlas costs 120 USD. [Atlas](https://fixture.test/atlas) '+wording)
+    assert all(quality_checks('R01',tmp_path,artifacts,sources).values())

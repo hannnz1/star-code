@@ -814,10 +814,33 @@ class Agent:
         """为 HITL 权限确认生成人类可读的操作描述。"""
         return PermissionChecker.describe_tool_action(tc.tool_name, tc.arguments)
 
+    def _tool_for_execution(self, name):
+        from copy import copy
+        tool = self.registry.get(name)
+        if tool is not None and hasattr(tool, 'work_dir'):
+            tool = copy(tool)
+            tool.work_dir = self.work_dir
+        return tool
+
+    async def _pre_tool_hook(self, tc):
+        if self.hook_engine:
+            context = self._build_hook_context('pre_tool_use', tool_name=tc.tool_name,
+                tool_args=tc.arguments, file_path=self._infer_file_path(tc.arguments))
+            rejection = await self.hook_engine.run_pre_tool_hooks(context)
+            if rejection is not None:
+                return ToolResult(output=f'Hook rejected: {rejection.reason}', is_error=True)
+        return None
+
+    async def _post_tool_hook(self, tc, result):
+        if self.hook_engine:
+            context = self._build_hook_context('post_tool_use', tool_name=tc.tool_name,
+                tool_args=tc.arguments, file_path=self._infer_file_path(tc.arguments), message=result.output)
+            await self.hook_engine.run_hooks('post_tool_use', context)
+
     async def _execute_single_tool_direct(
         self, tc: ToolCallComplete
     ) -> _ToolExecResult:
-        tool = self.registry.get(tc.tool_name)
+        tool = self._tool_for_execution(tc.tool_name)
         start = time.monotonic()
 
         if tool is None:
@@ -837,6 +860,11 @@ class Agent:
                 elapsed=time.monotonic() - start,
             )
 
+        rejection = await self._pre_tool_hook(tc)
+        if rejection is not None:
+            return _ToolExecResult(tool_id=tc.tool_id, tool_name=tc.tool_name,
+                                   result=rejection, elapsed=time.monotonic() - start)
+
         if self.permission_checker:
             decision = self.permission_checker.check(tool, tc.arguments)
             if decision.effect == "deny":
@@ -855,6 +883,7 @@ class Agent:
         except Exception as e:
             result = ToolResult(output=f"Tool execution error: {e}", is_error=True)
 
+        await self._post_tool_hook(tc, result)
         self._snapshot_for_recovery(tc, result)
 
         return _ToolExecResult(
@@ -874,7 +903,7 @@ class Agent:
     async def _execute_tool(
         self, tc: ToolCallComplete
     ) -> AsyncIterator[tuple[ToolResult, float]]:
-        tool = self.registry.get(tc.tool_name)
+        tool = self._tool_for_execution(tc.tool_name)
         start = time.monotonic()
 
         if tool is None:
@@ -893,6 +922,11 @@ class Agent:
             )
             elapsed = time.monotonic() - start
             yield result, elapsed
+            return
+
+        rejection = await self._pre_tool_hook(tc)
+        if rejection is not None:
+            yield rejection, time.monotonic() - start
             return
 
         # 权限检查
@@ -951,6 +985,7 @@ class Agent:
 
         self._snapshot_for_recovery(tc, result)
 
+        await self._post_tool_hook(tc, result)
         elapsed = time.monotonic() - start
         yield result, elapsed
 
@@ -1227,7 +1262,7 @@ class Agent:
     async def _execute_tool_noninteractive(
         self, tc: ToolCallComplete
     ) -> ToolResult:
-        tool = self.registry.get(tc.tool_name)
+        tool = self._tool_for_execution(tc.tool_name)
 
         if tool is None:
             return ToolResult(

@@ -143,15 +143,18 @@ class TestPathSandbox:
         ok, _ = self.sandbox.check("~/.ssh/id_rsa")
         assert not ok
 
-    def test_symlink_escape(self) -> None:
-        for candidate in ("/etc/hosts", "/etc/hostname", "/etc/resolv.conf"):
-            if Path(candidate).exists():
-                target = Path(candidate)
-                break
-        else:
-            pytest.skip("No suitable system file found for symlink test")
+    def test_symlink_escape(self, tmp_path, monkeypatch) -> None:
+        target = tmp_path / 'outside.txt'
+        target.write_text('outside fixture')
+        monkeypatch.setattr(tempfile, 'gettempdir', lambda: str(self.tmpdir))
+        self.sandbox = PathSandbox(str(self.tmpdir))
         link = self.tmpdir / "escape.txt"
-        link.symlink_to(target)
+        try:
+            link.symlink_to(target)
+        except OSError as error:
+            if getattr(error, 'winerror', None) == 1314:
+                pytest.skip('Windows file symlink privilege unavailable (WinError 1314)')
+            raise
         ok, reason = self.sandbox.check(str(link))
         assert not ok
         assert "沙箱" in reason
@@ -613,6 +616,8 @@ async def test_e2e_sandbox_outside_path_asks():
 async def test_e2e_rule_allows_git():
     """放行 git 命令的规则可以让其无需人工介入（HITL）直接通过。"""
     tmpdir = Path(tempfile.mkdtemp())
+    import subprocess
+    subprocess.run(['git', 'init', str(tmpdir)], check=True, capture_output=True)
     rules_file = tmpdir / ".mewcode" / "permissions.yaml"
     rules_file.parent.mkdir(parents=True)
     rules_file.write_text(yaml.dump([{"rule": "Bash(git *)", "effect": "allow"}]))

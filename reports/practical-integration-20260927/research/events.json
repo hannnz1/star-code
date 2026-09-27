@@ -1,0 +1,349 @@
+[
+  {
+    "task_id": "b061fe371f96464da96777e4f2aa6a75",
+    "sequence": 1,
+    "type": "status",
+    "payload": {
+      "status": "QUEUED"
+    },
+    "created_at": 1790444298.928061
+  },
+  {
+    "task_id": "b061fe371f96464da96777e4f2aa6a75",
+    "sequence": 2,
+    "type": "status",
+    "payload": {
+      "status": "RUNNING"
+    },
+    "created_at": 1790444298.9290624
+  },
+  {
+    "task_id": "b061fe371f96464da96777e4f2aa6a75",
+    "sequence": 3,
+    "type": "assistant_message",
+    "payload": {
+      "text": "",
+      "tool_count": 2
+    },
+    "created_at": 1790444300.3602276
+  },
+  {
+    "task_id": "b061fe371f96464da96777e4f2aa6a75",
+    "sequence": 4,
+    "type": "tool_prepared",
+    "payload": {
+      "arguments": {
+        "url": "https://docs.python.org/3/library/asyncio.html"
+      },
+      "call_id": "call_JhdkHUMT709YZKkgENxFebKe",
+      "name": "read_url"
+    },
+    "created_at": 1790444300.3656094
+  },
+  {
+    "task_id": "b061fe371f96464da96777e4f2aa6a75",
+    "sequence": 5,
+    "type": "tool_started",
+    "payload": {
+      "call_id": "call_JhdkHUMT709YZKkgENxFebKe",
+      "name": "read_url"
+    },
+    "created_at": 1790444300.366257
+  },
+  {
+    "task_id": "b061fe371f96464da96777e4f2aa6a75",
+    "sequence": 6,
+    "type": "source",
+    "payload": {
+      "id": "1038acd20259426f979815a7f96124ff",
+      "retrieved_at": 1790444301.6262481,
+      "sha256": "af00ee9ca5a89fb7744ef891db9ebe451f282e0c4077fb8957f518246f468fd9",
+      "task_id": "b061fe371f96464da96777e4f2aa6a75",
+      "title": "asyncio — Asynchronous I/O — Python 3.14.7 documentation",
+      "url": "https://docs.python.org/3/library/asyncio.html"
+    },
+    "created_at": 1790444301.627249
+  },
+  {
+    "task_id": "b061fe371f96464da96777e4f2aa6a75",
+    "sequence": 7,
+    "type": "tool_result",
+    "payload": {
+      "artifact_ids": [],
+      "call_id": "call_JhdkHUMT709YZKkgENxFebKe",
+      "content": "{\"source_id\": \"1038acd20259426f979815a7f96124ff\", \"url\": \"https://docs.python.org/3/library/asyncio.html\", \"title\": \"asyncio — Asynchronous I/O — Python 3.14.7 documentation\", \"text\": \"asyncio — Asynchronous I/O — Python 3.14.7 documentation\\nTheme\\nAuto\\nLight\\nDark\\nPrevious topic\\nNetworking and Interprocess Communication\\nNext topic\\nRunners\\nThis page\\nReport a bug\\nImprove this page\\nShow source\\nNavigation\\nindex\\nmodules\\n|\\nnext\\n|\\nprevious\\n|\\nPython\\n»\\n3.14.7 Documentation\\n»\\nThe Python standard library\\n»\\nNetworking and Interprocess Communication\\n»\\nasyncio\\n— Asynchronous I/O\\n|\\nTheme\\nAuto\\nLight\\nDark\\n|\\nasyncio\\n— Asynchronous I/O\\n¶\\nHello World!\\nimport\\nasyncio\\nasync\\ndef\\nmain\\n():\\nprint\\n(\\n'Hello ...'\\n)\\nawait\\nasyncio\\n.\\nsleep\\n(\\n1\\n)\\nprint\\n(\\n'... World!'\\n)\\nasyncio\\n.\\nrun\\n(\\nmain\\n())\\nasyncio is a library to write\\nconcurrent\\ncode using\\nthe\\nasync/await\\nsyntax.\\nasyncio is used as a foundation for multiple Python asynchronous\\nframeworks that provide high-performance network and web-servers,\\ndatabase connection libraries, distributed task queues, etc.\\nasyncio is often a perfect fit for IO-bound and high-level\\nstructured\\nnetwork code.\\nSee also\\nA Conceptual Overview of asyncio\\nExplanation of the fundamentals of asyncio.\\nasyncio provides a set of\\nhigh-level\\nAPIs to:\\nrun Python coroutines\\nconcurrently and\\nhave full control over their execution;\\nperform\\nnetwork IO and IPC\\n;\\ncontrol\\nsubprocesses\\n;\\ndistribute tasks via\\nqueues\\n;\\nsynchronize\\nconcurrent code;\\nFor\\nintrospection\\n, asyncio provides APIs and tools for:\\ninspecting the\\nasync call graph\\nof tasks and futures;\\ninspecting tasks in another running Python process with\\ncommand-line tools\\n;\\nAdditionally, there are\\nlow-level\\nAPIs for\\nlibrary and framework developers\\nto:\\ncreate and manage\\nevent loops\\n, which\\nprovide asynchronous APIs for\\nnetworking\\n,\\nrunning\\nsubprocesses\\n,\\nhandling\\nOS signals\\n, etc;\\nimplement efficient protocols using\\ntransports\\n;\\nbridge\\ncallback-based libraries and code\\nwith async/await syntax.\\nAvailability\\n: not WASI.\\nThis module does not work or is not available on WebAssembly. See\\nWebAssembly platforms\\nfor more information.\\nasyncio REPL\\nYou can experiment with an\\nasyncio\\nconcurrent context in the\\nREPL\\n:\\n$ python -m asyncio\\nasyncio REPL ...\\nUse \\\"await\\\" directly instead of \\\"asyncio.run()\\\".\\nType \\\"help\\\", \\\"copyright\\\", \\\"credits\\\" or \\\"license\\\" for more information.\\n>>>\\nimport\\nasyncio\\n>>>\\nawait\\nasyncio\\n.\\nsleep\\n(\\n10\\n,\\nresult\\n=\\n'hello'\\n)\\n'hello'\\nThis REPL provides limited compatibility with\\nPYTHON_BASIC_REPL\\n.\\nIt is recommended that the default REPL is used\\nfor full functionality and the latest features.\\nRaises an\\nauditing event\\ncpython.run_stdin\\nwith no arguments.\\nChanged in version 3.12.5:\\n(also 3.11.10, 3.10.15, 3.9.20, and 3.8.20)\\nEmits audit events.\\nChanged in version 3.13:\\nUses PyREPL if possible, in which case\\nPYTHONSTARTUP\\nis\\nalso executed. Emits audit events.\\nReference\\nHigh-level APIs\\nRunners\\nCoroutines and tasks\\nStreams\\nSynchronization Primitives\\nSubprocesses\\nQueues\\nExceptions\\nIntrospection APIs\\nCall graph introspection\\nCommand-line introspection tools\\nLow-level APIs\\nEvent loop\\nFutures\\nTransports and Protocols\\nPolicies\\nPlatform Support\\nExtending\\nGuides and Tutorials\\nHigh-level API Index\\nLow-level API Index\\nDeveloping with asyncio\\nasyncio and free-threaded Python\\nNote\\nThe source code for asyncio can be found in\\nLib/asyncio/\\n.\\nPrevious topic\\nNetworking and Interprocess Communication\\nNext topic\\nRunners\\nThis page\\nReport a bug\\nImprove this page\\nShow source\\n«\\nNavigation\\nindex\\nmodules\\n|\\nnext\\n|\\nprevious\\n|\\nPython\\n»\\n3.14.7 Documentation\\n»\\nThe Python standard library\\n»\\nNetworking and Interprocess Communication\\n»\\nasyncio\\n— Asynchronous I/O\\n|\\nTheme\\nAuto\\nLight\\nDark\\n|\\n©\\nCopyright\\n2001 Python Software Foundation.\\nThis page is licensed under the Python Software Foundation License Version 2.\\nExamples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.\\nSee\\nHistory and License\\nfor more information.\\nThe Python Software Foundation is a non-profit corporation.\\nPlease donate.\\nLast updated on Sep 26, 2026 (16:22 UTC).\\nFound a bug\\n?\\nCreated using\\nSphinx\\n8.2.3.\", \"truncated\": false, \"blocked_requests\": 0}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "created_at": 1790444301.678815
+  },
+  {
+    "task_id": "b061fe371f96464da96777e4f2aa6a75",
+    "sequence": 8,
+    "type": "tool_prepared",
+    "payload": {
+      "arguments": {
+        "url": "https://docs.python.org/3/library/concurrent.futures.html"
+      },
+      "call_id": "call_uMQoUzn2Esv34sMWipNbohZT",
+      "name": "read_url"
+    },
+    "created_at": 1790444301.6871521
+  },
+  {
+    "task_id": "b061fe371f96464da96777e4f2aa6a75",
+    "sequence": 9,
+    "type": "tool_started",
+    "payload": {
+      "call_id": "call_uMQoUzn2Esv34sMWipNbohZT",
+      "name": "read_url"
+    },
+    "created_at": 1790444301.6887155
+  },
+  {
+    "task_id": "b061fe371f96464da96777e4f2aa6a75",
+    "sequence": 10,
+    "type": "source",
+    "payload": {
+      "id": "5971acd2192b48459ff33b1ddca77a1c",
+      "retrieved_at": 1790444302.8646245,
+      "sha256": "77ded6c55d6624152e92eb3d0cec8ca683f82466da7096e2c4085fb0624aa004",
+      "task_id": "b061fe371f96464da96777e4f2aa6a75",
+      "title": "concurrent.futures — Launching parallel tasks — Python 3.14.7 documentation",
+      "url": "https://docs.python.org/3/library/concurrent.futures.html"
+    },
+    "created_at": 1790444302.8655992
+  },
+  {
+    "task_id": "b061fe371f96464da96777e4f2aa6a75",
+    "sequence": 11,
+    "type": "artifact",
+    "payload": {
+      "created_at": 1790444302.9277446,
+      "id": "63c6ff8c9b7a4b1db448eff1fbb8b764",
+      "media_type": "text/plain",
+      "name": "tool-output.txt",
+      "sha256": "99c087f95c5d1f7cb70488197909fd2448a5240d0743db6cb753abfc0001b8e5",
+      "task_id": "b061fe371f96464da96777e4f2aa6a75",
+      "version": 1
+    },
+    "created_at": 1790444302.9287426
+  },
+  {
+    "task_id": "b061fe371f96464da96777e4f2aa6a75",
+    "sequence": 12,
+    "type": "tool_result",
+    "payload": {
+      "artifact_ids": [],
+      "call_id": "call_uMQoUzn2Esv34sMWipNbohZT",
+      "content": "{\"source_id\": \"5971acd2192b48459ff33b1ddca77a1c\", \"url\": \"https://docs.python.org/3/library/concurrent.futures.html\", \"title\": \"concurrent.futures — Launching parallel tasks — Python 3.14.7 documentation\", \"text\": \"concurrent.futures — Launching parallel tasks — Python 3.14.7 documentation\\nTheme\\nAuto\\nLight\\nDark\\nTable of Contents\\nconcurrent.futures\\n— Launching parallel tasks\\nExecutor Objects\\nThreadPoolExecutor\\nThreadPoolExecutor Example\\nInterpreterPoolExecutor\\nProcessPoolExecutor\\nProcessPoolExecutor Example\\nFuture Objects\\nModule Functions\\nException classes\\nPrevious topic\\nThe\\nconcurrent\\npackage\\nNext topic\\nconcurrent.interpreters\\n— Multiple interpreters in the same process\\nThis page\\nReport a bug\\nImprove this page\\nShow source\\nNavigation\\nindex\\nmodules\\n|\\nnext\\n|\\nprevious\\n|\\nPython\\n»\\n3.14.7 Documentation\\n»\\nThe Python standard library\\n»\\nConcurrent Execution\\n»\\nconcurrent.futures\\n— Launching parallel tasks\\n|\\nTheme\\nAuto\\nLight\\nDark\\n|\\nconcurrent.futures\\n— Launching parallel tasks\\n¶\\nAdded in version 3.2.\\nSource code:\\nLib/concurrent/futures/thread.py\\n,\\nLib/concurrent/futures/process.py\\n,\\nand\\nLib/concurrent/futures/interpreter.py\\nThe\\nconcurrent.futures\\nmodule provides a high-level interface for\\nasynchronously executing callables.\\nThe asynchronous execution can be performed with threads, using\\nThreadPoolExecutor\\nor\\nInterpreterPoolExecutor\\n,\\nor separate processes, using\\nProcessPoolExecutor\\n.\\nEach implements the same interface, which is defined\\nby the abstract\\nExecutor\\nclass.\\nconcurrent.futures.Future\\nmust not be confused with\\nasyncio.Future\\n, which is designed for use with\\nasyncio\\ntasks and coroutines. See the\\nasyncio’s Future\\ndocumentation for a detailed comparison of the two.\\nAvailability\\n: not WASI.\\nThis module does not work or is not available on WebAssembly. See\\nWebAssembly platforms\\nfor more information.\\nExecutor Objects\\n¶\\nclass\\nconcurrent.futures.\\nExecutor\\n¶\\nAn abstract class that provides methods to execute calls asynchronously.  It\\nshould not be used directly, but through its concrete subclasses.\\nsubmit\\n(\\nfn\\n,\\n/\\n,\\n*\\nargs\\n,\\n**\\nkwargs\\n)\\n¶\\nSchedules the callable,\\nfn\\n, to be executed as\\nfn(*args,\\n**kwargs)\\nand returns a\\nFuture\\nobject representing the execution of the\\ncallable.\\nwith\\nThreadPoolExecutor\\n(\\nmax_workers\\n=\\n1\\n)\\nas\\nexecutor\\n:\\nfuture\\n=\\nexecutor\\n.\\nsubmit\\n(\\npow\\n,\\n323\\n,\\n1235\\n)\\nprint\\n(\\nfuture\\n.\\nresult\\n())\\nmap\\n(\\nfn\\n,\\n*\\niterables\\n,\\ntimeout\\n=\\nNone\\n,\\nchunksize\\n=\\n1\\n,\\nbuffersize\\n=\\nNone\\n)\\n¶\\nSimilar to\\nmap(fn,\\n*iterables)\\nexcept:\\nThe\\niterables\\nare collected immediately rather than lazily, unless a\\nbuffersize\\nis specified to limit the number of submitted tasks whose\\nresults have not yet been yielded. If the buffer is full, iteration over\\nthe\\niterables\\npauses until a result is yielded from the buffer.\\nfn\\nis executed asynchronously and several calls to\\nfn\\nmay be made concurrently.\\nThe returned iterator raises a\\nTimeoutError\\nif\\n__next__()\\nis called and the result isn’t available\\nafter\\ntimeout\\nseconds from the original call to\\nExecutor.map()\\n.\\ntimeout\\ncan be an int or a float.  If\\ntimeout\\nis not specified or\\nNone\\n, there is no limit to the wait time.\\nIf a\\nfn\\ncall raises an exception, then that exception will be\\nraised when its value is retrieved from the iterator.\\nWhen using\\nProcessPoolExecutor\\n, this method chops\\niterables\\ninto a number of chunks which it submits to the pool as separate\\ntasks.  The (approximate) size of these chunks can be specified by\\nsetting\\nchunksize\\nto a positive integer.  For very long iterables,\\nusing a large value for\\nchunksize\\ncan significantly improve\\nperformance compared to the default size of 1.  With\\nThreadPoolExecutor\\nand\\nInterpreterPoolExecutor\\n,\\nchunksize\\nhas no effect.\\nChanged in version 3.5:\\nAdded the\\nchunksize\\nparameter.\\nChanged in version 3.14:\\nAdded the\\nbuffersize\\nparameter.\\nshutdown\\n(\\nwait\\n=\\nTrue\\n,\\n*\\n,\\ncancel_futures\\n=\\nFalse\\n)\\n¶\\nSignal the executor that it should free any resources that it is using\\nwhen the currently pending futures are done executing.  Calls to\\nExecutor.submit()\\nand\\nExecutor.map()\\nmade after shutdown will\\nraise\\nRuntimeError\\n.\\nIf\\nwait\\nis\\nTrue\\nthen this method will not return until all the\\npending futures are done executing and the resources associated with the\\nexecutor have been freed.  If\\nwait\\nis\\nFalse\\nthen this method will\\nreturn immediately and the resources associated with the executor will be\\nfreed when all pending futures are done executing.  Regardless of the\\nvalue of\\nwait\\n, the entire Python program will not exit until all\\npending futures are done executing.\\nIf\\ncancel_futures\\nis\\nTrue\\n, this method will cancel all pending\\nfutures that the executor has not started running. Any futures that\\nare completed or running won’t be cancelled, regardless of the value\\nof\\ncancel_futures\\n.\\nIf both\\ncancel_futures\\nand\\nwait\\nare\\nTrue\\n, all futures that the\\nexecutor has started running will be completed prior to this method\\nreturning. The remaining futures are cancelled.\\nYou can avoid having to call this method explicitly if you use the executor\\nas a\\ncontext manager\\nvia the\\nwith\\nstatement, which\\nwill shutdown the\\nExecutor\\n(waiting as if\\nExecutor.shutdown()\\nwere called with\\nwait\\nset to\\nTrue\\n):\\nimport\\nshutil\\nwith\\nThreadPoolExecutor\\n(\\nmax_workers\\n=\\n4\\n)\\nas\\ne\\n:\\ne\\n.\\nsubmit\\n(\\nshutil\\n.\\ncopy\\n,\\n'src1.txt'\\n,\\n'dest1.txt'\\n)\\ne\\n.\\nsubmit\\n(\\nshutil\\n.\\ncopy\\n,\\n'src2.txt'\\n,\\n'dest2.txt'\\n)\\ne\\n.\\nsubmit\\n(\\nshutil\\n.\\ncopy\\n,\\n'src3.txt'\\n,\\n'dest3.txt'\\n)\\ne\\n.\\nsubmit\\n(\\nshutil\\n.\\ncopy\\n,\\n'src4.txt'\\n,\\n'dest4.txt'\\n)\\nChanged in version 3.9:\\nAdded\\ncancel_futures\\n.\\nThreadPoolExecutor\\n¶\\nThreadPoolExecutor\\nis an\\nExecutor\\nsubclass that uses a pool of\\nthreads to execute calls asynchronously.\\nDeadlocks can occur when the callable associated with a\\nFuture\\nwaits on\\nthe results of another\\nFuture\\n.  For example:\\nimport\\ntime\\ndef\\nwait_on_b\\n():\\ntime\\n.\\nsleep\\n(\\n5\\n)\\nprint\\n(\\nb\\n.\\nresult\\n())\\n# b will never complete because it is waiting on a.\\nreturn\\n5\\ndef\\nwait_on_a\\n():\\ntime\\n.\\nsleep\\n(\\n5\\n)\\nprint\\n(\\na\\n.\\nresult\\n())\\n# a will never complete because it is waiting on b.\\nreturn\\n6\\nexecutor\\n=\\nThreadPoolExecutor\\n(\\nmax_workers\\n=\\n2\\n)\\na\\n=\\nexecutor\\n.\\nsubmit\\n(\\nwait_on_b\\n)\\nb\\n=\\nexecutor\\n.\\nsubmit\\n(\\nwait_on_a\\n)\\nAnd:\\ndef\\nwait_on_future\\n():\\nf\\n=\\nexecutor\\n.\\nsubmit\\n(\\npow\\n,\\n5\\n,\\n2\\n)\\n# This will never complete because there is only one worker thread and\\n# it is executing this function.\\nprint\\n(\\nf\\n.\\nresult\\n())\\nexecutor\\n=\\nThreadPoolExecutor\\n(\\nmax_workers\\n=\\n1\\n)\\nfuture\\n=\\nexecutor\\n.\\nsubmit\\n(\\nwait_on_future\\n)\\n# Note: calling future.result() would also cause a deadlock because\\n# the single worker thread is already waiting for wait_on_future().\\nclass\\nconcurrent.futures.\\nThreadPoolExecutor\\n(\\nmax_workers\\n=\\nNone\\n,\\nthread_name_prefix\\n=\\n''\\n,\\ninitializer\\n=\\nNone\\n,\\ninitargs\\n=\\n()\\n)\\n¶\\nAn\\nExecutor\\nsubclass that uses a pool of at most\\nmax_workers\\nthreads to execute calls asynchronously.\\nAll threads enqueued to\\nThreadPoolExecutor\\nwill be joined before the\\ninterpreter can exit. Note that the exit handler which does this is\\nexecuted\\nbefore\\nany exit handlers added using\\natexit\\n. This means\\nexceptions in the main thread must be caught and handled in order to\\nsignal threads to exit gracefully. For this reason, it is recommended\\nthat\\nThreadPoolExecutor\\nnot be used for long-running tasks.\\ninitializer\\nis an optional callable that is called at the start of\\neach worker thread;\\ninitargs\\nis a tuple of arguments passed to the\\ninitializer.  Should\\ninitializer\\nraise an exception, all currently\\npending jobs will raise a\\nBrokenThreadPool\\n,\\nas well as any attempt to submit more jobs to the pool.\\nChanged in version 3.5:\\nIf\\nmax_workers\\nis\\nNone\\nor\\nnot given, it will default to the number of processors on the machine,\\nmultiplied by\\n5\\n, assuming that\\nThreadPoolExecutor\\nis often\\nused to overlap I/O instead of CPU work and the number of workers\\nshould be higher than the number of workers\\nfor\\nProcessPoolExecutor\\n.\\nChanged in version 3.6:\\nAdded the\\nthread_name_prefix\\nparameter to allow users to\\ncontrol the\\nthreading.Thread\\nnames for worker threads created by\\nthe pool for easier debugging.\\nChanged in version 3.7:\\nAdded the\\ninitializer\\nand\\ninitargs\\narguments.\\nChanged in version 3.8:\\nDefault value of\\nmax_workers\\nis changed to\\nmin(32,\\nos.cpu_count()\\n+\\n4)\\n.\\nThis default value preserves at least 5 workers for I/O bound tasks.\\nIt utilizes at most 32 CPU cores for CPU bound tasks which release the GIL.\\nAnd it avoids using very large resources implicitly on many-core machines.\\nThreadPoolExecutor now reuses idle worker threads before starting\\nmax_workers\\nworker threads too.\\nChanged in version 3.13:\\nDefault value of\\nmax_workers\\nis changed to\\nmin(32,\\n(os.process_cpu_count()\\nor\\n1)\\n+\\n4)\\n.\\nThreadPoolExecutor Example\\n¶\\nimport\\nconcurrent.futures\\nimport\\nurllib.request\\nURLS\\n=\\n[\\n'http://www.foxnews.com/'\\n,\\n'http://www.cnn.com/'\\n,\\n'http://europe.wsj.com/'\\n,\\n'http://www.bbc.co.uk/'\\n,\\n'http://nonexistent-subdomain.python.org/'\\n]\\n# Retrieve a single page and report the URL and contents\\ndef\\nload_url\\n(\\nurl\\n,\\ntimeout\\n):\\nwith\\nurllib\\n.\\nrequest\\n.\\nurlopen\\n(\\nurl\\n,\\ntimeout\\n=\\ntimeout\\n)\\nas\\nconn\\n:\\nreturn\\nconn\\n.\\nread\\n()\\n# We can use a with statement to ensure threads are cleaned up promptly\\nwith\\nconcurrent\\n.\\nfutures\\n.\\nThreadPoolExecutor\\n(\\nmax_workers\\n=\\n5\\n)\\nas\\nexecutor\\n:\\n# Start the load operations and mark each future with its URL\\nfuture_to_url\\n=\\n{\\nexecutor\\n.\\nsubmit\\n(\\nload_url\\n,\\nurl\\n,\\n60\\n):\\nurl\\nfor\\nurl\\nin\\nURLS\\n}\\nfor\\nfuture\\nin\\nconcurrent\\n.\\nfutures\\n.\\nas_completed\\n(\\nfuture_to_url\\n):\\nurl\\n=\\nfuture_to_url\\n[\\nfuture\\n]\\ntry\\n:\\ndata\\n=\\nfuture\\n.\\nresult\\n()\\nexcept\\nException\\nas\\nexc\\n:\\nprint\\n(\\n'\\n%r\\ngenerated an exception:\\n%s\\n'\\n%\\n(\\nurl\\n,\\nexc\\n))\\nelse\\n:\\nprint\\n(\\n'\\n%r\\npage is\\n%d\\nbytes'\\n%\\n(\\nurl\\n,\\nlen\\n(\\ndata\\n)))\\nInterpreterPoolExecutor\\n¶\\nAdded in version 3.14.\\nThe\\nInterpreterPoolExecutor\\nclass uses a pool of interpreters\\nto execute calls asynchronously.  It is a\\nThreadPoolExecutor\\nsubclass, which means each worker is running in its own thread.\\nThe difference here is that each worker has its own interpreter,\\nand runs each task using that interpreter.\\nThe biggest benefit to using interpreters instead of only threads\\nis true multi-core parallelism.  Each interpreter has its own\\nGlobal Interpreter Lock\\n, so code\\nrunning in one interpreter can run on one CPU core, while code in\\nanother interpreter runs unblocked on a different core.\\nThe tradeoff is that writing concurrent code for use with multiple\\ninterpreters can take extra effort.  However, this is because it\\nforces you to be deliberate about how and when interpreters interact,\\nand to be explicit about what data is shared between interpreters.\\nThis results in several benefits that help balance the extra effort,\\nincluding true multi-core parallelism,  For example, code written\\nthis way can make it easier to reason about concurrency.  Another\\nmajor benefit is that you don’t have to deal with several of the\\nbig pain points of using threads, like race conditions.\\nEach worker’s interpreter is isolated from all the other interpreters.\\n“Isolated” means each interpreter has its own runtime state and\\noperates completely independently.  For example, if you redirect\\nsys.stdout\\nin one interpreter, it will not be automatically\\nredirected to any other interpreter.  If you import a module in one\\ninterpreter, it is not automatically imported in any other.  You\\nwould need to import the module separately in interpreter where\\nyou need it.  In fact, each module im\n[Truncated; use read_offload with metadata.offload_id for more.]",
+      "error_code": null,
+      "metadata": {
+        "offload_id": "63c6ff8c9b7a4b1db448eff1fbb8b764",
+        "total_characters": 29066,
+        "truncated": true
+      },
+      "status": "success"
+    },
+    "created_at": 1790444302.9303076
+  },
+  {
+    "task_id": "b061fe371f96464da96777e4f2aa6a75",
+    "sequence": 13,
+    "type": "text_delta",
+    "payload": {
+      "text": "我已读取两份官方文档。接下来我将继续提取与“适用任务 / 取消限制 / CPU 密集型选择”直接相关的原文信息，并据此写成中文 research.md。"
+    },
+    "created_at": 1790444304.766058
+  },
+  {
+    "task_id": "b061fe371f96464da96777e4f2aa6a75",
+    "sequence": 14,
+    "type": "assistant_message",
+    "payload": {
+      "text": "我已读取两份官方文档。接下来我将继续提取与“适用任务 / 取消限制 / CPU 密集型选择”直接相关的原文信息，并据此写成中文 research.md。",
+      "tool_count": 2
+    },
+    "created_at": 1790444304.7688792
+  },
+  {
+    "task_id": "b061fe371f96464da96777e4f2aa6a75",
+    "sequence": 15,
+    "type": "tool_prepared",
+    "payload": {
+      "arguments": {
+        "artifact_id": "63c6ff8c9b7a4b1db448eff1fbb8b764",
+        "offset": 0
+      },
+      "call_id": "call_P7Rs6DRMSbBXO7TGNEsqD7Ke",
+      "name": "read_offload"
+    },
+    "created_at": 1790444304.7750008
+  },
+  {
+    "task_id": "b061fe371f96464da96777e4f2aa6a75",
+    "sequence": 16,
+    "type": "tool_started",
+    "payload": {
+      "call_id": "call_P7Rs6DRMSbBXO7TGNEsqD7Ke",
+      "name": "read_offload"
+    },
+    "created_at": 1790444304.7757988
+  },
+  {
+    "task_id": "b061fe371f96464da96777e4f2aa6a75",
+    "sequence": 17,
+    "type": "tool_result",
+    "payload": {
+      "artifact_ids": [],
+      "call_id": "call_P7Rs6DRMSbBXO7TGNEsqD7Ke",
+      "content": "{\"text\": \"{\\\"source_id\\\": \\\"5971acd2192b48459ff33b1ddca77a1c\\\", \\\"url\\\": \\\"https://docs.python.org/3/library/concurrent.futures.html\\\", \\\"title\\\": \\\"concurrent.futures — Launching parallel tasks — Python 3.14.7 documentation\\\", \\\"text\\\": \\\"concurrent.futures — Launching parallel tasks — Python 3.14.7 documentation\\\\nTheme\\\\nAuto\\\\nLight\\\\nDark\\\\nTable of Contents\\\\nconcurrent.futures\\\\n— Launching parallel tasks\\\\nExecutor Objects\\\\nThreadPoolExecutor\\\\nThreadPoolExecutor Example\\\\nInterpreterPoolExecutor\\\\nProcessPoolExecutor\\\\nProcessPoolExecutor Example\\\\nFuture Objects\\\\nModule Functions\\\\nException classes\\\\nPrevious topic\\\\nThe\\\\nconcurrent\\\\npackage\\\\nNext topic\\\\nconcurrent.interpreters\\\\n— Multiple interpreters in the same process\\\\nThis page\\\\nReport a bug\\\\nImprove this page\\\\nShow source\\\\nNavigation\\\\nindex\\\\nmodules\\\\n|\\\\nnext\\\\n|\\\\nprevious\\\\n|\\\\nPython\\\\n»\\\\n3.14.7 Documentation\\\\n»\\\\nThe Python standard library\\\\n»\\\\nConcurrent Execution\\\\n»\\\\nconcurrent.futures\\\\n— Launching parallel tasks\\\\n|\\\\nTheme\\\\nAuto\\\\nLight\\\\nDark\\\\n|\\\\nconcurrent.futures\\\\n— Launching parallel tasks\\\\n¶\\\\nAdded in version 3.2.\\\\nSource code:\\\\nLib/concurrent/futures/thread.py\\\\n,\\\\nLib/concurrent/futures/process.py\\\\n,\\\\nand\\\\nLib/concurrent/futures/interpreter.py\\\\nThe\\\\nconcurrent.futures\\\\nmodule provides a high-level interface for\\\\nasynchronously executing callables.\\\\nThe asynchronous execution can be performed with threads, using\\\\nThreadPoolExecutor\\\\nor\\\\nInterpreterPoolExecutor\\\\n,\\\\nor separate processes, using\\\\nProcessPoolExecutor\\\\n.\\\\nEach implements the same interface, which is defined\\\\nby the abstract\\\\nExecutor\\\\nclass.\\\\nconcurrent.futures.Future\\\\nmust not be confused with\\\\nasyncio.Future\\\\n, which is designed for use with\\\\nasyncio\\\\ntasks and coroutines. See the\\\\nasyncio’s Future\\\\ndocumentation for a detailed comparison of the two.\\\\nAvailability\\\\n: not WASI.\\\\nThis module does not work or is not available on WebAssembly. See\\\\nWebAssembly platforms\\\\nfor more information.\\\\nExecutor Objects\\\\n¶\\\\nclass\\\\nconcurrent.futures.\\\\nExecutor\\\\n¶\\\\nAn abstract class that provides methods to execute calls asynchronously.  It\\\\nshould not be used directly, but through its concrete subclasses.\\\\nsubmit\\\\n(\\\\nfn\\\\n,\\\\n/\\\\n,\\\\n*\\\\nargs\\\\n,\\\\n**\\\\nkwargs\\\\n)\\\\n¶\\\\nSchedules the callable,\\\\nfn\\\\n, to be executed as\\\\nfn(*args,\\\\n**kwargs)\\\\nand returns a\\\\nFuture\\\\nobject representing the execution of the\\\\ncallable.\\\\nwith\\\\nThreadPoolExecutor\\\\n(\\\\nmax_workers\\\\n=\\\\n1\\\\n)\\\\nas\\\\nexecutor\\\\n:\\\\nfuture\\\\n=\\\\nexecutor\\\\n.\\\\nsubmit\\\\n(\\\\npow\\\\n,\\\\n323\\\\n,\\\\n1235\\\\n)\\\\nprint\\\\n(\\\\nfuture\\\\n.\\\\nresult\\\\n())\\\\nmap\\\\n(\\\\nfn\\\\n,\\\\n*\\\\niterables\\\\n,\\\\ntimeout\\\\n=\\\\nNone\\\\n,\\\\nchunksize\\\\n=\\\\n1\\\\n,\\\\nbuffersize\\\\n=\\\\nNone\\\\n)\\\\n¶\\\\nSimilar to\\\\nmap(fn,\\\\n*iterables)\\\\nexcept:\\\\nThe\\\\niterables\\\\nare collected immediately rather than lazily, unless a\\\\nbuffersize\\\\nis specified to limit the number of submitted tasks whose\\\\nresults have not yet been yielded. If the buffer is full, iteration over\\\\nthe\\\\niterables\\\\npauses until a result is yielded from the buffer.\\\\nfn\\\\nis executed asynchronously and several calls to\\\\nfn\\\\nmay be made concurrently.\\\\nThe returned iterator raises a\\\\nTimeoutError\\\\nif\\\\n__next__()\\\\nis called and the result isn’t available\\\\nafter\\\\ntimeout\\\\nseconds from the original call to\\\\nExecutor.map()\\\\n.\\\\ntimeout\\\\ncan be an int or a float.  If\\\\ntimeout\\\\nis not specified or\\\\nNone\\\\n, there is no limit to the wait time.\\\\nIf a\\\\nfn\\\\ncall raises an exception, then that exception will be\\\\nraised when its value is retrieved from the iterator.\\\\nWhen using\\\\nProcessPoolExecutor\\\\n, this method chops\\\\niterables\\\\ninto a number of chunks which it submits to the pool as separate\\\\ntasks.  The (approximate) size of these chunks can be specified by\\\\nsetting\\\\nchunksize\\\\nto a positive integer.  For very long iterables,\\\\nusing a large value for\\\\nchunksize\\\\ncan significantly improve\\\\nperformance compared to the default size of 1.  With\\\\nThreadPoolExecutor\\\\nand\\\\nInterpreterPoolExecutor\\\\n,\\\\nchunksize\\\\nhas no effect.\\\\nChanged in version 3.5:\\\\nAdded the\\\\nchunksize\\\\nparameter.\\\\nChanged in version 3.14:\\\\nAdded the\\\\nbuffersize\\\\nparameter.\\\\nshutdown\\\\n(\\\\nwait\\\\n=\\\\nTrue\\\\n,\\\\n*\\\\n,\\\\ncancel_futures\\\\n=\\\\nFalse\\\\n)\\\\n¶\\\\nSignal the executor that it should free any resources that it is using\\\\nwhen the currently pending futures are done executing.  Calls to\\\\nExecutor.submit()\\\\nand\\\\nExecutor.map()\\\\nmade after shutdown will\\\\nraise\\\\nRuntimeError\\\\n.\\\\nIf\\\\nwait\\\\nis\\\\nTrue\\\\nthen this method will not return until all the\\\\npending futures are done executing and the resources associated with the\\\\nexecutor have been freed.  If\\\\nwait\\\\nis\\\\nFalse\\\\nthen this method will\\\\nreturn immediately and the resources associated with the executor will be\\\\nfreed when all pending futures are done executing.  Regardless of the\\\\nvalue of\\\\nwait\\\\n, the entire Python program will not exit until all\\\\npending futures are done executing.\\\\nIf\\\\ncancel_futures\\\\nis\\\\nTrue\\\\n, this method will cancel all pending\\\\nfutures that the executor has not started running. Any futures that\\\\nare completed or running won’t be cancelled, regardless of the value\\\\nof\\\\ncancel_futures\\\\n.\\\\nIf both\\\\ncancel_futures\\\\nand\\\\nwait\\\\nare\\\\nTrue\\\\n, all futures that the\\\\nexecutor has started running will be completed prior to this method\\\\nreturning. The remaining futures are cancelled.\\\\nYou can avoid having to call this method explicitly if you use the executor\\\\nas a\\\\ncontext manager\\\\nvia the\\\\nwith\\\\nstatement, which\\\\nwill shutdown the\\\\nExecutor\\\\n(waiting as if\\\\nExecutor.shutdown()\\\\nwere called with\\\\nwait\\\\nset to\\\\nTrue\\\\n):\\\\nimport\\\\nshutil\\\\nwith\\\\nThreadPoolExecutor\\\\n(\\\\nmax_workers\\\\n=\\\\n4\\\\n)\\\\nas\\\\ne\\\\n:\\\\ne\\\\n.\\\\nsubmit\\\\n(\\\\nshutil\\\\n.\\\\ncopy\\\\n,\\\\n'src1.txt'\\\\n,\\\\n'dest1.txt'\\\\n)\\\\ne\\\\n.\\\\nsubmit\\\\n(\\\\nshutil\\\\n.\\\\ncopy\\\\n,\\\\n'src2.txt'\\\\n,\\\\n'dest2.txt'\\\\n)\\\\ne\\\\n.\\\\nsubmit\\\\n(\\\\nshutil\\\\n.\\\\ncopy\\\\n,\\\\n'src3.txt'\\\\n,\\\\n'dest3.txt'\\\\n)\\\\ne\\\\n.\\\\nsubmit\\\\n(\\\\nshutil\\\\n.\\\\ncopy\\\\n,\\\\n'src4.txt'\\\\n,\\\\n'dest4.txt'\\\\n)\\\\nChanged in version 3.9:\\\\nAdded\\\\ncancel_futures\\\\n.\\\\nThreadPoolExecutor\\\\n¶\\\\nThreadPoolExecutor\\\\nis an\\\\nExecutor\\\\nsubclass that uses a pool of\\\\nthreads to execute calls asynchronously.\\\\nDeadlocks can occur when the callable associated with a\\\\nFuture\\\\nwaits on\\\\nthe results of another\\\\nFuture\\\\n.  For example:\\\\nimport\\\\ntime\\\\ndef\\\\nwait_on_b\\\\n():\\\\ntime\\\\n.\\\\nsleep\\\\n(\\\\n5\\\\n)\\\\nprint\\\\n(\\\\nb\\\\n.\\\\nresult\\\\n())\\\\n# b will never complete because it is waiting on a.\\\\nreturn\\\\n5\\\\ndef\\\\nwait_on_a\\\\n():\\\\ntime\\\\n.\\\\nsleep\\\\n(\\\\n5\\\\n)\\\\nprint\\\\n(\\\\na\\\\n.\\\\nresult\\\\n())\\\\n# a will never complete because it is waiting on b.\\\\nreturn\\\\n6\\\\nexecutor\\\\n=\\\\nThreadPoolExecutor\\\\n(\\\\nmax_workers\\\\n=\\\\n2\\\\n)\\\\na\\\\n=\\\\nexecutor\\\\n.\\\\nsubmit\\\\n(\\\\nwait_on_b\\\\n)\\\\nb\\\\n=\\\\nexecutor\\\\n.\\\\nsubmit\\\\n(\\\\nwait_on_a\\\\n)\\\\nAnd:\\\\ndef\\\\nwait_on_future\\\\n():\\\\nf\\\\n=\\\\nexecutor\\\\n.\\\\nsubmit\\\\n(\\\\npow\\\\n,\\\\n5\\\\n,\\\\n2\\\\n)\\\\n# This will never complete because there is only one worker thread and\\\\n# it is executing this function.\\\\nprint\\\\n(\\\\nf\\\\n.\\\\nresult\\\\n())\\\\nexecutor\\\\n=\\\\nThreadPoolExecutor\\\\n(\\\\nmax_workers\\\\n=\\\\n1\\\\n)\\\\nfuture\\\\n=\\\\nexecutor\\\\n.\\\\nsubmit\\\\n(\\\\nwait_on_future\\\\n)\\\\n# Note: calling future.result() would also cause a deadlock because\\\\n# the single worker thread is already waiting for wait_on_future().\\\\nclass\\\\nconcurrent.futures.\\\\nThreadPoolExecutor\\\\n(\\\\nmax_workers\\\\n=\\\\nNone\\\\n,\\\\nthread_name_prefix\\\\n=\\\\n''\\\\n,\\\\ninitializer\\\\n=\\\\nNone\\\\n,\\\\ninitargs\\\\n=\\\\n()\\\\n)\\\\n¶\\\\nAn\\\\nExecutor\\\\nsubclass that uses a pool of at most\\\\nmax_workers\\\\nthreads to execute calls asynchronously.\\\\nAll threads enqueued to\\\\nThreadPoolExecutor\\\\nwill be joined before the\\\\ninterpreter can exit. Note that the exit handler which does this is\\\\nexecuted\\\\nbefore\\\\nany exit handlers added using\\\\natexit\\\\n. This means\\\\nexceptions in the main thread must be caught and handled in order to\\\\nsignal threads to exit gracefully. For this reason, it is recommended\\\\nthat\\\\nThreadPoolExecutor\\\\nnot be used for long-running tasks.\\\\ninitializer\\\\nis an optional callable that is called at the start of\\\\neach worker thread;\\\\ninitargs\\\\nis a tuple of arguments passed to the\\\\ninitializer.  Should\\\\ninitializer\\\\nraise an exception, all currently\\\\npending jobs will raise a\\\\nBrokenThreadPool\\\\n,\\\\nas well as any attempt to submit more jobs to the pool.\\\\nChanged in version 3.5:\\\\nIf\\\\nmax_workers\\\\nis\\\\nNone\\\\nor\\\\nnot given, it will default to the number of processors on the machine,\\\\nmultiplied by\\\\n5\\\\n, assuming that\\\\nThreadPoolExecutor\\\\nis often\\\\nused to overlap I/O instead of CPU work and the number of workers\\\\nshould be higher than the number of workers\\\\nfor\\\\nProcessPoolExecutor\\\\n.\\\\nChanged in version 3.6:\\\\nAdded the\\\\nthread_name_prefix\\\\nparameter to allow users to\\\\ncontrol the\\\\nthreading.Thread\\\\nnames for worker threads created by\\\\nthe pool for easier debugging.\\\\nChanged in version 3.7:\\\\nAdded the\\\\ninitializer\\\\nand\\\\ninitargs\\\\narguments.\\\\nChanged in version 3.8:\\\\nDefault value of\\\\nmax_workers\\\\nis changed to\\\\nmin(32,\\\\nos.cpu_count()\\\\n+\\\\n4)\\\\n.\\\\nThis default value preserves at least 5 workers for I/O bound tasks.\\\\nIt utilizes at most 32 CPU cores for CPU bound tasks which release the GIL.\\\\nAnd it avoids using very large resources implicitly on many-core machines.\\\\nThreadPoolExecutor now reuses idle worker threads before starting\\\\nmax_workers\\\\nworker threads too.\\\\nChanged in version 3.13:\\\\nDefault value of\\\\nmax_workers\\\\nis changed to\\\\nmin(32,\\\\n(os.process_cpu_count()\\\\nor\\\\n1)\\\\n+\\\\n4)\\\\n.\\\\nThreadPoolExecutor Example\\\\n¶\\\\nimport\\\\nconcurrent.futures\\\\nimport\\\\nurllib.request\\\\nURLS\\\\n=\\\\n[\\\\n'http://www.foxnews.com/'\\\\n,\\\\n'http://www.cnn.com/'\\\\n,\\\\n'http://europe.wsj.com/'\\\\n,\\\\n'http://www.bbc.co.uk/'\\\\n,\\\\n'http://nonexistent-subdomain.python.org/'\\\\n]\\\\n# Retrieve a single page and report the URL and contents\\\\ndef\\\\nload_url\\\\n(\\\\nurl\\\\n,\\\\ntimeout\\\\n):\\\\nwith\\\\nurllib\\\\n.\\\\nrequest\\\\n.\\\\nurlopen\\\\n(\\\\nurl\\\\n,\\\\ntimeout\\\\n=\\\\ntimeout\\\\n)\\\\nas\\\\nconn\\\\n:\\\\nreturn\\\\nconn\\\\n.\\\\nread\\\\n()\\\\n# We can use a with statement to ensure threads are cleaned up promptly\\\\nwith\\\\nconcurrent\\\\n.\\\\nfutures\\\\n.\\\\nThreadPoolExecutor\\\\n(\\\\nmax_workers\\\\n=\\\\n5\\\\n)\\\\nas\\\\nexecutor\\\\n:\\\\n# Start the load operations and mark each future with its URL\\\\nfuture_to_url\\\\n=\\\\n{\\\\nexecutor\\\\n.\\\\nsubmit\\\\n(\\\\nload_url\\\\n,\\\\nurl\\\\n,\\\\n60\\\\n):\\\\nurl\\\\nfor\\\\nurl\\\\nin\\\\nURLS\\\\n}\\\\nfor\\\\nfuture\\\\nin\\\\nconcurrent\\\\n.\\\\nfutures\\\\n.\\\\nas_completed\\\\n(\\\\nfuture_to_url\\\\n):\\\\nurl\\\\n=\\\\nfuture_to_url\\\\n[\\\\nfuture\\\\n]\\\\ntry\\\\n:\\\\ndata\\\\n=\\\\nfuture\\\\n.\\\\nresult\\\\n()\\\\nexcept\\\\nException\\\\nas\\\\nexc\\\\n:\\\\nprint\\\\n(\\\\n'\\\\n%r\\\\ngenerated an exception:\\\\n%s\\\\n'\\\\n%\\\\n(\\\\nurl\\\\n,\\\\nexc\\\\n))\\\\nelse\\\\n:\\\\nprint\\\\n(\\\\n'\\\\n%r\\\\npage is\\\\n%d\\\\nbytes'\\\\n%\\\\n(\\\\nurl\\\\n,\\\\nlen\\\\n(\\\\ndata\\\\n)))\\\\nInterpreterPoolExecutor\\\\n¶\\\\nAdded in version 3.14.\\\\nThe\\\\nInterpreterPoolExecutor\\\\nclass uses a pool of interpreters\\\\nto execute calls asynchronously.  It is a\\\\nThreadPoolExecutor\\\\nsubclass, which means each worker is running in its own thread.\\\\nThe difference here is that each worker has its own interpreter,\\\\nand runs each task using that interpreter.\\\\nThe biggest benefit to using interpreters instead of only threads\\\\nis true multi-core parallelism.  Each interpreter has its own\\\\nGlobal Interpreter Lock\\\\n, so code\\\\nrunning in one interpreter can run on one CPU core, while code in\\\\nanother interpreter runs unblocked on a different core.\\\\nThe tradeoff is that writing concurrent code for use with multiple\\\\ninterpreters can take extra effort.  However, this is because it\\\\nforces you to be deliberate about how and when interpreters interact,\\\\nand to be explicit about what data is shared between interpreters.\\\\nThis results in several benefits that help balance the extra effort,\\\\nincluding true multi-core parallelism,  For example, code written\\\\nthis way can make it easier to reason about concurrency.  Another\\\\nmajor benefit is that you don’t have to deal with several of the\\\\nbig pain points of using threads, like race conditions.\\\\nEach worker’s interpreter is isolated from all the other interpreters.\\\\n“Isolated” means each interpreter has its own runtime state and\\\\noperates completely independently.  For example, if you redirect\\\\nsys.stdout\\\\nin one interpreter, it will not be automatically\\\\nredirected to any other interpreter.  If you import a module in one\\\\ninterpreter, it is not automatically imported in any other.  You\\\\nwould need to import the module separately in interpreter where\\\\nyou need it.  In fact, each module im\", \"next_offset\": 12000}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "created_at": 1790444304.7814376
+  },
+  {
+    "task_id": "b061fe371f96464da96777e4f2aa6a75",
+    "sequence": 18,
+    "type": "tool_prepared",
+    "payload": {
+      "arguments": {
+        "artifact_id": "63c6ff8c9b7a4b1db448eff1fbb8b764",
+        "offset": 12000
+      },
+      "call_id": "call_pE9NHOlwpXgRtI5G8tYv2RiF",
+      "name": "read_offload"
+    },
+    "created_at": 1790444304.7900832
+  },
+  {
+    "task_id": "b061fe371f96464da96777e4f2aa6a75",
+    "sequence": 19,
+    "type": "tool_started",
+    "payload": {
+      "call_id": "call_pE9NHOlwpXgRtI5G8tYv2RiF",
+      "name": "read_offload"
+    },
+    "created_at": 1790444304.7922134
+  },
+  {
+    "task_id": "b061fe371f96464da96777e4f2aa6a75",
+    "sequence": 20,
+    "type": "tool_result",
+    "payload": {
+      "artifact_ids": [],
+      "call_id": "call_pE9NHOlwpXgRtI5G8tYv2RiF",
+      "content": "{\"text\": \"ported in an interpreter is\\\\na completely separate object from the same module in a different\\\\ninterpreter, including\\\\nsys\\\\n,\\\\nbuiltins\\\\n,\\\\nand even\\\\n__main__\\\\n.\\\\nIsolation means a mutable object, or other data, cannot be used\\\\nby more than one interpreter at the same time.  That effectively means\\\\ninterpreters cannot actually share such objects or data.  Instead,\\\\neach interpreter must have its own copy, and you will have to\\\\nsynchronize any changes between the copies manually.  Immutable\\\\nobjects and data, like the builtin singletons, strings, and tuples\\\\nof immutable objects, don’t have these limitations.\\\\nCommunicating and synchronizing between interpreters is most effectively\\\\ndone using dedicated tools, like those proposed in\\\\nPEP 734\\\\n.  One less\\\\nefficient alternative is to serialize with\\\\npickle\\\\nand then send\\\\nthe bytes over a shared\\\\nsocket\\\\nor\\\\npipe\\\\n.\\\\nclass\\\\nconcurrent.futures.\\\\nInterpreterPoolExecutor\\\\n(\\\\nmax_workers\\\\n=\\\\nNone\\\\n,\\\\nthread_name_prefix\\\\n=\\\\n''\\\\n,\\\\ninitializer\\\\n=\\\\nNone\\\\n,\\\\ninitargs\\\\n=\\\\n()\\\\n)\\\\n¶\\\\nA\\\\nThreadPoolExecutor\\\\nsubclass that executes calls asynchronously\\\\nusing a pool of at most\\\\nmax_workers\\\\nthreads.  Each thread runs\\\\ntasks in its own interpreter.  The worker interpreters are isolated\\\\nfrom each other, which means each has its own runtime state and that\\\\nthey can’t share any mutable objects or other data.  Each interpreter\\\\nhas its own\\\\nGlobal Interpreter Lock\\\\n,\\\\nwhich means code run with this executor has true multi-core parallelism.\\\\nThe optional\\\\ninitializer\\\\nand\\\\ninitargs\\\\narguments have the same\\\\nmeaning as for\\\\nThreadPoolExecutor\\\\n: the initializer is run\\\\nwhen each worker is created, though in this case it is run in\\\\nthe worker’s interpreter.  The executor serializes the\\\\ninitializer\\\\nand\\\\ninitargs\\\\nusing\\\\npickle\\\\nwhen sending them to the worker’s\\\\ninterpreter.\\\\nNote\\\\nThe executor may replace uncaught exceptions from\\\\ninitializer\\\\nwith\\\\nExecutionFailed\\\\n.\\\\nOther caveats from parent\\\\nThreadPoolExecutor\\\\napply here.\\\\nsubmit()\\\\nand\\\\nmap()\\\\nwork like normal,\\\\nexcept the worker serializes the callable and arguments using\\\\npickle\\\\nwhen sending them to its interpreter.  The worker\\\\nlikewise serializes the return value when sending it back.\\\\nWhen a worker’s current task raises an uncaught exception, the worker\\\\nalways tries to preserve the exception as-is.  If that is successful\\\\nthen it also sets the\\\\n__cause__\\\\nto a corresponding\\\\nExecutionFailed\\\\ninstance, which contains a summary of the original exception.\\\\nIn the uncommon case that the worker is not able to preserve the\\\\noriginal as-is then it directly preserves the corresponding\\\\nExecutionFailed\\\\ninstance instead.\\\\nProcessPoolExecutor\\\\n¶\\\\nThe\\\\nProcessPoolExecutor\\\\nclass is an\\\\nExecutor\\\\nsubclass that\\\\nuses a pool of processes to execute calls asynchronously.\\\\nProcessPoolExecutor\\\\nuses the\\\\nmultiprocessing\\\\nmodule, which\\\\nallows it to side-step the\\\\nGlobal Interpreter Lock\\\\nbut also means that\\\\nonly picklable objects can be executed and returned.\\\\nThe\\\\n__main__\\\\nmodule must be importable by worker subprocesses. This means\\\\nthat\\\\nProcessPoolExecutor\\\\nwill not work in the interactive interpreter.\\\\nCalling\\\\nExecutor\\\\nor\\\\nFuture\\\\nmethods from a callable submitted\\\\nto a\\\\nProcessPoolExecutor\\\\nwill result in deadlock.\\\\nNote that the restrictions on functions and arguments needing to picklable as\\\\nper\\\\nmultiprocessing.Process\\\\napply when using\\\\nsubmit()\\\\nand\\\\nmap()\\\\non a\\\\nProcessPoolExecutor\\\\n. A function defined\\\\nin a REPL or a lambda should not be expected to work.\\\\nclass\\\\nconcurrent.futures.\\\\nProcessPoolExecutor\\\\n(\\\\nmax_workers\\\\n=\\\\nNone\\\\n,\\\\nmp_context\\\\n=\\\\nNone\\\\n,\\\\ninitializer\\\\n=\\\\nNone\\\\n,\\\\ninitargs\\\\n=\\\\n()\\\\n,\\\\nmax_tasks_per_child\\\\n=\\\\nNone\\\\n)\\\\n¶\\\\nAn\\\\nExecutor\\\\nsubclass that executes calls asynchronously using a pool\\\\nof at most\\\\nmax_workers\\\\nprocesses.  If\\\\nmax_workers\\\\nis\\\\nNone\\\\nor not\\\\ngiven, it will default to\\\\nos.process_cpu_count()\\\\n.\\\\nIf\\\\nmax_workers\\\\nis less than or equal to\\\\n0\\\\n, then a\\\\nValueError\\\\nwill be raised.\\\\nOn Windows,\\\\nmax_workers\\\\nmust be less than or equal to\\\\n61\\\\n. If it is not\\\\nthen\\\\nValueError\\\\nwill be raised. If\\\\nmax_workers\\\\nis\\\\nNone\\\\n, then\\\\nthe default chosen will be at most\\\\n61\\\\n, even if more processors are\\\\navailable.\\\\nmp_context\\\\ncan be a\\\\nmultiprocessing\\\\ncontext or\\\\nNone\\\\n. It will be\\\\nused to launch the workers. If\\\\nmp_context\\\\nis\\\\nNone\\\\nor not given, the\\\\ndefault\\\\nmultiprocessing\\\\ncontext is used.\\\\nSee\\\\nContexts and start methods\\\\n.\\\\ninitializer\\\\nis an optional callable that is called at the start of\\\\neach worker process;\\\\ninitargs\\\\nis a tuple of arguments passed to the\\\\ninitializer.  Should\\\\ninitializer\\\\nraise an exception, all currently\\\\npending jobs will raise a\\\\nBrokenProcessPool\\\\n,\\\\nas well as any attempt to submit more jobs to the pool.\\\\nmax_tasks_per_child\\\\nis an optional argument that specifies the maximum\\\\nnumber of tasks a single process can execute before it will exit and be\\\\nreplaced with a fresh worker process. By default\\\\nmax_tasks_per_child\\\\nis\\\\nNone\\\\nwhich means worker processes will live as long as the pool. When\\\\na max is specified, the “spawn” multiprocessing start method will be used by\\\\ndefault in absence of a\\\\nmp_context\\\\nparameter. This feature is incompatible\\\\nwith the “fork” start method.\\\\nChanged in version 3.3:\\\\nWhen one of the worker processes terminates abruptly, a\\\\nBrokenProcessPool\\\\nerror is now raised.\\\\nPreviously, behaviour\\\\nwas undefined but operations on the executor or its futures would often\\\\nfreeze or deadlock.\\\\nChanged in version 3.7:\\\\nThe\\\\nmp_context\\\\nargument was added to allow users to control the\\\\nstart_method for worker processes created by the pool.\\\\nAdded the\\\\ninitializer\\\\nand\\\\ninitargs\\\\narguments.\\\\nChanged in version 3.11:\\\\nThe\\\\nmax_tasks_per_child\\\\nargument was added to allow users to\\\\ncontrol the lifetime of workers in the pool.\\\\nChanged in version 3.12:\\\\nOn POSIX systems, if your application has multiple threads and the\\\\nmultiprocessing\\\\ncontext uses the\\\\n\\\\\\\"fork\\\\\\\"\\\\nstart method:\\\\nThe\\\\nos.fork()\\\\nfunction called internally to spawn workers may raise a\\\\nDeprecationWarning\\\\n. Pass a\\\\nmp_context\\\\nconfigured to use a\\\\ndifferent start method. See the\\\\nos.fork()\\\\ndocumentation for\\\\nfurther explanation.\\\\nChanged in version 3.13:\\\\nmax_workers\\\\nuses\\\\nos.process_cpu_count()\\\\nby default, instead of\\\\nos.cpu_count()\\\\n.\\\\nChanged in version 3.14:\\\\nThe default process start method (see\\\\nContexts and start methods\\\\n) changed away from\\\\nfork\\\\n. If you\\\\nrequire the\\\\nfork\\\\nstart method for\\\\nProcessPoolExecutor\\\\nyou must\\\\nexplicitly pass\\\\nmp_context=multiprocessing.get_context(\\\\\\\"fork\\\\\\\")\\\\n.\\\\nChanged in version 3.14.7:\\\\nFixed a deadlock (\\\\ngh-115634\\\\n) where the executor could hang after\\\\na worker process exited upon reaching its\\\\nmax_tasks_per_child\\\\nlimit while tasks remained queued.\\\\nterminate_workers\\\\n(\\\\n)\\\\n¶\\\\nAttempt to terminate all living worker processes immediately by calling\\\\nProcess.terminate\\\\non each of them.\\\\nInternally, it will also call\\\\nExecutor.shutdown()\\\\nto ensure that all\\\\nother resources associated with the executor are freed.\\\\nAfter calling this method the caller should no longer submit tasks to the\\\\nexecutor.\\\\nAdded in version 3.14.\\\\nkill_workers\\\\n(\\\\n)\\\\n¶\\\\nAttempt to kill all living worker processes immediately by calling\\\\nProcess.kill\\\\non each of them.\\\\nInternally, it will also call\\\\nExecutor.shutdown()\\\\nto ensure that all\\\\nother resources associated with the executor are freed.\\\\nAfter calling this method the caller should no longer submit tasks to the\\\\nexecutor.\\\\nAdded in version 3.14.\\\\nProcessPoolExecutor Example\\\\n¶\\\\nimport\\\\nconcurrent.futures\\\\nimport\\\\nmath\\\\nPRIMES\\\\n=\\\\n[\\\\n112272535095293\\\\n,\\\\n112582705942171\\\\n,\\\\n112272535095293\\\\n,\\\\n115280095190773\\\\n,\\\\n115797848077099\\\\n,\\\\n1099726899285419\\\\n]\\\\ndef\\\\nis_prime\\\\n(\\\\nn\\\\n):\\\\nif\\\\nn\\\\n<\\\\n2\\\\n:\\\\nreturn\\\\nFalse\\\\nif\\\\nn\\\\n==\\\\n2\\\\n:\\\\nreturn\\\\nTrue\\\\nif\\\\nn\\\\n%\\\\n2\\\\n==\\\\n0\\\\n:\\\\nreturn\\\\nFalse\\\\nsqrt_n\\\\n=\\\\nint\\\\n(\\\\nmath\\\\n.\\\\nfloor\\\\n(\\\\nmath\\\\n.\\\\nsqrt\\\\n(\\\\nn\\\\n)))\\\\nfor\\\\ni\\\\nin\\\\nrange\\\\n(\\\\n3\\\\n,\\\\nsqrt_n\\\\n+\\\\n1\\\\n,\\\\n2\\\\n):\\\\nif\\\\nn\\\\n%\\\\ni\\\\n==\\\\n0\\\\n:\\\\nreturn\\\\nFalse\\\\nreturn\\\\nTrue\\\\ndef\\\\nmain\\\\n():\\\\nwith\\\\nconcurrent\\\\n.\\\\nfutures\\\\n.\\\\nProcessPoolExecutor\\\\n()\\\\nas\\\\nexecutor\\\\n:\\\\nfor\\\\nnumber\\\\n,\\\\nprime\\\\nin\\\\nzip\\\\n(\\\\nPRIMES\\\\n,\\\\nexecutor\\\\n.\\\\nmap\\\\n(\\\\nis_prime\\\\n,\\\\nPRIMES\\\\n)):\\\\nprint\\\\n(\\\\n'\\\\n%d\\\\nis prime:\\\\n%s\\\\n'\\\\n%\\\\n(\\\\nnumber\\\\n,\\\\nprime\\\\n))\\\\nif\\\\n__name__\\\\n==\\\\n'__main__'\\\\n:\\\\nmain\\\\n()\\\\nFuture Objects\\\\n¶\\\\nThe\\\\nFuture\\\\nclass encapsulates the asynchronous execution of a callable.\\\\nFuture\\\\ninstances are created by\\\\nExecutor.submit()\\\\n.\\\\nclass\\\\nconcurrent.futures.\\\\nFuture\\\\n¶\\\\nEncapsulates the asynchronous execution of a callable.\\\\nFuture\\\\ninstances are created by\\\\nExecutor.submit()\\\\nand should not be created\\\\ndirectly except for testing.\\\\ncancel\\\\n(\\\\n)\\\\n¶\\\\nAttempt to cancel the call.  If the call is currently being executed or\\\\nfinished running and cannot be cancelled then the method will return\\\\nFalse\\\\n, otherwise the call will be cancelled and the method will\\\\nreturn\\\\nTrue\\\\n.\\\\ncancelled\\\\n(\\\\n)\\\\n¶\\\\nReturn\\\\nTrue\\\\nif the call was successfully cancelled.\\\\nrunning\\\\n(\\\\n)\\\\n¶\\\\nReturn\\\\nTrue\\\\nif the call is currently being executed and cannot be\\\\ncancelled.\\\\ndone\\\\n(\\\\n)\\\\n¶\\\\nReturn\\\\nTrue\\\\nif the call was successfully cancelled or finished\\\\nrunning.\\\\nresult\\\\n(\\\\ntimeout\\\\n=\\\\nNone\\\\n)\\\\n¶\\\\nReturn the value returned by the call. If the call hasn’t yet completed\\\\nthen this method will wait up to\\\\ntimeout\\\\nseconds.  If the call hasn’t\\\\ncompleted in\\\\ntimeout\\\\nseconds, then a\\\\nTimeoutError\\\\nwill be raised.\\\\ntimeout\\\\ncan be\\\\nan int or float.  If\\\\ntimeout\\\\nis not specified or\\\\nNone\\\\n, there is no\\\\nlimit to the wait time.\\\\nIf the future is cancelled before completing then\\\\nCancelledError\\\\nwill be raised.\\\\nIf the call raised an exception, this method will raise the same exception.\\\\nexception\\\\n(\\\\ntimeout\\\\n=\\\\nNone\\\\n)\\\\n¶\\\\nReturn the exception raised by the call.  If the call hasn’t yet\\\\ncompleted then this method will wait up to\\\\ntimeout\\\\nseconds.  If the\\\\ncall hasn’t completed in\\\\ntimeout\\\\nseconds, then a\\\\nTimeoutError\\\\nwill be raised.\\\\ntimeout\\\\ncan be\\\\nan int or float.  If\\\\ntimeout\\\\nis not specified or\\\\nNone\\\\n, there is no\\\\nlimit to the wait time.\\\\nIf the future is cancelled before completing then\\\\nCancelledError\\\\nwill be raised.\\\\nIf the call completed without raising,\\\\nNone\\\\nis returned.\\\\nadd_done_callback\\\\n(\\\\nfn\\\\n)\\\\n¶\\\\nAttaches the callable\\\\nfn\\\\nto the future.\\\\nfn\\\\nwill be called, with the\\\\nfuture as its only argument, when the future is cancelled or finishes\\\\nrunning.\\\\nAdded callables are called in the order that they were added and are\\\\nalways called in a thread belonging to the process that added them.  If\\\\nthe callable raises an\\\\nException\\\\nsubclass, it will be logged and\\\\nignored.  If the callable raises a\\\\nBaseException\\\\nsubclass, the\\\\nbehavior is undefined.\\\\nIf the future has already completed or been cancelled,\\\\nfn\\\\nwill be\\\\ncalled immediately.\\\\nThe following\\\\nFuture\\\\nmethods are meant for use in unit tests and\\\\nExecutor\\\\nimplementations.\\\\nset_running_or_notify_cancel\\\\n(\\\\n)\\\\n¶\\\\nThis method should only be called by\\\\nExecutor\\\\nimplementations\\\\nbefore executing the work associated with the\\\\nFuture\\\\nand by unit\\\\ntests.\\\\nIf the method returns\\\\nFalse\\\\nthen the\\\\nFuture\\\\nwas cancelled,\\\\ni.e.\\\\nFuture.cancel()\\\\nwas called and returned\\\\nTrue\\\\n.  Any threads\\\\nwaiting on the\\\\nFuture\\\\ncompleting (i.e. through\\\\nas_completed()\\\\nor\\\\nwait()\\\\n) will be woken up.\\\\nIf the method returns\\\\nTrue\\\\nthen the\\\\nFuture\\\\nwas not cancelled\\\\nand has been put in the running state, i.e. calls to\\\\nFuture.running()\\\\nwill return\\\\nTrue\\\\n.\\\\nThis method can only be called once and cannot be called after\\\\nFuture.set_result()\\\\nor\\\\nFuture.set_exception()\\\\nhave been\\\\ncalled.\\\\nset_result\\\\n(\\\\nresult\\\\n)\\\\n¶\\\\nSets the result of the work associated with the\\\\nFuture\\\\nto\\\\nresult\\\\n.\\\\nThis method should only be used by\\\\nExecutor\\\\nimplementations and\\\\nunit tests.\\\\nChanged in version 3.8:\\\\nThis method raises\\\\nconcurrent.futures.InvalidStateError\\\\nif the\\\\nFuture\\\\nis\\\\nalready done.\\\\nset_exception\\\\n(\\\\nexception\\\\n)\\\\n¶\\\\nSets the result of the work associated with the\\\\nFuture\\\\nto the\\\\nException\\\\nexception\\\\n.\\\\nT\", \"next_offset\": 24000}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "created_at": 1790444304.798185
+  },
+  {
+    "task_id": "b061fe371f96464da96777e4f2aa6a75",
+    "sequence": 21,
+    "type": "text_delta",
+    "payload": {
+      "text": "已提取到足够的官方原文，尤其是 asyncio 的用途定位、concurrent.futures 的执行器类型、shutdown/cancel 语义，以及 CPU 密集型相关说明。现在开始整理成中文技术比较报告并保存为 research.md。"
+    },
+    "created_at": 1790444316.8214946
+  },
+  {
+    "task_id": "b061fe371f96464da96777e4f2aa6a75",
+    "sequence": 22,
+    "type": "assistant_message",
+    "payload": {
+      "text": "已提取到足够的官方原文，尤其是 asyncio 的用途定位、concurrent.futures 的执行器类型、shutdown/cancel 语义，以及 CPU 密集型相关说明。现在开始整理成中文技术比较报告并保存为 research.md。",
+      "tool_count": 1
+    },
+    "created_at": 1790444316.8267639
+  },
+  {
+    "task_id": "b061fe371f96464da96777e4f2aa6a75",
+    "sequence": 23,
+    "type": "tool_prepared",
+    "payload": {
+      "arguments": {
+        "content": "# MUSE 后台任务技术比较报告：`asyncio` vs `concurrent.futures`\n\n> 依据：仅基于已实际读取的 Python 官方文档。\n> 说明：下文所引述的结论都能在文末“来源链接”中对应到官方页面；若某项能力不在两份文档中直接说明，本文不会擅自扩展。\n\n## 1. 结论摘要\n\n- **`asyncio`** 更适合 **I/O 密集型、网络通信、异步协程编排、需要对任务执行过程做精细控制** 的后台任务。\n- **`concurrent.futures`** 更适合 **把普通可调用对象丢到线程池/进程池/解释器池中并行执行** 的场景，尤其适合：\n  - `ThreadPoolExecutor`：偏 **I/O 并发**，不推荐长时间运行任务；\n  - `ProcessPoolExecutor`：适合 **CPU 密集型**、需要绕开 GIL 的工作；\n  - `InterpreterPoolExecutor`：可获得 **真正多核并行**，但并发代码需要更谨慎，且数据不能共享可变对象。\n\n## 2. 各适合哪些任务\n\n### 2.1 `asyncio` 适合的任务\n\n官方文档明确写到：`asyncio` 是“使用 `async/await` 语法编写并发代码”的库，且“通常非常适合 I/O-bound 和高层结构化网络代码”。它还提供了高层 API 来执行协程、网络 I/O、IPC、子进程、队列和同步原语。\n\n**因此，适合：**\n- 网络请求、Socket 通信、协议处理\n- 需要大量等待 I/O 的后台任务\n- 需要协程编排、队列调度、任务同步的异步服务\n- 与子进程、IPC 交互的异步控制逻辑\n\n**不应把它理解为**：专门用于纯 CPU 计算加速的模块。官方页面的定位是 asynchronous I/O，而非 CPU 并行计算。\n\n### 2.2 `concurrent.futures` 适合的任务\n\n官方文档将其定义为“用于异步执行 callable 的高层接口”，可通过线程、进程或解释器来执行。\n\n**因此，适合：**\n- 把已有的同步函数并行化执行\n- 批量提交独立任务并收集结果\n- 需要线程池、进程池或多解释器池的后台作业\n- 需要把任务包装成 `Future`，由外部统一等待、回调或取消\n\n#### 子类适用性\n\n- **`ThreadPoolExecutor`**：官方示例与说明都表明它常用于 **I/O 叠加并发**；默认最大线程数的设计也明确提到“保留至少 5 个 worker 用于 I/O bound 任务”。\n- **`ProcessPoolExecutor`**：官方明确指出它使用多进程，**绕过 GIL**，适合 CPU 密集型并行。\n- **`InterpreterPoolExecutor`**：官方明确指出它带来 **true multi-core parallelism**，但每个 worker 在自己的解释器中运行，数据隔离更强，代价是并发代码要更谨慎地处理共享与序列化。\n\n## 3. 取消（Cancellation）的限制\n\n### 3.1 `concurrent.futures.Future.cancel()` 的限制\n\n官方文档对 `Future.cancel()` 的描述是：\n- 只能“尝试取消”任务；\n- 如果任务已经在执行，或已经执行完成，则返回 `False`，无法取消；\n- 如果成功取消则返回 `True`。\n\n此外，`Executor.shutdown(cancel_futures=True)` 只能取消 **尚未开始运行** 的 pending futures：\n- **已经完成或正在运行的 future 不会被取消**；\n- 如果 `wait=True` 且 `cancel_futures=True`，正在运行的任务会先完成，剩余未开始任务才会被取消。\n\n这意味着：\n- `concurrent.futures` 的取消是 **协作式、且有状态限制** 的；\n- 一旦任务已进入运行态，通常不能靠 `cancel()` 把它“硬停掉”。\n\n### 3.2 `asyncio` 的取消\n\n本次读取到的 `asyncio` 总览页只明确说明它提供任务、协程、同步、队列、子进程等高层 API；**当前读取的页面片段中没有出现 `Task.cancel()` 等更细节的取消语义说明**。因此，本报告**不对 `asyncio` 的取消机制做超出该页文字的推断**。\n\n> 说明：若需要比较 `asyncio` 的任务取消细节，应进一步读取 `asyncio` 中关于 Tasks / Futures 的专门页面；但本次按要求仅依据已实际读取的官方文档，不额外扩展。\n\n## 4. CPU 密集型工作怎么选择\n\n### 4.1 首选：`ProcessPoolExecutor`\n\n官方文档明确写到：`ProcessPoolExecutor` 使用多进程，**可以绕开 Global Interpreter Lock**。这使它成为 CPU 密集型工作最直接的选择。\n\n同时，文档还指出：\n- 只能执行和返回 **可 pickle** 的对象；\n- `__main__` 模块必须可被 worker 子进程导入；\n- 在交互式解释器里不工作；\n- 在 submit/map 的 callable 中调用 `Executor` 或 `Future` 方法可能导致死锁。\n\n**结论**：\n- 如果任务是纯 Python CPU 计算、彼此独立、且参数/返回值可序列化，优先选 `ProcessPoolExecutor`。\n\n### 4.2 次选：`InterpreterPoolExecutor`\n\n官方文档指出它具有 **true multi-core parallelism**，因为每个解释器有自己的 GIL。相较于线程池，它能实现真正的多核并行；但代价是：\n- worker 之间不能共享可变对象；\n- 需要显式处理跨解释器的数据传递；\n- 初始化参数、调用参数、返回值都要通过 pickle 序列化。\n\n**结论**：\n- 如果你希望多核并行，同时愿意接受解释器隔离带来的数据传递成本，`InterpreterPoolExecutor` 也是 CPU 密集型候选。\n\n### 4.3 不推荐：`ThreadPoolExecutor` 作为 CPU 密集型首选\n\n官方文档对 `ThreadPoolExecutor` 的说明强调：\n- 它通常用于 **I/O overlap**；\n- 默认 worker 数量设计也偏向 I/O；\n- 对 CPU bound 任务，只有在 **任务会释放 GIL** 时，线程池才可能利用更多 CPU；\n- 还特别警告：**不推荐用于长时间运行任务**。\n\n**结论**：\n- 对 CPU 密集型纯 Python 计算，不优先选线程池；\n- 除非你的计算代码主要在释放 GIL 的扩展里完成，否则线程池通常不是最佳方案。\n\n## 5. 面向 MUSE 后台任务的选型建议\n\n### 5.1 适合用 `asyncio` 的后台任务\n\n- 网络爬取、API 聚合、异步数据库访问、消息队列消费\n- 大量等待外部 I/O 的调度器\n- 需要在单进程内管理大量并发连接的任务\n- 需要协程级别的生命周期控制、同步和队列管理\n\n### 5.2 适合用 `concurrent.futures` 的后台任务\n\n- 现有同步函数的并行批处理\n- 独立文件处理、图像处理、加解密、数据转换等任务封装成 callable 后分发\n- 需要线程池/进程池/解释器池做隔离执行的工作\n\n### 5.3 简化决策\n\n- **I/O 密集型、网络并发、协程友好** → 优先 `asyncio`\n- **CPU 密集型、需要多核并行** → 优先 `ProcessPoolExecutor`\n- **需要多核并行且愿意接受解释器隔离** → 可考虑 `InterpreterPoolExecutor`\n- **同步 I/O 并发、老代码快速并行化** → 可用 `ThreadPoolExecutor`\n\n## 6. 注意事项\n\n- `concurrent.futures.Future` 不应与 `asyncio.Future` 混淆；前者用于执行器任务，后者用于 `asyncio` 任务和协程。\n- `ThreadPoolExecutor` 可能发生死锁，尤其是任务内部再等待同一线程池中的其他 future。\n- `ProcessPoolExecutor` 和 `InterpreterPoolExecutor` 都有序列化限制；代码、参数、返回值需要可传递。\n- 两个模块在 WebAssembly 上均不可用或不可工作（官方页面均有此说明）。\n\n## 7. 逐条来源链接\n\n1. `asyncio` 总览：\n   - https://docs.python.org/3/library/asyncio.html\n   - 证据点：`asyncio` 用于 `async/await` 并发代码；适合 I/O-bound 和结构化网络代码；提供网络 I/O、IPC、子进程、队列、同步原语等高层 API。\n\n2. `concurrent.futures` 总览：\n   - https://docs.python.org/3/library/concurrent.futures.html\n   - 证据点：高层异步执行 callable；可用线程、进程、解释器执行。\n\n3. `Executor.shutdown(cancel_futures=...)`：\n   - https://docs.python.org/3/library/concurrent.futures.html\n   - 证据点：只能取消尚未开始的 pending futures；运行中或完成的不会取消。\n\n4. `Future.cancel()`：\n   - https://docs.python.org/3/library/concurrent.futures.html\n   - 证据点：任务已在执行或已完成则返回 `False`，无法取消。\n\n5. `ThreadPoolExecutor`：\n   - https://docs.python.org/3/library/concurrent.futures.html\n   - 证据点：用于线程池异步执行；不推荐长期运行任务；默认配置偏向 I/O overlap；CPU-bound 仅在释放 GIL 时受益。\n\n6. `ProcessPoolExecutor`：\n   - https://docs.python.org/3/library/concurrent.futures.html\n   - 证据点：多进程、绕过 GIL、仅可 pickle 的对象；适合 CPU 并行。\n\n7. `InterpreterPoolExecutor`：\n   - https://docs.python.org/3/library/concurrent.futures.html\n   - 证据点：每个 worker 解释器隔离、拥有自己的 GIL、支持 true multi-core parallelism，但不能共享可变对象。\n\n## 8. 备注\n\n- 本报告仅使用已实际读取的官方文档内容，不引入未读取页面的补充解释。\n- 若需要进一步细化“`asyncio` 任务取消、TaskGroup、shield、timeout”等细节，建议再读取 `asyncio` 的专门章节后补充。",
+        "media_type": "text/markdown",
+        "name": "research.md"
+      },
+      "call_id": "call_tKCsGG3mHZO0FKqZMkvJXELj",
+      "name": "save_artifact"
+    },
+    "created_at": 1790444316.8351405
+  },
+  {
+    "task_id": "b061fe371f96464da96777e4f2aa6a75",
+    "sequence": 24,
+    "type": "tool_started",
+    "payload": {
+      "call_id": "call_tKCsGG3mHZO0FKqZMkvJXELj",
+      "name": "save_artifact"
+    },
+    "created_at": 1790444316.8370273
+  },
+  {
+    "task_id": "b061fe371f96464da96777e4f2aa6a75",
+    "sequence": 25,
+    "type": "artifact",
+    "payload": {
+      "created_at": 1790444316.8384335,
+      "id": "20726281e15341589fd8f0b4cd378acf",
+      "media_type": "text/markdown",
+      "name": "research.md",
+      "sha256": "6973a7ab0814a1838089ba64b77aa434ff5c2bfee0980fa0e832296caa0daecc",
+      "task_id": "b061fe371f96464da96777e4f2aa6a75",
+      "version": 1
+    },
+    "created_at": 1790444316.8390348
+  },
+  {
+    "task_id": "b061fe371f96464da96777e4f2aa6a75",
+    "sequence": 26,
+    "type": "tool_result",
+    "payload": {
+      "artifact_ids": [
+        "20726281e15341589fd8f0b4cd378acf"
+      ],
+      "call_id": "call_tKCsGG3mHZO0FKqZMkvJXELj",
+      "content": "{\"id\": \"20726281e15341589fd8f0b4cd378acf\", \"task_id\": \"b061fe371f96464da96777e4f2aa6a75\", \"name\": \"research.md\", \"media_type\": \"text/markdown\", \"sha256\": \"6973a7ab0814a1838089ba64b77aa434ff5c2bfee0980fa0e832296caa0daecc\", \"version\": 1, \"created_at\": 1790444316.8384335}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "created_at": 1790444316.8400402
+  },
+  {
+    "task_id": "b061fe371f96464da96777e4f2aa6a75",
+    "sequence": 27,
+    "type": "text_delta",
+    "payload": {
+      "text": "已完成，并已用 `save_artifact` 保存为 **research.md**。\n\n要点概览：\n- `asyncio`：更适合 I/O 密集型、网络并发、协程编排、队列/同步/子进程控制。\n- `concurrent.futures`：更适合把同步 callable 丢到线程池/进程池/解释器池中执行。\n- 取消限制：\n  - `Future.cancel()` 只能取消尚未运行的任务；\n  - `shutdown(cancel_futures=True)` 只能取消未开始的 pending futures，运行中任务不会被取消。\n- CPU 密集型选择：\n  - 首选 `ProcessPoolExecutor`；\n  - 可考虑 `InterpreterPoolExecutor` 获取真正多核并行；\n  - `ThreadPoolExecutor` 通常不作为 CPU 密集型首选，官方还不建议用于长时间运行任务。\n\n我在报告中逐条附了官方来源链接，并明确说明了本次读取到的文档范围内没有额外编造 `asyncio` 取消细节。"
+    },
+    "created_at": 1790444319.5972333
+  },
+  {
+    "task_id": "b061fe371f96464da96777e4f2aa6a75",
+    "sequence": 28,
+    "type": "assistant_message",
+    "payload": {
+      "text": "已完成，并已用 `save_artifact` 保存为 **research.md**。\n\n要点概览：\n- `asyncio`：更适合 I/O 密集型、网络并发、协程编排、队列/同步/子进程控制。\n- `concurrent.futures`：更适合把同步 callable 丢到线程池/进程池/解释器池中执行。\n- 取消限制：\n  - `Future.cancel()` 只能取消尚未运行的任务；\n  - `shutdown(cancel_futures=True)` 只能取消未开始的 pending futures，运行中任务不会被取消。\n- CPU 密集型选择：\n  - 首选 `ProcessPoolExecutor`；\n  - 可考虑 `InterpreterPoolExecutor` 获取真正多核并行；\n  - `ThreadPoolExecutor` 通常不作为 CPU 密集型首选，官方还不建议用于长时间运行任务。\n\n我在报告中逐条附了官方来源链接，并明确说明了本次读取到的文档范围内没有额外编造 `asyncio` 取消细节。",
+      "tool_count": 0
+    },
+    "created_at": 1790444319.6012447
+  },
+  {
+    "task_id": "b061fe371f96464da96777e4f2aa6a75",
+    "sequence": 29,
+    "type": "status",
+    "payload": {
+      "status": "SUCCEEDED"
+    },
+    "created_at": 1790444319.6106162
+  }
+]

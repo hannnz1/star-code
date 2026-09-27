@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="9" time="26.574" timestamp="2026-09-27T06:04:05.208975+10:00" hostname="DESKTOP-97O7KOC"><testcase classname="tests.test_terminal_context" name="test_compact_requires_inactive_turn_and_preserves_goal_and_tool_pair" time="0.367" /><testcase classname="tests.test_terminal_context" name="test_command_completion_matches_public_commands" time="0.007" /><testcase classname="tests.test_terminal_context" name="test_terminal_conversation_rewind_uses_durable_fork" time="0.106"><failure message="httpx.HTTPStatusError: Client error '409 Conflict' for url 'http://127.0.0.1:8765/api/conversations/9fed89570ab84dabb7d3a95d5d347e1d/fork'&#10;For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/409">api = (&lt;starlette.testclient.TestClient object at 0x00000178AC1AEC60&gt;, &lt;fastapi.applications.FastAPI object at 0x00000178AC1AE450&gt;)
+
+    def test_terminal_conversation_rewind_uses_durable_fork(api):
+        from muse.terminal import TerminalClient
+        client, app = api
+        terminal = TerminalClient(client, client.get('/api/workspaces').json()[0]['id'])
+        terminal.handle('Original goal')
+        source = terminal.task_id
+        task = app.state.repository.claim_next('worker')
+        app.state.repository.save_conversation_checkpoint(source, 'worker', task.lease_epoch, 0,
+            [{'role': 'user', 'content': 'Original goal'}])
+        terminal.handle('/pause')
+        assert json.loads(terminal.handle('/checkpoints'))[0]['sequence'] == 0
+&gt;       fork = json.loads(terminal.handle('/rewind 0 conversation Continue here'))
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_terminal_context.py:52: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\muse\terminal.py:171: in handle
+    result = self.request('POST', f"/api/conversations/{task['id']}/fork", json={
+src\muse\terminal.py:47: in request
+    response.raise_for_status()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;Response [409 Conflict]&gt;
+
+    def raise_for_status(self) -&gt; Response:
+        """
+        Raise the `HTTPStatusError` if one occurred.
+        """
+        request = self._request
+        if request is None:
+            raise RuntimeError(
+                "Cannot call `raise_for_status` as the request "
+                "instance has not been set on this response."
+            )
+    
+        if self.is_success:
+            return self
+    
+        if self.has_redirect_location:
+            message = (
+                "{error_type} '{0.status_code} {0.reason_phrase}' for url '{0.url}'\n"
+                "Redirect location: '{0.headers[location]}'\n"
+                "For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/{0.status_code}"
+            )
+        else:
+            message = (
+                "{error_type} '{0.status_code} {0.reason_phrase}' for url '{0.url}'\n"
+                "For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/{0.status_code}"
+            )
+    
+        status_class = self.status_code // 100
+        error_types = {
+            1: "Informational response",
+            3: "Redirect response",
+            4: "Client error",
+            5: "Server error",
+        }
+        error_type = error_types.get(status_class, "Invalid status code")
+        message = message.format(self, error_type=error_type)
+&gt;       raise HTTPStatusError(message, request=request, response=self)
+E       httpx.HTTPStatusError: Client error '409 Conflict' for url 'http://127.0.0.1:8765/api/conversations/9fed89570ab84dabb7d3a95d5d347e1d/fork'
+E       For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/409
+
+.venv\Lib\site-packages\httpx\_models.py:829: HTTPStatusError</failure></testcase><testcase classname="tests.test_extension_receipts" name="test_committed_extension_receipt_recovers_without_replaying[spawn_skill]" time="0.056" /><testcase classname="tests.test_extension_receipts" name="test_committed_extension_receipt_recovers_without_replaying[__hook_0]" time="0.085" /><testcase classname="tests.test_extension_receipts" name="test_committed_extension_receipt_recovers_without_replaying[__hook_async]" time="0.120" /><testcase classname="tests.test_extension_receipts" name="test_committed_extension_receipt_recovers_without_replaying[team_work]" time="0.062" /><testcase classname="tests.test_extension_receipts" name="test_committed_extension_receipt_recovers_without_replaying[team_message]" time="0.053" /><testcase classname="tests.test_worktree_lifecycle" name="test_worktree_merge_and_retirement_preserve_unmerged_and_dirty_work" time="22.004" /></testsuite></testsuites>

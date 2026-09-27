@@ -1,0 +1,22 @@
+{
+  "release_gate": "NOT_ACCEPTED",
+  "planned_attempts_per_campaign": 60,
+  "campaign1_raw": {
+    "AUTO_PASS_REVIEW_REQUIRED": 32,
+    "BLOCKED": 11,
+    "FAIL": 17
+  },
+  "campaign2_raw": {
+    "FAIL": 18,
+    "BLOCKED": 8,
+    "AUTO_PASS_REVIEW_REQUIRED": 34
+  },
+  "campaign2_reviewed": {
+    "FAIL": 17,
+    "BLOCKED": 8,
+    "PASS": 34,
+    "PASS_WITH_DOCUMENTED_AUTO_FALSE_NEGATIVE": 1
+  },
+  "reviewed_pass_total": 35,
+  "note": "Two complete campaigns are separate; no best-round pooling. Local no-JVM-path smoke is not clean-host acceptance. Async Hook fixes were subsequently covered by regression, not by these frozen product cases."
+}

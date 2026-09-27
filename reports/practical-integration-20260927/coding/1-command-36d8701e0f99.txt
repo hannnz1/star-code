@@ -1,0 +1,29 @@
+
+[stderr]
+test_array_nullable_union (test_composition.SchemaTests.test_array_nullable_union) ... ok
+test_one_of_preserves_both_branches (test_composition.SchemaTests.test_one_of_preserves_both_branches) ... FAIL
+test_union_is_grouped_inside_intersection (test_composition.SchemaTests.test_union_is_grouped_inside_intersection) ... FAIL
+
+======================================================================
+FAIL: test_one_of_preserves_both_branches (test_composition.SchemaTests.test_one_of_preserves_both_branches)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Documents\Codex\2026-09-26\ai-starcode-muse-coding-agent-python\outputs\muse-next\work\practical-integration-20260927\coding\test_composition.py", line 5, in test_one_of_preserves_both_branches
+    self.assertEqual(ts_type({'oneOf':[{'type':'string'},{'type':'number'}]}),'string | number')
+AssertionError: 'unknown' != 'string | number'
+- unknown
++ string | number
+
+
+======================================================================
+FAIL: test_union_is_grouped_inside_intersection (test_composition.SchemaTests.test_union_is_grouped_inside_intersection)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Documents\Codex\2026-09-26\ai-starcode-muse-coding-agent-python\outputs\muse-next\work\practical-integration-20260927\coding\test_composition.py", line 8, in test_union_is_grouped_inside_intersection
+    self.assertIn('(string|number)',output)
+AssertionError: '(string|number)' not found in 'string|number&boolean'
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.001s
+
+FAILED (failures=2)

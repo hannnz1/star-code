@@ -1,0 +1,32 @@
+F                                                                        [100%]
+================================== FAILURES ===================================
+__________________ test_agent_shell_uses_selected_workspace ___________________
+
+tmp_path = WindowsPath('C:/Users/Administrator/Documents/Codex/2026-09-26/ai-starcode-muse-coding-agent-python/outputs/muse-next/work/shell-cwd-red/test_agent_shell_uses_selected0')
+
+    async def test_agent_shell_uses_selected_workspace(tmp_path):
+        from test_agent import MockLLMClient
+        from mewcode.agent import Agent, ToolResultEvent
+        from mewcode.conversation import ConversationManager
+        from mewcode.tools import create_default_registry
+        from mewcode.tools.base import ToolCallComplete, StreamEnd
+        script = tmp_path / 'location.py'
+        script.write_text('import os\nprint(os.getcwd())')
+        client = MockLLMClient([[ToolCallComplete('c', 'Bash', {'command': command(script)}),
+                                StreamEnd('tool_use')], [StreamEnd('end_turn')]])
+        agent = Agent(client, create_default_registry(), 'openai', work_dir=str(tmp_path))
+        conversation = ConversationManager()
+        conversation.add_user_message('Check working directory')
+        events = [e async for e in agent.run(conversation)]
+        result = next(e for e in events if isinstance(e, ToolResultEvent))
+>       assert result.output.strip() == str(tmp_path)
+E       AssertionError: assert 'C:\\Users\\A...ts\\muse-next' == 'C:\\Users\\A...ses_selected0'
+E         
+E         Skipping 93 identical leading characters in diff, use -v to show
+E         - s\muse-next\work\shell-cwd-red\test_agent_shell_uses_selected0
+E         + s\muse-next
+
+tests\test_shell_lifecycle.py:33: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_shell_lifecycle.py::test_agent_shell_uses_selected_workspace
+1 failed in 3.19s

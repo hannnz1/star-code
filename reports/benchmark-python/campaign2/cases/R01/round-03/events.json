@@ -1,0 +1,277 @@
+[
+  {
+    "task_id": "d68b6e54c4094119b686b17eb54a19c1",
+    "sequence": 1,
+    "type": "status",
+    "payload": {
+      "status": "QUEUED"
+    },
+    "created_at": 1790457140.3135846
+  },
+  {
+    "task_id": "d68b6e54c4094119b686b17eb54a19c1",
+    "sequence": 2,
+    "type": "status",
+    "payload": {
+      "status": "RUNNING"
+    },
+    "created_at": 1790457140.3170753
+  },
+  {
+    "task_id": "d68b6e54c4094119b686b17eb54a19c1",
+    "sequence": 3,
+    "type": "assistant_message",
+    "payload": {
+      "text": "",
+      "tool_count": 3
+    },
+    "created_at": 1790457141.8970983
+  },
+  {
+    "task_id": "d68b6e54c4094119b686b17eb54a19c1",
+    "sequence": 4,
+    "type": "tool_prepared",
+    "payload": {
+      "arguments": {
+        "url": "http://127.0.0.1:60569/atlas"
+      },
+      "call_id": "call_7pnzZPFMvS7lkvjCKq5gf1EA",
+      "name": "read_url"
+    },
+    "created_at": 1790457141.9035356
+  },
+  {
+    "task_id": "d68b6e54c4094119b686b17eb54a19c1",
+    "sequence": 5,
+    "type": "tool_started",
+    "payload": {
+      "call_id": "call_7pnzZPFMvS7lkvjCKq5gf1EA",
+      "name": "read_url"
+    },
+    "created_at": 1790457141.9055383
+  },
+  {
+    "task_id": "d68b6e54c4094119b686b17eb54a19c1",
+    "sequence": 6,
+    "type": "source",
+    "payload": {
+      "id": "43d610d231fd45789061ef2c85410e8f",
+      "retrieved_at": 1790457142.3291402,
+      "sha256": "a6a59bc365ff425fe5ff9c0b73b0495dc950d2937b8ddb577655eb96f55fb749",
+      "task_id": "d68b6e54c4094119b686b17eb54a19c1",
+      "title": "atlas",
+      "url": "http://127.0.0.1:60569/atlas"
+    },
+    "created_at": 1790457142.3302255
+  },
+  {
+    "task_id": "d68b6e54c4094119b686b17eb54a19c1",
+    "sequence": 7,
+    "type": "tool_result",
+    "payload": {
+      "artifact_ids": [],
+      "call_id": "call_7pnzZPFMvS7lkvjCKq5gf1EA",
+      "content": "{\"source_id\": \"43d610d231fd45789061ef2c85410e8f\", \"url\": \"http://127.0.0.1:60569/atlas\", \"title\": \"atlas\", \"text\": \"atlas\\nAtlas\\nPrice 120 USD; limit 40 projects; retention 7 days; export CSV.\", \"truncated\": false, \"blocked_requests\": 0}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "created_at": 1790457142.3773808
+  },
+  {
+    "task_id": "d68b6e54c4094119b686b17eb54a19c1",
+    "sequence": 8,
+    "type": "tool_prepared",
+    "payload": {
+      "arguments": {
+        "url": "http://127.0.0.1:60569/birch"
+      },
+      "call_id": "call_d4qRcBpXzIQky8CcCihPG5DF",
+      "name": "read_url"
+    },
+    "created_at": 1790457142.3839498
+  },
+  {
+    "task_id": "d68b6e54c4094119b686b17eb54a19c1",
+    "sequence": 9,
+    "type": "tool_started",
+    "payload": {
+      "call_id": "call_d4qRcBpXzIQky8CcCihPG5DF",
+      "name": "read_url"
+    },
+    "created_at": 1790457142.385983
+  },
+  {
+    "task_id": "d68b6e54c4094119b686b17eb54a19c1",
+    "sequence": 10,
+    "type": "source",
+    "payload": {
+      "id": "bd0c2588466f492ba7d019d6a487d503",
+      "retrieved_at": 1790457142.8065283,
+      "sha256": "0172a4ffa5705d7058dd7c889837028d2b5be84f7a4007daa13bfd74c3ec9c5a",
+      "task_id": "d68b6e54c4094119b686b17eb54a19c1",
+      "title": "birch",
+      "url": "http://127.0.0.1:60569/birch"
+    },
+    "created_at": 1790457142.8065283
+  },
+  {
+    "task_id": "d68b6e54c4094119b686b17eb54a19c1",
+    "sequence": 11,
+    "type": "tool_result",
+    "payload": {
+      "artifact_ids": [],
+      "call_id": "call_d4qRcBpXzIQky8CcCihPG5DF",
+      "content": "{\"source_id\": \"bd0c2588466f492ba7d019d6a487d503\", \"url\": \"http://127.0.0.1:60569/birch\", \"title\": \"birch\", \"text\": \"birch\\nBirch\\nPrice 180 USD; limit 75 projects; retention 14 days; export JSON.\", \"truncated\": false, \"blocked_requests\": 0}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "created_at": 1790457142.8568184
+  },
+  {
+    "task_id": "d68b6e54c4094119b686b17eb54a19c1",
+    "sequence": 12,
+    "type": "tool_prepared",
+    "payload": {
+      "arguments": {
+        "url": "http://127.0.0.1:60569/cedar"
+      },
+      "call_id": "call_r2tpoSTUGMNYcfZVJizjZ14i",
+      "name": "read_url"
+    },
+    "created_at": 1790457142.8630295
+  },
+  {
+    "task_id": "d68b6e54c4094119b686b17eb54a19c1",
+    "sequence": 13,
+    "type": "tool_started",
+    "payload": {
+      "call_id": "call_r2tpoSTUGMNYcfZVJizjZ14i",
+      "name": "read_url"
+    },
+    "created_at": 1790457142.8640287
+  },
+  {
+    "task_id": "d68b6e54c4094119b686b17eb54a19c1",
+    "sequence": 14,
+    "type": "source",
+    "payload": {
+      "id": "d1b3d1e4a5864f12a4343f7322ed8f43",
+      "retrieved_at": 1790457143.2880924,
+      "sha256": "bfbf2b81e25bcb6bd2b906a8f6391b3beb6a183d85aaf629db0e9273ff7aff7c",
+      "task_id": "d68b6e54c4094119b686b17eb54a19c1",
+      "title": "cedar",
+      "url": "http://127.0.0.1:60569/cedar"
+    },
+    "created_at": 1790457143.2880924
+  },
+  {
+    "task_id": "d68b6e54c4094119b686b17eb54a19c1",
+    "sequence": 15,
+    "type": "tool_result",
+    "payload": {
+      "artifact_ids": [],
+      "call_id": "call_r2tpoSTUGMNYcfZVJizjZ14i",
+      "content": "{\"source_id\": \"d1b3d1e4a5864f12a4343f7322ed8f43\", \"url\": \"http://127.0.0.1:60569/cedar\", \"title\": \"cedar\", \"text\": \"cedar\\nCedar\\nPrice 240 USD; limit 90 projects; retention 30 days; export XML.\", \"truncated\": false, \"blocked_requests\": 0}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "created_at": 1790457143.338386
+  },
+  {
+    "task_id": "d68b6e54c4094119b686b17eb54a19c1",
+    "sequence": 16,
+    "type": "assistant_message",
+    "payload": {
+      "text": "",
+      "tool_count": 1
+    },
+    "created_at": 1790457146.3782644
+  },
+  {
+    "task_id": "d68b6e54c4094119b686b17eb54a19c1",
+    "sequence": 17,
+    "type": "tool_prepared",
+    "payload": {
+      "arguments": {
+        "content": "# Product comparison\n\nI compared Atlas, Birch, and Cedar across price, project limit, retention, and export.\n\n| Product | Price | Project limit | Retention | Export |\n|---|---:|---:|---:|---|\n| Atlas | 120 USD | 40 projects | 7 days | CSV |\n| Birch | 180 USD | 75 projects | 14 days | JSON |\n| Cedar | 240 USD | 90 projects | 30 days | XML |\n\n## Notes\n- Atlas is the lowest-priced option and has the shortest retention and smallest project limit.\n- Birch is the middle option on price, project limit, and retention.\n- Cedar is the most expensive but offers the highest project limit and longest retention.\n- Export formats differ across all three products, so the best choice depends on which format you need.\n\n## Recommendation\nIf cost is the main priority, choose **Atlas**. If you want the best overall balance of capacity and retention, choose **Birch**. If you need the largest project limit and longest retention regardless of price, choose **Cedar**.\n\n## Sources\n- Atlas: http://127.0.0.1:60569/atlas — \"Price 120 USD; limit 40 projects; retention 7 days; export CSV.\"\n- Birch: http://127.0.0.1:60569/birch — \"Price 180 USD; limit 75 projects; retention 14 days; export JSON.\"\n- Cedar: http://127.0.0.1:60569/cedar — \"Price 240 USD; limit 90 projects; retention 30 days; export XML.\"",
+        "media_type": "text/markdown",
+        "name": "report.md"
+      },
+      "call_id": "call_UMmnJ7QyzMdrK3O98Ws5Lyev",
+      "name": "save_artifact"
+    },
+    "created_at": 1790457146.3832705
+  },
+  {
+    "task_id": "d68b6e54c4094119b686b17eb54a19c1",
+    "sequence": 18,
+    "type": "tool_started",
+    "payload": {
+      "call_id": "call_UMmnJ7QyzMdrK3O98Ws5Lyev",
+      "name": "save_artifact"
+    },
+    "created_at": 1790457146.3852677
+  },
+  {
+    "task_id": "d68b6e54c4094119b686b17eb54a19c1",
+    "sequence": 19,
+    "type": "artifact",
+    "payload": {
+      "created_at": 1790457146.3862684,
+      "id": "fcefaa18782f416fad67efc57a509e96",
+      "media_type": "text/markdown",
+      "name": "report.md",
+      "sha256": "b97c2ea5f24b3b2112baa57e3d679cf7cc4e1053606a6c0b307d00eb9c1ed076",
+      "task_id": "d68b6e54c4094119b686b17eb54a19c1",
+      "version": 1
+    },
+    "created_at": 1790457146.387268
+  },
+  {
+    "task_id": "d68b6e54c4094119b686b17eb54a19c1",
+    "sequence": 20,
+    "type": "tool_result",
+    "payload": {
+      "artifact_ids": [
+        "fcefaa18782f416fad67efc57a509e96"
+      ],
+      "call_id": "call_UMmnJ7QyzMdrK3O98Ws5Lyev",
+      "content": "{\"id\": \"fcefaa18782f416fad67efc57a509e96\", \"task_id\": \"d68b6e54c4094119b686b17eb54a19c1\", \"name\": \"report.md\", \"media_type\": \"text/markdown\", \"sha256\": \"b97c2ea5f24b3b2112baa57e3d679cf7cc4e1053606a6c0b307d00eb9c1ed076\", \"version\": 1, \"created_at\": 1790457146.3862684}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "created_at": 1790457146.3882682
+  },
+  {
+    "task_id": "d68b6e54c4094119b686b17eb54a19c1",
+    "sequence": 21,
+    "type": "text_delta",
+    "payload": {
+      "text": "Done — I created `report.md` with the 12 comparison values, citations, and a recommendation."
+    },
+    "created_at": 1790457147.602778
+  },
+  {
+    "task_id": "d68b6e54c4094119b686b17eb54a19c1",
+    "sequence": 22,
+    "type": "assistant_message",
+    "payload": {
+      "text": "Done — I created `report.md` with the 12 comparison values, citations, and a recommendation.",
+      "tool_count": 0
+    },
+    "created_at": 1790457147.6064966
+  },
+  {
+    "task_id": "d68b6e54c4094119b686b17eb54a19c1",
+    "sequence": 23,
+    "type": "status",
+    "payload": {
+      "status": "SUCCEEDED"
+    },
+    "created_at": 1790457147.6139
+  }
+]

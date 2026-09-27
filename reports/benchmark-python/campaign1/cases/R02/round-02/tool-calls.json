@@ -1,0 +1,94 @@
+[
+  {
+    "task_id": "1a622b016c91447a98a9668f4cb03d35",
+    "id": "call_LjLAY5j4xdcTL2kXEF826FAD",
+    "name": "read_url",
+    "arguments": {
+      "url": "http://127.0.0.1:56984/atlas"
+    },
+    "risk": "read",
+    "status": "DONE",
+    "digest": "3d9d493b69275ebb235678ce65f7634db096f57e526a6939b15650a3abb2f1b7",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_LjLAY5j4xdcTL2kXEF826FAD",
+      "content": "{\"source_id\": \"ab9c9522fa944ea98410ea18aa200771\", \"url\": \"http://127.0.0.1:56984/atlas\", \"title\": \"atlas\", \"text\": \"atlas\\nAtlas\\nPrice 120 USD; limit 40 projects; retention 7 days; export CSV.\", \"truncated\": false, \"blocked_requests\": 0}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790455273.1671498,
+    "updated_at": 1790455273.8034384
+  },
+  {
+    "task_id": "1a622b016c91447a98a9668f4cb03d35",
+    "id": "call_EPCJijhJxyxGAFglPlU869jz",
+    "name": "read_url",
+    "arguments": {
+      "url": "http://127.0.0.1:56984/birch"
+    },
+    "risk": "read",
+    "status": "DONE",
+    "digest": "2c7136f87df4f2ca8aca7b1e2ac0837f8e2f05cc2f82cf4ccf4afbd1c709e967",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_EPCJijhJxyxGAFglPlU869jz",
+      "content": "{\"source_id\": \"7fa714186544435a8466ef62b9e35157\", \"url\": \"http://127.0.0.1:56984/birch\", \"title\": \"birch\", \"text\": \"birch\\nBirch\\nPrice 180 USD; limit 75 projects; retention 14 days; export JSON.\", \"truncated\": false, \"blocked_requests\": 0}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790455273.8120494,
+    "updated_at": 1790455274.4455612
+  },
+  {
+    "task_id": "1a622b016c91447a98a9668f4cb03d35",
+    "id": "call_7L8fkhz81I6iBmPfKQD6hC7h",
+    "name": "read_url",
+    "arguments": {
+      "url": "http://127.0.0.1:56984/unavailable"
+    },
+    "risk": "read",
+    "status": "FAILED",
+    "digest": "2203834aadca631a87990d061ff736a5a4d3aa4d1231644ad78d07896e361f37",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_7L8fkhz81I6iBmPfKQD6hC7h",
+      "content": "Source unavailable (HTTP 503)",
+      "error_code": "TOOL_ERROR",
+      "metadata": {},
+      "status": "error"
+    },
+    "attempts": 1,
+    "created_at": 1790455274.4534,
+    "updated_at": 1790455275.0830355
+  },
+  {
+    "task_id": "1a622b016c91447a98a9668f4cb03d35",
+    "id": "call_p17acUP0OTm4Wovlh0KWyqcg",
+    "name": "save_artifact",
+    "arguments": {
+      "content": "# Product comparison report\n\n## Sources read\n- `http://127.0.0.1:56984/atlas` — available\n- `http://127.0.0.1:56984/birch` — available\n- `http://127.0.0.1:56984/unavailable` — unavailable (HTTP 503)\n\n## Comparison\n\n| Product | Price | Project limit | Retention | Export |\n|---|---:|---:|---:|---|\n| Atlas | 120 USD | 40 projects | 7 days | CSV |\n| Birch | 180 USD | 75 projects | 14 days | JSON |\n| Unavailable | Not available | Not available | Not available | Not available |\n\n## Notes\n- Atlas is cheaper than Birch by 60 USD.\n- Birch allows 35 more projects than Atlas.\n- Birch retains data twice as long as Atlas.\n- Atlas exports CSV, while Birch exports JSON.\n\n## Unavailable source\nThe source `http://127.0.0.1:56984/unavailable` could not be read because it returned HTTP 503. No product details were available from that source, so its price, project limit, retention, and export format are missing and are not inferred here.\n",
+      "media_type": "text/markdown",
+      "name": "report.md"
+    },
+    "risk": "write",
+    "status": "DONE",
+    "digest": "fd0de5b43c13ed1a5020d3be4d91241b2c9c1a71aabe10205cf2807c2a4b5dae",
+    "result": {
+      "artifact_ids": [
+        "870547d22bed419880d7652ea3bed36f"
+      ],
+      "call_id": "call_p17acUP0OTm4Wovlh0KWyqcg",
+      "content": "{\"id\": \"870547d22bed419880d7652ea3bed36f\", \"task_id\": \"1a622b016c91447a98a9668f4cb03d35\", \"name\": \"report.md\", \"media_type\": \"text/markdown\", \"sha256\": \"16ffeed93d5f169b0d2b0335ea7a899565f6ab66c82d25657249faa6cb6bc87b\", \"version\": 1, \"created_at\": 1790455277.8174467}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790455277.8113766,
+    "updated_at": 1790455277.8200693
+  }
+]

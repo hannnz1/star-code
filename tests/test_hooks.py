@@ -513,8 +513,7 @@ class TestAgentHookIntegration:
     """验证 pre_tool_use 拒绝会导致工具调用被跳过。"""
 
     @pytest.mark.asyncio
-    @pytest.mark.skipif(os.name == "nt", reason="rm 命令在 Windows 上不可用")
-    async def test_pre_tool_use_reject_skips_tool(self):
+    async def test_pre_tool_use_reject_skips_tool(self, monkeypatch):
         from mewcode.agent import Agent, ToolResultEvent
         from mewcode.client import LLMClient
         from mewcode.conversation import ConversationManager
@@ -531,7 +530,7 @@ class TestAgentHookIntegration:
                     yield ToolCallComplete(
                         tool_id="t1",
                         tool_name="Bash",
-                        arguments={"command": "rm -rf /"},
+                        arguments={"command": "echo forbidden_fixture"},
                     )
                     yield StreamEnd(stop_reason="tool_use", input_tokens=10, output_tokens=5)
                 else:
@@ -539,18 +538,21 @@ class TestAgentHookIntegration:
                     yield StreamEnd(stop_reason="end_turn", input_tokens=10, output_tokens=5)
 
         hook = Hook(
-            id="block-rm",
+            id="block-fixture",
             event="pre_tool_use",
             action=Action(type="command", command="echo dangerous command blocked"),
-            condition=parse_condition('tool == "Bash" && args.command =~ /rm\\s+-rf/'),
+            condition=parse_condition('tool == "Bash" && args.command =~ /forbidden_fixture/'),
             reject=True,
         )
         engine = HookEngine([hook])
 
         client = MockClient()
         registry = create_default_registry()
+        async def must_not_execute(*args, **kwargs):
+            pytest.fail('Rejected tool was executed')
+        monkeypatch.setattr(type(registry.get('Bash')), 'execute', must_not_execute)
         conv = ConversationManager()
-        conv.add_user_message("delete everything")
+        conv.add_user_message("Run the fixture command")
 
         agent = Agent(
             client=client,

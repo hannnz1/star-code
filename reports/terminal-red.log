@@ -1,0 +1,35 @@
+FFF                                                                      [100%]
+================================== FAILURES ===================================
+____________ test_terminal_submits_to_same_queue_and_controls_task ____________
+
+api = (<starlette.testclient.TestClient object at 0x000001442C30C950>, <fastapi.applications.FastAPI object at 0x000001442C30C230>)
+
+    def test_terminal_submits_to_same_queue_and_controls_task(api):
+>       from muse.terminal import TerminalClient
+E       ModuleNotFoundError: No module named 'muse.terminal'
+
+tests\test_terminal_service.py:5: ModuleNotFoundError
+_______________ test_terminal_plan_has_enforced_read_only_tools _______________
+
+api = (<starlette.testclient.TestClient object at 0x000001442C4EFA70>, <fastapi.applications.FastAPI object at 0x000001442C4CCF20>)
+
+    def test_terminal_plan_has_enforced_read_only_tools(api):
+>       from muse.terminal import TerminalClient
+E       ModuleNotFoundError: No module named 'muse.terminal'
+
+tests\test_terminal_service.py:21: ModuleNotFoundError
+______________ test_terminal_never_approves_an_unreviewed_action ______________
+
+api = (<starlette.testclient.TestClient object at 0x000001442C503620>, <fastapi.applications.FastAPI object at 0x000001442C503140>)
+
+    def test_terminal_never_approves_an_unreviewed_action(api):
+        import pytest
+>       from muse.terminal import TerminalClient
+E       ModuleNotFoundError: No module named 'muse.terminal'
+
+tests\test_terminal_service.py:36: ModuleNotFoundError
+=========================== short test summary info ===========================
+FAILED tests/test_terminal_service.py::test_terminal_submits_to_same_queue_and_controls_task
+FAILED tests/test_terminal_service.py::test_terminal_plan_has_enforced_read_only_tools
+FAILED tests/test_terminal_service.py::test_terminal_never_approves_an_unreviewed_action
+3 failed in 4.05s

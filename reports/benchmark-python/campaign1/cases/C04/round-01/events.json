@@ -1,0 +1,139 @@
+{
+  "ea01eea2c615405d99654084ef02da73": [
+    {
+      "task_id": "ea01eea2c615405d99654084ef02da73",
+      "sequence": 1,
+      "type": "status",
+      "payload": {
+        "status": "QUEUED"
+      },
+      "created_at": 1790455214.2492769
+    },
+    {
+      "task_id": "ea01eea2c615405d99654084ef02da73",
+      "sequence": 2,
+      "type": "status",
+      "payload": {
+        "status": "RUNNING"
+      },
+      "created_at": 1790455214.2522569
+    },
+    {
+      "task_id": "ea01eea2c615405d99654084ef02da73",
+      "sequence": 3,
+      "type": "assistant_message",
+      "payload": {
+        "text": "",
+        "tool_count": 1
+      },
+      "created_at": 1790455215.60014
+    },
+    {
+      "task_id": "ea01eea2c615405d99654084ef02da73",
+      "sequence": 4,
+      "type": "tool_prepared",
+      "payload": {
+        "arguments": {
+          "command": "python slow.py",
+          "timeout_seconds": 120
+        },
+        "call_id": "call_ec5Ct2HWJSu3IaF4fGDUCjrx",
+        "name": "run_command"
+      },
+      "created_at": 1790455215.6076317
+    },
+    {
+      "task_id": "ea01eea2c615405d99654084ef02da73",
+      "sequence": 5,
+      "type": "status",
+      "payload": {
+        "status": "WAITING_APPROVAL"
+      },
+      "created_at": 1790455215.6107683
+    },
+    {
+      "task_id": "ea01eea2c615405d99654084ef02da73",
+      "sequence": 6,
+      "type": "approval_required",
+      "payload": {
+        "arguments": {
+          "command": "python slow.py",
+          "timeout_seconds": 120
+        },
+        "call_id": "call_ec5Ct2HWJSu3IaF4fGDUCjrx",
+        "name": "run_command"
+      },
+      "created_at": 1790455215.6107683
+    },
+    {
+      "task_id": "ea01eea2c615405d99654084ef02da73",
+      "sequence": 7,
+      "type": "approval_decided",
+      "payload": {
+        "approval_id": "437b6da3701a442580f3023c95e61ca6",
+        "status": "APPROVED"
+      },
+      "created_at": 1790455215.6144538
+    },
+    {
+      "task_id": "ea01eea2c615405d99654084ef02da73",
+      "sequence": 8,
+      "type": "status",
+      "payload": {
+        "status": "QUEUED"
+      },
+      "created_at": 1790455215.6133962
+    },
+    {
+      "task_id": "ea01eea2c615405d99654084ef02da73",
+      "sequence": 9,
+      "type": "status",
+      "payload": {
+        "status": "RUNNING"
+      },
+      "created_at": 1790455215.6165495
+    },
+    {
+      "task_id": "ea01eea2c615405d99654084ef02da73",
+      "sequence": 10,
+      "type": "tool_started",
+      "payload": {
+        "call_id": "call_ec5Ct2HWJSu3IaF4fGDUCjrx",
+        "name": "run_command"
+      },
+      "created_at": 1790455215.6344087
+    },
+    {
+      "task_id": "ea01eea2c615405d99654084ef02da73",
+      "sequence": 11,
+      "type": "status",
+      "payload": {
+        "status": "RUNNING"
+      },
+      "created_at": 1790455216.1590335
+    },
+    {
+      "task_id": "ea01eea2c615405d99654084ef02da73",
+      "sequence": 12,
+      "type": "tool_result",
+      "payload": {
+        "artifact_ids": [],
+        "call_id": "call_ec5Ct2HWJSu3IaF4fGDUCjrx",
+        "content": "CANCELLED",
+        "error_code": "CANCELLED",
+        "metadata": {},
+        "status": "cancelled"
+      },
+      "created_at": 1790455216.215893
+    },
+    {
+      "task_id": "ea01eea2c615405d99654084ef02da73",
+      "sequence": 13,
+      "type": "status",
+      "payload": {
+        "status": "CANCELLED"
+      },
+      "created_at": 1790455216.220388
+    }
+  ]
+}

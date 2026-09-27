@@ -1,0 +1,27 @@
+
+[stderr]
+test_0 (test_calculator.ClampTests.test_0) ... ok
+test_1 (test_calculator.ClampTests.test_1) ... ok
+test_2 (test_calculator.ClampTests.test_2) ... ok
+test_3 (test_calculator.ClampTests.test_3) ... ok
+test_4 (test_calculator.ClampTests.test_4) ... ok
+test_5 (test_calculator.ClampTests.test_5) ... ok
+test_6 (test_calculator.ClampTests.test_6) ... ok
+test_7 (test_calculator.ClampTests.test_7) ... ok
+test_8 (test_calculator.ClampTests.test_8) ... ok
+test_9 (test_calculator.ClampTests.test_9) ... ok
+test_service (test_service.ServiceTest.test_service) ... FAIL
+
+======================================================================
+FAIL: test_service (test_service.ServiceTest.test_service)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Documents\Codex\2026-09-26\ai-starcode-muse-coding-agent-python\outputs\muse-next\work\benchmark-python-campaign2\cases\C03\round-02\workspace\test_service.py", line 4, in test_service
+    def test_service(self): self.assertTrue(service_available(), 'EXTERNAL_SERVICE_UNAVAILABLE')
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : EXTERNAL_SERVICE_UNAVAILABLE
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.001s
+
+FAILED (failures=1)

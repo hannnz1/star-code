@@ -1,0 +1,186 @@
+[
+  {
+    "task_id": "3b3e7216a74f4caa9a940cc816b1118f",
+    "id": "call_rzO4WBtPxTFkNHEr1tia98jT",
+    "name": "list_files",
+    "arguments": {
+      "path": ".",
+      "pattern": "**/*"
+    },
+    "risk": "read",
+    "status": "DONE",
+    "digest": "6f58ff4d4b29d1dc477d67f4acbe9347ea54daafbdb558cd7fc88b923e0ad70b",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_rzO4WBtPxTFkNHEr1tia98jT",
+      "content": "{\"paths\": [\"broken.pdf\", \"scan.pdf\", \"valid.txt\"], \"truncated\": false}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790455184.4022067,
+    "updated_at": 1790455184.4157457
+  },
+  {
+    "task_id": "3b3e7216a74f4caa9a940cc816b1118f",
+    "id": "call_OdPrzRMTb2MfJPCAyP2dQJE7",
+    "name": "list_files",
+    "arguments": {
+      "path": ".",
+      "pattern": "**/valid.txt"
+    },
+    "risk": "read",
+    "status": "DONE",
+    "digest": "81db65429d5f6e183bf093b7421da489895028f85586bda0f547cd2afcdaac55",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_OdPrzRMTb2MfJPCAyP2dQJE7",
+      "content": "{\"paths\": [\"valid.txt\"], \"truncated\": false}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790455184.4240687,
+    "updated_at": 1790455184.4375143
+  },
+  {
+    "task_id": "3b3e7216a74f4caa9a940cc816b1118f",
+    "id": "call_FwyKMKkh6gUESxf6PYFabeWq",
+    "name": "list_files",
+    "arguments": {
+      "path": ".",
+      "pattern": "**/scan.pdf"
+    },
+    "risk": "read",
+    "status": "DONE",
+    "digest": "b53ffc569f92ac2a00257a875d8ef3e1550b4f0a3b525f5ab6d9bf4c40afb658",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_FwyKMKkh6gUESxf6PYFabeWq",
+      "content": "{\"paths\": [\"scan.pdf\"], \"truncated\": false}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790455184.4489899,
+    "updated_at": 1790455184.4620354
+  },
+  {
+    "task_id": "3b3e7216a74f4caa9a940cc816b1118f",
+    "id": "call_U2KeOGMomhi61OOIbq8fawp0",
+    "name": "list_files",
+    "arguments": {
+      "path": ".",
+      "pattern": "**/broken.pdf"
+    },
+    "risk": "read",
+    "status": "DONE",
+    "digest": "8643afeb9a0c1dfcf07dbcb9438b684547b0a22753a02b4d0e97da5b666b7009",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_U2KeOGMomhi61OOIbq8fawp0",
+      "content": "{\"paths\": [\"broken.pdf\"], \"truncated\": false}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790455184.4710507,
+    "updated_at": 1790455184.4840772
+  },
+  {
+    "task_id": "3b3e7216a74f4caa9a940cc816b1118f",
+    "id": "call_JHyb7cqwkodHBqSvECYFJOnH",
+    "name": "read_document",
+    "arguments": {
+      "path": "valid.txt"
+    },
+    "risk": "read",
+    "status": "DONE",
+    "digest": "494b97648f2f2912d140933fa488ed6d6d0cccf71d3499a17f42993e05f621f8",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_JHyb7cqwkodHBqSvECYFJOnH",
+      "content": "{\"path\": \"valid.txt\", \"sha256\": \"4536bba88cb8940d1adba0208dd4c485b5d4957a72502f0c7b10c40df1a09af9\", \"text\": \"The readable document's fact: project Falcon launches in May 2027.\", \"truncated\": false}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790455185.9218066,
+    "updated_at": 1790455185.9349287
+  },
+  {
+    "task_id": "3b3e7216a74f4caa9a940cc816b1118f",
+    "id": "call_ihn1rYZBUliel0S5jamB1Z0S",
+    "name": "read_document",
+    "arguments": {
+      "path": "scan.pdf"
+    },
+    "risk": "read",
+    "status": "FAILED",
+    "digest": "c8fa501bffe2c9a8b1346a5b6b37f2b653cbf3688fb9faeae6b1ccd8ebb77103",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_ihn1rYZBUliel0S5jamB1Z0S",
+      "content": "PDF has no extractable text; OCR is not supported in this version",
+      "error_code": "TOOL_ERROR",
+      "metadata": {},
+      "status": "error"
+    },
+    "attempts": 1,
+    "created_at": 1790455185.9499292,
+    "updated_at": 1790455185.9649668
+  },
+  {
+    "task_id": "3b3e7216a74f4caa9a940cc816b1118f",
+    "id": "call_PC5zQccpUhdeE2RGazJmz8ia",
+    "name": "read_document",
+    "arguments": {
+      "path": "broken.pdf"
+    },
+    "risk": "read",
+    "status": "FAILED",
+    "digest": "81a14007e76662fffa4e14a385db4e31a49d9aa304de4d79f43c27c6ea04ec29",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_PC5zQccpUhdeE2RGazJmz8ia",
+      "content": "PDF could not be parsed or is encrypted",
+      "error_code": "TOOL_ERROR",
+      "metadata": {},
+      "status": "error"
+    },
+    "attempts": 1,
+    "created_at": 1790455185.9718199,
+    "updated_at": 1790455185.9865556
+  },
+  {
+    "task_id": "3b3e7216a74f4caa9a940cc816b1118f",
+    "id": "call_tnKRqpNpVB3k0c3rVimHXU85",
+    "name": "save_artifact",
+    "arguments": {
+      "content": "# Summary\n\n## valid.txt\n- `valid.txt` is readable and states: **\"The readable document's fact: project Falcon launches in May 2027.\"**\n\n## Unsupported / inaccessible files\n- `scan.pdf`: unsupported for extraction because the PDF has **no extractable text** and **OCR is not supported** in this version.\n- `broken.pdf`: inaccessible because the PDF **could not be parsed or is encrypted**.\n\n## Notes\n- I did not invent or infer any PDF content.\n- All original files were preserved.",
+      "media_type": "text/markdown",
+      "name": "summary.md"
+    },
+    "risk": "write",
+    "status": "DONE",
+    "digest": "5ec4d80d1fcab09d147dbbd7cb37bcbb0660a13bf8b31612b9241b547bef11c5",
+    "result": {
+      "artifact_ids": [
+        "ae6675d92eeb42b497545040745bdd9a"
+      ],
+      "call_id": "call_tnKRqpNpVB3k0c3rVimHXU85",
+      "content": "{\"id\": \"ae6675d92eeb42b497545040745bdd9a\", \"task_id\": \"3b3e7216a74f4caa9a940cc816b1118f\", \"name\": \"summary.md\", \"media_type\": \"text/markdown\", \"sha256\": \"2b2624a69a03cf077f8f1c3c4e1d1d4acfc3abf2f263c96f257b131805ca5da6\", \"version\": 1, \"created_at\": 1790455187.9097147}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790455187.905971,
+    "updated_at": 1790455187.911613
+  }
+]

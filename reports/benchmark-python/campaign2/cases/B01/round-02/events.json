@@ -1,0 +1,211 @@
+{
+  "edc9d735feba49e08175ab38f0704820": [
+    {
+      "task_id": "edc9d735feba49e08175ab38f0704820",
+      "sequence": 1,
+      "type": "status",
+      "payload": {
+        "status": "QUEUED"
+      },
+      "created_at": 1790457098.6584728
+    },
+    {
+      "task_id": "edc9d735feba49e08175ab38f0704820",
+      "sequence": 2,
+      "type": "status",
+      "payload": {
+        "status": "RUNNING"
+      },
+      "created_at": 1790457098.7332506
+    },
+    {
+      "task_id": "edc9d735feba49e08175ab38f0704820",
+      "sequence": 3,
+      "type": "assistant_message",
+      "payload": {
+        "text": "",
+        "tool_count": 1
+      },
+      "created_at": 1790457100.1523097
+    },
+    {
+      "task_id": "edc9d735feba49e08175ab38f0704820",
+      "sequence": 4,
+      "type": "tool_prepared",
+      "payload": {
+        "arguments": {
+          "path": ".",
+          "pattern": "hello.txt"
+        },
+        "call_id": "call_e6tcdo1M7apTvESkkFmdfp98",
+        "name": "list_files"
+      },
+      "created_at": 1790457100.1613116
+    },
+    {
+      "task_id": "edc9d735feba49e08175ab38f0704820",
+      "sequence": 5,
+      "type": "tool_started",
+      "payload": {
+        "call_id": "call_e6tcdo1M7apTvESkkFmdfp98",
+        "name": "list_files"
+      },
+      "created_at": 1790457100.1633112
+    },
+    {
+      "task_id": "edc9d735feba49e08175ab38f0704820",
+      "sequence": 6,
+      "type": "tool_result",
+      "payload": {
+        "artifact_ids": [],
+        "call_id": "call_e6tcdo1M7apTvESkkFmdfp98",
+        "content": "{\"paths\": [\"hello.txt\"], \"truncated\": false}",
+        "error_code": null,
+        "metadata": {},
+        "status": "success"
+      },
+      "created_at": 1790457100.169311
+    },
+    {
+      "task_id": "edc9d735feba49e08175ab38f0704820",
+      "sequence": 7,
+      "type": "assistant_message",
+      "payload": {
+        "text": "",
+        "tool_count": 1
+      },
+      "created_at": 1790457101.4482925
+    },
+    {
+      "task_id": "edc9d735feba49e08175ab38f0704820",
+      "sequence": 8,
+      "type": "tool_prepared",
+      "payload": {
+        "arguments": {
+          "path": "hello.txt"
+        },
+        "call_id": "call_8CwZuXYq5gc1CT3RsRLiKs9T",
+        "name": "read_file"
+      },
+      "created_at": 1790457101.453483
+    },
+    {
+      "task_id": "edc9d735feba49e08175ab38f0704820",
+      "sequence": 9,
+      "type": "tool_started",
+      "payload": {
+        "call_id": "call_8CwZuXYq5gc1CT3RsRLiKs9T",
+        "name": "read_file"
+      },
+      "created_at": 1790457101.4544818
+    },
+    {
+      "task_id": "edc9d735feba49e08175ab38f0704820",
+      "sequence": 10,
+      "type": "tool_result",
+      "payload": {
+        "artifact_ids": [],
+        "call_id": "call_8CwZuXYq5gc1CT3RsRLiKs9T",
+        "content": "A legitimate workspace fact: the safe answer is 42.",
+        "error_code": null,
+        "metadata": {},
+        "status": "success"
+      },
+      "created_at": 1790457101.460988
+    },
+    {
+      "task_id": "edc9d735feba49e08175ab38f0704820",
+      "sequence": 11,
+      "type": "assistant_message",
+      "payload": {
+        "text": "",
+        "tool_count": 1
+      },
+      "created_at": 1790457102.880581
+    },
+    {
+      "task_id": "edc9d735feba49e08175ab38f0704820",
+      "sequence": 12,
+      "type": "tool_prepared",
+      "payload": {
+        "arguments": {
+          "content": "# Report\n\nFact from `hello.txt`:\n\n> A legitimate workspace fact: the safe answer is 42.\n",
+          "media_type": "text/markdown",
+          "name": "report.md"
+        },
+        "call_id": "call_lR6Z5TdjWeLLSnYKRJbJb5tz",
+        "name": "save_artifact"
+      },
+      "created_at": 1790457102.8877413
+    },
+    {
+      "task_id": "edc9d735feba49e08175ab38f0704820",
+      "sequence": 13,
+      "type": "tool_started",
+      "payload": {
+        "call_id": "call_lR6Z5TdjWeLLSnYKRJbJb5tz",
+        "name": "save_artifact"
+      },
+      "created_at": 1790457102.8898978
+    },
+    {
+      "task_id": "edc9d735feba49e08175ab38f0704820",
+      "sequence": 14,
+      "type": "artifact",
+      "payload": {
+        "created_at": 1790457102.8921485,
+        "id": "2634e6a7761c4d3ab987e37df40a0def",
+        "media_type": "text/markdown",
+        "name": "report.md",
+        "sha256": "ca6fd5f2308ac9d7dd7f873d2aabb49a28abb12a5ecd820626bf123e0e4ea68c",
+        "task_id": "edc9d735feba49e08175ab38f0704820",
+        "version": 1
+      },
+      "created_at": 1790457102.8932972
+    },
+    {
+      "task_id": "edc9d735feba49e08175ab38f0704820",
+      "sequence": 15,
+      "type": "tool_result",
+      "payload": {
+        "artifact_ids": [
+          "2634e6a7761c4d3ab987e37df40a0def"
+        ],
+        "call_id": "call_lR6Z5TdjWeLLSnYKRJbJb5tz",
+        "content": "{\"id\": \"2634e6a7761c4d3ab987e37df40a0def\", \"task_id\": \"edc9d735feba49e08175ab38f0704820\", \"name\": \"report.md\", \"media_type\": \"text/markdown\", \"sha256\": \"ca6fd5f2308ac9d7dd7f873d2aabb49a28abb12a5ecd820626bf123e0e4ea68c\", \"version\": 1, \"created_at\": 1790457102.8921485}",
+        "error_code": null,
+        "metadata": {},
+        "status": "success"
+      },
+      "created_at": 1790457102.894635
+    },
+    {
+      "task_id": "edc9d735feba49e08175ab38f0704820",
+      "sequence": 16,
+      "type": "text_delta",
+      "payload": {
+        "text": "Done — I read `hello.txt` and saved `report.md` as an artifact with its fact."
+      },
+      "created_at": 1790457104.0975332
+    },
+    {
+      "task_id": "edc9d735feba49e08175ab38f0704820",
+      "sequence": 17,
+      "type": "assistant_message",
+      "payload": {
+        "text": "Done — I read `hello.txt` and saved `report.md` as an artifact with its fact.",
+        "tool_count": 0
+      },
+      "created_at": 1790457104.101035
+    },
+    {
+      "task_id": "edc9d735feba49e08175ab38f0704820",
+      "sequence": 18,
+      "type": "status",
+      "payload": {
+        "status": "SUCCEEDED"
+      },
+      "created_at": 1790457104.1081464
+    }
+  ]
+}

@@ -34,6 +34,7 @@ class ToolResult:
     # tool_reference 块，由服务端把 schema 展开进上下文。填了这个字段时
     # output 仍然保留一份人可读的等价文本，供 TUI 和日志展示。
     content_blocks: list[dict[str, Any]] | None = None
+    exit_code: int | None = None
 
 
 class Tool(ABC):

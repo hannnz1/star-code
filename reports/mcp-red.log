@@ -1,0 +1,65 @@
+FF                                                                       [100%]
+================================== FAILURES ===================================
+__________ test_mcp_discovery_and_call_each_require_durable_approval __________
+
+tmp_path = WindowsPath('C:/Users/Administrator/Documents/Codex/2026-09-26/ai-starcode-muse-coding-agent-python/outputs/muse-next/work/mcp-red/test_mcp_discovery_and_call_ea0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000180C22827B0>
+
+    async def test_mcp_discovery_and_call_each_require_durable_approval(tmp_path, monkeypatch):
+        calls = []
+        class Client:
+            def __init__(self, config):
+                self.config = config
+            async def connect(self):
+                calls.append('connect')
+            async def list_tools(self):
+                return [SimpleNamespace(name='echo', description='echo input', inputSchema={
+                    'type': 'object', 'properties': {'value': {'type': 'integer'}}, 'required': ['value']})]
+            async def call_tool(self, name, args):
+                calls.append((name, args))
+                return SimpleNamespace(isError=False, content=[SimpleNamespace(text=str(args['value']))])
+            async def close(self):
+                calls.append('close')
+        monkeypatch.setattr('mewcode.mcp.client.MCPClient', Client)
+        provider = ScriptedProvider([
+            [ModelEvent(type='call', call=ToolCall(id='discover', name='mcp_discover', arguments={'server': 'local'}))],
+            [ModelEvent(type='call', call=ToolCall(id='call', name='mcp_call', arguments={'server': 'local', 'tool': 'echo', 'arguments': {'value': 7}}))],
+            [ModelEvent(type='text', text='Read the MCP result.')],
+        ])
+        repo, task, original = runtime(tmp_path, provider)
+        config = tmp_path / 'extensions.yaml'
+        config.write_text('''mcp_servers:
+      - name: local
+        command: fixture-command
+    ''')
+        settings = original.settings.model_copy(update={'config_path': config})
+        worker = Worker(settings, repo, AgentRunner(provider))
+        await worker.run_once()
+>       assert repo.get(task.id).status == 'WAITING_APPROVAL'
+E       AssertionError: assert 'SUCCEEDED' == 'WAITING_APPROVAL'
+E         
+E         - WAITING_APPROVAL
+E         + SUCCEEDED
+
+tests\test_durable_mcp.py:40: AssertionError
+__________ test_mcp_configuration_change_invalidates_pending_action ___________
+
+tmp_path = WindowsPath('C:/Users/Administrator/Documents/Codex/2026-09-26/ai-starcode-muse-coding-agent-python/outputs/muse-next/work/mcp-red/test_mcp_configuration_change_0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000180C4A16660>
+
+    async def test_mcp_configuration_change_invalidates_pending_action(tmp_path, monkeypatch):
+        provider = ScriptedProvider([[ModelEvent(type='call', call=ToolCall(id='d', name='mcp_discover', arguments={'server': 'local'}))]])
+        repo, task, original = runtime(tmp_path, provider)
+        path = tmp_path / 'extensions.yaml'
+        path.write_text('mcp_servers:\n  - name: local\n    command: original\n')
+        worker = Worker(original.settings.model_copy(update={'config_path': path}), repo, AgentRunner(provider))
+        await worker.run_once()
+>       approval = repo.approvals(task.id)[0]
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       IndexError: list index out of range
+
+tests\test_durable_mcp.py:63: IndexError
+=========================== short test summary info ===========================
+FAILED tests/test_durable_mcp.py::test_mcp_discovery_and_call_each_require_durable_approval
+FAILED tests/test_durable_mcp.py::test_mcp_configuration_change_invalidates_pending_action
+2 failed in 1.43s

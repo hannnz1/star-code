@@ -1,0 +1,273 @@
+[
+  {
+    "task_id": "c19b5ef9a61a40bea54b2de2b0577b34",
+    "sequence": 1,
+    "type": "status",
+    "payload": {
+      "status": "QUEUED"
+    },
+    "created_at": 1790455324.4567478
+  },
+  {
+    "task_id": "c19b5ef9a61a40bea54b2de2b0577b34",
+    "sequence": 2,
+    "type": "status",
+    "payload": {
+      "status": "RUNNING"
+    },
+    "created_at": 1790455324.4628766
+  },
+  {
+    "task_id": "c19b5ef9a61a40bea54b2de2b0577b34",
+    "sequence": 3,
+    "type": "assistant_message",
+    "payload": {
+      "text": "",
+      "tool_count": 4
+    },
+    "created_at": 1790455327.4670978
+  },
+  {
+    "task_id": "c19b5ef9a61a40bea54b2de2b0577b34",
+    "sequence": 4,
+    "type": "tool_prepared",
+    "payload": {
+      "arguments": {
+        "path": ".",
+        "pattern": "**/*"
+      },
+      "call_id": "call_lt7JfBqcS27fbH6aJK08mHG2",
+      "name": "list_files"
+    },
+    "created_at": 1790455327.4759586
+  },
+  {
+    "task_id": "c19b5ef9a61a40bea54b2de2b0577b34",
+    "sequence": 5,
+    "type": "tool_started",
+    "payload": {
+      "call_id": "call_lt7JfBqcS27fbH6aJK08mHG2",
+      "name": "list_files"
+    },
+    "created_at": 1790455327.477553
+  },
+  {
+    "task_id": "c19b5ef9a61a40bea54b2de2b0577b34",
+    "sequence": 6,
+    "type": "tool_result",
+    "payload": {
+      "artifact_ids": [],
+      "call_id": "call_lt7JfBqcS27fbH6aJK08mHG2",
+      "content": "{\"paths\": [\"broken.pdf\", \"scan.pdf\", \"valid.txt\"], \"truncated\": false}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "created_at": 1790455327.4826992
+  },
+  {
+    "task_id": "c19b5ef9a61a40bea54b2de2b0577b34",
+    "sequence": 7,
+    "type": "tool_prepared",
+    "payload": {
+      "arguments": {
+        "path": "valid.txt"
+      },
+      "call_id": "call_7keTTVuyhdD9t11PeXNVyvVF",
+      "name": "read_document"
+    },
+    "created_at": 1790455327.486311
+  },
+  {
+    "task_id": "c19b5ef9a61a40bea54b2de2b0577b34",
+    "sequence": 8,
+    "type": "tool_started",
+    "payload": {
+      "call_id": "call_7keTTVuyhdD9t11PeXNVyvVF",
+      "name": "read_document"
+    },
+    "created_at": 1790455327.4878156
+  },
+  {
+    "task_id": "c19b5ef9a61a40bea54b2de2b0577b34",
+    "sequence": 9,
+    "type": "tool_result",
+    "payload": {
+      "artifact_ids": [],
+      "call_id": "call_7keTTVuyhdD9t11PeXNVyvVF",
+      "content": "{\"path\": \"valid.txt\", \"sha256\": \"4536bba88cb8940d1adba0208dd4c485b5d4957a72502f0c7b10c40df1a09af9\", \"text\": \"The readable document's fact: project Falcon launches in May 2027.\", \"truncated\": false}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "created_at": 1790455327.494749
+  },
+  {
+    "task_id": "c19b5ef9a61a40bea54b2de2b0577b34",
+    "sequence": 10,
+    "type": "tool_prepared",
+    "payload": {
+      "arguments": {
+        "path": "scan.pdf"
+      },
+      "call_id": "call_PQbQlhtwwOf4mqtw1cSWnnFK",
+      "name": "read_document"
+    },
+    "created_at": 1790455327.4985979
+  },
+  {
+    "task_id": "c19b5ef9a61a40bea54b2de2b0577b34",
+    "sequence": 11,
+    "type": "tool_started",
+    "payload": {
+      "call_id": "call_PQbQlhtwwOf4mqtw1cSWnnFK",
+      "name": "read_document"
+    },
+    "created_at": 1790455327.499729
+  },
+  {
+    "task_id": "c19b5ef9a61a40bea54b2de2b0577b34",
+    "sequence": 12,
+    "type": "tool_result",
+    "payload": {
+      "artifact_ids": [],
+      "call_id": "call_PQbQlhtwwOf4mqtw1cSWnnFK",
+      "content": "PDF has no extractable text; OCR is not supported in this version",
+      "error_code": "TOOL_ERROR",
+      "metadata": {},
+      "status": "error"
+    },
+    "created_at": 1790455327.5069551
+  },
+  {
+    "task_id": "c19b5ef9a61a40bea54b2de2b0577b34",
+    "sequence": 13,
+    "type": "tool_prepared",
+    "payload": {
+      "arguments": {
+        "path": "broken.pdf"
+      },
+      "call_id": "call_jdGAmmuFx7VTomZgrW3j58Ez",
+      "name": "read_document"
+    },
+    "created_at": 1790455327.5113146
+  },
+  {
+    "task_id": "c19b5ef9a61a40bea54b2de2b0577b34",
+    "sequence": 14,
+    "type": "tool_started",
+    "payload": {
+      "call_id": "call_jdGAmmuFx7VTomZgrW3j58Ez",
+      "name": "read_document"
+    },
+    "created_at": 1790455327.512207
+  },
+  {
+    "task_id": "c19b5ef9a61a40bea54b2de2b0577b34",
+    "sequence": 15,
+    "type": "tool_result",
+    "payload": {
+      "artifact_ids": [],
+      "call_id": "call_jdGAmmuFx7VTomZgrW3j58Ez",
+      "content": "PDF could not be parsed or is encrypted",
+      "error_code": "TOOL_ERROR",
+      "metadata": {},
+      "status": "error"
+    },
+    "created_at": 1790455327.519282
+  },
+  {
+    "task_id": "c19b5ef9a61a40bea54b2de2b0577b34",
+    "sequence": 16,
+    "type": "assistant_message",
+    "payload": {
+      "text": "",
+      "tool_count": 1
+    },
+    "created_at": 1790455329.1397045
+  },
+  {
+    "task_id": "c19b5ef9a61a40bea54b2de2b0577b34",
+    "sequence": 17,
+    "type": "tool_prepared",
+    "payload": {
+      "arguments": {
+        "content": "# Summary\n\n## valid.txt\n- The readable document states: **project Falcon launches in May 2027**.\n\n## Unsupported / inaccessible files\n- **scan.pdf** — unsupported because the PDF has no extractable text, and OCR is not supported in this version.\n- **broken.pdf** — inaccessible because the PDF could not be parsed or is encrypted.\n\n## Notes\n- I did not invent or infer any PDF content.\n- Originals were preserved; no files were modified.",
+        "media_type": "text/markdown",
+        "name": "summary.md"
+      },
+      "call_id": "call_cdqleYn55RZk11Buq1l1iiEL",
+      "name": "save_artifact"
+    },
+    "created_at": 1790455329.1447852
+  },
+  {
+    "task_id": "c19b5ef9a61a40bea54b2de2b0577b34",
+    "sequence": 18,
+    "type": "tool_started",
+    "payload": {
+      "call_id": "call_cdqleYn55RZk11Buq1l1iiEL",
+      "name": "save_artifact"
+    },
+    "created_at": 1790455329.146395
+  },
+  {
+    "task_id": "c19b5ef9a61a40bea54b2de2b0577b34",
+    "sequence": 19,
+    "type": "artifact",
+    "payload": {
+      "created_at": 1790455329.1474962,
+      "id": "3d5fd7e613384940b743b5c5408d8181",
+      "media_type": "text/markdown",
+      "name": "summary.md",
+      "sha256": "6ca894cc1c1ce3906db8b6448b6d476f82c1d067a1d8346e26077bc7ee9ad66a",
+      "task_id": "c19b5ef9a61a40bea54b2de2b0577b34",
+      "version": 1
+    },
+    "created_at": 1790455329.1487978
+  },
+  {
+    "task_id": "c19b5ef9a61a40bea54b2de2b0577b34",
+    "sequence": 20,
+    "type": "tool_result",
+    "payload": {
+      "artifact_ids": [
+        "3d5fd7e613384940b743b5c5408d8181"
+      ],
+      "call_id": "call_cdqleYn55RZk11Buq1l1iiEL",
+      "content": "{\"id\": \"3d5fd7e613384940b743b5c5408d8181\", \"task_id\": \"c19b5ef9a61a40bea54b2de2b0577b34\", \"name\": \"summary.md\", \"media_type\": \"text/markdown\", \"sha256\": \"6ca894cc1c1ce3906db8b6448b6d476f82c1d067a1d8346e26077bc7ee9ad66a\", \"version\": 1, \"created_at\": 1790455329.1474962}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "created_at": 1790455329.1493738
+  },
+  {
+    "task_id": "c19b5ef9a61a40bea54b2de2b0577b34",
+    "sequence": 21,
+    "type": "text_delta",
+    "payload": {
+      "text": "Done — I read all three files, summarized `valid.txt`, and listed the two PDFs as unsupported/inaccessible with reasons. I also saved `summary.md` and preserved the originals."
+    },
+    "created_at": 1790455330.55823
+  },
+  {
+    "task_id": "c19b5ef9a61a40bea54b2de2b0577b34",
+    "sequence": 22,
+    "type": "assistant_message",
+    "payload": {
+      "text": "Done — I read all three files, summarized `valid.txt`, and listed the two PDFs as unsupported/inaccessible with reasons. I also saved `summary.md` and preserved the originals.",
+      "tool_count": 0
+    },
+    "created_at": 1790455330.560533
+  },
+  {
+    "task_id": "c19b5ef9a61a40bea54b2de2b0577b34",
+    "sequence": 23,
+    "type": "status",
+    "payload": {
+      "status": "SUCCEEDED"
+    },
+    "created_at": 1790455330.5663795
+  }
+]

@@ -1,0 +1,410 @@
+FFFF                                                                     [100%]
+================================== FAILURES ===================================
+________________ test_failed_command_has_structured_exit_code _________________
+
+tmp_path = WindowsPath('C:/Users/Administrator/Documents/Codex/2026-09-26/ai-starcode-muse-coding-agent-python/outputs/muse-next/work/shell-red/test_failed_command_has_struct0')
+
+    async def test_failed_command_has_structured_exit_code(tmp_path):
+        script = tmp_path / 'failure.py'
+        script.write_text('print("failure evidence")\nraise SystemExit(3)')
+        tool = Bash()
+        tool.work_dir = str(tmp_path)
+        result = await tool.execute(Params(command=command(script)))
+>       assert result.is_error
+E       AssertionError: assert False
+E        +  where False = ToolResult(output='failure evidence\n\nExit code 3', is_error=False, content_blocks=None).is_error
+
+tests\test_shell_lifecycle.py:24: AssertionError
+___________________ test_command_owns_descendants[timeout] ____________________
+
+fut = <coroutine object Process.communicate at 0x0000023DA3063880>, timeout = 2
+
+    async def wait_for(fut, timeout):
+        """Wait for the single Future or coroutine to complete, with timeout.
+    
+        Coroutine will be wrapped in Task.
+    
+        Returns result of the Future or coroutine.  When a timeout occurs,
+        it cancels the task and raises TimeoutError.  To avoid the task
+        cancellation, wrap it in shield().
+    
+        If the wait is cancelled, the task is also cancelled.
+    
+        If the task suppresses the cancellation and returns a value instead,
+        that value is returned.
+    
+        This function is a coroutine.
+        """
+        # The special case for timeout <= 0 is for the following case:
+        #
+        # async def test_waitfor():
+        #     func_started = False
+        #
+        #     async def func():
+        #         nonlocal func_started
+        #         func_started = True
+        #
+        #     try:
+        #         await asyncio.wait_for(func(), 0)
+        #     except asyncio.TimeoutError:
+        #         assert not func_started
+        #     else:
+        #         assert False
+        #
+        # asyncio.run(test_waitfor())
+    
+    
+        if timeout is not None and timeout <= 0:
+            fut = ensure_future(fut)
+    
+            if fut.done():
+                return fut.result()
+    
+            await _cancel_and_wait(fut)
+            try:
+                return fut.result()
+            except exceptions.CancelledError as exc:
+                raise TimeoutError from exc
+    
+        async with timeouts.timeout(timeout):
+>           return await fut
+                   ^^^^^^^^^
+
+..\..\..\..\..\..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\tasks.py:520: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+..\..\..\..\..\..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\subprocess.py:201: in communicate
+    stdin, stdout, stderr = await tasks.gather(stdin, stdout, stderr)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\..\..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\subprocess.py:181: in _read_stream
+    output = await stream.read()
+             ^^^^^^^^^^^^^^^^^^^
+..\..\..\..\..\..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\streams.py:706: in read
+    block = await self.read(self._limit)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\..\..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\streams.py:713: in read
+    await self._wait_for_data('read')
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <StreamReader transport=<_ProactorReadPipeTransport fd=812 read=<_OverlappedFuture pending cb=[_ProactorReadPipeTransport._loop_reading()]>>>
+func_name = 'read'
+
+    async def _wait_for_data(self, func_name):
+        """Wait until feed_data() or feed_eof() is called.
+    
+        If stream was paused, automatically resume it.
+        """
+        # StreamReader uses a future to link the protocol feed_data() method
+        # to a read coroutine. Running two read coroutines at the same time
+        # would have an unexpected behaviour. It would not possible to know
+        # which coroutine would get the next data.
+        if self._waiter is not None:
+            raise RuntimeError(
+                f'{func_name}() called while another coroutine is '
+                f'already waiting for incoming data')
+    
+        assert not self._eof, '_wait_for_data after EOF'
+    
+        # Waiting for data while paused will make deadlock, so prevent it.
+        # This is essential for readexactly(n) for case when n > self._limit.
+        if self._paused:
+            self._paused = False
+            self._transport.resume_reading()
+    
+        self._waiter = self._loop.create_future()
+        try:
+>           await self._waiter
+E           asyncio.exceptions.CancelledError
+
+..\..\..\..\..\..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\streams.py:545: CancelledError
+
+The above exception was the direct cause of the following exception:
+
+self = <mewcode.tools.bash.Bash object at 0x0000023DA30DBE90>
+params = Params(command='C:\\Users\\Administrator\\Documents\\Codex\\2026-09-26\\ai-starcode-muse-coding-agent-python\\outputs\...-muse-coding-agent-python\\outputs\\muse-next\\work\\shell-red\\test_command_owns_descendants_0\\parent.py', timeout=2)
+
+    async def execute(self, params: Params) -> ToolResult:
+        timeout = min(params.timeout, MAX_TIMEOUT)
+    
+        # ��������� OS ɳ�䣬�������װΪɳ����ִ��
+        actual_command = params.command
+        if self.sandbox and self.sandbox_config and self.sandbox.available():
+            actual_command = self.sandbox.wrap(params.command, self.sandbox_config)
+    
+        try:
+            proc = await asyncio.create_subprocess_shell(
+                actual_command,
+                stdout=asyncio.subprocess.PIPE,
+                stderr=asyncio.subprocess.STDOUT,  # �ϲ� stderr �� stdout
+                cwd=self.work_dir,
+            )
+>           stdout, _ = await asyncio.wait_for(proc.communicate(), timeout=timeout)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+mewcode\tools\bash.py:144: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+..\..\..\..\..\..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\tasks.py:519: in wait_for
+    async with timeouts.timeout(timeout):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <Timeout [expired]>
+exc_type = <class 'asyncio.exceptions.CancelledError'>
+exc_val = CancelledError(), exc_tb = <traceback object at 0x0000023DA3123680>
+
+    async def __aexit__(
+        self,
+        exc_type: Optional[Type[BaseException]],
+        exc_val: Optional[BaseException],
+        exc_tb: Optional[TracebackType],
+    ) -> Optional[bool]:
+        assert self._state in (_State.ENTERED, _State.EXPIRING)
+    
+        if self._timeout_handler is not None:
+            self._timeout_handler.cancel()
+            self._timeout_handler = None
+    
+        if self._state is _State.EXPIRING:
+            self._state = _State.EXPIRED
+    
+            if self._task.uncancel() <= self._cancelling and exc_type is exceptions.CancelledError:
+                # Since there are no new cancel requests, we're
+                # handling this.
+>               raise TimeoutError from exc_val
+E               TimeoutError
+
+..\..\..\..\..\..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\timeouts.py:115: TimeoutError
+
+During handling of the above exception, another exception occurred:
+
+fut = <Task cancelled name='Task-9' coro=<Bash.execute() done, defined at C:\Users\Administrator\Documents\Codex\2026-09-26\ai-starcode-muse-coding-agent-python\outputs\muse-next\mewcode\tools\bash.py:129>>
+timeout = 5
+
+    async def wait_for(fut, timeout):
+        """Wait for the single Future or coroutine to complete, with timeout.
+    
+        Coroutine will be wrapped in Task.
+    
+        Returns result of the Future or coroutine.  When a timeout occurs,
+        it cancels the task and raises TimeoutError.  To avoid the task
+        cancellation, wrap it in shield().
+    
+        If the wait is cancelled, the task is also cancelled.
+    
+        If the task suppresses the cancellation and returns a value instead,
+        that value is returned.
+    
+        This function is a coroutine.
+        """
+        # The special case for timeout <= 0 is for the following case:
+        #
+        # async def test_waitfor():
+        #     func_started = False
+        #
+        #     async def func():
+        #         nonlocal func_started
+        #         func_started = True
+        #
+        #     try:
+        #         await asyncio.wait_for(func(), 0)
+        #     except asyncio.TimeoutError:
+        #         assert not func_started
+        #     else:
+        #         assert False
+        #
+        # asyncio.run(test_waitfor())
+    
+    
+        if timeout is not None and timeout <= 0:
+            fut = ensure_future(fut)
+    
+            if fut.done():
+                return fut.result()
+    
+            await _cancel_and_wait(fut)
+            try:
+                return fut.result()
+            except exceptions.CancelledError as exc:
+                raise TimeoutError from exc
+    
+        async with timeouts.timeout(timeout):
+>           return await fut
+                   ^^^^^^^^^
+
+..\..\..\..\..\..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\tasks.py:520: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+mewcode\tools\bash.py:147: in execute
+    await proc.wait()
+..\..\..\..\..\..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\subprocess.py:137: in wait
+    return await self._transport._wait()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <_WindowsSubprocessTransport pid=38920 returncode=1 stdout=<_ProactorReadPipeTransport fd=812 read=<_OverlappedFuture pending cb=[_ProactorReadPipeTransport._loop_reading()]>>>
+
+    async def _wait(self):
+        """Wait until the process exit and return the process return code.
+    
+        This method is a coroutine."""
+        if self._returncode is not None:
+            return self._returncode
+    
+        waiter = self._loop.create_future()
+        self._exit_waiters.append(waiter)
+>       return await waiter
+               ^^^^^^^^^^^^
+E       asyncio.exceptions.CancelledError
+
+..\..\..\..\..\..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\base_subprocess.py:230: CancelledError
+
+The above exception was the direct cause of the following exception:
+
+tmp_path = WindowsPath('C:/Users/Administrator/Documents/Codex/2026-09-26/ai-starcode-muse-coding-agent-python/outputs/muse-next/work/shell-red/test_command_owns_descendants_0')
+mode = 'timeout'
+
+    @pytest.mark.parametrize('mode', ['timeout', 'cancel', 'parent_exit'])
+    async def test_command_owns_descendants(tmp_path, mode):
+        parent = tmp_path / 'parent.py'
+        child = tmp_path / 'child.py'
+        child.write_text('import time\ntime.sleep(120)')
+        parent.write_text('import subprocess,sys,pathlib,json,time,os\n'
+            'p=subprocess.Popen([sys.executable,"child.py"])\n'
+            'pathlib.Path("pids.json").write_text(json.dumps([os.getpid(),p.pid]))\n'
+            + ('time.sleep(120)\n' if mode != 'parent_exit' else ''))
+        tool = Bash()
+        tool.work_dir = str(tmp_path)
+        task = asyncio.create_task(tool.execute(Params(command=command(parent), timeout=2)))
+        pids = []
+        try:
+            for _ in range(100):
+                if (tmp_path / 'pids.json').exists():
+                    pids = json.loads((tmp_path / 'pids.json').read_text())
+                    break
+                await asyncio.sleep(.02)
+            assert pids, 'parent did not start'
+            if mode == 'cancel':
+                task.cancel()
+                with pytest.raises(asyncio.CancelledError):
+                    await task
+            else:
+>               result = await asyncio.wait_for(task, 5)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_shell_lifecycle.py:54: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+..\..\..\..\..\..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\tasks.py:519: in wait_for
+    async with timeouts.timeout(timeout):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <Timeout [expired]>
+exc_type = <class 'asyncio.exceptions.CancelledError'>
+exc_val = CancelledError(), exc_tb = <traceback object at 0x0000023DA3123880>
+
+    async def __aexit__(
+        self,
+        exc_type: Optional[Type[BaseException]],
+        exc_val: Optional[BaseException],
+        exc_tb: Optional[TracebackType],
+    ) -> Optional[bool]:
+        assert self._state in (_State.ENTERED, _State.EXPIRING)
+    
+        if self._timeout_handler is not None:
+            self._timeout_handler.cancel()
+            self._timeout_handler = None
+    
+        if self._state is _State.EXPIRING:
+            self._state = _State.EXPIRED
+    
+            if self._task.uncancel() <= self._cancelling and exc_type is exceptions.CancelledError:
+                # Since there are no new cancel requests, we're
+                # handling this.
+>               raise TimeoutError from exc_val
+E               TimeoutError
+
+..\..\..\..\..\..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\timeouts.py:115: TimeoutError
+____________________ test_command_owns_descendants[cancel] ____________________
+
+tmp_path = WindowsPath('C:/Users/Administrator/Documents/Codex/2026-09-26/ai-starcode-muse-coding-agent-python/outputs/muse-next/work/shell-red/test_command_owns_descendants_1')
+mode = 'cancel'
+
+    @pytest.mark.parametrize('mode', ['timeout', 'cancel', 'parent_exit'])
+    async def test_command_owns_descendants(tmp_path, mode):
+        parent = tmp_path / 'parent.py'
+        child = tmp_path / 'child.py'
+        child.write_text('import time\ntime.sleep(120)')
+        parent.write_text('import subprocess,sys,pathlib,json,time,os\n'
+            'p=subprocess.Popen([sys.executable,"child.py"])\n'
+            'pathlib.Path("pids.json").write_text(json.dumps([os.getpid(),p.pid]))\n'
+            + ('time.sleep(120)\n' if mode != 'parent_exit' else ''))
+        tool = Bash()
+        tool.work_dir = str(tmp_path)
+        task = asyncio.create_task(tool.execute(Params(command=command(parent), timeout=2)))
+        pids = []
+        try:
+            for _ in range(100):
+                if (tmp_path / 'pids.json').exists():
+                    pids = json.loads((tmp_path / 'pids.json').read_text())
+                    break
+                await asyncio.sleep(.02)
+            assert pids, 'parent did not start'
+            if mode == 'cancel':
+                task.cancel()
+                with pytest.raises(asyncio.CancelledError):
+                    await task
+            else:
+                result = await asyncio.wait_for(task, 5)
+                assert result.is_error == (mode == 'timeout')
+            for _ in range(100):
+                if not any(psutil.pid_exists(pid) for pid in pids):
+                    break
+                await asyncio.sleep(.02)
+>           assert not any(psutil.pid_exists(pid) for pid in pids)
+E           assert not True
+E            +  where True = any(<generator object test_command_owns_descendants.<locals>.<genexpr> at 0x0000023DA336B6B0>)
+
+tests\test_shell_lifecycle.py:60: AssertionError
+_________________ test_command_owns_descendants[parent_exit] __________________
+
+tmp_path = WindowsPath('C:/Users/Administrator/Documents/Codex/2026-09-26/ai-starcode-muse-coding-agent-python/outputs/muse-next/work/shell-red/test_command_owns_descendants_2')
+mode = 'parent_exit'
+
+    @pytest.mark.parametrize('mode', ['timeout', 'cancel', 'parent_exit'])
+    async def test_command_owns_descendants(tmp_path, mode):
+        parent = tmp_path / 'parent.py'
+        child = tmp_path / 'child.py'
+        child.write_text('import time\ntime.sleep(120)')
+        parent.write_text('import subprocess,sys,pathlib,json,time,os\n'
+            'p=subprocess.Popen([sys.executable,"child.py"])\n'
+            'pathlib.Path("pids.json").write_text(json.dumps([os.getpid(),p.pid]))\n'
+            + ('time.sleep(120)\n' if mode != 'parent_exit' else ''))
+        tool = Bash()
+        tool.work_dir = str(tmp_path)
+        task = asyncio.create_task(tool.execute(Params(command=command(parent), timeout=2)))
+        pids = []
+        try:
+            for _ in range(100):
+                if (tmp_path / 'pids.json').exists():
+                    pids = json.loads((tmp_path / 'pids.json').read_text())
+                    break
+                await asyncio.sleep(.02)
+            assert pids, 'parent did not start'
+            if mode == 'cancel':
+                task.cancel()
+                with pytest.raises(asyncio.CancelledError):
+                    await task
+            else:
+                result = await asyncio.wait_for(task, 5)
+>               assert result.is_error == (mode == 'timeout')
+E               AssertionError: assert True == ('parent_exit' == 'timeout'
+E                +  where True = ToolResult(output='Error: command timed out after 2s', is_error=True, content_blocks=None).is_error
+E                 
+E                 - timeout
+E                 + parent_exit)
+
+tests\test_shell_lifecycle.py:55: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_shell_lifecycle.py::test_failed_command_has_structured_exit_code
+FAILED tests/test_shell_lifecycle.py::test_command_owns_descendants[timeout]
+FAILED tests/test_shell_lifecycle.py::test_command_owns_descendants[cancel]
+FAILED tests/test_shell_lifecycle.py::test_command_owns_descendants[parent_exit]
+4 failed in 10.82s
