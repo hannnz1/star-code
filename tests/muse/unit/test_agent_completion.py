@@ -1,6 +1,7 @@
 import asyncio
 from pathlib import Path
 
+import pytest
 from test_agent_loop import ScriptedProvider, runtime
 
 from muse.contracts import ModelEvent, TaskRequest, ToolCall
@@ -8,6 +9,7 @@ from muse.main import create_app
 from muse.memory.service import MemoryService
 from muse.tools.context import ExecutionContext
 from muse.tools.files import FileTools
+from muse.tools.registry import ToolRegistry
 
 
 async def test_pause_finishes_current_model_turn_and_resume_does_not_repeat(tmp_path):
@@ -90,6 +92,21 @@ async def test_ask_user_progress_statement_does_not_pause_task(tmp_path):
     assert repo.get(task.id).status == "SUCCEEDED"
     assert repo.calls(task.id) == []
     assert "direct question" in provider.requests[1][-1]["content"]
+
+
+@pytest.mark.parametrize('question', [
+    'Should I wait for the children to finish and then continue?',
+    'Should I inspect the child worktrees directly and continue?',
+])
+async def test_ask_user_cannot_pause_for_routine_delegation_progress(tmp_path, question):
+    repo, _, worker = runtime(tmp_path, ScriptedProvider([]))
+    parent = repo.claim_next('parent')
+    repo.spawn_child(parent.id, 'parent', parent.lease_epoch, 'spawn', 'Inspect component')
+    ctx = ExecutionContext(worker.settings, repo, parent, 'parent')
+    result = await ToolRegistry(ctx).execute(ToolCall(id='question', name='ask_user', arguments={'question': question}))
+    assert result.status == 'error'
+    assert 'continue' in result.content.lower()
+    assert not ctx.cp.get('input_question')
 
 
 async def test_research_without_sources_and_artifact_is_not_success(tmp_path):

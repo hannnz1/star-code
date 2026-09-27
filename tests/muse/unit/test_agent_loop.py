@@ -45,6 +45,15 @@ async def test_agent_uses_real_file_tool_and_passes_result_back(tmp_path):
     assert len(repo.calls(task.id)) == 1
 
 
+async def test_coding_guidance_requires_behavioral_checks_beyond_compilation(tmp_path):
+    scripted = ScriptedProvider([[ModelEvent(type='text', text='No changes required')]])
+    _, _, worker = runtime(tmp_path, scripted)
+    await worker.run_once()
+    guidance = scripted.requests[0][0]['content'].lower()
+    assert 'existing tests' in guidance
+    assert 'compilation alone' in guidance
+
+
 async def test_model_budget_stops_before_third_request(tmp_path):
     scripted = ScriptedProvider([[ModelEvent(type="call", call=ToolCall(id=f"r{i}", name="read_file", arguments={"path": "hello.txt"}))] for i in range(3)])
     repo, task, worker = runtime(tmp_path, scripted, max_turns=2)
@@ -52,6 +61,29 @@ async def test_model_budget_stops_before_third_request(tmp_path):
     assert len(scripted.requests) == 2
     assert repo.get(task.id).status == "FAILED"
     assert repo.get(task.id).checkpoint["model_requests"] == 2
+
+
+async def test_transient_model_connection_failure_retries_without_tool_dispatch(tmp_path):
+    from muse.providers.compatible import ProviderError
+
+    class FlakyProvider:
+        requests = 0
+
+        async def stream(self, messages, tools):
+            self.requests += 1
+            if self.requests == 1:
+                raise ProviderError('Model service connection failed')
+            yield ModelEvent(type='text', text='Recovered answer')
+            yield ModelEvent(type='done')
+
+    provider = FlakyProvider()
+    repo, task, worker = runtime(tmp_path, provider)
+    await worker.run_once()
+    completed = repo.get(task.id)
+    assert completed.status == 'SUCCEEDED'
+    assert provider.requests == 2
+    assert completed.checkpoint['usage']['complete'] is False
+    assert repo.calls(task.id) == []
 
 
 async def test_tool_budget_stops_before_second_dispatch(tmp_path):

@@ -1,9 +1,11 @@
+import asyncio
 import json
 import sys
 
 from muse.agent.context import compact_messages, model_visible_messages
 from muse.contracts import AgentResult, ToolCall
 from muse.memory.service import MemoryService
+from muse.providers.compatible import ProviderError
 from muse.tools.context import TaskControl
 from muse.tools.registry import ToolRegistry
 
@@ -16,6 +18,7 @@ For an action within the user's requested scope, call its tool directly: the run
 Use ask_user when essential information is missing or the next step would expand the requested scope. Respect denied actions; never retry to bypass a denial.
 After delegated work finishes, continue the parent's requested review, integration and final verification. A child commit is not automatically applied to the parent workspace. For requested integration use worktree_manage review, then integrate with the exact returned commit identities; refresh review after the parent changes.
 Code changes MUST be followed by verify_command with real tests or an appropriate build/check.
+For coding tasks, inspect existing tests and boundary/error contracts before editing. Compilation alone does not prove behavior; when an isolated component cannot run the full suite, inspect its tests and make the parent run the unified verifier after integration.
 Never claim tests passed unless the verification tool reports exit code 0 AFTER the final change.
 Research needs actually read sources and citations supporting the claims. A link alone is not evidence.
 If essential details are missing, follow relevant primary documentation before concluding. Check version compatibility in technical recommendations and explicitly identify incomplete outcomes.
@@ -213,6 +216,16 @@ class AgentRunner:
             except TaskControl:
                 raise
             except Exception as error:  # noqa: BLE001 -- persist provider failure and run configured error Hooks once.
+                transient = (isinstance(error, ProviderError)
+                             and str(error) in {'Model service connection failed', 'Model request timed out',
+                                                'Model stream was incomplete; no tools were dispatched'})
+                retries = cp.get('transient_model_failures', 0)
+                if transient and retries < 2 and cp['model_requests'] < min(ctx.settings.max_turns, cp.get('max_local_turns', ctx.settings.max_turns)):
+                    cp['transient_model_failures'] = retries + 1
+                    ctx.repo.add_event(ctx.task_id, 'model_retry', {'attempt': retries + 1, 'reason': str(error)})
+                    ctx.save()
+                    await asyncio.sleep(0.2 * (2 ** retries))
+                    continue
                 cp['pending_failure'] = ctx.safe(str(error))[:2000]
                 cp['pending_hook_events'].append(['error', str(cp['model_requests'])])
                 ctx.save()
@@ -223,6 +236,7 @@ class AgentRunner:
                 cp["usage_pending"] = False
             if not completed:
                 raise RuntimeError("Model stream did not complete")
+            cp['transient_model_failures'] = 0
             answer = ctx.safe("".join(text_parts))
             message = {"role": "assistant", "content": answer}
             if calls:

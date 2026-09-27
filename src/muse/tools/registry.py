@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import asyncio
 import json
+import re
 import time
 
 import jsonschema
@@ -26,6 +27,12 @@ class ToolRegistry:
         self.files = FileTools(context)
         self.entries = {}
         async def ask_user(args, call_id):
+            if context.repo.children(context.task_id) and re.search(
+                r'\b(?:should|can|may)\s+i\s+(?:wait|inspect|continue|review|integrate)\b',
+                args['question'], re.IGNORECASE,
+            ):
+                return ToolResult(call_id=call_id, status='error', error_code='ROUTINE_DELEGATION',
+                                  content='No user input is needed to continue delegated work. Check child status, wait for completion, review with worktree_manage, then integrate or report a real blocker.')
             context.cp["input_question"] = context.safe(args["question"])
             return ToolResult(call_id=call_id, content="Question recorded; execution will wait for the user's reply.", metadata={"question": context.cp["input_question"]})
         self.register(ToolDefinition(name="ask_user", description="Ask a direct question ending in ? or ？ only when essential input is missing or scope must change. Never send a progress statement here. For an in-scope action requiring approval, call that action's tool instead; the runtime requests approval before execution.", parameters=schema({"question": {"type": "string", "minLength": 1, "pattern": r"[?？]\s*$"}}, ["question"])), ask_user)
