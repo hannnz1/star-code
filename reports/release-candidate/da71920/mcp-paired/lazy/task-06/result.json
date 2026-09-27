@@ -1,0 +1,28 @@
+{
+  "case": "task-06",
+  "mode": "LAZY",
+  "checks": {
+    "completed": true,
+    "exact_result": true,
+    "exact_remote_call": true,
+    "schema_loaded": true,
+    "no_other_tools": true
+  },
+  "passed": true,
+  "model": "gpt-5.4-mini",
+  "seconds": 9.109,
+  "model_requests": 5,
+  "usage": {
+    "complete": true,
+    "input_tokens": 21417,
+    "output_tokens": 116
+  },
+  "answer": "eu-west-2",
+  "error": "",
+  "remote_calls": [
+    {
+      "tool": "deployments_get_region",
+      "entity_id": "DEP-451"
+    }
+  ]
+}

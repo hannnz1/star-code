@@ -1,0 +1,113 @@
+[
+  {
+    "task_id": "191d4ed684b844c8a6b774834c4cb7a0",
+    "id": "call_6SPpDGmRNJtIaptVxeyY9EhP",
+    "name": "read_file",
+    "arguments": {
+      "path": "README.md"
+    },
+    "risk": "read",
+    "status": "DONE",
+    "digest": "12f44f9c05aee99327d6099eaac3e5e3001376b9a630ad2e7aa4260e47637ca3",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_6SPpDGmRNJtIaptVxeyY9EhP",
+      "content": "# Text utilities contract\r\nImplement two existing independent interfaces, preserving signatures and verification files.\r\ntext.Slug.of(String): reject null with IllegalArgumentException. Normalize NFKD, discard Unicode combining marks,\r\nlowercase with Locale.ROOT, replace each run outside ASCII a-z/0-9 with one hyphen, strip edge hyphens.\r\nAn empty or punctuation-only input returns the empty string.\r\ntext.Header.parse(String): reject null, CR/LF anywhere, no colon, or an invalid header name with IllegalArgumentException.\r\nSplit at the FIRST colon. Trim both parts; lowercase name with Locale.ROOT. Name must match [a-z][a-z0-9-]*.\r\nReturn a one-entry Map<String,String>; value can be empty and can contain additional colons. Preserve value case.\r\nRead tests/GateTest.java for boundary checks. Run powershell.exe -NoProfile -File ./verify.ps1 after integrating both components.\r\n",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790491036.8075812,
+    "updated_at": 1790491036.8212676
+  },
+  {
+    "task_id": "191d4ed684b844c8a6b774834c4cb7a0",
+    "id": "call_CityNbIQUBa2BUs1qjc9UmTu",
+    "name": "read_file",
+    "arguments": {
+      "path": "contract.json"
+    },
+    "risk": "read",
+    "status": "DONE",
+    "digest": "bd610232cc83dd839eae52ba4f88f9c7880d9eaef1e04af4ff33a2f6a809eea9",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_CityNbIQUBa2BUs1qjc9UmTu",
+      "content": "{\r\n  \"components\": [\r\n    \"src/text/Slug.java\",\r\n    \"src/text/Header.java\"\r\n  ]\r\n}\r\n",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790491036.8334455,
+    "updated_at": 1790491036.8457608
+  },
+  {
+    "task_id": "191d4ed684b844c8a6b774834c4cb7a0",
+    "id": "call_F7vy7stc2dh8YwBtV3BX7eRz",
+    "name": "read_file",
+    "arguments": {
+      "path": "src/text/Slug.java"
+    },
+    "risk": "read",
+    "status": "DONE",
+    "digest": "7002c85c882126787688078a6c19805e54ecec8e8b6787d652dcb2f370f977be",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_F7vy7stc2dh8YwBtV3BX7eRz",
+      "content": "package text; public final class Slug { public static String of(String text) { throw new UnsupportedOperationException(\"Not implemented\"); } }\r\n",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790491038.630948,
+    "updated_at": 1790491038.6444495
+  },
+  {
+    "task_id": "191d4ed684b844c8a6b774834c4cb7a0",
+    "id": "call_fCbOr0Al7VTsEZMKIXZbmOPf",
+    "name": "read_file",
+    "arguments": {
+      "path": "tests/GateTest.java"
+    },
+    "risk": "read",
+    "status": "DONE",
+    "digest": "6c3205915e58371457d4ff0ea4ada6a9976624b4132b0f81ddd873438fe0f511",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_fCbOr0Al7VTsEZMKIXZbmOPf",
+      "content": "import text.Slug; import text.Header; import java.util.*;\r\npublic class GateTest {\r\n static int n; static void eq(Object a,Object b){n++;if(!Objects.equals(a,b))throw new AssertionError(\"expected \"+b+\" got \"+a);}\r\n static void bad(Runnable r){n++;try{r.run();}catch(IllegalArgumentException e){return;}throw new AssertionError(\"expected rejection\");}\r\n public static void main(String[]args){\r\n eq(Slug.of(\" Hello, WORLD! \"),\"hello-world\");eq(Slug.of(\"caf\\u00e9 d\\u00e9j\\u00e0\"),\"cafe-deja\");\r\n eq(Slug.of(\"A___B  12\"),\"a-b-12\");eq(Slug.of(\"\"),\"\");eq(Slug.of(\"---\"),\"\");bad(()->Slug.of(null));\r\n Locale old=Locale.getDefault();try{Locale.setDefault(Locale.forLanguageTag(\"tr-TR\"));eq(Slug.of(\"I\"),\"i\");eq(Header.parse(\"X-ID: I\"),Map.of(\"x-id\",\"I\"));}finally{Locale.setDefault(old);}\r\n eq(Header.parse(\" Content-Type : Text/Plain \"),Map.of(\"content-type\",\"Text/Plain\"));\r\n eq(Header.parse(\"Url: https://example.test:443\"),Map.of(\"url\",\"https://example.test:443\"));eq(Header.parse(\"X-Empty: \"),Map.of(\"x-empty\",\"\"));\r\n bad(()->Header.parse(null));bad(()->Header.parse(\"missing\"));bad(()->Header.parse(\":v\"));bad(()->Header.parse(\"1X:v\"));bad(()->Header.parse(\"a b:v\"));\r\n bad(()->Header.parse(\"x:v\\r\\ny:z\"));bad(()->Header.parse(\"x:v\\n\"));\r\n System.out.println(\"PASS \"+n+\" contract checks\");}}\r\n",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790491038.6553226,
+    "updated_at": 1790491038.6679714
+  },
+  {
+    "task_id": "191d4ed684b844c8a6b774834c4cb7a0",
+    "id": "call_yRTydtK9wcvGaFjl2cU98Dxl",
+    "name": "write_file",
+    "arguments": {
+      "content": "package text;\n\nimport java.text.Normalizer;\nimport java.util.Locale;\n\npublic final class Slug {\n    public static String of(String text) {\n        if (text == null) {\n            throw new IllegalArgumentException(\"text\");\n        }\n\n        String normalized = Normalizer.normalize(text, Normalizer.Form.NFKD)\n                .replaceAll(\"\\\\p{M}+\", \"\")\n                .toLowerCase(Locale.ROOT);\n\n        StringBuilder out = new StringBuilder(normalized.length());\n        boolean pendingHyphen = false;\n        for (int i = 0; i < normalized.length(); i++) {\n            char ch = normalized.charAt(i);\n            if (ch >= 'a' && ch <= 'z' || ch >= '0' && ch <= '9') {\n                if (pendingHyphen && out.length() > 0) {\n                    out.append('-');\n                }\n                out.append(ch);\n                pendingHyphen = false;\n            } else {\n                if (out.length() > 0) {\n                    pendingHyphen = true;\n                }\n            }\n        }\n        return out.toString();\n    }\n}\n",
+      "path": "src/text/Slug.java"
+    },
+    "risk": "write",
+    "status": "DONE",
+    "digest": "6b66c829af3ad78d9c0099de0e38f46e388b4d65b4fbf12b0fad5a3975e254e7",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_yRTydtK9wcvGaFjl2cU98Dxl",
+      "content": "{\"path\": \"src\\\\text\\\\Slug.java\", \"sha256\": \"ce1a1d4d59a7c8838dcf89378711c6c12d892f73fdd107bea47053d5d276fca3\", \"bytes\": 1040}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790491041.182362,
+    "updated_at": 1790491041.2109194
+  }
+]

@@ -1,0 +1,73 @@
+{
+  "case": "checkout",
+  "checks": {
+    "parent_completed": false,
+    "two_children": true,
+    "children_completed": false,
+    "independent_workspaces": true,
+    "overlap": true,
+    "unified_verifier": false,
+    "agent_ran_verifier": false,
+    "contract_preserved": true,
+    "committed_child_contributions": false
+  },
+  "passed": false,
+  "fixture_hashes": {
+    ".gitignore": "d732d5b08731425c80b19f110884169b471748c9c63c7c87ee6da09fb1b61931",
+    "contract.json": "9a4db2e37dd8bfa297ec54dd9f47fa34cc546907c3c81ed2956a91794e09183e",
+    "README.md": "cf10f78ace4a65089c9cbef69a8da0e645c8f53cda5b526599772e64fb4c12bf",
+    "verify.ps1": "f4911184168b0fef72963412eb1c51ada344d79b3337f8a93690947daef6b884",
+    "tests/GateTest.java": "010d1b5b3058b7c3a6089a2a8d7a08442eb7322f449cac38f6589bd49dbcf64a",
+    "src/checkout/pricing/DiscountPolicy.java": "5d65c8aef252f546a91acbcb5ed751ef7ceb5477155bab1fe7ed984a37917daa",
+    "src/checkout/shipping/ShippingQuote.java": "f2c25619191f285fc292169a3df2c893aa4269b4bc764817f2c1638a83190706"
+  },
+  "overlap_seconds": 9.205776453018188,
+  "parent_status": "WAITING_INPUT",
+  "error": "",
+  "usage": {
+    "complete": true,
+    "input_tokens": 39254,
+    "output_tokens": 1263
+  },
+  "seconds": 23.17199999999866,
+  "contributions": [
+    {
+      "child_id": "52e7608edffe46fa854dadd57d3ffe18",
+      "commit": "8dafaea7f11811d4140d51c769faf46c4492a642",
+      "changed": [],
+      "reviewed": false,
+      "integrated": false,
+      "ancestor": true,
+      "files_equal": true
+    },
+    {
+      "child_id": "434124b8fc8b4c81a75da41b65a76b6f",
+      "commit": "8dafaea7f11811d4140d51c769faf46c4492a642",
+      "changed": [],
+      "reviewed": false,
+      "integrated": false,
+      "ancestor": true,
+      "files_equal": true
+    }
+  ],
+  "children": [
+    {
+      "id": "52e7608edffe46fa854dadd57d3ffe18",
+      "status": "INTERRUPTED",
+      "usage": {
+        "complete": true,
+        "input_tokens": 17472,
+        "output_tokens": 562
+      }
+    },
+    {
+      "id": "434124b8fc8b4c81a75da41b65a76b6f",
+      "status": "INTERRUPTED",
+      "usage": {
+        "complete": true,
+        "input_tokens": 8190,
+        "output_tokens": 460
+      }
+    }
+  ]
+}

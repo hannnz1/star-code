@@ -1,0 +1,28 @@
+{
+  "case": "task-04",
+  "mode": "FULL",
+  "checks": {
+    "completed": true,
+    "exact_result": true,
+    "exact_remote_call": true,
+    "schema_loaded": true,
+    "no_other_tools": true
+  },
+  "passed": true,
+  "model": "gpt-5.4-mini",
+  "seconds": 11.719,
+  "model_requests": 6,
+  "usage": {
+    "complete": true,
+    "input_tokens": 41821,
+    "output_tokens": 138
+  },
+  "answer": "Morgan Chen",
+  "error": "",
+  "remote_calls": [
+    {
+      "tool": "tickets_get_owner",
+      "entity_id": "TKT-615"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "case": "task-07",
+  "mode": "LAZY",
+  "checks": {
+    "completed": true,
+    "exact_result": true,
+    "exact_remote_call": true,
+    "schema_loaded": true,
+    "no_other_tools": true
+  },
+  "passed": true,
+  "model": "gpt-5.4-mini",
+  "seconds": 7.234,
+  "model_requests": 5,
+  "usage": {
+    "complete": true,
+    "input_tokens": 21426,
+    "output_tokens": 113
+  },
+  "answer": "27 units",
+  "error": "",
+  "remote_calls": [
+    {
+      "tool": "inventory_get_quantity",
+      "entity_id": "SKU-386"
+    }
+  ]
+}

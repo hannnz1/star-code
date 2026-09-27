@@ -1,0 +1,116 @@
+[
+  {
+    "task_id": "351b0325b8e446eb98142d23b7093e6e",
+    "id": "call_QMc1ag3B2pac90tlYHKwP7lE",
+    "name": "list_files",
+    "arguments": {
+      "path": "."
+    },
+    "risk": "read",
+    "status": "DONE",
+    "digest": "cc9077ead0681ae950dbf418ff050fe1fedf57cb68ca7d5cbf4474055a8fc518",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_QMc1ag3B2pac90tlYHKwP7lE",
+      "content": "{\"paths\": [\"lyra.pdf\", \"orion.txt\", \"vega.md\"], \"truncated\": false}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790491469.925571,
+    "updated_at": 1790491469.9451528
+  },
+  {
+    "task_id": "351b0325b8e446eb98142d23b7093e6e",
+    "id": "call_GkPXk7iAK7BlmhAGH626MZAX",
+    "name": "read_file",
+    "arguments": {
+      "path": "orion.txt"
+    },
+    "risk": "read",
+    "status": "DONE",
+    "digest": "38f1373ed8919e1da7f19cf0ba1cd35cabf6c72c1dddd00c5545a6ed3d84a20b",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_GkPXk7iAK7BlmhAGH626MZAX",
+      "content": "Project Orion\r\nBudget 42000 USD\r\nOwner Maya\r\nLaunch 2027-02-14",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790491471.2231286,
+    "updated_at": 1790491471.2453566
+  },
+  {
+    "task_id": "351b0325b8e446eb98142d23b7093e6e",
+    "id": "call_1BNc2Fttvqbt4bENZTes3iu6",
+    "name": "read_file",
+    "arguments": {
+      "path": "vega.md"
+    },
+    "risk": "read",
+    "status": "DONE",
+    "digest": "3d085637a6b9772d61e7edc9f1f41d49dcb5bb3a24ebf5fc0bac32c4e48b49db",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_1BNc2Fttvqbt4bENZTes3iu6",
+      "content": "Project Vega\r\nBudget 61000 USD\r\nOwner Leon\r\nLaunch 2027-03-21",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790491471.2626195,
+    "updated_at": 1790491471.2889771
+  },
+  {
+    "task_id": "351b0325b8e446eb98142d23b7093e6e",
+    "id": "call_nCEwoBneQtfN3Nvhl0KCPnX1",
+    "name": "read_document",
+    "arguments": {
+      "path": "lyra.pdf"
+    },
+    "risk": "read",
+    "status": "DONE",
+    "digest": "51860735091f37901a44a4dc391d99771f71c8511c6d60c53bd9b91b00d82ad8",
+    "result": {
+      "artifact_ids": [],
+      "call_id": "call_nCEwoBneQtfN3Nvhl0KCPnX1",
+      "content": "{\"path\": \"lyra.pdf\", \"sha256\": \"7030a98be2f9b4f5ac704ef8e7aa2d1e8de09efebde2a564a967be696de29ee3\", \"text\": \"Project Lyra\\nBudget 73000 USD\\nOwner Mira\\nLaunch 2027-04-18\\n\", \"truncated\": false}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790491471.3052204,
+    "updated_at": 1790491471.3324804
+  },
+  {
+    "task_id": "351b0325b8e446eb98142d23b7093e6e",
+    "id": "call_AlQIy3RMs5ePFu1O02rxuoqN",
+    "name": "save_artifact",
+    "arguments": {
+      "content": "# Project Summary\n\n| Project | Budget | Owner | Launch Date | Source |\n|---|---:|---|---|---|\n| Orion | 42000 USD | Maya | 2027-02-14 | `orion.txt` |\n| Vega | 61000 USD | Leon | 2027-03-21 | `vega.md` |\n| Lyra | 73000 USD | Mira | 2027-04-18 | `lyra.pdf` |\n\n## Notes\n- Originals were preserved and not modified.\n- Source text for the PDF was extracted from `lyra.pdf`.\n",
+      "media_type": "text/markdown",
+      "name": "summary.md"
+    },
+    "risk": "write",
+    "status": "DONE",
+    "digest": "3736f5778a0275b56bcadc736e0844eddd0c6c871a55a2f4cdc9407d27a90e3b",
+    "result": {
+      "artifact_ids": [
+        "7ae2d7080003441da19c80c065bd8f38"
+      ],
+      "call_id": "call_AlQIy3RMs5ePFu1O02rxuoqN",
+      "content": "{\"id\": \"7ae2d7080003441da19c80c065bd8f38\", \"task_id\": \"351b0325b8e446eb98142d23b7093e6e\", \"name\": \"summary.md\", \"media_type\": \"text/markdown\", \"sha256\": \"0028605aa12d9981d8f7168ab9ad9e79e2b60accb2ffe1110de2fcebe857274d\", \"version\": 1, \"created_at\": 1790491473.3119662}",
+      "error_code": null,
+      "metadata": {},
+      "status": "success"
+    },
+    "attempts": 1,
+    "created_at": 1790491473.3027964,
+    "updated_at": 1790491473.316964
+  }
+]

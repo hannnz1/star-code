@@ -1,0 +1,302 @@
+{
+  "70a705fa1d314381b5e6f9057ba8b5ba": [
+    {
+      "task_id": "70a705fa1d314381b5e6f9057ba8b5ba",
+      "sequence": 1,
+      "type": "status",
+      "payload": {
+        "status": "QUEUED"
+      },
+      "created_at": 1790491708.6172876
+    },
+    {
+      "task_id": "70a705fa1d314381b5e6f9057ba8b5ba",
+      "sequence": 2,
+      "type": "status",
+      "payload": {
+        "status": "RUNNING"
+      },
+      "created_at": 1790491708.6213038
+    },
+    {
+      "task_id": "70a705fa1d314381b5e6f9057ba8b5ba",
+      "sequence": 3,
+      "type": "assistant_message",
+      "payload": {
+        "text": "",
+        "tool_count": 2
+      },
+      "created_at": 1790491709.886447
+    },
+    {
+      "task_id": "70a705fa1d314381b5e6f9057ba8b5ba",
+      "sequence": 4,
+      "type": "tool_prepared",
+      "payload": {
+        "arguments": {
+          "query": "USER_COMMON_6143"
+        },
+        "call_id": "call_BzRM5t47DhSlMIzyCmMta80a",
+        "name": "search_memory"
+      },
+      "created_at": 1790491709.8984249
+    },
+    {
+      "task_id": "70a705fa1d314381b5e6f9057ba8b5ba",
+      "sequence": 5,
+      "type": "tool_started",
+      "payload": {
+        "call_id": "call_BzRM5t47DhSlMIzyCmMta80a",
+        "name": "search_memory"
+      },
+      "created_at": 1790491709.901723
+    },
+    {
+      "task_id": "70a705fa1d314381b5e6f9057ba8b5ba",
+      "sequence": 6,
+      "type": "tool_result",
+      "payload": {
+        "artifact_ids": [],
+        "call_id": "call_BzRM5t47DhSlMIzyCmMta80a",
+        "content": "[{\"id\": \"389bc12b0a9842cb933a5be1a088fa34\", \"scope\": \"user\", \"workspace_id\": null, \"title\": \"Common\", \"content\": \"USER_COMMON_6143\", \"source_task_id\": null, \"updated_at\": 1790491708.615756}]",
+        "error_code": null,
+        "metadata": {},
+        "status": "success"
+      },
+      "created_at": 1790491709.9060736
+    },
+    {
+      "task_id": "70a705fa1d314381b5e6f9057ba8b5ba",
+      "sequence": 7,
+      "type": "tool_prepared",
+      "payload": {
+        "arguments": {
+          "query": "PREFERENCE_MANDARIN_3197"
+        },
+        "call_id": "call_4fP2BEfcZtPJUOdTlsXSon1a",
+        "name": "search_memory"
+      },
+      "created_at": 1790491709.91459
+    },
+    {
+      "task_id": "70a705fa1d314381b5e6f9057ba8b5ba",
+      "sequence": 8,
+      "type": "tool_started",
+      "payload": {
+        "call_id": "call_4fP2BEfcZtPJUOdTlsXSon1a",
+        "name": "search_memory"
+      },
+      "created_at": 1790491709.9181044
+    },
+    {
+      "task_id": "70a705fa1d314381b5e6f9057ba8b5ba",
+      "sequence": 9,
+      "type": "tool_result",
+      "payload": {
+        "artifact_ids": [],
+        "call_id": "call_4fP2BEfcZtPJUOdTlsXSon1a",
+        "content": "[{\"id\": \"ac347a386f3d4029b129f06422b136cb\", \"scope\": \"project\", \"workspace_id\": \"d71f462a385344768836ca5930bf54e8\", \"title\": \"Project preference\", \"content\": \"PREFERENCE_MANDARIN_3197\", \"source_task_id\": null, \"updated_at\": 1790491708.6077478}]",
+        "error_code": null,
+        "metadata": {},
+        "status": "success"
+      },
+      "created_at": 1790491709.9201055
+    },
+    {
+      "task_id": "70a705fa1d314381b5e6f9057ba8b5ba",
+      "sequence": 10,
+      "type": "text_delta",
+      "payload": {
+        "text": "I found two applicable memories:\n\n- User preference: `Common` — `USER_COMMON_6143`\n- Project preference: `Project preference` — `PREFERENCE_MANDARIN_3197`\n\nI won’t create or edit any memories."
+      },
+      "created_at": 1790491711.3640304
+    },
+    {
+      "task_id": "70a705fa1d314381b5e6f9057ba8b5ba",
+      "sequence": 11,
+      "type": "assistant_message",
+      "payload": {
+        "text": "I found two applicable memories:\n\n- User preference: `Common` — `USER_COMMON_6143`\n- Project preference: `Project preference` — `PREFERENCE_MANDARIN_3197`\n\nI won’t create or edit any memories.",
+        "tool_count": 0
+      },
+      "created_at": 1790491711.3688867
+    },
+    {
+      "task_id": "70a705fa1d314381b5e6f9057ba8b5ba",
+      "sequence": 12,
+      "type": "status",
+      "payload": {
+        "status": "SUCCEEDED"
+      },
+      "created_at": 1790491711.3822403
+    }
+  ],
+  "003fc3a9ac4f471d93252295344840af": [
+    {
+      "task_id": "003fc3a9ac4f471d93252295344840af",
+      "sequence": 1,
+      "type": "status",
+      "payload": {
+        "status": "QUEUED"
+      },
+      "created_at": 1790491711.3852937
+    },
+    {
+      "task_id": "003fc3a9ac4f471d93252295344840af",
+      "sequence": 2,
+      "type": "status",
+      "payload": {
+        "status": "RUNNING"
+      },
+      "created_at": 1790491711.3888297
+    },
+    {
+      "task_id": "003fc3a9ac4f471d93252295344840af",
+      "sequence": 3,
+      "type": "assistant_message",
+      "payload": {
+        "text": "",
+        "tool_count": 3
+      },
+      "created_at": 1790491712.7392724
+    },
+    {
+      "task_id": "003fc3a9ac4f471d93252295344840af",
+      "sequence": 4,
+      "type": "tool_prepared",
+      "payload": {
+        "arguments": {
+          "query": "user-managed preferences for this workspace"
+        },
+        "call_id": "call_gHgZUr1m7l3P79CTBy2E0o5n",
+        "name": "search_memory"
+      },
+      "created_at": 1790491712.7500327
+    },
+    {
+      "task_id": "003fc3a9ac4f471d93252295344840af",
+      "sequence": 5,
+      "type": "tool_started",
+      "payload": {
+        "call_id": "call_gHgZUr1m7l3P79CTBy2E0o5n",
+        "name": "search_memory"
+      },
+      "created_at": 1790491712.7528288
+    },
+    {
+      "task_id": "003fc3a9ac4f471d93252295344840af",
+      "sequence": 6,
+      "type": "tool_result",
+      "payload": {
+        "artifact_ids": [],
+        "call_id": "call_gHgZUr1m7l3P79CTBy2E0o5n",
+        "content": "[]",
+        "error_code": null,
+        "metadata": {},
+        "status": "success"
+      },
+      "created_at": 1790491712.7551167
+    },
+    {
+      "task_id": "003fc3a9ac4f471d93252295344840af",
+      "sequence": 7,
+      "type": "tool_prepared",
+      "payload": {
+        "arguments": {},
+        "call_id": "call_uBJK3ioYvf5oYE9zmlmE05DZ",
+        "name": "team_status"
+      },
+      "created_at": 1790491712.7647636
+    },
+    {
+      "task_id": "003fc3a9ac4f471d93252295344840af",
+      "sequence": 8,
+      "type": "tool_started",
+      "payload": {
+        "call_id": "call_uBJK3ioYvf5oYE9zmlmE05DZ",
+        "name": "team_status"
+      },
+      "created_at": 1790491712.7673945
+    },
+    {
+      "task_id": "003fc3a9ac4f471d93252295344840af",
+      "sequence": 9,
+      "type": "tool_result",
+      "payload": {
+        "artifact_ids": [],
+        "call_id": "call_uBJK3ioYvf5oYE9zmlmE05DZ",
+        "content": "{\"team\": {\"name\": \"task-003fc3a9ac4f\", \"description\": \"\", \"createdAt\": 1790491712, \"leadAgentId\": \"003fc3a9ac4f471d93252295344840af\", \"members\": [{\"agentId\": \"003fc3a9ac4f471d93252295344840af\", \"name\": \"003fc3a9ac4f471d93252295344840af\", \"agentType\": \"durable-task\", \"model\": \"gpt-5.4-mini\", \"joinedAt\": 0, \"worktreePath\": \"C:\\\\Users\\\\Administrator\\\\Documents\\\\Codex\\\\2026-09-26\\\\ai-starcode-muse-coding-agent-python\\\\outputs\\\\muse-next\\\\work\\\\rc-da71920\\\\muse-bench\\\\cases\\\\P04\\\\round-03\\\\workspace-b\", \"backendType\": \"durable-worker\", \"isActive\": true}]}, \"statuses\": {\"003fc3a9ac4f471d93252295344840af\": \"RUNNING\"}}",
+        "error_code": null,
+        "metadata": {},
+        "status": "success"
+      },
+      "created_at": 1790491712.7707822
+    },
+    {
+      "task_id": "003fc3a9ac4f471d93252295344840af",
+      "sequence": 10,
+      "type": "tool_prepared",
+      "payload": {
+        "arguments": {
+          "path": ".",
+          "pattern": "**/*"
+        },
+        "call_id": "call_kOHDD3ZdLZVKAmLywh49bRhY",
+        "name": "list_files"
+      },
+      "created_at": 1790491712.7812786
+    },
+    {
+      "task_id": "003fc3a9ac4f471d93252295344840af",
+      "sequence": 11,
+      "type": "tool_started",
+      "payload": {
+        "call_id": "call_kOHDD3ZdLZVKAmLywh49bRhY",
+        "name": "list_files"
+      },
+      "created_at": 1790491712.783597
+    },
+    {
+      "task_id": "003fc3a9ac4f471d93252295344840af",
+      "sequence": 12,
+      "type": "tool_result",
+      "payload": {
+        "artifact_ids": [],
+        "call_id": "call_kOHDD3ZdLZVKAmLywh49bRhY",
+        "content": "{\"paths\": [], \"truncated\": false}",
+        "error_code": null,
+        "metadata": {},
+        "status": "success"
+      },
+      "created_at": 1790491712.7875202
+    },
+    {
+      "task_id": "003fc3a9ac4f471d93252295344840af",
+      "sequence": 13,
+      "type": "text_delta",
+      "payload": {
+        "text": "Applicable user-managed preference for this workspace:\n\n- **Common**: `USER_COMMON_6143`\n\nNot applicable here:\n- **Other project**: `PROJECT_B_ONLY_8291` (project-specific, not for this workspace)"
+      },
+      "created_at": 1790491714.2569182
+    },
+    {
+      "task_id": "003fc3a9ac4f471d93252295344840af",
+      "sequence": 14,
+      "type": "assistant_message",
+      "payload": {
+        "text": "Applicable user-managed preference for this workspace:\n\n- **Common**: `USER_COMMON_6143`\n\nNot applicable here:\n- **Other project**: `PROJECT_B_ONLY_8291` (project-specific, not for this workspace)",
+        "tool_count": 0
+      },
+      "created_at": 1790491714.2627697
+    },
+    {
+      "task_id": "003fc3a9ac4f471d93252295344840af",
+      "sequence": 15,
+      "type": "status",
+      "payload": {
+        "status": "SUCCEEDED"
+      },
+      "created_at": 1790491714.2780187
+    }
+  ]
+}

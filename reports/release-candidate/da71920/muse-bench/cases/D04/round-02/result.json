@@ -1,0 +1,43 @@
+{
+  "case": "D04",
+  "round": 2,
+  "track": "real-model",
+  "result": "AUTO_PASS_REVIEW_REQUIRED",
+  "checks": {
+    "expected_state": true,
+    "fact_coverage": true,
+    "source_hashes_unchanged": true,
+    "two_extraction_errors": true,
+    "deliverable_bytes_valid": true
+  },
+  "facts": {
+    "Falcon": true,
+    "May 2027": true,
+    "scan.pdf": true,
+    "broken.pdf": true
+  },
+  "task_status": "SUCCEEDED",
+  "error": "",
+  "model": "gpt-5.4-mini",
+  "protocol": "openai-responses",
+  "duration_seconds": 5.141,
+  "usage": {
+    "complete": true,
+    "input_tokens": 6874,
+    "output_tokens": 271
+  },
+  "model_requests": 3,
+  "tool_calls": 5,
+  "changed_files": [],
+  "artifacts": [
+    {
+      "id": "c5d54d5194ec4ce7a3df1d46f19d0734",
+      "task_id": "ff3a43de577947048f4df10c5b56cb26",
+      "name": "summary.md",
+      "media_type": "text/markdown",
+      "sha256": "6e29449b523526a8727e1b9f62d10b22e12d6c4c587eae9d4a9618e8336860d5",
+      "version": 1,
+      "created_at": 1790491496.3557842
+    }
+  ]
+}

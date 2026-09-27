@@ -75,3 +75,14 @@
 - Multi-Agent 0/3 in RC5. Two parents used `ask_user` to emit progress statements with no question, causing WAITING_INPUT. The third parent failed final verification. This is an actionable product input-validation issue, so the subsequent paid batch was stopped after one long-context phase; partial evidence is retained, not counted as a complete RC5 campaign.
 - Ruling: `ask_user` requires a direct question ending in `?` or `？`; invalid progress statements return actionable INVALID_ARGUMENTS without pausing. This syntactic guard cannot determine whether an otherwise well-formed question is necessary. Existing valid clarification/resume behavior remains.
 - RC6 red/green regression covers observed statement; source and model tests must be rerun because the public tool schema changed. RC5 data cannot be attributed to RC6.
+
+## RC6 final measured candidate and handoff
+
+- `da71920` / 0.3.0rc6: 958 passed, 2 skipped, 2 dependency warnings; Ruff/OpenAPI/lock/frontend checks passed. Fresh wheel API/web/Worker/CLI and owned-process start/stop passed locally without Java on PATH. Known source files unchanged: 407/407.
+- Original long-context three complete runs with both views scoring 11/11, 17/17, 23/23 at all thresholds. MCP paired FULL 10/10 and LAZY 10/10, exactly ten expected remote calls per mode. No price claim; actual cost unrecorded.
+- Original multi-Agent 1/3: numeric fully passed two-child contribution and unified verifier. Checkout and text did not complete; no score pooling or fixture answer injection. Ruling: retain failed attempts as a real limitation; repeated model stochastic retries or further prompt changes would require another frozen candidate and full campaign, so RC6 handoff remains NOT_ACCEPTED.
+- Business full fixed 60: each round 19 AUTO_PASS_REVIEW_REQUIRED, 1 P01 BLOCKED; 0 FAIL and no NOT_RUN. Human semantic reviews and independent Windows symlink remain pending, as requested by user. Export 1,019 scanned evidence files plus 60-line review CSV.
+- Permission replay: 180 actions, median 9, total 94, 50/50 risky probes denied. The different contract is documented; original 8 confirmations cannot be claimed.
+- RC6 wheel/source ZIP from same candidate commit created, 207 wheel files, fresh local install and no-Java PATH process smoke passed, archive secret and forbidden-file scan zero; SHA-256 manifest validated.
+- Ruling: final publication remains NOT_ACCEPTED until failed multi-Agent 3/3, independent host P01 and human review gates close. This is a local reviewable RC, not a public or Java-equivalence release.
+- RC6 local performance replay completed: p95 task creation 5.21 ms, event-to-browser 831.43 ms, cancel confirmation 5.78 ms, process tree stop 119.43 ms, expired lease recovery 7.47 ms. No RSS or real-model timing claim. Backup/restore and legacy v1→8 copy preservation are included in the 958-pass regression.

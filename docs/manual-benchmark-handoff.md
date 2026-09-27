@@ -2,6 +2,8 @@
 
 按用户要求：开发和自动检查先完成，人工判断集中到本清单。`AUTO_PASS_REVIEW_REQUIRED` 只是自动预筛通过，不能直接改成正式 PASS。
 
+RC6 本机批次的逐项入口：[60 行人工审核表](../reports/release-candidate/da71920/manual-review.csv)与[脱敏证据目录](../reports/release-candidate/da71920)。当前 57 项待人工审核、3 项 P01 环境阻塞；请勿在审核表中将阻塞项改为 PASS。独立 Windows 执行后要为该环境保存一份新的完整 60 项记录。
+
 ## 先核对版本
 
 使用交付目录中的 SHA-256 清单核对 wheel、源码 ZIP 和证据。保持 StarCode 原模型、服务、凭据来源与 40 轮 / 100 次工具 / 900 秒活动时间预算。不要把配置文件或密钥粘贴进报告。

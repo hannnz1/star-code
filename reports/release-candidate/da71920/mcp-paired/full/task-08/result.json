@@ -1,0 +1,28 @@
+{
+  "case": "task-08",
+  "mode": "FULL",
+  "checks": {
+    "completed": true,
+    "exact_result": true,
+    "exact_remote_call": true,
+    "schema_loaded": true,
+    "no_other_tools": true
+  },
+  "passed": true,
+  "model": "gpt-5.4-mini",
+  "seconds": 9.359,
+  "model_requests": 5,
+  "usage": {
+    "complete": true,
+    "input_tokens": 33590,
+    "output_tokens": 124
+  },
+  "answer": "2027-02-11",
+  "error": "",
+  "remote_calls": [
+    {
+      "tool": "certificates_get_expiry",
+      "entity_id": "CERT-527"
+    }
+  ]
+}

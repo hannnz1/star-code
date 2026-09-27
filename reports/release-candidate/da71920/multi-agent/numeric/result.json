@@ -1,0 +1,77 @@
+{
+  "case": "numeric",
+  "checks": {
+    "parent_completed": true,
+    "two_children": true,
+    "children_completed": true,
+    "independent_workspaces": true,
+    "overlap": true,
+    "unified_verifier": true,
+    "agent_ran_verifier": true,
+    "contract_preserved": true,
+    "committed_child_contributions": true
+  },
+  "passed": true,
+  "fixture_hashes": {
+    ".gitignore": "d732d5b08731425c80b19f110884169b471748c9c63c7c87ee6da09fb1b61931",
+    "contract.json": "709e384c2a9fd2e58988d0cf6bdef585eb7368f9a5eb829e8515c78fc8b8be22",
+    "README.md": "acdb3ddba972a7d1276a81fd5f024e8e63be9c797b2f5c25c994ef364cf3b119",
+    "verify.ps1": "f4911184168b0fef72963412eb1c51ada344d79b3337f8a93690947daef6b884",
+    "tests/GateTest.java": "12c55da6a4e4316a80cd58accd5af85a2449d97853318d0e31a8cc715348a033",
+    "src/retry/Delay.java": "34056f50674dcf4d7befc2d661e9c2a46ca2a722dc0994409d1e521ef20254d7",
+    "src/stats/Mean.java": "a6d5a5f112a25a18b46632c71ba3379c2f2c5da62aa720dae9f654622f08df3c"
+  },
+  "overlap_seconds": 13.359051704406738,
+  "parent_status": "SUCCEEDED",
+  "error": "",
+  "usage": {
+    "complete": true,
+    "input_tokens": 82934,
+    "output_tokens": 1751
+  },
+  "seconds": 47.38999999999942,
+  "contributions": [
+    {
+      "child_id": "5f9104095108400bac59406d3a88e839",
+      "commit": "654a38d826e4ec04a784ff9d0d2a80779163a03b",
+      "changed": [
+        "src/stats/Mean.java"
+      ],
+      "reviewed": true,
+      "integrated": true,
+      "ancestor": true,
+      "files_equal": true
+    },
+    {
+      "child_id": "b60eff8738834aef839bb540b1f84e5a",
+      "commit": "bf800df267033798a7e25835016c2a9076236b82",
+      "changed": [
+        "src/retry/Delay.java"
+      ],
+      "reviewed": true,
+      "integrated": true,
+      "ancestor": true,
+      "files_equal": true
+    }
+  ],
+  "children": [
+    {
+      "id": "5f9104095108400bac59406d3a88e839",
+      "status": "SUCCEEDED",
+      "usage": {
+        "complete": true,
+        "input_tokens": 21152,
+        "output_tokens": 557
+      }
+    },
+    {
+      "id": "b60eff8738834aef839bb540b1f84e5a",
+      "status": "SUCCEEDED",
+      "usage": {
+        "complete": true,
+        "input_tokens": 18678,
+        "output_tokens": 519
+      }
+    }
+  ]
+}

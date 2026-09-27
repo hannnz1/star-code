@@ -1,0 +1,54 @@
+{
+  "case": "R02",
+  "round": 2,
+  "track": "real-model",
+  "result": "AUTO_PASS_REVIEW_REQUIRED",
+  "checks": {
+    "expected_state": true,
+    "fact_coverage": true,
+    "source_count": true,
+    "citations_exist": true,
+    "report_exists": true,
+    "workspace_unchanged": true,
+    "failed_source_recorded": true,
+    "deliverable_bytes_valid": true,
+    "source_bytes_valid": true,
+    "citations_in_deliverable": true,
+    "citation_labels_match_sources": true,
+    "explicit_doubling_consistent": true
+  },
+  "facts": {
+    "120 USD": true,
+    "40 projects": true,
+    "7 days": true,
+    "CSV": true,
+    "180 USD": true,
+    "75 projects": true,
+    "14 days": true,
+    "JSON": true
+  },
+  "task_status": "SUCCEEDED",
+  "error": "",
+  "model": "gpt-5.4-mini",
+  "protocol": "openai-responses",
+  "duration_seconds": 11.375,
+  "usage": {
+    "complete": true,
+    "input_tokens": 7194,
+    "output_tokens": 482
+  },
+  "model_requests": 3,
+  "tool_calls": 4,
+  "changed_files": [],
+  "artifacts": [
+    {
+      "id": "1db50801615146aaad05b00ab2cbd0be",
+      "task_id": "9d64eefe574b4faeb42b48dd4c0a2529",
+      "name": "report.md",
+      "media_type": "text/markdown",
+      "sha256": "d89f73b3857d624a7a0990648aad1fca40af6bfd99d8c0428c45f81a61044b59",
+      "version": 1,
+      "created_at": 1790491451.0605645
+    }
+  ]
+}

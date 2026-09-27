@@ -1,0 +1,182 @@
+{
+  "6bec370b0bb84728877fd4436b2cd359": [
+    {
+      "task_id": "6bec370b0bb84728877fd4436b2cd359",
+      "sequence": 1,
+      "type": "status",
+      "payload": {
+        "status": "QUEUED"
+      },
+      "created_at": 1790491703.8929148
+    },
+    {
+      "task_id": "6bec370b0bb84728877fd4436b2cd359",
+      "sequence": 2,
+      "type": "status",
+      "payload": {
+        "status": "RUNNING"
+      },
+      "created_at": 1790491703.9004498
+    },
+    {
+      "task_id": "6bec370b0bb84728877fd4436b2cd359",
+      "sequence": 3,
+      "type": "assistant_message",
+      "payload": {
+        "text": "",
+        "tool_count": 2
+      },
+      "created_at": 1790491705.33407
+    },
+    {
+      "task_id": "6bec370b0bb84728877fd4436b2cd359",
+      "sequence": 4,
+      "type": "tool_prepared",
+      "payload": {
+        "arguments": {
+          "query": "Project preference"
+        },
+        "call_id": "call_trafSAiKnUdhRYCliz3OCjvh",
+        "name": "search_memory"
+      },
+      "created_at": 1790491705.3498335
+    },
+    {
+      "task_id": "6bec370b0bb84728877fd4436b2cd359",
+      "sequence": 5,
+      "type": "tool_started",
+      "payload": {
+        "call_id": "call_trafSAiKnUdhRYCliz3OCjvh",
+        "name": "search_memory"
+      },
+      "created_at": 1790491705.3540213
+    },
+    {
+      "task_id": "6bec370b0bb84728877fd4436b2cd359",
+      "sequence": 6,
+      "type": "tool_result",
+      "payload": {
+        "artifact_ids": [],
+        "call_id": "call_trafSAiKnUdhRYCliz3OCjvh",
+        "content": "[{\"id\": \"5c2d002a558245868b08140a88899743\", \"scope\": \"project\", \"workspace_id\": \"2e795a6dc8c64f4e8c5d9762e21ad9cc\", \"title\": \"Project preference\", \"content\": \"PREFERENCE_MANDARIN_3197\", \"source_task_id\": null, \"updated_at\": 1790491703.8899221}]",
+        "error_code": null,
+        "metadata": {},
+        "status": "success"
+      },
+      "created_at": 1790491705.3597724
+    },
+    {
+      "task_id": "6bec370b0bb84728877fd4436b2cd359",
+      "sequence": 7,
+      "type": "tool_prepared",
+      "payload": {
+        "arguments": {
+          "query": "PREFERENCE_MANDARIN_3197"
+        },
+        "call_id": "call_4nj1y0tD9GEnZi6qdrVB115Y",
+        "name": "search_memory"
+      },
+      "created_at": 1790491705.371068
+    },
+    {
+      "task_id": "6bec370b0bb84728877fd4436b2cd359",
+      "sequence": 8,
+      "type": "tool_started",
+      "payload": {
+        "call_id": "call_4nj1y0tD9GEnZi6qdrVB115Y",
+        "name": "search_memory"
+      },
+      "created_at": 1790491705.3740342
+    },
+    {
+      "task_id": "6bec370b0bb84728877fd4436b2cd359",
+      "sequence": 9,
+      "type": "tool_result",
+      "payload": {
+        "artifact_ids": [],
+        "call_id": "call_4nj1y0tD9GEnZi6qdrVB115Y",
+        "content": "[{\"id\": \"5c2d002a558245868b08140a88899743\", \"scope\": \"project\", \"workspace_id\": \"2e795a6dc8c64f4e8c5d9762e21ad9cc\", \"title\": \"Project preference\", \"content\": \"PREFERENCE_MANDARIN_3197\", \"source_task_id\": null, \"updated_at\": 1790491703.8899221}]",
+        "error_code": null,
+        "metadata": {},
+        "status": "success"
+      },
+      "created_at": 1790491705.3785503
+    },
+    {
+      "task_id": "6bec370b0bb84728877fd4436b2cd359",
+      "sequence": 10,
+      "type": "text_delta",
+      "payload": {
+        "text": "我读到了可用的用户管理记忆，目前只有一条项目级偏好：\n\n- **Project preference**：`PREFERENCE_MANDARIN_3197`\n\n可应用的偏好：\n- 这是**项目范围**的记忆，不是全局用户偏好。\n- 它看起来像一个内部偏好/标记值，但**没有给出可直接展开的自然语言说明**。\n- 基于当前信息，我只能确认：**后续应优先按“中文/普通话相关偏好”理解或响应**，但具体含义仍不明确。\n\n我没有创建或编辑任何记忆。"
+      },
+      "created_at": 1790491707.2624254
+    },
+    {
+      "task_id": "6bec370b0bb84728877fd4436b2cd359",
+      "sequence": 11,
+      "type": "assistant_message",
+      "payload": {
+        "text": "我读到了可用的用户管理记忆，目前只有一条项目级偏好：\n\n- **Project preference**：`PREFERENCE_MANDARIN_3197`\n\n可应用的偏好：\n- 这是**项目范围**的记忆，不是全局用户偏好。\n- 它看起来像一个内部偏好/标记值，但**没有给出可直接展开的自然语言说明**。\n- 基于当前信息，我只能确认：**后续应优先按“中文/普通话相关偏好”理解或响应**，但具体含义仍不明确。\n\n我没有创建或编辑任何记忆。",
+        "tool_count": 0
+      },
+      "created_at": 1790491707.2683263
+    },
+    {
+      "task_id": "6bec370b0bb84728877fd4436b2cd359",
+      "sequence": 12,
+      "type": "status",
+      "payload": {
+        "status": "SUCCEEDED"
+      },
+      "created_at": 1790491707.2836285
+    }
+  ],
+  "cc73e55430be431d8fc94bae0e60b086": [
+    {
+      "task_id": "cc73e55430be431d8fc94bae0e60b086",
+      "sequence": 1,
+      "type": "status",
+      "payload": {
+        "status": "QUEUED"
+      },
+      "created_at": 1790491707.2889507
+    },
+    {
+      "task_id": "cc73e55430be431d8fc94bae0e60b086",
+      "sequence": 2,
+      "type": "status",
+      "payload": {
+        "status": "RUNNING"
+      },
+      "created_at": 1790491707.292283
+    },
+    {
+      "task_id": "cc73e55430be431d8fc94bae0e60b086",
+      "sequence": 3,
+      "type": "text_delta",
+      "payload": {
+        "text": "No user-managed preferences are currently available."
+      },
+      "created_at": 1790491708.5421646
+    },
+    {
+      "task_id": "cc73e55430be431d8fc94bae0e60b086",
+      "sequence": 4,
+      "type": "assistant_message",
+      "payload": {
+        "text": "No user-managed preferences are currently available.",
+        "tool_count": 0
+      },
+      "created_at": 1790491708.547072
+    },
+    {
+      "task_id": "cc73e55430be431d8fc94bae0e60b086",
+      "sequence": 5,
+      "type": "status",
+      "payload": {
+        "status": "SUCCEEDED"
+      },
+      "created_at": 1790491708.5639756
+    }
+  ]
+}

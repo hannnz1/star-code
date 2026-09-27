@@ -1,0 +1,73 @@
+{
+  "case": "text",
+  "checks": {
+    "parent_completed": false,
+    "two_children": true,
+    "children_completed": false,
+    "independent_workspaces": true,
+    "overlap": true,
+    "unified_verifier": false,
+    "agent_ran_verifier": false,
+    "contract_preserved": true,
+    "committed_child_contributions": false
+  },
+  "passed": false,
+  "fixture_hashes": {
+    ".gitignore": "d732d5b08731425c80b19f110884169b471748c9c63c7c87ee6da09fb1b61931",
+    "contract.json": "693cc3084b36d81c3fb5027c16fea714efcf8b6c62fd7a334567377583d8af37",
+    "README.md": "a6265b2a31cfe792f88fb33f8149534f6a52259a01ddfe9e4d278e7c8b738502",
+    "verify.ps1": "f4911184168b0fef72963412eb1c51ada344d79b3337f8a93690947daef6b884",
+    "tests/GateTest.java": "dc735e704a1aa32e0b84248c71159daf3908e86dd8ce7c6d4b8a6b85d130e406",
+    "src/text/Header.java": "bb4871b11aca61bb7491479cf6228ed2c4488ad583457606b41244e1967b68c8",
+    "src/text/Slug.java": "3589ff114ea2af9c55133cb013ca69eeea51795eda943b43ac83bfd73d54b37b"
+  },
+  "overlap_seconds": 3.133636951446533,
+  "parent_status": "WAITING_INPUT",
+  "error": "",
+  "usage": {
+    "complete": true,
+    "input_tokens": 22943,
+    "output_tokens": 922
+  },
+  "seconds": 14.343999999997322,
+  "contributions": [
+    {
+      "child_id": "191d4ed684b844c8a6b774834c4cb7a0",
+      "commit": "01c8b74adb990e541eb3bdd6f254a6189d504946",
+      "changed": [],
+      "reviewed": false,
+      "integrated": false,
+      "ancestor": true,
+      "files_equal": true
+    },
+    {
+      "child_id": "78192d65d28e4035abd3af8bff3f48c0",
+      "commit": "01c8b74adb990e541eb3bdd6f254a6189d504946",
+      "changed": [],
+      "reviewed": false,
+      "integrated": false,
+      "ancestor": true,
+      "files_equal": true
+    }
+  ],
+  "children": [
+    {
+      "id": "191d4ed684b844c8a6b774834c4cb7a0",
+      "status": "QUEUED",
+      "usage": {
+        "complete": true,
+        "input_tokens": 8044,
+        "output_tokens": 401
+      }
+    },
+    {
+      "id": "78192d65d28e4035abd3af8bff3f48c0",
+      "status": "QUEUED",
+      "usage": {
+        "complete": true,
+        "input_tokens": 2184,
+        "output_tokens": 67
+      }
+    }
+  ]
+}

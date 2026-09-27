@@ -1,0 +1,138 @@
+{
+  "verified": {
+    "killed_pid": 45524,
+    "checkpoint_before": {
+      "active_seconds": 1.9839999999967404,
+      "messages": [
+        {
+          "content": "Use write_file exactly once to write 'committed' to result.txt, then report completion. Do not use commands or other writes.",
+          "role": "user"
+        },
+        {
+          "content": "",
+          "role": "assistant",
+          "tool_calls": [
+            {
+              "arguments": {
+                "content": "committed",
+                "path": "result.txt"
+              },
+              "id": "call_MydM8NpanvTO8Oi1a7iqybSU",
+              "name": "write_file"
+            }
+          ]
+        }
+      ],
+      "model_requests": 1,
+      "pending_calls": [
+        {
+          "arguments": {
+            "content": "committed",
+            "path": "result.txt"
+          },
+          "id": "call_MydM8NpanvTO8Oi1a7iqybSU",
+          "name": "write_file"
+        }
+      ],
+      "pending_hook_events": [],
+      "project_guidance": {
+        "content": "",
+        "sources": []
+      },
+      "team_message_ids": [],
+      "usage": {
+        "complete": true,
+        "input_tokens": 2060,
+        "output_tokens": 24
+      },
+      "usage_pending": false
+    },
+    "calls_before": [
+      {
+        "task_id": "bfe7d70176d24874980e4d2da5b3611c",
+        "id": "call_MydM8NpanvTO8Oi1a7iqybSU",
+        "name": "write_file",
+        "arguments": {
+          "content": "committed",
+          "path": "result.txt"
+        },
+        "risk": "write",
+        "status": "EXECUTING",
+        "digest": "b73ddf067034bdae854e723f8fffbf82b08eb99adb5bf51ff86a9e1ce6cb49b5",
+        "result": null,
+        "attempts": 1,
+        "created_at": 1790491688.9476876,
+        "updated_at": 1790491688.9516997
+      }
+    ],
+    "recovered_status": "INTERRUPTED"
+  },
+  "unverifiable": {
+    "killed_pid": 58128,
+    "checkpoint_before": {
+      "active_seconds": 2.562000000005355,
+      "messages": [
+        {
+          "content": "Use write_file exactly once to write 'committed' to result.txt, then report completion. Do not use commands or other writes.",
+          "role": "user"
+        },
+        {
+          "content": "",
+          "role": "assistant",
+          "tool_calls": [
+            {
+              "arguments": {
+                "content": "committed",
+                "path": "result.txt"
+              },
+              "id": "call_LhLYR8ZZ5Z7eP2ehmFxOaymz",
+              "name": "write_file"
+            }
+          ]
+        }
+      ],
+      "model_requests": 1,
+      "pending_calls": [
+        {
+          "arguments": {
+            "content": "committed",
+            "path": "result.txt"
+          },
+          "id": "call_LhLYR8ZZ5Z7eP2ehmFxOaymz",
+          "name": "write_file"
+        }
+      ],
+      "pending_hook_events": [],
+      "project_guidance": {
+        "content": "",
+        "sources": []
+      },
+      "team_message_ids": [],
+      "usage": {
+        "complete": true,
+        "input_tokens": 2060,
+        "output_tokens": 24
+      },
+      "usage_pending": false
+    },
+    "calls_before": [
+      {
+        "task_id": "edee9545a737498f9700f526cd27da6a",
+        "id": "call_LhLYR8ZZ5Z7eP2ehmFxOaymz",
+        "name": "write_file",
+        "arguments": {
+          "content": "committed",
+          "path": "result.txt"
+        },
+        "risk": "write",
+        "status": "EXECUTING",
+        "digest": "6a173d8d3aa6325dfb6b402bdcc9a5b7723f475587430fe0a86ddb65c3b9013d",
+        "result": null,
+        "attempts": 1,
+        "created_at": 1790491696.4859874,
+        "updated_at": 1790491696.4919214
+      }
+    ],
+    "recovered_status": "INTERRUPTED"
+  }
+}
