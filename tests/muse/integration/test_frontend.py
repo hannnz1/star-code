@@ -175,6 +175,12 @@ def test_browser_input_approval_download_and_followup(tmp_path, monkeypatch):
             page.get_by_role('button',name='批准执行').click()
             page.get_by_role('button',name='批准执行').wait_for(state='detached')
             run_worker()
+            # New default also approves reversible artifact writes. Assert the
+            # actual UI approval rather than granting acceptEdits implicitly.
+            page.get_by_text('report.md', exact=False).first.wait_for()
+            page.get_by_role('button',name='批准执行').click()
+            page.get_by_role('button',name='批准执行').wait_for(state='detached')
+            run_worker()
             page.get_by_label('在此基础上继续').wait_for()
             with page.expect_download() as download:
                 page.get_by_role('button',name=re.compile('report.md')).click()

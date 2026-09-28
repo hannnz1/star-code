@@ -56,6 +56,7 @@ def row_task(row) -> TaskRecord:
 class TaskRepository(DelegationMixin, TeamMixin, ConversationMixin):
     def __init__(self, path: Path):
         self.db = Database(path)
+        self.snapshot_factory = None
 
     def register_workspace(self, path: str, name: str = "Workspace") -> dict:
         try:
@@ -117,16 +118,20 @@ class TaskRepository(DelegationMixin, TeamMixin, ConversationMixin):
             raise ValueError("Worker lease is no longer valid")
         return task
 
-    def create(self, request: TaskRequest) -> TaskRecord:
+    def create(self, request: TaskRequest, *, initial_call=None) -> TaskRecord:
         if not request.read_only and explicit_read_only(request.prompt):
-            request = request.model_copy(update={'read_only': True})
+            request = request.model_copy(update={'read_only': True, 'permission_mode': 'plan'})
         now = time.time()
         with self.db.transaction() as conn:
             old = conn.execute(text("SELECT * FROM tasks WHERE client_request_id=:key"), {"key": request.client_request_id}).mappings().first()
             if old:
                 previous = row_task(old)
+                if previous.legacy_policy and 'permission_mode' not in request.model_fields_set:
+                    request = request.model_copy(update={'permission_mode': previous.permission_mode})
                 if any(getattr(previous, key) != value for key, value in request.model_dump().items()):
                     raise ValueError("client_request_id already belongs to another request")
+                if initial_call and previous.checkpoint.get('skill_request') != initial_call.model_dump():
+                    raise ValueError('Skill request ID reused with different source or arguments')
                 return previous
             if not conn.execute(text("SELECT id FROM workspaces WHERE id=:id"), {"id": request.workspace_id}).first():
                 raise ValueError("Unknown workspace")
@@ -134,11 +139,72 @@ class TaskRepository(DelegationMixin, TeamMixin, ConversationMixin):
                 parent = self._task(conn, request.parent_task_id)
                 if parent["workspace_id"] != request.workspace_id or parent["status"] not in TERMINAL:
                     raise ValueError("Follow-up requires a terminal parent in the same workspace")
+            if request.plan_task_id:
+                plan = self._task(conn, request.plan_task_id)
+                digest = hashlib.sha256(plan['result'].encode()).hexdigest()
+                if plan['workspace_id'] != request.workspace_id or plan['status'] != 'SUCCEEDED' or not plan['read_only'] or request.plan_sha256 != digest:
+                    raise ValueError('Reviewed plan source or content hash does not match')
+            elif request.plan_sha256:
+                raise ValueError('Plan hash requires a plan task')
             data = {**request.model_dump(), "id": uuid.uuid4().hex, "now": now}
-            conn.execute(text("""INSERT INTO tasks(id,prompt,workspace_id,scenario,client_request_id,parent_task_id,status,created_at,updated_at,read_only)
-                VALUES(:id,:prompt,:workspace_id,:scenario,:client_request_id,:parent_task_id,'QUEUED',:now,:now,:read_only)"""), data)
+            workspace = dict(conn.execute(text('SELECT * FROM workspaces WHERE id=:id'), {'id': request.workspace_id}).mappings().one())
+            checkpoint = self.snapshot_factory(request, workspace) if self.snapshot_factory else {'current_directory': request.current_directory}
+            if initial_call:
+                checkpoint.update(skill_request=initial_call.model_dump(), pending_calls=[initial_call.model_dump()],
+                                  messages=[{'role': 'user', 'content': request.prompt},
+                                            {'role': 'assistant', 'content': '', 'tool_calls': [initial_call.model_dump()]}])
+            data['checkpoint'] = encode(checkpoint)
+            conn.execute(text("""INSERT INTO tasks(id,prompt,workspace_id,scenario,client_request_id,parent_task_id,status,created_at,updated_at,read_only,permission_mode,legacy_policy,coordinator_mode,plan_task_id,plan_sha256,current_directory,checkpoint)
+                VALUES(:id,:prompt,:workspace_id,:scenario,:client_request_id,:parent_task_id,'QUEUED',:now,:now,:read_only,:permission_mode,0,:coordinator_mode,:plan_task_id,:plan_sha256,:current_directory,:checkpoint)"""), data)
             self._event(conn, data["id"], "status", {"status": "QUEUED"}, now)
+            if initial_call:
+                self._event(conn, data['id'], 'skill_requested', {'name': initial_call.arguments['name'],
+                            'sha256': initial_call.arguments['_source_sha256'], 'call_id': initial_call.id}, now)
             return row_task(self._task(conn, data["id"]))
+
+    def set_permission_mode(self, task_id: str, mode: str, *, expected_revision: int) -> TaskRecord:
+        from muse.permissions.task_policy import action_digest
+        if mode not in {'default', 'acceptEdits', 'plan'}:
+            raise ValueError('Unknown permission mode')
+        ranks = {'plan': 0, 'default': 1, 'acceptEdits': 2}
+        with self.db.transaction() as conn:
+            task = self._task(conn, task_id)
+            if task['revision'] != expected_revision:
+                raise ValueError('Task revision conflict')
+            if task['status'] not in {'QUEUED', 'PAUSED', 'WAITING_INPUT', 'WAITING_APPROVAL', 'INTERRUPTED'}:
+                raise ValueError('Cannot change policy while running or after completion')
+            parent = conn.execute(text('SELECT t.permission_mode FROM tasks t JOIN task_delegations d ON d.parent_id=t.id WHERE d.child_id=:id'), {'id': task_id}).scalar()
+            if parent and ranks[mode] > ranks[parent]:
+                raise ValueError('Child policy cannot exceed its parent')
+            identifiers, cursor = [task_id], 0
+            while cursor < len(identifiers):
+                identifiers.extend(row[0] for row in conn.execute(text('SELECT child_id FROM task_delegations WHERE parent_id=:id'), {'id': identifiers[cursor]}))
+                cursor += 1
+            descendants = [self._task(conn, identifier) for identifier in identifiers]
+            if any(row['status'] == 'RUNNING' for row in descendants):
+                raise ValueError('Cannot change policy while a descendant is running')
+            if task['permission_mode'] == mode and not task['legacy_policy']:
+                return row_task(task)
+            now = time.time()
+            for row in descendants:
+                if row['status'] in TERMINAL:
+                    continue
+                effective = mode if row['id'] == task_id else min((row['permission_mode'], mode), key=ranks.get)
+                version = row['policy_version'] + 1
+                values = {'id': row['id'], 'mode': effective, 'version': version, 'read_only': effective == 'plan', 'now': now}
+                conn.execute(text('UPDATE tasks SET permission_mode=:mode,policy_version=:version,legacy_policy=0,read_only=:read_only,revision=revision+1,updated_at=:now WHERE id=:id'), values)
+                prepared = conn.execute(text("SELECT * FROM tool_calls WHERE task_id=:id AND status='PREPARED'"), values).mappings().all()
+                updated_task = self._task(conn, row['id'])
+                for call in prepared:
+                    conn.execute(text("UPDATE approvals SET status='INVALIDATED' WHERE task_id=:id AND tool_call_id=:call AND status IN ('PENDING','APPROVED')"), {**values, 'call': call['id']})
+                    digest = action_digest(updated_task, call['name'], json.loads(call['arguments']))
+                    conn.execute(text('UPDATE tool_calls SET digest=:digest,updated_at=:now WHERE task_id=:id AND id=:call'), {**values, 'call': call['id'], 'digest': digest})
+                # Resume explicitly after policy review. Keep checkpoint/pending
+                # model call so it is re-evaluated under the new policy.
+                if row['status'] == 'WAITING_APPROVAL':
+                    self._state(conn, row['id'], 'PAUSED', now, pause_requested=True)
+                self._event(conn, row['id'], 'permission_policy_changed', {'permission_mode': effective, 'policy_version': version}, now)
+            return row_task(self._task(conn, task_id))
 
     def get(self, task_id: str) -> TaskRecord:
         rows = self.db.rows("SELECT * FROM tasks WHERE id=:id", {"id": task_id})
@@ -200,6 +266,14 @@ class TaskRepository(DelegationMixin, TeamMixin, ConversationMixin):
                     raise ValueError('Finish pending tool/model calls before changing context')
                 if action == 'reload':
                     cp.pop('project_guidance', None)
+                    cp.pop('role_snapshot', None)
+                    cp['source_version'] = cp.get('source_version', 1) + 1
+                    if self.snapshot_factory:
+                        workspace = dict(conn.execute(text('SELECT * FROM workspaces WHERE id=:id'), {'id': task['workspace_id']}).mappings().one())
+                        snapshot = self.snapshot_factory(row_task(task), workspace)
+                        for key in ('project_guidance', 'role_snapshot'):
+                            if key in snapshot:
+                                cp[key] = {**snapshot[key], 'version': cp['source_version']}
                 elif cp.get('messages'):
                     from muse.agent.context import compact_messages
                     if len(encode(cp['messages'])) > 8 * 1024 * 1024:
@@ -230,6 +304,7 @@ class TaskRepository(DelegationMixin, TeamMixin, ConversationMixin):
                 cp = json.loads(task["checkpoint"])
                 cp.pop("input_question", None)
                 cp.setdefault("messages", []).append({"role": "user", "content": content})
+                cp.setdefault('user_sources', [{'role': 'user', 'content': task['prompt']}]).append({'role': 'user', 'content': content})
                 conn.execute(text("UPDATE tasks SET checkpoint=:cp WHERE id=:id"), {"cp": encode(cp), "id": task_id})
                 self._state(conn, task_id, "QUEUED", now)
             else:
@@ -253,7 +328,8 @@ class TaskRepository(DelegationMixin, TeamMixin, ConversationMixin):
             task = self._lease(conn, task_id, owner, epoch, now)
             if task["cancel_requested"]:
                 raise ValueError("Task has been cancelled")
-            digest = hashlib.sha256(encode([task_id, task["workspace_id"], name, arguments]).encode()).hexdigest()
+            from muse.permissions.task_policy import action_digest
+            digest = action_digest(task, name, arguments)
             params = {"task_id": task_id, "id": call_id, "name": name, "arguments": encode(arguments), "risk": risk, "digest": digest, "now": now}
             old = conn.execute(text("SELECT * FROM tool_calls WHERE task_id=:task_id AND id=:id"), params).mappings().first()
             if old:
@@ -277,6 +353,11 @@ class TaskRepository(DelegationMixin, TeamMixin, ConversationMixin):
                 return False
             if call["status"] != "PREPARED":
                 raise ValueError("Tool call is already executing or has uncertain side effects")
+            from muse.permissions.task_policy import action_digest, requires_approval
+            if task['permission_mode'] == 'plan' and call['risk'] != 'read':
+                raise PermissionError('Plan policy permits only read tools')
+            if call['digest'] != action_digest(task, call['name'], json.loads(call['arguments'])):
+                raise ValueError('Tool approval policy version no longer matches')
             attempts = sum(conn.execute(text("SELECT COALESCE(SUM(attempts),0) FROM tool_calls WHERE task_id=:id"), {"id": identifier}).scalar_one()
                            for identifier in self._group_ids(conn, task_id))
             frozen = conn.execute(text('SELECT max_tool_calls FROM execution_budgets WHERE root_id=:root'),
@@ -285,7 +366,7 @@ class TaskRepository(DelegationMixin, TeamMixin, ConversationMixin):
                 max_calls = min(max_calls, frozen)
             if attempts >= max_calls:
                 raise ValueError("Tool call budget exhausted")
-            if call["risk"] == "execute":
+            if requires_approval(task['permission_mode'], call['risk']):
                 approved = conn.execute(text("SELECT id FROM approvals WHERE task_id=:task_id AND tool_call_id=:id AND action_digest=:digest AND status='APPROVED' AND expires_at>:now"),
                                         {**params, "digest": call["digest"], "now": now}).first()
                 if not approved:
@@ -315,15 +396,17 @@ class TaskRepository(DelegationMixin, TeamMixin, ConversationMixin):
     def request_approval(self, task_id: str, owner: str, epoch: int, call_id: str) -> dict:
         now = time.time()
         with self.db.transaction() as conn:
-            self._lease(conn, task_id, owner, epoch, now)
+            task = self._lease(conn, task_id, owner, epoch, now)
             call = conn.execute(text("SELECT * FROM tool_calls WHERE task_id=:task AND id=:call"), {"task": task_id, "call": call_id}).mappings().one()
-            data = {"id": uuid.uuid4().hex, "task_id": task_id, "call": call_id, "digest": call["digest"], "expires": now + 3600, "now": now}
-            conn.execute(text("""INSERT INTO approvals(id,task_id,tool_call_id,action_digest,status,expires_at,created_at)
-                VALUES(:id,:task_id,:call,:digest,'PENDING',:expires,:now)
+            data = {"id": uuid.uuid4().hex, "task_id": task_id, "call": call_id, "digest": call["digest"], "expires": now + 3600, "now": now,
+                    'permission_mode': task['permission_mode'], 'policy_version': task['policy_version'], 'workspace_id': task['workspace_id']}
+            conn.execute(text("""INSERT INTO approvals(id,task_id,tool_call_id,action_digest,status,expires_at,created_at,permission_mode,policy_version,workspace_id)
+                VALUES(:id,:task_id,:call,:digest,'PENDING',:expires,:now,:permission_mode,:policy_version,:workspace_id)
                 ON CONFLICT(task_id,tool_call_id,action_digest) DO UPDATE SET status='PENDING',expires_at=excluded.expires_at"""), data)
             self._state(conn, task_id, "WAITING_APPROVAL", now, lease_owner=None, lease_until=None)
-            self._event(conn, task_id, "approval_required", {"call_id": call_id, "name": call["name"], "arguments": json.loads(call["arguments"])}, now)
-            return dict(conn.execute(text("SELECT * FROM approvals WHERE task_id=:task_id AND tool_call_id=:call"), data).mappings().one())
+            self._event(conn, task_id, "approval_required", {"call_id": call_id, "name": call["name"], "arguments": json.loads(call["arguments"]),
+                        'permission_mode': task['permission_mode'], 'policy_version': task['policy_version']}, now)
+            return dict(conn.execute(text("SELECT * FROM approvals WHERE task_id=:task_id AND tool_call_id=:call AND action_digest=:digest"), data).mappings().one())
 
     def approvals(self, task_id: str | None = None) -> list[dict]:
         clause = "WHERE a.task_id=:task" if task_id else ""

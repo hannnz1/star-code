@@ -89,7 +89,7 @@ class MuseApp(App):
                 return
             try:
                 task = await asyncio.to_thread(self.terminal.task)
-                state.update(f"{task['id'][:12]} · {task['status']} · {task['prompt'][:80]}")
+                state.update(f"{task['id'][:12]} · {task['status']} · {task.get('permission_mode', 'default')} · {task['prompt'][:80]}")
                 outcome = (task['id'], task.get('result'), task.get('error'))
                 if outcome != self.last_result and (outcome[1] or outcome[2]):
                     self.query_one(RichLog).write(outcome[1] or outcome[2])
@@ -98,6 +98,7 @@ class MuseApp(App):
                 state.update('连接未完成：' + str(error))
 
 
-def run_tui(settings, workspace):
+def run_tui(settings, workspace, *, permission_mode='default'):
     with connect_terminal(settings, workspace) as terminal:
+        terminal.permission_mode = permission_mode
         MuseApp(terminal).run()

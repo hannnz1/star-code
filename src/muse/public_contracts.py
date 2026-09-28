@@ -3,7 +3,7 @@ from typing import Any, Literal
 
 from pydantic import BaseModel
 
-from muse.contracts import TaskStatus
+from muse.contracts import PermissionMode, TaskStatus
 
 
 class UsageView(BaseModel):
@@ -26,6 +26,12 @@ class TaskView(BaseModel):
     client_request_id: str
     parent_task_id: str | None
     read_only: bool
+    permission_mode: PermissionMode
+    policy_version: int
+    legacy_policy: bool
+    coordinator_mode: bool = False
+    plan_task_id: str | None = None
+    plan_sha256: str | None = None
     status: TaskStatus
     revision: int
     created_at: float
@@ -63,7 +69,10 @@ class ApprovalView(BaseModel):
     task_id: str
     tool_call_id: str
     action_digest: str
-    status: Literal['PENDING', 'APPROVED', 'DENIED']
+    status: Literal['PENDING', 'APPROVED', 'DENIED', 'INVALIDATED']
+    permission_mode: PermissionMode
+    policy_version: int
+    workspace_id: str
     expires_at: float
     created_at: float
     name: str
@@ -77,6 +86,10 @@ class MemoryView(BaseModel):
     content: str
     source_task_id: str | None
     updated_at: float
+    version: int = 1
+    status: str = 'active'
+    provenance: str = 'legacy/manual'
+    conflict_id: str | None = None
 
 
 class UncertainActionView(BaseModel):

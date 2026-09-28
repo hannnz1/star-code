@@ -1,15 +1,19 @@
 from __future__ import annotations
 
+import asyncio
 import hashlib
 import json
 import os
 import tempfile
+import threading
+import time
 from pathlib import Path
 
 from sqlalchemy import text
 
 from muse.contracts import ToolResult
 from muse.permissions.policy import WorkspacePolicy
+from muse.tools.regex_search import FILE_TIMEOUT, SEARCH_TIMEOUT, RegexSession
 
 MAX_FILE_BYTES = 16 * 1024 * 1024
 IGNORED_DIRS = {".git", ".muse", ".mewcode", ".venv", "node_modules", "__pycache__", ".pytest_cache"}
@@ -51,16 +55,52 @@ class FileTools:
             content = data.decode("utf-8-sig")
         except UnicodeDecodeError:
             raise ValueError("File is not UTF-8 text; use read_document for PDF files") from None
-        return self.context.safe(content)
+        if 'offset' not in args and 'limit' not in args:
+            return self.context.safe(content)
+        offset, limit = args.get('offset', 0), args.get('limit', 2000)
+        if type(offset) is not int or offset < 0 or type(limit) is not int or not 1 <= limit <= 10000:
+            return ToolResult(call_id=call_id, status='error', error_code='INVALID_ARGUMENTS',
+                              content='offset must be a nonnegative integer; limit must be an integer from 1 to 10000')
+        lines = self.context.safe_lines(content)
+        end = min(offset + limit, len(lines))
+        return json.dumps({'lines': [{'line': i + 1, 'text': self.context.safe(lines[i])}
+                                     for i in range(offset, end)], 'offset': offset,
+                           'next_offset': end if end < len(lines) else None,
+                           'truncated': end < len(lines), 'total_lines': len(lines)}, ensure_ascii=False)
 
-    async def list_files(self, args, call_id):
-        root = self.policy.resolve(args.get("path", "."), must_exist=True)
-        pattern = args.get("pattern", "*")
+    async def list_files(self, args, call_id, *, deadline=None):
+        stop = threading.Event()
+
+        def collect():
+            root = self.policy.resolve(args.get('path', '.'), must_exist=True)
+            return self._list_paths(root, args.get('pattern', '*'), stop, deadline)
+
+        pending = asyncio.create_task(asyncio.to_thread(collect))
+        try:
+            if deadline is None:
+                return await self.context.controlled(pending)
+            remaining = deadline - time.monotonic()
+            if remaining <= 0:
+                raise TimeoutError('Search time limit exceeded during candidate enumeration')
+            return await self.context.controlled(asyncio.wait_for(pending, remaining))
+        finally:
+            stop.set()
+            if not pending.done():
+                pending.cancel()
+            await asyncio.gather(pending, return_exceptions=True)
+
+    def _list_paths(self, root, pattern, stop, deadline):
+        def check():
+            if stop.is_set() or (deadline is not None and time.monotonic() >= deadline):
+                raise TimeoutError('Search time limit exceeded during candidate enumeration')
+
         found = []
         for directory, dirs, files in os.walk(root, followlinks=False):
+            check()
             dirs[:] = sorted(d for d in dirs if d not in IGNORED_DIRS and not (Path(directory) / d).is_symlink()
                              and not (hasattr(Path(directory) / d, "is_junction") and (Path(directory) / d).is_junction()))
             for name in sorted(files):
+                check()
                 path = Path(directory) / name
                 try:
                     self.policy.resolve(str(path))
@@ -74,20 +114,68 @@ class FileTools:
         return json.dumps({"paths": found, "truncated": False}, ensure_ascii=False)
 
     async def search_text(self, args, call_id):
-        paths = json.loads(await self.list_files({"path": args.get("path", "."), "pattern": args.get("glob", "*")}, call_id))["paths"]
+        deadline = time.monotonic() + SEARCH_TIMEOUT
+        paths = []
         hits = []
         needle = args["pattern"]
-        for path in paths[:500]:
-            try:
-                content = self.read_bytes(path).decode("utf-8-sig")
-            except (ValueError, OSError, UnicodeError):
-                continue
-            for number, line in enumerate(content.splitlines(), 1):
-                if needle.casefold() in line.casefold():
-                    hits.append({"path": path, "line": number, "text": self.context.safe(line[:1000])})
+        session = RegexSession(self.context, deadline) if args.get('regex', False) else None
+        limits = {'candidate_files': 500, 'matches': 100, 'file_timeout_ms': int(FILE_TIMEOUT * 1000),
+                  'search_timeout_ms': int(SEARCH_TIMEOUT * 1000)}
+        processed, skipped = 0, 0
+
+        def result(reason=None):
+            return json.dumps({'matches': hits, 'truncated': reason is not None,
+                               'truncation_reason': reason, 'limits': limits,
+                               'processed_files': processed, 'skipped_files': skipped}, ensure_ascii=False)
+
+        try:
+            listing = json.loads(await self.list_files(
+                {'path': args.get('path', '.'), 'pattern': args.get('glob', '*')}, call_id, deadline=deadline))
+            paths = listing['paths']
+            if session:
+                try:
+                    await session.start(needle, args.get('case_sensitive', False))
+                except ValueError as error:
+                    return ToolResult(call_id=call_id, status='error', error_code='INVALID_ARGUMENTS',
+                                      content=self.context.safe(str(error)))
+            for path in paths[:500]:
+                await asyncio.sleep(0)
+                self.context.check()
+                if time.monotonic() >= deadline:
+                    raise TimeoutError('Search time limit exceeded')
+                try:
+                    content = self.read_bytes(path).decode('utf-8-sig')
+                except (ValueError, OSError, UnicodeError):
+                    skipped += 1
+                    continue
+                if session:
+                    matches = await session.matches(content, 100 - len(hits))
+                else:
+                    sensitive = args.get('case_sensitive', False)
+                    query = needle if sensitive else needle.casefold()
+                    matches = []
+                    for number, line in enumerate(content.splitlines(), 1):
+                        if query in (line if sensitive else line.casefold()):
+                            matches.append({'line': number, 'text': line[:1000]})
+                        if len(matches) >= 100 - len(hits):
+                            break
+                        if number % 1000 == 0:
+                            self.context.check()
+                            if time.monotonic() >= deadline:
+                                raise TimeoutError('Search time limit exceeded')
+                safe_lines = self.context.safe_lines(content) if matches else []
+                hits.extend({'path': path, 'line': match['line'], 'text': safe_lines[match['line'] - 1][:1000]}
+                            for match in matches)
+                processed += 1
                 if len(hits) >= 100:
-                    return json.dumps({"matches": hits, "truncated": True}, ensure_ascii=False)
-        return json.dumps({"matches": hits, "truncated": False}, ensure_ascii=False)
+                    return result('match_limit')
+            return result('candidate_limit' if len(paths) > 500 or listing['truncated'] else None)
+        except TimeoutError:
+            return ToolResult(call_id=call_id, status='error', error_code='SEARCH_TIMEOUT',
+                              content=result('timeout'), metadata={'limits': limits})
+        finally:
+            if session:
+                await session.close()
 
     async def write_file(self, args, call_id):
         content = args["content"].encode("utf-8")

@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "cases": 60,
+  "groups": {
+    "stable": 20,
+    "one_off": 20,
+    "update_conflict_secret": 20
+  },
+  "sha256": "34f094f7e319aa1a88fa587d1f42ae53a911170434d968aaf102a506e646c587",
+  "labels_status": "PROVISIONAL_REQUIRES_TWO_HUMAN_REVIEWERS",
+  "api_run_status": "NOT_RUN",
+  "quality_metrics": null,
+  "requirements": [
+    "user/project scope",
+    "cross-project leakage = 0",
+    "sensitive storage = 0",
+    "updates/withdrawal",
+    "local/semantic top-k paired"
+  ],
+  "model": "use selected StarCode provider only"
+}

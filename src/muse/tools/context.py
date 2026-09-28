@@ -3,7 +3,7 @@ import time
 
 from muse.config import Settings
 from muse.contracts import TaskRecord
-from muse.permissions.secrets import redact, stream_prefix
+from muse.permissions.secrets import redact, redact_lines, stream_prefix
 from muse.tasks.repository import TaskRepository
 
 
@@ -47,6 +47,12 @@ class ExecutionContext:
         if isinstance(value, list):
             return [self.safe_value(child) for child in value]
         return value
+
+    def safe_lines(self, value: str) -> list[str]:
+        secrets = (self.settings.access_token.get_secret_value(),)
+        if self.settings.provider:
+            secrets += (self.settings.provider.api_key.get_secret_value(),)
+        return redact_lines(value, secrets + tuple(self.extension_secrets))
 
     def stream_prefix(self, value: str):
         secrets = (self.settings.access_token.get_secret_value(),)

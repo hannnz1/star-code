@@ -29,7 +29,7 @@ def runtime(tmp_path, provider, **limits):
     root.mkdir()
     (root / "hello.txt").write_text("local content", encoding="utf-8")
     ws = repo.register_workspace(str(root))
-    task = repo.create(TaskRequest(prompt="Read hello.txt", workspace_id=ws["id"], scenario="coding", client_request_id="task"))
+    task = repo.create(TaskRequest(prompt="Read hello.txt", workspace_id=ws["id"], scenario="coding", client_request_id="task", permission_mode='acceptEdits'))
     return repo, task, Worker(settings, repo, AgentRunner(provider), worker_id="test-worker")
 
 

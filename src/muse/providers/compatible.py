@@ -28,6 +28,10 @@ def responses_input(messages: list[dict]) -> list[dict]:
         if role == "tool":
             result.append({"type": "function_call_output", "call_id": message["tool_call_id"], "output": message["content"]})
         else:
+            state = message.get('_protocol_state')
+            if role == 'assistant' and state and state.get('protocol') == 'openai-responses':
+                result.extend(state['items'])
+                continue
             if message.get("content"):
                 result.append({"role": role, "content": message["content"]})
             for call in message.get("tool_calls", []):
@@ -92,6 +96,8 @@ class HttpModelProvider:
     async def stream(self, messages: list[dict], tools: list[ToolDefinition]) -> AsyncIterator[ModelEvent]:
         if self.settings.protocol not in {'openai-responses', 'openai-compat', 'anthropic'}:
             raise ProviderError('Unsupported provider protocol')
+        from muse.providers.thinking import thinking_parameters
+        thinking = thinking_parameters(self.settings)
         own = self.client is None
         client = self.client or httpx.AsyncClient(timeout=self.settings.timeout, proxy=self.settings.proxy_url,
                                                 trust_env=False, follow_redirects=False)
@@ -114,6 +120,7 @@ class HttpModelProvider:
             if tools:
                 payload["tools"] = [{"type": "function", "function": {k: v for k, v in tool.items() if k != "type"}} for tool in tool_defs]
             suffix = "/chat/completions"
+        payload.update(thinking)
         url = self.settings.base_url if self.settings.base_url.endswith(suffix) else self.settings.base_url + suffix
         headers = {'Content-Type': 'application/json'}
         if self.settings.protocol == 'anthropic':
@@ -130,8 +137,18 @@ class HttpModelProvider:
                     parser = parse_anthropic(response)
                 else:
                     parser = self._responses(response) if response_mode else self._chat(response)
+                summary_seen = False
                 async for item in parser:
-                    yield item
+                    if item.type == 'summary':
+                        if self.settings.thinking and self.settings.thinking_summary:
+                            summary_seen |= bool(item.text)
+                            yield item
+                    elif item.type == 'done':
+                        if self.settings.thinking and not summary_seen:
+                            yield ModelEvent(type='summary', text='')
+                        yield item
+                    else:
+                        yield item
         except httpx.TimeoutException:
             raise ProviderError("Model request timed out") from None
         except httpx.HTTPError:
@@ -146,6 +163,8 @@ class HttpModelProvider:
         calls: dict[int, dict] = {}
         complete = False
         usage = None
+        output_items = {}
+        summary_streamed = False
         async for data in sse_data(response):
             if data == "[DONE]":
                 break
@@ -153,8 +172,12 @@ class HttpModelProvider:
             kind = event.get("type")
             if kind == "response.output_text.delta":
                 yield ModelEvent(type="text", text=event.get("delta", ""))
+            elif kind == 'response.reasoning_summary_text.delta':
+                summary_streamed = True
+                yield ModelEvent(type='summary', text=event.get('delta', ''))
             elif kind == "response.output_item.done":
                 item = event.get("item", {})
+                output_items[event.get('output_index', len(output_items))] = item
                 if item.get("type") == "function_call":
                     calls[event.get("output_index", len(calls))] = item
             elif kind == "response.completed":
@@ -162,6 +185,7 @@ class HttpModelProvider:
                 result = event.get("response", {})
                 usage = result.get("usage")
                 for index, item in enumerate(result.get("output", [])):
+                    output_items[index] = item
                     if item.get("type") == "function_call":
                         calls[index] = item
             elif kind in {"response.failed", "response.incomplete", "error"}:
@@ -174,6 +198,16 @@ class HttpModelProvider:
         if not complete:
             raise ProviderError("Model stream was incomplete; no tools were dispatched")
         parsed = checked_calls([calls[key] for key in sorted(calls)])
+        if not summary_streamed:
+            for key in sorted(output_items):
+                item = output_items[key]
+                if item.get('type') == 'reasoning':
+                    for part in item.get('summary', []):
+                        if part.get('type') == 'summary_text' and isinstance(part.get('text'), str):
+                            yield ModelEvent(type='summary', text=part['text'])
+        if any(item.get('type') == 'reasoning' for item in output_items.values()):
+            yield ModelEvent(type='protocol_state', protocol_state={'protocol': 'openai-responses',
+                'items': [output_items[key] for key in sorted(output_items)]})
         for call in parsed:
             yield ModelEvent(type="call", call=call)
         yield ModelEvent(type="usage", usage=usage)

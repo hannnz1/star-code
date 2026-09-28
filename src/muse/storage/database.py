@@ -1,4 +1,7 @@
-from contextlib import contextmanager
+import sqlite3
+import time
+import uuid
+from contextlib import closing, contextmanager
 from pathlib import Path
 
 from sqlalchemy import create_engine, event, text
@@ -57,6 +60,8 @@ SCHEMA = [
         sequence INTEGER NOT NULL, messages TEXT NOT NULL, created_at REAL NOT NULL,
         PRIMARY KEY(task_id,revision))""",
     "INSERT OR IGNORE INTO schema_version(version) VALUES(8)",
+    "INSERT OR IGNORE INTO schema_version(version) VALUES(9)",
+    "INSERT OR IGNORE INTO schema_version(version) VALUES(10)",
 ]
 
 
@@ -64,6 +69,24 @@ class Database:
     def __init__(self, path: Path):
         path = Path(path).resolve()
         path.parent.mkdir(parents=True, exist_ok=True)
+        migration_backup = None
+        if path.exists():
+            with closing(sqlite3.connect(path)) as source:
+                table = source.execute("SELECT name FROM sqlite_master WHERE name='schema_version'").fetchone()
+                prior = source.execute('SELECT MAX(version) FROM schema_version').fetchone()[0] if table else 0
+                if prior and prior > 10:
+                    raise ValueError('Unsupported database schema version')
+                if prior and prior < 10:
+                    directory = path.parent / 'migration-backups'
+                    if directory.is_symlink() or (hasattr(directory, 'is_junction') and directory.is_junction()):
+                        raise ValueError('Migration backup directory must not be linked')
+                    directory.mkdir(exist_ok=True)
+                    migration_backup = directory / f'v{prior}-before-v10-{uuid.uuid4().hex[:12]}.sqlite3'
+                    with closing(sqlite3.connect(migration_backup)) as target:
+                        source.backup(target)
+                    with closing(sqlite3.connect(migration_backup)) as check:
+                        if check.execute('PRAGMA integrity_check').fetchone()[0] != 'ok':
+                            raise ValueError('Migration backup integrity check failed')
         self.engine = create_engine(f"sqlite:///{path.as_posix()}", connect_args={"check_same_thread": False, "timeout": 20})
 
         @event.listens_for(self.engine, "connect")
@@ -76,15 +99,36 @@ class Database:
         with self.transaction() as connection:
             for statement in SCHEMA:
                 connection.exec_driver_sql(statement)
-            if connection.exec_driver_sql("SELECT MAX(version) FROM schema_version").scalar() != 8:
+            if connection.exec_driver_sql("SELECT MAX(version) FROM schema_version").scalar() != 10:
                 raise ValueError("Unsupported database schema version")
             columns = {row[1] for row in connection.exec_driver_sql('PRAGMA table_info(tasks)')}
             if 'read_only' not in columns:
                 connection.exec_driver_sql('ALTER TABLE tasks ADD COLUMN read_only INTEGER NOT NULL DEFAULT 0')
+            if 'permission_mode' not in columns:
+                connection.exec_driver_sql("ALTER TABLE tasks ADD COLUMN permission_mode TEXT NOT NULL DEFAULT 'acceptEdits'")
+                connection.exec_driver_sql("UPDATE tasks SET permission_mode='plan' WHERE read_only=1")
+            for name, datatype in [('policy_version', 'INTEGER NOT NULL DEFAULT 1'),
+                                   ('legacy_policy', 'INTEGER NOT NULL DEFAULT 1'),
+                                   ('coordinator_mode', 'INTEGER NOT NULL DEFAULT 0'),
+                                   ('plan_task_id', 'TEXT'), ('plan_sha256', 'TEXT'),
+                                   ('current_directory', "TEXT NOT NULL DEFAULT '.'")]:
+                if name not in columns:
+                    connection.exec_driver_sql(f'ALTER TABLE tasks ADD COLUMN {name} {datatype}')
+            approval_columns = {row[1] for row in connection.exec_driver_sql('PRAGMA table_info(approvals)')}
+            for name, datatype in [('permission_mode', "TEXT NOT NULL DEFAULT 'acceptEdits'"),
+                                   ('policy_version', 'INTEGER NOT NULL DEFAULT 1'), ('workspace_id', 'TEXT')]:
+                if name not in approval_columns:
+                    connection.exec_driver_sql(f'ALTER TABLE approvals ADD COLUMN {name} {datatype}')
+                    connection.exec_driver_sql(f'UPDATE approvals SET {name}=(SELECT {name} FROM tasks WHERE tasks.id=approvals.task_id)')
             budget_columns = {row[1] for row in connection.exec_driver_sql('PRAGMA table_info(execution_budgets)')}
             for name, datatype in [('max_turns', 'INTEGER'), ('max_tool_calls', 'INTEGER'), ('max_active_seconds', 'REAL')]:
                 if name not in budget_columns:
                     connection.exec_driver_sql(f'ALTER TABLE execution_budgets ADD COLUMN {name} {datatype}')
+            connection.exec_driver_sql('''CREATE TABLE IF NOT EXISTS migration_audit(
+                id TEXT PRIMARY KEY,version INTEGER NOT NULL,backup_path TEXT NOT NULL,created_at REAL NOT NULL)''')
+            if migration_backup:
+                connection.execute(text('INSERT INTO migration_audit VALUES(:id,10,:path,:now)'),
+                                   {'id': uuid.uuid4().hex, 'path': str(migration_backup), 'now': time.time()})
 
     @contextmanager
     def transaction(self):

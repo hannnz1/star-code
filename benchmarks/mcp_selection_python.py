@@ -66,11 +66,15 @@ async def run(args, registry_factory=ToolRegistry, mode='LAZY'):
             task = repo.create(TaskRequest(prompt=case['prompt'], workspace_id=ws['id'], scenario='general', client_request_id=case['id']))
             requests = []
             class RecordedProvider:
+                def __init__(self, selected_settings, recorded_requests):
+                    self.settings = selected_settings
+                    self.requests = recorded_requests
+
                 async def stream(self, messages, definitions):
-                    requests.append({'messages': messages, 'tools': [d.model_dump() for d in definitions]})
-                    async for event in HttpModelProvider(settings.provider).stream(messages, definitions):
+                    self.requests.append({'messages': messages, 'tools': [d.model_dump() for d in definitions]})
+                    async for event in HttpModelProvider(self.settings.provider).stream(messages, definitions):
                         yield event
-            worker = Worker(settings, repo, AgentRunner(RecordedProvider(), registry_factory=registry_factory))
+            worker = Worker(settings, repo, AgentRunner(RecordedProvider(settings, requests), registry_factory=registry_factory))
             start, first = time.monotonic(), len(remote_calls)
             for _ in range(8):
                 await worker.run_once()
@@ -98,7 +102,7 @@ async def run(args, registry_factory=ToolRegistry, mode='LAZY'):
             (target / 'requests.json').write_text(json.dumps(requests, ensure_ascii=False, indent=2), encoding='utf-8')
             records.append(record)
             print(json.dumps(record), flush=True)
-            (args.output / 'summary.json').write_text(json.dumps({'fixture_sha256': hashlib.sha256(args.fixture.read_bytes()).hexdigest(), 'planned': 10, 'records': records}, indent=2))
+            (args.output / 'summary.json').write_text(json.dumps({'fixture_sha256': hashlib.sha256(args.fixture.read_bytes()).hexdigest(), 'planned': len(data['tasks']), 'records': records}, indent=2))
     finally:
         server.should_exit = True
         await asyncio.to_thread(thread.join, 5)

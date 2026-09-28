@@ -18,7 +18,7 @@ from pydantic import BaseModel, Field, ValidationError
 
 from muse.artifacts.service import ArtifactService
 from muse.config import Settings, load_settings
-from muse.contracts import TERMINAL, TaskRequest
+from muse.contracts import TERMINAL, PermissionMode, TaskRequest
 from muse.memory.service import MemoryService
 from muse.permissions.secrets import redact
 from muse.public_contracts import (
@@ -50,6 +50,11 @@ class ControlInput(BaseModel):
 class DecisionInput(BaseModel):
     allow: bool
     action_digest: str
+
+
+class PolicyInput(BaseModel):
+    expected_revision: int
+    permission_mode: PermissionMode
 
 
 class RenewalInput(BaseModel):
@@ -94,6 +99,8 @@ def public_task(task):
 def create_app(settings: Settings | None = None) -> FastAPI:
     settings = settings or load_settings(require_provider=False)
     repo = TaskRepository(settings.data_dir / "state.sqlite3")
+    from muse.agent.instructions import resource_snapshot
+    repo.snapshot_factory = lambda request, workspace: resource_snapshot(settings, request, workspace)
     if not repo.workspaces():
         default = settings.data_dir.parent / (settings.data_dir.name + "-workspaces") / "default"
         default.mkdir(parents=True, exist_ok=True)
@@ -139,6 +146,11 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     def public_settings():
         return settings.public()
 
+    @app.get('/api/sandbox')
+    def sandbox_capabilities():
+        from muse.permissions.os_sandbox import capabilities
+        return {'policy': settings.sandbox_policy, **capabilities()}
+
     @app.get("/api/workspaces", response_model=list[WorkspaceView])
     def workspaces():
         return repo.workspaces()
@@ -154,6 +166,57 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     @app.post("/api/tasks", response_model=TaskView, status_code=201)
     def create_task(body: TaskRequest):
         return public_task(repo.create(body))
+
+    @app.post('/api/skills/run', response_model=TaskView, status_code=201)
+    def run_skill(body: dict):
+        from muse.contracts import ToolCall
+        from muse.tools.registry import ToolRegistry
+        name, arguments = body.get('name'), body.get('arguments', '')
+        if not isinstance(name, str) or not isinstance(arguments, str) or len(arguments) > 12000:
+            raise ValueError('Invalid skill execution request')
+        request = TaskRequest(**{key: value for key, value in body.items() if key not in {'name', 'arguments'}})
+        from muse.contracts import TaskRecord
+        task = TaskRecord(**request.model_dump(), id='catalog', created_at=0, updated_at=0)
+        ctx = ExecutionContext(settings, repo, task, 'skill-catalog')
+        registry = ToolRegistry(ctx)
+        skill = registry.skills.selected({'name': name})
+        call = ToolCall(id='skill-entry', name='spawn_skill' if skill['mode'] == 'fork' else 'load_skill',
+                        arguments={'name': name, 'arguments': arguments, '_source_sha256': skill['sha256']})
+        if call.name not in {definition.name for definition in registry.definitions()}:
+            raise ValueError('Skill execution is unavailable under this task policy')
+        task = repo.create(request, initial_call=call)
+        return public_task(repo.get(task.id))
+
+    @app.get('/api/workspaces/{workspace_id}/skills')
+    async def workspace_skills(workspace_id: str):
+        import re
+
+        from muse.contracts import TaskRecord
+        from muse.terminal import HELP
+        from muse.tools.registry import ToolRegistry
+        task = TaskRecord(prompt='Catalog', workspace_id=workspace_id, client_request_id='catalog',
+                          id='catalog', created_at=0, updated_at=0)
+        registry = ToolRegistry(ExecutionContext(settings, repo, task, 'skill-catalog'))
+        result = json.loads(await registry.skills.list({}, 'catalog'))
+        builtin = set(re.findall(r'/([a-z][a-z-]*)', HELP)) | {'quit'}
+        result['aliases'] = [{'name': item['name'], 'enabled': item['name'] not in builtin,
+                              'reason': 'builtin command takes priority' if item['name'] in builtin else None}
+                             for item in result['skills']]
+        return result
+
+    @app.get('/api/tasks/{task_id}/trace')
+    def trace(task_id: str, format: str = 'json'):
+        from muse.tasks.trace import task_trace, trace_jsonl
+        result = task_trace(repo, settings, task_id)
+        if format == 'jsonl':
+            return Response(trace_jsonl(result), media_type='application/x-ndjson')
+        if format != 'json':
+            raise ValueError('Trace format must be json or jsonl')
+        return result
+
+    @app.get('/api/tasks/{task_id}/memory-recall')
+    def memory_recall(task_id: str):
+        return repo.get(task_id).checkpoint.get('memory_recall', {'mode': 'not_run', 'fallback': False})
 
     @app.get("/api/tasks/{task_id}", response_model=TaskView)
     def task_detail(task_id: str):
@@ -199,6 +262,10 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         ctx = ExecutionContext(settings, repo, repo.get(task_id), 'user-reconciliation')
         return repo.reconcile_external(task_id, body.call_id, body.action_digest, body.expected_revision,
                                        body.successful, ctx.safe(body.explanation))
+
+    @app.post('/api/tasks/{task_id}/policy', response_model=TaskView)
+    def task_policy(task_id: str, body: PolicyInput):
+        return public_task(repo.set_permission_mode(task_id, body.permission_mode, expected_revision=body.expected_revision))
 
     @app.post("/api/tasks/{task_id}/{action}", response_model=TaskView)
     def control(task_id: str, action: Literal["pause", "resume", "cancel", "input", "compact", "reload"], body: ControlInput):
@@ -282,6 +349,28 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     @app.get("/api/memories", response_model=list[MemoryView])
     def memories():
         return memory.list()
+
+    @app.get('/api/memory/candidates')
+    def memory_candidates():
+        return memory.candidates()
+
+    @app.get('/api/memory/jobs')
+    def memory_jobs():
+        from muse.memory.maintenance import MemoryMaintenance
+        return MemoryMaintenance(repo, settings).jobs()
+
+    @app.get('/api/memory/{memory_id}/history')
+    def memory_history(memory_id: str):
+        return memory.history(memory_id)
+
+    @app.post('/api/memory/{memory_id}/confirm')
+    def confirm_memory(memory_id: str):
+        return memory.confirm(memory_id)
+
+    @app.post('/api/memory/{memory_id}/withdraw')
+    def withdraw_memory(memory_id: str):
+        memory.delete(memory_id)
+        return {'status': 'withdrawn', 'id': memory_id}
 
     @app.post("/api/memories", response_model=MemoryView, status_code=201)
     def remember(body: MemoryInput):

@@ -115,6 +115,12 @@ class DelegationMixin:
             capabilities = capabilities or {}
             parent_cp = json.loads(parent['checkpoint'])
             child_cp = {}
+            if 'sandbox' in parent_cp:
+                child_cp['sandbox'] = parent_cp['sandbox']
+            if not workspace_id or workspace_id == parent['workspace_id']:
+                for key in ('project_guidance', 'role_snapshot', 'source_version', 'current_directory'):
+                    if key in parent_cp:
+                        child_cp[key] = parent_cp[key]
             child_cp['suppressed_hooks'] = sorted(set(parent_cp.get('suppressed_hooks', []) + capabilities.get('suppressed_hooks', [])))
             allowed = capabilities.get('allowed_tools', parent_cp.get('allowed_tools'))
             if allowed is not None:
@@ -148,12 +154,22 @@ class DelegationMixin:
                 depth += 1
             if depth >= 4:
                 raise ValueError('Delegation depth limit reached')
+            if workspace_id and workspace_id != parent['workspace_id'] and self.snapshot_factory:
+                from muse.contracts import TaskRequest
+                workspace = dict(conn.execute(text('SELECT * FROM workspaces WHERE id=:id'), {'id': workspace_id}).mappings().one())
+                request = TaskRequest(prompt=prompt, workspace_id=workspace_id, client_request_id='snapshot')
+                snapshot = self.snapshot_factory(request, workspace)
+                for key in ('project_guidance', 'role_snapshot', 'source_version', 'current_directory'):
+                    if key in snapshot:
+                        child_cp[key] = snapshot[key]
             child_id = uuid.uuid4().hex
-            conn.execute(text('''INSERT INTO tasks(id,prompt,workspace_id,scenario,client_request_id,status,created_at,updated_at,read_only,checkpoint)
-                VALUES(:id,:prompt,:workspace,:scenario,:key,'QUEUED',:now,:now,:read_only,:checkpoint)'''), {
+            conn.execute(text('''INSERT INTO tasks(id,prompt,workspace_id,scenario,client_request_id,status,created_at,updated_at,read_only,checkpoint,permission_mode,policy_version,legacy_policy)
+                VALUES(:id,:prompt,:workspace,:scenario,:key,'QUEUED',:now,:now,:read_only,:checkpoint,:mode,:version,:legacy)'''), {
                 'id': child_id, 'prompt': prompt, 'workspace': workspace_id or parent['workspace_id'], 'scenario': parent['scenario'],
                 'key': 'delegation:' + parent_id + ':' + call_id, 'now': now,
-                'read_only': bool(parent['read_only'] or capabilities.get('read_only', False)), 'checkpoint': json.dumps(child_cp)})
+                'read_only': bool(parent['read_only'] or capabilities.get('read_only', False)), 'checkpoint': json.dumps(child_cp),
+                'mode': 'plan' if parent['read_only'] or capabilities.get('read_only', False) else parent['permission_mode'],
+                'version': parent['policy_version'], 'legacy': parent['legacy_policy']})
             conn.execute(text('INSERT INTO task_delegations(parent_id,child_id,root_id,call_id) VALUES(:p,:c,:r,:call)'),
                          {'p': parent_id, 'c': child_id, 'r': root, 'call': call_id})
             self._event(conn, child_id, 'status', {'status': 'QUEUED'}, now)

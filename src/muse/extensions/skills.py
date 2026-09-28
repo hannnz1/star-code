@@ -45,7 +45,7 @@ class DurableSkills:
         def schema(properties, required=()):
             return {'type': 'object', 'properties': properties, 'required': list(required), 'additionalProperties': False}
         registry.register(ToolDefinition(name='list_skills', description='List workspace skill descriptions and validation errors.', parameters=schema({})), self.list)
-        props = {'name': {'type': 'string'}, 'arguments': {'type': 'string'}}
+        props = {'name': {'type': 'string'}, 'arguments': {'type': 'string'}, '_source_sha256': {'type': 'string'}}
         registry.register(ToolDefinition(name='load_skill', description='Read an inline workspace skill. Fork skills return metadata only; use spawn_skill for isolated execution.', parameters=schema(props, ['name'])), self.load)
         registry.register(ToolDefinition(name='spawn_skill', risk='execute', description='Run a workspace skill in a durable child task, with approval and shared budgets. Does not change the model.',
             parameters=schema({**props, '_source_sha256': {'type': 'string'}}, ['name'])), self.spawn)
@@ -103,7 +103,7 @@ class DurableSkills:
     def bind(self, call):
         if call.name in {'list_skills', 'load_skill', 'spawn_skill'}:
             self.reload()
-        if call.name == 'spawn_skill' and call.arguments.get('name') in self.skills:
+        if call.name in {'load_skill', 'spawn_skill'} and call.arguments.get('name') in self.skills and '_source_sha256' not in call.arguments:
             return call.model_copy(update={'arguments': {**call.arguments, '_source_sha256': self.skills[call.arguments['name']]['sha256']}})
         return call
 
@@ -114,6 +114,8 @@ class DurableSkills:
         if args['name'] not in self.skills:
             raise ValueError('Unknown workspace skill; use list_skills')
         skill = self.skills[args['name']]
+        if args.get('_source_sha256') and args['_source_sha256'] != skill['sha256']:
+            raise ValueError('Skill source changed; submit a new reviewed execution request')
         if skill.get('model') not in (None, '', 'inherit', self.ctx.settings.provider.model if self.ctx.settings.provider else None):
             raise ValueError('Skill requests a different model; the selected StarCode model is preserved')
         return skill

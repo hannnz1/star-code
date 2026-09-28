@@ -17,7 +17,7 @@ def make_repo(tmp_path):
 def create(repo, workspace_id, request_id="request-1"):
     from muse.contracts import TaskRequest
     return repo.create(TaskRequest(prompt="Read the local project", workspace_id=workspace_id,
-                                   client_request_id=request_id, scenario="coding"))
+                                   client_request_id=request_id, scenario="coding", permission_mode='acceptEdits'))
 
 
 def test_create_deduplicates_same_request_and_rejects_changed_payload(tmp_path):

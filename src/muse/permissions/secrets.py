@@ -1,4 +1,5 @@
 import re
+from bisect import bisect_left, bisect_right
 
 PATTERNS = [
     re.compile(r"(?i)\bBearer\s+[A-Za-z0-9._~+/=-]{8,}"),
@@ -19,6 +20,24 @@ def redact(value: str, secrets: tuple[str, ...] = ()) -> str:
     for pattern in PATTERNS:
         value = pattern.sub("[REDACTED]", value)
     return value
+
+
+def redact_lines(value: str, secrets: tuple[str, ...] = ()) -> list[str]:
+    """Mask whole source lines intersecting a secret, including multi-line spans."""
+    raw_lines = value.splitlines(keepends=True)
+    lines = value.splitlines()
+    starts, position = [], 0
+    for raw in raw_lines:
+        starts.append(position)
+        position += len(raw)
+    patterns = [*PATTERNS, *(re.compile(re.escape(secret)) for secret in secrets if secret)]
+    hidden = set()
+    for pattern in patterns:
+        for match in pattern.finditer(value):
+            first = max(0, bisect_right(starts, match.start()) - 1)
+            end = bisect_left(starts, match.end())
+            hidden.update(range(first, end))
+    return ['[REDACTED]' if i in hidden else line for i, line in enumerate(lines)]
 
 
 def stream_prefix(value: str, secrets: tuple[str, ...] = ()) -> tuple[str, str]:

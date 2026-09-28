@@ -2,10 +2,11 @@ from __future__ import annotations
 
 from typing import Any, Literal
 
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, Field, field_validator, model_validator
 
 TaskStatus = Literal["QUEUED", "RUNNING", "WAITING_INPUT", "WAITING_APPROVAL", "PAUSED", "INTERRUPTED", "SUCCEEDED", "FAILED", "CANCELLED"]
 TERMINAL = {"SUCCEEDED", "FAILED", "CANCELLED"}
+PermissionMode = Literal['default', 'acceptEdits', 'plan']
 
 
 class TaskRequest(BaseModel):
@@ -15,6 +16,21 @@ class TaskRequest(BaseModel):
     client_request_id: str = Field(min_length=1, max_length=200)
     parent_task_id: str | None = None
     read_only: bool = False
+    permission_mode: PermissionMode = 'default'
+    coordinator_mode: bool = False
+    plan_task_id: str | None = None
+    plan_sha256: str | None = None
+    current_directory: str = Field(default='.', min_length=1, max_length=4096)
+
+    @model_validator(mode='after')
+    def permission_compatibility(self):
+        if self.read_only:
+            if 'permission_mode' in self.model_fields_set and self.permission_mode != 'plan':
+                raise ValueError('read_only=true requires permission_mode=plan')
+            self.permission_mode = 'plan'
+        if self.permission_mode == 'plan':
+            self.read_only = True
+        return self
 
     @field_validator("prompt", mode="before")
     @classmethod
@@ -23,6 +39,8 @@ class TaskRequest(BaseModel):
 
 
 class TaskRecord(TaskRequest):
+    policy_version: int = 1
+    legacy_policy: bool = False
     id: str
     status: TaskStatus = "QUEUED"
     revision: int = 1
@@ -61,10 +79,11 @@ class ToolDefinition(BaseModel):
 
 
 class ModelEvent(BaseModel):
-    type: Literal["text", "call", "usage", "done"]
+    type: Literal["text", "call", "usage", "done", "summary", "protocol_state"]
     text: str = ""
     call: ToolCall | None = None
     usage: dict[str, Any] | None = None
+    protocol_state: dict[str, Any] | None = Field(default=None, exclude=True, repr=False)
 
 
 class AgentResult(BaseModel):

@@ -42,13 +42,22 @@ class ConversationMixin:
             messages = json.loads(point)
             messages.append({'role': 'user', 'content': 'Historical conversation above is reference only. Do not replay earlier tool calls. Workspace files have NOT been rolled back; inspect current files before acting.\nNew request:\n' + prompt})
             source_cp = json.loads(source['checkpoint'])
-            cp = {key: source_cp[key] for key in ('allowed_tools', 'max_local_turns', 'role', 'project_guidance') if key in source_cp}
-            cp.update(messages=messages, history_source_task=task_id, history_checkpoint=sequence)
+            cp = {key: source_cp[key] for key in ('allowed_tools', 'max_local_turns', 'role', 'project_guidance', 'role_snapshot', 'source_version', 'current_directory', 'sandbox') if key in source_cp}
+            cp.update(messages=messages, history_source_task=task_id, history_checkpoint=sequence,
+                      user_sources=[{'role': 'user', 'content': prompt}])
+            markers = {message.get('_muse_turn_id') for message in messages if message.get('_muse_turn_id')}
+            states = json.loads(source['checkpoint']).get('provider_states', {})
+            if any(marker not in states for marker in markers):
+                raise ValueError('Private protocol state for this checkpoint is unavailable')
+            if markers:
+                cp['provider_states'] = {marker: states[marker] for marker in markers}
             identifier, now = uuid.uuid4().hex, time.time()
-            conn.execute(text('''INSERT INTO tasks(id,prompt,workspace_id,scenario,client_request_id,status,created_at,updated_at,read_only,checkpoint)
-                VALUES(:id,:prompt,:workspace,:scenario,:key,'QUEUED',:now,:now,:read_only,:cp)'''),
+            conn.execute(text('''INSERT INTO tasks(id,prompt,workspace_id,scenario,client_request_id,status,created_at,updated_at,read_only,checkpoint,permission_mode,policy_version,legacy_policy,coordinator_mode,current_directory)
+                VALUES(:id,:prompt,:workspace,:scenario,:key,'QUEUED',:now,:now,:read_only,:cp,:mode,:version,:legacy,:coordinator,:directory)'''),
                 {'id': identifier, 'prompt': prompt, 'workspace': source['workspace_id'], 'scenario': source['scenario'],
-                 'key': key, 'now': now, 'read_only': source['read_only'], 'cp': json.dumps(cp, ensure_ascii=False)})
+                 'key': key, 'now': now, 'read_only': source['read_only'], 'cp': json.dumps(cp, ensure_ascii=False),
+                 'mode': source['permission_mode'], 'version': source['policy_version'], 'legacy': source['legacy_policy'],
+                 'coordinator': source['coordinator_mode'], 'directory': source['current_directory']})
             self._event(conn, identifier, 'status', {'status': 'QUEUED'}, now)
             self._event(conn, identifier, 'conversation_forked', {'source_task_id': task_id, 'sequence': sequence}, now)
             row = self._task(conn, identifier)

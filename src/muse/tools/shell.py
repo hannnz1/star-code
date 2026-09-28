@@ -26,7 +26,8 @@ def stop_tree(pid: int):
         pass
 
 
-async def run_command(context, args, call_id: str, *, verify: bool = False, argv: list[str] | None = None) -> ToolResult:
+async def run_command(context, args, call_id: str, *, verify: bool = False, argv: list[str] | None = None,
+                      machine_output: bool = False) -> ToolResult:
     context.check()
     command = args["command"]
     shell = shutil.which("pwsh") or shutil.which("powershell") if os.name == "nt" else shutil.which("bash")
@@ -37,10 +38,13 @@ async def run_command(context, args, call_id: str, *, verify: bool = False, argv
         "PATH", "SYSTEMROOT", "WINDIR", "COMSPEC", "PATHEXT", "LANG", "LC_ALL", "NUMBER_OF_PROCESSORS",
     }}
     environment["PATH"] = str(Path(sys.executable).parent) + os.pathsep + environment.get("PATH", "")
-    temp = context.settings.data_dir / "process-temp"
-    temp.mkdir(exist_ok=True)
+    temp = context.settings.data_dir.parent / (context.settings.data_dir.name + '-process-temp') / context.task_id
+    temp.mkdir(parents=True, exist_ok=True)
     environment.update(TEMP=str(temp), TMP=str(temp), PYTHONUTF8="1", PYTHONIOENCODING="utf-8")
-    process = await asyncio.create_subprocess_exec(*(argv if argv is not None else [shell, *options, command]), cwd=context.workspace, env=environment,
+    from muse.permissions.os_sandbox import sandbox_argv
+    effective_argv = sandbox_argv(context, argv if argv is not None else [shell, *options, command], temp)
+    context.save()
+    process = await asyncio.create_subprocess_exec(*effective_argv, cwd=context.workspace, env=environment,
                                                    stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE, **ProcessTree.launch_options())
     try:
         tree = ProcessTree(process.pid)
@@ -95,4 +99,5 @@ async def run_command(context, args, call_id: str, *, verify: bool = False, argv
         metadata["mutation_call_ids"] = sorted(mutation_ids(context.repo.calls(context.task_id)))
         context.cp["verification"] = {**metadata, "call_id": call_id}
     return ToolResult(call_id=call_id, status="success" if process.returncode == 0 else "error",
-                      content=safe, artifact_ids=[artifact["id"]], error_code=None if process.returncode == 0 else "COMMAND_FAILED", metadata=metadata)
+                      content=stdout if machine_output and process.returncode == 0 else safe,
+                      artifact_ids=[artifact["id"]], error_code=None if process.returncode == 0 else "COMMAND_FAILED", metadata=metadata)

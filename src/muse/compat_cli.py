@@ -13,8 +13,8 @@ from muse.contracts import TERMINAL
 from muse.terminal import connect_terminal
 
 
-def execute_prompt(terminal, prompt, *, output_format='text', wait_seconds=300, read_only=False):
-    terminal.submit(prompt, read_only=read_only)
+def execute_prompt(terminal, prompt, *, output_format='text', wait_seconds=300, read_only=False, permission_mode='default'):
+    terminal.submit(prompt, read_only=read_only, permission_mode='plan' if read_only else permission_mode)
     deadline = time.monotonic() + wait_seconds
     cursor = 0
     previous = None
@@ -67,7 +67,7 @@ def main():
     parser.add_argument('--output-format', choices=['text', 'stream-json'], default='text')
     parser.add_argument('--wait-seconds', type=float, default=300)
     parser.add_argument('--mode', choices=['default', 'acceptEdits', 'plan'], default='default',
-                        help='plan enforces read-only prompts; all execution still requires durable approval')
+                        help='default approves writes and execution; acceptEdits permits workspace edits; plan permits read tools only')
     parser.add_argument('--remote', action='store_true', help='Run the loopback MUSE web API; Worker is started separately')
     args = parser.parse_args()
     if not math.isfinite(args.wait_seconds) or args.wait_seconds < 0:
@@ -88,10 +88,10 @@ def main():
         elif args.p is not None:
             with connect_terminal(settings, args.workspace) as terminal:
                 raise SystemExit(execute_prompt(terminal, args.p, output_format=args.output_format,
-                                               wait_seconds=args.wait_seconds, read_only=args.mode == 'plan'))
+                                               wait_seconds=args.wait_seconds, permission_mode=args.mode))
         else:
             from muse.tui import run_tui
-            run_tui(settings, args.workspace)
+            run_tui(settings, args.workspace, permission_mode=args.mode)
     except (ValueError, RuntimeError, httpx.HTTPError) as error:
         parser.exit(1, f'{error}\nCheck that API and Worker use the same --data-dir, --port and original configuration.\n')
     except KeyboardInterrupt:

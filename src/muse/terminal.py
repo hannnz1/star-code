@@ -1,4 +1,5 @@
 """Terminal frontend for the same HTTP service and Worker used by the web UI."""
+import hashlib
 import json
 import re
 import shlex
@@ -15,9 +16,14 @@ from muse.contracts import TERMINAL
 HELP = '''MUSE commands:
 /help /status /tasks /use ID /clear /events /watch
 /plan PROMPT /do PROMPT /review PROMPT
+/mode default|acceptEdits|plan
+/thinking
+/trace [TASK_ID] /run-skill NAME [ARGS] /coordinator on|off
+/sandbox
 /pause /resume /cancel /input REPLY
 /approvals /approve ID /deny ID /renew ID
 /memory /artifacts /sources /rewind CALL_ID /exit
+/memory-jobs /memory-candidates /confirm-memory ID /withdraw-memory ID /memory-history ID
 /children /child ID /back
 /team /board
 /compact /reload /skills /agents /mcp /model /cost /context
@@ -56,12 +62,16 @@ class TerminalClient:
             raise ValueError('Task belongs to a different workspace')
         return task
 
-    def submit(self, prompt, read_only=False):
+    def submit(self, prompt, read_only=False, permission_mode=None, plan=None):
         parent = self.task() if self.task_id else None
         if parent and parent['status'] not in TERMINAL:
             raise ValueError('Current task is active; use /input to answer it or /clear to start another task')
         result = self.request('POST', '/api/tasks', json={'prompt': prompt, 'workspace_id': self.workspace_id,
             'scenario': 'coding', 'read_only': read_only, 'client_request_id': uuid.uuid4().hex,
+            'coordinator_mode': getattr(self, 'coordinator_mode', False),
+            'plan_task_id': plan['id'] if plan else None,
+            'plan_sha256': hashlib.sha256(plan['result'].encode()).hexdigest() if plan else None,
+            'permission_mode': 'plan' if read_only else permission_mode or getattr(self, 'permission_mode', 'default'),
             'parent_task_id': parent['id'] if parent else None})
         self.task_id = result['id']
         return result
@@ -71,6 +81,19 @@ class TerminalClient:
         name = {'permission': 'approvals', 'reload-skills': 'skills'}.get(name, name)
         if not is_command:
             result = self.submit(line)
+        elif name == 'sandbox':
+            if args:
+                raise ValueError('Set sandbox.policy in your explicit configuration, then restart for new tasks')
+            result = self.request('GET', '/api/sandbox')
+        elif name == 'memory-jobs':
+            result = self.request('GET', '/api/memory/jobs')
+        elif name == 'memory-candidates':
+            result = self.request('GET', '/api/memory/candidates')
+        elif name in {'confirm-memory', 'withdraw-memory', 'memory-history'}:
+            if not re.fullmatch(r'[a-f0-9]{32}', args):
+                raise ValueError('A memory ID is required')
+            action = {'confirm-memory': 'confirm', 'withdraw-memory': 'withdraw', 'memory-history': 'history'}[name]
+            result = self.request('GET' if action == 'history' else 'POST', f'/api/memory/{args}/{action}')
         elif name == 'help':
             return HELP
         elif name in {'exit', 'quit'}:
@@ -78,9 +101,37 @@ class TerminalClient:
         elif name == 'clear':
             self.task_id = None
             return 'Ready for a new task. Existing tasks continue in the Worker.'
+        elif name == 'mode':
+            if args not in {'default', 'acceptEdits', 'plan'}:
+                raise ValueError('Use /mode default|acceptEdits|plan')
+            if self.task_id:
+                task = self.task()
+                if task['status'] not in TERMINAL:
+                    result = self.request('POST', f"/api/tasks/{task['id']}/policy", json={
+                        'permission_mode': args, 'expected_revision': task['revision']})
+                    self.permission_mode = args
+                else:
+                    self.permission_mode = args
+                    result = {'permission_mode': args, 'applies_to': 'new tasks'}
+            else:
+                self.permission_mode = args
+                result = {'permission_mode': args, 'applies_to': 'new tasks'}
+        elif name == 'coordinator':
+            if args not in {'on', 'off'}:
+                raise ValueError('Use /coordinator on|off for new tasks')
+            self.coordinator_mode = args == 'on'
+            result = {'coordinator_mode': self.coordinator_mode, 'applies_to': 'new tasks'}
+        elif name == 'trace':
+            identifier = args or self.task()['id']
+            if not re.fullmatch(r'[a-f0-9]{32}', identifier):
+                raise ValueError('A task ID is required')
+            result = self.request('GET', f'/api/tasks/{identifier}/trace')
+        elif name == 'run-skill':
+            result = self.run_skill(args)
         elif name in {'plan', 'review', 'do'}:
             prompt = args or ('Execute the previous plan and verify the changes.' if name == 'do' else 'Review the current project and report findings.')
-            result = self.submit(prompt, read_only=name != 'do')
+            source = self.task() if name == 'do' and self.task_id else None
+            result = self.submit(prompt, read_only=name != 'do', plan=source if source and source['read_only'] and source['status'] == 'SUCCEEDED' else None)
         elif name == 'use':
             task = self.request('GET', '/api/tasks/' + args)
             if task['workspace_id'] != self.workspace_id:
@@ -163,6 +214,25 @@ class TerminalClient:
             self.reviewed.pop(args)
         elif name == 'memory':
             result = [m for m in self.request('GET', '/api/memories') if m['scope'] == 'user' or m['workspace_id'] == self.workspace_id]
+        elif name == 'thinking':
+            task = self.task()
+            summaries, cursor, pending = [], 0, []
+            while True:
+                response = self.client.get(f"/api/tasks/{task['id']}/events", params={'follow': 'false', 'after': cursor})
+                response.raise_for_status()
+                batch = [json.loads(frame[6:]) for frame in response.text.splitlines() if frame.startswith('data: ')]
+                for event in batch:
+                    cursor = event['sequence']
+                    if event['type'] == 'thinking_summary_delta':
+                        pending.append(event['payload']['text'])
+                    elif event['type'] == 'thinking_summary':
+                        summaries.append(f"#{event['payload']['model_request']}: " + event['payload']['text'])
+                        pending = []
+                if len(batch) < 1000:
+                    break
+            if pending:
+                summaries.append('进行中：' + ''.join(pending))
+            return '\n'.join(summaries) or '本任务尚无思考摘要。'
         elif name in {'artifacts', 'sources', 'events'}:
             task = self.task()
             if name == 'events':
@@ -174,6 +244,8 @@ class TerminalClient:
             task = self.task()
             result = self.request('GET', f"/api/tasks/{task['id']}/conversation-checkpoints")
         elif name == 'rewind':
+            if 'both' in args.split():
+                raise ValueError('both recovery is unsupported; file and conversation recovery are separate actions')
             task = self.task()
             parts = args.split(maxsplit=2)
             if len(parts) >= 2 and parts[1] == 'conversation':
@@ -198,8 +270,26 @@ class TerminalClient:
                     return 'Use /approvals or /input when the task needs your response.'
                 time.sleep(.5)
         else:
-            raise ValueError('Unknown command. Use /help.')
+            catalog = self.request('GET', f'/api/workspaces/{self.workspace_id}/skills')
+            if name in {alias['name'] for alias in catalog['aliases'] if alias['enabled']}:
+                result = self.run_skill(name + (' ' + args if args else ''))
+            else:
+                raise ValueError('Unknown command. Use /help or /run-skill NAME ARGS.')
         return json.dumps(result, ensure_ascii=False, indent=2)
+
+    def run_skill(self, arguments):
+        parts = arguments.split(maxsplit=1)
+        if not parts:
+            raise ValueError('Use /run-skill NAME [ARGS]')
+        if self.task_id and self.task()['status'] not in TERMINAL:
+            raise ValueError('Current task is active; finish it or /clear before running a skill')
+        result = self.request('POST', '/api/skills/run', json={'name': parts[0], 'arguments': parts[1] if len(parts) > 1 else '',
+            'prompt': 'Execute skill ' + parts[0], 'workspace_id': self.workspace_id,
+            'client_request_id': uuid.uuid4().hex, 'scenario': 'coding',
+            'permission_mode': getattr(self, 'permission_mode', 'default'),
+            'coordinator_mode': getattr(self, 'coordinator_mode', False)})
+        self.task_id = result['id']
+        return result
 
 
 def validate_server(settings, public):

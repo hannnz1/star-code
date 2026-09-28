@@ -7,6 +7,8 @@ from muse.tools.context import ApprovalRequired, ExecutionContext, TaskControl
 class Worker:
     def __init__(self, settings, repository, runner, *, worker_id=None):
         self.settings, self.repo, self.runner = settings, repository, runner
+        from muse.agent.instructions import resource_snapshot
+        repository.snapshot_factory = lambda request, workspace: resource_snapshot(settings, request, workspace)
         self.worker_id = worker_id or f"worker-{uuid.uuid4().hex[:12]}"
 
     async def run_once(self) -> bool:
@@ -14,6 +16,10 @@ class Worker:
         self.repo.wake_completed_parents()
         task = self.repo.claim_next(self.worker_id, ttl=self.settings.lease_seconds)
         if task is None:
+            from muse.memory.maintenance import MemoryMaintenance
+            maintenance = MemoryMaintenance(self.repo, self.settings)
+            if self.settings.memory_auto_extract or self.settings.memory_auto_consolidate:
+                return await maintenance.run_once(getattr(self.runner, 'provider', None))
             return False
         context = ExecutionContext(self.settings, self.repo, task, self.worker_id, enforce_budgets=True)
         stop = asyncio.Event()
@@ -34,6 +40,13 @@ class Worker:
             result = await self.runner.run(task, context)
             context.save()
             self.repo.finish(task.id, self.worker_id, task.lease_epoch, result.status, result.text)
+            if result.status == 'SUCCEEDED':
+                from muse.memory.maintenance import MemoryMaintenance
+                maintenance = MemoryMaintenance(self.repo, self.settings)
+                maintenance.enqueue(task.id)
+                for snapshot in context.cp.get('memory_snapshots', []):
+                    maintenance.enqueue(task.id, snapshot)
+                maintenance.enqueue_consolidation(task.workspace_id)
         except ApprovalRequired:
             pass  # Approval transition and checkpoint were committed atomically before yielding.
         except TaskControl as control:

@@ -75,6 +75,49 @@ def test_full_catalog_adapter_keeps_activation_task_local_and_execution_approval
     assert 'oneOf' not in production.parameters
 
 
+def test_paired_mcp_report_requires_each_frozen_case_once_per_mode():
+    from benchmarks.mcp_paired_python import paired_report
+
+    cases = ['task-01', 'task-02', 'task-03']
+    records = [{'case': case, 'mode': mode, 'passed': True}
+               for mode in ('FULL', 'LAZY') for case in cases]
+    assert paired_report(records, cases)['planned'] == 6
+    assert paired_report(records, cases)['passed']
+    assert not paired_report(records[:-1], cases)['passed']
+    assert not paired_report(records[:-1] + [records[0]], cases)['passed']
+    assert not paired_report(records[:-1] + [{**records[-1], 'passed': False}], cases)['passed']
+
+
+def test_paired_mcp_mode_order_can_be_reversed_for_counterbalance():
+    from benchmarks.mcp_paired_python import mode_sequence
+
+    assert [mode for mode, _ in mode_sequence('FULL_LAZY')] == ['FULL', 'LAZY']
+    assert [mode for mode, _ in mode_sequence('LAZY_FULL')] == ['LAZY', 'FULL']
+
+
+def test_full_catalog_is_available_before_first_model_request(tmp_path):
+    from test_agent_loop import ScriptedProvider, runtime
+
+    from benchmarks.mcp_paired_python import FullCatalogRegistry
+    from muse.tools.context import ExecutionContext
+    repo, task, worker = runtime(tmp_path, ScriptedProvider([]))
+    config = tmp_path / 'mcp.yaml'
+    config.write_text('mcp_servers:\n  - name: fixture\n    command: synthetic\n')
+    ctx = ExecutionContext(worker.settings.model_copy(update={'config_path': config}), repo, task, 'test')
+    FullCatalogRegistry.fixture_tools = [
+        {'name': f'lookup_{i}', 'description': f'Tool {i}', 'inputSchema': {'type': 'object'}}
+        for i in range(100)
+    ]
+    try:
+        registry = FullCatalogRegistry(ctx)
+        definitions = registry.definitions()
+    finally:
+        FullCatalogRegistry.fixture_tools = None
+    call = next(definition for definition in definitions if definition.name == 'mcp_call')
+    assert len(call.parameters['oneOf']) == 100
+    assert len(ctx.cp['mcp_catalogs']['fixture']['tools']) == 100
+
+
 def test_multi_agent_gate_rejects_idle_children_even_when_parent_verifier_passes():
     from benchmarks.multi_agent_python import contributions_valid
     assert not contributions_valid('base', ['a.py', 'b.py'], [

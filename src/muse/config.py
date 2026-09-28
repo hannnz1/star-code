@@ -4,6 +4,7 @@ from __future__ import annotations
 import os
 import secrets
 from pathlib import Path
+from typing import Literal
 from urllib.parse import urlsplit
 
 import yaml
@@ -21,6 +22,10 @@ class ProviderSettings(BaseModel):
     context_window: int = Field(default=128000, ge=4096)
     max_output_tokens: int = Field(default=8192, ge=256)
     thinking: bool = False
+    thinking_capability: Literal['unsupported', 'openai-reasoning', 'anthropic-manual', 'anthropic-adaptive'] = 'unsupported'
+    reasoning_effort: Literal['low', 'medium', 'high', 'xhigh', 'max'] = 'medium'
+    thinking_budget_tokens: int = Field(default=2048, ge=1024)
+    thinking_summary: bool = True
 
 
 class Settings(BaseModel):
@@ -29,6 +34,18 @@ class Settings(BaseModel):
     provider: ProviderSettings | None = None
     config_path: Path | None = None
     skill_roots: list[Path] = Field(default_factory=list)
+    instruction_roots: list[Path] = Field(default_factory=list)
+    agent_roots: list[Path] = Field(default_factory=list)
+    worktree_managed_root: Path | None = None
+    memory_auto_extract: bool = False
+    memory_auto_consolidate: bool = False
+    memory_semantic_recall: bool = False
+    memory_budget_tokens: int = Field(default=0, ge=0)
+    memory_max_requests: int = Field(default=8, ge=0, le=1000)
+    memory_recall_top_k: int = Field(default=10, ge=1, le=10)
+    sandbox_policy: Literal['off', 'required'] = 'off'
+    sandbox_runtime_roots: list[Path] = Field(default_factory=list)
+    sandbox_network_allowlist: list[str] = Field(default_factory=list)
     host: str = "127.0.0.1"
     port: int = 8765
     max_turns: int = Field(default=40, ge=1, le=1000)
@@ -123,6 +140,10 @@ def load_settings(
             proxy_url=proxy_url, timeout=root.get("request_timeout_seconds", 120),
             context_window=selected.get("context_window", 128000),
             max_output_tokens=selected.get("max_output_tokens", 8192), thinking=selected.get("thinking", False),
+            thinking_capability=selected.get('thinking_capability', 'unsupported'),
+            reasoning_effort=selected.get('reasoning_effort', 'medium'),
+            thinking_budget_tokens=selected.get('thinking_budget_tokens', 2048),
+            thinking_summary=selected.get('thinking_summary', True),
         )
     elif require_provider:
         raise ValueError("Select a configuration with --config or MUSE_STARCODE_CONFIG; no model was configured")
@@ -130,9 +151,30 @@ def load_settings(
     skill_roots = root.get('skill_roots', [])
     if not isinstance(skill_roots, list) or any(not isinstance(value, str) or not value.strip() for value in skill_roots):
         raise ValueError('skill_roots must be a list of explicit directory paths')
+    worktrees = root.get('worktrees') or {}
+    trusted = {}
+    for key in ('instruction_roots', 'agent_roots'):
+        values = root.get(key, [])
+        if not isinstance(values, list) or any(not isinstance(value, str) or not value.strip() for value in values):
+            raise ValueError(f'{key} must be a list of explicit directories')
+        trusted[key] = [((source.parent if source else Path.cwd()) / value).absolute() for value in values]
+    if not isinstance(worktrees, dict):
+        raise ValueError('worktrees must be a configuration object')  # noqa: TRY004 -- configuration errors use ValueError at the CLI boundary.
+    managed_root = worktrees.get('managed_root')
+    if managed_root is not None:
+        if not isinstance(managed_root, str) or not managed_root.strip():
+            raise ValueError('worktrees.managed_root must be an explicit directory path')
+        managed_root = ((source.parent if source else Path.cwd()) / managed_root).absolute()
     return Settings(
         data_dir=directory, access_token=SecretStr(_local_token(directory)), provider=provider,
         config_path=source, skill_roots=[(source.parent / value).resolve() for value in skill_roots] if source else [],
+        worktree_managed_root=managed_root,
+        **trusted,
+        sandbox_policy=(root.get('sandbox') or {}).get('policy', 'off'),
+        sandbox_runtime_roots=[Path(value).absolute() for value in (root.get('sandbox') or {}).get('runtime_roots', [])],
+        sandbox_network_allowlist=(root.get('sandbox') or {}).get('network_allowlist', []),
+        **{f'memory_{name}': value for name, value in (root.get('memory') or {}).items()
+           if name in {'auto_extract', 'auto_consolidate', 'semantic_recall', 'budget_tokens', 'max_requests', 'recall_top_k'}},
         max_turns=limits.get("max_turns", 40),
         max_tool_calls=limits.get("max_tool_calls", 100),
         max_active_seconds=limits.get("max_active_seconds", 900),
