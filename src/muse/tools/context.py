@@ -33,11 +33,16 @@ class ExecutionContext:
         self.prior_active = float(self.cp.get("active_seconds", 0))
         self.extension_secrets = set()
 
-    def safe(self, value: str) -> str:
+    def _secrets(self):
         secrets = (self.settings.access_token.get_secret_value(),)
         if self.settings.provider:
             secrets += (self.settings.provider.api_key.get_secret_value(),)
-        return redact(value, secrets + tuple(self.extension_secrets))
+        if self.settings.commerce_connector:
+            secrets += (self.settings.commerce_connector.token.get_secret_value(),)
+        return secrets + tuple(self.extension_secrets)
+
+    def safe(self, value: str) -> str:
+        return redact(value, self._secrets())
 
     def safe_value(self, value):
         if isinstance(value, str):
@@ -49,16 +54,10 @@ class ExecutionContext:
         return value
 
     def safe_lines(self, value: str) -> list[str]:
-        secrets = (self.settings.access_token.get_secret_value(),)
-        if self.settings.provider:
-            secrets += (self.settings.provider.api_key.get_secret_value(),)
-        return redact_lines(value, secrets + tuple(self.extension_secrets))
+        return redact_lines(value, self._secrets())
 
     def stream_prefix(self, value: str):
-        secrets = (self.settings.access_token.get_secret_value(),)
-        if self.settings.provider:
-            secrets += (self.settings.provider.api_key.get_secret_value(),)
-        return stream_prefix(value, secrets + tuple(self.extension_secrets))
+        return stream_prefix(value, self._secrets())
 
     def active_seconds(self) -> float:
         return self.prior_active + time.monotonic() - self.started

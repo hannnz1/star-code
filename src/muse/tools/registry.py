@@ -94,6 +94,8 @@ class ToolRegistry:
         self.teams = DurableTeams(self)
         from muse.extensions.memory import DurableMemory
         self.memory = DurableMemory(self)
+        from muse.commerce.tools import CommerceTools
+        self.commerce = CommerceTools(self)
         from muse.extensions.roles import DurableRoles
         self.roles = DurableRoles(self)
         async def spawn_task(args, call_id):
@@ -110,10 +112,12 @@ class ToolRegistry:
         self.entries[definition.name] = (definition, handler)
 
     def definitions(self) -> list[ToolDefinition]:
+        from muse.commerce.roles import allows
         self.mcp.refresh_definition()
         excluded = {"write_file", "edit_file", "run_command", "verify_command"} if self.context.task.scenario in {"research", "documents"} else set()
         return [self.mcp.public_definition(definition) for name, (definition, _) in self.entries.items() if name not in excluded and not name.startswith('__hook_')
                 and self.coordinator_allows(name, definition)
+                and allows(self.context, name)
                 and (self.context.cp.get('allowed_tools') is None or name in self.context.cp['allowed_tools'])
                 and (not self.context.task.read_only or definition.risk == 'read')]
 
@@ -163,8 +167,10 @@ class ToolRegistry:
         call = self.roles.bind(call)
         allowed = {tool.name for tool in self.definitions()}
         if internal:
+            from muse.commerce.roles import allows
             allowed.update(name for name, (definition, _) in self.entries.items() if name.startswith('__hook_')
                            and self.coordinator_allows(name, definition)
+                           and allows(ctx, name)
                            and (not ctx.task.read_only or definition.risk == 'read'))
         if call.name not in allowed:
             return ToolResult(call_id=call.id, status="error", content="Tool is unavailable in this scenario", error_code="UNKNOWN_TOOL")

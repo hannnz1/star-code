@@ -10,6 +10,8 @@ from typing import Literal
 from urllib.parse import quote
 
 from fastapi import FastAPI, HTTPException, Request, Response
+from fastapi.exception_handlers import request_validation_exception_handler
+from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.openapi.utils import get_openapi
 from fastapi.responses import FileResponse, JSONResponse, StreamingResponse
@@ -108,9 +110,61 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     service_context = SimpleNamespace(settings=settings, repo=repo, task_id="", safe=redact)
     artifacts = ArtifactService(service_context)
     memory = MemoryService(repo, settings)
-    app = FastAPI(title="MUSE", version="0.1.0", docs_url=None, redoc_url=None)
+    app = FastAPI(title="Crew", version="0.1.0", docs_url=None, redoc_url=None)
     app.state.settings, app.state.repository = settings, repo
     app.state.artifacts, app.state.memory = artifacts, memory
+    from muse.commerce.api import create_router
+    from muse.commerce.errors import CommerceFailure
+    from muse.commerce.repository import CommerceRepository
+    commerce = CommerceRepository(repo)
+    app.state.commerce = commerce
+    from muse.commerce.orchestration import CommerceWorkflowService
+    app.state.commerce_workflows = CommerceWorkflowService(commerce, settings)
+    from muse.commerce.platforms.base import UnconfiguredPlatform
+    from muse.commerce.platforms.wordpress import WordPressPlatform
+    app.state.commerce_platform = (WordPressPlatform(settings.commerce_connector)
+                                  if settings.commerce_connector else UnconfiguredPlatform())
+    from muse.commerce.merchant_approval import MerchantReleaseApprovalRepository
+    from muse.commerce.platforms.publication import ConnectorPublicationService
+    app.state.commerce_publication = (ConnectorPublicationService(MerchantReleaseApprovalRepository(commerce), settings.commerce_connector)
+                                     if settings.commerce_connector else None)
+    from muse.commerce.platforms.verification import ConnectorVerificationService
+    from muse.commerce.verification_jobs import VerificationJobRepository
+    app.state.commerce_verification = (ConnectorVerificationService(VerificationJobRepository(commerce), settings.commerce_connector)
+        if settings.commerce_connector else None)
+    from muse.commerce.platforms.reference import ConnectorReferenceService
+    from muse.commerce.reference_jobs import ReferenceJobRepository
+    app.state.commerce_reference = (ConnectorReferenceService(ReferenceJobRepository(commerce), settings.commerce_connector)
+                                    if settings.commerce_connector else None)
+    app.include_router(create_router(commerce))
+
+    @app.exception_handler(CommerceFailure)
+    async def commerce_failure(request, error):
+        return JSONResponse({'error': error.public.model_dump(mode='json')}, status_code=error.status)
+
+    @app.exception_handler(RequestValidationError)
+    async def invalid_request(request, error):
+        if not request.url.path.startswith('/api/commerce/'):
+            return await request_validation_exception_handler(request, error)
+        from muse.commerce.api import (
+            BriefUpdate,
+            ConnectionInput,
+            PlanControl,
+            ProductImportInput,
+            ProjectInput,
+            RefreshInput,
+            WorkflowInput,
+        )
+        from muse.commerce.models import SiteBrief
+        fields = set(ProjectInput.model_fields) | set(BriefUpdate.model_fields) | set(SiteBrief.model_fields) | set(ProductImportInput.model_fields)
+        fields |= set(ConnectionInput.model_fields) | set(RefreshInput.model_fields)
+        fields |= set(WorkflowInput.model_fields) | set(PlanControl.model_fields)
+        failure = CommerceFailure('INPUT_INVALID', 422)
+        failure.public.field_errors = [
+            {'field': '.'.join(str(part) if part in fields or isinstance(part, int) else '*'
+                               for part in issue['loc'] if part != 'body'), 'message': 'Invalid field'}
+            for issue in error.errors()]
+        return JSONResponse({'error': failure.public.model_dump(mode='json')}, status_code=422)
     app.add_middleware(CORSMiddleware, allow_origins=settings.allowed_origins,
                        allow_methods=["GET", "POST", "PATCH", "DELETE"], allow_headers=["Authorization", "Content-Type", "Last-Event-ID"])
 

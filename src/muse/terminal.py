@@ -13,7 +13,7 @@ import httpx
 from mewcode.commands.parser import parse_command
 from muse.contracts import TERMINAL
 
-HELP = '''MUSE commands:
+HELP = '''Crew commands:
 /help /status /tasks /use ID /clear /events /watch
 /plan PROMPT /do PROMPT /review PROMPT
 /mode default|acceptEdits|plan
@@ -320,7 +320,7 @@ def run_terminal(settings, workspace: Path):
         print(HELP)
         while True:
             try:
-                line = input('MUSE> ').strip()
+                line = input('Crew> ').strip()
                 if line:
                     print(terminal.handle(line))
             except EOFError:

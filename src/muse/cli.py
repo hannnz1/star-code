@@ -8,7 +8,7 @@ from muse.config import load_settings
 
 
 def main():
-    parser = argparse.ArgumentParser(prog="muse", description="MUSE personal task assistant")
+    parser = argparse.ArgumentParser(prog="muse", description="Crew — Your AI commerce team")
     parser.add_argument("command", choices=["api", "worker", "terminal", "tui", "doctor", "token", "probe", "import-memory", "import-history", "backup-state", "restore-state"])
     parser.add_argument('--workspace', type=Path, default=Path.cwd())
     parser.add_argument("--config", type=Path, help="Explicit StarCode/MUSE provider configuration")

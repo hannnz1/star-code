@@ -1,0 +1,7 @@
+# 第七批审查输入
+
+Workspace muse-next; branch muse-integration; HEAD/base 4aec15ae79648f1e398b29e975177b73ca532fb6; changes uncommitted. This incremental review covers new src/muse/commerce/changesets.py and tests/muse/commerce/test_changesets.py, their interaction with existing theme.py, context.py, models.py, approval.py, connector operations.py and publisher.py. Prior rounds already reviewed; do not repeat them.
+
+Authority: docs/superpowers/specs/2026-09-30-muse-commerce-mvp-design.md and docs/superpowers/plans/2026-09-30-muse-commerce-mvp.md P7 create_changeset. Ledger seventh-batch rulings explain restricted scope. Only deterministic owned theme candidate generation, no verifier/public review/approve/write endpoint. Launch products conservatively unsupported because paginated snapshot cannot prove SKU absence. No real deployment/model/HTTP; 22 fixture/local SQLite tests passed.
+
+Review focus: exact package regeneration and content/code/snapshot binding; caller-supplied fingerprint map; ID reuse across plan revisions and environments; downstream approval and token/receipt compatibility; sanitized invalid inputs; independently mutated effective templates/global styles; hidden writes or false workflow success. Shape checks do not prove true browser/purchase checks. Source commit is a supplied hash; OS verifier must later attest it. Report concrete Important/Critical/Minor and declined judgments. No edits or additional subagents.

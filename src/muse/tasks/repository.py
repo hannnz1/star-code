@@ -5,6 +5,7 @@ import json
 import re
 import time
 import uuid
+from contextlib import nullcontext
 from pathlib import Path
 
 from sqlalchemy import text
@@ -118,11 +119,11 @@ class TaskRepository(DelegationMixin, TeamMixin, ConversationMixin):
             raise ValueError("Worker lease is no longer valid")
         return task
 
-    def create(self, request: TaskRequest, *, initial_call=None) -> TaskRecord:
+    def create(self, request: TaskRequest, *, initial_call=None, initial_checkpoint=None, _connection=None) -> TaskRecord:
         if not request.read_only and explicit_read_only(request.prompt):
             request = request.model_copy(update={'read_only': True, 'permission_mode': 'plan'})
         now = time.time()
-        with self.db.transaction() as conn:
+        with (nullcontext(_connection) if _connection is not None else self.db.transaction()) as conn:
             old = conn.execute(text("SELECT * FROM tasks WHERE client_request_id=:key"), {"key": request.client_request_id}).mappings().first()
             if old:
                 previous = row_task(old)
@@ -149,6 +150,12 @@ class TaskRepository(DelegationMixin, TeamMixin, ConversationMixin):
             data = {**request.model_dump(), "id": uuid.uuid4().hex, "now": now}
             workspace = dict(conn.execute(text('SELECT * FROM workspaces WHERE id=:id'), {'id': request.workspace_id}).mappings().one())
             checkpoint = self.snapshot_factory(request, workspace) if self.snapshot_factory else {'current_directory': request.current_directory}
+            if initial_checkpoint is not None:
+                if set(initial_checkpoint) - {'commerce', 'role', 'allowed_tools', 'max_local_turns', 'commerce_role_snapshot'}:
+                    raise ValueError('Unsupported initial backend checkpoint fields')
+                checkpoint.update(initial_checkpoint)
+                if 'commerce_role_snapshot' in checkpoint:
+                    checkpoint.setdefault('role_snapshot', {'custom': {}, 'errors': [], 'sources': [], 'version': 1})['commerce'] = checkpoint.pop('commerce_role_snapshot')
             if initial_call:
                 checkpoint.update(skill_request=initial_call.model_dump(), pending_calls=[initial_call.model_dump()],
                                   messages=[{'role': 'user', 'content': request.prompt},
@@ -215,13 +222,24 @@ class TaskRepository(DelegationMixin, TeamMixin, ConversationMixin):
     def list(self) -> list[TaskRecord]:
         return [row_task(row) for row in self.db.rows("SELECT * FROM tasks ORDER BY created_at DESC LIMIT 500")]
 
-    def claim_next(self, worker_id: str, *, now: float | None = None, ttl: float = 30) -> TaskRecord | None:
+    def claim_next(self, worker_id: str, *, now: float | None = None, ttl: float = 30, commerce_limit: int | None = None) -> TaskRecord | None:
         now = timestamp(now)
         with self.db.transaction() as conn:
-            row = conn.execute(text("SELECT id FROM tasks WHERE status='QUEUED' AND cancel_requested=0 ORDER BY created_at LIMIT 1")).first()
-            if not row:
+            candidates = conn.execute(text("SELECT id,checkpoint FROM tasks WHERE status='QUEUED' AND cancel_requested=0 ORDER BY created_at,id")).mappings()
+            task_id = None
+            for candidate in candidates:
+                binding = json.loads(candidate['checkpoint']).get('commerce', {})
+                if commerce_limit is not None and binding.get('project_id') and binding.get('plan_id'):
+                    count = conn.execute(text("SELECT COUNT(DISTINCT json_extract(checkpoint,'$.commerce.plan_id')) FROM tasks "
+                        "WHERE json_extract(checkpoint,'$.commerce.project_id')=:project AND json_extract(checkpoint,'$.commerce.plan_id')<>:plan "
+                        "AND status IN ('RUNNING','WAITING_INPUT','WAITING_APPROVAL','PAUSED','INTERRUPTED') AND cancel_requested=0"),
+                        {'project': binding['project_id'], 'plan': binding['plan_id']}).scalar()
+                    if count >= commerce_limit:
+                        continue
+                task_id = candidate['id']
+                break
+            if task_id is None:
                 return None
-            task_id = row[0]
             conn.execute(text("UPDATE tasks SET lease_epoch=lease_epoch+1 WHERE id=:id"), {"id": task_id})
             self._state(conn, task_id, "RUNNING", now, lease_owner=worker_id, lease_until=now + ttl)
             return row_task(self._task(conn, task_id))
@@ -265,6 +283,8 @@ class TaskRepository(DelegationMixin, TeamMixin, ConversationMixin):
                 if cp.get('pending_calls') or cp.get('usage_pending'):
                     raise ValueError('Finish pending tool/model calls before changing context')
                 if action == 'reload':
+                    if cp.get('commerce'):
+                        raise ValueError('Commerce roles are frozen; create a new plan to reload resources')
                     cp.pop('project_guidance', None)
                     cp.pop('role_snapshot', None)
                     cp['source_version'] = cp.get('source_version', 1) + 1
@@ -502,6 +522,9 @@ class TaskRepository(DelegationMixin, TeamMixin, ConversationMixin):
                 checkpoint['active_seconds'] = float(checkpoint.get('active_seconds', 0)) + max(0, min(now, task['lease_until'] or now) - task['updated_at'])
                 conn.execute(text('UPDATE tasks SET checkpoint=:cp WHERE id=:id'), {'id': task_id, 'cp': encode(checkpoint)})
                 self._reconcile_spawn_calls(conn, task_id, now)
+                if checkpoint.get('commerce'):
+                    from muse.commerce.recovery import reconcile_managed_calls
+                    reconcile_managed_calls(self, conn, task_id, now)
                 unknown = conn.execute(text("SELECT id FROM tool_calls WHERE task_id=:id AND status='EXECUTING' AND risk!='read'"), {"id": task_id}).first()
                 conn.execute(text("UPDATE tool_calls SET status=CASE WHEN risk='read' THEN 'PREPARED' ELSE 'UNKNOWN' END WHERE task_id=:id AND status='EXECUTING'"), {"id": task_id})
                 self._state(conn, task_id, "INTERRUPTED", now, lease_owner=None, lease_until=None,

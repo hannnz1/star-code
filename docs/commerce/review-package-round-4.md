@@ -1,0 +1,7 @@
+# 第四批审查输入
+
+Scope: src/muse/commerce_connector/operations.py, authorization.py; tests/muse/commerce/test_operation_contract.py, test_execution_authorization.py. Only these new files; previous round ledger/receipts are existing reviewed foundations. Workspace uncommitted, HEAD/base 4aec15ae79648f1e398b29e975177b73ca532fb6. Existing spec docs/superpowers/specs/2026-09-30-muse-commerce-mvp-design.md sections 6/7 and plan docs/superpowers/plans/2026-09-30-muse-commerce-mvp.md P3/P7 require closed operations, expiry/target/changed-content refusal. Rulings in development-ledger.md fourth batch.
+
+No public mutation/signing route, no caller in task/API/CLI, no enabled store writes. Authority is trusted internal HMAC primitive: backend supplies CURRENT persisted approval. P7 is not implemented; membership of operation in reviewed ChangeSet, current resource reads, verified report authenticity, OS isolation and remote plugin approval verification remain integration gates. Do not confuse a valid signature with those checks. Contracts are wire validation only, ownership must be enforced remotely. Plain text and no media refs deliberately narrow v1, listed as a ruling.
+
+Review coercion/unsafe payloads and package handling, HMAC target/environment/expiry/revocation/tampering/secret leakage, malformed token/JSON boundedness. Report concrete Critical/Important/Minor, declined judgments. No edits, no spawned agents, no repeated previous batch review. Relevant tests 38 passed.

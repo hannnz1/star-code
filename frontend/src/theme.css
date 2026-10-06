@@ -1,0 +1,82 @@
+/* Shared Crew design tokens, loaded before any lazy workspace. */
+:root {
+  --crew-ink: #242424;
+  --crew-muted: #666666;
+  --crew-line: #e3e3e5;
+  --crew-background: #f6f6f7;
+  --crew-sidebar: #f0f0f1;
+  --crew-surface: #ffffff;
+  --crew-subtle: #f6f6f8;
+  --crew-selected: #e4e4e7;
+  --crew-accent: #6941c6;
+  --crew-accent-soft: #f0eef7;
+  --crew-art: #9781cf;
+  --crew-action: #292929;
+  --crew-action-hover: #3b3b3b;
+  color: var(--crew-ink);
+  background: var(--crew-background);
+}
+.app-shell {background:var(--crew-background);color:var(--crew-ink)}
+.brand {letter-spacing:-.5px;font-weight:650}
+.brand-icon {background:var(--crew-action);box-shadow:0 4px 9px #24242414}
+.beta {color:var(--crew-muted);border-color:var(--crew-line)}
+button:hover {background:var(--crew-accent-soft)}
+button:focus-visible,a:focus-visible {outline-color:var(--crew-accent)}
+input:focus,textarea:focus,select:focus {border-color:#7861b1;box-shadow:0 0 0 3px #eee8fa}
+.primary:hover,.send:hover {background:var(--crew-action-hover);color:#fff}
+.sidebar .nav-item.selected,.sidebar .task-item.active {background:var(--crew-selected);color:var(--crew-ink)}
+.topbar {height:56px;border-color:#e6e6e8}
+.home {width:min(860px,calc(100% - 64px));margin:54px auto 60px}
+.home h1,.login h1 {font-family:Inter,"Segoe UI","Microsoft YaHei",sans-serif;font-size:36px;font-weight:600;line-height:1.4;letter-spacing:-.5px;color:var(--crew-ink)}
+.home h1 span {color:var(--crew-accent)}
+.intro {font-size:13px;line-height:1.9;color:var(--crew-muted)}
+.composer {border-color:var(--crew-line);border-radius:12px;box-shadow:0 2px 6px #20212b05}
+.composer-footer {gap:8px;flex-wrap:wrap}
+.composer-footer label {display:inline-flex;align-items:center;gap:5px;font-size:11px;color:var(--crew-muted)}
+.composer-footer input[type=checkbox] {accent-color:var(--crew-accent)}
+.composer select {color:var(--crew-ink)}
+.mode-row button {font-size:11px}
+.mode-row button.active {background:var(--crew-accent-soft);border-color:#ded5ee;color:var(--crew-accent)}
+.starter {background:#fff;border-color:var(--crew-line);border-radius:10px;padding:20px}
+.starter h3 {font-size:13px;font-weight:600}
+.starter p {font-size:12px;color:var(--crew-muted)}
+.home-note {font-size:11px;line-height:1.7}
+.user-message,.markdown pre,.markdown code {background:var(--crew-subtle)}
+.mini-brand {background:var(--crew-accent-soft);color:var(--crew-accent)}
+.evidence {background:var(--crew-background)}
+.status {background:#eeeef1;color:var(--crew-muted)}
+.status.SUCCEEDED {background:#e2f0e5;color:#3a7751}
+.status.FAILED {background:#f8e8df;color:#a45c41}
+.status.WAITING_APPROVAL,.status.WAITING_INPUT {background:#f8efd7;color:#9e7b39}
+.modal {background:#fff;border-color:var(--crew-line);border-radius:14px}
+.modal h2 {font-size:20px;font-weight:600}
+.modal input[type=checkbox] {accent-color:var(--crew-accent)}
+.login {background:var(--crew-background)}
+.login .language-switch {z-index:2}
+.login-card {width:400px;max-width:calc(100% - 48px);padding:36px 0}
+.login-card .brand {margin-bottom:42px}
+.login p {font-size:13px;color:var(--crew-muted)}
+.login-art {background:#f0eef7;color:var(--crew-art);border-left:1px solid var(--crew-line)}
+.login-dither {width:min(70%,480px);height:auto;max-width:100%}
+.login-art>span {color:var(--crew-muted);font-size:12px;letter-spacing:1.5px;text-align:center;padding:0 24px}
+@media(max-width:850px) {.home {width:calc(100% - 44px);margin-top:38px}.starter {padding:16px}.login-card {padding:54px 0}}
+@media(max-width:600px) {.home {width:calc(100% - 32px);margin-top:32px}.home h1,.login h1 {font-size:28px}.topbar {height:60px}.starter {padding:16px}.composer-footer {padding:0 12px 14px}.composer select {max-width:100%}.conversation {padding:20px 16px}.task-actions {flex-wrap:wrap}.modal-backdrop {padding:16px}.modal {padding:20px;max-width:100%}.heading-row {flex-wrap:wrap}}
+@media(prefers-reduced-motion:reduce) {button,a {transition:none}.spin {animation:none}}
+.crew-settings-dialog{padding:0;border:0;border-radius:14px;max-width:calc(100vw - 32px);width:560px;max-height:90vh;color:var(--crew-ink)}
+.crew-settings-dialog::backdrop{background:#1b1d2948;backdrop-filter:blur(3px)}
+.crew-settings-dialog .modal{width:100%;max-height:90vh;border:0;margin:0}
+.crew-task-outcome{padding:16px;margin:16px 0;background:var(--crew-subtle);border:1px solid var(--crew-line);border-radius:10px;font-size:14px}
+.crew-task-outcome h4{margin:0 0 8px}.crew-task-outcome p{margin:6px 0;font-size:14px}
+.crew-technical-details{font-size:12px;color:var(--crew-muted);margin:12px 0}
+.composer .send{display:inline-flex;align-items:center;justify-content:center;width:auto;min-width:112px;min-height:44px;border-radius:10px;padding:0 14px;gap:6px;font-size:14px;flex-shrink:0}
+.crew-mode-guidance{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:12px 20px;border-top:1px solid var(--crew-line);background:var(--crew-subtle);border-radius:0 0 14px 14px}
+.crew-mode-guidance p{margin:0;font-size:13px;line-height:1.6;color:var(--crew-ink)}
+.crew-mode-guidance p+p{margin-top:4px;color:var(--crew-muted)}
+.crew-mode-guidance-actions{display:flex;align-items:center;gap:12px;flex-shrink:0;font-size:12px;color:var(--crew-muted)}
+.crew-mode-guidance-actions button{min-height:44px;padding:8px 12px;border:1px solid var(--crew-line);border-radius:8px;background:white;color:var(--crew-accent)}
+.crew-mode-guidance-actions button:disabled{opacity:.5;cursor:default}
+.mode-row button{min-height:44px}
+.crew-developer-workspace{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;margin:14px 0 20px;background:var(--crew-subtle);border:1px solid var(--crew-line);border-radius:10px;font-size:13px;color:var(--crew-muted)}
+.crew-developer-workspace>svg{flex-shrink:0;margin-top:3px}.crew-developer-workspace>div{min-width:0}
+.crew-developer-workspace code{display:block;font-size:13px;color:var(--crew-ink);overflow-wrap:anywhere;margin:3px 0}.crew-developer-workspace small{font-size:12px}
+@media(max-width:600px){.crew-mode-guidance{align-items:flex-start;flex-direction:column;padding:12px 16px;gap:8px}.crew-mode-guidance-actions{width:100%;justify-content:space-between;flex-wrap:wrap}.mode-row{flex-wrap:wrap}.mode-row button{flex:1 1 40%;justify-content:center}.composer-footer{flex-wrap:wrap;gap:12px}.composer-footer label{margin-left:0}.composer .send{margin-left:auto}}

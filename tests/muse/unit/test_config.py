@@ -20,6 +20,16 @@ def test_existing_starcode_provider_is_loaded_without_exporting_secret(tmp_path)
     assert source.read_text(encoding="utf-8").count("fixture-secret") == 1
 
 
+def test_commerce_capacity_configuration_is_loaded_and_validated(tmp_path):
+    source = tmp_path / 'capacity.yaml'
+    source.write_text('commerce:\n  max_active_plans: 1\n', encoding='utf-8')
+    settings = config_module().load_settings(source, data_dir=tmp_path / 'capacity-state', require_provider=False)
+    assert settings.commerce_max_active_plans == 1
+    source.write_text('commerce:\n  max_active_plans: false\n', encoding='utf-8')
+    with pytest.raises(ValueError):
+        config_module().load_settings(source, data_dir=tmp_path / 'bad-capacity', require_provider=False)
+
+
 def test_missing_provider_key_is_actionable(tmp_path, monkeypatch):
     monkeypatch.delenv("MUSE_API_KEY", raising=False)
     source = tmp_path / "settings.yaml"

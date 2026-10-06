@@ -217,14 +217,24 @@ class MemoryMaintenance:
 
     def _consolidate(self, job, snapshot, result):
         allowed = {row['id']: row for row in snapshot}
+        def recency(record):
+            versions = self.repo.db.rows('SELECT rowid AS sequence FROM memory_versions WHERE memory_id=:id AND version=:version',
+                                        {'id': record['id'], 'version': record['version']})
+            return record['updated_at'], versions[0]['sequence'] if versions else 0
         for group in result.get('groups', [])[:100]:
-            if not isinstance(group, list) or len(group) < 2 or any(identifier not in allowed for identifier in group):
+            if (not isinstance(group, list) or len(group) < 2
+                    or any(not isinstance(identifier, str) or identifier not in allowed for identifier in group)
+                    or len(set(group)) != len(group)):
                 continue
             records = [allowed[identifier] for identifier in group]
             if len({record['content'] for record in records}) != 1:
                 continue
+            ordered = sorted(records, key=recency, reverse=True)
+            keeper = next((row for row in self.memory.for_task(job['workspace_id']) if row['id'] == ordered[0]['id']), None)
+            if keeper is None or keeper['version'] != ordered[0]['version'] or keeper['content'] != ordered[0]['content']:
+                continue
             # Preserve original notes and versions. Only an exact duplicate can be superseded.
-            for record in sorted(records, key=lambda row: row['updated_at'], reverse=True)[1:]:
+            for record in ordered[1:]:
                 current = next((row for row in self.memory.for_task(job['workspace_id']) if row['id'] == record['id']), None)
                 if current and current['version'] == record['version']:
                     self.memory._transition(record['id'], 'superseded')

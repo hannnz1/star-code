@@ -8,7 +8,32 @@ from typing import Literal
 from urllib.parse import urlsplit
 
 import yaml
-from pydantic import BaseModel, Field, SecretStr
+from pydantic import (
+    BaseModel,
+    ConfigDict,
+    Field,
+    SecretStr,
+    ValidationError,
+    field_validator,
+)
+
+
+class CommerceConnectorSettings(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+    service_url: str
+    token: SecretStr = Field(exclude=True, repr=False, min_length=16)
+    versions_lock_path: Path
+
+    @field_validator('service_url')
+    @classmethod
+    def fixed_service_url(cls, value):
+        url = urlsplit(value)
+        if (not url.hostname or url.username or url.password or url.query or url.fragment
+                or url.path not in {'', '/'} or (url.scheme != 'https' and not
+                    (url.scheme == 'http' and url.hostname in {'localhost', '127.0.0.1', '::1'}))):
+            raise ValueError('Connector requires HTTPS or a loopback service without URL credentials')
+        _ = url.port
+        return value.rstrip('/')
 
 
 class ProviderSettings(BaseModel):
@@ -29,9 +54,11 @@ class ProviderSettings(BaseModel):
 
 
 class Settings(BaseModel):
+    commerce_max_active_plans: int = Field(default=2, ge=1, le=20, strict=True)
     data_dir: Path
     access_token: SecretStr = Field(exclude=True, repr=False)
     provider: ProviderSettings | None = None
+    commerce_connector: CommerceConnectorSettings | None = Field(default=None, exclude=True, repr=False)
     config_path: Path | None = None
     skill_roots: list[Path] = Field(default_factory=list)
     instruction_roots: list[Path] = Field(default_factory=list)
@@ -165,9 +192,26 @@ def load_settings(
         if not isinstance(managed_root, str) or not managed_root.strip():
             raise ValueError('worktrees.managed_root must be an explicit directory path')
         managed_root = ((source.parent if source else Path.cwd()) / managed_root).absolute()
+    connector = None
+    commerce_limits = root.get('commerce') or {}
+    if not isinstance(commerce_limits, dict):
+        raise ValueError('commerce must be a configuration object')
+    if root.get('commerce_connector') is not None:
+        value = root['commerce_connector']
+        if (not isinstance(value, dict) or set(value) != {'service_url', 'token_env', 'versions_lock_path'}
+                or not isinstance(value['token_env'], str) or not isinstance(value['versions_lock_path'], str)):
+            raise ValueError('commerce_connector requires service_url, token_env and versions_lock_path')
+        try:
+            connector = CommerceConnectorSettings(service_url=value['service_url'],
+                token=SecretStr(os.getenv(value['token_env'], '')),
+                versions_lock_path=((source.parent if source else Path.cwd()) / value['versions_lock_path']).resolve())
+        except (ValidationError, ValueError, TypeError):
+            raise ValueError('Invalid commerce connector configuration or missing service credential') from None
     return Settings(
         data_dir=directory, access_token=SecretStr(_local_token(directory)), provider=provider,
         config_path=source, skill_roots=[(source.parent / value).resolve() for value in skill_roots] if source else [],
+        commerce_connector=connector,
+        commerce_max_active_plans=commerce_limits.get('max_active_plans', 2),
         worktree_managed_root=managed_root,
         **trusted,
         sandbox_policy=(root.get('sandbox') or {}).get('policy', 'off'),

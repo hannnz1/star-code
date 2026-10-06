@@ -1,0 +1,45 @@
+name: ${COMMERCE_PROJECT:?provide validated project name}
+services:
+  database:
+    image: ${DATABASE_IMAGE:?provide resolved digest}
+    environment:
+      MARIADB_DATABASE: wordpress
+      MARIADB_USER: wordpress
+      MARIADB_PASSWORD_FILE: /run/secrets/database_password
+      MARIADB_ROOT_PASSWORD_FILE: /run/secrets/database_root_password
+    volumes:
+      - database:/var/lib/mysql
+    secrets:
+      - database_password
+      - database_root_password
+    networks: [store]
+  wordpress:
+    image: ${WORDPRESS_IMAGE:?provide resolved digest}
+    environment:
+      WORDPRESS_DB_HOST: database
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD_FILE: /run/secrets/database_password
+      WORDPRESS_CONFIG_EXTRA: |
+        define('DISALLOW_FILE_EDIT', true);
+        define('WP_AUTO_UPDATE_CORE', false);
+    ports:
+      - "127.0.0.1:${COMMERCE_HTTP_PORT:?provide reference port}:80"
+    volumes:
+      - site:/var/www/html
+    secrets: [database_password]
+    networks: [store]
+    depends_on: [database]
+volumes:
+  database:
+    name: ${COMMERCE_PROJECT:?provide validated project name}-database
+  site:
+    name: ${COMMERCE_PROJECT:?provide validated project name}-site
+secrets:
+  database_password:
+    file: ${COMMERCE_SECRET_DIR:?provide service-owned secret directory}/database-password
+  database_root_password:
+    file: ${COMMERCE_SECRET_DIR:?provide service-owned secret directory}/database-root-password
+networks:
+  store:
+    internal: true

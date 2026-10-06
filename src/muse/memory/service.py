@@ -35,6 +35,8 @@ class MemoryService:
         secrets = [self.settings.access_token.get_secret_value()]
         if self.settings.provider:
             secrets.append(self.settings.provider.api_key.get_secret_value())
+        if self.settings.commerce_connector:
+            secrets.append(self.settings.commerce_connector.token.get_secret_value())
         if contains_secret(content) or contains_secret(title) or any(s and s in content + title for s in secrets):
             raise ValueError("Memory cannot contain secrets")
         if scope == "project":

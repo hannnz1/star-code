@@ -10,8 +10,8 @@ from muse.terminal import HELP, complete_command, connect_terminal
 
 
 class MuseApp(App):
-    TITLE = 'MUSE'
-    SUB_TITLE = '个人任务助手'
+    TITLE = 'Crew'
+    SUB_TITLE = 'Your AI commerce team.'
     BINDINGS: ClassVar = [('ctrl+q', 'quit', '退出界面（任务继续）')]
     CSS = '''
     Screen { background: $surface; }

@@ -112,6 +112,8 @@ def resource_snapshot(settings, request, workspace):
     secrets = [settings.access_token.get_secret_value()]
     if settings.provider:
         secrets.append(settings.provider.api_key.get_secret_value())
+    if settings.commerce_connector:
+        secrets.append(settings.commerce_connector.token.get_secret_value())
     ctx = SimpleNamespace(workspace=Path(workspace['path']), settings=settings,
                           cp={'current_directory': request.current_directory, 'source_version': 1},
                           safe=lambda value: redact(value, tuple(secrets)), save=lambda: None)

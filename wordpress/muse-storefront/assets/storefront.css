@@ -1,0 +1,17 @@
+/* Static styles; no third-party assets or script dependencies. */
+* { box-sizing: border-box; }
+body { margin: 0; overflow-wrap: anywhere; }
+header, footer { padding-block: 24px; }
+main { min-height: 60vh; padding-block: 32px; }
+.wp-block-site-title { font-weight: 700; }
+/* Leave room for Woo's cart-count badge at the edge of the header. */
+.wp-block-group .wp-block-woocommerce-mini-cart { margin-inline-end: 12px; }
+.wp-block-woocommerce-product-collection { margin-block: 32px; }
+.wp-block-woocommerce-product-image img { max-width: 100%; height: auto; }
+.wp-block-woocommerce-product-price { font-variant-numeric: tabular-nums; }
+:focus-visible { outline: 3px solid var(--wp--preset--color--accent); outline-offset: 3px; }
+@media (max-width: 600px) {
+  main { padding-block: 20px; }
+  .wp-block-woocommerce-product-template { grid-template-columns: minmax(0, 1fr); }
+  .wp-block-navigation { max-width: 100%; }
+}

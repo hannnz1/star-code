@@ -46,7 +46,7 @@ class DurableRoles:
                     name = meta['name']
                     if not isinstance(name, str) or not re.fullmatch(r'[a-z][a-z0-9_-]{0,63}', name):
                         raise ValueError('Invalid role name')
-                    if name in {'general', 'explore', 'plan', 'verification'}:
+                    if name in {'general', 'explore', 'plan', 'verification', 'store_manager', 'site_developer', 'product_content'}:
                         raise ValueError('Role name conflicts with an existing role')
                     if isinstance(meta.get('maxTurns'), bool):
                         raise TypeError('Role maxTurns must be positive and cannot be boolean')
@@ -59,6 +59,9 @@ class DurableRoles:
                     self.errors.append(self.ctx.safe(str(error))[:500])
         self.ctx.cp['role_snapshot'] = {'custom': self.custom, 'errors': self.errors, 'sources': self.sources,
                                        'version': self.ctx.cp.get('source_version', 1)}
+        if self.ctx.cp.get('commerce'):
+            from muse.commerce.roles import role_snapshot
+            self.ctx.cp['role_snapshot']['commerce'] = role_snapshot()
 
     async def list(self, args, call_id):
         self.reload()
@@ -76,6 +79,8 @@ class DurableRoles:
         return call
 
     def prompt(self, name, prompt, *, isolated=False):
+        if name in {'store_manager', 'site_developer', 'product_content'}:
+            raise ValueError('Commerce roles require a durable business workflow, not generic delegation')
         if name not in self.custom:
             if name not in {'general', 'explore', 'plan', 'verification'}:
                 raise ValueError('Unknown role. Builtin roles: general, explore, plan, verification. Use list_roles with {} for registered project roles, or omit role to use general. Role is not a worker display name.')

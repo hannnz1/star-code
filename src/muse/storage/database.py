@@ -6,6 +6,10 @@ from pathlib import Path
 
 from sqlalchemy import create_engine, event, text
 
+from muse.commerce.schema import SCHEMA as COMMERCE_SCHEMA
+
+SCHEMA_VERSION = 12
+
 SCHEMA = [
     "CREATE TABLE IF NOT EXISTS schema_version(version INTEGER PRIMARY KEY)",
     "INSERT OR IGNORE INTO schema_version(version) VALUES(1)",
@@ -74,14 +78,14 @@ class Database:
             with closing(sqlite3.connect(path)) as source:
                 table = source.execute("SELECT name FROM sqlite_master WHERE name='schema_version'").fetchone()
                 prior = source.execute('SELECT MAX(version) FROM schema_version').fetchone()[0] if table else 0
-                if prior and prior > 10:
+                if prior and prior > SCHEMA_VERSION:
                     raise ValueError('Unsupported database schema version')
-                if prior and prior < 10:
+                if prior and prior < SCHEMA_VERSION:
                     directory = path.parent / 'migration-backups'
                     if directory.is_symlink() or (hasattr(directory, 'is_junction') and directory.is_junction()):
                         raise ValueError('Migration backup directory must not be linked')
                     directory.mkdir(exist_ok=True)
-                    migration_backup = directory / f'v{prior}-before-v10-{uuid.uuid4().hex[:12]}.sqlite3'
+                    migration_backup = directory / f'v{prior}-before-v{SCHEMA_VERSION}-{uuid.uuid4().hex[:12]}.sqlite3'
                     with closing(sqlite3.connect(migration_backup)) as target:
                         source.backup(target)
                     with closing(sqlite3.connect(migration_backup)) as check:
@@ -97,9 +101,9 @@ class Database:
             connection.execute("PRAGMA synchronous=FULL")
 
         with self.transaction() as connection:
-            for statement in SCHEMA:
+            for statement in [*SCHEMA, *COMMERCE_SCHEMA]:
                 connection.exec_driver_sql(statement)
-            if connection.exec_driver_sql("SELECT MAX(version) FROM schema_version").scalar() != 10:
+            if connection.exec_driver_sql("SELECT MAX(version) FROM schema_version").scalar() != SCHEMA_VERSION:
                 raise ValueError("Unsupported database schema version")
             columns = {row[1] for row in connection.exec_driver_sql('PRAGMA table_info(tasks)')}
             if 'read_only' not in columns:
@@ -127,8 +131,9 @@ class Database:
             connection.exec_driver_sql('''CREATE TABLE IF NOT EXISTS migration_audit(
                 id TEXT PRIMARY KEY,version INTEGER NOT NULL,backup_path TEXT NOT NULL,created_at REAL NOT NULL)''')
             if migration_backup:
-                connection.execute(text('INSERT INTO migration_audit VALUES(:id,10,:path,:now)'),
-                                   {'id': uuid.uuid4().hex, 'path': str(migration_backup), 'now': time.time()})
+                connection.execute(text('INSERT INTO migration_audit VALUES(:id,:version,:path,:now)'),
+                                   {'id': uuid.uuid4().hex, 'version': SCHEMA_VERSION,
+                                    'path': str(migration_backup), 'now': time.time()})
 
     @contextmanager
     def transaction(self):

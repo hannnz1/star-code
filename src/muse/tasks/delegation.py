@@ -2,6 +2,7 @@
 import json
 import time
 import uuid
+from contextlib import nullcontext
 
 from sqlalchemy import text
 
@@ -106,9 +107,9 @@ class DelegationMixin:
                     total += max(0, min(now, task['lease_until'] or now) - task['updated_at'])
             return total
 
-    def spawn_child(self, parent_id, owner, epoch, call_id, prompt, *, workspace_id=None, capabilities=None):
+    def spawn_child(self, parent_id, owner, epoch, call_id, prompt, *, workspace_id=None, capabilities=None, _connection=None):
         now = time.time()
-        with self.db.transaction() as conn:
+        with (nullcontext(_connection) if _connection is not None else self.db.transaction()) as conn:
             parent = self._lease(conn, parent_id, owner, epoch, now)
             if parent['cancel_requested']:
                 raise ValueError('Parent was cancelled')
@@ -136,6 +137,8 @@ class DelegationMixin:
                 child_cp['max_local_turns'] = min(local_limit, parent_cp.get('max_local_turns', local_limit))
             if capabilities.get('role'):
                 child_cp['role'] = capabilities['role']
+            if capabilities.get('commerce'):
+                child_cp['commerce'] = capabilities['commerce']
             if capabilities.get('hook_job'):
                 child_cp['hook_job'] = capabilities['hook_job']
             existing = conn.execute(text('SELECT child_id FROM task_delegations WHERE parent_id=:p AND call_id=:c'), {'p': parent_id, 'c': call_id}).first()

@@ -1,0 +1,7 @@
+# 第五批审查输入
+
+Workspace same muse-next; uncommitted HEAD/base 4aec15ae79648f1e398b29e975177b73ca532fb6. New files src/muse/commerce_connector/publisher.py and tests/muse/commerce/test_publisher.py; read existing operation_ledger/authorization/receipts/operations/context for integration only, do not repeat prior reviews. Spec docs/superpowers/specs/2026-09-30-muse-commerce-mvp-design.md §6/7 and plan docs/superpowers/plans/2026-09-30-muse-commerce-mvp.md P3/P7. Rulings in development-ledger fifth batch.
+
+Internal default-disabled publisher. approval_lookup is a trusted current persisted DB provider (not implemented or exposed), boundary flag is deployment switch not proof OS isolation. No API/CLI/Agent write routes. Tests mocked remote WordPress only. Cannot claim real store acceptance. Strict ChangeSet digest excludes only digest field; report full digest matches grant, report passed, operation member, target project/env and all preconditions checked; repeated approval lookup after reads and durable send marker.
+
+Review transaction concurrency, repeated operations, cancellation/error timing, fixed/bounded HTTP, target rebinding across ledger instances, scope/approval consistency. Known design gap to evaluate: ledger identity currently connection ID/environment, no persisted target URL binding; same ID rebinding could reconcile against wrong host. Also callback errors should remain sanitized. Assess with behavior probes, report Important/Critical/Minor and declines. No edits or subagents. One review; parent will do one fix pass.

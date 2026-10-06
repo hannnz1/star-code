@@ -102,7 +102,7 @@ class AgentRunner:
                 cp['pending_hook_events'].pop(0)
                 ctx.save()
             if cp.get('pending_failure'):
-                raise TaskControl('FAILED', cp['pending_failure'])
+                raise TaskControl('INTERRUPTED' if cp.get('commerce') else 'FAILED', cp['pending_failure'])
             if cp.get("input_question"):
                 return AgentResult(status="WAITING_INPUT", text=cp["input_question"])
             while cp["pending_calls"]:
@@ -130,6 +130,24 @@ class AgentRunner:
                 cp.pop('waiting_children', None)
             ctx.repo.save_conversation_checkpoint(task.id, ctx.owner, ctx.epoch, cp['model_requests'], cp['messages'])
             if "final_text" in cp:
+                if cp.get('commerce'):
+                    from muse.commerce.repository import CommerceRepository
+                    plan = CommerceRepository(ctx.repo).get_plan(cp['commerce']['plan_id'],
+                                                               project_id=cp['commerce']['project_id'])
+                    step = next(item for item in plan.steps if item.id == cp['commerce']['step_id'])
+                    if not step.output_hash:
+                        if cp.get('commerce_completion_repairs', 0) >= 2:
+                            raise TaskControl('FAILED', 'Commerce structured role output is missing')
+                        cp['commerce_completion_repairs'] = cp.get('commerce_completion_repairs', 0) + 1
+                        cp['messages'].append({'role': 'user', '_muse_reference': True, 'content':
+                            'Runtime completion check: your structured role output has not been accepted. '
+                            'Read read_commerce_context and submit exactly its blueprint object (store_manager/site_developer) '
+                            'or its products array (product_content). Do not wrap products in an object. '
+                            'The developer must also seal the theme code. Use the prior tool error to correct once if permitted. '
+                            'A narrative response or sealed code alone does not complete this role.'})
+                        cp.pop('final_text')
+                        ctx.save()
+                        continue
                 await registry.hooks.emit('session_end', 'session')
                 await registry.hooks.emit('shutdown', 'session')
                 children = ctx.repo.children(task.id)
@@ -174,6 +192,10 @@ class AgentRunner:
                     continue
             for event in ('turn_start', 'pre_send'):
                 await registry.hooks.emit(event, str(cp['model_requests'] + 1))
+            if cp.get('commerce'):
+                from muse.commerce.planning import provider_identity
+                if cp['commerce'].get('provider_hash') != provider_identity(ctx.settings):
+                    raise TaskControl('INTERRUPTED', 'Configured Commerce model identity changed; restore the frozen provider')
             ctx.repo.reserve_model_request(task.id, ctx.owner, ctx.epoch, ctx.settings.max_turns)
             cp["model_requests"] += 1
             cp["usage_pending"] = True
@@ -188,7 +210,8 @@ class AgentRunner:
                 buffer = ""
                 summary_buffer = ''
                 from muse.memory.maintenance import MemoryMaintenance
-                maintenance = MemoryMaintenance(ctx.repo, ctx.settings)
+                memory_settings = ctx.settings.model_copy(update={'memory_semantic_recall': False}) if cp.get('commerce') else ctx.settings
+                maintenance = MemoryMaintenance(ctx.repo, memory_settings)
                 query = (cp.get('user_sources') or [{'content': task.prompt}])[-1]['content']
                 memories, recall_mode = await maintenance.recall(self.provider, task.id, query)
                 cp['memory_recall_mode'] = recall_mode
@@ -250,7 +273,7 @@ class AgentRunner:
                              and str(error) in {'Model service connection failed', 'Model request timed out',
                                                 'Model stream was incomplete; no tools were dispatched'})
                 retries = cp.get('transient_model_failures', 0)
-                if transient and retries < 2 and cp['model_requests'] < min(ctx.settings.max_turns, cp.get('max_local_turns', ctx.settings.max_turns)):
+                if not cp.get('commerce') and transient and retries < 2 and cp['model_requests'] < min(ctx.settings.max_turns, cp.get('max_local_turns', ctx.settings.max_turns)):
                     cp['transient_model_failures'] = retries + 1
                     ctx.repo.add_event(ctx.task_id, 'model_retry', {'attempt': retries + 1, 'reason': str(error)})
                     ctx.save()
@@ -337,6 +360,21 @@ class AgentRunner:
         mutations = mutation_ids(calls)
         verifications = [call for call in calls if call["name"] == "verify_command" and call["result"]]
         verification = verifications[-1]["result"].get("metadata", {}) if verifications else None
+        static_preparation = False
+        if cp.get('commerce') and cp.get('role') == 'site_developer' and any(
+                call['name'] in {'write_theme_file', 'seal_theme_code'} and call['attempts'] > 0 for call in calls):
+            from muse.commerce.code_bridge import load_captured_code
+            from muse.commerce.errors import CommerceFailure
+            from muse.commerce.repository import CommerceRepository
+            commerce = CommerceRepository(context.repo)
+            try:
+                plan = commerce.get_plan(cp['commerce']['plan_id'], project_id=cp['commerce']['project_id'])
+                artifact = load_captured_code(commerce, plan)
+            except CommerceFailure:
+                raise TaskControl('FAILED', 'Static theme changes require a current sealed code artifact; site verification remains pending') from None
+            verification = {'static_code_captured': True, 'code_revision': artifact.package.code_revision,
+                            'package_sha256': artifact.package.package_sha256, 'site_verified': False}
+            static_preparation = True
         if context.task.coordinator_mode:
             children = context.repo.children(context.task_id)
             if any(child.status != 'SUCCEEDED' for child in children):
@@ -375,6 +413,6 @@ class AgentRunner:
                 raise TaskControl('FAILED', 'Asynchronous Hook effects have no verification after job completion')
             if mutations and (not verification or verification.get("exit_code") != 0 or not mutations.issubset(set(verification.get("mutation_call_ids", [])))):
                 raise TaskControl("FAILED", "Code changes have no successful verification after the last edit")
-            if verification and verification.get("exit_code") != 0:
+            if verification and not static_preparation and verification.get("exit_code") != 0:
                 raise TaskControl("FAILED", "Verification command failed")
         return AgentResult(status="SUCCEEDED", text=text, verification=verification or {})

@@ -33,6 +33,8 @@ def task_trace(repository, settings, task_id):
     secrets = [settings.access_token.get_secret_value()]
     if settings.provider:
         secrets.append(settings.provider.api_key.get_secret_value())
+    if settings.commerce_connector:
+        secrets.append(settings.commerce_connector.token.get_secret_value())
     def public(value):
         if isinstance(value, dict):
             return {key: public(child) for key, child in value.items()

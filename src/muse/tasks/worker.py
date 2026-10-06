@@ -12,15 +12,27 @@ class Worker:
         self.worker_id = worker_id or f"worker-{uuid.uuid4().hex[:12]}"
 
     async def run_once(self) -> bool:
+        from muse.commerce.repository import CommerceRepository
+        from muse.commerce.orchestration import CommerceWorkflowService
+        from muse.commerce.task_queue import CommerceTaskQueue
+        commerce = CommerceRepository(self.repo)
+        CommerceTaskQueue(commerce, CommerceWorkflowService(commerce, self.settings)).promote()
+        from muse.commerce.task_automation import LocalApplyService
+        LocalApplyService(commerce, self.settings.data_dir / 'commerce-source.git').process()
+        from muse.commerce.follow_up_models import ModelSuggestionService
+        model_worked = await ModelSuggestionService(commerce, self.settings).run_once(getattr(self.runner, 'provider', None))
+        from muse.commerce.design_proposals import DesignProposalService
+        model_worked = await DesignProposalService(commerce, self.settings).run_once(getattr(self.runner, 'provider', None)) or model_worked
         self.repo.recover_expired_tasks()
         self.repo.wake_completed_parents()
-        task = self.repo.claim_next(self.worker_id, ttl=self.settings.lease_seconds)
+        task = self.repo.claim_next(self.worker_id, ttl=self.settings.lease_seconds,
+                                    commerce_limit=self.settings.commerce_max_active_plans)
         if task is None:
             from muse.memory.maintenance import MemoryMaintenance
             maintenance = MemoryMaintenance(self.repo, self.settings)
             if self.settings.memory_auto_extract or self.settings.memory_auto_consolidate:
-                return await maintenance.run_once(getattr(self.runner, 'provider', None))
-            return False
+                return await maintenance.run_once(getattr(self.runner, 'provider', None)) or model_worked
+            return model_worked
         context = ExecutionContext(self.settings, self.repo, task, self.worker_id, enforce_budgets=True)
         stop = asyncio.Event()
 
@@ -40,7 +52,7 @@ class Worker:
             result = await self.runner.run(task, context)
             context.save()
             self.repo.finish(task.id, self.worker_id, task.lease_epoch, result.status, result.text)
-            if result.status == 'SUCCEEDED':
+            if result.status == 'SUCCEEDED' and not context.cp.get('commerce'):
                 from muse.memory.maintenance import MemoryMaintenance
                 maintenance = MemoryMaintenance(self.repo, self.settings)
                 maintenance.enqueue(task.id)

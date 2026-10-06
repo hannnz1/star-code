@@ -1,0 +1,7 @@
+# 第六批审查输入
+
+Workspace muse-next, branch muse-integration, uncommitted HEAD/base 4aec15ae79648f1e398b29e975177b73ca532fb6. New src/muse/commerce/approval.py and tests/muse/commerce/test_commerce_approval.py. Relevant existing schema.py/connections.py invalidation/repository.py save_plan/database.py transaction and commerce_connector/publisher.py ApprovedExecution integration. No prior batch repeated review.
+
+Plan docs/superpowers/plans/2026-09-30-muse-commerce-mvp.md P7 and spec docs/superpowers/specs/2026-09-30-muse-commerce-mvp-design.md §7 require fixed 30min approvals, digest/version/target binding, revoke/cancel/changed content zero writes. No API/CLI/Agent approval or write endpoints; stage_review trusted verifier only (P6 actual verifier not implemented). Fixture check/evidence are explicitly offline, not proof real checks ran. Real store writes remain disabled. Rulings in sixth-batch ledger.
+
+Review current status/readback consistency, idempotency and clock expiry, concurrency, immutable review/report digest, column vs JSON authority, callback binding. Known items to inspect: revoke currently leaves plan APPROVED; first approve does not recheck report integrity after loading stored row. Evaluate actual effects without inventing physical DB authentication guarantees (trusted DB under future OS identity). Report concrete Important/Critical/Minor and declined judgments, no edits/subagents. 13 new tests passed.

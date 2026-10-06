@@ -40,6 +40,8 @@ class DurableHooks:
                     'required': ['payload', '_source', 'action_preview'], 'additionalProperties': False}), handler)
 
     async def emit(self, event, identity, call=None, result=None):
+        if self.ctx.cp.get('commerce'):
+            return None  # Commerce roles never inherit executable project Hooks.
         payload = HookContext(event_name=event, tool_name=call.name if call else '', tool_args=call.arguments if call else {},
                               file_path=str(call.arguments.get('path', '')) if call else '', message=result.content if result else '',
                               error=self.ctx.cp.get('pending_failure', '') if event == 'error' else '')

@@ -1,0 +1,7 @@
+# 第八批审查输入
+
+Workspace muse-next; branch muse-integration; uncommitted HEAD/base 4aec15ae79648f1e398b29e975177b73ca532fb6. Incremental additions: src/muse/commerce/export.py, ProjectExport model and GET project/export route; frontend ProjectExport.tsx and CommerceHome integration; regenerated api.generated.ts; tests/test_commerce_export.py and download assertions in commerce browser test. Prior rounds reviewed separately, do not repeat.
+
+Plan P10/spec AC08, paths docs/superpowers/plans/2026-09-30-muse-commerce-mvp.md and specs/2026-09-30-muse-commerce-mvp-design.md. Rulings in eighth-batch development-ledger. This is bounded, revision-bound, read-only offline handoff, not automatic restoration or platform compatibility acceptance. No deployment, API cost, order/customer/credential read. Only explicit merchant inputs, plan history, current-revision import batches; regenerated deterministic theme bytes require matching source content. Source commit provenance still deferred. required_versions only declares format, no platform version attested.
+
+Review focus: project/version isolation under concurrent edits, payload identity/integrity, fixed ZIP paths and bounds, exclusion of runtime secrets/customer/order data, JSON/Unicode failures, unverified/stale theme labeling, misleading success/restore claims, browser authentication and download race/error handling. No edits/subagents/network. Report Important/Critical/Minor and declined judgments.
